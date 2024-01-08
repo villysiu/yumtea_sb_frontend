@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
+
 export const fetchCategories=createAsyncThunk(
     'wine/fetchCategories',
     async () => {
@@ -23,8 +24,7 @@ export const fetchCategories=createAsyncThunk(
             
         } 
         catch(error){
-            // console.log('error')
-            return Promise.reject("category grab err");
+            return Promise.reject(error);
         }
     }
 )
@@ -41,6 +41,7 @@ export const fetchWines=createAsyncThunk(
             })
 
             if(!response.ok) {
+                
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
@@ -48,8 +49,8 @@ export const fetchWines=createAsyncThunk(
             return data
         } 
         catch(error){
-            // console.log('error')
-            return Promise.reject("category grab err");
+            
+            return Promise.reject(error);
         }
     }
 )

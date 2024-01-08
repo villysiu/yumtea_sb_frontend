@@ -43,9 +43,6 @@ const Header = () => {
                             <NavDropdown title="Wines" id="navbarScrollingDropdown">
                                 <NavDropdown.Item key="0"
                                                 href={`${homeLink}/wines`}
-                                                // as={Link}      
-                                                // to={`/wines/${category.slug}`}
-                                                
                                             >
                                                 All
                                                 

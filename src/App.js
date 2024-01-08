@@ -5,6 +5,8 @@ import { fetchCurrentUser } from './features/user/userSlice';
 import Header from './features/headerNav/Header';
 
 import { Outlet } from 'react-router-dom';
+import Messages from './features/message/Messages';
+
 function App() {
   console.log("in APP")
     const dispatch=useDispatch();
@@ -24,6 +26,7 @@ function App() {
       {console.log(current_user)}
       <div className="App">
           <Header username={current_user}/>
+          <Messages />
           <div>
               <Outlet />
               
