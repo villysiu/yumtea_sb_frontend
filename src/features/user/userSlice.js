@@ -9,7 +9,7 @@ export const fetchCurrentUser=createAsyncThunk(
                 method: "GET",
                 headers: {
                     // "Content-Type": "application/json",
-                    // "Authorization":  'Token 3442ce531573070a9f36ffeff6d73fa00fcc41fa',
+        
                     "Authorization": `Token ${localStorage.getItem("token")}`,
         
                 }
@@ -30,8 +30,8 @@ export const fetchCurrentUser=createAsyncThunk(
             }
         } 
         catch(error){
-            console.log('error')
-            return Promise.reject("No user logged in");
+            console.log(error)
+            return Promise.reject(error);
         }
     }
 )
@@ -76,7 +76,7 @@ const userSlice=createSlice({
     name: 'user',
     initialState: {
         current_user: {
-            username: "Guest",
+            username: null,
             status: 'idle',
             error: null,    
         },

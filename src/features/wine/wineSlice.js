@@ -5,7 +5,7 @@ export const fetchCategories=createAsyncThunk(
     'wine/fetchCategories',
     async () => {
         try {
-            const response=await fetch(`${apiLink}/categories`, {
+            const response=await fetch(`${apiLink}/api/categories`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export const fetchWines=createAsyncThunk(
     'wine/fetchWines',
     async () => {
         try {
-            const response=await fetch(`${apiLink}/menuitems`, {
+            const response=await fetch(`${apiLink}/api/menuitems`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

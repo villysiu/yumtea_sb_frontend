@@ -4,11 +4,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { PersonCircle } from 'react-bootstrap-icons';
-import { Cart } from 'react-bootstrap-icons';
+
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategories } from '../wine/wineSlice';
 import { homeLink } from '../../app/global';
+import CartButton from '../cart/CartButton';
 
 const Header = () => {
     const dispatch=useDispatch();
@@ -75,7 +76,7 @@ const Header = () => {
           
                 <div className='nav_circles'>
                     <div><PersonCircle className="circle_button"/></div>
-                    <div><Cart className="circle_button"/></div>
+                    <div><CartButton /></div>
                 </div>
             </div>
         </div>

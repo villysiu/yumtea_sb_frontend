@@ -10,11 +10,8 @@ import Messages from './features/message/Messages';
 function App() {
   console.log("in APP")
     const dispatch=useDispatch();
-
-    
     const {current_user} = useSelector(state => state.user)
-    
- 
+
     useEffect(()=>{
 
       if(localStorage.getItem("token"))
@@ -25,7 +22,7 @@ function App() {
     <>
       {console.log(current_user)}
       <div className="App">
-          <Header username={current_user}/>
+          <Header />
           <Messages />
           <div>
               <Outlet />
