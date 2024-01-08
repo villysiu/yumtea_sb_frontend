@@ -1,8 +1,10 @@
 .App {
   text-align: center;
 }
+:root{
 
-
+  --header_circle_btn: 2rem;
+} 
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -20,16 +22,43 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.nav_brand {
+  font-size: 2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  text-decoration: none;
+  color: black;
+}
+.header_wrapper {
+  display: flex;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.nav_features {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+@media all and (max-width: 991.98px) {
+  .nav_features{
+
+    flex-direction: row-reverse;
+    justify-content: unset;
   }
-  to {
-    transform: rotate(360deg);
-  }
+  
+}
+.nav_circles {
+  display: flex;
+  align-items: center;
+}
+.d_navbar {
+  background-color: transparent !important;
+}
+.circle_button {
+  font-size: calc(var(--header_circle_btn) * 0.5);
+  color:#000;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  width: var(--header_circle_btn) !important; 
+  height: var(--header_circle_btn) !important; 
 }

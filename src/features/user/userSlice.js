@@ -113,7 +113,7 @@ const userSlice=createSlice({
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
-            state.current_user.status = 'idle'
+            state.current_user.status = 'failed'
         })
         .addCase(loginUser.pending, (state, action) => {
             state.current_user.status = 'loading'

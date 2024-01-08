@@ -1,41 +1,35 @@
-// import './App.css';
+import './App.css';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUser, loginUser } from './features/user/userSlice';
+import { fetchCurrentUser } from './features/user/userSlice';
+import Header from './features/headerNav/Header';
 
-import Button from 'react-bootstrap/Button';
+import { Outlet } from 'react-router-dom';
 function App() {
   console.log("in APP")
     const dispatch=useDispatch();
 
-    const {status, username} = useSelector(state => {
-        console.log(state)
-        return state.user.current_user
-    })
-   
     
+    const {current_user} = useSelector(state => state.user)
+    
+ 
     useEffect(()=>{
-        if(localStorage.getItem("token") && status==='idle'){
-            console.log('get username')
-            dispatch(fetchCurrentUser())
-        }
-        // if(status === 'failed' ){
-        //     console.log("in use effect?")
-        //     dispatch(loginUser())
-        // }
-        
-    },[dispatch, status, username])
+
+      if(localStorage.getItem("token"))
+        dispatch(fetchCurrentUser())
+
+    }, [dispatch])
   return (
+    <>
+      {console.log(current_user)}
       <div className="App">
-          <header className="App-header">
-              Little D Wine 
-          </header>
+          <Header username={current_user}/>
           <div>
-              <h1>Hello {username}</h1>
-              <p>wine is listing here soon</p>
+              <Outlet />
               
           </div>
       </div>
+      </>
   );
 }
 
