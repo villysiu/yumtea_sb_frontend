@@ -2,8 +2,12 @@ import { Outlet } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { fetchWines } from "./wineSlice"
+import WineList from "./WineList"
+import { Link } from "react-router-dom"
+import { Cart } from "react-bootstrap-icons"
+import { homeLink } from "../../app/global"
 const WineApp = () =>{
-    console.log("wine appxs")
+    console.log("wine App")
     const dispatch = useDispatch()
     let {status} = useSelector(state => state.wine.wines)
     
@@ -19,10 +23,10 @@ const WineApp = () =>{
         return <>Loading</>
     }
     return(
-        
-        
-        <Outlet />
+        <>
 
+            <Outlet />
+        </>
     )
 }
 export default WineApp

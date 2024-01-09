@@ -5,8 +5,10 @@ import { Container, Row, Col, Button } from "react-bootstrap"
 import { CartFill } from "react-bootstrap-icons"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
-import Form from 'react-bootstrap/Form';
+import CartItem from "./CartItem"
+
 const Cart = () => {
+    console.log("in cart")
     const dispatch = useDispatch()
     const {cart_arr, status} = useSelector(state=>{
         console.log(state)
@@ -14,7 +16,7 @@ const Cart = () => {
 
     })
     const {username} = useSelector(state => state.user.current_user)
-
+    
     useEffect(()=>{
 
         if(username && status === 'idle'){
@@ -24,6 +26,8 @@ const Cart = () => {
     }, [dispatch, username, status])
 
     return (
+        
+
         <Container >
             <Row className="border borderSecondary border-bottom-0">
                 <Col className="cart_a m-3">
@@ -51,28 +55,7 @@ const Cart = () => {
                             {
                                 cart_arr.map(item=>{
                                     return (
-                                        <Row className="borderSecondary border-bottom pb-5 cart_h">
-                                            
-                                                <Col md className="cart_h">
-                                                    <Col xs={3}>a pic</Col>
-                                                    <Col xs={9} className='cart_f'>
-                                                        <div>{item.title}</div>
-                                                        <div>remove button</div>
-                                                    </Col>
-                                                </Col>
-                                                <Col md className='cart_g'>
-                                                    <div className="cart_e">
-                                                        <div className='cart_h'>
-                                                            {/* qty: "-"{item.quantity}"+" */}
-                                                            <Button className="qty_minus rounded-start" variant="light">-</Button>
-                                                            {/* <button type="button" className="qty_minus rounded-start" onclick="alert('Hello world!')">+</button> */}
-                                                            <Form.Control type="text" className='qty_box' value={item.quantity} />
-                                                            <Button className="qty_plus rounded-end" variant="light">+</Button>
-                                                        </div>
-                                                        <div>(${item.price} each)</div>
-                                                    </div>
-                                                </Col>
-                                        </Row>
+                                        <CartItem item={item} />
                                     )
                                 })
                             }
@@ -84,20 +67,5 @@ const Cart = () => {
 
     )
 
-    // if(cart_arr.length===0){
-    //     <
-    // }
-        
-    // return(
-    //     <div>
-    //         {
-    //             cart_arr.map(item => {
-    //                 return(
-    //                 <>{item.title} - {item.price}</>)
-    //             })
-    //         }
-    //     </div>
-        
-    // )
 }
 export default Cart

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchCategories, fetchWines } from '../wine/wineSlice'
-
+import { addItemToCart } from '../cart/cartSlice'
 const messageSlice = createSlice({
     name: 'message',
     initialState: {
@@ -37,6 +37,24 @@ const messageSlice = createSlice({
                 }
             )
         })
+        // .addCase(addItemToCart.succeeded, (state, action) => {
+        //     state.message_arr.push(
+        //         {
+        //             status: true,
+        //             type: "success",
+        //             content: `Item added to cart.`
+        //         }
+        //     )
+        // })
+        // .addCase(fetchWines.rejected, (state, action) => {
+        //     state.message_arr.push(
+        //         {
+        //             status: true,
+        //             type: "danger",
+        //             content: `Item failed adding to cart.`
+        //         }
+        //     )
+        // })
     }
 })
 export default messageSlice.reducer

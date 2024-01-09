@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { PersonCircle } from 'react-bootstrap-icons';
-
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategories } from '../wine/wineSlice';
@@ -27,7 +27,9 @@ const Header = () => {
     
     return (
         <div className="header_wrapper px-5">
-            <a href="/" className="nav_brand">Little D</a>
+            <a href="/" className="nav_brand"></a>
+            <Link to={`${homeLink}`} className="nav_brand">Little D</Link>
+            
             
             <div className='nav_features'>
 
@@ -40,26 +42,16 @@ const Header = () => {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="/" key='2322'>Home</Nav.Link>
+         
+                            <Link to={`${homeLink}/wines`} className='nav-link'>Home</Link>
                             <NavDropdown title="Wines" id="navbarScrollingDropdown">
-                                <NavDropdown.Item key="0"
-                                                href={`${homeLink}/wines`}
-                                            >
-                                                All
-                                                
-                                            </NavDropdown.Item>
+                                <Link to={`${homeLink}/wines`} className='dropdown-item'>All</Link>
                                 {
                                 category_arr.map(category=>{
 
                                     return (
-                                        <NavDropdown.Item key={category.pk}
-                                            href={`${homeLink}/wines/cat/${category.pk}`}
-                                    
-                                        >
-                                            {category.title}
-                                            
-                                        </NavDropdown.Item>
-                                        // <Link to={`contacts/1`}>{category.title}</Link>
+                                        <Link to={`${homeLink}/wines/cat/${category.pk}`} className='dropdown-item'>{category.title}</Link>
+                                        
                                     )
                                 })
                             }
@@ -77,7 +69,7 @@ const Header = () => {
                 <div className='nav_circles'>
                     <div><PersonCircle className="circle_button"/></div>
                     <div><CartButton /></div>
-                </div>
+               </div>
             </div>
         </div>
         

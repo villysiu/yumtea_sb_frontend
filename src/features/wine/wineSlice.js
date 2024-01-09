@@ -64,6 +64,11 @@ const wineSlice=createSlice({
         },
         wines: {
             wine_arr: [],
+                // {pk: 1, title: 'Chester-Kidder', year: 2019, price: '65.00'},
+                // {pk: 2, title: 'ACS', year: 2020, price: '150.00'},
+                // {pk: 3, title: 'Pedestal', year: 2019, price: '90.00'},
+                // {pk: 4, title: 'Dance', year: 2021, price: '42.00'},
+                // {pk: 5, title: 'Cymbal', year: 2022, price: '35.00'}
             status: 'idle',
         }, 
     },

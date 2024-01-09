@@ -3,8 +3,9 @@ import { useParams, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+
 import { homeLink } from "../../app/global"
+import PurchaseButton from './PurchaseButton';
 const WineList = () =>{
     console.log("in wine list")
     let { categoryId } = useParams();
@@ -28,14 +29,14 @@ const WineList = () =>{
                     wine_arr.map(wine=>{
                         return (
                             
-                            <Col sm={12} md={4} lg={3}>
+                            <Col sm={12} md={4} lg={3} key={wine.pk}>
                         
                                 
                                 <Link to={`${homeLink}/wines/${wine.pk}`}>{wine.title}</Link>
                                 <div>{wine.year}</div>
                                 <div>{wine.title}</div>
                                 <div>{wine.varietal}</div>
-                                <div><Button>Purchase</Button></div>
+                                <PurchaseButton />
                             </Col>
                      )})
                 }

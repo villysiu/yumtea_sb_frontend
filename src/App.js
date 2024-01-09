@@ -9,18 +9,18 @@ import Messages from './features/message/Messages';
 
 function App() {
   console.log("in APP")
-    const dispatch=useDispatch();
-    const {current_user} = useSelector(state => state.user)
+    // const dispatch=useDispatch();
+    // const {current_user} = useSelector(state => state.user)
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-      if(localStorage.getItem("token"))
-        dispatch(fetchCurrentUser())
+    //   if(localStorage.getItem("token"))
+    //     dispatch(fetchCurrentUser())
 
-    }, [dispatch])
+    // }, [dispatch])
   return (
     <>
-      {console.log(current_user)}
+      {/* {console.log(current_user)} */}
       <div className="App">
           <Header />
           <Messages />
