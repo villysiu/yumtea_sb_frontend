@@ -100,3 +100,46 @@
 .cart_d {
   display: flex;
 }
+.cart_e {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.cart_f {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cart_g {
+  margin-top: 0rem;
+}
+@media all and (max-width: 767.98px) {
+  .cart_g{
+    margin-top: 2rem;
+
+  }
+  
+}
+.cart_h {
+  display: flex;
+}
+.qty_minus, .qty_plus {
+  width: 40px;
+  height: 40px;
+  border:gainsboro 1px solid;
+  border-radius: 0;
+}
+.qty_minus {
+  border-top-left-radius: var(--bs-border-radius)!important;
+    border-bottom-left-radius: var(--bs-border-radius)!important;
+}
+.qty_plus {
+  border-top-right-radius: var(--bs-border-radius)!important;
+    border-bottom-right-radius: var(--bs-border-radius)!important;
+}
+.qty_box {
+  width: 40px;
+  height: 40px;
+  border-radius: unset !important;
+}

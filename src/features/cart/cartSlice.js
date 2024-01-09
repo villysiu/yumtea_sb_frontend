@@ -33,7 +33,11 @@ const cartSlice=createSlice({
     name: 'cart',
     initialState: {
         cart: {
-            cart_arr: [],
+            cart_arr: [
+                {pk: 1, title: "test-wine-1", quantity: 1, price: 33},
+                {pk: 2, title: "test-wine-2", quantity: 2, price: 50}
+            
+            ],
             status: 'idle',
              
         },

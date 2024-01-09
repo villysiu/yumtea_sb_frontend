@@ -5,7 +5,7 @@ import { Container, Row, Col, Button } from "react-bootstrap"
 import { CartFill } from "react-bootstrap-icons"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
-
+import Form from 'react-bootstrap/Form';
 const Cart = () => {
     const dispatch = useDispatch()
     const {cart_arr, status} = useSelector(state=>{
@@ -34,7 +34,7 @@ const Cart = () => {
                     }
                 </Col>
             </Row>
-            <Row className="border borderSecondary cart_c">
+            <Row className="border borderSecondary cart_c px-3">
                 {
                     cart_arr.length === 0 ? 
                         <>
@@ -46,7 +46,37 @@ const Cart = () => {
                             </Col>
                         </>
                         :
-                        <Col>cart items</Col>
+                        <>
+                            
+                            {
+                                cart_arr.map(item=>{
+                                    return (
+                                        <Row className="borderSecondary border-bottom pb-5 cart_h">
+                                            
+                                                <Col md className="cart_h">
+                                                    <Col xs={3}>a pic</Col>
+                                                    <Col xs={9} className='cart_f'>
+                                                        <div>{item.title}</div>
+                                                        <div>remove button</div>
+                                                    </Col>
+                                                </Col>
+                                                <Col md className='cart_g'>
+                                                    <div className="cart_e">
+                                                        <div className='cart_h'>
+                                                            {/* qty: "-"{item.quantity}"+" */}
+                                                            <Button className="qty_minus rounded-start" variant="light">-</Button>
+                                                            {/* <button type="button" className="qty_minus rounded-start" onclick="alert('Hello world!')">+</button> */}
+                                                            <Form.Control type="text" className='qty_box' value={item.quantity} />
+                                                            <Button className="qty_plus rounded-end" variant="light">+</Button>
+                                                        </div>
+                                                        <div>(${item.price} each)</div>
+                                                    </div>
+                                                </Col>
+                                        </Row>
+                                    )
+                                })
+                            }
+                        </>
                 }
                 
             </Row>
