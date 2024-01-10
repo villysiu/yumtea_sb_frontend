@@ -10,19 +10,25 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 const CartItem = ({cartItem}) => {
     const [error, setError] = useState("")
+    console.log(cartItem)
+    // const menuItemStatus = useSelector(state=>state.wine.wines.status)
     
     const menuItem = useSelector(state=>{
-        return state.wine.wines.wine_arr.filter(wine=>wine.pk === cartItem.menuitem)[0]
+        let ww = state.wine.wines.wine_arr.filter(wine=>wine.pk === cartItem.menuitem)[0]
+        console.log(ww)
+        return ww
     })
     
     return(
-        <Row key={cartItem.pk} className="borderSecondary border-bottom pb-5 cart_h">
+        <Row className="borderSecondary border-bottom pb-5 cart_h">
                                             
             <Col md className="cart_h">
                 <Col xs={3}>a pic</Col>
                 <Col xs={9} className='cart_f'>
                     <Link to={`${homeLink}/wines/${cartItem.menuitem}`} className="solid_link">
+                        
                         {menuItem.year} {menuItem.title}
+                        {/* {cartItem.menuitem} */}
                     </Link>
                     
                 </Col>
@@ -35,7 +41,7 @@ const CartItem = ({cartItem}) => {
                             
                             <MinusButton itemId={cartItem.pk} qty={cartItem.quantity} setError={setError}/>
                             <QtyInputBox itemId={cartItem.pk} qty={cartItem.quantity} />
-                            <PlusButton itemId={cartItem.pk} qty={cartItem.quantity} inventory={menuItem.inventory} setError={setError} />
+                            <PlusButton menuitemId={menuItem.pk} qty={cartItem.quantity} inventory={menuItem.inventory} setError={setError} />
                         </div>
                         <div className="error_message">
                             {error}

@@ -85,38 +85,53 @@ const cartSlice=createSlice({
                     "user_id": 2,
                     "menuitem": 4,
                     "quantity": 1,
-                    "linetotal": 42.55,
-                    "unit_price": 42.55
+                    "linetotal": 42.00,
+                    "unit_price": 42.00
                 }
             
             ],
             status: 'idle',
+            
              
         },
        
     },
     reducers: {
         increment(state, action) {
-            let menuitem = state.cart.cart_arr.filter(item=> item.pk === action.payload)
-            menuitem[0].quantity++
-            console.log(typeof(menuitem[0].linetotal))
-            console.log(typeof(menuitem[0].unit_price))
-            menuitem[0].linetotal += menuitem[0].unit_price
+            console.log(action.payload)
+            let cartitem = state.cart.cart_arr.filter(item=>item.menuitem === action.payload.menuitemId)
+            
+            if(cartitem.length===0){
+                console.log("item not in cart")
+                state.cart.cart_arr.push(
+                    {
+                        "menuitem": action.payload.menuitemId,
+                        "quantity": 1,
+                        "linetotal": action.payload.price,
+                        "unit_price": action.payload.price
+                    }
+                )
+            }
+            else{
+                console.log("item in cart")
+                cartitem[0].quantity++
+                cartitem[0].linetotal += cartitem[0].unit_price
+            }
+            
 
           },
           decrement(state, action) {
             let menuitem = state.cart.cart_arr.filter(item=> item.pk === action.payload)
-            if(menuitem[0].quantity > 1)
-                menuitem[0].quantity--
+            
+            menuitem[0].quantity--
+            menuitem[0].linetotal -= menuitem[0].unit_price
           },
-        //   incrementByAmount(state, action) {
-        //     console.log("change by text box?")
-        //     console.log(action.payload)
-        //     let menuitem = state.cart.cart_arr.filter(item=> item.pk === action.payload.itemId)
-        //     menuitem[0].quantity = action.payload.newVal
-        //   },
+
           removeItem(state, action){
             state.cart.cart_arr = state.cart.cart_arr.filter(item=> item.pk !== action.payload)
+          },
+          addItem(state, action){
+
           }
     },
     extraReducers(builder) {

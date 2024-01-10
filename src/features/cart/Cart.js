@@ -55,7 +55,7 @@ const Cart = () => {
                             {
                                 cart_arr.map(item=>{
                                     return (
-                                        <CartItem cartItem={item} />
+                                        <CartItem key={item.pk} cartItem={item} />
                                     )
                                 })
                             }

@@ -10,6 +10,7 @@ const QtyInputBox = ({itemId, qty}) =>{
             className='qty_box' 
             // defaultValue={qty} 
             value={qty} 
+            readOnly
             />
             <div className='qty_label'>QTY</div>
         </div>

@@ -6,14 +6,15 @@ import Col from 'react-bootstrap/Col';
 
 import { homeLink } from "../../app/global"
 import PurchaseButton from './PurchaseButton';
+import Wine from './Wine';
 const WineList = () =>{
     console.log("in wine list")
     let { categoryId } = useParams();
 
     let {wine_arr, status} = useSelector(state => {
-        console.log(state.wine.wines)
+        console.log(state)
         return state.wine.wines
-})
+    })
 
     if(categoryId && status==='succeeded'){
         wine_arr = wine_arr.filter(w=>categoryId===String(w.category))
@@ -26,19 +27,7 @@ const WineList = () =>{
         <Container>
             <Row>
                 {
-                    wine_arr.map(wine=>{
-                        return (
-                            
-                            <Col sm={12} md={4} lg={3} key={wine.pk}>
-                        
-                                
-                                <Link to={`${homeLink}/wines/${wine.pk}`}>{wine.title}</Link>
-                                <div>{wine.year}</div>
-                                <div>{wine.title}</div>
-                                <div>{wine.varietal}</div>
-                                <PurchaseButton />
-                            </Col>
-                     )})
+                    wine_arr.map(wine=><Wine key={wine.pk} menuitem={wine} />)
                 }
             </Row>
         </Container>

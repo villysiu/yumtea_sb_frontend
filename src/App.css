@@ -183,3 +183,12 @@
   color:black;
   font-weight: bold;
 }
+.added_message {
+  position: absolute;
+  left: 40%;
+  top: 35px;
+  width: 200px;
+  /* font-size: 10px; */
+  background-color: white;
+  border: #d1c089 1px solid;
+}

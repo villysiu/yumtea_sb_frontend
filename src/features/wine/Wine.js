@@ -1,23 +1,22 @@
-import { useParams } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { Col } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { homeLink } from "../../app/global"
+import { USDollar } from "../../app/global"
+import PurchaseButton from "./PurchaseButton"
+const Wine = ({menuitem}) =>{
+    if(menuitem.inventory === 0)
+        return null
+    const title = menuitem.year +" " + menuitem.title
+    return (
+        <Col sm={12} md={4} lg={3} className="mt-5">             
+            <Link to={`${homeLink}/wines/${menuitem.pk}`} className='solid_link'>{menuitem.title}</Link>
+            <div>{menuitem.year}</div>
+            <div>{menuitem.varietal}</div>
+            <div>{USDollar.format(menuitem.price)}</div>
 
-const Wine = () =>{
-    let {itemId} = useParams()
+            <PurchaseButton menuitemId={menuitem.pk} menuitemTitle={title} price={menuitem.price}/>
+        </Col>
 
-    let {status, wine_arr} = useSelector(state => {
-        console.log(state.wine.wines)
-        return state.wine.wines
-    })
-
-    const singleWine = wine_arr.filter(wine => wine.pk === parseInt(itemId))
-
-    if(singleWine.length===0)
-        return( <div>cannot find wine, not existed?</div>)
-
-    return(
-        <>
-            {singleWine[0].title}
-        </>
     )
 }
 export default Wine

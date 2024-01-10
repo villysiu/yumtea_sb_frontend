@@ -43,21 +43,21 @@ const Header = () => {
                             navbarScroll
                         >
          
-                            <Link to={`${homeLink}/wines`} className='nav-link'>Home</Link>
-                            <NavDropdown title="Wines" id="navbarScrollingDropdown">
+                            <Link to={`${homeLink}/wines`} key="11128" className='nav-link'>Home</Link>
+                            <NavDropdown title="Wines" id="navbarScrollingDropdown" key="nav">
                                 <Link to={`${homeLink}/wines`} className='dropdown-item'>All</Link>
                                 {
                                 category_arr.map(category=>{
 
                                     return (
-                                        <Link to={`${homeLink}/wines/cat/${category.pk}`} className='dropdown-item'>{category.title}</Link>
+                                        <Link to={`${homeLink}/wines/cat/${category.pk}`} key={category.pk} className='dropdown-item'>{category.title}</Link>
                                         
                                     )
                                 })
                             }
                             </NavDropdown>
 
-                            <Nav.Link href="/" key="2235">Visit & Taste</Nav.Link>
+                            <Nav.Link href="/" key="465645">Visit & Taste</Nav.Link>
                             
                         
                         </Nav>

@@ -40,12 +40,13 @@ const router = createBrowserRouter([
                     path: "wines/:itemId",
                     element: <Wine />,
                   },
+                  {
+                    path: "/cart",
+                    element: <Cart />
+                  },
               ]
           },
-          {
-              path: "/cart",
-              element: <Cart />
-          },
+          
           // {
           //     path: "/secure",
           //     element: <Secure />,
