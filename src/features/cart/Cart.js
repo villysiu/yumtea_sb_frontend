@@ -55,7 +55,7 @@ const Cart = () => {
                             {
                                 cart_arr.map(item=>{
                                     return (
-                                        <CartItem item={item} />
+                                        <CartItem cartItem={item} />
                                     )
                                 })
                             }

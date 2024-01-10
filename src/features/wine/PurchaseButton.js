@@ -9,7 +9,7 @@ const PurchaseButton = ({itemId}) =>{
         // dispatch(addsomething(itemId))
     }
     return(
-        <Button className='purchase_button' onClick={handleClick}>Purchase</Button>
+        <Button className='purchase_button' size="sm" onClick={handleClick}>Purchase</Button>
     )
 }
 export default PurchaseButton

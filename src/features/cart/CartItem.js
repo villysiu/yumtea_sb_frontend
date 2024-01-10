@@ -2,19 +2,29 @@ import { useState } from "react"
 import PlusButton from "./PlusButton"
 import MinusButton from "./MinusButton"
 import QtyInputBox from "./QtyInputBox"
+import RemoveButton from "./RemoveButton"
 import {  Row, Col } from "react-bootstrap"
-const CartItem = ({item}) => {
+import { USDollar } from "../../app/global"
+import { homeLink } from "../../app/global"
+import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+const CartItem = ({cartItem}) => {
     const [error, setError] = useState("")
-
-   
+    
+    const menuItem = useSelector(state=>{
+        return state.wine.wines.wine_arr.filter(wine=>wine.pk === cartItem.menuitem)[0]
+    })
+    
     return(
-        <Row key={item.pk} className="borderSecondary border-bottom pb-5 cart_h">
+        <Row key={cartItem.pk} className="borderSecondary border-bottom pb-5 cart_h">
                                             
             <Col md className="cart_h">
                 <Col xs={3}>a pic</Col>
                 <Col xs={9} className='cart_f'>
-                    <div>{item.title}</div>
-                    <div>remove button</div>
+                    <Link to={`${homeLink}/wines/${cartItem.menuitem}`} className="solid_link">
+                        {menuItem.year} {menuItem.title}
+                    </Link>
+                    
                 </Col>
             </Col>
             <Col md className='cart_g'>
@@ -23,15 +33,28 @@ const CartItem = ({item}) => {
                         
                         <div className='cart_h'>
                             
-                            <MinusButton itemId={item.pk} qty={item.quantity} setError={setError}/>
-                            <QtyInputBox itemId={item.pk} qty={item.quantity} />
-                            <PlusButton itemId={item.pk} qty={item.quantity} />
+                            <MinusButton itemId={cartItem.pk} qty={cartItem.quantity} setError={setError}/>
+                            <QtyInputBox itemId={cartItem.pk} qty={cartItem.quantity} />
+                            <PlusButton itemId={cartItem.pk} qty={cartItem.quantity} inventory={menuItem.inventory} setError={setError} />
                         </div>
                         <div className="error_message">
                             {error}
                         </div>
+                        {
+                            menuItem.inventory <5 && 
+                            <div className="mt-2 low_inventory">
+                                Only a few left
+                            </div>
+                        }
+                        <div className='mt-2'>
+                            <RemoveButton itemId={cartItem.pk} />
+                        </div>
                     </div>
-                    <div>(${item.price} each)</div>
+                    <div className='cart_i'>
+                        <div>{USDollar.format(cartItem.unit_price)}</div>
+                       
+                        <div><b>Total {USDollar.format(cartItem.linetotal)}</b></div>
+                    </div>
                 </div>
             </Col>
         </Row>

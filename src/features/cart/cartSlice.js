@@ -72,8 +72,22 @@ const cartSlice=createSlice({
     initialState: {
         cart: {
             cart_arr: [
-                {pk: 1, title: "test-wine-1", quantity: 1, price: 33},
-                {pk: 2, title: "test-wine-2", quantity: 2, price: 50}
+                {
+                    "pk": 34,
+                    "user_id": 2,
+                    "menuitem": 1,
+                    "quantity": 2,
+                    "linetotal": 130.0,
+                    "unit_price": 65.0
+                },
+                {
+                    "pk": 35,
+                    "user_id": 2,
+                    "menuitem": 4,
+                    "quantity": 1,
+                    "linetotal": 42.55,
+                    "unit_price": 42.55
+                }
             
             ],
             status: 'idle',
@@ -85,18 +99,25 @@ const cartSlice=createSlice({
         increment(state, action) {
             let menuitem = state.cart.cart_arr.filter(item=> item.pk === action.payload)
             menuitem[0].quantity++
+            console.log(typeof(menuitem[0].linetotal))
+            console.log(typeof(menuitem[0].unit_price))
+            menuitem[0].linetotal += menuitem[0].unit_price
+
           },
           decrement(state, action) {
             let menuitem = state.cart.cart_arr.filter(item=> item.pk === action.payload)
             if(menuitem[0].quantity > 1)
                 menuitem[0].quantity--
           },
-          incrementByAmount(state, action) {
-            console.log("change by text box?")
-            console.log(action.payload)
-            let menuitem = state.cart.cart_arr.filter(item=> item.pk === action.payload.itemId)
-            menuitem[0].quantity = action.payload.newVal
-          },
+        //   incrementByAmount(state, action) {
+        //     console.log("change by text box?")
+        //     console.log(action.payload)
+        //     let menuitem = state.cart.cart_arr.filter(item=> item.pk === action.payload.itemId)
+        //     menuitem[0].quantity = action.payload.newVal
+        //   },
+          removeItem(state, action){
+            state.cart.cart_arr = state.cart.cart_arr.filter(item=> item.pk !== action.payload)
+          }
     },
     extraReducers(builder) {
       builder
@@ -125,5 +146,5 @@ const cartSlice=createSlice({
        
     }
 })
-export const { increment, decrement, incrementByAmount } = cartSlice.actions
+export const { increment, decrement, removeItem } = cartSlice.actions
 export default cartSlice.reducer
