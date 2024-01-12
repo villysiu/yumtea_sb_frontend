@@ -13,11 +13,11 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price}) =>{
         setSuccessMessage(`${menuitemTitle} added to shopping cart.` )
     }
     return(
-        <div style={{'position': 'relative'}}>
+        <>
             {successMessage && <AddedOverlay successMessage={successMessage} setSuccessMessage={setSuccessMessage}/>}
-            <Button className='purchase_button' size="sm" onClick={handleClick}>Purchase</Button>
+            <Button className='purchase_button' onClick={handleClick}>Purchase</Button>
 
-        </div>
+        </>
     )
 }
 export default PurchaseButton

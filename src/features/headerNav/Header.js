@@ -24,16 +24,17 @@ const Header = () => {
         }
     }, [status, dispatch])
     
-    
+    const WineDropdownTitle = () =>{
+        return <div className="header_text" >Wines</div>
+    }
     return (
-        <div className="header_wrapper px-5">
-            <a href="/" className="nav_brand"></a>
-            <Link to={`${homeLink}`} className="nav_brand">Little D</Link>
+        <div className="header_wrapper app_width">
+            <Link to={`${homeLink}`} className="nav_brand header_text">Little D</Link>
             
             
             <div className='nav_features'>
 
-                <Navbar expand="lg" className="bg-body-tertiary d_navbar">
+                <Navbar expand="lg" className="bg-body-tertiary d_navbar" >
                     <Container fluid>
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll">
@@ -43,21 +44,21 @@ const Header = () => {
                             navbarScroll
                         >
          
-                            <Link to={`${homeLink}/wines`} key="11128" className='nav-link'>Home</Link>
-                            <NavDropdown title="Wines" id="navbarScrollingDropdown" key="nav">
+                            <Link to={`${homeLink}/wines`} key="11128" className='nav-link header_text'>Home</Link>
+                            <NavDropdown title={<WineDropdownTitle />} id="navbarScrollingDropdown" key="nav">
                                 <Link to={`${homeLink}/wines`} className='dropdown-item'>All</Link>
                                 {
                                 category_arr.map(category=>{
 
                                     return (
-                                        <Link to={`${homeLink}/wines/cat/${category.pk}`} key={category.pk} className='dropdown-item'>{category.title}</Link>
+                                        <Link to={`${homeLink}/wines/cat/${category.pk}`} key={category.pk} className='dropdown-item' >{category.title}</Link>
                                         
                                     )
                                 })
                             }
                             </NavDropdown>
 
-                            <Nav.Link href="/" key="465645">Visit & Taste</Nav.Link>
+                            <Link href="/" key="465645" className='nav-link header_text'>Visit & Taste</Link>
                             
                         
                         </Nav>
@@ -67,8 +68,11 @@ const Header = () => {
                 </Navbar>
           
                 <div className='nav_circles'>
-                    <div><PersonCircle className="circle_button"/></div>
-                    <div><CartButton /></div>
+                    <Link to={`${homeLink}/cart`} >
+                        <PersonCircle className="circle_button header_text"/>
+                    </Link>
+                    {/* <div className="circle_button header_text"></div> */}
+                    <CartButton />
                </div>
             </div>
         </div>

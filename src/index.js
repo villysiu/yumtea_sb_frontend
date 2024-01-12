@@ -11,7 +11,7 @@ import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import About from './features/headerNav/About'
 import WineList from './features/wine/WineList';
 import WineApp from './features/wine/WineApp';
-import Wine from './features/wine/Wine';
+import SingleWine from './features/wine/SIngleWine';
 import Secure from './features/user/Secure';
 import Cart from './features/cart/Cart';
 
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
                   },
                   {
                     path: "wines/:itemId",
-                    element: <Wine />,
+                    element: <SingleWine />,
                   },
                   {
                     path: "/cart",

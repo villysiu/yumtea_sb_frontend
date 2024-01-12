@@ -19,17 +19,20 @@ function App() {
 
     // }, [dispatch])
   return (
-    <>
-      {/* {console.log(current_user)} */}
+   
       <div className="App">
-          <Header />
-          <Messages />
-          <div>
-              <Outlet />
+        <div className='appbody border border-danger'>
+        
+           <Header />
+          
+         {/* <Messages /> */}
+         
+          <Outlet />
               
-          </div>
+      
+        </div>
       </div>
-      </>
+     
   );
 }
 

@@ -17,11 +17,11 @@ const WineApp = () =>{
     if(status === "loading"){
         return <>Loading</>
     }
-    if(status === 'failed'){
+    if(status === 'failed' || status === 'idle'){
         return null
     }
     return(
-            <Outlet />
+        <Outlet />
     )
 }
 export default WineApp

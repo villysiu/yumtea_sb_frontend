@@ -31,11 +31,8 @@ const Cart = () => {
         <Container >
             <Row className="border borderSecondary border-bottom-0">
                 <Col className="cart_a m-3">
-                 
                     <CartFill style={{fontSize:'2rem', marginRight: '1rem'}} /> 
-                    {
-                        <>Your Cart: {cart_arr.length} item(s)</>
-                    }
+                    Your Cart: {cart_arr.length} item(s)
                 </Col>
             </Row>
             <Row className="border borderSecondary cart_c px-3">
@@ -45,19 +42,14 @@ const Cart = () => {
                             <Col className="cart_b">Your Cart is Empty</Col> 
                             <Col className='my-3 cart_d'>
                                 <Link to={`${homeLink}/wines`}>
-                                <Button className='cart_button'>Continue Shopping</Button>
+                                    <Button className='cart_button'>Continue Shopping</Button>
                                 </Link>
                             </Col>
                         </>
                         :
                         <>
-                            
                             {
-                                cart_arr.map(item=>{
-                                    return (
-                                        <CartItem key={item.pk} cartItem={item} />
-                                    )
-                                })
+                                cart_arr.map(item=><CartItem key={item.pk} cartItem={item} />)
                             }
                         </>
                 }
