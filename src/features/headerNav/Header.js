@@ -24,6 +24,11 @@ const Header = () => {
         }
     }, [status, dispatch])
     
+    let myDivObj = document.getElementById("singlewine_bg"); 
+    // let myDivObjBgColor = window.getComputedStyle(myDivObj).backgroundColor;
+    console.log(myDivObj);
+
+
     const WineDropdownTitle = () =>{
         return <div className="header_text" >Wines</div>
     }

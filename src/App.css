@@ -38,6 +38,7 @@
   .singlewine_title{
     margin-top: 4rem;
     font-size: 60px;
+    color: green;
   }
 }
 .appbody {
@@ -247,50 +248,72 @@
 .added_message {
   position: absolute;
   left: 40%;
-  top: 35px;
-  width: 200px;
+  top: 50px;
+  width: 300px;
   /* font-size: 10px; */
   background-color: white;
   border: #d1c089 1px solid;
+  color: black;
+  padding: 1rem;
+  filter: drop-shadow(0 0 0.75rem black);
 }
-
-.singlewine_bg {
-  width: 100%;
-  height: 50vh;
-  object-fit: cover;
-  
-  /* opacity: 0.75; */
-  filter: brightness(69%);
-  /* position: absolute; */
-  background-color: black;
-  z-index: 1;
-}
-.singlewine_wrapper {
-  width: calc(var(--body_width) - 8rem);
-  display: flex;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  position: absolute;
-  z-index: 10;
-  bottom: -17rem;
-}
-.sss{
+.singlewine_wrapper{
   position: absolute;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.singlewine_bg_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+#singlewine_bg {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+  filter: brightness(69%);
+  background-color: black;
+  z-index: 1;
+}
+.singlewine_title_cart_props_wrapper{
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+.singlewine_img_title_wrapper {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: -300px;
+  white-space: nowrap;
+}
+
 .singlewine_title{
-  /* margin-top: 10rem; */
+  margin-top: 6rem;
   font-size: 60px;
-  color:white;
+  color:green;
+  /* position: absolute;
+  bottom: 0; */
   
 }
 .www {
   margin-top: 9.5rem
 }
-.singlewine_img_wrapper, .winelist_img_wrapper{
+.singlewine_img_wrapper{
+  display: flex;
+  justify-content: center;
+  /* position:absolute;
+  bottom: 0; */
+  z-index: 1000;
+
+
+}
+
+.winelist_img_wrapper{
   display: flex;
   justify-content: center;
 }
@@ -337,7 +360,12 @@
   color: white;
 }
 .singlewine_desc_wrapper {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
+  /* position: absolute;
+  z-index: 10;
+  bottom: 0rem;
+  left: 20rem; */
+  padding-left: 250px;
 }
 .singlewine_cart {
   display: flex;
