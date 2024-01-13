@@ -17,14 +17,14 @@ const SingleWine = () =>{
         return (
             <>
                 {singleWine.description}
-                {/* {singleWine.description}
+                {singleWine.description}
                 {singleWine.description}
                 {singleWine.description}
                 {singleWine.description}
                 {singleWine.description}
 
                 {singleWine.description}
-                {singleWine.description} */}
+                {singleWine.description}
             </>
         )
     }
@@ -56,9 +56,7 @@ const SingleWine = () =>{
     }
     if(singleWine===undefined)
         return( <div>cannot find wine, not existed?</div>)
-        let myDivObj = document.getElementById("singlewine_bg"); 
-        // let myDivObjBgColor = window.getComputedStyle(myDivObj).backgroundColor;
-        console.log(myDivObj);
+
     return(
         <div className="singlewine_wrapper">
             <div className="singlewine_bg_wrapper" >
@@ -75,10 +73,6 @@ const SingleWine = () =>{
                             {title}
                         </div>
                        <Price />
-                        {/* <div className='singlewine_cart mb-3'>
-                            <span className="pe-4">{USDollar.format(singleWine.price)}</span>
-                            <PurchaseButton menuitemId={singleWine.pk} menuitemTitle={singleWine.year +" " + singleWine.title} price={singleWine.price} />
-                        </div> */}
                         <Props />
                         
                     </div>
@@ -96,7 +90,7 @@ const SingleWine = () =>{
                     </div>
                 </div>
             </div>
-            <div className="d-block d-sm-none" style={{"margin-top": "8rem"}}>
+            <div className="d-block d-sm-none" style={{marginTop: "8rem"}}>
                 <Price />
                 <Props />
             </div>

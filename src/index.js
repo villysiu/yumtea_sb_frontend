@@ -14,7 +14,7 @@ import WineApp from './features/wine/WineApp';
 import SingleWine from './features/wine/SIngleWine';
 import Secure from './features/user/Secure';
 import Cart from './features/cart/Cart';
-
+import Test from './features/user/Test';
 const router = createBrowserRouter([
   {
       path: "/",
@@ -45,6 +45,10 @@ const router = createBrowserRouter([
                     element: <Cart />
                   },
               ]
+          },
+          {
+            path: '/test',
+            element: <Test />
           },
           
           // {

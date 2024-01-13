@@ -20,12 +20,12 @@ function App() {
     // }, [dispatch])
   return (
    
-      <div className="App">
+      <div id="App">
         <div className='appbody border border-danger'>
         
            <Header />
           
-         {/* <Messages /> */}
+         <Messages />
          
           <Outlet />
               

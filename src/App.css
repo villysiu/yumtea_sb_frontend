@@ -1,12 +1,15 @@
-.App {
+#App {
   /* text-align: center; */
   display:flex;
   width: 100vw;
   justify-content: center;
-  min-width: 390px
+  min-width: 390px;
+  
+  
   
 }
 :root{
+  --bs-body-bg: green;
   --body_width: 1536px;
   --header_circle_btn: 2rem;
   --header_padding: 2rem;
@@ -52,6 +55,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin-top: 6rem;
     
 
 }
@@ -90,16 +94,17 @@
   transform: scale(1.2);
 }
 .header_wrapper {
-  display: flex;
+  background: transparent !important;
+  /* display: flex;
   align-items: center;
   padding-left: var(--header_padding);
-  padding-right: var(--header_padding);
-  position: sticky;
+  padding-right: var(--header_padding); */
+  /* position: absolute;
   top: 0px;
-  z-index: 1050;
+  z-index: 1050; */
 }
 
-.nav_features {
+.header_features {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -111,8 +116,8 @@
 }
 
 @media all and (max-width: 991.98px) {
-  .nav_features{
-
+  .header_features{
+    width: unset;
     flex-direction: row-reverse;
     justify-content: unset;
   }
@@ -266,11 +271,13 @@
   filter: drop-shadow(0 0 0.75rem black);
 }
 .singlewine_wrapper{
-  position: absolute;
+  position: fixed;
+  top: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 .singlewine_bg_wrapper {
   width: 100%;
@@ -284,7 +291,7 @@
   height: 50vh;
   object-fit: cover;
   filter: brightness(69%);
-  background-color: black;
+  /* background-color: black; */
   z-index: 1;
 }
 .singlewine_title_cart_props_wrapper{
