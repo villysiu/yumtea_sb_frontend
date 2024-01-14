@@ -26,7 +26,7 @@ const WineList = () =>{
             <div>nothing</div>
         )
     return (
-        <Container style={{marginTop: '6rem'}}>
+        <Container>
             <Row>
                 {
                     wine_arr.map(wine=><Wine key={wine.pk} menuitem={wine} />)

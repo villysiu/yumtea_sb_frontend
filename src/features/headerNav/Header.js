@@ -24,11 +24,15 @@ const Header = () => {
         toggleHamburger(false)
         document.getElementById('navbarScroll').style.display =  'block'
         toggleShowCategories(true)
+        console.log('hhh')
+        console.log(document.documentElement.style.getPropertyValue('--bs-bg-opacity'))
+        // document.documentElement.style.setProperty('--bs-bg-opacity', '1')
 
     }
     const closeMDDropdown = e =>{
         toggleHamburger(true)
         document.getElementById('navbarScroll').style.display = 'none'
+    
     }
     useEffect(() => {
         const handleResize = () => {
@@ -48,9 +52,9 @@ const Header = () => {
     
     return (
         
-        <Navbar expand="lg" className="bg-body-tertiary header_wrapper" fixed="top">
+        <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
             <Container fluid>
-                <Link to={`${homeLink}`} className="nav_brand">Little D</Link>
+                <Link to={`${homeLink}`} className="nav_brand header_title" >Little D</Link>
                 
                 <div className="header_features">
                    

@@ -12,11 +12,6 @@ const SingleWine = () =>{
         console.log(state.wine.wines)
         return state.wine.wines
     })
-    // setHeadeTextColor({color: "white"})
-  
-    
-    
-    
 
     const singleWine = wine_arr.find(wine => wine.pk === parseInt(itemId))
     const title = singleWine.year +" " + singleWine.title + " very very long name"
@@ -66,10 +61,6 @@ const SingleWine = () =>{
         
     )
     
-    
-      
-    
-
     return(
         <div className="singlewine_wrapper">
             

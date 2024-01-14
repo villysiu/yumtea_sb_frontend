@@ -26,7 +26,6 @@ const Cart = () => {
     }, [dispatch, username, status])
 
     return (
-        
 
         <Container >
             <Row className="border borderSecondary border-bottom-0">

@@ -25,7 +25,7 @@ function App() {
         <div className='appbody border border-danger'>
         
            <Header />
-          
+          <div style={{height: '6rem'}}></div>
          <Messages />
          
           <Outlet />

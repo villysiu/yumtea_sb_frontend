@@ -11,6 +11,7 @@
 }
 
 :root{
+  --bs-tertiary-bg-rgb: 245, 237, 207;
   --bs-body-bg: rgba(242,241,237);
   --body_width: 1536px;
   --header_circle_btn: 2rem;
@@ -23,6 +24,8 @@
   --single_wine_img_height: 400px;
   /* --single_wine_details_width: calc(var(--single_wine_width) - var(--single_wine_img_width)); */
   --header_text_color: black;
+
+  --cartitem_img_width: 100px;
 } 
 
 @media all and  (max-width: 1535.98px) {
@@ -89,20 +92,14 @@
   position: relative;
 }
 
-.test{
-  position: absolute;
-  font-family: Arial, Helvetica;
-  /* font-size: 100px; */
-  mix-blend-mode: difference;
-  color: white;
-  z-index: 3;
+.header_title {
+  color: var(--header_text_color);
 }
 .header_text {
-  /* color: var(--header_text_color); */
-  /* filter: invert(100%); */
+
   /* mix-blend-mode: difference; */
-    color: black;
-    /* opacity: 1; */
+    color: var(--header_text_color);
+
 
 }
 .header_text:hover {
@@ -111,10 +108,7 @@
   text-shadow: rgb(131, 79, 159) 1px 0 10px;
 }
 .header_wrapper {
-  /* background: white !important;
-  opacity: 0.6; */
-  background-color:rgba(255,255,255,0.3) !important;
-
+  /* background-color:rgba(255,255,255,0.3) !important; */
 }
 
 
@@ -123,7 +117,6 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-
   color: white;
 }
 
@@ -194,6 +187,34 @@
   color: #3a2f37;
   /* width: auto; */
 }
+.cartitem_container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.cartitem_img_wrapper{
+  width: var(--cartitem_img_width);
+}
+.cartitem_img{
+  width: var(--cartitem_img_width);
+}
+.cartitem_info{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.cartitem_title {
+  width: calc(100% / 2);
+
+}
+.cartitem_qty, .cartitem_price{
+  width: calc(100% / 4);
+
+}
+.cartitem_price{
+  text-align: right;
+
+}
 .cart_button:active, .cart_button:hover, .cart_button:focus-visible,
 .purchase_button:active, .purchase_button:hover, .purchase_button:focus-visible
  {
@@ -203,54 +224,24 @@
   /* background: #d1c089; */
   opacity: 0.75; 
 }
-.cart_a {
+.cartitem_qty_input{
   display: flex;
-  flex-direction: row;
-  align-items: center;
-
-}
-.cart_b {
-  display: flex;
-  height: 200px;
-  min-height: 200px;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-}
-.cart_c {
-  display: flex;
-  flex-direction: column;
-}
-.cart_d {
-  display: flex;
-}
-.cart_e {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.cart_f {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+    flex-direction: row;
 }
 
-.cart_g {
-  margin-top: 0rem;
-}
 @media all and (max-width: 767.98px) {
-  .cart_g{
-    margin-top: 2rem;
-
+  .cartitem_info {
+    flex-direction: column;
   }
+  .cartitem_qty{
+    padding-top: 2rem;
+    width: 100%;
+  }
+  .cartitem_price{
+    padding-top: 2rem;
+    text-align: left;
   
-}
-.cart_h {
-  display: flex;
-}.cart_i {
-  display: flex;
-  flex-direction: column;
-    align-items: flex-end;
+  }
 }
 .qty_minus, .qty_plus {
   width: 40px;
@@ -272,8 +263,9 @@
   background-color: #937d36;
   color:white;
 }
-.qty_minus:disabled{
-  background-color: #d1c089;;
+.qty_minus:disabled, .qty_plus:disabled{
+  background-color: #937d36;
+  opacity: 0.4;
 
 }
 .qty_box {
@@ -287,11 +279,11 @@
 }
 .qty_label{
   position: absolute;
-  left: 7px;
+  left: 14px;
   top: -8px;
   width: 30px;
   font-size: 10px;
-  background-color: white;
+  background-color: var(--bs-body-bg);
 }
 .low_inventory {
   
