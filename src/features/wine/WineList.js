@@ -7,9 +7,11 @@ import Col from 'react-bootstrap/Col';
 import { homeLink } from "../../app/global"
 import PurchaseButton from './PurchaseButton';
 import Wine from './Wine';
+import setHeadeTextColor from '../../app/global';
 const WineList = () =>{
     console.log("in wine list")
     let { categoryId } = useParams();
+    // setHeadeTextColor({color: "black"})
 
     let {wine_arr, status} = useSelector(state => {
         console.log(state)
@@ -24,7 +26,7 @@ const WineList = () =>{
             <div>nothing</div>
         )
     return (
-        <Container>
+        <Container style={{marginTop: '6rem'}}>
             <Row>
                 {
                     wine_arr.map(wine=><Wine key={wine.pk} menuitem={wine} />)

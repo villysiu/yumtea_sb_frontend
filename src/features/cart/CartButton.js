@@ -5,7 +5,7 @@ const CartButton =() =>{
 
     return(
         <Link to={`${homeLink}/cart`} >
-            <Cart className="circle_button header_text" />
+            <Cart className="circle_button" />
         </Link>
     )
 }

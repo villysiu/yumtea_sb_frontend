@@ -5,3 +5,8 @@ export const USDollar = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
 });
+export default function setHeadeTextColor({color}) {
+    // console.log(color)
+    // console.log(document.documentElement.style)
+    document.documentElement.style.setProperty('--header_text_color', color)
+}

@@ -3,6 +3,8 @@ import { useSelector } from "react-redux"
 import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import PurchaseButton from "./PurchaseButton"
+import setHeadeTextColor from "../../app/global"
+import { useEffect, useState } from "react"
 const SingleWine = () =>{
     let {itemId} = useParams()
 
@@ -10,6 +12,11 @@ const SingleWine = () =>{
         console.log(state.wine.wines)
         return state.wine.wines
     })
+    // setHeadeTextColor({color: "white"})
+  
+    
+    
+    
 
     const singleWine = wine_arr.find(wine => wine.pk === parseInt(itemId))
     const title = singleWine.year +" " + singleWine.title + " very very long name"
@@ -31,19 +38,19 @@ const SingleWine = () =>{
     const Props = () =>{
         return (
             <ul className='singlewine_props_wrapper'>
-                            <li className='singlewine_prop pe-3'>
-                                <span>WINEMAKER</span>
-                                <span>Danielle</span>
-                            </li>
-                            <li className='singlewine_prop ps-3 pe-3'>
-                                <span>APPELLATION</span>
-                                <span>{singleWine.origin}</span>
-                            </li>
-                            <li className='singlewine_prop ps-3' style={{borderRight: '0px'}}>
-                                <span>VARIETAL</span>
-                                <span>{singleWine.varietal}</span>
-                            </li>
-                        </ul>
+                <li className='singlewine_prop pe-3'>
+                    <span>WINEMAKER</span>
+                    <span>Danielle</span>
+                </li>
+                <li className='singlewine_prop ps-3 pe-3'>
+                    <span>APPELLATION</span>
+                    <span>{singleWine.origin}</span>
+                </li>
+                <li className='singlewine_prop ps-3' style={{borderRight: '0px'}}>
+                    <span>VARIETAL</span>
+                    <span>{singleWine.varietal}</span>
+                </li>
+            </ul>
         )
     }
     const Price =() =>{
@@ -55,13 +62,24 @@ const SingleWine = () =>{
         )
     }
     if(singleWine===undefined)
-        return( <div>cannot find wine, not existed?</div>)
+        return( <div>cannot find wine, not existed? </div>
+        
+    )
+    
+    
+      
+    
 
     return(
         <div className="singlewine_wrapper">
+            
             <div className="singlewine_bg_wrapper" >
-                <img src={`${homeLink}/pick_grape_bg.jpeg`} id="singlewine_bg" alt={singleWine.title}></img>
+                {/* <div className='singlewine_bg'></div> */}
+                <img src={`${homeLink}/pick_grape_bg.jpeg`} className="singlewine_bg" alt={singleWine.title}
                 
+                ></img>
+                
+          
                 <div className="singlewine_img_pos_wrapper app_width d-none d-sm-block">
                     <div className="singlewine_img_wrapper">
                         <img src={`${homeLink}/ASC_websize.png`} className="singlewine_img" alt={singleWine.title}></img>
@@ -94,11 +112,10 @@ const SingleWine = () =>{
                 <Price />
                 <Props />
             </div>
-            <div className="singlewine_desc_wrapper app_width ">
+            <div className="singlewine_desc_wrapper app_width">
                 <Desc />
             </div>
-            
-
+           
          </div>
 
     )

@@ -2,70 +2,96 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import { PersonCircle } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategories } from '../wine/wineSlice';
+
 import { homeLink } from '../../app/global';
-import CartButton from '../cart/CartButton';
+import { Cart } from 'react-bootstrap-icons';
+import { useState } from 'react';
+import CategoryDropdown from './CategoryDropdown';
+import { X } from 'react-bootstrap-icons';
 
 const Header = () => {
-    const dispatch=useDispatch();
-    let {category_arr, status} = useSelector(state => {
-        // console.log(state.wine.category)
-        return state.wine.category
-        
-    })
-    useEffect(()=>{
-        if(status === 'idle'){
-            dispatch(fetchCategories())
-        }
-    }, [status, dispatch])
     
+    const [showCategories, toggleShowCategories] = useState(false)
+    const [showHamburger, toggleHamburger] = useState(true)
 
-    const WineDropdownTitle = () =>{
-        return <div className="header_text" >Wines</div>
+    
+    
+    const openMDDropdown = e =>{
+        toggleHamburger(false)
+        document.getElementById('navbarScroll').style.display =  'block'
+        toggleShowCategories(true)
+
     }
+    const closeMDDropdown = e =>{
+        toggleHamburger(true)
+        document.getElementById('navbarScroll').style.display = 'none'
+    }
+    useEffect(() => {
+        const handleResize = () => {
+            document.getElementById('navbarScroll').style.display = 'none'
+            toggleHamburger(true)
+            toggleShowCategories(false)
+        };
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+   
+
+    
     return (
         
         <Navbar expand="lg" className="bg-body-tertiary header_wrapper" fixed="top">
             <Container fluid>
-            {/* <Navbar.Brand href="#">Navbar scroll</Navbar.Brand> */}
-                <Link to={`${homeLink}`} className="nav_brand header_text">Little D</Link>
+                <Link to={`${homeLink}`} className="nav_brand">Little D</Link>
+                
                 <div className="header_features">
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
-                        navbarScroll
-                    >
-                        <Link to={`${homeLink}/wines`} key="11128" className='nav-link header_text'>Home</Link>
-                        <NavDropdown title={<WineDropdownTitle />} id="navbarScrollingDropdown" key="nav">
-                            <Link to={`${homeLink}/wines`} className='dropdown-item'>All</Link>
-                            {
-                                category_arr.map(category=>{
+                   
+                    {showHamburger ? 
+                        <Navbar.Toggle aria-controls="navbarScroll"
+                            onClick={openMDDropdown} 
+                            className='header_dropdown_bar_btn'
+                        />
+                        :
+                        <X onClick={closeMDDropdown} className='circle_button header_nav_x_btn' /> 
+                    }
+                    <Navbar.Collapse id="navbarScroll" style={{display: 'none'}} >
+                        <Nav
+                            className="me-auto my-2 my-lg-0 header_md_dropdown" navbarScroll
+                            // style={{ maxHeight: '100px'}}
+                        >
+                            <Link to={`${homeLink}/wines`} key="11128" className='nav-link header_text' onClick={closeMDDropdown}>
+                                Home
+                            </Link>
 
-                                    return (
-                                        <Link to={`${homeLink}/wines/cat/${category.pk}`} key={category.pk} className='dropdown-item' >{category.title}</Link>
-                                    )
-                                })
-                            }
-                        </NavDropdown>
+                            <CategoryDropdown show={showCategories} 
+                                closeMDDropdown={closeMDDropdown}
+                                toggleShow={toggleShowCategories} />
+                            
 
-                        <Link href="/" key="465645" className='nav-link header_text'>Visit & Taste</Link>
-                                        
-                    </Nav>
+                            <Link href="/" key="465645" className='nav-link header_text' 
+                                onClick={closeMDDropdown}>Visit & Taste
+                            </Link>
+                                            
+                        </Nav>
                     
                     </Navbar.Collapse>
+
                     <div className='nav_circles'>
-                        <Link to={`${homeLink}/test`} >
-                            <PersonCircle className="circle_button header_text"/>
+                        <Link to={`${homeLink}/test`} onClick={closeMDDropdown}>
+                            <PersonCircle className="circle_button"/>
                         </Link>
-                        {/* <div className="circle_button header_text"></div> */}
-                        <CartButton />
+                  
+                        <Link to={`${homeLink}/cart`} onClick={closeMDDropdown}>
+                            <Cart className="circle_button" />
+                        </Link>
                     </div>
                 </div>
             </Container>
