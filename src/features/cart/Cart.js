@@ -16,6 +16,16 @@ const Cart = () => {
 
     })
     const {username} = useSelector(state => state.user.current_user)
+    // const itemCount = {
+        // let itemCount = 0
+        // let subtotal = 0
+        // cart_arr.map(cartitem => {
+        //     itemCount += cartitem.quantity
+        //     subtotal += cartitem.linetotal
+        // })
+    // }
+
+
     
     useEffect(()=>{
 
@@ -35,16 +45,21 @@ const Cart = () => {
             </div>
         </>
     }
+    let [itemCount, subtotal] = cart_arr.reduce(
+        (acumulator, currCartItem) => {
+            return [acumulator[0]+currCartItem.quantity, acumulator[1]+currCartItem.linetotal]
+        }, [0,0]
+    )
     return (
         <div className='cart_container'>
-            <CartSummary />
+            <CartSummary subtotal={subtotal} />
             
         
             <div className='cart_cartitems'>
                 <div className="border border-bottom-0">
                     <div className="cart_a m-3">
                         <CartFill style={{fontSize:'2rem', marginRight: '1rem'}} /> 
-                        Your Cart: {cart_arr.length} item(s)
+                        Your Cart: {itemCount} item(s)
                     </div>
                 </div>
                 <div className="border borderSecondary cart_c px-3">
