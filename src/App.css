@@ -6,8 +6,7 @@
   min-width: 390px;
 
   position: relative;
-  /* background-color:rgba(242,241,237); */
-  /* height: 100vh; */
+
 }
 
 :root{
@@ -26,12 +25,15 @@
   --header_text_color: black;
 
   --cartitem_img_width: 100px;
+  --cart_summary_width: 450px;
+  --cart_summary_right: calc((100vw - 1536px) / 2);
+  /* --cart_summary_top: 6rem/ */
 } 
 
 @media all and  (max-width: 1535.98px) {
   :root{
     --body_width: 100vw;
-    /* --single_wine_details_width: calc( 100vw - var(--single_wine_margin) - var(--single_wine_img_width)) */
+    --cart_summary_right: 0
   }
 }
 @media all and  (max-width: 389.98px) {
@@ -43,6 +45,13 @@
 @media all and  (max-width: 991.98px) {
   :root {
     --header_padding: 0.5rem;
+    
+  }
+}
+@media all and  (max-width: 1199.98px) {
+  :root {
+    
+    --cart_summary_width: 250px;
   }
 }
 
@@ -52,15 +61,18 @@
     --single_wine_img_width: 140px;
     --single_wine_img_pos: -150px;
     --singlewine_title_font_size: 35px;
+    --cart_summary_width: 90vw;
+    --cart_summary_right: 5vw;
+ 
   }
 }
 
 .appbody {
   position: relative; 
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
     
     
 
@@ -174,9 +186,44 @@
   color: black;
 
 }
-.purchase_button{
+.purchase_button, .checkout_btn{
   background: #d1c089;
   border: 0px 
+}
+.checkout_btn{ 
+  width: 100%;
+}
+.cart_container {
+  width: var(--body_width);
+  position: relative;
+  border:1px pink solid;
+}
+.cart_summary {
+  /* width: ?calc( var(--body_width) * 0.3 - 2rem); */
+  width: var(--cart_summary_width);
+  min-width: 250px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border: 1px black solid;
+  position: fixed;
+  top: 6rem;
+  bottom: unset;
+  right: var(--cart_summary_right);
+  padding: 1rem;
+  background-color: var(--bs-body-bg);
+  z-index: 1030;
+}
+
+.cart_summary_line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.cart_summary_checkout {
+  text-align: center;
+}
+.cart_cartitems{
+  width: calc( var(--body_width) - var(--cart_summary_width) - 2rem);
 }
 .cart_button {
   background: #d1c089;
@@ -229,7 +276,10 @@
     flex-direction: row;
 }
 
-@media all and (max-width: 767.98px) {
+@media all and (max-width: 991.98px) {
+  .cart_cartitems {
+    width: calc(var(--body_width) - var(--cart_summary_width) - 2rem)
+  }
   .cartitem_info {
     flex-direction: column;
   }
@@ -241,6 +291,21 @@
     padding-top: 2rem;
     text-align: left;
   
+  }
+  .cartitem_title, .cartitem_price {
+    width: unset;
+  }
+}
+@media all and (max-width: 767.98px) {
+  .cart_summary {
+    bottom: 0;
+    top: unset;
+    margin-left: 0;
+  margin-right: 0;
+  }
+  .cart_cartitems{
+    margin-bottom: 20rem;
+    width: 100vw;
   }
 }
 .qty_minus, .qty_plus {

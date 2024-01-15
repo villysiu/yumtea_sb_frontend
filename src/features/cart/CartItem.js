@@ -22,8 +22,8 @@ const CartItem = ({cartItem}) => {
     return(
         <div className="borderSecondary border-bottom pb-5 cartitem_container">
             <div className="cartitem_img_wrapper">
-            <Link to={`${homeLink}/wines/${cartItem.menuitem}`}>
-                <img src={`${homeLink}/ASC_websize.png`} className="cartitem_img" alt={menuItem.title}></img>  
+                <Link to={`${homeLink}/wines/${cartItem.menuitem}`}>
+                    <img src={`${homeLink}/ASC_websize.png`} className="cartitem_img" alt={menuItem.title}></img>  
                 </Link>
             </div>
             
