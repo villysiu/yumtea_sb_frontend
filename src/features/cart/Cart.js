@@ -36,14 +36,16 @@ const Cart = () => {
     }, [dispatch, username, status])
 
     if(cart_arr.length === 0){
+        return(
         <>
             <div className="cart_b">Your Cart is Empty</div> 
             <div className='my-3 cart_d'>
                 <Link to={`${homeLink}/wines`}>
-                    <Button className='cart_button'>Continue Shopping</Button>
+                    <Button className='gold_button short'>Continue Shopping</Button>
                 </Link>
             </div>
         </>
+        )
     }
     let [itemCount, subtotal] = cart_arr.reduce(
         (acumulator, currCartItem) => {

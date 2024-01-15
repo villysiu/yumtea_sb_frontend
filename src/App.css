@@ -11,7 +11,8 @@
 
 :root{
   --bs-tertiary-bg-rgb: 245, 237, 207;
-  --bs-body-bg: rgba(242,241,237);
+  /* --bs-body-bg: rgba(242,241,237); */
+  --bs-body-bg: white;
   --body_width: 1536px;
   --header_circle_btn: 2rem;
   --header_padding: 2rem;
@@ -186,12 +187,14 @@
   color: black;
 
 }
-.purchase_button, .checkout_btn{
+.gold_button {
   background: #d1c089;
-  border: 0px 
-}
-.checkout_btn{ 
+  border: 0px; 
+  text-transform: uppercase;
   width: 100%;
+}
+.gold_button.short {
+  width: unset;
 }
 .cart_container {
   width: var(--body_width);
@@ -225,15 +228,7 @@
 .cart_cartitems{
   width: calc( var(--body_width) - var(--cart_summary_width) - 2rem);
 }
-.cart_button {
-  background: #d1c089;
-  border: 0px solid #000;
-  padding: 10px 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.04rem;
-  color: #3a2f37;
-  /* width: auto; */
-}
+
 .cartitem_container{
   width: 100%;
   display: flex;
@@ -262,14 +257,17 @@
   text-align: right;
 
 }
-.cart_button:active, .cart_button:hover, .cart_button:focus-visible,
-.purchase_button:active, .purchase_button:hover, .purchase_button:focus-visible
+.gold_button:active, .gold_button:hover
+
+{
+  background-color: #a5904b !important;
+  color: black;
+}
+.gold_button:disabled
  {
-  
-  background-color: #d1c089 !important;
-  border: 0px;
-  /* background: #d1c089; */
-  opacity: 0.75; 
+  background: #d1c089;
+  opacity: 0.5;
+  /* color: black; */
 }
 .cartitem_qty_input{
   display: flex;
@@ -461,17 +459,11 @@
 .singlewine_img {
   width: 100%;
 }
-/* .singlewine_img_wrapper-1{
-  display: flex;
-  flex-direction: column;
-} */
 .singlewine_info_wrapper {
   display: flex;
   flex-direction: column;
 }
-/* .singlewine_desc_wrapper {
-  
-} */
+
 
 .singlewine_props_wrapper {
   display: flex;
@@ -492,9 +484,7 @@
   padding-left: var(--single_wine_img_width);
   padding-right: 1rem;
 }
-/* .singlewine_desc_wrapper_sm {
-  visibility: hidden;
-} */
+
 .singlewine_cart {
   display: flex;
   flex-direction: row;
@@ -539,4 +529,8 @@
 .winelist_wine_title {
   display: flex;
   justify-content: center;
+}
+
+.login_form {
+  /* background-color: white; */
 }

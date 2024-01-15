@@ -89,7 +89,7 @@ const Header = () => {
                     </Navbar.Collapse>
 
                     <div className='nav_circles'>
-                        <Link to={`${homeLink}/test`} onClick={closeMDDropdown}>
+                        <Link to={`${homeLink}/signin`} onClick={closeMDDropdown}>
                             <PersonCircle className="circle_button"/>
                         </Link>
                   

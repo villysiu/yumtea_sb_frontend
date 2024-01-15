@@ -15,7 +15,7 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price}) =>{
     return(
         <div style={{"position": "relative"}}>
             {successMessage && <AddedOverlay successMessage={successMessage} setSuccessMessage={setSuccessMessage}/>}
-            <Button className='purchase_button' onClick={handleClick}>Purchase</Button>
+            <Button className='gold_button short' onClick={handleClick}>Purchase</Button>
 
         </div>
     )

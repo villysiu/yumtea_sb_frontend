@@ -72,22 +72,22 @@ const cartSlice=createSlice({
     initialState: {
         cart: {
             cart_arr: [
-                {
-                    "pk": 34,
-                    "user_id": 2,
-                    "menuitem": 1,
-                    "quantity": 2,
-                    "linetotal": 130.0,
-                    "unit_price": 65.0
-                },
-                {
-                    "pk": 35,
-                    "user_id": 2,
-                    "menuitem": 4,
-                    "quantity": 1,
-                    "linetotal": 42.00,
-                    "unit_price": 42.00
-                }
+                // {
+                //     "pk": 34,
+                //     "user_id": 2,
+                //     "menuitem": 1,
+                //     "quantity": 2,
+                //     "linetotal": 130.0,
+                //     "unit_price": 65.0
+                // },
+                // {
+                //     "pk": 35,
+                //     "user_id": 2,
+                //     "menuitem": 4,
+                //     "quantity": 1,
+                //     "linetotal": 42.00,
+                //     "unit_price": 42.00
+                // }
             
             ],
             status: 'idle',

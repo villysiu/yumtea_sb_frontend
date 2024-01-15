@@ -17,7 +17,7 @@ const Wine = ({menuitem}) =>{
             </Link>
        
             <div>{menuitem.varietal}</div>
-            <div>{USDollar.format(menuitem.price)}</div>
+            <div className='mb-3'>{USDollar.format(menuitem.price)}</div>
 
             { menuitem.inventory === 0 ?
                 <OutOfStockButton />

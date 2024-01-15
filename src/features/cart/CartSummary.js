@@ -26,7 +26,7 @@ const CartSummary = ({subtotal}) =>{
             </div>
             
             <div className="cart_summary_checkout mt-5">
-                <Button className='checkout_btn'>Checkout</Button>
+                <Button className='gold_button'>Checkout</Button>
             </div>
         </div>
     )
