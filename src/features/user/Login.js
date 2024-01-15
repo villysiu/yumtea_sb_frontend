@@ -5,23 +5,23 @@ import { homeLink } from '../../app/global';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { loginUser } from './userSlice';
 
 const Login = () =>{
-    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const dispatch=useDispatch();
 
     const handleSubmit=e=>{
         e.preventDefault()
-        console.log(email)
+        console.log(username)
         console.log(password)
+        // {'username': 'danielle', 'password': 'mpassword3@!'}
         // const formData=new FormData()
         // formData.append("email", email)
         // formData.append("password", password)
-        // dispatch(loginUser({user: Object.fromEntries(formData)}))
-        // .catch((error) => {
-        //     console.log(error)
-        // })
+        dispatch(loginUser({'username': username, 'password': password}))
+
         
         // e.target.reset() 
     }
@@ -42,15 +42,15 @@ const Login = () =>{
                     label="Username"
                     className="mb-3"
                 >
-                    <Form.Control type="text" placeholder="Username" value={email} 
-                onChange={e=>setEmail(e.target.value)} />
+                    <Form.Control type="text" placeholder="Username" value={username} 
+                onChange={e=>setUsername(e.target.value)} />
                 </FloatingLabel>
                 <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
                     <Form.Control type="password" placeholder="Password" value={password} 
                 onChange={e=>setPassword(e.target.value)} />
                 </FloatingLabel>
                 <Button type="submit" className='gold_button mb-3' 
-                    disabled={ !email || !password }>Sign In</Button>
+                    disabled={ !username || !password }>Sign In</Button>
             </Form>
             <div>Forgot your password?</div>
             <Link to={`${homeLink}/signup`}>

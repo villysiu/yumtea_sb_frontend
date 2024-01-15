@@ -1,21 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
-    async (_, thunkAPI) => {
-        console.log("in fecting???")
-        
+    async (token, thunkAPI) => {
+        console.log("in fetching???")
+        console.log(`Token ${token}`)
         try {
             const response=await fetch("http://127.0.0.1:8000/auth/users/me", {
                 method: "GET",
                 headers: {
-                    // "Content-Type": "application/json",
-        
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-        
-                }
+                    "Content-Type": "application/json",
+                    // "Authorization": `Token ${localStorage.getItem("token")}`,
+                    "Authorization": `Token ${token}`,
+                    // "Authorization": 'Token 9fa98cb2924d5888174b744360d06f14f6be724c'
+                },
+                // mode: "no-cors",
+                
+    
             })
- 
-            
+
             if(!response.ok) {
                 console.log(response)
                 // remove incorrect token from localstorage
@@ -31,18 +33,18 @@ export const fetchCurrentUser=createAsyncThunk(
         } 
         catch(error){
             console.log(error)
+            localStorage.clear()
             return Promise.reject(error);
         }
     }
 )
 export const loginUser=createAsyncThunk(
     'user/loginUser',
-    async (_, thunkAPI ) =>{
+    async (userInfo, thunkAPI ) =>{
         
-          const formdata = {
-            'username': 'danielle',
-            'password': 'mpassword3@!'
-        }
+        console.log(userInfo)
+        // { 'username': 'danielle', 'password': 'mpassword3@!' }
+
         try {
             const response=await fetch('http://127.0.0.1:8000/auth/token/login/', {
                 'method': "POST",
@@ -50,7 +52,7 @@ export const loginUser=createAsyncThunk(
                     'content-type': 'application/json',
                     'accept': 'application/json'
                 },
-                'body': JSON.stringify(formdata)
+                'body': JSON.stringify(userInfo)
    
             })
             
@@ -61,10 +63,9 @@ export const loginUser=createAsyncThunk(
             console.log(data)
 
             localStorage.setItem('token', data.auth_token)
+            thunkAPI.dispatch(fetchCurrentUser(data.auth_token))
+            return data.auth_token
             
-            return {
-                ...data.auth_token
-            }
         } 
         catch(error){
             return Promise.reject(error.message)
@@ -75,11 +76,16 @@ export const loginUser=createAsyncThunk(
 const userSlice=createSlice({
     name: 'user',
     initialState: {
+
         current_user: {
             username: null,
             status: 'idle',
             error: null,    
         },
+        token: {
+            status: 'idle',
+            
+        }
         // user: {
         //     error: null,
         //     user: null,
@@ -116,19 +122,18 @@ const userSlice=createSlice({
             state.current_user.status = 'failed'
         })
         .addCase(loginUser.pending, (state, action) => {
-            state.current_user.status = 'loading'
+            state.token.status = 'loading'
         })
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
             //reset status to idle so it can fetch current user in useEffect
-            state.current_user.status = 'idle'
-            state.current_user.error = null
+            state.token.status = 'succcess'
+            state.token.error = null
 
         })
         .addCase(loginUser.rejected, (state, action) => {
-
-            state.current_user.status = 'failed'
-            state.current_user.error = action.error.message
+            state.token.status = 'failed'
+            state.token.error = action.error.message
         })
     }
 })
