@@ -16,6 +16,7 @@ import Secure from './features/user/Secure';
 import Cart from './features/cart/Cart';
 import Login from './features/user/Login';
 import Signup from './features/user/Signup';
+import Account from './features/user/Account';
 const router = createBrowserRouter([
   {
       path: "/",
@@ -56,17 +57,21 @@ const router = createBrowserRouter([
             element: <Signup />
           },
           
-          // {
-          //     path: "/secure",
-          //     element: <Secure />,
-          //     children: [
+          {
+              path: "/secure",
+              element: <Secure />,
+              children: [
+              {
+                  path: '/secure/account',
+                  element: <Account />
+              }
           //       {
           //         path: "/secure/cart"
           //       }
-          //     ]
+              ]
 
 
-          // },
+          },
           
           {
               path: "/about",

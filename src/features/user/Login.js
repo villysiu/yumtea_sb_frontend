@@ -14,12 +14,6 @@ const Login = () =>{
 
     const handleSubmit=e=>{
         e.preventDefault()
-        console.log(username)
-        console.log(password)
-        // {'username': 'danielle', 'password': 'mpassword3@!'}
-        // const formData=new FormData()
-        // formData.append("email", email)
-        // formData.append("password", password)
         dispatch(loginUser({'username': username, 'password': password}))
 
         

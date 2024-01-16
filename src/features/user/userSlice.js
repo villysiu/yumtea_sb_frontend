@@ -1,19 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
-    async (token, thunkAPI) => {
+    async () => {
         console.log("in fetching???")
-        console.log(`Token ${token}`)
+        
         try {
             const response=await fetch("http://127.0.0.1:8000/auth/users/me", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    // "Authorization": `Token ${localStorage.getItem("token")}`,
-                    "Authorization": `Token ${token}`,
-                    // "Authorization": 'Token 9fa98cb2924d5888174b744360d06f14f6be724c'
+                    "Authorization": `Token ${localStorage.getItem("token")}`,
+                    // "Authorization": `Token ${token}`,
+                    
                 },
-                // mode: "no-cors",
+            
                 
     
             })
@@ -27,9 +27,7 @@ export const fetchCurrentUser=createAsyncThunk(
             const data=await response.json()
             console.log(data)
             // timeOutUser2(data.curr_user.login, thunkAPI)
-            return { 
-                ...data
-            }
+            return data
         } 
         catch(error){
             console.log(error)
@@ -63,7 +61,7 @@ export const loginUser=createAsyncThunk(
             console.log(data)
 
             localStorage.setItem('token', data.auth_token)
-            thunkAPI.dispatch(fetchCurrentUser(data.auth_token))
+            thunkAPI.dispatch(fetchCurrentUser())
             return data.auth_token
             
         } 
@@ -114,7 +112,7 @@ const userSlice=createSlice({
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
             console.log(action.payload)
             state.current_user.status = 'succeeded'
-            state.current_user.username = action.payload.username
+            state.current_user = action.payload
             // state.current_user.id = action.payload.id
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {

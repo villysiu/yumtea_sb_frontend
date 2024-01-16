@@ -1,40 +1,45 @@
-import Plus from './Plus';
-import { useSelector } from 'react-redux';
-
-import ProfileDropdown from './ProfileDropdown';
-import User from '../user/session/User'
+import { useDispatch, useSelector } from 'react-redux';
 import { PersonCircle } from 'react-bootstrap-icons'
-import { Spinner } from 'react-bootstrap';
+import { homeLink } from '../../app/global';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { fetchCurrentUser } from '../user/userSlice';
+const PersonActions = ({closeMDDropdown}) =>{
+     const dispatch = useDispatch()
+    // const userStatus = useSelector(state => state.users.currUser.status)
+    const current_user = useSelector(state => {
+        console.log(state.user)
+        return state.user.current_user
+    })
 
-const PersonActions = () =>{
-    const userStatus = useSelector(state => state.users.currUser.status)
-    const currUser = useSelector(state => state.users.currUser.currUser)
+    useEffect(()=>{
+        console.log("hhh")
+        console.log(localStorage.getItem('token'))
+        console.log(current_user.username)
+        if(localStorage.getItem('token') && current_user.username===null){
+            dispatch(fetchCurrentUser())
+        }
+    }, [dispatch, current_user.username])
   
-    if (!currUser){
-        return (
-            userStatus === 'loading' ? 
-                <Spinner  /> 
-                : 
-                <User display={
-                    <>
-                        <div  className="flex_row_center">
-                            <PersonCircle className="circle_button"/>
-                            <div className='d-none d-lg-block'>
-                                <div style={{cursor: 'pointer'}} >
-                                    Login
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                }/>
 
-        )}
-    return(
-        <>
-            <Plus />
-            <ProfileDropdown currUser={currUser} />
-        </>
-           
-    )
+
+        return (
+            // { if status == loading ?
+            //     do a spinner
+            //  }
+
+            <Link to={`${homeLink}/secure/account`} 
+            onClick={closeMDDropdown}
+            >
+                {
+                    current_user.username===null ? 
+                    <PersonCircle className="circle_button"/> :
+                    <>Hello {current_user.username}</>
+                }
+                
+            </Link>
+
+        )
+
 }
 export default PersonActions

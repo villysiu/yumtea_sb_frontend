@@ -2,8 +2,6 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
-import { PersonCircle } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -12,7 +10,7 @@ import { Cart } from 'react-bootstrap-icons';
 import { useState } from 'react';
 import CategoryDropdown from './CategoryDropdown';
 import { X } from 'react-bootstrap-icons';
-
+import PersonActions from './PersonActions';
 const Header = () => {
     
     const [showCategories, toggleShowCategories] = useState(false)
@@ -89,9 +87,7 @@ const Header = () => {
                     </Navbar.Collapse>
 
                     <div className='nav_circles'>
-                        <Link to={`${homeLink}/signin`} onClick={closeMDDropdown}>
-                            <PersonCircle className="circle_button"/>
-                        </Link>
+                        <PersonActions closeMDDropdown={closeMDDropdown}/>
                   
                         <Link to={`${homeLink}/cart`} onClick={closeMDDropdown}>
                             <Cart className="circle_button" />
