@@ -10,12 +10,12 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 const CartItem = ({cartItem}) => {
     const [error, setError] = useState("")
-    console.log(cartItem)
+    // console.log(cartItem)
     // const menuItemStatus = useSelector(state=>state.wine.wines.status)
     
     const menuItem = useSelector(state=>{
-        let ww = state.wine.wines.wine_arr.filter(wine=>wine.pk === cartItem.menuitem)[0]
-        console.log(ww)
+        let ww = state.wine.wines.wine_arr.filter(wine=>wine.pk === cartItem.menuitem_id)[0]
+        // console.log(ww)
         return ww
     })
     

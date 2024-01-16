@@ -8,18 +8,16 @@ const PersonActions = ({closeMDDropdown}) =>{
      const dispatch = useDispatch()
     // const userStatus = useSelector(state => state.users.currUser.status)
     const current_user = useSelector(state => {
-        console.log(state.user)
+        
         return state.user.current_user
     })
 
-    useEffect(()=>{
-        console.log("hhh")
-        console.log(localStorage.getItem('token'))
-        console.log(current_user.username)
-        if(localStorage.getItem('token') && current_user.username===null){
-            dispatch(fetchCurrentUser())
-        }
-    }, [dispatch, current_user.username])
+    // useEffect(()=>{
+
+    //     if(localStorage.getItem('token') && current_user.username===null){
+    //         dispatch(fetchCurrentUser())
+    //     }
+    // }, [dispatch, current_user.username])
   
 
 

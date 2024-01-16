@@ -1,39 +1,25 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { fetchCart } from "./cartSlice"
+
 import { Button } from "react-bootstrap"
 import { CartFill } from "react-bootstrap-icons"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
 import CartItem from "./CartItem"
 import CartSummary from "./CartSummary"
+
 const Cart = () => {
     console.log("in cart")
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
+
     const {cart_arr, status} = useSelector(state=>{
         console.log(state)
         return state.cart.cart
 
     })
-    const {username} = useSelector(state => state.user.current_user)
-    // const itemCount = {
-        // let itemCount = 0
-        // let subtotal = 0
-        // cart_arr.map(cartitem => {
-        //     itemCount += cartitem.quantity
-        //     subtotal += cartitem.linetotal
-        // })
-    // }
-
-
+    // const {username} = useSelector(state => state.user.current_user)
     
-    useEffect(()=>{
-
-        if(username && status === 'idle'){
-            console.log("not to be here if no user")
-            dispatch(fetchCart())
-        }
-    }, [dispatch, username, status])
+    
 
     if(cart_arr.length === 0){
         return(
@@ -69,9 +55,9 @@ const Cart = () => {
                         cart_arr.map(item=><CartItem key={item.pk} cartItem={item} />)
                     }
                 </div>
-            {/* </div> */}
+     
             
-        </div>
+            </div>
         </div>
 
     )

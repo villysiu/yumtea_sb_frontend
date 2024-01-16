@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { json } from "react-router-dom";
 import { apiLink } from "../../app/global";
 
 
 export const fetchCart=createAsyncThunk(
     'cart/fetchCart',
     async () => {
+        console.log("fetching cart")
         try {
             const response=await fetch(`${apiLink}/api/cart`, {
                 method: "GET",
@@ -32,8 +32,8 @@ export const fetchCart=createAsyncThunk(
 )
 export const addItemToCart = createAsyncThunk(
     'cart/addItemToCart',
-    async (itemId) => {
-        const formData = {'menuitem_id': itemId}
+    async (item, thunkAPI) => {
+        console.log(item)
         try {
             const response=await fetch(`${apiLink}/api/cart`, {
                 method: "POST",
@@ -43,7 +43,7 @@ export const addItemToCart = createAsyncThunk(
                     "Authorization": `Token ${localStorage.getItem("token")}`,
                     
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(item)
             })
 
             if(!response.ok) {
@@ -51,15 +51,15 @@ export const addItemToCart = createAsyncThunk(
             }
             const data=await response.json()
             console.log(data)
-            // {
-            // 	"pk": 34,
-            // 	"user_id": 2,
-            // 	"menuitem": "2019 Chester-Kidder",
-            // 	"quantity": 2,
-            // 	"linetotal": "130.00",
-            // 	"unit_price": "65.00"
-            // }
-            
+        //     // {
+        //     // 	"pk": 34,
+        //     // 	"user_id": 2,
+        //     // 	"menuitem": "2019 Chester-Kidder",
+        //     // 	"quantity": 2,
+        //     // 	"linetotal": "130.00",
+        //     // 	"unit_price": "65.00"
+        //     // }
+            thunkAPI.dispatch(fetchCart())
             return data
         } 
         catch(error){
@@ -71,25 +71,7 @@ const cartSlice=createSlice({
     name: 'cart',
     initialState: {
         cart: {
-            cart_arr: [
-                // {
-                //     "pk": 34,
-                //     "user_id": 2,
-                //     "menuitem": 1,
-                //     "quantity": 2,
-                //     "linetotal": 130.0,
-                //     "unit_price": 65.0
-                // },
-                // {
-                //     "pk": 35,
-                //     "user_id": 2,
-                //     "menuitem": 4,
-                //     "quantity": 1,
-                //     "linetotal": 42.00,
-                //     "unit_price": 42.00
-                // }
-            
-            ],
+            cart_arr: [],
             status: 'idle',
             
              
@@ -99,13 +81,13 @@ const cartSlice=createSlice({
     reducers: {
         increment(state, action) {
             console.log(action.payload)
-            let cartitem = state.cart.cart_arr.filter(item=>item.menuitem === action.payload.menuitemId)
+            let cartitem = state.cart.cart_arr.filter(item=>item.menuitem_id === action.payload.menuitemId)
             
             if(cartitem.length===0){
                 console.log("item not in cart")
                 state.cart.cart_arr.push(
                     {
-                        "menuitem": action.payload.menuitemId,
+                        "menuitem_id": action.payload.menuitemId,
                         "quantity": 1,
                         "linetotal": action.payload.price,
                         "unit_price": action.payload.price
@@ -130,9 +112,7 @@ const cartSlice=createSlice({
           removeItem(state, action){
             state.cart.cart_arr = state.cart.cart_arr.filter(item=> item.pk !== action.payload)
           },
-          addItem(state, action){
 
-          }
     },
     extraReducers(builder) {
       builder
@@ -140,6 +120,7 @@ const cartSlice=createSlice({
             state.cart.status = 'loading'
         })
         .addCase(fetchCart.fulfilled, (state, action) => {
+            console.log(action.payload)
             state.cart.status = 'succeeded'
             state.cart.cart_arr = action.payload
         })
@@ -151,7 +132,7 @@ const cartSlice=createSlice({
         })
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
-            state.cart.cart_arr.push(action.payload)
+            // state.cart.cart_arr.push(action.payload)
         })
         .addCase(addItemToCart.rejected, (state, action) => {
             state.cart.status = 'failed'
