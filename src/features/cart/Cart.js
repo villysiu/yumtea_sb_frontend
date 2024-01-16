@@ -17,10 +17,7 @@ const Cart = () => {
         return state.cart.cart
 
     })
-    // const {username} = useSelector(state => state.user.current_user)
     
-    
-
     if(cart_arr.length === 0){
         return(
         <>

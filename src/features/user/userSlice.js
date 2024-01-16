@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { addItemToCart } from "../cart/cartSlice";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
     async () => {
@@ -62,6 +63,7 @@ export const loginUser=createAsyncThunk(
 
             localStorage.setItem('token', data.auth_token)
             thunkAPI.dispatch(fetchCurrentUser())
+            
             return data.auth_token
             
         } 
