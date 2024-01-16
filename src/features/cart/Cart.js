@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-
+import { fetchCart } from "./cartSlice"
 import { Button } from "react-bootstrap"
 import { CartFill } from "react-bootstrap-icons"
 import { homeLink } from "../../app/global"
@@ -10,14 +10,16 @@ import CartSummary from "./CartSummary"
 
 const Cart = () => {
     console.log("in cart")
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const {cart_arr, status} = useSelector(state=>{
         console.log(state)
         return state.cart.cart
 
     })
-    
+    useEffect(()=>{
+        dispatch(fetchCart())
+    }, [dispatch])
     if(cart_arr.length === 0){
         return(
         <>

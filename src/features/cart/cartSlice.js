@@ -59,7 +59,7 @@ export const addItemToCart = createAsyncThunk(
         //     // 	"linetotal": "130.00",
         //     // 	"unit_price": "65.00"
         //     // }
-            thunkAPI.dispatch(fetchCart())
+            // thunkAPI.dispatch(fetchCart())
             return data
         } 
         catch(error){
