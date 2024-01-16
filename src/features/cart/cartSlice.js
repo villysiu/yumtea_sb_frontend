@@ -73,7 +73,7 @@ const cartSlice=createSlice({
         cart: {
             cart_arr: [],
             status: 'idle',
-            
+            message: "",
              
         },
        
@@ -132,6 +132,7 @@ const cartSlice=createSlice({
         })
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
+            // state.cart.message = 
             // state.cart.cart_arr.push(action.payload)
         })
         .addCase(addItemToCart.rejected, (state, action) => {

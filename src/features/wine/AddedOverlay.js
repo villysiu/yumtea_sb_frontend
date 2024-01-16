@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 
-const AddedOverlay = ({successMessage, setSuccessMessage}) =>{
+const AddedOverlay = ({message, setMessage}) =>{
     
     useEffect(() => {
         var timer = setInterval(()=>{
-            setSuccessMessage("")
+            setMessage("")
         }, 5000 )
         return function cleanup() {
             clearInterval(timer)
         }
-    }, [setSuccessMessage]);
+    }, [setMessage]);
     
     return(
         <div className='added_message' >
-            {successMessage}
+            {message}
         </div>
     )
 }
