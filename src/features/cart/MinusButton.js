@@ -2,10 +2,11 @@ import { Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { decrement } from "./cartSlice"
 import { useEffect } from "react"
-const MinusButton = ({itemId, qty, setError})=>{
+const MinusButton = ({cartitemId, qty, setQuantity, setError})=>{
     const dispatch = useDispatch()
     const handleClick = () => {
-        dispatch(decrement(itemId))
+        dispatch(decrement(cartitemId))
+        setQuantity(q=>q-1)
     }
     const handleDisabledClick = () => {
         setError("Minimum quantity is 1")

@@ -11,7 +11,7 @@ import { useSelector } from "react-redux"
 const CartItem = ({cartItem}) => {
     const [error, setError] = useState("")
     // console.log(cartItem)
-    // const menuItemStatus = useSelector(state=>state.wine.wines.status)
+    const [quantity, setQuantity] = useState(cartItem.quantity)
     
     const menuItem = useSelector(state=>{
         let ww = state.wine.wines.wine_arr.filter(wine=>wine.pk === cartItem.menuitem_id)[0]
@@ -35,13 +35,16 @@ const CartItem = ({cartItem}) => {
                 </div>
                 <div className='cartitem_qty'>
                     <div className="cartitem_qty_input">
-                        <MinusButton itemId={cartItem.pk} qty={cartItem.quantity} setError={setError}/>
-                        <QtyInputBox itemId={cartItem.pk} qty={cartItem.quantity} />
-                        <PlusButton menuitemId={menuItem.pk} qty={cartItem.quantity} inventory={menuItem.inventory} setError={setError} />
+                        <MinusButton cartitemId={cartItem.pk} qty={quantity} setQuantity={setQuantity} setError={setError}/>
+                        <QtyInputBox itemId={cartItem.pk} qty={quantity} />
+                        <PlusButton menuitemId={menuItem.pk} qty={quantity} setQuantity={setQuantity} inventory={menuItem.inventory} setError={setError} />
                     </div>    
-                    <div className="error_message">
-                        {error}
-                    </div>
+                    {
+                        error.length>0 &&
+                        <div className="error_message">
+                            {error}
+                        </div>
+                    }
                     {
                         menuItem.inventory <5 && 
                         <div className="mt-2 low_inventory">
@@ -49,7 +52,7 @@ const CartItem = ({cartItem}) => {
                         </div>
                     }
                     <div className='cartitem_other_width'>
-                        <RemoveButton itemId={cartItem.pk} />
+                        <RemoveButton cartitemId={cartItem.pk} />
                     </div>
                 </div>
                 <div className='cartitem_price'>                       

@@ -81,9 +81,9 @@ const cartSlice=createSlice({
     reducers: {
         increment(state, action) {
             console.log(action.payload)
-            let cartitem = state.cart.cart_arr.filter(item=>item.menuitem_id === action.payload.menuitemId)
+            let cartitem = state.cart.cart_arr.find(item=>item.menuitem_id === action.payload.menuitemId)
             
-            if(cartitem.length===0){
+            if(cartitem === undefined){
                 console.log("item not in cart")
                 state.cart.cart_arr.push(
                     {
@@ -96,17 +96,18 @@ const cartSlice=createSlice({
             }
             else{
                 console.log("item in cart")
-                cartitem[0].quantity++
-                cartitem[0].linetotal += cartitem[0].unit_price
+                cartitem.quantity++
+                cartitem.linetotal += cartitem.unit_price
             }
             
 
           },
           decrement(state, action) {
-            let menuitem = state.cart.cart_arr.filter(item=> item.pk === action.payload)
-            
-            menuitem[0].quantity--
-            menuitem[0].linetotal -= menuitem[0].unit_price
+            console.log(action.payload)
+            let cartitem = state.cart.cart_arr.find(cartitem=> cartitem.pk === action.payload)
+            // cartitem existed since it is coming from shopping cart 
+            cartitem.quantity--
+            cartitem.linetotal -= cartitem.unit_price
           },
 
           removeItem(state, action){

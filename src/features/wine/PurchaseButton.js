@@ -18,10 +18,11 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price}) =>{
         
         if(current_user.username === null){
             dispatch(increment({"menuitemId":menuitemId, "price": price}))
-            setMessage(`${menuitemTitle} added to shopping cart hahahahah.` )
+            setMessage(`${menuitemTitle} added to shopping cart.` )
         } 
         else{
             dispatch(addItemToCart({'menuitem': menuitemId}))
+            .unwrap()
             .then((originalPromiseResult) => {
                 setMessage(`${menuitemTitle} added to shopping cart.` )
             })
