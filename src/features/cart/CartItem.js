@@ -22,14 +22,14 @@ const CartItem = ({cartItem}) => {
     return(
         <div className="borderSecondary border-bottom pb-5 cartitem_container">
             <div className="cartitem_img_wrapper">
-                <Link to={`${homeLink}/wines/${cartItem.menuitem}`}>
+                <Link to={`${homeLink}/wines/${menuItem.pk}`}>
                     <img src={`${homeLink}/ASC_websize.png`} className="cartitem_img" alt={menuItem.title}></img>  
                 </Link>
             </div>
             
             <div className='cartitem_info pt-4 ms-5'>
                 <div className='cartitem_title'>
-                    <Link to={`${homeLink}/wines/${cartItem.menuitem}`} className="solid_link">
+                    <Link to={`${homeLink}/wines/${menuItem.pk}`} className="solid_link">
                         {menuItem.year} {menuItem.title}
                     </Link>
                 </div>
