@@ -1,17 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
+const addTempCartToAPI = (thunkAPI) =>{
+    
+    const temp_cart_arr = thunkAPI.getState().cart.cart.temp_cart_arr
+    console.log(temp_cart_arr)
+    for(let item of temp_cart_arr){
+        console.log(item)
+        thunkAPI.dispatch(addItemToCart({'menuitem': item.menuitem_id, 'quantity': item.quantity}) )
+    }
+    thunkAPI.dispatch(emptyTempCart())
 
-
+}
 export const fetchCart=createAsyncThunk(
     'cart/fetchCart',
-    async () => {
+    async (_, thunkAPI) => {
         console.log("fetching cart")
         try {
             const response=await fetch(`${apiLink}/api/cart`, {
                 method: "GET",
                 headers: {
-                    // "Content-Type": "application/json",
-                    // 'accept': 'application/json'
                     "Authorization": `Token ${localStorage.getItem("token")}`,
                 }
             })
@@ -22,7 +29,7 @@ export const fetchCart=createAsyncThunk(
             const data=await response.json()
             console.log(data)
             // {"pk": 1, "title": "Red Wine", "slug": "red"}
-            
+            addTempCartToAPI(thunkAPI)
             return data
         } 
         catch(error){
@@ -51,15 +58,7 @@ export const addItemToCart = createAsyncThunk(
             }
             const data=await response.json()
             console.log(data)
-        //     // {
-        //     // 	"pk": 34,
-        //     // 	"user_id": 2,
-        //     // 	"menuitem_id": 1,
-        //     // 	"quantity": 2,
-        //     // 	"linetotal": "130.00",
-        //     // 	"unit_price": "65.00"
-        //     // }
-            // thunkAPI.dispatch(fetchCart())
+
             return data
         } 
         catch(error){
@@ -109,7 +108,9 @@ const cartSlice=createSlice({
     name: 'cart',
     initialState: {
         cart: {
+
             cart_arr: [],
+            temp_cart_arr:[],
             status: 'idle',
             message: "",
              
@@ -119,11 +120,11 @@ const cartSlice=createSlice({
     reducers: {
         increment(state, action) {
             console.log(action.payload)
-            let cartitem = state.cart.cart_arr.find(item=>item.menuitem_id === action.payload.menuitemId)
+            let cartitem = state.cart.temp_cart_arr.find(item=>item.menuitem_id === action.payload.menuitemId)
             
             if(cartitem === undefined){
                 console.log("item not in cart")
-                state.cart.cart_arr.push(
+                state.cart.temp_cart_arr.push(
                     {
                         "menuitem_id": action.payload.menuitemId,
                         "quantity": 1,
@@ -137,19 +138,24 @@ const cartSlice=createSlice({
                 cartitem.quantity++
                 cartitem.linetotal += cartitem.unit_price
             }
-            
+            state.cart.cart_arr = state.cart.temp_cart_arr
 
           },
           decrement(state, action) {
             console.log(action.payload)
-            let cartitem = state.cart.cart_arr.find(cartitem=> cartitem.pk === action.payload)
+            let cartitem = state.cart.temp_cart_arr.find(cartitem=> cartitem.pk === action.payload)
             // cartitem existed since it is coming from shopping cart 
             cartitem.quantity--
             cartitem.linetotal -= cartitem.unit_price
+
+            state.cart.cart_arr = state.cart.temp_cart_arr
           },
 
           removeItem(state, action){
-            state.cart.cart_arr = state.cart.cart_arr.filter(item=> item.pk !== action.payload)
+            state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=> item.pk !== action.payload)
+          },
+          emptyTempCart(state,action){
+            state.cart.temp_cart_arr = []
           },
 
     },
@@ -159,6 +165,7 @@ const cartSlice=createSlice({
             state.cart.status = 'loading'
         })
         .addCase(fetchCart.fulfilled, (state, action) => {
+            console.log('WHO COMES FIRST?')
             console.log(action.payload)
             state.cart.status = 'succeeded'
             state.cart.cart_arr = action.payload
@@ -210,5 +217,5 @@ const cartSlice=createSlice({
         })
     }
 })
-export const { increment, decrement, removeItem } = cartSlice.actions
+export const { increment, decrement, removeItem, emptyTempCart } = cartSlice.actions
 export default cartSlice.reducer
