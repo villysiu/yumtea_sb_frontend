@@ -54,7 +54,7 @@ export const addItemToCart = createAsyncThunk(
         //     // {
         //     // 	"pk": 34,
         //     // 	"user_id": 2,
-        //     // 	"menuitem": "2019 Chester-Kidder",
+        //     // 	"menuitem_id": 1,
         //     // 	"quantity": 2,
         //     // 	"linetotal": "130.00",
         //     // 	"unit_price": "65.00"
@@ -171,8 +171,25 @@ const cartSlice=createSlice({
         })
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
-            // state.cart.message = 
-            // state.cart.cart_arr.push(action.payload)
+            console.log(action.payload)
+            let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.menuitem_id === action.payload.menuitem_id)
+            
+            if(cartitem === undefined){
+                console.log("item not in cart")
+                state.cart.cart_arr.push(action.payload
+                    // {
+                    //     "menuitem_id": action.payload.menuitem_id,
+                    //     "quantity": 1,
+                    //     "linetotal": action.payload.price,
+                    //     "unit_price": action.payload.price
+                    // }
+                )
+            }
+            else{
+                console.log("item in cart")
+                cartitem.quantity++
+                cartitem.linetotal += cartitem.unit_price
+            }
         })
         .addCase(addItemToCart.rejected, (state, action) => {
             state.cart.status = 'failed'
@@ -185,7 +202,7 @@ const cartSlice=createSlice({
             // state.cart.message = 
              let cartitem = state.cart.cart_arr.find(cartitem =>cartitem.pk === action.payload.pk)
              cartitem.quantity = action.payload.quantity
-             cartitem.linetotal += cartitem.unit_price
+             cartitem.linetotal = cartitem.unit_price * action.payload.quantity
 
         })
         .addCase(updateSingleCartQuantity.rejected, (state, action) => {

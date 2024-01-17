@@ -8,10 +8,7 @@ import { useEffect, useState } from "react"
 const SingleWine = () =>{
     let {itemId} = useParams()
 
-    let {status, wine_arr} = useSelector(state => {
-        console.log(state.wine.wines)
-        return state.wine.wines
-    })
+    let {status, wine_arr} = useSelector(state => state.wine.wines)
 
     const singleWine = wine_arr.find(wine => wine.pk === parseInt(itemId))
     const title = singleWine.year +" " + singleWine.title + " very very long name"

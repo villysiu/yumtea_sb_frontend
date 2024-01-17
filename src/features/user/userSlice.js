@@ -26,7 +26,7 @@ export const fetchCurrentUser=createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            console.log(data)
+            
             // timeOutUser2(data.curr_user.login, thunkAPI)
             return data
         } 
@@ -112,7 +112,7 @@ const userSlice=createSlice({
             state.current_user.status = 'loading'
         })
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-            console.log(action.payload)
+            // console.log(action.payload)
             state.current_user.status = 'succeeded'
             state.current_user = action.payload
             // state.current_user.id = action.payload.id
