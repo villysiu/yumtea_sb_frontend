@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 const CartItem = ({cartItem}) => {
     const [error, setError] = useState("")
-    // console.log(cartItem)
+    console.log(cartItem)
     const [quantity, setQuantity] = useState(cartItem.quantity)
     
     const menuItem = useSelector(state=>{

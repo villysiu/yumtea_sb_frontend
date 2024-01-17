@@ -12,14 +12,17 @@ import Spinner from "react-bootstrap/Spinner"
 const Cart = () => {
     console.log("in cart")
     const dispatch = useDispatch()
-
+    const current_user = useSelector(state => state.user.current_user)
     const {cart_arr, status} = useSelector(state=>state.cart.cart)
 
-    useEffect(()=>{
-        dispatch(fetchCart())
-    }, [dispatch])
+    // useEffect(()=>{
+    //     if(current_user.username){
+    //         console.log("in effect getting cart from backend")
+    //         dispatch(fetchCart())
+    //     }
+    // }, [dispatch])
 
- 
+    console.log(cart_arr)
     if(cart_arr.length === 0){
         return(
         <>
@@ -37,6 +40,7 @@ const Cart = () => {
             return [acumulator[0]+currCartItem.quantity, acumulator[1]+currCartItem.linetotal]
         }, [0,0]
     )
+    
     return (
         <div className='cart_container'>
             {
