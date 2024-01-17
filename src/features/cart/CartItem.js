@@ -14,8 +14,7 @@ const CartItem = ({cartItem}) => {
     const [quantity, setQuantity] = useState(cartItem.quantity)
     
     const menuItem = useSelector(state=>{
-        let ww = state.wine.wines.wine_arr.filter(wine=>wine.pk === cartItem.menuitem_id)[0]
-        // console.log(ww)
+        let ww = state.wine.wines.wine_arr.find(wine=>wine.pk === cartItem.menuitem_id)
         return ww
     })
     
@@ -35,9 +34,9 @@ const CartItem = ({cartItem}) => {
                 </div>
                 <div className='cartitem_qty'>
                     <div className="cartitem_qty_input">
-                        <MinusButton cartitemId={cartItem.pk} qty={quantity} setQuantity={setQuantity} setError={setError}/>
+                        <MinusButton cartitem={cartItem} setQuantity={setQuantity} setError={setError}/>
                         <QtyInputBox itemId={cartItem.pk} qty={quantity} />
-                        <PlusButton menuitemId={menuItem.pk} qty={quantity} setQuantity={setQuantity} inventory={menuItem.inventory} setError={setError} />
+                        <PlusButton cartitem={cartItem} setQuantity={setQuantity} inventory={menuItem.inventory} setError={setError} />
                     </div>    
                     {
                         error.length>0 &&

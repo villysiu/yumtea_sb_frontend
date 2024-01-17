@@ -67,6 +67,44 @@ export const addItemToCart = createAsyncThunk(
         }
     }
 )
+export const updateSingleCartQuantity = createAsyncThunk(
+    'cart/updateSingleCartQuantity',
+    async (item, thunkAPI) => {
+        console.log(item)
+        // {cartitemId: 33, quantity: 3}
+        try {
+            const response=await fetch(`${apiLink}/api/cart/${item.cartitemId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json',
+                    "Authorization": `Token ${localStorage.getItem("token")}`,
+                    
+                },
+                body: JSON.stringify({'quantity': item.quantity})
+            })
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            const data=await response.json()
+            console.log(data)
+        //     // {
+        //     // 	"pk": 34,
+        //     // 	"user_id": 2,
+        //     // 	"menuitem": "2019 Chester-Kidder",
+        //     // 	"quantity": 2,
+        //     // 	"linetotal": "130.00",
+        //     // 	"unit_price": "65.00"
+        //     // }
+            // thunkAPI.dispatch(fetchCart())
+            return data
+        } 
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 const cartSlice=createSlice({
     name: 'cart',
     initialState: {
@@ -139,9 +177,20 @@ const cartSlice=createSlice({
         .addCase(addItemToCart.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
+        .addCase(updateSingleCartQuantity.pending, (state, action) => {
+            state.cart.status = 'loading'
+        })
+        .addCase(updateSingleCartQuantity.fulfilled, (state, action) => {
+            state.cart.status = 'succeeded'
+            // state.cart.message = 
+             let cartitem = state.cart.cart_arr.find(cartitem =>cartitem.pk === action.payload.pk)
+             cartitem.quantity = action.payload.quantity
+             cartitem.linetotal += cartitem.unit_price
 
-       
-       
+        })
+        .addCase(updateSingleCartQuantity.rejected, (state, action) => {
+            state.cart.status = 'failed'
+        })
     }
 })
 export const { increment, decrement, removeItem } = cartSlice.actions

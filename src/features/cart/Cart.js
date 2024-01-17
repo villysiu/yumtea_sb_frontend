@@ -7,19 +7,19 @@ import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
 import CartItem from "./CartItem"
 import CartSummary from "./CartSummary"
+import Spinner from "react-bootstrap/Spinner"
 
 const Cart = () => {
     console.log("in cart")
     const dispatch = useDispatch()
 
-    const {cart_arr, status} = useSelector(state=>{
-        console.log(state)
-        return state.cart.cart
+    const {cart_arr, status} = useSelector(state=>state.cart.cart)
 
-    })
     useEffect(()=>{
         dispatch(fetchCart())
     }, [dispatch])
+
+ 
     if(cart_arr.length === 0){
         return(
         <>
@@ -39,6 +39,18 @@ const Cart = () => {
     )
     return (
         <div className='cart_container'>
+            {
+
+                status === 'loading' && 
+                
+                    <div className="loading" >
+                     
+                        <Spinner animation="border" role="status" className="spinner_props">
+                        <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div>
+            }
+    
             <CartSummary subtotal={subtotal} />
             
         
