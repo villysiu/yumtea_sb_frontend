@@ -10,7 +10,7 @@ import { Cart } from 'react-bootstrap-icons';
 import { useState } from 'react';
 import CategoryDropdown from './CategoryDropdown';
 import { X } from 'react-bootstrap-icons';
-import User from '../user/User';
+import UserButton from '../user/UserButton';
 
 const Header = () => {
     
@@ -89,7 +89,7 @@ const Header = () => {
 
                     <div className='nav_circles'>
                         {/* <PersonActions closeMDDropdown={closeMDDropdown}/> */}
-                        <User closeMDDropdown={closeMDDropdown}/>
+                        <UserButton closeMDDropdown={closeMDDropdown}/>
                         <Link to={`${homeLink}/cart`} onClick={closeMDDropdown}>
                             <Cart className="circle_button" />
                         </Link>
