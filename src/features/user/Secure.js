@@ -8,12 +8,12 @@ const Secure = () => {
         console.log(state.user)
         return state.user.current_user
     })
-    if(current_user.username === null){
+    if(!current_user.username){
         // return <Login />
         return (
             <Navigate replace={true} 
 
-            to="../signin"
+            to="../user/signin"
             />
         )
     }

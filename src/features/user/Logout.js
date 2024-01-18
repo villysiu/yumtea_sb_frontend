@@ -7,7 +7,7 @@ const Logout = () =>{
         dispatch(logoutUser())
     }
     return(
-        <div className="mb-3" style={{'cursor': 'pointer'}} onClick={handleClick}>Sign out</div>
+        <div className="solid_link mb-3" style={{'cursor': 'pointer'}} onClick={handleClick}>Sign out</div>
     )
 }
 export default Logout

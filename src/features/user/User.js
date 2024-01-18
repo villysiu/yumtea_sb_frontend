@@ -1,15 +1,15 @@
 
 import { useSelector } from "react-redux"
 import { Outlet } from "react-router-dom"
-import Account from "./Account"
-
+import { Navigate } from "react-router-dom"
 const User = () => {
-    console.log("in secure")
+    console.log("in user")
     const current_user = useSelector(state => state.user.current_user)
+    console.log(current_user.username)
     if(current_user.username !== null){
-
-        return <Account />
-
+        return(
+        <Navigate replace={true} to="../secure/account" />
+        )
     }
     return(
         <Outlet />
