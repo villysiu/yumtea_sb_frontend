@@ -214,7 +214,7 @@
   right: var(--cart_summary_right);
   padding: 1rem;
   background-color: var(--bs-body-bg);
-  z-index: 1030;
+  z-index: 200;
 }
 
 .cart_summary_line {
@@ -312,7 +312,7 @@
 }
 @media all and (max-width: 767.98px) {
   .cart_summary {
-    bottom: 0;
+    bottom: 1rem;
     top: unset;
     margin-left: 0;
   margin-right: 0;
@@ -421,7 +421,7 @@
   display: flex;
   flex-direction: row;
   position: absolute;
-  z-index: 1000;
+  z-index: 100;
 }
 .singlewine_img_pos_wrapper {
   
@@ -445,7 +445,7 @@
   
 }
 .singlewine_title_img_visibility_wrapper{
-  z-index: 1000;
+  z-index: 100;
 }
 
 .singlewine_title_img_sm_wrapper {
@@ -556,16 +556,20 @@
 }
 .user_dropdown_wrapper {
   position:absolute;
-  width: 200px;
-  
+  width: 150px;
+  right: 0;
 
-  
 }
+
 .user_dropdown {
   border: black 1px solid;
   width: 100%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   background-color: white;
-  
+}
+@media all and  (max-width: 991.98px) {
+  .user_dropdown_wrapper {
+    right: unset;
+  }
 }
