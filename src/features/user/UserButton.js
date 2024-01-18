@@ -19,7 +19,7 @@ const UserButton = ({closeMDDropdown}) =>{
         
             {
                 current_user.username===null ? 
-                    <Link to={`${homeLink}/signin`} 
+                    <Link to={`${homeLink}/user/signin`} 
                         onClick={closeMDDropdown} >
                         <PersonCircle className="circle_button"/> 
                     </Link>

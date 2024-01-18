@@ -27,14 +27,6 @@ function App() {
       if(current_user.username && cart.status === 'idle' ){
           console.log("there is an user and api cart not fetched ('idle)")
           dispatch(fetchCart())
-
-          // if(cart.cart_arr.length > 0){
-              
-          //     for(let item of cart.cart_arr){
-          //         console.log(item)
-          //         dispatch(addItemToCart({'menuitem': item.menuitem_id, 'quantity': item.quantity}) )
-          // }}
-          // dispatch(fetchCart())
       }
   }, [dispatch, current_user.username, cart.cart_arr])
     

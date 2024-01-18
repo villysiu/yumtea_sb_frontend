@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { homeLink } from '../../app/global';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from './userSlice';
@@ -15,9 +15,6 @@ const Login = () =>{
     const handleSubmit=e=>{
         e.preventDefault()
         dispatch(loginUser({'username': username, 'password': password}))
-
-        
-        // e.target.reset() 
     }
     return(
        
@@ -47,7 +44,7 @@ const Login = () =>{
                     disabled={ !username || !password }>Sign In</Button>
             </Form>
             <div>Forgot your password?</div>
-            <Link to={`${homeLink}/signup`}>
+            <Link to={`${homeLink}/user/signup`}>
                 <Button className='gold_button mt-5' >Create an account</Button>
             </Link>
 

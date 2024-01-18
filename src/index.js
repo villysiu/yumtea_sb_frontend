@@ -17,6 +17,8 @@ import Cart from './features/cart/Cart';
 import Login from './features/user/Login';
 import Signup from './features/user/Signup';
 import Account from './features/user/Account';
+import User from './features/user/User';
+
 const router = createBrowserRouter([
   {
       path: "/",
@@ -49,14 +51,20 @@ const router = createBrowserRouter([
               ]
           },
           {
-            path: '/signin',
-            element: <Login />
+              path: "/user",
+              element: <User />,
+              children: [
+
+                  {
+                    path: '/user/signin',
+                    element: <Login />
+                  },
+                  {
+                    path: '/user/signup',
+                    element: <Signup />
+                  },
+              ]
           },
-          {
-            path: '/signup',
-            element: <Signup />
-          },
-          
           {
               path: "/secure",
               element: <Secure />,
