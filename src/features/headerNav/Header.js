@@ -10,7 +10,8 @@ import { Cart } from 'react-bootstrap-icons';
 import { useState } from 'react';
 import CategoryDropdown from './CategoryDropdown';
 import { X } from 'react-bootstrap-icons';
-import PersonActions from './PersonActions';
+import User from '../user/User';
+
 const Header = () => {
     
     const [showCategories, toggleShowCategories] = useState(false)
@@ -87,8 +88,8 @@ const Header = () => {
                     </Navbar.Collapse>
 
                     <div className='nav_circles'>
-                        <PersonActions closeMDDropdown={closeMDDropdown}/>
-                  
+                        {/* <PersonActions closeMDDropdown={closeMDDropdown}/> */}
+                        <User closeMDDropdown={closeMDDropdown}/>
                         <Link to={`${homeLink}/cart`} onClick={closeMDDropdown}>
                             <Cart className="circle_button" />
                         </Link>

@@ -1,22 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addItemToCart } from "../cart/cartSlice";
+import { apiLink } from "../../app/global";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
     async () => {
         console.log("in fetching???")
         
         try {
-            const response=await fetch("http://127.0.0.1:8000/auth/users/me", {
+            const response=await fetch(`${apiLink}/auth/users/me`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Token ${localStorage.getItem("token")}`,
-                    // "Authorization": `Token ${token}`,
-                    
                 },
-            
-                
-    
             })
 
             if(!response.ok) {
@@ -45,11 +40,12 @@ export const loginUser=createAsyncThunk(
         // { 'username': 'danielle', 'password': 'mpassword3@!' }
 
         try {
-            const response=await fetch('http://127.0.0.1:8000/auth/token/login/', {
+            const response=await fetch(`${apiLink}/auth/token/login/`, {
                 'method': "POST",
                 'headers': {
                     'content-type': 'application/json',
-                    'accept': 'application/json'
+                    'accept': 'application/json',
+                    
                 },
                 'body': JSON.stringify(userInfo)
    
@@ -71,7 +67,35 @@ export const loginUser=createAsyncThunk(
             return Promise.reject(error.message)
         }
     }
-
+)
+export const logoutUser=createAsyncThunk(
+    'user/logoutUser',
+    async () =>{
+        console.log("in lougout redux")
+        try {
+            const response=await fetch(`${apiLink}/auth/token/logout/`, {
+                'method': "POST",
+                'headers': {
+                    'content-type': 'application/json',
+                    "Authorization": `Token ${localStorage.getItem("token")}`,
+                },
+            
+   
+            })
+            
+            if(!response.ok) 
+                throw new Error(`${response.status} ${response.statusText}`)
+            console.log(response)
+            
+            console.log("clear storgae")
+            localStorage.clear()
+            return null
+            
+        } 
+        catch(error){
+            return Promise.reject(error.message)
+        }
+    }
 )
 const userSlice=createSlice({
     name: 'user',
@@ -86,16 +110,7 @@ const userSlice=createSlice({
             status: 'idle',
             
         }
-        // user: {
-        //     error: null,
-        //     user: null,
-        //     status: 'idle',
-        // },
-        // email: {
-        //     error: null,
-        //     existed: 0,
-        //     status: 'idle',
-        // }, 
+
        
         
     },
@@ -133,7 +148,24 @@ const userSlice=createSlice({
         })
         .addCase(loginUser.rejected, (state, action) => {
             state.token.status = 'failed'
-            state.token.error = action.error.message
+            
+        })
+        .addCase(logoutUser.pending, (state, action) => {
+            state.token.status = 'loading'
+        })
+        .addCase(logoutUser.fulfilled, (state, action) => {
+            state.token.status = 'idle'
+            state.current_user={
+                username: null,
+                status: 'idle',
+                error: null,    
+            }
+            
+
+        })
+        .addCase(logoutUser.rejected, (state, action) => {
+            state.token.status = 'failed'
+            
         })
     }
 })

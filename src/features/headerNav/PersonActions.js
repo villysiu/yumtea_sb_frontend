@@ -7,10 +7,7 @@ import { fetchCurrentUser } from '../user/userSlice';
 const PersonActions = ({closeMDDropdown}) =>{
      const dispatch = useDispatch()
     // const userStatus = useSelector(state => state.users.currUser.status)
-    const current_user = useSelector(state => {
-        
-        return state.user.current_user
-    })
+    const current_user = useSelector(state => state.user.current_user )
 
     // useEffect(()=>{
 

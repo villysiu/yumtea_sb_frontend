@@ -550,3 +550,22 @@
 .login_form {
   /* background-color: white; */
 }
+.hello_user {
+  position: relative;
+  color: black;
+}
+.user_dropdown_wrapper {
+  position:absolute;
+  width: 200px;
+  
+
+  
+}
+.user_dropdown {
+  border: black 1px solid;
+  width: 100%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: white;
+  
+}
