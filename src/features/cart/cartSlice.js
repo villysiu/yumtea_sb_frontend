@@ -1,16 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-const addTempCartToAPI = (thunkAPI) =>{
-    
-    const temp_cart_arr = thunkAPI.getState().cart.cart.temp_cart_arr
-    console.log(temp_cart_arr)
-    for(let item of temp_cart_arr){
-        console.log(item)
-        thunkAPI.dispatch(addItemToCart({'menuitem': item.menuitem_id, 'quantity': item.quantity}) )
-    }
-    thunkAPI.dispatch(emptyTempCart())
 
-}
+export const batchAddItems=createAsyncThunk(
+    'cart/batchAddItems',
+    async (_, thunkAPI) => {
+       
+        const temp_cart_arr = thunkAPI.getState().cart.cart.temp_cart_arr
+
+        try {
+            
+            for (let item of temp_cart_arr){
+                await thunkAPI.dispatch(addItemToCart({'menuitem': item.menuitem_id, 'quantity': item.quantity}) )
+            }
+            return null
+        }
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 export const fetchCart=createAsyncThunk(
     'cart/fetchCart',
     async (_, thunkAPI) => {
@@ -27,9 +35,9 @@ export const fetchCart=createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            console.log(data)
+            // console.log(data)
             // {"pk": 1, "title": "Red Wine", "slug": "red"}
-            addTempCartToAPI(thunkAPI)
+            
             return data
         } 
         catch(error){
@@ -40,7 +48,7 @@ export const fetchCart=createAsyncThunk(
 export const addItemToCart = createAsyncThunk(
     'cart/addItemToCart',
     async (item, thunkAPI) => {
-        console.log(item)
+     
         try {
             const response=await fetch(`${apiLink}/api/cart`, {
                 method: "POST",
@@ -57,7 +65,6 @@ export const addItemToCart = createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            console.log(data)
 
             return data
         } 
@@ -69,7 +76,7 @@ export const addItemToCart = createAsyncThunk(
 export const updateSingleCartQuantity = createAsyncThunk(
     'cart/updateSingleCartQuantity',
     async (item, thunkAPI) => {
-        console.log(item)
+        // console.log(item)
         // {cartitemId: 33, quantity: 3}
         try {
             const response=await fetch(`${apiLink}/api/cart/${item.cartitemId}`, {
@@ -87,7 +94,7 @@ export const updateSingleCartQuantity = createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            console.log(data)
+            // console.log(data)
         //     // {
         //     // 	"pk": 34,
         //     // 	"user_id": 2,
@@ -123,7 +130,7 @@ const cartSlice=createSlice({
             let cartitem = state.cart.temp_cart_arr.find(item=>item.menuitem_id === action.payload.menuitemId)
             
             if(cartitem === undefined){
-                console.log("item not in cart")
+                // console.log("item not in cart")
                 state.cart.temp_cart_arr.push(
                     {
                         "menuitem_id": action.payload.menuitemId,
@@ -134,7 +141,7 @@ const cartSlice=createSlice({
                 )
             }
             else{
-                console.log("item in cart")
+                // console.log("item in cart")
                 cartitem.quantity++
                 cartitem.linetotal += cartitem.unit_price
             }
@@ -165,7 +172,7 @@ const cartSlice=createSlice({
             state.cart.status = 'loading'
         })
         .addCase(fetchCart.fulfilled, (state, action) => {
-            console.log('WHO COMES FIRST?')
+            console.log('CART FETCHED FROM API')
             console.log(action.payload)
             state.cart.status = 'succeeded'
             state.cart.cart_arr = action.payload
@@ -178,25 +185,20 @@ const cartSlice=createSlice({
         })
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
+            console.log('ITEM ADDED TO API')
             console.log(action.payload)
             let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.menuitem_id === action.payload.menuitem_id)
             
             if(cartitem === undefined){
                 console.log("item not in cart")
-                state.cart.cart_arr.push(action.payload
-                    // {
-                    //     "menuitem_id": action.payload.menuitem_id,
-                    //     "quantity": 1,
-                    //     "linetotal": action.payload.price,
-                    //     "unit_price": action.payload.price
-                    // }
-                )
+                state.cart.cart_arr.push(action.payload)
             }
             else{
                 console.log("item in cart")
                 cartitem.quantity++
                 cartitem.linetotal += cartitem.unit_price
             }
+            state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=>item.menuitem_id !== action.payload.menuitem_id)
         })
         .addCase(addItemToCart.rejected, (state, action) => {
             state.cart.status = 'failed'
@@ -213,6 +215,16 @@ const cartSlice=createSlice({
 
         })
         .addCase(updateSingleCartQuantity.rejected, (state, action) => {
+            state.cart.status = 'failed'
+        })
+        .addCase(batchAddItems.pending, (state, action) => {
+            state.cart.status = 'loading'
+        })
+        .addCase(batchAddItems.fulfilled, (state, action) => {
+            state.cart.status = 'succeeded'
+
+        })
+        .addCase(batchAddItems.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
     }

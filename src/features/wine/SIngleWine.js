@@ -48,7 +48,7 @@ const SingleWine = () =>{
     const Price =() =>{
         return(
             <div className='singlewine_cart mb-3'>
-                <span className="pe-4">{USDollar.format(singleWine.price)}</span>
+                <span className="singlewine_price pe-4 ">{USDollar.format(singleWine.price)}</span>
                 <PurchaseButton menuitemId={singleWine.pk} menuitemTitle={singleWine.year +" " + singleWine.title} price={singleWine.price} />
             </div>
         )

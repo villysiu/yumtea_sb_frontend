@@ -130,7 +130,6 @@ const userSlice=createSlice({
             // console.log(action.payload)
             state.current_user.status = 'succeeded'
             state.current_user = action.payload
-            // state.current_user.id = action.payload.id
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER

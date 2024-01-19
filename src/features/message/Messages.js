@@ -23,19 +23,22 @@ const Message = ({message}) =>{
     
     if(show){
         return (
-            <Alert className="message" variant={message.type} onClose={() => setShow(false)} dismissible>
+            <Alert className="app_message" variant={message.type} 
+            onClose={() => setShow(false)} 
+            dismissible
+            >
                 {message.content}
+        
             </Alert>
         )
     }
 }
 const Messages = () =>{
     const {message_arr} = useSelector(state=>state.message)
-
     return (
         <>
             {
-                message_arr.map(message=><Message message={message} />)
+                message_arr.map((message, idx)=><Message key={idx} message={message} />)
             }
         </>
     )

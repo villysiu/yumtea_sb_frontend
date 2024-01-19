@@ -96,6 +96,17 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.app_message {
+  width: 100%;
+  margin-bottom: 0;
+  /* padding-bottom: 0.5rem;
+  padding-top: 0.5rem; */
+}
+/* .alert-dismissible {
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+} */
+
 .nav_brand {
   font-size: 2rem;
   font-weight: bold;
@@ -506,12 +517,10 @@
   flex-direction: row;
     align-items: center;
     color: white;
-    font-size: larger;
-    font-size: 1.5rem;
-    font-weight: bolder;
-
 }
-
+.singlewine_price{
+  font-size: 1.5rem;
+}
 @media all and  (max-width: 575.98px) {
 
   .singlewine_title_pos_wrapper{

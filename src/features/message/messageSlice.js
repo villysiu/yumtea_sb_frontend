@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchCategories, fetchWines } from '../wine/wineSlice'
-import { addItemToCart } from '../cart/cartSlice'
+import { batchAddItems } from '../cart/cartSlice'
+import { logoutUser,  } from '../user/userSlice'
 const messageSlice = createSlice({
     name: 'message',
     initialState: {
@@ -10,11 +11,7 @@ const messageSlice = createSlice({
       removeMessage: (state)=>{
         state.message_arr = []
       },
-    //   logoutMessage: (state)=>{
-    //     state.status= true
-    //     state.type="success"
-    //     state.content="Session timed out."
-    //   }
+
     },
     extraReducers(builder) {
         builder
@@ -37,24 +34,49 @@ const messageSlice = createSlice({
                 }
             )
         })
-        // .addCase(addItemToCart.succeeded, (state, action) => {
+        .addCase(logoutUser.fulfilled, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "success",
+                    content: "Good bye"
+                }
+            )
+            
+
+        })
+        // .addCase(addItemToCart.fulfilled, (state, action) => {
+        //     console.log('IN MESSAGE AFTER ITEM ADDED')
         //     state.message_arr.push(
         //         {
         //             status: true,
         //             type: "success",
-        //             content: `Item added to cart.`
+        //             content: "Item updated."
         //         }
         //     )
         // })
-        // .addCase(fetchWines.rejected, (state, action) => {
+        // .addCase(fetchCart.fulfilled, (state, action) => {
+        //     console.log('IN MESSAGE AFTER CART FETCHED FROM API')
         //     state.message_arr.push(
         //         {
         //             status: true,
-        //             type: "danger",
-        //             content: `Item failed adding to cart.`
+        //             type: "success",
+        //             content: "Shopping cart has been updated."
         //         }
         //     )
         // })
+        .addCase(batchAddItems.fulfilled, (state, action) => {
+            console.log('Batch items added to CART')
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "success",
+                    content: "Shopping cart has been updated."
+                }
+            )
+
+        })
+
     }
 })
 export default messageSlice.reducer

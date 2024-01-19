@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom';
 import Messages from './features/message/Messages';
 // import { addItemToCart } from './features/cart/cartSlice';
 import { fetchCart } from './features/cart/cartSlice';
-
+import { batchAddItems } from './features/cart/cartSlice';
 function App() {
   console.log("in APP")
     const dispatch=useDispatch();
@@ -27,6 +27,9 @@ function App() {
       if(current_user.username && cart.status === 'idle' ){
           console.log("there is an user and api cart not fetched ('idle)")
           dispatch(fetchCart())
+          .then(()=>{
+             dispatch(batchAddItems())
+          })
       }
   }, [dispatch, current_user.username, cart.cart_arr])
     
@@ -36,7 +39,7 @@ function App() {
         <div className='appbody border border-danger'>
         
            <Header />
-          <div style={{height: '6rem'}}></div>
+          <div style={{height: '4rem'}}></div>
          <Messages />
          
           <Outlet />
