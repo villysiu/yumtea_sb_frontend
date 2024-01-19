@@ -51,7 +51,7 @@ const CartItem = ({cartItem}) => {
                         </div>
                     }
                     <div className='cartitem_other_width'>
-                        <RemoveButton cartitemId={cartItem.pk} />
+                        <RemoveButton cartitemId={cartItem.pk} title={`${menuItem.year} ${menuItem.title}`}/>
                     </div>
                 </div>
                 <div className='cartitem_price'>                       

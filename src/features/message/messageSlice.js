@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchCategories, fetchWines } from '../wine/wineSlice'
-import { batchAddItems } from '../cart/cartSlice'
+import { batchAddItems, removeItemFromCart } from '../cart/cartSlice'
 import { logoutUser,  } from '../user/userSlice'
 const messageSlice = createSlice({
     name: 'message',
@@ -45,26 +45,15 @@ const messageSlice = createSlice({
             
 
         })
-        // .addCase(addItemToCart.fulfilled, (state, action) => {
-        //     console.log('IN MESSAGE AFTER ITEM ADDED')
-        //     state.message_arr.push(
-        //         {
-        //             status: true,
-        //             type: "success",
-        //             content: "Item updated."
-        //         }
-        //     )
-        // })
-        // .addCase(fetchCart.fulfilled, (state, action) => {
-        //     console.log('IN MESSAGE AFTER CART FETCHED FROM API')
-        //     state.message_arr.push(
-        //         {
-        //             status: true,
-        //             type: "success",
-        //             content: "Shopping cart has been updated."
-        //         }
-        //     )
-        // })
+        .addCase(removeItemFromCart.fulfilled, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "success",
+                    content: `${action.payload.title} removed from shopping cart.`
+                }
+            )
+        })
         .addCase(batchAddItems.fulfilled, (state, action) => {
             console.log('Batch items added to CART')
             state.message_arr.push(

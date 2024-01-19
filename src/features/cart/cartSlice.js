@@ -111,6 +111,29 @@ export const updateSingleCartQuantity = createAsyncThunk(
         }
     }
 )
+export const removeItemFromCart = createAsyncThunk(
+    'cart/removeItemFromCart',
+    async (formData) => {
+
+        try {
+            const response=await fetch(`${apiLink}/api/cart/${formData.cartitemId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json',
+                    "Authorization": `Token ${localStorage.getItem("token")}`,
+                },
+            })
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            return formData
+        } 
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 const cartSlice=createSlice({
     name: 'cart',
     initialState: {
@@ -201,6 +224,17 @@ const cartSlice=createSlice({
             state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=>item.menuitem_id !== action.payload.menuitem_id)
         })
         .addCase(addItemToCart.rejected, (state, action) => {
+            state.cart.status = 'failed'
+        })
+        .addCase(removeItemFromCart.pending, (state, action) => {
+            state.cart.status = 'loading'
+        })
+        .addCase(removeItemFromCart.fulfilled, (state, action) => {
+            state.cart.status = 'succeeded'
+            console.log(action.payload)
+            state.cart.cart_arr = state.cart.cart_arr.filter(cartitem=>cartitem.pk !== action.payload.cartitemId)
+        })
+        .addCase(removeItemFromCart.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
         .addCase(updateSingleCartQuantity.pending, (state, action) => {
