@@ -5,8 +5,8 @@ import { logoutUser } from "../user/userSlice";
 
 export const fetchCurrentUserOrders=createAsyncThunk(
     'order/fetchCurrentUserOrders',
-    async (_, thunkAPI) => {
-        console.log("fetching cart")
+    async () => {
+        console.log("fetching orders")
         try {
             const response=await fetch(`${apiLink}/api/orders`, {
                 method: "GET",
@@ -63,5 +63,5 @@ const orderSlice=createSlice({
         
     }
 })
-export const {  } = cartSlice.actions
+// export const {  } = orderSlice.actions
 export default orderSlice.reducer

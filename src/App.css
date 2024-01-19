@@ -582,3 +582,33 @@
     right: unset;
   }
 }
+.orderhistory_wrapper {
+  /* border: black 1px solid; */
+  width: 100%;
+  padding: 1rem;
+}
+.orderhistory_order {
+  display: flex;
+  flex-direction: row;
+  border-bottom: black 1px solid;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+.orderhistory_order_col{
+  width: 50%;
+}
+.orderhistory_order_details_l{
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+}
+.orderhistory_order_details_c{
+  width:47%;
+  display: flex;
+  flex-direction: row;
+  
+}
+.orderhistory_order_details_r{
+  width:3%;
+  text-align: right;
+}
