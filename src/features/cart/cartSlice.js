@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
+import { logoutUser } from "../user/userSlice";
 
 export const batchAddItems=createAsyncThunk(
     'cart/batchAddItems',
     async (_, thunkAPI) => {
        
         const temp_cart_arr = thunkAPI.getState().cart.cart.temp_cart_arr
-
         try {
-            
             for (let item of temp_cart_arr){
                 await thunkAPI.dispatch(addItemToCart({'menuitem': item.menuitem_id, 'quantity': item.quantity}) )
             }
@@ -142,8 +141,6 @@ const cartSlice=createSlice({
             cart_arr: [],
             temp_cart_arr:[],
             status: 'idle',
-            message: "",
-             
         },
        
     },
@@ -260,6 +257,11 @@ const cartSlice=createSlice({
         })
         .addCase(batchAddItems.rejected, (state, action) => {
             state.cart.status = 'failed'
+        })
+        .addCase(logoutUser.fulfilled, (state, action) => {
+            state.cart.cart_arr = []
+            state.cart.temp_cart_arr = []
+            state.cart.status = 'idle'
         })
     }
 })
