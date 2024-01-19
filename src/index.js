@@ -18,6 +18,7 @@ import Login from './features/user/Login';
 import Signup from './features/user/Signup';
 import Account from './features/user/Account';
 import User from './features/user/User';
+import OrderHistory from './features/order/OrderHistory';
 
 const router = createBrowserRouter([
   {
@@ -72,10 +73,11 @@ const router = createBrowserRouter([
               {
                   path: '/secure/account',
                   element: <Account />
-              }
-          //       {
-          //         path: "/secure/cart"
-          //       }
+              },
+                {
+                  path: "/secure/orders",
+                  element: <OrderHistory />
+                }
               ]
 
 

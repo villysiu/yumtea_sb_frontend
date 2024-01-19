@@ -23,9 +23,6 @@ const Header = () => {
         toggleHamburger(false)
         document.getElementById('navbarScroll').style.display =  'block'
         toggleShowCategories(true)
-        console.log('hhh')
-        console.log(document.documentElement.style.getPropertyValue('--bs-bg-opacity'))
-        // document.documentElement.style.setProperty('--bs-bg-opacity', '1')
 
     }
     const closeMDDropdown = e =>{
