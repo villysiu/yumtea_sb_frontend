@@ -49,7 +49,7 @@ const Header = () => {
     return (
         
         <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
-            <Container fluid>
+            <Container fluid className='header_container'>
                 <Link to={`${homeLink}`} className="nav_brand header_title" >Little D</Link>
                 
                 <div className="header_features">
