@@ -13,30 +13,33 @@ const CartItem = ({cartItem}) => {
     console.log(cartItem)
     const [quantity, setQuantity] = useState(cartItem.quantity)
     
-    const menuItem = useSelector(state=>{
-        let ww = state.wine.wines.wine_arr.find(wine=>wine.pk === cartItem.menuitem_id)
-        return ww
-    })
+    // const menuItem = useSelector(state=>{
+    //     let ww = state.wine.wines.wine_arr.find(wine=>wine.pk === cartItem.menuitem_id)
+    //     return ww
+    // })
     
     return(
         <div className="borderSecondary border-bottom pb-5 cartitem_container">
             <div className="cartitem_img_wrapper">
-                <Link to={`${homeLink}/wines/${menuItem.pk}`}>
-                    <img src={`${homeLink}/ASC_websize.png`} className="cartitem_img" alt={menuItem.title}></img>  
+                <Link to={`${homeLink}/wines/${cartItem.menuitem_id}`}>
+                    <img src={`${homeLink}/ASC_websize.png`} className="cartitem_img" alt={cartItem.title}></img>  
                 </Link>
             </div>
             
             <div className='cartitem_info pt-4 ms-5'>
                 <div className='cartitem_title'>
-                    <Link to={`${homeLink}/wines/${menuItem.pk}`} className="solid_link">
-                        {menuItem.year} {menuItem.title}
+                    <Link to={`${homeLink}/wines/${cartItem.menuitem_id}`} className="solid_link">
+                        {cartItem.title}
                     </Link>
                 </div>
                 <div className='cartitem_qty'>
                     <div className="cartitem_qty_input">
                         <MinusButton cartitem={cartItem} setQuantity={setQuantity} setError={setError}/>
                         <QtyInputBox itemId={cartItem.pk} qty={quantity} />
-                        <PlusButton cartitem={cartItem} setQuantity={setQuantity} inventory={menuItem.inventory} setError={setError} />
+                        <PlusButton cartitem={cartItem} setQuantity={setQuantity} 
+                        // inventory={menuItem.inventory} 
+                        inventory={100}
+                        setError={setError} />
                     </div>    
                     {
                         error.length>0 &&
@@ -44,14 +47,14 @@ const CartItem = ({cartItem}) => {
                             {error}
                         </div>
                     }
-                    {
+                    {/* {
                         menuItem.inventory <5 && 
                         <div className="mt-2 low_inventory">
                             Only a few left
                         </div>
-                    }
+                    } */}
                     <div className='cartitem_other_width'>
-                        <RemoveButton cartitemId={cartItem.pk} title={`${menuItem.year} ${menuItem.title}`}/>
+                        <RemoveButton cartitemId={cartItem.pk} title={`${cartItem.title}`}/>
                     </div>
                 </div>
                 <div className='cartitem_price'>                       
