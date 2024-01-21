@@ -25,7 +25,7 @@ const OrderHistory = () =>{
             {
                 orders_arr.map(order => {
                     return (
-                        <SingleOrder order={order} show={show} setShow={setShow}/>
+                        <SingleOrder key={order.pk} order={order} show={show} setShow={setShow}/>
 
                     )
                 })

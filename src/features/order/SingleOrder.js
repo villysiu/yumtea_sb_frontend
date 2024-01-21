@@ -1,6 +1,6 @@
 import { USDollar } from "../../app/global"
 import { homeLink } from "../../app/global"
-import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 
 const SingleOrder = ({order, show, setShow}) =>{
     
@@ -16,12 +16,16 @@ const SingleOrder = ({order, show, setShow}) =>{
         return(
             <div className='singleorder_item'>
                 <div className='orderhistory_order_img_container'>
-                    <img src={`${homeLink}/ASC_websize.png`} className="orderhistory_order_img" alt="{item.menuitem}"></img>
-                    {/* {item.menuitem} <br/> */}
+                    <Link to={`${homeLink}/wines/${item.menuitem}`} className="solid_link">
+                        <img src={`${homeLink}/ASC_websize.png`} className="orderhistory_order_img" alt="{item.title}"></img>
+                    </Link>
+            
                     <div className="qty_circle">{item.quantity}</div>
                 </div>
                 <div style={{width: '100%'}}>
-                    <b>{item.title}</b>
+                    <Link to={`${homeLink}/wines/${item.menuitem}`} className="solid_link">
+                        <b>{item.title}</b>
+                    </Link>
                     <div>Price: {USDollar.format(item.unit_price)}</div>
                     <div style={{textAlign: 'right'}}><b>{USDollar.format(item.line_total)}</b></div>
                 </div>
@@ -56,7 +60,7 @@ const SingleOrder = ({order, show, setShow}) =>{
             <div className='orderhistory_order_details'>
                 {
                 order.orderitems.map(item=>{
-                    return (<SingleOrderItem item={item}/>)
+                    return (<SingleOrderItem key={item.pk} item={item}/>)
                 })}
             </div>
         }
