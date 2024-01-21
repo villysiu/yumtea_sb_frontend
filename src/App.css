@@ -625,12 +625,13 @@
   width: 10rem;
   min-width: 10rem;
   max-width: 10rem;
+  display: flex;
 }
 .orderhistory_order_img {
   width: 60px;
 }
 .orderhistory_order_details {
-  display: flex;
+  /* display: flex; */
 }
 .qty_circle {
   display: flex;
@@ -648,6 +649,9 @@
   left: 3rem;
     top: 0.5rem;
   
+}
+.singleorder_item{
+  display: flex;
 }
 @media all and  (max-width: 767.98px) {
   .orderhistory_order_header_l, .orderhistory_order_header_c{
