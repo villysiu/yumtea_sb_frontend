@@ -1,8 +1,9 @@
 import { USDollar } from "../../app/global"
 import { homeLink } from "../../app/global"
-import { Row, Col } from "react-bootstrap"
+import { useSelector } from "react-redux"
+
 const SingleOrder = ({order, show, setShow}) =>{
-   
+    
     const handleOpen = e =>{
         setShow(order.pk)
     }
@@ -11,12 +12,20 @@ const SingleOrder = ({order, show, setShow}) =>{
     }
 
     const SingleOrderItem = ({item}) =>{
+        
         return(
-            <Col className='orderhistory_order_img_container'>
-                <img src={`${homeLink}/ASC_websize.png`} className="orderhistory_order_img" alt="{item.menuitem}"></img>
-                {/* {item.menuitem} <br/> */}
-                <div className="qty_circle">{item.quantity}</div>
-            </Col>
+            <div className='singleorder_item'>
+                <div className='orderhistory_order_img_container'>
+                    <img src={`${homeLink}/ASC_websize.png`} className="orderhistory_order_img" alt="{item.menuitem}"></img>
+                    {/* {item.menuitem} <br/> */}
+                    <div className="qty_circle">{item.quantity}</div>
+                </div>
+                <div style={{width: '100%'}}>
+                    <b>{item.title}</b>
+                    <div>Price: {USDollar.format(item.unit_price)}</div>
+                    <div style={{textAlign: 'right'}}><b>{USDollar.format(item.line_total)}</b></div>
+                </div>
+            </div>
         )
     }
     return(
@@ -44,12 +53,12 @@ const SingleOrder = ({order, show, setShow}) =>{
             </div>
 
             {show && show === order.pk &&
-            <Row className='orderhistory_order_details'>
+            <div className='orderhistory_order_details'>
                 {
                 order.orderitems.map(item=>{
                     return (<SingleOrderItem item={item}/>)
                 })}
-            </Row>
+            </div>
         }
         </div>
         
