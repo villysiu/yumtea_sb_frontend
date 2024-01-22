@@ -14,13 +14,14 @@ const Cart = () => {
     const dispatch = useDispatch()
     const current_user = useSelector(state => state.user.current_user)
     const cart = useSelector(state=>state.cart.cart)
-
+   
     useEffect(()=>{
         if(current_user.username && cart.status === 'idle' ){
             console.log("there is an user and api cart not fetched ('idle)")
             dispatch(fetchCart())
             .then(()=>{
-               dispatch(batchAddItems())
+                if(cart.temp_cart_arr.length>0)
+                    dispatch(batchAddItems())
             })
         }
     }, [dispatch, current_user.username, cart.cart_arr])
