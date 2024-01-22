@@ -1,12 +1,12 @@
 import { homeLink } from "../../app/global"
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchCategories } from "../wine/wineSlice";
 import { NavDropdown } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { useRef } from "react";
 
-const CategoryDropdown = ({show, closeMDDropdown, toggleShow}) =>{
+const CategoryDropdown = () =>{
     const dispatch=useDispatch();
     let {category_arr, status} = useSelector(state => state.wine.category)
     useEffect(()=>{
@@ -16,48 +16,74 @@ const CategoryDropdown = ({show, closeMDDropdown, toggleShow}) =>{
     }, [status, dispatch])
 
 
-    const ref = useRef();
-
-    useEffect(() => {
-      const handleClickOutside = (e) => {
-        if (!ref.current.contains(e.target)) {
-            toggleShow( window.innerWidth < 991.98 ? true : false )
-        }
-      };
-      document.addEventListener("mousedown", handleClickOutside);
-    }, [ref]);
-
-
-    const handleMouseEnterCategories = (e) =>{
-        toggleShow(true)
+    const [show, setShow] = useState(false)
+    const handleMouseenter = e =>{
+        setShow(true)
     }
-    const handleClick = (e) =>{
-        if(window.innerWidth < 991.98)
-            closeMDDropdown()
-        else
-            toggleShow(false)
+    const handleMouseleave = e =>{
+        setShow(false)
     }
-    const Title = <div className='header_text'>Wines</div>
-    return (
-        <NavDropdown title={Title} ref={ref} id="navbarScrollingDropdown" key="nav"
-            show={show} 
-            onMouseEnter={handleMouseEnterCategories} 
-            // className='header_text'
-        >
-            <Link to={`${homeLink}/wines`} className='dropdown-item' 
-            onClick={handleClick}>
-                All
-            </Link>
+
+    const CategoryList = () =>{
+        return (
+            <>
+            <div className='pb-2' >
+                <Link to={`${homeLink}/wines`} className='pb-2 solid_link' 
+                // onClick={()=>setShowMDFullscrenn(false)}
+                >
+                    All
+                </Link>
+            </div>
+
             {
                 category_arr.map(category=>{
                     return (
-                        <Link to={`${homeLink}/wines/cat/${category.pk}`} key={category.pk} className='dropdown-item' 
-                            onClick={handleClick}
-                        >{category.title}</Link>
+                        <div className='pb-2' >
+                            <Link to={`${homeLink}/wines/cat/${category.pk}`} key={category.pk} className='single_cat_text solid_link'
+                                // onClick={()=>setShowMDFullscrenn(false)}
+                                >
+                            {category.title}</Link>
+                        </div>
                     )
                 })
+            }   
+        </>
+    )
+    
+    }
+    
+
+    return (
+        <>
+        {/* min-width: 992px */}
+        <div className='d-none d-lg-block'>
+            <div onMouseEnter={handleMouseenter}
+                onMouseLeave={handleMouseleave}
+                className='collapsable_item_link header_text header_category'
+            >
+                Wines
+            
+            {show && 
+                    <div className='header_category_dropdown_wrapper'>
+                        <div className='header_category_dropdown mt-3 pt-3'>
+                            <CategoryList />
+                        </div>
+                    </div>
             }
-        </NavDropdown>
+            </div>
+        </div>
+
+        {/* max-width: 992px */}
+        <div className='d-lg-none'>
+            <div className='collapsable_item_link header_text' style={{textAlign: "center"}}>
+                Wines
+                <div className='header_category_dropdown'>
+                <CategoryList />
+                </div>
+            </div>
+        </div>
+
+        </>
     
     )
 }

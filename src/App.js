@@ -9,6 +9,7 @@ import Messages from './features/message/Messages';
 // import { addItemToCart } from './features/cart/cartSlice';
 import { fetchCart } from './features/cart/cartSlice';
 import { batchAddItems } from './features/cart/cartSlice';
+import Header2 from './features/headerNav/Header2';
 function App() {
   console.log("in APP")
     const dispatch=useDispatch();
@@ -38,7 +39,7 @@ function App() {
       <div id="App">
         <div className='appbody border border-danger'>
         
-           <Header />
+           <Header2 />
           <div style={{height: '4rem'}}></div>
          <Messages />
          
