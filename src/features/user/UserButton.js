@@ -4,10 +4,23 @@ import { homeLink } from "../../app/global"
 import { Link } from 'react-router-dom';
 import { PersonCircle } from "react-bootstrap-icons";
 import UserDropdown from "./UserDropdown";
-
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchCurrentUser } from "./userSlice";
 const UserButton = ({showMDFullscrenn, setShowMDFullscrenn}) =>{
+    const dispatch=useDispatch();
     const current_user = useSelector(state => state.user.current_user )
     const [show, setShow] = useState(false)
+    
+    
+    
+    useEffect(()=>{
+      console.log("user login I am in APP.ks")
+      if(localStorage.getItem('token') && current_user.username===null){
+          dispatch(fetchCurrentUser())
+      }
+  }, [dispatch, current_user.username])
+
     const handleMouseenter = e =>{
         setShow(true)
     }
@@ -15,7 +28,7 @@ const UserButton = ({showMDFullscrenn, setShowMDFullscrenn}) =>{
         setShow(false)
     }
     const UserButtonHelper = () =>{
-        // if(showMDFullscrenn)
+        
         return (
             <>
                 {/* max-width: 992px */}
@@ -42,21 +55,20 @@ const UserButton = ({showMDFullscrenn, setShowMDFullscrenn}) =>{
         )
       
     }
+    if(current_user.status === 'loading')
+        return <div>Loading</div>
+
     return (
         <>
-        
             {
                 current_user.username===null ? 
                     <Link to={`${homeLink}/user/signin`}>
                         <PersonCircle className="circle_button"/> 
                     </Link>
                     :
-                    <UserButtonHelper />
-                    
+                    <UserButtonHelper />       
             }
-                
-  
-            </>
+        </>
         )
 
 }

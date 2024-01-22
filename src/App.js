@@ -12,41 +12,24 @@ import { batchAddItems } from './features/cart/cartSlice';
 import Header2 from './features/headerNav/Header2';
 function App() {
   console.log("in APP")
-    const dispatch=useDispatch();
-    const current_user = useSelector(state => state.user.current_user)
+    
   
-    const cart = useSelector(state => {
-      console.log(state)
-      return state.cart.cart
-    })
+    // const cart = useSelector(state => state.cart.cart)
     
-    useEffect(()=>{
-      console.log("user login I am in APP.ks")
-      if(localStorage.getItem('token') && current_user.username===null){
-          dispatch(fetchCurrentUser())
-      }
-      if(current_user.username && cart.status === 'idle' ){
-          console.log("there is an user and api cart not fetched ('idle)")
-          dispatch(fetchCart())
-          .then(()=>{
-             dispatch(batchAddItems())
-          })
-      }
-  }, [dispatch, current_user.username, cart.cart_arr])
     
+    
+
   return (
    
       <div id="App">
-        <div className='appbody border border-danger'>
-        
-           <Header2 />
-          <div style={{height: '4rem'}}></div>
-         <Messages />
-         
-          <Outlet />
-              
-      
-        </div>
+          <div className='appbody border border-danger'>
+          
+              <Header2 />
+              <div style={{height: '4rem'}}></div>
+              <Messages />
+            
+              <Outlet />
+          </div>
       </div>
      
   );
