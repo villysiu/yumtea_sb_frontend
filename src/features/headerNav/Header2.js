@@ -73,11 +73,7 @@ const Header2 = () => {
                                     <X className='header_dropdown_x_button header_nav_x_btn' onClick={()=>setShow(false)} />
                                     <div className='header_md_fullscreen_dropdown'>
                                         <CollapableItems />
-                                        {/* <div className="collapsable_items">
-                                            <div>My Account</div>
-                                            <div>Order History</div>
-                                            <div>Sign Out</div>
-                                        </div> */}
+                                        
                                         <UserDropdown />
                                     </div>
                                     

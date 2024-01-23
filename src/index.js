@@ -20,6 +20,8 @@ import Account from './features/user/Account';
 import User from './features/user/User';
 import OrderHistory from './features/order/OrderHistory';
 import Checkout from './features/order/Checkout';
+import OrderSuccess from './features/order/OrderSuccess';
+
 const router = createBrowserRouter([
   {
       path: "/",
@@ -81,6 +83,10 @@ const router = createBrowserRouter([
                 {
                   path: "/secure/checkout",
                   element: <Checkout />
+                },
+                {
+                  path: "/secure/ordersuccess",
+                  element: <OrderSuccess />
                 }
 
 

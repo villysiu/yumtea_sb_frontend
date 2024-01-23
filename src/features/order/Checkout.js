@@ -1,14 +1,19 @@
-import CartSummary from "../cart/CartSummary";
+import OrderSummary from "./OrderSummary";
 import { Navigate, useLocation } from "react-router-dom";
 const Checkout = () => {
     let { state } = useLocation();
-console.log(state)
-if(!state.btn )
-    <Navigate to="../cart" replace={true} />
+    console.log(state)
+    // prohibited direct access this page
+    if(!state ){
+        return <Navigate to="../../cart" replace={true} />}
     return (
-        <div>check out
+        <div>
+            <div>
+                Shipping address
 
-            <CartSummary subtotal={state.subtotal} />
+            </div>
+
+            <OrderSummary subtotal={state.subtotal} />
         </div>
     )
 }

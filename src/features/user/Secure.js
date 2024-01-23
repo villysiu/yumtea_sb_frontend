@@ -7,12 +7,11 @@ const Secure = () => {
     console.log("in secure")
     let location = useLocation();
     console.log(location)
-    const current_user = useSelector(state => {
-        console.log(state.user)
-        return state.user.current_user
-    })
+    const current_user = useSelector(state => state.user.current_user)
+
     if(current_user.status === 'loading')
         return <div>Loading</div>
+        
     if(!current_user.username){
         return (
             <Navigate to="../user/signin"
