@@ -85,7 +85,7 @@ const orderSlice=createSlice({
             
             console.log(action.payload)
             state.order.status = 'succeeded'
-            state.order.orders_arr = action.payload
+            state.order.orders_arr = action.payload.reverse()
         })
         .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
             state.order.status = 'failed'
