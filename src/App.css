@@ -713,3 +713,47 @@
     flex-direction: column;
   }
 }
+.order_filter_container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+
+}
+.order_filter_title {
+  position: absolute;
+  top: -0.75rem;
+  right:5rem;
+  background-color: white;
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+}
+.order_filter_box {
+  
+  border: black 1px solid;
+  background-color: white !important;
+  color:black !important;
+    width: 12rem;
+    padding: 1rem;
+    text-align: center; 
+    height: 3.5rem;
+    display: flex;
+    
+    align-items: center;
+    justify-content: space-between;
+}
+.order_filter_choices {
+  position: absolute;
+  border: black 1px solid;
+    width: 12rem;
+    padding: 0.5rem;
+    text-align: left; 
+    top: 3.5rem;
+    background-color: white;
+}
+.order_filter_choice{
+  display: flex;
+  padding: 0.5rem;
+}
+.order_filter_choice:hover {
+  background-color: bisque;
+}
