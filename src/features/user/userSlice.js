@@ -103,8 +103,10 @@ const userSlice=createSlice({
 
         current_user: {
             username: null,
+            email: null,
+            id: null,
             status: 'idle',
-            error: null,    
+            
         },
         token: {
             status: 'idle',
@@ -128,8 +130,9 @@ const userSlice=createSlice({
         })
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
             // console.log(action.payload)
-            state.current_user.status = 'succeeded'
+            
             state.current_user = action.payload
+            state.current_user.status = 'succeeded'
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
@@ -140,9 +143,8 @@ const userSlice=createSlice({
         })
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
-            //reset status to idle so it can fetch current user in useEffect
             state.token.status = 'succcess'
-            state.token.error = null
+
 
         })
         .addCase(loginUser.rejected, (state, action) => {

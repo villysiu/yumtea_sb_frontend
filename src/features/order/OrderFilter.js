@@ -1,7 +1,7 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Check } from 'react-bootstrap-icons';
 
-const OrderFilter = ({selected, setSelected}) =>{
+const OrderFilter = ({filter, setFilter}) =>{
     
     
     
@@ -19,7 +19,7 @@ const OrderFilter = ({selected, setSelected}) =>{
     <Dropdown className='order_filter_container'>
         <div className='order_filter_title'>Order Date</div>
         <Dropdown.Toggle className='order_filter_box' >
-            <div>{filterChoices[selected]} </div>
+            <div>{filterChoices[filter]} </div>
             
         </Dropdown.Toggle>
 
@@ -27,9 +27,9 @@ const OrderFilter = ({selected, setSelected}) =>{
         {
             filterChoices.map((choice, idx)=>{
                 return (
-                    <Dropdown.Item className='order_filter_choice' onClick={()=>setSelected(idx)} >
+                    <Dropdown.Item key={idx} className='order_filter_choice' onClick={()=>setFilter(idx)} >
                         <div style={{width: '1.5rem'}}>
-                            {selected === idx && <Check />}
+                            {filter === idx && <Check />}
                         </div>
                         <div>{choice}</div>
                     </Dropdown.Item>

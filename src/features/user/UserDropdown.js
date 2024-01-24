@@ -10,10 +10,7 @@ const UserDropdown = () =>{
                 <div>Reservations</div>
                 <hr/>
                 <Logout />
-                
-                
-                
-                
+
             </div>
         </div>
     )

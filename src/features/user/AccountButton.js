@@ -5,10 +5,10 @@ const AccountButton = () => {
     
     return (
         <div className='pb-2' >
-        <Link to={`${homeLink}/secure/account`} className="solid_link" >
-            My Account
-            
-        </Link>
+            <Link to={`${homeLink}/secure/account`} className="solid_link" >
+                My Account
+                
+            </Link>
         </div>
     )
 }

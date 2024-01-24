@@ -12,7 +12,10 @@ import CategoryDropdown from './CategoryDropdown';
 import { X } from 'react-bootstrap-icons';
 import UserButton from '../user/UserButton';
 import UserDropdown from '../user/UserDropdown';
-
+import Account from '../user/Account';
+import AccountButton from '../user/AccountButton';
+import Logout from '../user/Logout';
+import OrdersButton from '../order/OrdersButton';
 const Header2 = () => {
     
     // const [showCategories, toggleShowCategories] = useState(false)
@@ -74,7 +77,23 @@ const Header2 = () => {
                                     <div className='header_md_fullscreen_dropdown'>
                                         <CollapableItems />
                                         
-                                        <UserDropdown />
+                                        {/* <UserDropdown /> */}
+                                        <div className='header_user_dropdown header_text'>
+                                            <div className='header_text pt-3 '>
+                                                <AccountButton />
+                                            </div>
+                                            <div className='header_text pt-3 '>
+                                                <OrdersButton />
+                                            </div>
+                                            <div className='header_text pt-3 '>
+                                                Reservations comng soon
+                                            </div>
+                                           
+                                            <div className='header_text pt-3'>
+                                                <Logout />
+                                            </div> 
+                                            
+                                        </div>
                                     </div>
                                     
                                 </>

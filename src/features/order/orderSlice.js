@@ -107,3 +107,30 @@ const orderSlice=createSlice({
 })
 // export const {  } = orderSlice.actions
 export default orderSlice.reducer
+export const lastthirtydaysOrders = (state) => {
+    const current = new Date()
+    current.setDate(current.getDate()-5)
+    return {
+        'orders_arr': state.order.order.orders_arr.filter(order=>new Date(order.date) > current), 
+        'status': 'succeeded'
+    }
+     
+}
+export const currentyearOrders = (state) =>{
+    const current_year = new Date().getFullYear()
+    const regex = /(\d{4})/g;
+    return {
+        'orders_arr': 
+            state.order.order.orders_arr.filter(order=>parseInt(order.date.match(regex)[0]) === current_year), 
+        'status': 'succeeded'
+    }
+}
+export const lastyearOrders = (state) =>{
+    const last_year = new Date().getFullYear()-1
+    const regex = /(\d{4})/g;
+    return {
+        'orders_arr': 
+            state.order.order.orders_arr.filter(order=>parseInt(order.date.match(regex)[0]) === last_year), 
+        'status': 'succeeded'
+    }
+}

@@ -2,9 +2,8 @@ import { homeLink } from "../../app/global"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchCategories } from "../wine/wineSlice";
-import { NavDropdown } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { useRef } from "react";
+
 
 const CategoryDropdown = () =>{
     const dispatch=useDispatch();
@@ -27,10 +26,8 @@ const CategoryDropdown = () =>{
     const CategoryList = () =>{
         return (
             <>
-            <div className='pb-2' >
-                <Link to={`${homeLink}/wines`} className='pb-2 solid_link' 
-                // onClick={()=>setShowMDFullscrenn(false)}
-                >
+            <div>
+                <Link to={`${homeLink}/wines`} className='single_cat_text solid_link'>
                     All
                 </Link>
             </div>
@@ -38,10 +35,10 @@ const CategoryDropdown = () =>{
             {
                 category_arr.map(category=>{
                     return (
-                        <div className='pb-2' >
-                            <Link to={`${homeLink}/wines/cat/${category.pk}`} key={category.pk} className='single_cat_text solid_link'
-                                // onClick={()=>setShowMDFullscrenn(false)}
-                                >
+                        <div  >
+                            <Link to={`${homeLink}/wines/cat/${category.pk}`} 
+                            key={category.pk} className='single_cat_text solid_link'
+                            >
                             {category.title}</Link>
                         </div>
                     )

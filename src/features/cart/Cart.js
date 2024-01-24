@@ -9,6 +9,7 @@ import CartItem from "./CartItem"
 import CartSummary from "./CartSummary"
 import Spinner from "react-bootstrap/Spinner"
 import { batchAddItems } from "./cartSlice"
+import EmptyCart from "./EmptyCart"
 const Cart = () => {
     console.log("in cart")
     const dispatch = useDispatch()
@@ -27,21 +28,13 @@ const Cart = () => {
     }, [dispatch, current_user.username, cart.cart_arr])
 
     // console.log(cart_arr)
-    if(cart.status === 'loading')
+    if(cart.status === 'loading' || current_user.status === 'loading')
         return <div>Loading</div>
 
     if(cart.cart_arr.length === 0){
-        return(
-            <>
-                <div className="cart_b">Your Cart is Empty</div> 
-                <div className='my-3 cart_d'>
-                    <Link to={`${homeLink}/wines`}>
-                        <Button className='gold_button short'>Continue Shopping</Button>
-                    </Link>
-                </div>
-            </>
-        )
+        return <EmptyCart />
     }
+    
     let [itemCount, subtotal] = cart.cart_arr.reduce(
         (acumulator, currCartItem) => {
             return [acumulator[0]+currCartItem.quantity, acumulator[1]+currCartItem.linetotal]
@@ -50,20 +43,7 @@ const Cart = () => {
     
     return (
         <div className='cart_container'>
-            {
-
-                cart.status === 'loading' && 
-                
-                    <div className="loading" >
-                     
-                        <Spinner animation="border" role="status" className="spinner_props">
-                        <span className="visually-hidden">Loading...</span>
-                        </Spinner>
-                    </div>
-            }
-    
             <CartSummary subtotal={subtotal} />
-            
         
             <div className='cart_cartitems'>
                 <div className="border border-bottom-0">
@@ -76,9 +56,7 @@ const Cart = () => {
                     {
                         cart.cart_arr.map(item=><CartItem key={item.pk} cartItem={item} />)
                     }
-                </div>
-     
-            
+                </div>       
             </div>
         </div>
 
