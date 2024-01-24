@@ -35,9 +35,9 @@ const CategoryDropdown = () =>{
             {
                 category_arr.map(category=>{
                     return (
-                        <div  >
+                        <div key={category.pk}  >
                             <Link to={`${homeLink}/wines/cat/${category.pk}`} 
-                            key={category.pk} className='single_cat_text solid_link'
+                            className='single_cat_text solid_link'
                             >
                             {category.title}</Link>
                         </div>

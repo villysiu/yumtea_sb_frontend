@@ -47,7 +47,7 @@ const Header2 = () => {
                     Home
                 </Link>               
                 <CategoryDropdown />
-                <Link href="/" className='collapsable_item_link header_text'>
+                <Link to={`${homeLink}/visit-taste`} className='collapsable_item_link header_text'>
                     Visit & Taste
                 </Link>
             </div>

@@ -21,7 +21,7 @@ import User from './features/user/User';
 import OrderHistory from './features/order/OrderHistory';
 import Checkout from './features/order/Checkout';
 import OrderSuccess from './features/order/OrderSuccess';
-
+import Location from './features/headerNav/Location';
 const router = createBrowserRouter([
   {
       path: "/",
@@ -67,6 +67,10 @@ const router = createBrowserRouter([
                     element: <Signup />
                   },
               ]
+          },
+          {
+            path: "/visit-taste",
+              element: <Location />,
           },
           {
               path: "/secure",
