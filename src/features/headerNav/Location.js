@@ -3,20 +3,15 @@ import { homeLink } from "../../app/global"
 const Location = () =>{
     return(
         <div className="location_wrapper">
-            
-            <div className="location_bg_wrapper" >
-                {/* <div className='singlewine_bg'></div> */}
+            <div className="location_bg_wrapper">
                 <img src={`${homeLink}/FullRoomPianoLT.jpeg`} className="singlewine_bg"></img>
-                
-          
-                
-                    <div className='location_title_container'>
-                        <div className='location_title'><b>Little D Tasting Room </b></div>
-                        <div className='location_res_button'>
-                            <Button className="gold_button">Make reservation</Button>
-                        </div>
+            
+                <div className='location_title_container'>
+                    <div className='location_title'><b>Little D Tasting Room </b></div>
+                    <div className='location_res_button'>
+                        <Button className="gold_button">Make reservation</Button>
                     </div>
-
+                </div>
             </div>
             <div className="location_details_container">
                 
