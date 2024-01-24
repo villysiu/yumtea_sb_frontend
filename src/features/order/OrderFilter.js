@@ -7,7 +7,8 @@ const OrderFilter = ({selected, setSelected}) =>{
     
     const filterChoices = [
         "All Order",
-        "Past 3 Months",
+        "Past 30 days",
+        // "Past 3 Months",
         "Current Year",
         "Last Year"
     ]

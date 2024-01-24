@@ -18,6 +18,9 @@ const OrderHistory = () =>{
             dispatch(fetchCurrentUserOrders())
     }, [])
 
+    useEffect(()=>{
+        setShow(null)
+    }, [selected])
     const DateFilterHelper = (date) =>{
         
         if(selected===1){
@@ -48,8 +51,6 @@ const OrderHistory = () =>{
             <h2 style={{textAlign: 'center'}}>Order History</h2>
             
             <div className="orderhistory_wrapper">
-                
-
                 <div style={{width: '100%', textAlign: 'right'}}>
                     <OrderFilter selected={selected} setSelected={setSelected} />
                 </div>
@@ -69,7 +70,6 @@ const OrderHistory = () =>{
                 }
             </div>
         </div>
-
     )
 }
 export default OrderHistory
