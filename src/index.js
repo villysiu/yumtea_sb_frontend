@@ -22,6 +22,7 @@ import OrderHistory from './features/order/OrderHistory';
 import Checkout from './features/order/Checkout';
 import OrderSuccess from './features/order/OrderSuccess';
 import Location from './features/headerNav/Location';
+import Reserve from './features/reservation/Reserve';
 const router = createBrowserRouter([
   {
       path: "/",
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
                 {
                   path: "/secure/ordersuccess",
                   element: <OrderSuccess />
+                },
+                {
+                  path: "/secure/reserve",
+                  element: <Reserve />
                 }
 
 
