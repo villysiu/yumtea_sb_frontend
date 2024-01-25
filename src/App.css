@@ -848,15 +848,28 @@
 .reserve_date, .reserve_time, .reserve_guest{ 
   width: 33%;
   margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .reserve_time_select, .reserve_date_input, .reserve_guest_count{
-  width: 80%;
-  padding: 0.5rem;
   height: 3rem;
 }
 .reserve_button_container {
   width: 10rem;
+  padding-left: 1rem;
+
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  color: transparent;
+  background: transparent;
 }
 @media all and  (max-width: 767.98px) {
   .reserve_date, .reserve_time,  .reserve_guest {
