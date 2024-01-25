@@ -23,6 +23,7 @@ import Checkout from './features/order/Checkout';
 import OrderSuccess from './features/order/OrderSuccess';
 import Location from './features/headerNav/Location';
 import Reserve from './features/reservation/Reserve';
+import ReservationSuccess from './features/reservation/ReservationSuccess';
 const router = createBrowserRouter([
   {
       path: "/",
@@ -96,7 +97,11 @@ const router = createBrowserRouter([
                 {
                   path: "/secure/reserve",
                   element: <Reserve />
-                }
+                },
+                {
+                  path: "/secure/reservation_success",
+                  element: <ReservationSuccess />
+                },
 
 
               ]

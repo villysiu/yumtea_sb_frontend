@@ -5,8 +5,12 @@ import { useState } from "react"
 import ReserveTime from "./ReserveTime"
 import ReserveGuest from './ReserveGuest'
 import ReserveDate from "./ReserveDate"
+import { useDispatch } from "react-redux"
+import { makeReservation } from "./reservationSlice"
+import { useNavigate } from "react-router-dom"
 const Reserve = () =>{
-   
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const today = new Date() 
     const todayStr= `${today.getFullYear()}-${parseInt((today.getMonth()) +1).toString().padStart(2,"0")}-${today.getDate()}`
 
@@ -17,6 +21,20 @@ const Reserve = () =>{
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(date, time, guest)
+        const formData={
+            'reservation_date': date,
+            'reservation_time': `${time}:00`,
+            'no_of_guests': guest
+        }
+        dispatch(makeReservation(formData))
+        .unwrap()
+        .then((originalPromiseResult) => {
+            console.log(originalPromiseResult)
+            navigate("../reservation_success", { state: { from: "secure/reservation", data: originalPromiseResult} });
+        })
+        .catch((rejectedValueOrSerializedError) => {
+        // handle error here
+        })
     }
     return(
         <div className="reserve_wrapper">

@@ -5,6 +5,7 @@ import userReducer from '../features/user/userSlice'
 import wineSlice from '../features/wine/wineSlice' 
 import cartSlice from '../features/cart/cartSlice'
 import orderSlice from '../features/order/orderSlice'
+import reservationSlice from '../features/reservation/reservationSlice'
 
 export default configureStore({
   reducer: {
@@ -12,7 +13,8 @@ export default configureStore({
     wine: wineSlice,
     message: messageSlice,
     cart: cartSlice,
-    order: orderSlice
+    order: orderSlice,
+    reservation: reservationSlice,
 
   },
 })
