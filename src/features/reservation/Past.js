@@ -7,6 +7,8 @@ import { fetchPastReservations } from "./reservationSlice"
 import { Clock } from "react-bootstrap-icons"
 import { Calendar3 } from "react-bootstrap-icons"
 import { PeopleFill } from "react-bootstrap-icons"
+import DeleteReservation from "./DeleteReservation"
+
 const Past = () =>{
     const dispatch = useDispatch()
     const reservation = useSelector(state=>state.reservation.past_reservations)
@@ -28,7 +30,7 @@ const Past = () =>{
             {
                 reservation.past_reservations_arr.map(reservation=>{
                     return (
-                        <div className='single_past_reservation_container'>
+                        <div key={reservation.pk} className='single_past_reservation_container'>
                             
                             <div className='past_reservation_date'>
                                 <Calendar3 className='me-2'/>{reservation.reservation_date}
@@ -41,6 +43,10 @@ const Past = () =>{
                             <div className='past_reservation_guests'>
                                 <PeopleFill className='me-2'/>{reservation.no_of_guests}
                             </div>
+                            <div className='past_reservation_edit_button'>
+                                <DeleteReservation pk={reservation.pk} />
+                      
+                            </div>    
                            
                         </div>
                     )

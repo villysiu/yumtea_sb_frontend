@@ -201,6 +201,11 @@ const reservationSlice=createSlice({
             state.upcoming_reservations.upcoming_reservations_arr.filter(res=>{
                 return res.pk!==action.payload
             })
+            state.past_reservations.status = 'succeeded'
+            state.past_reservations.past_reservations_arr = 
+            state.past_reservations.past_reservations_arr.filter(res=>{
+                return res.pk!==action.payload
+            })
             
         })
         .addCase(deleteReservation.rejected, (state, action) => {
