@@ -916,5 +916,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: calc(100% / 6);
 }
 .upcoming_reservation_edit_button {
-  text-align: right;
+  display: flex;
+    justify-content: flex-end;
+}
+.trash_btn, .edit_btn {
+  cursor: pointer;
+  margin-right: 1rem;
+
 }

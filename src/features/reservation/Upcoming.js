@@ -7,6 +7,8 @@ import { Clock } from "react-bootstrap-icons"
 import { Calendar3 } from "react-bootstrap-icons"
 import { PeopleFill } from "react-bootstrap-icons"
 import { PencilSquare } from "react-bootstrap-icons"
+import DeleteReservation from "./DeleteReservation"
+import EditReservation from "./EditReservation"
 const Upcoming = () =>{
     const dispatch = useDispatch()
     const reservation = useSelector(state=>state.reservation.upcoming_reservations)
@@ -42,7 +44,9 @@ const Upcoming = () =>{
                                 <PeopleFill className='me-2'/>{reservation.no_of_guests}
                             </div>
                             <div className='upcoming_reservation_edit_button'>
-                                <PencilSquare  className='me-2'/>
+                                <EditReservation />
+                                <DeleteReservation pk={reservation.pk} />
+                      
                             </div>    
                             
                            

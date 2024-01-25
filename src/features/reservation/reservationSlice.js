@@ -110,6 +110,34 @@ export const fetchPastReservations=createAsyncThunk(
         }
     }
 )
+export const deleteReservation=createAsyncThunk(
+    'reservation/deleteReservation',
+    async (pk) => {
+        console.log("delete Reservation")
+        console.log(pk)
+        try {
+            const response=await fetch(`${apiLink}/bookingApi/${pk}`, {
+                method: "DELETE",
+                
+                headers: {
+                    'Authorization': `Token ${localStorage.getItem("token")}`,
+                },
+            })
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            // const data=await response.json()
+            // console.log(data)
+
+            
+            return pk
+        } 
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 const reservationSlice=createSlice({
     name: 'reservation',
     initialState: {
@@ -163,6 +191,20 @@ const reservationSlice=createSlice({
         })
         .addCase(fetchPastReservations.rejected, (state, action) => {
             state.past_reservations.status = 'failed'
+        })
+        .addCase(deleteReservation.pending, (state, action) => {
+            state.upcoming_reservations.status = 'loading'
+        })
+        .addCase(deleteReservation.fulfilled, (state, action) => {
+            state.upcoming_reservations.status = 'succeeded'
+            state.upcoming_reservations.upcoming_reservations_arr = 
+            state.upcoming_reservations.upcoming_reservations_arr.filter(res=>{
+                return res.pk!==action.payload
+            })
+            
+        })
+        .addCase(deleteReservation.rejected, (state, action) => {
+            state.upcoming_reservations.status = 'failed'
         })
         
     }
