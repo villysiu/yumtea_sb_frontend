@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import { logoutUser } from "../user/userSlice";
+
 
 
 export const fetchCurrentUserOrders=createAsyncThunk(
