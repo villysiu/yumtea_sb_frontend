@@ -16,6 +16,7 @@ import Account from '../user/Account';
 import AccountButton from '../user/AccountButton';
 import Logout from '../user/Logout';
 import OrdersButton from '../order/OrdersButton';
+import ReservationButton from '../reservation/ReservationButton';
 const Header2 = () => {
     
     // const [showCategories, toggleShowCategories] = useState(false)
@@ -86,7 +87,7 @@ const Header2 = () => {
                                                 <OrdersButton />
                                             </div>
                                             <div className='header_text pt-3 '>
-                                                Reservations comng soon
+                                                <ReservationButton />
                                             </div>
                                            
                                             <div className='header_text pt-3'>

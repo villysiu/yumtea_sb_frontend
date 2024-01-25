@@ -891,3 +891,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .reservation_success_left_column{
   width: 10rem;
 }
+.past_reservation_title, .upcoming_reservation_title {
+  font-size: larger;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  text-align: left;
+}
+.past_reservation_container, .upcoming_reservation_container{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  width: 100%
+}
+.single_past_reservation_container, .single_upcoming_reservation_container{
+  display: flex;
+  width: 100%;
+  
+  padding-bottom: 0.5rem;
+}
+.past_reservation_date, .past_reservation_time, .past_reservation_guests,
+.upcoming_reservation_date, .upcoming_reservation_time {
+  width: calc(100% / 3);
+}
+.upcoming_reservation_guests, .upcoming_reservation_edit_button {
+  width: calc(100% / 6);
+}
+.upcoming_reservation_edit_button {
+  text-align: right;
+}
