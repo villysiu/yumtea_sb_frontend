@@ -1,25 +1,31 @@
+import { Form } from "react-bootstrap"
+import InputGroup from 'react-bootstrap/InputGroup';
+import { Person } from "react-bootstrap-icons";
 const ReserveGuest =({guest, setGuest}) =>{
     const guestArr = Array.from(Array(5), (_, index) => index + 2);
-    console.log(guestArr)
+    
     const handleChange = e =>{
-        console.log(e.target.value)
         setGuest(e.target.value)
     }
     return(
-        <div className='reserve_guest'>
-            <select id="hours" className='reserve_guest_count'
+        <InputGroup className='reserve_guest'>
+        
+        <InputGroup.Text id="basic-addon1">
+            <Person />
+        </InputGroup.Text>
+            <Form.Select className='reserve_guest_count'
                 onChange={handleChange}
                 defaultValue={guest}
             >
                 {
                     guestArr.map(count=>{
                         return(
-                            <option value={count}>{count} Guests</option>
+                            <option key={count} value={count}>{count} Guests</option>
                         )
                     })
                 }
-            </select>
-        </div>
+            </Form.Select>
+        </InputGroup>
     )
 }
 export default ReserveGuest
