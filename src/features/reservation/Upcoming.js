@@ -6,9 +6,8 @@ import { Spinner } from "react-bootstrap"
 import { Clock } from "react-bootstrap-icons"
 import { Calendar3 } from "react-bootstrap-icons"
 import { PeopleFill } from "react-bootstrap-icons"
-import { PencilSquare } from "react-bootstrap-icons"
-import DeleteReservation from "./DeleteReservation"
-import EditReservation from "./EditReservation"
+import DeleteReservationButton from "./DeleteReservationButton"
+import EditReservationButton from "./EditReservationButton"
 const Upcoming = () =>{
     const dispatch = useDispatch()
     const reservation = useSelector(state=>state.reservation.upcoming_reservations)
@@ -37,15 +36,15 @@ const Upcoming = () =>{
                             </div>
                         
                             <div className='upcoming_reservation_time'>
-                                <Clock className='me-2'/>{reservation.reservation_time}
+                                <Clock className='me-2'/>{reservation.reservation_time.slice(0,5)}
                             </div>
                         
                             <div className='upcoming_reservation_guests'>
                                 <PeopleFill className='me-2'/>{reservation.no_of_guests}
                             </div>
                             <div className='upcoming_reservation_edit_button'>
-                                <EditReservation />
-                                <DeleteReservation pk={reservation.pk} />
+                                <EditReservationButton reservation={reservation} />
+                                <DeleteReservationButton pk={reservation.pk} />
                       
                             </div>    
                             
