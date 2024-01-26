@@ -1,4 +1,3 @@
-import { fetchReservations } from "./reservationSlice"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
@@ -7,7 +6,7 @@ import { fetchPastReservations } from "./reservationSlice"
 import { Clock } from "react-bootstrap-icons"
 import { Calendar3 } from "react-bootstrap-icons"
 import { PeopleFill } from "react-bootstrap-icons"
-import DeleteReservation from "./DeleteReservation"
+import DeleteReservationButton from "./DeleteReservationButton"
 
 const Past = () =>{
     const dispatch = useDispatch()
@@ -37,14 +36,14 @@ const Past = () =>{
                             </div>
                         
                             <div className='past_reservation_time'>
-                                <Clock className='me-2'/>{reservation.reservation_time}
+                                <Clock className='me-2'/>{reservation.reservation_time.slice(0,5)}
                             </div>
                         
                             <div className='past_reservation_guests'>
                                 <PeopleFill className='me-2'/>{reservation.no_of_guests}
                             </div>
                             <div className='past_reservation_edit_button'>
-                                <DeleteReservation pk={reservation.pk} />
+                                <DeleteReservationButton pk={reservation.pk} />
                       
                             </div>    
                            

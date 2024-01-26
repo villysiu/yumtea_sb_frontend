@@ -3,9 +3,9 @@ import { apiLink } from "../../app/global";
 
 export const makeReservation=createAsyncThunk(
     'reservation/makeReservation',
-    async (resData) => {
+    async (formData) => {
         console.log("Make Reservation")
-        console.log(resData)
+        console.log(formData)
         try {
             const response=await fetch(`${apiLink}/bookingApi/`, {
                 method: "POST",
@@ -15,7 +15,7 @@ export const makeReservation=createAsyncThunk(
                     'accept': 'application/json',
                     'Authorization': `Token ${localStorage.getItem("token")}`,
                 },
-                body: JSON.stringify(resData)
+                body: JSON.stringify(formData)
             })
 
             if(!response.ok) {
@@ -138,6 +138,37 @@ export const deleteReservation=createAsyncThunk(
         }
     }
 )
+export const updateReservation=createAsyncThunk(
+    'reservation/updateReservation',
+    async (formData) => {
+        console.log("update Reservation")
+        console.log(formData)
+        try {
+            const response=await fetch(`${apiLink}/bookingApi/${formData.pk}`, {
+                method: "PATCH",
+                
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                    'Authorization': `Token ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify(formData.data)
+            })
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            const data=await response.json()
+    
+
+            
+            return data
+        } 
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 const reservationSlice=createSlice({
     name: 'reservation',
     initialState: {
@@ -160,16 +191,17 @@ const reservationSlice=createSlice({
     extraReducers(builder) {
       builder
         .addCase(makeReservation.pending, (state, action) => {
-            state.reservation.status = 'loading'
+            state.upcoming_reservations.status = 'loading'
         })
         .addCase(makeReservation.fulfilled, (state, action) => {
             
             console.log(action.payload)
-            state.reservation.status = 'succeeded'
-            state.reservation.reservations_arr = [...state.reservation.reservations_arr, action.payload]
+            state.upcoming_reservations.status = 'succeeded'
+            state.upcoming_reservations.upcoming_reservations_arr =
+             [...state.upcoming_reservations.upcoming_reservations_arr, action.payload]
         })
         .addCase(makeReservation.rejected, (state, action) => {
-            state.reservation.status = 'failed'
+            state.upcoming_reservations.status = 'failed'
         })
         .addCase(fetchReservations.pending, (state, action) => {
             state.upcoming_reservations.status = 'loading'
@@ -211,8 +243,36 @@ const reservationSlice=createSlice({
         .addCase(deleteReservation.rejected, (state, action) => {
             state.upcoming_reservations.status = 'failed'
         })
+        .addCase(updateReservation.pending, (state, action) => {
+            state.upcoming_reservations.status = 'loading'
+        })
+        .addCase(updateReservation.fulfilled, (state, action) => {
+            state.upcoming_reservations.status = 'succeeded'
+            state.upcoming_reservations.upcoming_reservations_arr = 
+            state.upcoming_reservations.upcoming_reservations_arr.map(res=>{
+                if(res.pk!==action.payload.pk)
+                    return action.payload
+                return res
+            })
+            
+            
+        })
+        .addCase(updateReservation.rejected, (state, action) => {
+            state.upcoming_reservations.status = 'failed'
+        })
         
     }
 })
-// export const {  } = orderSlice.actions
+// export const {  } = reservationSlice.actions
 export default reservationSlice.reducer
+
+export const getReservationById =(pk, state)=>{
+    console.log(pk)
+    console.log(state)
+    const res = state.reservation.upcoming_reservations.upcoming_reservations_arr
+        .find(res=>{
+            return res.pk === parseInt(pk)
+        })
+    return res
+    // return null
+}

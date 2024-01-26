@@ -856,7 +856,7 @@
   height: 3rem;
 }
 .reserve_button_container {
-  width: 10rem;
+  width: 15rem;
   padding-left: 1rem;
 
 }
@@ -871,15 +871,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: transparent;
   background: transparent;
 }
-@media all and  (max-width: 767.98px) {
-  .reserve_date, .reserve_time,  .reserve_guest {
-    width: 100%;
-  }
-  .reserve_date_time {
-    flex-direction: column;
-  }
-  
-}
+
 .reservation_success_container{
   display: flex;
   flex-direction: column;
@@ -888,39 +880,57 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: row;
 }
-.reservation_success_left_column{
-  width: 10rem;
-}
-.past_reservation_title, .upcoming_reservation_title {
+
+.past_reservation_title, .upcoming_reservation_title,
+.reservation_success_title {
   font-size: larger;
   font-weight: bold;
   padding-bottom: 0.5rem;
   text-align: left;
 }
-.past_reservation_container, .upcoming_reservation_container{
+.past_reservation_container, .upcoming_reservation_container, 
+.reservation_success_container{
   padding-left: 2rem;
   padding-right: 2rem;
   width: 100%
 }
-.single_past_reservation_container, .single_upcoming_reservation_container{
+.single_past_reservation_container, .single_upcoming_reservation_container,
+.reservation_success_details_container{
   display: flex;
   width: 100%;
   
   padding-bottom: 0.5rem;
 }
-.past_reservation_date, .past_reservation_time, .past_reservation_guests,
-.upcoming_reservation_date, .upcoming_reservation_time {
+.past_reservation_date, .past_reservation_time, 
+.upcoming_reservation_date, .upcoming_reservation_time,
+.reservation_success_date, .reservation_success_time, 
+.reservation_success_guests {
   width: calc(100% / 3);
 }
+.past_reservation_guests, .past_reservation_edit_button,
 .upcoming_reservation_guests, .upcoming_reservation_edit_button {
   width: calc(100% / 6);
 }
-.upcoming_reservation_edit_button {
+.upcoming_reservation_edit_button, .past_reservation_edit_button {
   display: flex;
     justify-content: flex-end;
 }
 .trash_btn, .edit_btn {
   cursor: pointer;
   margin-right: 1rem;
+  color: black;
 
+
+}
+@media all and  (max-width: 767.98px) {
+  .reserve_date, .reserve_time,  .reserve_guest {
+    width: 100%;
+  }
+  .reserve_date_time {
+    flex-direction: column;
+  }
+  .reservation_success_details_container{
+    flex-direction: column;
+  }
+  
 }

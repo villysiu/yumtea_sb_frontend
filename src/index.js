@@ -25,6 +25,8 @@ import Location from './features/headerNav/Location';
 import Reserve from './features/reservation/Reserve';
 import ReservationSuccess from './features/reservation/ReservationSuccess';
 import Reservations from './features/reservation/Reservations';
+import UpdateReservation from './features/reservation/UpdateReservation';
+import UpdateReservationFrom from './features/reservation/UpdateReservationFrom';
 
 const router = createBrowserRouter([
   {
@@ -100,13 +102,24 @@ const router = createBrowserRouter([
                   path: "/secure/reserve",
                   element: <Reserve />
                 },
-                {
-                  path: "/secure/reservation_success",
-                  element: <ReservationSuccess />
-                },
+                
                 {
                   path: "/secure/reservations",
-                  element: <Reservations />
+                  element: <Reservations />,
+                },
+                {
+                  path: "/secure/reservation/",
+                  element: <UpdateReservationFrom />,
+                  children: [
+                    {
+                      path: "/secure/reservation/update",
+                      element: <UpdateReservation />,
+                    },
+                    {
+                      path: "/secure/reservation/success",
+                      element: <ReservationSuccess />
+                    },
+                  ]
                 },
 
               ]

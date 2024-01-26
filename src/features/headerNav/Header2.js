@@ -1,7 +1,4 @@
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -11,8 +8,6 @@ import { useState } from 'react';
 import CategoryDropdown from './CategoryDropdown';
 import { X } from 'react-bootstrap-icons';
 import UserButton from '../user/UserButton';
-import UserDropdown from '../user/UserDropdown';
-import Account from '../user/Account';
 import AccountButton from '../user/AccountButton';
 import Logout from '../user/Logout';
 import OrdersButton from '../order/OrdersButton';
