@@ -2,7 +2,7 @@ import { TrashFill } from "react-bootstrap-icons"
 import { useDispatch } from "react-redux"
 import { deleteReservation } from "./reservationSlice"
 
-const DeleteReservation = ({pk}) =>{
+const DeleteReservationButton = ({pk}) =>{
     const dispatch = useDispatch()
     const handleClick = () =>{
         dispatch(deleteReservation(pk))
@@ -13,4 +13,4 @@ const DeleteReservation = ({pk}) =>{
         </div>
     )
 }
-export default DeleteReservation
+export default DeleteReservationButton
