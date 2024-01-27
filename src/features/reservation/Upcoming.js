@@ -1,4 +1,4 @@
-import { fetchReservations } from "./reservationSlice"
+
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
@@ -8,29 +8,23 @@ import { Calendar3 } from "react-bootstrap-icons"
 import { PeopleFill } from "react-bootstrap-icons"
 import DeleteReservationButton from "./DeleteReservationButton"
 import EditReservationButton from "./EditReservationButton"
+import { getUpcomingReservations } from "./reservationSlice"
 const Upcoming = () =>{
-    const dispatch = useDispatch()
-    const reservation = useSelector(state=>state.reservation.upcoming_reservations)
-    useEffect(()=>{
-        if(reservation.status==='idle'){
-            dispatch(fetchReservations())
-        }
-    }, [dispatch, reservation.status])
+    const reservation_status = useSelector(state=>state.reservation.reservations.status)
+    const reservation_array = useSelector(state=>getUpcomingReservations(state))
+   
 
-    // if(reservation.status === 'loading')
-    //     return <Spinner />
-
-    if(reservation.array.length===0)
+    if(reservation_array.length===0)
         return <div>No upcoming res at all, make one now</div>
 
     return (
         <div className='upcoming_reservation_container mt-5'>
             <div className='upcoming_reservation_title'>Upcoming reservation</div>
             {
-                reservation.status === 'loading' ? 
+                reservation_status === 'loading' ? 
                 <Spinner />
                 :
-                reservation.array.map(reservation=>{
+                reservation_array.map(reservation=>{
                     return (
                         <div key={reservation.pk} className='single_upcoming_reservation_container'>
                             
