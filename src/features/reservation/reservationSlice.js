@@ -286,7 +286,7 @@ const reservationSlice=createSlice({
             state.upcoming_reservations.status = 'succeeded'
             state.upcoming_reservations.array = 
             state.upcoming_reservations.array.map(res=>{
-                if(res.pk!==action.payload.pk)
+                if(res.pk===action.payload.pk)
                     return action.payload
                 return res
             })
