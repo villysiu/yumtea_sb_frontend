@@ -17,17 +17,20 @@ const Upcoming = () =>{
         }
     }, [dispatch, reservation.status])
 
-    if(reservation.status === 'loading')
-        return <Spinner />
+    // if(reservation.status === 'loading')
+    //     return <Spinner />
 
-    if(reservation.upcoming_reservations_arr.length===0)
+    if(reservation.array.length===0)
         return <div>No upcoming res at all, make one now</div>
 
     return (
         <div className='upcoming_reservation_container mt-5'>
             <div className='upcoming_reservation_title'>Upcoming reservation</div>
             {
-                reservation.upcoming_reservations_arr.map(reservation=>{
+                reservation.status === 'loading' ? 
+                <Spinner />
+                :
+                reservation.array.map(reservation=>{
                     return (
                         <div key={reservation.pk} className='single_upcoming_reservation_container'>
                             

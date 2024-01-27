@@ -169,19 +169,55 @@ export const updateReservation=createAsyncThunk(
         }
     }
 )
+export const fetchAllReservations=createAsyncThunk(
+    'reservation/fetchAllReservations',
+    async () => {
+        console.log("fetch All Reservation")
+        
+        try {
+            const response=await fetch(`${apiLink}/bookingApi/`, {
+                method: "GET",
+                
+                // headers: {
+                    // 'content-type': 'application/json',
+                    // 'accept': 'application/json',
+                    // 'Authorization': `Token ${localStorage.getItem("token")}`,
+                // },
+            })
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            const data=await response.json()
+            console.log(data)
+            // {
+            //     "pk": 38,
+            //     "user_id": 4,
+            //     "no_of_guests": 2,
+            //     "reservation_date": "2024-02-03",
+            //     "reservation_time": "16:00:00"
+            // }
+            
+            return data
+        } 
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 const reservationSlice=createSlice({
     name: 'reservation',
     initialState: {
         upcoming_reservations: {
-            upcoming_reservations_arr: [],
+            array: [],
             status: 'idle',
         },
         past_reservations: {
-            past_reservations_arr: [],
+            array: [],
             status: 'idle',
         },
-        available:{
-            available_arr: [],
+        all_reservations:{
+            array: [],
             status: 'idle',
 
         }
@@ -197,8 +233,8 @@ const reservationSlice=createSlice({
             
             console.log(action.payload)
             state.upcoming_reservations.status = 'succeeded'
-            state.upcoming_reservations.upcoming_reservations_arr =
-             [...state.upcoming_reservations.upcoming_reservations_arr, action.payload]
+            state.upcoming_reservations.array =
+             [...state.upcoming_reservations.array, action.payload]
         })
         .addCase(makeReservation.rejected, (state, action) => {
             state.upcoming_reservations.status = 'failed'
@@ -208,7 +244,7 @@ const reservationSlice=createSlice({
         })
         .addCase(fetchReservations.fulfilled, (state, action) => {
             state.upcoming_reservations.status = 'succeeded'
-            state.upcoming_reservations.upcoming_reservations_arr = action.payload
+            state.upcoming_reservations.array = action.payload
         })
         .addCase(fetchReservations.rejected, (state, action) => {
             state.upcoming_reservations.status = 'failed'
@@ -219,7 +255,7 @@ const reservationSlice=createSlice({
         })
         .addCase(fetchPastReservations.fulfilled, (state, action) => {
             state.past_reservations.status = 'succeeded'
-            state.past_reservations.past_reservations_arr = action.payload
+            state.past_reservations.array = action.payload
         })
         .addCase(fetchPastReservations.rejected, (state, action) => {
             state.past_reservations.status = 'failed'
@@ -229,13 +265,13 @@ const reservationSlice=createSlice({
         })
         .addCase(deleteReservation.fulfilled, (state, action) => {
             state.upcoming_reservations.status = 'succeeded'
-            state.upcoming_reservations.upcoming_reservations_arr = 
-            state.upcoming_reservations.upcoming_reservations_arr.filter(res=>{
+            state.upcoming_reservations.array = 
+            state.upcoming_reservations.array.filter(res=>{
                 return res.pk!==action.payload
             })
             state.past_reservations.status = 'succeeded'
-            state.past_reservations.past_reservations_arr = 
-            state.past_reservations.past_reservations_arr.filter(res=>{
+            state.past_reservations.array = 
+            state.past_reservations.array.filter(res=>{
                 return res.pk!==action.payload
             })
             
@@ -248,8 +284,8 @@ const reservationSlice=createSlice({
         })
         .addCase(updateReservation.fulfilled, (state, action) => {
             state.upcoming_reservations.status = 'succeeded'
-            state.upcoming_reservations.upcoming_reservations_arr = 
-            state.upcoming_reservations.upcoming_reservations_arr.map(res=>{
+            state.upcoming_reservations.array = 
+            state.upcoming_reservations.array.map(res=>{
                 if(res.pk!==action.payload.pk)
                     return action.payload
                 return res
@@ -260,6 +296,16 @@ const reservationSlice=createSlice({
         .addCase(updateReservation.rejected, (state, action) => {
             state.upcoming_reservations.status = 'failed'
         })
+        .addCase(fetchAllReservations.pending, (state, action) => {
+            state.all_reservations.status = 'loading'
+        })
+        .addCase(fetchAllReservations.fulfilled, (state, action) => {
+            state.all_reservations.status = 'succeeded'
+            state.all_reservations.array = action.payload
+        })
+        .addCase(fetchAllReservations.rejected, (state, action) => {
+            state.all_reservations.status = 'failed'
+        })
         
     }
 })
@@ -269,7 +315,7 @@ export default reservationSlice.reducer
 export const getReservationById =(pk, state)=>{
     console.log(pk)
     console.log(state)
-    const res = state.reservation.upcoming_reservations.upcoming_reservations_arr
+    const res = state.reservation.upcoming_reservations.array
         .find(res=>{
             return res.pk === parseInt(pk)
         })

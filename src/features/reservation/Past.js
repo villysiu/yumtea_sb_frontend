@@ -20,14 +20,14 @@ const Past = () =>{
     if(reservation.status === 'loading')
         return <Spinner />
 
-    if(reservation.past_reservations_arr.length===0)
+    if(reservation.array.length===0)
         return <div>No upcoming res at all, make one now</div>
 
     return (
         <div className='past_reservation_container mt-5'>
             <div className='past_reservation_title'>Past reservation</div>
             {
-                reservation.past_reservations_arr.map(reservation=>{
+                reservation.array.map(reservation=>{
                     return (
                         <div key={reservation.pk} className='single_past_reservation_container'>
                             

@@ -3,13 +3,13 @@ import ReserveGuest from './ReserveGuest'
 import ReserveDate from "./ReserveDate"
 import { Button } from "react-bootstrap"
 const ReserveForm =({date, setDate, time, setTime, guest, setGuest, btnName})=>{
-
+    
     return(
         <>
 
             <div className='reserve_date_time'>
                 <ReserveDate date={date} setDate={setDate} />
-                <ReserveTime time={time} setTime={setTime} />
+                <ReserveTime time={time} setTime={setTime} date={date}/>
             
                 <ReserveGuest guest={guest} setGuest={setGuest} />
             </div>
