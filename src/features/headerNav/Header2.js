@@ -39,7 +39,7 @@ const Header2 = () => {
     const CollapableItems = () => {
         return (
             <div className="collapsable_items">
-                <Link to={`${homeLink}/wines`} className='collapsable_item_link header_text'>
+                <Link to={`${homeLink}/menuitems`} className='collapsable_item_link header_text'>
                     Home
                 </Link>               
                 <CategoryDropdown />

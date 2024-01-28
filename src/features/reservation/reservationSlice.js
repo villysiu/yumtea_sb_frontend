@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector,current } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 
 export const makeReservation=createAsyncThunk(
@@ -56,7 +56,7 @@ export const fetchReservations=createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            console.log(data)
+            // console.log(data)
             // {
             //     "pk": 38,
             //     "user_id": 4,
@@ -77,7 +77,7 @@ export const deleteReservation=createAsyncThunk(
     'reservation/deleteReservation',
     async (pk) => {
         console.log("delete Reservation")
-        console.log(pk)
+
         try {
             const response=await fetch(`${apiLink}/bookingApi/${pk}`, {
                 method: "DELETE",
@@ -90,10 +90,7 @@ export const deleteReservation=createAsyncThunk(
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            // const data=await response.json()
-            // console.log(data)
 
-            
             return pk
         } 
         catch(error){
@@ -122,7 +119,7 @@ export const updateReservation=createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-    
+            
 
             
             return data
@@ -146,14 +143,7 @@ export const fetchAllReservations=createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            console.log(data)
-            // {
-            //     "pk": 38,
-            //     "user_id": 4,
-            //     "no_of_guests": 2,
-            //     "reservation_date": "2024-02-03",
-            //     "reservation_time": "16:00:00"
-            // }
+
             
             return data
         } 
@@ -190,8 +180,9 @@ const reservationSlice=createSlice({
             
             console.log(action.payload)
             state.reservations.status = 'succeeded'
-            state.reservations.array =
-             [...state.reservations.array, action.payload]
+            state.reservations.array.push(action.payload)
+            state.reservations.array = state.reservations.array.concat().sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
+            
         })
         .addCase(makeReservation.rejected, (state, action) => {
             state.reservations.status = 'failed'
@@ -215,11 +206,6 @@ const reservationSlice=createSlice({
             state.reservations.array.filter(res=>{
                 return res.pk!==action.payload
             })
-            state.past_reservations.status = 'succeeded'
-            state.past_reservations.array = 
-            state.past_reservations.array.filter(res=>{
-                return res.pk!==action.payload
-            })
             
         })
         .addCase(deleteReservation.rejected, (state, action) => {
@@ -230,14 +216,18 @@ const reservationSlice=createSlice({
         })
         .addCase(updateReservation.fulfilled, (state, action) => {
             state.reservations.status = 'succeeded'
-            state.reservations.array = 
-            state.reservations.array.map(res=>{
-                if(res.pk===action.payload.pk)
-                    return action.payload
-                return res
-            })
-            
-            
+            // console.log(action.payload)
+            // console.log(state.reservations.array)
+            console.log(current(state.reservations.array));
+            state.reservations.array  = 
+                state.reservations.array
+                .map(res=>{
+                    if(res.pk===action.payload.pk)
+                        return action.payload
+                    return res
+                })
+
+            state.reservations.array = state.reservations.array.concat().sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
         })
         .addCase(updateReservation.rejected, (state, action) => {
             state.reservations.status = 'failed'
@@ -245,6 +235,7 @@ const reservationSlice=createSlice({
         .addCase(fetchAllReservations.pending, (state, action) => {
             state.all_reservations.status = 'loading'
         })
+
         .addCase(fetchAllReservations.fulfilled, (state, action) => {
             state.all_reservations.status = 'succeeded'
             state.all_reservations.array = action.payload

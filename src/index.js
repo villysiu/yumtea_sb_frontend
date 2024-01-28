@@ -9,9 +9,9 @@ import store from './app/store'
 import App from './App';
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import About from './features/headerNav/About'
-import WineList from './features/wine/WineList';
-import WineApp from './features/wine/WineApp';
-import SingleWine from './features/wine/SIngleWine';
+import MenuitemList from './features/menuitem/MenuitemList';
+import MenuitemApp from './features/menuitem/MenuitemApp';
+import SingleMenuitem from './features/menuitem/SingleMenuitem';
 import Secure from './features/user/Secure';
 import Cart from './features/cart/Cart';
 import Login from './features/user/Login';
@@ -35,23 +35,23 @@ const router = createBrowserRouter([
       children: [
           {
               path: "/",
-              element: <WineApp />,
+              element: <MenuitemApp />,
               children: [
                   {
                     path: "/",
-                    element: <WineList />,
+                    element: <MenuitemList />,
                   },
                   {
-                    path: "/wines",
-                    element: <WineList />,
+                    path: "/menuitems",
+                    element: <MenuitemList />,
                   },
                   {
-                    path: "wines/cat/:categoryId",
-                    element: <WineList />,
+                    path: "menuitems/cat/:categoryId",
+                    element: <MenuitemList />,
                   },
                   {
-                    path: "wines/:itemId",
-                    element: <SingleWine />,
+                    path: "menuitems/:itemId",
+                    element: <SingleMenuitem />,
                   },
                   {
                     path: "/cart",

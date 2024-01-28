@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 
 export const fetchCategories=createAsyncThunk(
-    'wine/fetchCategories',
+    'menuitem/fetchCategories',
     async () => {
         try {
             const response=await fetch(`${apiLink}/api/categories`, {
@@ -28,9 +28,10 @@ export const fetchCategories=createAsyncThunk(
         }
     }
 )
-export const fetchWines=createAsyncThunk(
-    'wine/fetchWines',
+export const fetchMenuitems=createAsyncThunk(
+    'menuitem/fetchMenuitems',
     async () => {
+        console.log("feting menuitems")
         try {
             const response=await fetch(`${apiLink}/api/menuitems`, {
                 method: "GET",
@@ -49,26 +50,21 @@ export const fetchWines=createAsyncThunk(
             return data
         } 
         catch(error){
-            
+            console.log("i m in error fetching menu items")
             return Promise.reject(error);
         }
     }
 )
-const wineSlice=createSlice({
-    name: 'wine',
+const menuitemSlice=createSlice({
+    name: 'menuitem',
     initialState: {
         category: {
-            category_arr: [],
+            array: [],
             status: 'idle',
              
         },
-        wines: {
-            wine_arr: [],
-                // {pk: 1, title: 'Chester-Kidder', year: 2019, price: '65.00'},
-                // {pk: 2, title: 'ACS', year: 2020, price: '150.00'},
-                // {pk: 3, title: 'Pedestal', year: 2019, price: '90.00'},
-                // {pk: 4, title: 'Dance', year: 2021, price: '42.00'},
-                // {pk: 5, title: 'Cymbal', year: 2022, price: '35.00'}
+        menuitems: {
+            array: [],
             status: 'idle',
         }, 
     },
@@ -82,27 +78,26 @@ const wineSlice=createSlice({
         })
         .addCase(fetchCategories.fulfilled, (state, action) => {
             state.category.status = 'succeeded'
-            state.category.category_arr = action.payload
+            state.category.array = action.payload
         })
         .addCase(fetchCategories.rejected, (state, action) => {
             state.category.status = 'failed'
         })
 
-        .addCase(fetchWines.pending, (state, action) => {
-            state.wines.status = 'loading'
+        .addCase(fetchMenuitems.pending, (state, action) => {
+            state.menuitems.status = 'loading'
         })
-        .addCase(fetchWines.fulfilled, (state, action) => {
+        .addCase(fetchMenuitems.fulfilled, (state, action) => {
            
-            state.wines.status = 'succeeded'
-            state.wines.wine_arr = action.payload
-            // state.current_user.id = action.payload.id
+            state.menuitems.status = 'succeeded'
+            state.menuitems.array = action.payload
         })
-        .addCase(fetchWines.rejected, (state, action) => {
+        .addCase(fetchMenuitems.rejected, (state, action) => {
             
-            state.wines.status = 'failed'
+            state.menuitems.status = 'failed'
         })
        
     }
 })
 
-export default wineSlice.reducer
+export default menuitemSlice.reducer

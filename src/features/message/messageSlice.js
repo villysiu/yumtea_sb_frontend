@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchCategories, fetchWines } from '../wine/wineSlice'
+import { fetchCategories, fetchMenuitems } from '../menuitem/menuitemSlice'
 import { batchAddItems, removeItemFromCart } from '../cart/cartSlice'
 import { logoutUser,  } from '../user/userSlice'
 const messageSlice = createSlice({
@@ -25,12 +25,12 @@ const messageSlice = createSlice({
             )
 
         })
-        .addCase(fetchWines.rejected, (state, action) => {
+        .addCase(fetchMenuitems.rejected, (state, action) => {
             state.message_arr.push(
                 {
                     status: true,
                     type: "danger",
-                    content: `${action.error.name}: ${action.error.message} wines from API.`
+                    content: `${action.error.name}: ${action.error.message} from API.`
                 }
             )
         })

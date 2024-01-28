@@ -1,18 +1,18 @@
 import { homeLink } from "../../app/global"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchCategories } from "../wine/wineSlice";
+import { fetchCategories } from "../menuitem/menuitemSlice";
 import { Link } from 'react-router-dom';
 
 
 const CategoryDropdown = () =>{
     const dispatch=useDispatch();
-    let {category_arr, status} = useSelector(state => state.wine.category)
+    let category = useSelector(state => state.menuitem.category)
     useEffect(()=>{
-        if(status === 'idle'){
+        if(category.status === 'idle'){
             dispatch(fetchCategories())
         }
-    }, [status, dispatch])
+    }, [category.status, dispatch])
 
 
     const [show, setShow] = useState(false)
@@ -27,16 +27,16 @@ const CategoryDropdown = () =>{
         return (
             <>
             <div>
-                <Link to={`${homeLink}/wines`} className='single_cat_text solid_link'>
+                <Link to={`${homeLink}/menuitems`} className='single_cat_text solid_link'>
                     All
                 </Link>
             </div>
 
             {
-                category_arr.map(category=>{
+                category.array.map(category=>{
                     return (
                         <div key={category.pk}  >
-                            <Link to={`${homeLink}/wines/cat/${category.pk}`} 
+                            <Link to={`${homeLink}/menuitems/cat/${category.pk}`} 
                             className='single_cat_text solid_link'
                             >
                             {category.title}</Link>
