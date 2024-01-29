@@ -11,7 +11,7 @@ const Wine = ({menuitem}) =>{
         <Col sm={12} md={4} lg={3} className="winelist_wine_wrapper"> 
             <Link to={`${homeLink}/menuitems/${menuitem.pk}`} className='solid_link'>
                 <div className="winelist_img_wrapper">
-                    <img src={`${homeLink}/ASC_websize.png`} className="winelist_img" alt={menuitem.title}></img>  
+                    <img src={`${homeLink}/IMG_0210.png`} className="winelist_img" alt={menuitem.title}></img>  
                 </div>      
                 <div className="winelist_wine_title">{menuitem.year} {menuitem.title}</div>
             </Link>

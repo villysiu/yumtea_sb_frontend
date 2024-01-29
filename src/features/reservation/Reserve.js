@@ -41,7 +41,7 @@ const Reserve = () =>{
     return(
         <div className="reserve_wrapper">
             <div className="reserve_bg_wrapper">
-                <img src={`${homeLink}/2018-CK-lifestyle.jpeg`} alt="" className="singlewine_bg"></img>
+                <img src={`${homeLink}/A4CAC926-19A1-4D99-AA1A-F9CD36186C5C.jpeg`} alt="" className="singlewine_bg"></img>
             
                 <div className='reserve_title_container'>
                     <div className='reserve_title'><b>Little D Tasting Reservations </b></div>

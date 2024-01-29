@@ -10,7 +10,7 @@ const SingleMenuitem = () =>{
     let menuitems = useSelector(state => state.menuitem.menuitems)
 
     const singleMenuitem = menuitems.array.find(menuitem => menuitem.pk === parseInt(itemId))
-    const title = singleMenuitem.year +" " + singleMenuitem.title + " very very long name"
+    const title = singleMenuitem.title + " very very long name"
     const Desc = () =>{
         return (
             <>
@@ -24,17 +24,19 @@ const SingleMenuitem = () =>{
         return (
             <ul className='singlewine_props_wrapper'>
                 <li className='singlewine_prop pe-3'>
-                    <span>WINEMAKER</span>
-                    <span>Danielle</span>
+                    <span>Hot / Cold</span>
+                    
                 </li>
                 <li className='singlewine_prop ps-3 pe-3'>
-                    <span>APPELLATION</span>
-                    <span>{singleMenuitem.origin}</span>
+                    <span>Sweetness</span>
+                </li>
+                <li className='singlewine_prop ps-3'>
+                    <span>Milk Alternative</span>
                 </li>
                 <li className='singlewine_prop ps-3' style={{borderRight: '0px'}}>
-                    <span>VARIETAL</span>
-                    <span>{singleMenuitem.varietal}</span>
+                    <span>Topping</span>
                 </li>
+
             </ul>
         )
     }
@@ -47,7 +49,7 @@ const SingleMenuitem = () =>{
         )
     }
     if(singleMenuitem===undefined)
-        return( <div>cannot find wine, not existed? </div>
+        return( <div>cannot find item, not existed? </div>
         
     )
     
@@ -56,14 +58,14 @@ const SingleMenuitem = () =>{
             
             <div className="singlewine_bg_wrapper" >
                 {/* <div className='singlewine_bg'></div> */}
-                <img src={`${homeLink}/pick_grape_bg.jpeg`} className="singlewine_bg" alt={singleMenuitem.title}
+                <img src={`${homeLink}/IMG_0216.JPG`} className="singlewine_bg" alt={singleMenuitem.title}
                 
                 ></img>
                 
           
                 <div className="singlewine_img_pos_wrapper app_width d-none d-sm-block">
                     <div className="singlewine_img_wrapper">
-                        <img src={`${homeLink}/ASC_websize.png`} className="singlewine_img" alt={singleMenuitem.title}></img>
+                        <img src={`${homeLink}/IMG_0210.PNG`} className="singlewine_img" alt={singleMenuitem.title}></img>
                     </div>
                 </div>
                 <div className="singlewine_title_pos_wrapper app_width d-none d-sm-block">
@@ -71,7 +73,7 @@ const SingleMenuitem = () =>{
                         <div className='singlewine_title '> 
                             {title}
                         </div>
-                       <Price />
+                        <Price />
                         <Props />
                         
                     </div>
@@ -83,7 +85,7 @@ const SingleMenuitem = () =>{
                         </div>
                         
                         <div className="singlewine_img_wrapper">
-                            <img src={`${homeLink}/ASC_websize.png`} className="singlewine_img" alt={singleMenuitem.title}></img>
+                            <img src={`${homeLink}/IMG_0210.PNG`} className="singlewine_img" alt={singleMenuitem.title}></img>
                         </div>
                          
                     </div>

@@ -19,7 +19,7 @@
 
   --single_wine_margin: 2rem;
   --single_wine_img_width: 250px;
-  --single_wine_img_pos: -300px;
+  --single_wine_img_pos: -170px;
   --singlewine_title_font_size: 3rem;
   --single_wine_img_height: 400px;
   /* --single_wine_details_width: calc(var(--single_wine_width) - var(--single_wine_img_width)); */
@@ -60,7 +60,7 @@
   :root{
     /* width: calc(358px * 250 / 640) */
     --single_wine_img_width: 140px;
-    --single_wine_img_pos: -150px;
+    --single_wine_img_pos: -100px;
     --singlewine_title_font_size: 35px;
     --cart_summary_width: 90vw;
     --cart_summary_right: 5vw;
@@ -462,7 +462,7 @@
   width: 100%;
   height: 50vh;
   object-fit: cover;
-  /* filter: brightness(69%); */
+  filter: brightness(70%);
   background-color: black;
   z-index: 2;
 }
