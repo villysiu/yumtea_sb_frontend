@@ -3,11 +3,18 @@ import { useSelector } from "react-redux"
 import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import PurchaseButton from "./PurchaseButton"
-
+import CustomizeList from "./CustomizeList"
+import { useState } from "react"
+import { Button } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
 const SingleMenuitem = () =>{
     let {itemId} = useParams()
 
     let menuitems = useSelector(state => state.menuitem.menuitems)
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
     const singleMenuitem = menuitems.array.find(menuitem => menuitem.pk === parseInt(itemId))
     const title = singleMenuitem.title + " very very long name"
@@ -30,9 +37,12 @@ const SingleMenuitem = () =>{
                 <li className='singlewine_prop ps-3 pe-3'>
                     <span>Sweetness</span>
                 </li>
-                <li className='singlewine_prop ps-3'>
-                    <span>Milk Alternative</span>
-                </li>
+                { 
+                    singleMenuitem.milk_alternative !== "X" && 
+                    <li className='singlewine_prop ps-3'>
+                        <span>Milk Alternative</span>
+                    </li>
+                }
                 <li className='singlewine_prop ps-3' style={{borderRight: '0px'}}>
                     <span>Topping</span>
                 </li>
@@ -44,7 +54,10 @@ const SingleMenuitem = () =>{
         return(
             <div className='singlewine_cart mb-3'>
                 <span className="singlewine_price pe-4 ">{USDollar.format(singleMenuitem.price)}</span>
-                <PurchaseButton menuitemId={singleMenuitem.pk} menuitemTitle={singleMenuitem.year +" " + singleMenuitem.title} price={singleMenuitem.price} />
+               
+                {/* <PurchaseButton setShow={setShow} /> */}
+                <Button className='gold_button short' onClick={()=>setShow(true)}>BUY</Button>
+
             </div>
         )
     }
@@ -54,6 +67,12 @@ const SingleMenuitem = () =>{
     )
     
     return(
+        <>
+        {
+            <Modal show={show} onHide={()=>setShow(false)}>
+                <CustomizeList singleMenuitem={singleMenuitem} setShow={setShow} /> 
+            </Modal>
+        }
         <div className="singlewine_wrapper">
             
             <div className="singlewine_bg_wrapper" >
@@ -100,7 +119,7 @@ const SingleMenuitem = () =>{
             </div>
            
          </div>
-
+         </>
     )
 }
 export default SingleMenuitem

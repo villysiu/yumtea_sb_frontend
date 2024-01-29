@@ -14,7 +14,10 @@ const MenuitemList = () =>{
 console.log(menuitems)
     let menuitems_filter = menuitems.array
     if(categoryId && menuitems.status==='succeeded'){
-        menuitems_filter = menuitems.array.filter(w=>categoryId===String(w.category))
+        menuitems_filter = menuitems.array.filter(w=>{
+            return w.categories.includes(parseInt(categoryId))
+           
+        })
     }
     if(menuitems_filter.length===0)
         return(

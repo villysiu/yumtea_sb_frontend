@@ -551,6 +551,13 @@
   border-right: #937d36 1px solid;
   color: white;
 }
+.single_item_customize {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: #937d36 1px solid;
+  color: black;
+}
 .singlewine_desc_wrapper {
   padding-left: var(--single_wine_img_width);
   padding-right: 1rem;

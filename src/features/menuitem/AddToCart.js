@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
 import { useState } from "react"
 import AddedOverlay from "./AddedOverlay"
-const PurchaseButton = ({menuitemId, menuitemTitle, price, milkAlternative}) =>{
-    const dispatch = useDispatch()
+
+const AddToCart = ({menuitemId, menuitemTitle, price}) =>{
+    
+        const dispatch = useDispatch()
     const [message, setMessage] = useState("")
     const current_user = useSelector(state => {
         return state.user.current_user
     })
+    // const cart_status = useSelector(state=>{
+    //     return state.cart.cart.status
+    // })
     
     const handleClick = (e) =>{
         console.log("purchase button ")
@@ -18,16 +23,14 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price, milkAlternative}) =>{
             setMessage(`${menuitemTitle} added to shopping cart.` )
         } 
         else{
-            const data = {'menuitem': menuitemId, 'milk_alternative': milkAlternative}
-            console.log(data)
-            // dispatch(addItemToCart(data))
-            // .unwrap()
-            // .then((originalPromiseResult) => {
-            //     setMessage(`${menuitemTitle} added to shopping cart.` )
-            // })
-            // .catch((rejectedValueOrSerializedError) => {
-            //     setMessage("Failed to add item to shopping cart.")
-            // })
+            dispatch(addItemToCart({'menuitem': menuitemId}))
+            .unwrap()
+            .then((originalPromiseResult) => {
+                setMessage(`${menuitemTitle} added to shopping cart.` )
+            })
+            .catch((rejectedValueOrSerializedError) => {
+                setMessage("Failed to add item to shopping cart.")
+            })
             
                 
         }    
@@ -42,5 +45,6 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price, milkAlternative}) =>{
 
         </div>
     )
+    
 }
-export default PurchaseButton
+export default AddToCart
