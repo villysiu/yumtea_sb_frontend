@@ -73,7 +73,7 @@ const CategoryDropdown = () =>{
         {/* max-width: 992px */}
         <div className='d-lg-none'>
             <div className='collapsable_item_link header_text' style={{textAlign: "center"}}>
-                Wines
+                Drinks
                 <div className='header_category_dropdown'>
                 <CategoryList />
                 </div>
