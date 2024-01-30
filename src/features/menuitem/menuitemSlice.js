@@ -148,3 +148,6 @@ export default menuitemSlice.reducer
 export const getMenuitemById = (state, id) =>{
     return state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
 }
+export const getMilkById = (state, id) =>{
+    return state.menuitem.milk.array.find(milk => milk.pk === id)
+}

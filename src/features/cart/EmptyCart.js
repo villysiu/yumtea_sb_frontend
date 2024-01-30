@@ -6,7 +6,7 @@ const EmptyCart = () =>{
         <div className='empty_cart'>
             <div>Your Cart is Empty</div> 
             <div className='my-3 cart_d'>
-                <Link to={`${homeLink}/wines`}>
+                <Link to={`${homeLink}/`}>
                     <Button className='gold_button short'>Continue Shopping</Button>
                 </Link>
             </div>
