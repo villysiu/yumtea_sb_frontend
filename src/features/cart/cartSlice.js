@@ -154,7 +154,9 @@ const cartSlice=createSlice({
                 // console.log("item not in cart")
                 state.cart.temp_cart_arr.push(
                     {
+
                         "menuitem_id": action.payload.menuitemId, 
+                        "title": action.payload.title,
                         "quantity": 1,
                         "linetotal": action.payload.price,
                         "unit_price": action.payload.price,

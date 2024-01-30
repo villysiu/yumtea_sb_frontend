@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
-import { useState } from "react"
+
 
 const PurchaseButton = ({menuitemId, menuitemTitle, price, milk, setShow, setMessage}) =>{
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price, milk, setShow, setMes
         console.log(milk)
         console.log(typeof milk)
         if(current_user.username === null){
-            dispatch(increment({"menuitemId":menuitemId, "price": price, "milk": milk}))
+            dispatch(increment({"menuitemId":menuitemId, 'title': menuitemTitle, "price": price, "milk": milk}))
             setShow(false)
             setMessage(`${menuitemTitle} added to shopping cart.` )
         } 
