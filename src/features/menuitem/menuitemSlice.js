@@ -55,10 +55,42 @@ export const fetchMenuitems=createAsyncThunk(
         }
     }
 )
+export const fetchMilks=createAsyncThunk(
+    'menuitem/fetchMilks',
+    async () => {
+        try {
+            const response=await fetch(`${apiLink}/api/milks`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json'
+                }
+            })
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            const data=await response.json()
+            // console.log(data)
+            // {"pk": 1, "title": "Red Wine", "slug": "red"}
+            
+            return data
+            
+        } 
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 const menuitemSlice=createSlice({
     name: 'menuitem',
     initialState: {
         category: {
+            array: [],
+            status: 'idle',
+             
+        },
+        milk: {
             array: [],
             status: 'idle',
              
@@ -96,8 +128,23 @@ const menuitemSlice=createSlice({
             
             state.menuitems.status = 'failed'
         })
+
+        .addCase(fetchMilks.pending, (state, action) => {
+            state.milk.status = 'loading'
+        })
+        .addCase(fetchMilks.fulfilled, (state, action) => {
+            state.milk.status = 'succeeded'
+            state.milk.array = action.payload
+        })
+        .addCase(fetchMilks.rejected, (state, action) => {
+            state.milk.status = 'failed'
+        })
        
     }
 })
 
 export default menuitemSlice.reducer
+
+export const getMenuitemById = (state, id) =>{
+    return state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
+}

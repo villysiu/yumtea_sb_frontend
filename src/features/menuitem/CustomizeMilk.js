@@ -1,19 +1,24 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Clock } from "react-bootstrap-icons"
 import { Form } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchMilks } from "./menuitemSlice"
 const CustomizeMilk = ({milk, setMilk}) =>{
-    const milkArray = {
-        "W":"Whole Milk",
-        "T":"2% Milk",
-        "N": "Non-fat Milk",
-        "A": "Almond Milk",
-        "O": "Oat Milk",
-        "S": "Soy Milk",
-        // {"X": "Not Changable"}
-    }
+    const dispatch = useDispatch()
+    const milkChoices = useSelector(state=>state.menuitem.milk)
+
+    dispatch(()=>{
+        if(milkChoices.status === 'idle')
+            dispatch(fetchMilks())
+    }, [milkChoices.status, dispatch])
+
     const handleChange = e =>{
-        setMilk(e.target.value)
+        setMilk(parseInt(e.target.value))
     }
+    if(milkChoices.status === 'loading')
+        return <div>Loading</div>
+    if(milkChoices.status === 'failed')
+    return null
     return (
         <InputGroup className='customize_milk'>
         
@@ -25,12 +30,13 @@ const CustomizeMilk = ({milk, setMilk}) =>{
             defaultValue={milk}
             >
                 {
-                    Object.keys(milkArray).map(key =>{
-    
+                    milkChoices.array.map(choice =>{
+                        if(choice.pk === 1 ) 
+                            return;
+
                         return(
-    
-                            <option key={key} value={key}>
-                                {milkArray[key]}
+                            <option key={choice.pk} value={choice.pk}>
+                                {choice.title}
                             </option>
                         )
                     })

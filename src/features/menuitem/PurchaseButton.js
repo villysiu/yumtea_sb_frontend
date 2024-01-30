@@ -2,23 +2,25 @@ import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
 import { useState } from "react"
-import AddedOverlay from "./AddedOverlay"
-const PurchaseButton = ({menuitemId, menuitemTitle, price, milkAlternative}) =>{
+
+const PurchaseButton = ({menuitemId, menuitemTitle, price, milk, setShow, setMessage}) =>{
     const dispatch = useDispatch()
-    const [message, setMessage] = useState("")
+    
     const current_user = useSelector(state => {
         return state.user.current_user
     })
     
     const handleClick = (e) =>{
         console.log("purchase button ")
-        
+        console.log(milk)
+        console.log(typeof milk)
         if(current_user.username === null){
-            dispatch(increment({"menuitemId":menuitemId, "price": price}))
+            dispatch(increment({"menuitemId":menuitemId, "price": price, "milk": milk}))
+            setShow(false)
             setMessage(`${menuitemTitle} added to shopping cart.` )
         } 
         else{
-            const data = {'menuitem': menuitemId, 'milk_alternative': milkAlternative}
+            const data = {'menuitem': menuitemId, 'milk': milk}
             console.log(data)
             // dispatch(addItemToCart(data))
             // .unwrap()
@@ -36,9 +38,9 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price, milkAlternative}) =>{
     return(
         
         <div style={{"position": "relative"}}>
-            {/* {console.log(cart_status)} */}
-            {message && <AddedOverlay message={message} setMessage={setMessage}/>}
-            <Button className='gold_button short' onClick={handleClick}>Purchase</Button>
+
+            
+            <Button className='gold_button short' onClick={handleClick}>Add to Cart</Button>
 
         </div>
     )

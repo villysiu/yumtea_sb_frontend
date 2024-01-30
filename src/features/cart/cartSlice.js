@@ -147,16 +147,18 @@ const cartSlice=createSlice({
     reducers: {
         increment(state, action) {
             console.log(action.payload)
-            let cartitem = state.cart.temp_cart_arr.find(item=>item.menuitem_id === action.payload.menuitemId)
+            let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
+                                                                && item.milk === action.payload.milk)
             
             if(cartitem === undefined){
                 // console.log("item not in cart")
                 state.cart.temp_cart_arr.push(
                     {
-                        "menuitem_id": action.payload.menuitemId,
+                        "menuitem_id": action.payload.menuitemId, 
                         "quantity": 1,
                         "linetotal": action.payload.price,
-                        "unit_price": action.payload.price
+                        "unit_price": action.payload.price,
+                        "milk": action.payload.milk,
                     }
                 )
             }

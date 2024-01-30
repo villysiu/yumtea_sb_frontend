@@ -2,8 +2,9 @@ import { Modal, Button } from "react-bootstrap"
 import CustomizeMilk from "./CustomizeMilk"
 import { useState } from "react"
 import PurchaseButton from "./PurchaseButton"
-const CustomizeList = ({setShow, singleMenuitem}) =>{
-    const [milk, setMilk] = useState(singleMenuitem.milk_alternative)
+const CustomizeList = ({setShow, singleMenuitem, setMessage}) =>{
+    const [milk, setMilk] = useState(singleMenuitem.milk)
+    
     return (
         <>
             <Modal.Header closeButton>
@@ -11,7 +12,7 @@ const CustomizeList = ({setShow, singleMenuitem}) =>{
             </Modal.Header>
             <Modal.Body>
                 { 
-                    singleMenuitem.milk_alternative !== "X" && 
+                    singleMenuitem.milk !== 1 && 
                     <li className='single_item_customize ps-3'>
                         <span>Milk Alternative</span>
                         <CustomizeMilk milk={milk} setMilk={setMilk} />
@@ -25,7 +26,9 @@ const CustomizeList = ({setShow, singleMenuitem}) =>{
             <PurchaseButton menuitemId={singleMenuitem.pk} 
                             menuitemTitle={singleMenuitem.title} 
                             price={singleMenuitem.price}
-                            milkAlternative={milk} />
+                            milk={milk} 
+                            setShow={setShow} 
+                            setMessage={setMessage} />
             </Modal.Footer>
       </>
     )

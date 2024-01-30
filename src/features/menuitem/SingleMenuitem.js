@@ -7,16 +7,18 @@ import CustomizeList from "./CustomizeList"
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 import { Modal } from "react-bootstrap"
+import { getMenuitemById } from "./menuitemSlice"
+import AddedOverlay from "./AddedOverlay"
+
 const SingleMenuitem = () =>{
     let {itemId} = useParams()
-
-    let menuitems = useSelector(state => state.menuitem.menuitems)
+    const [message, setMessage] = useState("")
+    let singleMenuitem = useSelector(state => getMenuitemById(state, parseInt(itemId)))
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
 
-    const singleMenuitem = menuitems.array.find(menuitem => menuitem.pk === parseInt(itemId))
     const title = singleMenuitem.title + " very very long name"
     const Desc = () =>{
         return (
@@ -38,7 +40,7 @@ const SingleMenuitem = () =>{
                     <span>Sweetness</span>
                 </li>
                 { 
-                    singleMenuitem.milk_alternative !== "X" && 
+                    singleMenuitem.milk !== 1 && 
                     <li className='singlewine_prop ps-3'>
                         <span>Milk Alternative</span>
                     </li>
@@ -56,8 +58,8 @@ const SingleMenuitem = () =>{
                 <span className="singlewine_price pe-4 ">{USDollar.format(singleMenuitem.price)}</span>
                
                 {/* <PurchaseButton setShow={setShow} /> */}
-                <Button className='gold_button short' onClick={()=>setShow(true)}>BUY</Button>
-
+                <Button className='gold_button short' onClick={()=>setShow(true)}>Customize</Button>
+                {message && <AddedOverlay message={message} setMessage={setMessage}/>}
             </div>
         )
     }
@@ -70,7 +72,7 @@ const SingleMenuitem = () =>{
         <>
         {
             <Modal show={show} onHide={()=>setShow(false)}>
-                <CustomizeList singleMenuitem={singleMenuitem} setShow={setShow} /> 
+                <CustomizeList singleMenuitem={singleMenuitem} setShow={setShow} setMessage={setMessage} /> 
             </Modal>
         }
         <div className="singlewine_wrapper">
