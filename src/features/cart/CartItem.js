@@ -3,7 +3,6 @@ import PlusButton from "./PlusButton"
 import MinusButton from "./MinusButton"
 import QtyInputBox from "./QtyInputBox"
 import RemoveButton from "./RemoveButton"
-import {  Row, div } from "react-bootstrap"
 import { USDollar } from "../../app/global"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
@@ -15,7 +14,7 @@ const CartItem = ({cartItem}) => {
     console.log(cartItem)
     const [quantity, setQuantity] = useState(cartItem.quantity)
     
-    const milk = useSelector(state=>getMilkById(state, cartItem.milk))
+    // const milk = useSelector(state=>getMilkById(state, cartItem.milk))
     
     return(
         <div className="borderSecondary border-bottom pb-5 cartitem_container">
@@ -27,8 +26,9 @@ const CartItem = ({cartItem}) => {
             
             <div className='cartitem_info pt-4 ms-5'>
                 <div className='cartitem_title'>
-                    <Link to={`${homeLink}/wines/${cartItem.menuitem_id}`} className="solid_link">
-                        {cartItem.title} - {milk.title}
+                    <Link to={`${homeLink}/menuitems/${cartItem.menuitem_id}`} className="solid_link">
+                        {cartItem.title} 
+                        - {cartItem.milk}
                     </Link>
                 </div>
                 <div className='cartitem_qty'>

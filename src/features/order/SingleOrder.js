@@ -1,7 +1,7 @@
 import { USDollar } from "../../app/global"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 
 const SingleOrder = ({order, show, setShow}) =>{
     const ref=useRef()
@@ -12,15 +12,13 @@ const SingleOrder = ({order, show, setShow}) =>{
         setShow(null)
     }
 
-
-
     const SingleOrderItem = ({item}) =>{
         
         return(
             <div className='singleorder_item'>
                 <div className='orderhistory_order_img_container'>
                     <Link to={`${homeLink}/wines/${item.menuitem}`} className="solid_link">
-                        <img src={`${homeLink}/ASC_websize.png`} className="orderhistory_order_img" alt="{item.title}"></img>
+                        <img src={`${homeLink}/IMG_0210.png`} className="orderhistory_order_img" alt="{item.title}"></img>
                     </Link>
             
                     <div className="qty_circle">{item.quantity}</div>
@@ -29,6 +27,7 @@ const SingleOrder = ({order, show, setShow}) =>{
                     <Link to={`${homeLink}/wines/${item.menuitem}`} className="solid_link">
                         <b>{item.title}</b>
                     </Link>
+                    <div>Customize: {item.milk}</div>
                     <div>Price: {USDollar.format(item.unit_price)}</div>
                     <div style={{textAlign: 'right'}}><b>{USDollar.format(item.line_total)}</b></div>
                 </div>

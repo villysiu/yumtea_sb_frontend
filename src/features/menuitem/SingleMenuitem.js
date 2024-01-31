@@ -16,16 +16,27 @@ const SingleMenuitem = () =>{
     let singleMenuitem = useSelector(state => getMenuitemById(state, parseInt(itemId)))
 
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
+   
 
-    const title = singleMenuitem.title + " very very long name"
+    const Title = () => {
+        return(
+            <div className='singlewine_title '> 
+                {singleMenuitem.title}
+            </div>
+        )
+    }
+    const ItemImage = () =>{
+        return(
+        <div className="singlewine_img_wrapper">
+            <img src={`${homeLink}/IMG_0210.PNG`} className="singlewine_img" alt={singleMenuitem.title}></img>
+        </div>
+        )
+    }
     const Desc = () =>{
         return (
             <>
                 {singleMenuitem.description}
                 {singleMenuitem.description}
-                
             </>
         )
     }
@@ -85,15 +96,13 @@ const SingleMenuitem = () =>{
                 
           
                 <div className="singlewine_img_pos_wrapper app_width d-none d-sm-block">
-                    <div className="singlewine_img_wrapper">
-                        <img src={`${homeLink}/IMG_0210.PNG`} className="singlewine_img" alt={singleMenuitem.title}></img>
-                    </div>
+                    <ItemImage />
                 </div>
                 <div className="singlewine_title_pos_wrapper app_width d-none d-sm-block">
                     <div className="singlewine_title_cart_props_wrapper">
-                        <div className='singlewine_title '> 
-                            {title}
-                        </div>
+                        
+                            <Title />
+                
                         <Price />
                         <Props />
                         
@@ -101,13 +110,11 @@ const SingleMenuitem = () =>{
                 </div>
                 <div className=" d-block d-sm-none singlewine_title_img_visibility_wrapper">
                     <div className="singlewine_title_img_sm_wrapper">
-                        <div className='singlewine_title '> 
-                            {title}
-                        </div>
                         
-                        <div className="singlewine_img_wrapper">
-                            <img src={`${homeLink}/IMG_0210.PNG`} className="singlewine_img" alt={singleMenuitem.title}></img>
-                        </div>
+                            <Title />
+                        
+                        <ItemImage />
+                        
                          
                     </div>
                 </div>
