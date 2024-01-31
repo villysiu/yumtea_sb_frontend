@@ -1,33 +1,19 @@
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-
 import Menuitem from './Menuitem';
 
 const MenuitemList = () =>{
-    console.log("in wine list")
-    let { categoryId } = useParams();
-
-
+    console.log("in menuitem list")
+    
     let menuitems = useSelector(state => state.menuitem.menuitems)
-console.log(menuitems)
-    let menuitems_filter = menuitems.array
-    if(categoryId && menuitems.status==='succeeded'){
-        menuitems_filter = menuitems.array.filter(w=>{
-            return w.categories.includes(parseInt(categoryId))
-           
-        })
-    }
-    if(menuitems_filter.length===0)
-        return(
-            <div>nothing</div>
-        )
+    console.log(menuitems)
+    
     return (
         <Container>
             <Row>
                 {
-                    menuitems_filter.map(menuitem=><Menuitem key={menuitem.pk} menuitem={menuitem} />)
+                    menuitems.array.map(menuitem=><Menuitem key={menuitem.pk} menuitem={menuitem} />)
                 }
             </Row>
         </Container>
