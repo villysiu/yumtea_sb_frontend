@@ -10,7 +10,8 @@ const MinusButton = ({cartitem, setQuantity, setError})=>{
     })
     const handleClick = () => {
         if(current_user.username === null){
-            dispatch(decrement(cartitem.pk))
+            dispatch(decrement({'menuitemId':cartitem.menuitem_id, 'milkId': cartitem.milk_id }))
+           
             
         }else{
             // dispatch()

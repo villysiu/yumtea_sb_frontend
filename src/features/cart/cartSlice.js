@@ -177,10 +177,11 @@ const cartSlice=createSlice({
           },
           decrement(state, action) {
             console.log(action.payload)
-            let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.singleMenuitem.menuitem_id 
+            // {'menuitemId':cartitem.menuitem_id, 'milkId': cartitem.milk_id }
+            let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
                 && item.milk_id === action.payload.milkId)
 
-            // cartitem existed since it is coming from shopping cart 
+            // cartitem existed since it is from shopping cart 
             cartitem.quantity--
             cartitem.linetotal -= cartitem.unit_price
 
