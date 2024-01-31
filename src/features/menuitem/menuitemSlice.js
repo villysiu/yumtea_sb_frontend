@@ -66,22 +66,50 @@ export const fetchMilks=createAsyncThunk(
                     'accept': 'application/json'
                 }
             })
-
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            // console.log(data)
-            // {"pk": 1, "title": "Red Wine", "slug": "red"}
-            
             return data
-            
         } 
         catch(error){
             return Promise.reject(error);
         }
     }
 )
+export const fetchMenuitemsByCategory=createAsyncThunk(
+    'menuitem/fetchMenuitemsByCategory',
+    async (id) => {
+        try {
+            const response=await fetch(`${apiLink}/api/menuitem_categories?category_id=${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json'
+                }
+            })
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            const data=await response.json()
+            // {
+            //     "menuitem": {
+            //         "pk": 4,
+            //         "title": "Rose Milk Tea",
+            //         "price": 5.0,
+            //         "description": "Rose Milk Tea",
+            //         "inventory": 10,
+            //         "milk": 2
+            //     },
+            // },
+            return {items: data.map(item=>item.menuitem), id: id}
+        } 
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
+
 const menuitemSlice=createSlice({
     name: 'menuitem',
     initialState: {
@@ -96,6 +124,11 @@ const menuitemSlice=createSlice({
              
         },
         menuitems: {
+            array: [],
+            status: 'idle',
+        }, 
+        menuitemsByCategory: {
+            category_id: null,
             array: [],
             status: 'idle',
         }, 
@@ -127,6 +160,19 @@ const menuitemSlice=createSlice({
         .addCase(fetchMenuitems.rejected, (state, action) => {
             
             state.menuitems.status = 'failed'
+        })
+        .addCase(fetchMenuitemsByCategory.pending, (state, action) => {
+            state.menuitemsByCategory.status = 'loading'
+        })
+        .addCase(fetchMenuitemsByCategory.fulfilled, (state, action) => {
+           
+            state.menuitemsByCategory.status = 'succeeded'
+            state.menuitemsByCategory.array = action.payload.items
+            state.menuitemsByCategory.category_id = action.payload.id
+        })
+        .addCase(fetchMenuitemsByCategory.rejected, (state, action) => {
+            
+            state.menuitemsByCategory.status = 'failed'
         })
 
         .addCase(fetchMilks.pending, (state, action) => {
