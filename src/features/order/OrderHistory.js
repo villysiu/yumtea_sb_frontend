@@ -12,19 +12,19 @@ const OrderHistory = () =>{
     const [filter, setFilter] =useState(0)
 
     const order = useSelector(state =>{
-        if(filter === 1)
+        if(filter === '1')
             return lastthirtydaysOrders(state)
-        if(filter === 2)
+        if(filter === '2')
             return currentyearOrders(state)
-        if(filter === 3)
-            return lastyearOrders(state)
+        if(filter === '3'){
+            return lastyearOrders(state)}
         return state.order.order
     } ) 
    
     useEffect(()=>{
         if(order.status === 'idle')
             dispatch(fetchCurrentUserOrders())
-    }, [])
+    }, [order.status, dispatch])
 
     useEffect(()=>{
         // close order details when filter option changed

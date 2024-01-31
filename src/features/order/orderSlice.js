@@ -109,7 +109,7 @@ const orderSlice=createSlice({
 export default orderSlice.reducer
 export const lastthirtydaysOrders = (state) => {
     const current = new Date()
-    current.setDate(current.getDate()-5)
+    current.setDate(current.getDate()-7)
     return {
         'orders_arr': state.order.order.orders_arr.filter(order=>new Date(order.date) > current), 
         'status': 'succeeded'

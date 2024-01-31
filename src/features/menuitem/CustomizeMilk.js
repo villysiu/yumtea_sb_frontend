@@ -18,7 +18,7 @@ const CustomizeMilk = ({milk, setMilk}) =>{
     if(milkChoices.status === 'loading')
         return <div>Loading</div>
     if(milkChoices.status === 'failed')
-    return null
+        return null
     return (
         <InputGroup className='customize_milk'>
         
