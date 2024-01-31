@@ -3,7 +3,7 @@ import CustomizeMilk from "./CustomizeMilk"
 import { useState } from "react"
 import PurchaseButton from "./PurchaseButton"
 const CustomizeList = ({setShow, singleMenuitem, setMessage}) =>{
-    const [milk, setMilk] = useState(singleMenuitem.milk)
+    const [milk, setMilk] = useState(singleMenuitem.milk_id)
     
     return (
         <>
@@ -12,7 +12,7 @@ const CustomizeList = ({setShow, singleMenuitem, setMessage}) =>{
             </Modal.Header>
             <Modal.Body>
                 { 
-                    singleMenuitem.milk !== 1 && 
+                    singleMenuitem.milk_id !== 1 && 
                     <li className='single_item_customize ps-3'>
                         <span>Milk Alternative</span>
                         <CustomizeMilk milk={milk} setMilk={setMilk} />
@@ -23,10 +23,8 @@ const CustomizeList = ({setShow, singleMenuitem, setMessage}) =>{
             <Button variant="secondary" onClick={()=>setShow(false)}>
                 Cancel
             </Button>
-            <PurchaseButton menuitemId={singleMenuitem.pk} 
-                            menuitemTitle={singleMenuitem.title} 
-                            price={singleMenuitem.price}
-                            milk={milk} 
+            <PurchaseButton singleMenuitem={singleMenuitem} 
+                            milkId = {milk}
                             setShow={setShow} 
                             setMessage={setMessage} />
             </Modal.Footer>

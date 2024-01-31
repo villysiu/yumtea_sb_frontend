@@ -51,7 +51,7 @@ const SingleMenuitem = () =>{
                     <span>Sweetness</span>
                 </li>
                 { 
-                    singleMenuitem.milk !== 1 && 
+                    singleMenuitem.milk_id !== 1 && 
                     <li className='singlewine_prop ps-3'>
                         <span>Milk Alternative</span>
                     </li>
@@ -101,8 +101,7 @@ const SingleMenuitem = () =>{
                 <div className="singlewine_title_pos_wrapper app_width d-none d-sm-block">
                     <div className="singlewine_title_cart_props_wrapper">
                         
-                            <Title />
-                
+                        <Title />
                         <Price />
                         <Props />
                         

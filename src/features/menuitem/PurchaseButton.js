@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
 
 
-const PurchaseButton = ({menuitemId, menuitemTitle, price, milk, setShow, setMessage}) =>{
+const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
     const dispatch = useDispatch()
     
     const current_user = useSelector(state => {
@@ -14,27 +14,24 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price, milk, setShow, setMes
         console.log("purchase button ")
    
         if(current_user.username === null){
-            dispatch(increment({"menuitemId":menuitemId, 'title': menuitemTitle, "price": price, "milkId": milk}))
+            dispatch(increment({'singleMenuitem':singleMenuitem, 'milkId': milkId }))
             setShow(false)
-            setMessage(`${menuitemTitle} added to shopping cart.` )
+            setMessage(`${singleMenuitem.title} added to shopping cart.` )
         } 
         else{
-            const data = {'menuitem_pk': menuitemId, 'milk_pk': milk}
+            const data = {'menuitem_pk': singleMenuitem.pk, 'milk_pk': singleMenuitem.milk_id}
             console.log(data)
             dispatch(addItemToCart(data))
             .unwrap()
             .then((originalPromiseResult) => {
                 setShow(false)
-                setMessage(`${menuitemTitle} added to shopping cart.` )
+                setMessage(`${singleMenuitem.title} added to shopping cart.` )
             })
             .catch((rejectedValueOrSerializedError) => {
                 setShow(false)
                 setMessage("Failed to add item to shopping cart.")
-            })
-            
-                
-        }    
-        
+            })  
+        }     
     }
     return(
         

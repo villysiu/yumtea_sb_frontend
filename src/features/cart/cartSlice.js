@@ -35,7 +35,7 @@ export const fetchCart=createAsyncThunk(
             }
             const data=await response.json()
             // console.log(data)
-            // {"pk": 1, "title": "Red Wine", "slug": "red"}
+            
             
             return data
         } 
@@ -65,7 +65,16 @@ export const addItemToCart = createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-
+            // {
+            //     "pk": 10,
+            //     "user_id": 2,
+            //     "quantity": 1,
+            //     "menuitem_id": 2,
+            //     "linetotal": 5.0,
+            //     "unit_price": 5.0,
+            //     "title": "Jasmine Milk Tea",
+            //     "milk": "2% Milk"
+            // }
             return data
         } 
         catch(error){
@@ -95,14 +104,7 @@ export const updateSingleCartQuantity = createAsyncThunk(
             }
             const data=await response.json()
             // console.log(data)
-        //     // {
-        //     // 	"pk": 34,
-        //     // 	"user_id": 2,
-        //     // 	"menuitem": "2019 Chester-Kidder",
-        //     // 	"quantity": 2,
-        //     // 	"linetotal": "130.00",
-        //     // 	"unit_price": "65.00"
-        //     // }
+
             // thunkAPI.dispatch(fetchCart())
             return data
         } 
@@ -148,18 +150,19 @@ const cartSlice=createSlice({
     reducers: {
         increment(state, action) {
             console.log(action.payload)
-            let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
+// {'singleMenuitem':singleMenuitem, 'milkId': milkId }
+            let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.singleMenuitem.menuitem_id 
                                                                 && item.milk_id === action.payload.milkId)
             
             if(cartitem === undefined){
                 // console.log("item not in cart")
                 state.cart.temp_cart_arr.push(
                     {
-                        "menuitem_id": action.payload.menuitemId, 
-                        "title": action.payload.title,
+                        "menuitem_id": action.payload.singleMenuitem.pk, 
+                        // "title": action.payload.singleMenuitem.title,
                         "quantity": 1,
-                        "linetotal": action.payload.price,
-                        "unit_price": action.payload.price,
+                        "linetotal": action.payload.singleMenuitem.price,
+                        "unit_price": action.payload.singleMenuitem.price,
                         "milk_id": action.payload.milkId,
                     }
                 )
@@ -174,7 +177,9 @@ const cartSlice=createSlice({
           },
           decrement(state, action) {
             console.log(action.payload)
-            let cartitem = state.cart.temp_cart_arr.find(cartitem=> cartitem.pk === action.payload)
+            let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.singleMenuitem.menuitem_id 
+                && item.milk_id === action.payload.milkId)
+
             // cartitem existed since it is coming from shopping cart 
             cartitem.quantity--
             cartitem.linetotal -= cartitem.unit_price
