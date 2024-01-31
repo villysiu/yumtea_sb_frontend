@@ -72,8 +72,7 @@ const Header2 = () => {
                                     <X className='header_dropdown_x_button header_nav_x_btn' onClick={()=>setShow(false)} />
                                     <div className='header_md_fullscreen_dropdown'>
                                         <CollapableItems />
-                                        
-                                        {/* <UserDropdown /> */}
+                     
                                         <div className='header_user_dropdown header_text'>
                                             <div className='header_text pt-3 '>
                                                 <AccountButton />

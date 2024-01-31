@@ -688,6 +688,9 @@
   padding-bottom: 1rem;
   padding-top: 1rem;
 }
+.orderhistory_order_container{
+  display: flex;
+}
 .orderhistory_order_header {
   display: flex;
   flex-direction: row;

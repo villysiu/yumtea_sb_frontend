@@ -12,7 +12,7 @@ const OrderFilter = ({filter, setFilter}) =>{
         "Last Year"
     ]
     const handleChange = e =>{
-        console.log(e.target.value)
+        // console.log(e.target.value)
         setFilter(e.target.value)
     }
    return (

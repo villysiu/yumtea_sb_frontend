@@ -9,7 +9,7 @@ export const batchAddItems=createAsyncThunk(
         const temp_cart_arr = thunkAPI.getState().cart.cart.temp_cart_arr
         try {
             for (let item of temp_cart_arr){
-                await thunkAPI.dispatch(addItemToCart({'menuitem_pk': item.menuitem_id, 'milk_pk': item.milk, 'quantity': item.quantity}) )
+                await thunkAPI.dispatch(addItemToCart({'menuitem_pk': item.menuitem_id, 'milk_pk': item.milk_id, 'quantity': item.quantity}) )
             }
             return null
         }
@@ -149,19 +149,18 @@ const cartSlice=createSlice({
         increment(state, action) {
             console.log(action.payload)
             let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
-                                                                && item.milk === action.payload.milk)
+                                                                && item.milk_id === action.payload.milkId)
             
             if(cartitem === undefined){
                 // console.log("item not in cart")
                 state.cart.temp_cart_arr.push(
                     {
-
                         "menuitem_id": action.payload.menuitemId, 
                         "title": action.payload.title,
                         "quantity": 1,
                         "linetotal": action.payload.price,
                         "unit_price": action.payload.price,
-                        "milk": action.payload.milk,
+                        "milk_id": action.payload.milkId,
                     }
                 )
             }
@@ -184,7 +183,13 @@ const cartSlice=createSlice({
           },
 
           removeItem(state, action){
-            state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=> item.pk !== action.payload)
+            console.log('heree')
+            console.log(action.payload)
+            // {menuitemId: 2, milkId: 2}
+            state.cart.temp_cart_arr = state.cart.temp_cart_arr
+                .filter(item=> item.menuitem_id !== action.payload.menuitemId 
+                    && item.milk_id !== action.payload.milkId)
+            state.cart.cart_arr = state.cart.temp_cart_arr
           },
           emptyTempCart(state,action){
             state.cart.temp_cart_arr = []

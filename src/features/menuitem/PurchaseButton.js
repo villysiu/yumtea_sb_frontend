@@ -14,7 +14,7 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price, milk, setShow, setMes
         console.log("purchase button ")
    
         if(current_user.username === null){
-            dispatch(increment({"menuitemId":menuitemId, 'title': menuitemTitle, "price": price, "milk": milk}))
+            dispatch(increment({"menuitemId":menuitemId, 'title': menuitemTitle, "price": price, "milkId": milk}))
             setShow(false)
             setMessage(`${menuitemTitle} added to shopping cart.` )
         } 
@@ -39,10 +39,7 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price, milk, setShow, setMes
     return(
         
         <div style={{"position": "relative"}}>
-
-            
             <Button className='gold_button short' onClick={handleClick}>Add to Cart</Button>
-
         </div>
     )
 }

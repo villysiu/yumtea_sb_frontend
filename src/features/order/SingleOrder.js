@@ -37,14 +37,16 @@ const SingleOrder = ({order, show, setShow}) =>{
     return(
         <>
         <div className='orderhistory_order' ref={ref} id={order.pk} >
-            <div className='orderhistory_order_header'>
-                <div className='orderhistory_order_header_l'>
-                    <div className='orderhistory_order_col'>{order.date}</div>
-                    <div className='orderhistory_order_col'>Order #{order.pk}</div>
-                </div>
-                <div className='orderhistory_order_header_c'>
-                    <div className='orderhistory_order_col'>{USDollar.format(order.total)}</div>
-                    <div className='orderhistory_order_col'>{order.order_status}</div>
+            <div className='orderhistory_order_container'>
+                <div className='orderhistory_order_header' onClick={handleOpen}>
+                    <div className='orderhistory_order_header_l'>
+                        <div className='orderhistory_order_col'>{order.date}</div>
+                        <div className='orderhistory_order_col'>Order #{order.pk}</div>
+                    </div>
+                    <div className='orderhistory_order_header_c'>
+                        <div className='orderhistory_order_col'>{USDollar.format(order.total)}</div>
+                        <div className='orderhistory_order_col'>{order.order_status}</div>
+                    </div>
                 </div>
                 {
                     show && show === order.pk ? 
@@ -52,7 +54,9 @@ const SingleOrder = ({order, show, setShow}) =>{
                        -
                     </div>
                     :
-                    <div className='orderhistory_order_header_r' onClick={handleOpen}>
+                    <div className='orderhistory_order_header_r' 
+                    onClick={handleOpen}
+                    >
                        +
                     </div>
                 }

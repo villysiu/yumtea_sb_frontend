@@ -9,7 +9,9 @@ const Checkout = () => {
     return (
         <div>
             <div>
-                Shipping address
+                drinks will be ready in 10 minutes. <br/>
+                Table Service <br />
+                Pick up at counter when call out number <br/>
 
             </div>
 
