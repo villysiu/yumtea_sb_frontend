@@ -5,7 +5,7 @@ import { addItemToCart, increment } from "../cart/cartSlice"
 
 const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
     const dispatch = useDispatch()
-    
+    console.log()
     const current_user = useSelector(state => {
         return state.user.current_user
     })
@@ -19,7 +19,7 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
             setMessage(`${singleMenuitem.title} added to shopping cart.` )
         } 
         else{
-            const data = {'menuitem_pk': singleMenuitem.pk, 'milk_pk': singleMenuitem.milk_id}
+            const data = {'menuitem_pk': singleMenuitem.pk, 'milk_pk': milkId}
             console.log(data)
             dispatch(addItemToCart(data))
             .unwrap()

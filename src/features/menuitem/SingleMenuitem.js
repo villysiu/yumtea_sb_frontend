@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
-import PurchaseButton from "./PurchaseButton"
-import CustomizeList from "./CustomizeList"
+import CustomizeContainer from "./CustomizeContainer"
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 import { Modal } from "react-bootstrap"
@@ -17,7 +16,6 @@ const SingleMenuitem = () =>{
 
     const [show, setShow] = useState(false);
    
-
     const Title = () => {
         return(
             <div className='singlewine_title '> 
@@ -76,14 +74,13 @@ const SingleMenuitem = () =>{
     }
     if(singleMenuitem===undefined)
         return( <div>cannot find item, not existed? </div>
-        
     )
     
     return(
         <>
         {
             <Modal show={show} onHide={()=>setShow(false)}>
-                <CustomizeList singleMenuitem={singleMenuitem} setShow={setShow} setMessage={setMessage} /> 
+                <CustomizeContainer singleMenuitem={singleMenuitem} setShow={setShow} setMessage={setMessage} /> 
             </Modal>
         }
         <div className="singlewine_wrapper">

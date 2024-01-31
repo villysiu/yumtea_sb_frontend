@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 import { logoutUser } from "../user/userSlice";
-
+import { CheckoutCart } from "../order/orderSlice";
 export const batchAddItems=createAsyncThunk(
     'cart/batchAddItems',
     async (_, thunkAPI) => {
@@ -168,15 +168,15 @@ const cartSlice=createSlice({
         increment(state, action) {
             console.log(action.payload)
 // {'singleMenuitem':singleMenuitem, 'milkId': milkId }
-            let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.singleMenuitem.menuitem_id 
-                                                                && item.milk_id === action.payload.milkId)
+            let cartitem = state.cart.temp_cart_arr
+            .find(item=> item.menuitem_id === action.payload.singleMenuitem.menuitem_id 
+                        && item.milk_id === action.payload.milkId)
             
             if(cartitem === undefined){
                 // console.log("item not in cart")
                 state.cart.temp_cart_arr.push(
                     {
                         "menuitem_id": action.payload.singleMenuitem.pk, 
-                        // "title": action.payload.singleMenuitem.title,
                         "quantity": 1,
                         "linetotal": action.payload.singleMenuitem.price,
                         "unit_price": action.payload.singleMenuitem.price,
@@ -191,32 +191,39 @@ const cartSlice=createSlice({
             }
             state.cart.cart_arr = state.cart.temp_cart_arr
 
-          },
-          decrement(state, action) {
-            console.log(action.payload)
-            // {'menuitemId':cartitem.menuitem_id, 'milkId': cartitem.milk_id }
-            let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
-                && item.milk_id === action.payload.milkId)
+            },
+            decrement(state, action) {
+                console.log(action.payload)
+                // {'menuitemId':cartitem.menuitem_id, 'milkId': cartitem.milk_id }
+                let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
+                    && item.milk_id === action.payload.milkId)
 
-            // cartitem existed since it is from shopping cart 
-            cartitem.quantity--
-            cartitem.linetotal -= cartitem.unit_price
+                // cartitem existed since it is from shopping cart 
+                cartitem.quantity--
+                cartitem.linetotal -= cartitem.unit_price
 
-            state.cart.cart_arr = state.cart.temp_cart_arr
-          },
+                state.cart.cart_arr = state.cart.temp_cart_arr
+            },
 
-          removeItem(state, action){
-            console.log('heree')
-            console.log(action.payload)
-            // {menuitemId: 2, milkId: 2}
-            state.cart.temp_cart_arr = state.cart.temp_cart_arr
-                .filter(item=> !(item.menuitem_id === action.payload.menuitemId 
-                    && item.milk_id === action.payload.milkId))
-            state.cart.cart_arr = state.cart.temp_cart_arr
-          },
-          emptyTempCart(state,action){
-            state.cart.temp_cart_arr = []
-          },
+            removeItem(state, action){
+                // {menuitemId: 2, milkId: 2}
+                state.cart.temp_cart_arr = state.cart.temp_cart_arr
+                    .filter(item=> !(item.menuitem_id === action.payload.menuitemId 
+                        && item.milk_id === action.payload.milkId))
+                state.cart.cart_arr = state.cart.temp_cart_arr
+            },
+            emptyTempCart(state,action){
+                state.cart.temp_cart_arr = []
+            },
+            updateCustomization(state, action){
+                // {'menuitemId':cartitem.menuitem_id, 'prevMilkId': cartitem.milk_id, 'updatedMilkId': milk }
+                let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
+                    && item.milk_id === action.payload.prevMilkId)
+                cartitem.milk_id = action.payload.updatedMilkId
+                state.cart.cart_arr = state.cart.temp_cart_arr
+
+            }
+
 
     },
     extraReducers(builder) {
@@ -296,7 +303,12 @@ const cartSlice=createSlice({
             state.cart.temp_cart_arr = []
             state.cart.status = 'idle'
         })
+        .addCase(CheckoutCart.fulfilled, (state, action) => {
+            state.cart.cart_arr = []
+            state.cart.temp_cart_arr = []
+            state.cart.status = 'idle'
+        })
     }
 })
-export const { increment, decrement, removeItem, emptyTempCart } = cartSlice.actions
+export const { increment, decrement, removeItem, emptyTempCart, updateCustomization } = cartSlice.actions
 export default cartSlice.reducer

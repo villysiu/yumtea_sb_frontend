@@ -5,7 +5,7 @@ import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import OutOfStockButton from "./OutOfStockButton"
 import { useState } from "react"
-import CustomizeList from "./CustomizeList"
+import CustomizeList from "./CustomizeContainer"
 import { Button } from "react-bootstrap"
 import AddedOverlay from "./AddedOverlay"
 const Menuitem = ({menuitem}) =>{
