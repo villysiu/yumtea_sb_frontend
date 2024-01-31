@@ -430,8 +430,8 @@
 }
 .added_message {
   position: absolute;
-  left: 40%;
-  top: 50px;
+  left: 20%;
+  top: 40px;
   width: 300px;
   /* font-size: 10px; */
   background-color: white;
@@ -594,7 +594,9 @@
   .singlewine_desc_wrapper{
     padding-left: 1rem;
   }
-  
+  .singlewine_title_img_sm_wrapper {
+    width: 100%;
+  }
 
 }
 .winelist_wine_wrapper{

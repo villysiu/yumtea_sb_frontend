@@ -5,7 +5,7 @@ const Location = () =>{
     return(
         <div className="location_wrapper">
             <div className="location_bg_wrapper">
-                <img src={`${homeLink}/IMG_0216.JPG`} className="singlewine_bg"></img>
+                <img src={`${homeLink}/A4CAC926-19A1-4D99-AA1A-F9CD36186C5C.jpeg`} className="singlewine_bg"></img>
             
                 <div className='location_title_container'>
                     <div className='location_title'><b>Little D Tasting Room </b></div>

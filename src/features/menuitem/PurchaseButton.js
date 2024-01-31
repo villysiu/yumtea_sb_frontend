@@ -12,24 +12,25 @@ const PurchaseButton = ({menuitemId, menuitemTitle, price, milk, setShow, setMes
     
     const handleClick = (e) =>{
         console.log("purchase button ")
-        console.log(milk)
-        console.log(typeof milk)
+   
         if(current_user.username === null){
             dispatch(increment({"menuitemId":menuitemId, 'title': menuitemTitle, "price": price, "milk": milk}))
             setShow(false)
             setMessage(`${menuitemTitle} added to shopping cart.` )
         } 
         else{
-            const data = {'menuitem': menuitemId, 'milk': milk}
+            const data = {'menuitem_pk': menuitemId, 'milk_pk': milk}
             console.log(data)
-            // dispatch(addItemToCart(data))
-            // .unwrap()
-            // .then((originalPromiseResult) => {
-            //     setMessage(`${menuitemTitle} added to shopping cart.` )
-            // })
-            // .catch((rejectedValueOrSerializedError) => {
-            //     setMessage("Failed to add item to shopping cart.")
-            // })
+            dispatch(addItemToCart(data))
+            .unwrap()
+            .then((originalPromiseResult) => {
+                setShow(false)
+                setMessage(`${menuitemTitle} added to shopping cart.` )
+            })
+            .catch((rejectedValueOrSerializedError) => {
+                setShow(false)
+                setMessage("Failed to add item to shopping cart.")
+            })
             
                 
         }    

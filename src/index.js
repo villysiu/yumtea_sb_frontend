@@ -27,6 +27,7 @@ import ReservationSuccess from './features/reservation/ReservationSuccess';
 import Reservations from './features/reservation/Reservations';
 import UpdateReservation from './features/reservation/UpdateReservation';
 import UpdateReservationFrom from './features/reservation/UpdateReservationFrom';
+import MenuitemByCategory from './features/menuitem/MenuitemByCategory';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
                   },
                   {
                     path: "menuitems/cat/:categoryId",
-                    element: <MenuitemList />,
+                    element: <MenuitemByCategory />,
                   },
                   {
                     path: "menuitems/:itemId",

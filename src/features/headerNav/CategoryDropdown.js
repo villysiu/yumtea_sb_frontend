@@ -58,7 +58,7 @@ const CategoryDropdown = () =>{
                 onMouseLeave={handleMouseleave}
                 className='collapsable_item_link header_text header_category'
             >
-                Wines
+                Drinks
             
             {show && 
                     <div className='header_category_dropdown_wrapper'>

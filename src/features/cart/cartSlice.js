@@ -9,7 +9,7 @@ export const batchAddItems=createAsyncThunk(
         const temp_cart_arr = thunkAPI.getState().cart.cart.temp_cart_arr
         try {
             for (let item of temp_cart_arr){
-                await thunkAPI.dispatch(addItemToCart({'menuitem': item.menuitem_id, 'quantity': item.quantity}) )
+                await thunkAPI.dispatch(addItemToCart({'menuitem_pk': item.menuitem_id, 'milk_pk': item.milk, 'quantity': item.quantity}) )
             }
             return null
         }
@@ -47,7 +47,8 @@ export const fetchCart=createAsyncThunk(
 export const addItemToCart = createAsyncThunk(
     'cart/addItemToCart',
     async (item, thunkAPI) => {
-     
+        console.log(item)
+        // {menuitem_pk: 1, milk_pk: 7}
         try {
             const response=await fetch(`${apiLink}/api/cart`, {
                 method: "POST",
