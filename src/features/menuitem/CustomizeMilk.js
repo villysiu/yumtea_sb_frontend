@@ -1,16 +1,11 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Clock } from "react-bootstrap-icons"
 import { Form } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchMilks } from "./menuitemSlice"
-const CustomizeMilk = ({milk, setMilk}) =>{
-    const dispatch = useDispatch()
-    const milkChoices = useSelector(state=>state.menuitem.milk)
+import { useSelector } from "react-redux"
 
-    dispatch(()=>{
-        if(milkChoices.status === 'idle')
-            dispatch(fetchMilks())
-    }, [milkChoices.status, dispatch])
+const CustomizeMilk = ({milk, setMilk}) =>{
+    
+    const milkChoices = useSelector(state=>state.menuitem.milk)
 
     const handleChange = e =>{
         setMilk(parseInt(e.target.value))

@@ -7,6 +7,14 @@ export const batchAddItems=createAsyncThunk(
     async (_, thunkAPI) => {
        
         const temp_cart_arr = thunkAPI.getState().cart.cart.temp_cart_arr
+        // {
+        //     "menuitem_id": action.payload.singleMenuitem.pk, 
+        //     // "title": action.payload.singleMenuitem.title,
+        //     "quantity": 1,
+        //     "linetotal": action.payload.singleMenuitem.price,
+        //     "unit_price": action.payload.singleMenuitem.price,
+        //     "milk_id": action.payload.milkId,
+        // }
         try {
             for (let item of temp_cart_arr){
                 await thunkAPI.dispatch(addItemToCart({'menuitem_pk': item.menuitem_id, 'milk_pk': item.milk_id, 'quantity': item.quantity}) )
@@ -35,7 +43,15 @@ export const fetchCart=createAsyncThunk(
             }
             const data=await response.json()
             // console.log(data)
-            
+            // {
+            //     linetotal: 5,
+            //     menuitem_id: 6, 
+            //     milk_id: 3,
+            //     pk: 12,
+            //     quantity: 1,
+            //     unit_price: 5, 
+            //     user_id: 2
+            // }
             
             return data
         } 
@@ -49,6 +65,7 @@ export const addItemToCart = createAsyncThunk(
     async (item, thunkAPI) => {
         console.log(item)
         // {menuitem_pk: 1, milk_pk: 7}
+        // {menuitem_pk: 1, milk_pk: 7, quantity: 1}
         try {
             const response=await fetch(`${apiLink}/api/cart`, {
                 method: "POST",
@@ -193,8 +210,8 @@ const cartSlice=createSlice({
             console.log(action.payload)
             // {menuitemId: 2, milkId: 2}
             state.cart.temp_cart_arr = state.cart.temp_cart_arr
-                .filter(item=> item.menuitem_id !== action.payload.menuitemId 
-                    && item.milk_id !== action.payload.milkId)
+                .filter(item=> !(item.menuitem_id === action.payload.menuitemId 
+                    && item.milk_id === action.payload.milkId))
             state.cart.cart_arr = state.cart.temp_cart_arr
           },
           emptyTempCart(state,action){

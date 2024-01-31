@@ -16,6 +16,7 @@ const CartItem = ({cartItem}) => {
     
     const milkTitle = useSelector(state=>getMilkTitleById(state, cartItem.milk_id))
     const menuitemTitle = useSelector(state=>getMenuitemTitleById(state, cartItem.menuitem_id))
+    
     return(
         <div className="borderSecondary border-bottom pb-5 cartitem_container">
             <div className="cartitem_img_wrapper">
