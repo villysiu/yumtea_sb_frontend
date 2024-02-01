@@ -200,6 +200,6 @@ export const getMenuitemTitleById = (state, id) =>{
 }
 export const getMilkTitleById = (state, id) =>{
     console.log(id)
-    const milk = state.menuitem.milk.array.find(milk => milk.pk === id)
+    const milk = state.menuitem.milk.array.find(milk => milk.id === id)
     return milk === undefined? "" : milk.title
 }
