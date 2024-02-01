@@ -5,13 +5,11 @@ import { useEffect } from 'react';
 import { homeLink } from '../../app/global';
 import { Cart, List } from 'react-bootstrap-icons';
 import { useState } from 'react';
-import CategoryDropdown from './CategoryDropdown';
+
 import { X } from 'react-bootstrap-icons';
 import UserButton from '../user/UserButton';
-import AccountButton from '../user/AccountButton';
-import Logout from '../user/Logout';
-import OrdersButton from '../order/OrdersButton';
-import ReservationButton from '../reservation/ReservationButton';
+import HeaderCollapableItems from './HeaderCollapsableItems';
+import HeaderFullscreenList from './HeaderFullscreenList';
 const Header2 = () => {
     
     // const [showCategories, toggleShowCategories] = useState(false)
@@ -36,19 +34,7 @@ const Header2 = () => {
         };
     }, []);
 
-    const CollapableItems = () => {
-        return (
-            <div className="collapsable_items">
-                <Link to={`${homeLink}/menuitems`} className='collapsable_item_link header_text'>
-                    Home
-                </Link>               
-                <CategoryDropdown />
-                <Link to={`${homeLink}/visit-taste`} className='collapsable_item_link header_text'>
-                    Visit & Taste
-                </Link>
-            </div>
-        )
-    }
+    
     return (
         
         <div className="header2_wrapper">
@@ -57,39 +43,27 @@ const Header2 = () => {
                 
                 <div className="header_features">
                     <div className="d-none d-lg-block">
-                        <CollapableItems />
+                        <HeaderCollapableItems />
                     </div>
 
                     <div className='user_items'>
-                        <UserButton showMDFullscrenn={show} setShowMDFullscrenn={setShow} />
+                        {
+                            !show &&
+                            <div onClick={()=>setShow(false)}>
+                                <UserButton  />
+                            </div>
+                        }
+
                         <Link to={`${homeLink}/cart`} onClick={()=>setShow(false)} >
                             <Cart className="circle_button" />
                         </Link>
                         <div className="d-lg-none">
-                            {console.log(show)}
+                            
                             {show ? 
                                 <>
                                     <X className='header_dropdown_x_button header_nav_x_btn' onClick={()=>setShow(false)} />
-                                    <div className='header_md_fullscreen_dropdown'>
-                                        <CollapableItems />
-                     
-                                        <div className='header_user_dropdown header_text'>
-                                            <div className='header_text pt-3 '>
-                                                <AccountButton />
-                                            </div>
-                                            <div className='header_text pt-3 '>
-                                                <OrdersButton />
-                                            </div>
-                                            <div className='header_text pt-3 '>
-                                                <ReservationButton />
-                                            </div>
-                                           
-                                            <div className='header_text pt-3'>
-                                                <Logout />
-                                            </div> 
-                                            
-                                        </div>
-                                    </div>
+                                    <HeaderFullscreenList />
+                                    
                                     
                                 </>
                                 :

@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCurrentUser } from "./userSlice";
 import { Spinner } from "react-bootstrap";
-const UserButton = ({showMDFullscrenn, setShowMDFullscrenn}) =>{
+const UserButton = () =>{
     const dispatch=useDispatch();
     const current_user = useSelector(state => state.user.current_user )
     const [show, setShow] = useState(false)
@@ -19,33 +19,20 @@ const UserButton = ({showMDFullscrenn, setShowMDFullscrenn}) =>{
           dispatch(fetchCurrentUser())
       }
   }, [dispatch, current_user.username])
-
-    const handleMouseenter = e =>{
-        setShow(true)
-    }
-    const handleMouseleave = e =>{
-        setShow(false)
-    }
+    
     const UserButtonHelper = () =>{
-        
         return (
-            <>
+            <div className="hello_user" 
+                onMouseEnter={()=>setShow(true)}
+                onMouseLeave={()=>setShow(false)}
+            >
+                Hello {current_user.username}
+                <PersonFill className='circle_button' />
                 {
-                    !showMDFullscrenn && 
-                    <div className="hello_user" 
-                        onMouseEnter={handleMouseenter}
-                        onMouseLeave={handleMouseleave}
-                    >
-                        Hello {current_user.username}
-                        <PersonFill className='circle_button' />
-                        {
-                            show && <UserDropdown />
-                        }
-                    </div>
+                    show && <UserDropdown />
                 }
-            </>
+            </div>
         )
-      
     }
     if(current_user.status === 'loading')
         return <Spinner />
@@ -61,7 +48,7 @@ const UserButton = ({showMDFullscrenn, setShowMDFullscrenn}) =>{
                     <UserButtonHelper />       
             }
         </>
-        )
+    )
 
 }
 export default UserButton

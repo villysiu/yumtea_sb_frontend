@@ -256,7 +256,7 @@ const cartSlice=createSlice({
                 cartitem.quantity++
                 cartitem.linetotal += cartitem.unit_price
             }
-            state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=>item.menuitem_id !== action.payload.menuitem_id)
+            
         })
         .addCase(addItemToCart.rejected, (state, action) => {
             state.cart.status = 'failed'
