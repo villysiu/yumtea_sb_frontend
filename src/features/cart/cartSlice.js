@@ -99,11 +99,11 @@ export const addItemToCart = createAsyncThunk(
         }
     }
 )
-export const updateSingleCartQuantity = createAsyncThunk(
+export const updateCartItem = createAsyncThunk(
     'cart/updateSingleCartQuantity',
     async (item, thunkAPI) => {
-        // console.log(item)
-        // {cartitemId: 33, quantity: 3}
+        console.log(item)
+        // {cartitemId: 33, formData: {'quantity': item.quantity}}
         try {
             const response=await fetch(`${apiLink}/api/cart/${item.cartitemId}`, {
                 method: "PATCH",
@@ -113,16 +113,14 @@ export const updateSingleCartQuantity = createAsyncThunk(
                     "Authorization": `Token ${localStorage.getItem("token")}`,
                     
                 },
-                body: JSON.stringify({'quantity': item.quantity})
+                body: JSON.stringify(item.formData)
             })
 
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            // console.log(data)
 
-            // thunkAPI.dispatch(fetchCart())
             return data
         } 
         catch(error){
@@ -130,6 +128,7 @@ export const updateSingleCartQuantity = createAsyncThunk(
         }
     }
 )
+
 export const removeItemFromCart = createAsyncThunk(
     'cart/removeItemFromCart',
     async (formData) => {
@@ -274,18 +273,19 @@ const cartSlice=createSlice({
         .addCase(removeItemFromCart.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
-        .addCase(updateSingleCartQuantity.pending, (state, action) => {
+        .addCase(updateCartItem.pending, (state, action) => {
             state.cart.status = 'loading'
         })
-        .addCase(updateSingleCartQuantity.fulfilled, (state, action) => {
+        .addCase(updateCartItem.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
             // state.cart.message = 
              let cartitem = state.cart.cart_arr.find(cartitem =>cartitem.pk === action.payload.pk)
              cartitem.quantity = action.payload.quantity
              cartitem.linetotal = cartitem.unit_price * action.payload.quantity
+             cartitem.milk_id = action.payload.milk_id
 
         })
-        .addCase(updateSingleCartQuantity.rejected, (state, action) => {
+        .addCase(updateCartItem.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
         .addCase(batchAddItems.pending, (state, action) => {

@@ -2,7 +2,7 @@ import { Button, NavItem } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { decrement } from "./cartSlice"
 import { useEffect } from "react"
-import { updateSingleCartQuantity } from "./cartSlice"
+import { updateCartItem } from "./cartSlice"
 const MinusButton = ({cartitem, setQuantity, setError})=>{
     const dispatch = useDispatch()
     const current_user = useSelector(state => {
@@ -18,7 +18,7 @@ const MinusButton = ({cartitem, setQuantity, setError})=>{
             console.log("dedect item from api, ")
             console.log('in minus')
             console.log(cartitem.quantity)
-            dispatch(updateSingleCartQuantity({'cartitemId': cartitem.pk, 'quantity': cartitem.quantity-1}))
+            dispatch(updateCartItem({'cartitemId': cartitem.pk, formData: {'quantity': cartitem.quantity-1}}))
         }
         setQuantity(q=>q-1)
     }

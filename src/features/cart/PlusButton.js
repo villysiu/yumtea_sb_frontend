@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { updateSingleCartQuantity, increment } from "./cartSlice"
+import { updateCartItem, increment } from "./cartSlice"
 
 const PlusButton = ({cartitem, setQuantity, inventory, setError})=>{
     const dispatch = useDispatch()
@@ -13,7 +13,7 @@ const PlusButton = ({cartitem, setQuantity, inventory, setError})=>{
         }else{
             console.log('in plus')
             console.log(cartitem.quantity)
-            dispatch(updateSingleCartQuantity({'cartitemId': cartitem.pk, 'quantity': cartitem.quantity+1}))
+            dispatch(updateCartItem({'cartitemId': cartitem.pk, formData: {'quantity': cartitem.quantity+1}}))
         }
         setQuantity(q=>q+1)
     }
