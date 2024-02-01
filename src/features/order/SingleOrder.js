@@ -29,8 +29,9 @@ const SingleOrder = ({order, show, setShow}) =>{
                     </Link>
                     <div>Customize: {item.milk}</div>
                     <div>Price: {USDollar.format(item.unit_price)}</div>
-                    <div style={{textAlign: 'right'}}><b>{USDollar.format(item.line_total)}</b></div>
+                    
                 </div>
+                <div style={{textAlign: 'right'}}><b>{USDollar.format(item.line_total)}</b></div>
             </div>
         )
     }
@@ -63,7 +64,7 @@ const SingleOrder = ({order, show, setShow}) =>{
             </div>
 
             {show && show === order.pk &&
-            <div className='orderhistory_order_details'>
+            <div className='orderhistory_order_details pt-4'>
                 {
                     order.orderitems.map(item=>{
                         return (<SingleOrderItem key={item.pk} item={item}/>)
