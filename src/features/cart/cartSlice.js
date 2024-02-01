@@ -82,16 +82,15 @@ export const addItemToCart = createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            // {
-            //     "pk": 10,
-            //     "user_id": 2,
-            //     "quantity": 1,
-            //     "menuitem_id": 2,
-            //     "linetotal": 5.0,
-            //     "unit_price": 5.0,
-            //     "title": "Jasmine Milk Tea",
-            //     "milk": "2% Milk"
-            // }
+            // 	{
+	// 	"pk": 20,
+	// 	"user_id": 2,
+	// 	"menuitem_id": 7,
+	// 	"quantity": 2,
+	// 	"linetotal": 10.0,
+	// 	"unit_price": 5.0,
+	// 	"milk_id": 2
+	// },
             return data
         } 
         catch(error){
@@ -246,7 +245,7 @@ const cartSlice=createSlice({
             state.cart.status = 'succeeded'
             console.log('ITEM ADDED TO API')
             console.log(action.payload)
-            let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.menuitem_id === action.payload.menuitem_id)
+            let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.pk === action.payload.pk)
             
             if(cartitem === undefined){
                 console.log("item not in cart")
