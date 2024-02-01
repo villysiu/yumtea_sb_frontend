@@ -42,6 +42,7 @@ const Header2 = () => {
                 <Link to={`${homeLink}`} className="nav_brand header_title" onClick={()=>setShow(false)}>Little D</Link>
                 
                 <div className="header_features">
+                    {/* show itesm when screen bigger than 992*/}
                     <div className="d-none d-lg-block">
                         <HeaderCollapableItems />
                     </div>
@@ -57,14 +58,14 @@ const Header2 = () => {
                         <Link to={`${homeLink}/cart`} onClick={()=>setShow(false)} >
                             <Cart className="circle_button" />
                         </Link>
+
+                        {/* show hamburger dropdown list when screen smaller than 992*/}
                         <div className="d-lg-none">
                             
                             {show ? 
                                 <>
                                     <X className='header_dropdown_x_button header_nav_x_btn' onClick={()=>setShow(false)} />
                                     <HeaderFullscreenList />
-                                    
-                                    
                                 </>
                                 :
                                 <List className='header_dropdown_bar_button' onClick={()=>setShow(true)} />
