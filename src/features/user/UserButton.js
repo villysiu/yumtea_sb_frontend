@@ -8,17 +8,31 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCurrentUser } from "./userSlice";
 import { Spinner } from "react-bootstrap";
+
 const UserButton = () =>{
     const dispatch=useDispatch();
     const current_user = useSelector(state => state.user.current_user )
     const [show, setShow] = useState(false)
     
     useEffect(()=>{
-      console.log("user login I am in APP.ks")
-      if(localStorage.getItem('token') && current_user.username===null){
-          dispatch(fetchCurrentUser())
-      }
-  }, [dispatch, current_user.username])
+        console.log("user login I am in APP.ks")
+        if(localStorage.getItem('token') && current_user.username===null){
+            dispatch(fetchCurrentUser())
+        }
+    }, [dispatch, current_user.username])
+
+    useEffect(() => {
+        const handleClick = (e) => {
+            if(e.target.tagName.toLowerCase() === 'a')
+                setShow(false)
+        };
+        window.addEventListener('click', handleClick);
+
+        return () => {
+            window.removeEventListener('click', handleClick);
+        };
+    }, []);
+
     
     const UserButtonHelper = () =>{
         return (
@@ -49,6 +63,5 @@ const UserButton = () =>{
             }
         </>
     )
-
 }
 export default UserButton

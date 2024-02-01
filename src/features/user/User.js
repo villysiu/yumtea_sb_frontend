@@ -1,5 +1,3 @@
-
-import { ConeStriped } from "react-bootstrap-icons"
 import { useSelector } from "react-redux"
 import { Outlet, useLocation } from "react-router-dom"
 import { Navigate } from "react-router-dom"
