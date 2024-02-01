@@ -217,11 +217,15 @@ const cartSlice=createSlice({
                 state.cart.temp_cart_arr = []
             },
             updateCustomization(state, action){
-                // {'menuitemId':cartitem.menuitem_id, 'prevMilkId': cartitem.milk_id, 'updatedMilkId': milk }
+                console.log(action.payload)
+                // {'cartId': cartId, 'prevMilk': prevMilk, 'updatedMilk': updatedMilk}
                 // let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
                 //     && item.milk_id === action.payload.prevMilkId)
                 let cartitem = state.cart.temp_cart_arr[action.payload.cartId]
-                cartitem.milk_id = action.payload.updatedMilkId
+                cartitem.milk_id = action.payload.updatedMilk.id
+                cartitem.unit_price = cartitem.unit_price - action.payload.prevMilk.price + action.payload.updatedMilk.price
+                cartitem.linetotal = cartitem.unit_price * cartitem.quantity
+
                 state.cart.cart_arr = state.cart.temp_cart_arr
 
             }

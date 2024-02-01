@@ -6,7 +6,9 @@ import CustomizeList from "../menuitem/CustomizeList"
 import { getMenuitemById } from "../menuitem/menuitemSlice"
 import { updateCustomization } from "./cartSlice"
 import { updateCartItem } from "./cartSlice"
-const EditButton = ({cartId, cartItem}) =>{
+import { getMilkById } from "../menuitem/menuitemSlice"
+
+const EditButton = ({cartId, cartItem, prevMilk}) =>{
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
     const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
@@ -14,13 +16,13 @@ const EditButton = ({cartId, cartItem}) =>{
         return state.user.current_user
     })
     const [milk, setMilk] = useState(cartItem.milk_id)
-
+    const updatedMilk = useSelector(state=>getMilkById(state, milk))
     const handleClick = () =>{
         
         if(current_user.username === null){
             // dispatch(updateCustomization({'menuitemId':cartItem.menuitem_id, 
             //                     'prevMilkId': cartItem.milk_id, 'updatedMilkId': milk }))
-            dispatch(updateCustomization({'cartId': cartId, 'updatedMilkId': milk} ))
+            dispatch(updateCustomization({'cartId': cartId, 'prevMilk': prevMilk, 'updatedMilk': updatedMilk} ))
             setShow(false)
         }
         else {

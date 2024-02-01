@@ -65,7 +65,7 @@ const CartItem = ({cartId, cartItem}) => {
                             </div>
                         } */}
                         <div className='cartitem_other_width'>
-                            <EditButton cartId={cartId} cartItem={cartItem} />
+                            <EditButton cartId={cartId} cartItem={cartItem} prevMilk={milk} />
                         </div>
                         <div className='cartitem_other_width'>
                             <RemoveButton cartId={cartId} cartItem={cartItem} title={menuitemTitle} />
