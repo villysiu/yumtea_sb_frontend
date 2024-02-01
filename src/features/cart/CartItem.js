@@ -32,11 +32,16 @@ const CartItem = ({cartId, cartItem}) => {
                 </div>
                 
                 <div className='cartitem_info pt-4 ms-5'>
-                    <div className='cartitem_title'>
-                        <Link to={`${homeLink}/menuitems/${cartItem.menuitem_id}`} className="solid_link">
-                            {menuitemTitle} 
-                            - {milkTitle}
-                        </Link>
+                    <div className='cartitem_title_options'>
+                        <div className='cartitem_title'>
+                            <Link to={`${homeLink}/menuitems/${cartItem.menuitem_id}`} className="solid_link">
+                                <b>{menuitemTitle}</b>
+                            </Link>
+                            
+                        </div>
+                        <div className='cartitem_options'>
+                            {milkTitle}
+                        </div>
                     </div>
                     <div className='cartitem_qty'>
                         <div className="cartitem_qty_input">
@@ -63,7 +68,7 @@ const CartItem = ({cartId, cartItem}) => {
                             <EditButton cartId={cartId} cartItem={cartItem} />
                         </div>
                         <div className='cartitem_other_width'>
-                            <RemoveButton cartId={cartId} cartItem={cartItem} />
+                            <RemoveButton cartId={cartId} cartItem={cartItem} title={menuitemTitle} />
                         </div>
                     </div>
                     <div className='cartitem_price'>                       

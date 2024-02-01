@@ -93,14 +93,17 @@ export const fetchMenuitemsByCategory=createAsyncThunk(
             }
             const data=await response.json()
             // {
+            //     "pk": 4,
+            //     "category_id": 1,
+            //     "menuitem_id": 2,
             //     "menuitem": {
-            //         "pk": 4,
-            //         "title": "Rose Milk Tea",
+            //         "pk": 2,
+            //         "title": "Jasmine Milk Tea",
             //         "price": 5.0,
-            //         "description": "Rose Milk Tea",
-            //         "inventory": 10,
-            //         "milk": 2
-            //     },
+            //         "description": "Jasmine Milk Tea",
+            //         "inventory": 7,
+            //         "milk_id": 2
+            //     }
             // },
             return {items: data.map(item=>item.menuitem), id: id}
         } 
@@ -199,7 +202,6 @@ export const getMenuitemTitleById = (state, id) =>{
     return item.title
 }
 export const getMilkTitleById = (state, id) =>{
-    console.log(id)
     const milk = state.menuitem.milk.array.find(milk => milk.id === id)
     return milk === undefined? "" : milk.title
 }

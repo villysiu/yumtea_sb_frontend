@@ -46,6 +46,7 @@ const messageSlice = createSlice({
 
         })
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
+            console.log(action.payload)
             state.message_arr.push(
                 {
                     status: true,

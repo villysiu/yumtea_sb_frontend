@@ -99,10 +99,10 @@ export const addItemToCart = createAsyncThunk(
     }
 )
 export const updateCartItem = createAsyncThunk(
-    'cart/updateSingleCartQuantity',
+    'cart/updateCartItem',
     async (item, thunkAPI) => {
         console.log(item)
-        // {cartitemId: 33, formData: {'quantity': item.quantity}}
+        // {cartitemId: 33, formData: {'quantity': item.quantity, 'milk_pk': milk}}
         try {
             const response=await fetch(`${apiLink}/api/cart/${item.cartitemId}`, {
                 method: "PATCH",
@@ -119,7 +119,7 @@ export const updateCartItem = createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-
+            console.log(data)
             return data
         } 
         catch(error){
@@ -248,6 +248,7 @@ const cartSlice=createSlice({
             state.cart.status = 'succeeded'
             console.log('ITEM ADDED TO API')
             console.log(action.payload)
+            
             let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.pk === action.payload.pk)
             
             if(cartitem === undefined){
@@ -279,12 +280,23 @@ const cartSlice=createSlice({
             state.cart.status = 'loading'
         })
         .addCase(updateCartItem.fulfilled, (state, action) => {
+            // {
+            //     "pk": 30,
+            //     "user_id": 2,
+            //     "menuitem_id": 7,
+            //     "quantity": 1,
+            //     "linetotal": 5,
+            //     "unit_price": 5,
+            //     "milk_id": 3
+            // }
             state.cart.status = 'succeeded'
             // state.cart.message = 
              let cartitem = state.cart.cart_arr.find(cartitem =>cartitem.pk === action.payload.pk)
              cartitem.quantity = action.payload.quantity
-             cartitem.linetotal = cartitem.unit_price * action.payload.quantity
+             cartitem.unit_price = action.payload.unit_price
+             cartitem.linetotal = action.payload.unit_price * action.payload.quantity
              cartitem.milk_id = action.payload.milk_id
+            
 
         })
         .addCase(updateCartItem.rejected, (state, action) => {

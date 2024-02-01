@@ -34,22 +34,22 @@ const EditButton = ({cartId, cartItem}) =>{
     }
     return (
         <>
-        {
-            <Modal show={show} onHide={()=>setShow(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Customize {menuitem.title}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <CustomizeList menuitem={menuitem} milk={milk} setMilk={setMilk} />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={()=>setShow(false)}>
-                        Cancel
-                    </Button>
-                    <Button className='gold_button short' onClick={handleClick}>Update</Button>
-                </Modal.Footer>
-            </Modal>
-        }
+            {
+                <Modal show={show} onHide={()=>setShow(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Customize {menuitem.title}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <CustomizeList menuitem={menuitem} milk={milk} setMilk={setMilk} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={()=>setShow(false)}>
+                            Cancel
+                        </Button>
+                        <Button className='gold_button short' onClick={handleClick}>Update</Button>
+                    </Modal.Footer>
+                </Modal>
+            }
             <Link onClick={()=>setShow(true)}>Edit</Link>
         </>
         
