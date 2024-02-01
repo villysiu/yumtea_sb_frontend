@@ -3,7 +3,7 @@ import CustomizeList from "./CustomizeList"
 import PurchaseButton from "./PurchaseButton"
 import { useState } from "react"
 
-const CustomizeContainer = ({setShow, singleMenuitem, setMessage, update}) =>{
+const CustomizeContainer = ({setShow, singleMenuitem, setMessage}) =>{
 
     const [milk, setMilk] = useState(singleMenuitem.milk_id)
     

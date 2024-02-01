@@ -14,10 +14,6 @@ const MinusButton = ({cartId, cartItem, setQuantity, setError})=>{
            dispatch(decrement(cartId))
             
         }else{
-            // dispatch()
-            console.log("dedect item from api, ")
-            console.log('in minus')
-            console.log(cartItem.quantity)
             dispatch(updateCartItem({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity-1}}))
         }
         setQuantity(q=>q-1)

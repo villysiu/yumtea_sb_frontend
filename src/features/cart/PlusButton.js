@@ -2,13 +2,13 @@ import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { updateCartItem, increment } from "./cartSlice"
 
-const PlusButton = ({cartitem, setQuantity, inventory, setError})=>{
+const PlusButton = ({cartitem, milk, setQuantity, inventory, setError})=>{
     const dispatch = useDispatch()
     const current_user = useSelector(state => state.user.current_user)
     // const cart_status = useSelector(state => state.cart.cart.status)
     const handleClick = () => {
         if(current_user.username === null){
-            dispatch(increment({'singleMenuitem':cartitem, 'milkId': cartitem.milk_id }))
+            dispatch(increment({'singleMenuitem':cartitem, 'milk': milk  }))
             
         }else{
             console.log('in plus')

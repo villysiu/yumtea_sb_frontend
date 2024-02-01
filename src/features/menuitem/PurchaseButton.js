@@ -1,11 +1,11 @@
 import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
-
+import { getMilkById } from "./menuitemSlice"
 
 const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
     const dispatch = useDispatch()
-    console.log()
+    const milk = useSelector(state => getMilkById(state, milkId))
     const current_user = useSelector(state => {
         return state.user.current_user
     })
@@ -14,7 +14,7 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
         console.log("purchase button ")
    
         if(current_user.username === null){
-            dispatch(increment({'singleMenuitem':singleMenuitem, 'milkId': milkId }))
+            dispatch(increment({'singleMenuitem':singleMenuitem, 'milk': milk }))
             setShow(false)
             setMessage(`${singleMenuitem.title} added to shopping cart.` )
         } 

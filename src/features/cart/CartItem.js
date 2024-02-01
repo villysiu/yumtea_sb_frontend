@@ -7,7 +7,7 @@ import { USDollar } from "../../app/global"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { getMenuitemTitleById, getMilkTitleById, getMenuitemById } from "../menuitem/menuitemSlice"
+import { getMenuitemTitleById, getMilkById } from "../menuitem/menuitemSlice"
 import EditButton from "./EditButton"
 // import { Modal } from "react-bootstrap"
 // import CustomizeContainer from "../menuitem/CustomizeContainer"
@@ -16,10 +16,10 @@ const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
     console.log(cartItem)
     const [quantity, setQuantity] = useState(cartItem.quantity)
-    const [show, setShow] = useState(false)
-    const milkTitle = useSelector(state=>getMilkTitleById(state, cartItem.milk_id))
+
+    const milk = useSelector(state=>getMilkById(state, cartItem.milk_id))
     const menuitemTitle = useSelector(state=>getMenuitemTitleById(state, cartItem.menuitem_id))
-    const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
+   
 
     return(
         <>
@@ -40,14 +40,14 @@ const CartItem = ({cartId, cartItem}) => {
                             
                         </div>
                         <div className='cartitem_options'>
-                            {milkTitle}
+                            { milk.title}
                         </div>
                     </div>
                     <div className='cartitem_qty'>
                         <div className="cartitem_qty_input">
                             <MinusButton cartId={cartId} cartItem={cartItem} setQuantity={setQuantity} setError={setError}/>
                             <QtyInputBox itemId={cartItem.pk} qty={quantity} />
-                            <PlusButton cartitem={cartItem} setQuantity={setQuantity} 
+                            <PlusButton cartitem={cartItem} milk={milk} setQuantity={setQuantity} 
                             // inventory={menuItem.inventory}  
                             inventory={100}
                             setError={setError} />
