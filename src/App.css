@@ -558,6 +558,19 @@
   border-right: #937d36 1px solid;
   color: black;
 }
+.customize_milk{
+  height: 4rem;
+  position: relative;
+}
+.customize_milk_title {
+  position: absolute;
+  z-index: 100;
+  left: 1rem;
+  top: -0.7rem;
+  width: 8rem;
+  background-color: white;
+  text-align: center;
+}
 .singlewine_desc_wrapper {
   padding-left: var(--single_wine_img_width);
   padding-right: 1rem;

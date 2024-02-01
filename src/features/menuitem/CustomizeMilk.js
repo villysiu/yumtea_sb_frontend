@@ -1,5 +1,5 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
-import { Clock } from "react-bootstrap-icons"
+import { Clock, CupStraw } from "react-bootstrap-icons"
 import { Form } from "react-bootstrap"
 import { useSelector } from "react-redux"
 
@@ -16,10 +16,10 @@ const CustomizeMilk = ({milk, setMilk}) =>{
         return null
     return (
         <InputGroup className='customize_milk'>
-        
-            <InputGroup.Text id="basic-addon1">
-                <Clock />
-            </InputGroup.Text>
+            <span className="customize_milk_title">Milk Alternative</span>
+            {/* <InputGroup.Text id="basic-addon1">
+                <CupStraw />
+            </InputGroup.Text> */}
             <Form.Select className='customize_milk_select'
             onChange={handleChange}
             defaultValue={milk}
