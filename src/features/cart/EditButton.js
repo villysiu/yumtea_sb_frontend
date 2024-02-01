@@ -6,26 +6,27 @@ import CustomizeList from "../menuitem/CustomizeList"
 import { getMenuitemById } from "../menuitem/menuitemSlice"
 import { updateCustomization } from "./cartSlice"
 import { updateCartItem } from "./cartSlice"
-const EditButton = ({cartitem}) =>{
+const EditButton = ({cartId, cartItem}) =>{
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
-    const menuitem = useSelector(state=>getMenuitemById(state, cartitem.menuitem_id))
+    const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
     const current_user = useSelector(state => {
         return state.user.current_user
     })
-    const [milk, setMilk] = useState(cartitem.milk_id)
+    const [milk, setMilk] = useState(cartItem.milk_id)
 
     const handleClick = () =>{
         
         if(current_user.username === null){
-            dispatch(updateCustomization({'menuitemId':cartitem.menuitem_id, 
-                                'prevMilkId': cartitem.milk_id, 'updatedMilkId': milk }))
+            // dispatch(updateCustomization({'menuitemId':cartItem.menuitem_id, 
+            //                     'prevMilkId': cartItem.milk_id, 'updatedMilkId': milk }))
+            dispatch(updateCustomization({'cartId': cartId, 'updatedMilkId': milk} ))
             setShow(false)
         }
         else {
             // {cartitemId: 33, formData: {'quantity': item.quantity}}
             dispatch(updateCartItem(
-                {cartitemId: cartitem.pk, formData: {'milk_pk': milk}}
+                {cartitemId: cartItem.pk, formData: {'milk_pk': milk}}
             ))
         }
 

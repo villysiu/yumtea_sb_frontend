@@ -12,7 +12,7 @@ import EditButton from "./EditButton"
 // import { Modal } from "react-bootstrap"
 // import CustomizeContainer from "../menuitem/CustomizeContainer"
 
-const CartItem = ({cartItem}) => {
+const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
     console.log(cartItem)
     const [quantity, setQuantity] = useState(cartItem.quantity)
@@ -40,7 +40,7 @@ const CartItem = ({cartItem}) => {
                     </div>
                     <div className='cartitem_qty'>
                         <div className="cartitem_qty_input">
-                            <MinusButton cartitem={cartItem} setQuantity={setQuantity} setError={setError}/>
+                            <MinusButton cartId={cartId} cartItem={cartItem} setQuantity={setQuantity} setError={setError}/>
                             <QtyInputBox itemId={cartItem.pk} qty={quantity} />
                             <PlusButton cartitem={cartItem} setQuantity={setQuantity} 
                             // inventory={menuItem.inventory}  
@@ -60,10 +60,10 @@ const CartItem = ({cartItem}) => {
                             </div>
                         } */}
                         <div className='cartitem_other_width'>
-                            <EditButton cartitem={cartItem} />
+                            <EditButton cartId={cartId} cartItem={cartItem} />
                         </div>
                         <div className='cartitem_other_width'>
-                            <RemoveButton cartitem={cartItem} />
+                            <RemoveButton cartId={cartId} cartItem={cartItem} />
                         </div>
                     </div>
                     <div className='cartitem_price'>                       

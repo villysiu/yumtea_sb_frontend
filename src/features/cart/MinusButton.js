@@ -3,22 +3,22 @@ import { useDispatch, useSelector } from "react-redux"
 import { decrement } from "./cartSlice"
 import { useEffect } from "react"
 import { updateCartItem } from "./cartSlice"
-const MinusButton = ({cartitem, setQuantity, setError})=>{
+const MinusButton = ({cartId, cartItem, setQuantity, setError})=>{
     const dispatch = useDispatch()
     const current_user = useSelector(state => {
         return state.user.current_user
     })
     const handleClick = () => {
         if(current_user.username === null){
-            dispatch(decrement({'menuitemId':cartitem.menuitem_id, 'milkId': cartitem.milk_id }))
-           
+            // dispatch(decrement({'menuitemId':cartItem.menuitem_id, 'milkId': cartItem.milk_id }))
+           dispatch(decrement(cartId))
             
         }else{
             // dispatch()
             console.log("dedect item from api, ")
             console.log('in minus')
-            console.log(cartitem.quantity)
-            dispatch(updateCartItem({'cartitemId': cartitem.pk, formData: {'quantity': cartitem.quantity-1}}))
+            console.log(cartItem.quantity)
+            dispatch(updateCartItem({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity-1}}))
         }
         setQuantity(q=>q-1)
     }
@@ -34,7 +34,7 @@ const MinusButton = ({cartitem, setQuantity, setError})=>{
         }
     }, [setError]);
 
-    if(cartitem.quantity===1)
+    if(cartItem.quantity===1)
         return(
             <span  onClick={handleDisabledClick}>
                 <Button className="qty_minus rounded-start" variant="light"
