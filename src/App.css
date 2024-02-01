@@ -113,8 +113,10 @@
   justify-content: center;
   z-index: 1040;
     position: fixed;
+    left:0;
     top: 0;
     padding: 0.5rem;
+
 
 }
 .header_container {
@@ -165,7 +167,7 @@
 #navbarScrollingDropdown::after{
   display: none; 
 }
-.header_dropdown_bar_button, .header_dropdown_x_button {
+.header_dropdown_bar_button, .header_dropdown_x_button, .header_icon {
   color: black;
   font-size: 2rem;
   
@@ -610,6 +612,10 @@
   .singlewine_title_img_sm_wrapper {
     width: 100%;
   }
+  .singlewine_props_wrapper{
+    padding-left: 1rem !important;
+    padding-right: 1rem;
+  }
 
 }
 .winelist_wine_wrapper{
@@ -628,12 +634,15 @@
 .hello_user, .header_category {
   position: relative;
   color: black;
+  display: flex;
+  align-items: center;
 }
 .header_category_dropdown_wrapper {
   position:absolute;
   width: 150px;
   left: 0;
   z-index: 210;
+  top: 1.3rem;
 }
 .header_category_dropdown {
   width: 100%;
@@ -648,6 +657,7 @@
   width: 150px;
   right: 0;
   z-index: 210;
+  top: 1.5rem;
 
 }
 

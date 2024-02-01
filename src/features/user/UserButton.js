@@ -40,8 +40,8 @@ const UserButton = () =>{
                 onMouseEnter={()=>setShow(true)}
                 onMouseLeave={()=>setShow(false)}
             >
-                Hello {current_user.username}
-                <PersonFill className='circle_button' />
+                <div className="d-none d-sm-block pe-2">Hello {current_user.username}</div>
+                <PersonFill className='header_icon' />
                 {
                     show && <UserDropdown />
                 }
@@ -56,7 +56,7 @@ const UserButton = () =>{
             {
                 current_user.username===null ? 
                     <Link to={`${homeLink}/user/signin`}>
-                        <PersonCircle className="circle_button"/> 
+                        <PersonCircle className="header_icon"/> 
                     </Link>
                     :
                     <UserButtonHelper />       

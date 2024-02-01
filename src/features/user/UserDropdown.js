@@ -6,7 +6,7 @@ import ReservationButton from "../reservation/ReservationButton"
 const UserDropdown = () =>{
     return(
         <div className='user_dropdown_wrapper'>
-            <div className='user_dropdown p-3'>
+            <div className='user_dropdown mt-3 p-3'>
                 <AccountButton />
                 <OrdersButton />
                 <ReservationButton />

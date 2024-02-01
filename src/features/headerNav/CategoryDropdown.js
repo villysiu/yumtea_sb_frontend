@@ -16,12 +16,20 @@ const CategoryDropdown = () =>{
 
 
     const [show, setShow] = useState(false)
-    const handleMouseenter = e =>{
-        setShow(true)
-    }
-    const handleMouseleave = e =>{
-        setShow(false)
-    }
+    
+    useEffect(() => {
+        const handleClick = (e) => {
+            if(e.target.tagName.toLowerCase() === 'a')
+                setShow(false)
+        };
+        window.addEventListener('click', handleClick);
+
+        return () => {
+            window.removeEventListener('click', handleClick);
+        };
+    }, []);
+
+
 
     const CategoryList = () =>{
         return (
@@ -54,18 +62,18 @@ const CategoryDropdown = () =>{
         <>
         {/* min-width: 992px */}
         <div className='d-none d-lg-block'>
-            <div onMouseEnter={handleMouseenter}
-                onMouseLeave={handleMouseleave}
+            <div onMouseEnter={()=>setShow(true)}
+                onMouseLeave={()=>setShow(false)}
                 className='collapsable_item_link header_text header_category'
             >
                 Drinks
             
             {show && 
-                    <div className='header_category_dropdown_wrapper'>
-                        <div className='header_category_dropdown mt-3 pt-3'>
-                            <CategoryList />
-                        </div>
+                <div className='header_category_dropdown_wrapper'>
+                    <div className='header_category_dropdown mt-3 pt-3'>
+                        <CategoryList />
                     </div>
+                </div>
             }
             </div>
         </div>
@@ -75,7 +83,7 @@ const CategoryDropdown = () =>{
             <div className='collapsable_item_link header_text' style={{textAlign: "center"}}>
                 Drinks
                 <div className='header_category_dropdown'>
-                <CategoryList />
+                    <CategoryList />
                 </div>
             </div>
         </div>
