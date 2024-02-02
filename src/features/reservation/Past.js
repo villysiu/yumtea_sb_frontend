@@ -18,7 +18,7 @@ const Past = () =>{
         return <Spinner />
 
     if(reservation_array.length===0)
-        return <div>No upcoming res at all, make one now</div>
+        return null
 
     return (
         <div className='past_reservation_container mt-5'>

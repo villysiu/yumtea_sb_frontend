@@ -5,7 +5,7 @@ import CartSummaryDetails from "../cart/CartSummaryDetails"
 import { useDispatch } from "react-redux"
 import { CheckoutCart } from "./orderSlice"
 
-const OrderSummary = ({subtotal}) =>{
+const OrderSummary = ({subtotal, tax}) =>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleClick = () =>{
@@ -22,7 +22,7 @@ const OrderSummary = ({subtotal}) =>{
     }
     return(
         <div className='cart_summary'>
-            <CartSummaryDetails subtotal={subtotal} />
+            <CartSummaryDetails subtotal={subtotal} tax={tax} />
             
             <div className="cart_summary_checkout mt-5">
                 <Button className='gold_button' onClick={handleClick}>Pay Now</Button>

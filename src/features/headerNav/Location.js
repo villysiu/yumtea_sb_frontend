@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
+import MakeReservationButton from "../reservation/MakeReservation"
 const Location = () =>{
     return(
         <div className="location_wrapper">
@@ -9,11 +10,7 @@ const Location = () =>{
             
                 <div className='location_title_container'>
                     <div className='location_title'><b>Little D Tasting Room </b></div>
-                    <div className='location_res_button'>
-                    <Link to={`${homeLink}/secure/reserve`}>
-                        <Button className="gold_button">Make reservation</Button>
-                    </Link>
-                    </div>
+                    <MakeReservationButton />
                 </div>
             </div>
             <div className="location_details_container">

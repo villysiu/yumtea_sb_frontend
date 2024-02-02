@@ -14,7 +14,7 @@ import EditButton from "./EditButton"
 import { Spinner } from "react-bootstrap"
 const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
-    console.log(cartItem)
+    console.log("in cartitem")
     const [quantity, setQuantity] = useState(cartItem.quantity)
 
     const milk = useSelector(state=>getMilkById(state, cartItem.milk_id))
@@ -44,7 +44,7 @@ const CartItem = ({cartId, cartItem}) => {
                             
                         </div>
                         <div className='cartitem_options'>
-                            { milk.title}
+                            { milk.id!==1 && milk.title}
                         </div>
                     </div>
                     <div className='cartitem_qty'>

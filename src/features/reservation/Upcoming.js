@@ -9,13 +9,20 @@ import { PeopleFill } from "react-bootstrap-icons"
 import DeleteReservationButton from "./DeleteReservationButton"
 import EditReservationButton from "./EditReservationButton"
 import { getUpcomingReservations } from "./reservationSlice"
+import ReservationButton from "./ReservationButton"
+import MakeReservationButton from "./MakeReservation"
 const Upcoming = () =>{
     const reservation_status = useSelector(state=>state.reservation.reservations.status)
     const reservation_array = useSelector(state=>getUpcomingReservations(state))
    
 
     if(reservation_array.length===0)
-        return <div>No upcoming res at all, make one now</div>
+        return (
+            <div className="no_reservation">
+                <div className="mb-3">No reservation yet.</div>
+                <MakeReservationButton />
+            </div>
+        )
 
     return (
         <div className='upcoming_reservation_container mt-5'>
@@ -42,10 +49,7 @@ const Upcoming = () =>{
                             <div className='upcoming_reservation_edit_button'>
                                 <EditReservationButton reservation={reservation} />
                                 <DeleteReservationButton pk={reservation.pk} />
-                      
                             </div>    
-                            
-                           
                         </div>
                     )
                 })

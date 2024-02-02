@@ -35,15 +35,15 @@ const Cart = () => {
         return <EmptyCart />
     }
     
-    let [itemCount, subtotal] = cart.cart_arr.reduce(
+    let [itemCount, subtotal, tax] = cart.cart_arr.reduce(
         (acumulator, currCartItem) => {
-            return [acumulator[0]+currCartItem.quantity, acumulator[1]+currCartItem.linetotal]
-        }, [0,0]
+            return [acumulator[0]+currCartItem.quantity, acumulator[1]+currCartItem.linetotal, acumulator[2]+currCartItem.tax]
+        }, [0,0,0]
     )
     
     return (
         <div className='cart_container'>
-            <CartSummary subtotal={subtotal} />
+            <CartSummary subtotal={subtotal} tax={tax}/>
         
             <div className='cart_cartitems'>
                 <div className="border border-bottom-0">

@@ -267,6 +267,7 @@ const cartSlice=createSlice({
                 console.log("item in cart")
                 cartitem.quantity++
                 cartitem.linetotal += cartitem.unit_price
+                cartitem.tax = action.payload.tax
             }
             
         })
@@ -297,6 +298,7 @@ const cartSlice=createSlice({
             //     "quantity": 1,
             //     "linetotal": 5,
             //     "unit_price": 5,
+            //      "tax": 0.5,
             //     "milk_id": 3
             // }
             state.cart.status = 'succeeded'
@@ -305,6 +307,7 @@ const cartSlice=createSlice({
              cartitem.quantity = action.payload.quantity
              cartitem.unit_price = action.payload.unit_price
              cartitem.linetotal = action.payload.unit_price * action.payload.quantity
+             cartitem.tax = action.payload.tax
              cartitem.milk_id = action.payload.milk_id
             
 

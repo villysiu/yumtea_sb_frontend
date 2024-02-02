@@ -6,16 +6,10 @@ const Checkout = () => {
     // prohibited direct access this page
     if(!state ){
         return <Navigate to="../../cart" replace={true} />}
+        
     return (
         <div>
-            <div>
-                drinks will be ready in 10 minutes. <br/>
-                Table Service <br />
-                Pick up at counter when call out number <br/>
-
-            </div>
-
-            <OrderSummary subtotal={state.subtotal} />
+            <OrderSummary subtotal={state.subtotal} tax={state.tax} />
         </div>
     )
 }

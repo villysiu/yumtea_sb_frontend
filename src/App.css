@@ -266,8 +266,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60vh;
-  justify-content: center;
+  padding-top: 6rem;
 }
 .cart_summary {
   /* width: ?calc( var(--body_width) * 0.3 - 2rem); */
@@ -855,7 +854,7 @@
   padding-right: 1rem;
   padding-top: 1rem;
 }
-.location_res_button{
+.make_reservation_button{
   width: 16rem;
   /* font-size: 10px; */
 }
@@ -941,7 +940,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: row;
 }
-
+.no_reservation {
+  padding-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .past_reservation_title, .upcoming_reservation_title,
 .reservation_success_title {
   font-size: larger;
