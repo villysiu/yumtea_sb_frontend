@@ -11,7 +11,7 @@ import { getMenuitemTitleById, getMilkById } from "../menuitem/menuitemSlice"
 import EditButton from "./EditButton"
 // import { Modal } from "react-bootstrap"
 // import CustomizeContainer from "../menuitem/CustomizeContainer"
-
+import { Spinner } from "react-bootstrap"
 const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
     console.log(cartItem)
@@ -19,12 +19,16 @@ const CartItem = ({cartId, cartItem}) => {
 
     const milk = useSelector(state=>getMilkById(state, cartItem.milk_id))
     const menuitemTitle = useSelector(state=>getMenuitemTitleById(state, cartItem.menuitem_id))
-   
-
+    const cart = useSelector(state => state.cart.cart)
+    // if(cart.status === 'loading' && cart.affected === cartItem.pk)
+    //     return <div className="borderSecondary border-bottom pb-5 cartitem_container">loading</div>
     return(
         <>
             
             <div className="borderSecondary border-bottom pb-5 cartitem_container">
+                {cart.status === 'loading' && cart.affected === cartItem.pk &&
+                    <div className="white_film"><Spinner /></div>
+                }
                 <div className="cartitem_img_wrapper">
                     <Link to={`${homeLink}/menuitems/${cartItem.menuitem_id}`}>
                         <img src={`${homeLink}/IMG_0210.png`} className="cartitem_img" alt={menuitemTitle}></img>  

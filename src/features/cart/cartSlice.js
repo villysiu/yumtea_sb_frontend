@@ -100,7 +100,7 @@ export const addItemToCart = createAsyncThunk(
 )
 export const updateCartItem = createAsyncThunk(
     'cart/updateCartItem',
-    async (item, thunkAPI) => {
+    async (item) => {
         console.log(item)
         // {cartitemId: 33, formData: {'quantity': item.quantity, 'milk_pk': milk}}
         try {
@@ -119,7 +119,8 @@ export const updateCartItem = createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            console.log(data)
+            // console.log(data)
+
             return data
         } 
         catch(error){
@@ -159,6 +160,7 @@ const cartSlice=createSlice({
             cart_arr: [],
             temp_cart_arr:[],
             status: 'idle',
+            affected: null,
         },
        
     },
@@ -248,6 +250,7 @@ const cartSlice=createSlice({
         })
         .addCase(addItemToCart.pending, (state, action) => {
             state.cart.status = 'loading'
+           
         })
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
@@ -283,6 +286,8 @@ const cartSlice=createSlice({
         })
         .addCase(updateCartItem.pending, (state, action) => {
             state.cart.status = 'loading'
+            console.log(action)
+            state.cart.affected = action.meta.arg.cartitemId
         })
         .addCase(updateCartItem.fulfilled, (state, action) => {
             // {

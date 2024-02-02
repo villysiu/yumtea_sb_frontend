@@ -7,8 +7,6 @@ const MenuitemList = () =>{
     console.log("in menuitem list")
     
     let menuitems = useSelector(state => state.menuitem.menuitems)
-    console.log(menuitems)
-    
     return (
         <Container>
             <Row>

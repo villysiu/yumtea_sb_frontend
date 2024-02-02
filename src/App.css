@@ -85,7 +85,18 @@
 
 }
 
+.full_spinner {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:black;
+  z-index: 1041;
 
+  
+}
 .App-header {
   background-color: #282c34;
   min-height: 20vh;
@@ -243,7 +254,7 @@
   width: 100%;
 }
 .gold_button.short {
-  width: unset;
+  width: 130px;
 }
 .cart_container {
   width: var(--body_width);
@@ -306,6 +317,18 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  position: relative;
+}
+.white_film {
+  position: absolute;
+  background-color: rgb(249 249 249);
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .cartitem_img_wrapper{
   width: var(--cartitem_img_width);

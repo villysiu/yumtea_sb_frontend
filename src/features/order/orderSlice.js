@@ -97,7 +97,7 @@ const orderSlice=createSlice({
             
             console.log(action.payload)
             state.checkout.status = 'succeeded'
-            state.order.orders_arr = [...state.order.orders_arr, action.payload]
+            state.order.orders_arr = [ action.payload, ...state.order.orders_arr]
         })
         .addCase(CheckoutCart.rejected, (state, action) => {
             state.checkout.status = 'failed'

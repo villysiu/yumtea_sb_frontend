@@ -1,9 +1,9 @@
 import { homeLink, USDollar } from "../../app/global"
 
 const CartSummaryDetails = ({subtotal}) =>{
-    const shipping = 10
+    const gratuity = subtotal * 0.15
     const tax = subtotal *0.1
-    const total = subtotal + tax + shipping
+    const total = subtotal + tax + gratuity
     return (
         <>
         <div className='mb-3 solid_link'>Order Summary</div>
@@ -12,11 +12,11 @@ const CartSummaryDetails = ({subtotal}) =>{
                 <div>{USDollar.format(subtotal)}</div>
             </div>
             <div className="cart_summary_line">
-                <div>Estimated Shipping </div>
-                <div>{USDollar.format(shipping)}</div>
+                <div>Gratuity </div>
+                <div>{USDollar.format(gratuity)}</div>
             </div>
             <div className="cart_summary_line">
-                <div>Estimated Tax </div>
+                <div>Tax</div>
                 <div>{USDollar.format(tax)}</div>
                 </div>
             <hr/>

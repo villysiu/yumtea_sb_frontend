@@ -31,7 +31,6 @@ export const fetchCategories=createAsyncThunk(
 export const fetchMenuitems=createAsyncThunk(
     'menuitem/fetchMenuitems',
     async () => {
-        console.log("feting menuitems")
         try {
             const response=await fetch(`${apiLink}/api/menuitems`, {
                 method: "GET",

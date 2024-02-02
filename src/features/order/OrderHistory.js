@@ -4,6 +4,7 @@ import { fetchCurrentUserOrders } from "./orderSlice"
 import SingleOrder from "./SingleOrder"
 import OrderFilter from "./OrderFilter"
 import { lastthirtydaysOrders, currentyearOrders, lastyearOrders } from "./orderSlice"
+import FullSpinner from "../headerNav/FullSpinner"
 
 const OrderHistory = () =>{
 
@@ -32,7 +33,7 @@ const OrderHistory = () =>{
     }, [filter])
    
     if(order.status === 'loading' )
-        return <div>Loading</div>
+        return <FullSpinner />
     if(order.orders_arr.length === 0)
         return <div>No order</div>
 

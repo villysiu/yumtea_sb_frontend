@@ -12,12 +12,6 @@ import { batchAddItems } from './features/cart/cartSlice';
 import Header2 from './features/headerNav/Header2';
 function App() {
   console.log("in APP")
-    
-  
-    // const cart = useSelector(state => state.cart.cart)
-    
-    
-    
 
   return (
    

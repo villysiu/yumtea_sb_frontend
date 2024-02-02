@@ -28,8 +28,8 @@ const Cart = () => {
     }, [dispatch, current_user.username, cart.cart_arr])
 
     // console.log(cart_arr)
-    if(cart.status === 'loading' || current_user.status === 'loading')
-        return <div>Loading</div>
+    // if(cart.status === 'loading' || current_user.status === 'loading')
+    //     return <div>Loading</div>
 
     if(cart.cart_arr.length === 0){
         return <EmptyCart />

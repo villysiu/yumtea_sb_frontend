@@ -2,14 +2,14 @@ import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
 import { getMilkById } from "./menuitemSlice"
-
+import {Spinner} from "react-bootstrap"
 const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
     const dispatch = useDispatch()
     const milk = useSelector(state => getMilkById(state, milkId))
     const current_user = useSelector(state => {
         return state.user.current_user
     })
-    
+    const cart_status = useSelector(state => state.cart.cart.status)
     const handleClick = (e) =>{
         console.log("purchase button ")
    
@@ -33,9 +33,13 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
             })  
         }     
     }
+    if(cart_status === 'loading')
+        return  <div>
+            <Button className='gold_button short' disabled><Spinner animation="border" size="sm" /></Button>
+            </div>
     return(
         
-        <div style={{"position": "relative"}}>
+        <div>
             <Button className='gold_button short' onClick={handleClick}>Add to Cart</Button>
         </div>
     )

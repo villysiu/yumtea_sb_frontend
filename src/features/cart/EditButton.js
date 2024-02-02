@@ -30,6 +30,7 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
             dispatch(updateCartItem(
                 {cartitemId: cartItem.pk, formData: {'milk_pk': milk}}
             ))
+            setShow(false)
         }
 
         
