@@ -45,7 +45,7 @@ const SingleOrder = ({order, show, setShow}) =>{
                         <div className='orderhistory_order_col'>Order #{order.pk}</div>
                     </div>
                     <div className='orderhistory_order_header_c'>
-                        <div className='orderhistory_order_col'>{USDollar.format(order.total)}</div>
+                        <div className='orderhistory_order_col'>{USDollar.format(order.subtotal+order.tax)}</div>
                         <div className='orderhistory_order_col'>{order.order_status}</div>
                     </div>
                 </div>
