@@ -270,22 +270,26 @@ const cartSlice=createSlice({
             state.cart.status = 'succeeded'
             console.log('ITEM ADDED TO API')
             console.log(action.payload)
-            console.log(typeof action.payload.linetotal)
+            
             let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.pk === action.payload.pk)
             
             if(cartitem === undefined){
                 console.log("item not in cart")
                 state.cart.cart_arr.push(action.payload)
+
                 state.cart.subtotal += action.payload.linetotal
                 state.cart.tax += action.payload.tax
+                state.cart.itemCount += action.payload.quantity
             }
             else{
                 console.log("item in cart")
-                cartitem.quantity++
-                cartitem.linetotal += cartitem.unit_price
+                state.cart.subtotal = state.cart.subtotal - cartitem.linetotal + action.payload.linetotal
+                state.cart.tax = state.cart.tax - cartitem.tax + action.payload.tax
+                state.cart.itemCount = state.cart.itemCount - cartitem.quantity + action.payload.quantity
+
+                cartitem.quantity = action.payload.quantity
+                cartitem.linetotal = action.payload.linetotal
                 cartitem.tax = action.payload.tax
-                state.cart.subtotal += action.payload.unit_price
-                state.cart.tax += action.payload.tax
             }
             
         })
@@ -298,9 +302,13 @@ const cartSlice=createSlice({
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
             console.log(action.payload)
+            let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.pk === action.payload.cartitemId)
+            state.cart.subtotal -= cartitem.linetotal
+            state.cart.tax -= cartitem.tax
+            state.cart.itemCount -= cartitem.quantity
+
             state.cart.cart_arr = state.cart.cart_arr.filter(cartitem=>cartitem.pk !== action.payload.cartitemId)
-            state.cart.subtotal -= action.payload.linetotal
-            state.cart.tax -= action.payload.tax
+            
         })
         .addCase(removeItemFromCart.rejected, (state, action) => {
             state.cart.status = 'failed'
@@ -322,18 +330,17 @@ const cartSlice=createSlice({
             //     "milk_id": 3
             // }
             state.cart.status = 'succeeded'
-            // state.cart.message = 
+
             let cartitem = state.cart.cart_arr.find(cartitem =>cartitem.pk === action.payload.pk)
+            state.cart.subtotal = state.cart.subtotal - cartitem.linetotal + action.payload.linetotal
+            state.cart.tax = state.cart.tax - cartitem.tax + action.payload.tax
+            state.cart.itemCount = state.cart.itemCount - cartitem.quantity + action.payload.quantity
+
             cartitem.quantity = action.payload.quantity
-            cartitem.unit_price = action.payload.unit_price
-            cartitem.linetotal = action.payload.unit_price * action.payload.quantity
+            cartitem.linetotal = action.payload.linetotal
             cartitem.tax = action.payload.tax
+            cartitem.unit_price = action.payload.unit_price
             cartitem.milk_id = action.payload.milk_id
-
-            state.cart.subtotal += action.payload.linetotal
-            state.cart.tax += action.payload.tax
-            
-
         })
         .addCase(updateCartItem.rejected, (state, action) => {
             state.cart.status = 'failed'

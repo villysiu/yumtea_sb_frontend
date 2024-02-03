@@ -9,7 +9,7 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
     const current_user = useSelector(state => {
         return state.user.current_user
     })
-    const cart_status = useSelector(state => state.cart.cart.status)
+    const cart = useSelector(state => state.cart.cart)
     const handleClick = (e) =>{
         console.log("purchase button ")
    
@@ -19,6 +19,7 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
             setMessage(`${singleMenuitem.title} added to shopping cart.` )
         } 
         else{
+            
             const data = {'menuitem_pk': singleMenuitem.pk, 'milk_pk': milkId}
             console.log(data)
             dispatch(addItemToCart(data))
@@ -33,7 +34,7 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
             })  
         }     
     }
-    if(cart_status === 'loading')
+    if(cart.status === 'loading')
         return  <div>
             <Button className='gold_button short' disabled><Spinner animation="border" size="sm" /></Button>
             </div>
