@@ -1,8 +1,6 @@
 import { USDollar } from "../../app/global"
-import { homeLink } from "../../app/global"
-import { Link } from "react-router-dom"
 import { useRef } from "react"
-
+import SingleOrderItem from "./SingleOrderItem"
 const SingleOrder = ({order, show, setShow}) =>{
     const ref=useRef()
     const handleOpen = e =>{
@@ -12,29 +10,7 @@ const SingleOrder = ({order, show, setShow}) =>{
         setShow(null)
     }
 
-    const SingleOrderItem = ({item}) =>{
-        
-        return(
-            <div className='singleorder_item'>
-                <div className='orderhistory_order_img_container'>
-                    <Link to={`${homeLink}/wines/${item.menuitem}`} className="solid_link">
-                        <img src={`${homeLink}/IMG_0210.png`} className="orderhistory_order_img" alt="{item.title}"></img>
-                    </Link>
-            
-                    <div className="qty_circle">{item.quantity}</div>
-                </div>
-                <div style={{width: '100%'}}>
-                    <Link to={`${homeLink}/wines/${item.menuitem}`} className="solid_link">
-                        <b>{item.title}</b>
-                    </Link>
-                    <div>Customize: {item.milk}</div>
-                    <div>Price: {USDollar.format(item.unit_price)}</div>
-                    
-                </div>
-                <div style={{textAlign: 'right'}}><b>{USDollar.format(item.line_total)}</b></div>
-            </div>
-        )
-    }
+    
     return(
         <>
         <div className='orderhistory_order' ref={ref} id={order.pk} >
@@ -45,7 +21,7 @@ const SingleOrder = ({order, show, setShow}) =>{
                         <div className='orderhistory_order_col'>Order #{order.pk}</div>
                     </div>
                     <div className='orderhistory_order_header_c'>
-                        <div className='orderhistory_order_col'>{USDollar.format(order.subtotal+order.tax)}</div>
+                        <div className='orderhistory_order_col'>{USDollar.format(order.total)}</div>
                         <div className='orderhistory_order_col'>{order.order_status}</div>
                     </div>
                 </div>
@@ -70,6 +46,21 @@ const SingleOrder = ({order, show, setShow}) =>{
                         return (<SingleOrderItem key={item.pk} item={item}/>)
                     })
                 }
+                <div className="orderhistory_order_tip_wrapper" >
+                    <div className="orderhistory_order_tip">
+                        <div >Tip: </div>
+                        <div><b>{USDollar.format(order.tip)}</b></div>
+                    </div>
+                    <div className="orderhistory_order_tip">
+                        <div >Tax: </div>
+                        <div><b>{USDollar.format(order.tax)}</b></div>
+                    </div>
+                    <div className="orderhistory_order_tip">
+                        <div >Total: </div>
+                        <div><b>{USDollar.format(order.total)}</b></div>
+                    </div>
+               
+                </div>
             </div>
         }
         </div>

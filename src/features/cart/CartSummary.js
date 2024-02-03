@@ -1,15 +1,16 @@
 import { Button } from "react-bootstrap"
-import { homeLink, USDollar } from "../../app/global"
+import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
 import CartSummaryDetails from "./CartSummaryDetails"
-const CartSummary = ({subtotal, tax}) =>{
+
+const CartSummary = () =>{
     
     return(
         <div className='cart_summary'>
-            <CartSummaryDetails subtotal={subtotal} tax={tax} />
+            <CartSummaryDetails/>
             
             <div className="cart_summary_checkout mt-5">
-                <Link to={`${homeLink}/secure/checkout`} state={{ 'subtotal': subtotal, 'tax': tax}}>
+                <Link to={`${homeLink}/secure/checkout`} state={{ 'from': 'cart_summary'}}>
                     <Button className='gold_button'>Checkout</Button>
                 </Link>
             </div>
