@@ -226,7 +226,10 @@ const cartSlice=createSlice({
             // state.cart.temp_cart_arr = state.cart.temp_cart_arr
             //     .filter(item=> !(item.menuitem_id === action.payload.menuitemId 
             //         && item.milk_id === action.payload.milkId))
-            state.cart.temp_cart_arr.splice(action.payload, 1)
+            state.cart.temp_cart_arr.splice(action.payload.id, 1)
+            state.cart.quantity -= action.payload.quantity
+            state.cart.subtotal -= action.payload.linetotal
+            state.cart.tax = state.cart.subtotal * 0.1
             state.cart.cart_arr = state.cart.temp_cart_arr
         },
         emptyTempCart(state,action){
