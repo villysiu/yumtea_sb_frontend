@@ -7,7 +7,7 @@ import { USDollar } from "../../app/global"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { getMenuitemTitleById, getMilkById } from "../menuitem/menuitemSlice"
+import { getMenuitemById, getMilkById } from "../menuitem/menuitemSlice"
 import EditButton from "./EditButton"
 // import { Modal } from "react-bootstrap"
 // import CustomizeContainer from "../menuitem/CustomizeContainer"
@@ -15,10 +15,11 @@ import { Spinner } from "react-bootstrap"
 const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
     console.log("in cartitem")
-    const [quantity, setQuantity] = useState(cartItem.quantity)
+    console.log(cartItem)
+
 
     const milk = useSelector(state=>getMilkById(state, cartItem.milk_id))
-    const menuitemTitle = useSelector(state=>getMenuitemTitleById(state, cartItem.menuitem_id))
+    const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
     const cart = useSelector(state => state.cart.cart)
     // if(cart.status === 'loading' && cart.affected === cartItem.pk)
     //     return <div className="borderSecondary border-bottom pb-5 cartitem_container">loading</div>
@@ -31,7 +32,7 @@ const CartItem = ({cartId, cartItem}) => {
                 }
                 <div className="cartitem_img_wrapper">
                     <Link to={`${homeLink}/menuitems/${cartItem.menuitem_id}`}>
-                        <img src={`${homeLink}/IMG_0210.png`} className="cartitem_img" alt={menuitemTitle}></img>  
+                        <img src={`${homeLink}/IMG_0210.png`} className="cartitem_img" alt={menuitem.title}></img>  
                     </Link>
                 </div>
                 
@@ -39,7 +40,7 @@ const CartItem = ({cartId, cartItem}) => {
                     <div className='cartitem_title_options'>
                         <div className='cartitem_title'>
                             <Link to={`${homeLink}/menuitems/${cartItem.menuitem_id}`} className="solid_link">
-                                <b>{menuitemTitle}</b>
+                                <b>{menuitem.title}</b>
                             </Link>
                             
                         </div>
@@ -49,9 +50,10 @@ const CartItem = ({cartId, cartItem}) => {
                     </div>
                     <div className='cartitem_qty'>
                         <div className="cartitem_qty_input">
-                            <MinusButton cartId={cartId} cartItem={cartItem} setQuantity={setQuantity} setError={setError}/>
-                            <QtyInputBox itemId={cartItem.pk} qty={quantity} />
-                            <PlusButton cartitem={cartItem} milk={milk} setQuantity={setQuantity} 
+                            <MinusButton cartId={cartId} cartItem={cartItem} setError={setError}/>
+                            <QtyInputBox cartItem={cartItem} />
+                           
+                            <PlusButton cartId={cartId} cartItem={cartItem} 
                             // inventory={menuItem.inventory}  
                             inventory={100}
                             setError={setError} />
@@ -72,7 +74,7 @@ const CartItem = ({cartId, cartItem}) => {
                             <EditButton cartId={cartId} cartItem={cartItem} prevMilk={milk} />
                         </div>
                         <div className='cartitem_other_width'>
-                            <RemoveButton cartId={cartId} cartItem={cartItem} title={menuitemTitle} />
+                            <RemoveButton cartId={cartId} cartItem={cartItem} title={menuitem.title} />
                         </div>
                     </div>
                     <div className='cartitem_price'>                       

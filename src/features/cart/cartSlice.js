@@ -174,67 +174,94 @@ const cartSlice=createSlice({
 // {'singleMenuitem':singleMenuitem, 'milk': milk }
             
             let cartitem = state.cart.temp_cart_arr
-            .find(item=> item.menuitem_id === action.payload.singleMenuitem.menuitem_id 
+                .find(item=> item.menuitem_id === action.payload.singleMenuitem.pk 
                         && item.milk_id === action.payload.milk.id)
-            
+            let unit_price = action.payload.singleMenuitem.price +action.payload.milk.price
+
+            state.cart.subtotal += unit_price
+            state.cart.tax += 0.1* unit_price
+            state.cart.itemCount += 1
+
             if(cartitem === undefined){
                 // console.log("item not in cart")
+                
                 state.cart.temp_cart_arr.push(
                     {
                         "menuitem_id": action.payload.singleMenuitem.pk, 
                         "quantity": 1,
-                        "linetotal": action.payload.singleMenuitem.price +action.payload.milk.price,
-                        "unit_price": action.payload.singleMenuitem.price +action.payload.milk.price,
+                        "linetotal": unit_price,
+                        "unit_price": unit_price,
                         "milk_id": action.payload.milk.id,
                     }
                 )
             }
             else{
-                // console.log("item in cart")
+                console.log("item in cart")
+                console.log(cartitem)
                 cartitem.quantity++
-                cartitem.linetotal += cartitem.unit_price
+                cartitem.linetotal += unit_price
+     
             }
             state.cart.cart_arr = state.cart.temp_cart_arr
 
-            },
-            decrement(state, action) {
-                console.log(action.payload)
-                // {'menuitemId':cartitem.menuitem_id, 'milkId': cartitem.milk_id }
-                // let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
-                //     && item.milk_id === action.payload.milkId)
-                let cartitem = state.cart.temp_cart_arr[action.payload]
-                // cartitem existed since it is from shopping cart 
-                cartitem.quantity--
-                cartitem.linetotal -= cartitem.unit_price
+        },
+        
+        updateQty(state, action) {
+            console.log(action.payload)
+            // cartitem existed since it is from shopping cart 
+            let cartitem = state.cart.temp_cart_arr[action.payload.id]
+            
+            state.cart.subtotal += action.payload.unit_price
+            state.cart.tax += 0.1* action.payload.unit_price
+            state.cart.itemCount += action.payload.unit_price>0 ? 1 : -1
 
-                state.cart.cart_arr = state.cart.temp_cart_arr
-            },
+            cartitem.quantity += action.payload.unit_price>0 ? 1 : -1
+            cartitem.linetotal += action.payload.unit_price
 
-            removeItem(state, action){
-                console.log(action.payload)
-                // {menuitemId: 2, milkId: 2}
-                // state.cart.temp_cart_arr = state.cart.temp_cart_arr
-                //     .filter(item=> !(item.menuitem_id === action.payload.menuitemId 
-                //         && item.milk_id === action.payload.milkId))
-                state.cart.temp_cart_arr.splice(action.payload, 1)
-                state.cart.cart_arr = state.cart.temp_cart_arr
-            },
-            emptyTempCart(state,action){
-                state.cart.temp_cart_arr = []
-            },
-            updateCustomization(state, action){
-                console.log(action.payload)
-                // {'cartId': cartId, 'prevMilk': prevMilk, 'updatedMilk': updatedMilk}
-                // let cartitem = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
-                //     && item.milk_id === action.payload.prevMilkId)
-                let cartitem = state.cart.temp_cart_arr[action.payload.cartId]
+            state.cart.cart_arr = state.cart.temp_cart_arr
+        },
+        removeItem(state, action){
+            console.log(action.payload)
+            // {menuitemId: 2, milkId: 2}
+            // state.cart.temp_cart_arr = state.cart.temp_cart_arr
+            //     .filter(item=> !(item.menuitem_id === action.payload.menuitemId 
+            //         && item.milk_id === action.payload.milkId))
+            state.cart.temp_cart_arr.splice(action.payload, 1)
+            state.cart.cart_arr = state.cart.temp_cart_arr
+        },
+        emptyTempCart(state,action){
+            state.cart.temp_cart_arr = []
+        },
+        updateCustomization(state, action){
+            console.log(action.payload)
+            // {'cartId': cartId, 'menuitemId': menuitemId, 'prevMilk': prevMilk, 'updatedMilk': updatedMilk}
+            let existed_item = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
+                && item.milk_id === action.payload.updatedMilk.id)
+            console.log(existed_item)
+            
+            let cartitem = state.cart.temp_cart_arr[action.payload.cartId]
+            console.log(cartitem)
+
+            state.cart.subtotal = state.cart.subtotal - cartitem.quantity * action.payload.prevMilk.price + cartitem.quantity * action.payload.updatedMilk.price
+            state.cart.tax = 0.1* state.cart.subtotal
+
+            if(existed_item === undefined){
                 cartitem.milk_id = action.payload.updatedMilk.id
                 cartitem.unit_price = cartitem.unit_price - action.payload.prevMilk.price + action.payload.updatedMilk.price
                 cartitem.linetotal = cartitem.unit_price * cartitem.quantity
-
-                state.cart.cart_arr = state.cart.temp_cart_arr
-
             }
+            else{
+
+                existed_item.quantity += cartitem.quantity
+                existed_item.linetotal += cartitem.quantity * existed_item.unit_price
+                state.cart.temp_cart_arr.splice(action.payload.cartId, 1)
+            }
+            
+            
+
+            state.cart.cart_arr = state.cart.temp_cart_arr
+
+        }
 
 
     },
@@ -367,5 +394,5 @@ const cartSlice=createSlice({
         })
     }
 })
-export const { increment, decrement, removeItem, emptyTempCart, updateCustomization } = cartSlice.actions
+export const { increment, decrement, updateQty, removeItem, emptyTempCart, updateCustomization } = cartSlice.actions
 export default cartSlice.reducer

@@ -194,6 +194,8 @@ const menuitemSlice=createSlice({
 export default menuitemSlice.reducer
 
 export const getMenuitemById = (state, id) =>{
+    console.log('getMenuitemById')
+    console.log(id)
     return state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
 }
 export const getMenuitemTitleById = (state, id) =>{

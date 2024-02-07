@@ -1,16 +1,15 @@
-import { FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { useDispatch } from 'react-redux';
-import { incrementByAmount } from './cartSlice';
-const QtyInputBox = ({itemId, qty}) =>{
-    
+
+const QtyInputBox = ({ cartItem, qty}) =>{
+
+    // const qq = useSelector(state=>state.cart.cart.cart_arr[cartIdx])
     return(
         <div style={{'position': "relative"}}>
             <Form.Control type="text"
             className='qty_box' 
-            // defaultValue={qty} 
-            value={qty} 
-            readOnly
+            
+            value={cartItem.quantity} 
+            
             />
             <div className='qty_label'>QTY</div>
         </div>

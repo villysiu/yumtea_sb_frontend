@@ -1,27 +1,29 @@
+import { createContext } from "react"
 import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { updateCartItem, increment } from "./cartSlice"
+import { updateCartItem, increment, updateQty } from "./cartSlice"
 
-const PlusButton = ({cartitem, milk, setQuantity, inventory, setError})=>{
+const PlusButton = ({cartId, cartItem, setQuantity, inventory, setError})=>{
+    console.log(cartItem)
     const dispatch = useDispatch()
     const current_user = useSelector(state => state.user.current_user)
     // const cart_status = useSelector(state => state.cart.cart.status)
     const handleClick = () => {
         if(current_user.username === null){
-            dispatch(increment({'singleMenuitem':cartitem, 'milk': milk  }))
-            
+            // dispatch(increment({'singleMenuitem': menuitem, 'milk': milk  }))
+            dispatch(updateQty({'id': cartId, 'unit_price': cartItem.unit_price}))
         }else{
             console.log('in plus')
-            console.log(cartitem.quantity)
-            dispatch(updateCartItem({'cartitemId': cartitem.pk, formData: {'quantity': cartitem.quantity+1}}))
+            console.log(cartItem.quantity)
+            dispatch(updateCartItem({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity+1}}))
         }
-        setQuantity(q=>q+1)
+        // setQuantity(q=>q+1)
     }
     const handleDisabledClick = () =>{
         setError("Maximum inventory reached")
     }
     
-    if(cartitem.quantity===inventory)
+    if(cartItem.quantity===inventory)
         return(
             <span onClick={handleDisabledClick}>
                 <Button className="qty_plus rounded-end" variant="light" 

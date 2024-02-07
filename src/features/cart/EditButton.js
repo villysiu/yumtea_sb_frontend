@@ -22,7 +22,7 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
         if(current_user.username === null){
             // dispatch(updateCustomization({'menuitemId':cartItem.menuitem_id, 
             //                     'prevMilkId': cartItem.milk_id, 'updatedMilkId': milk }))
-            dispatch(updateCustomization({'cartId': cartId, 'prevMilk': prevMilk, 'updatedMilk': updatedMilk} ))
+            dispatch(updateCustomization({'cartId': cartId, 'menuitemId':cartItem.menuitem_id, 'prevMilk': prevMilk, 'updatedMilk': updatedMilk} ))
             setShow(false)
         }
         else {
