@@ -1,6 +1,6 @@
 import { Button, NavItem } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { decrement } from "./cartSlice"
+import { decrement, updateQty } from "./cartSlice"
 import { useEffect } from "react"
 import { updateCartItem } from "./cartSlice"
 const MinusButton = ({cartId, cartItem, setQuantity, setError})=>{
@@ -11,12 +11,12 @@ const MinusButton = ({cartId, cartItem, setQuantity, setError})=>{
     const handleClick = () => {
         if(current_user.username === null){
             // dispatch(decrement({'menuitemId':cartItem.menuitem_id, 'milkId': cartItem.milk_id }))
-           dispatch(decrement(cartId))
-            
+        //    dispatch(decrement(cartId))
+            dispatch(updateQty({'id': cartId, 'unit_price': -cartItem.unit_price}))
         }else{
             dispatch(updateCartItem({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity-1}}))
         }
-        setQuantity(q=>q-1)
+        // setQuantity(q=>q-1)
     }
     const handleDisabledClick = () => {
         setError("Minimum quantity is 1")
