@@ -1,7 +1,7 @@
 import { createContext } from "react"
 import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { updateCartItem, increment, updateQty } from "./cartSlice"
+import { updateCartItemQty, updateQty } from "./cartSlice"
 
 const PlusButton = ({cartId, cartItem, setQuantity, inventory, setError})=>{
     console.log(cartItem)
@@ -15,9 +15,8 @@ const PlusButton = ({cartId, cartItem, setQuantity, inventory, setError})=>{
         }else{
             console.log('in plus')
             console.log(cartItem.quantity)
-            dispatch(updateCartItem({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity+1}}))
-        }
-        // setQuantity(q=>q+1)
+            dispatch(updateCartItemQty({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity+1}}))        }
+        
     }
     const handleDisabledClick = () =>{
         setError("Maximum inventory reached")

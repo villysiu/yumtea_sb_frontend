@@ -9,7 +9,7 @@ const QtyInputBox = ({ cartItem, qty}) =>{
             className='qty_box' 
             
             value={cartItem.quantity} 
-            
+            readOnly
             />
             <div className='qty_label'>QTY</div>
         </div>

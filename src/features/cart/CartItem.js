@@ -12,6 +12,7 @@ import EditButton from "./EditButton"
 // import { Modal } from "react-bootstrap"
 // import CustomizeContainer from "../menuitem/CustomizeContainer"
 import { Spinner } from "react-bootstrap"
+
 const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
     console.log("in cartitem")

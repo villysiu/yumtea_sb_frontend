@@ -98,6 +98,37 @@ export const addItemToCart = createAsyncThunk(
         }
     }
 )
+
+export const updateCartItemQty = createAsyncThunk(
+    'cart/updateCartItemQty',
+    async (item) => {
+        console.log(item)
+        // {cartitemId: 33, formData: {'quantity': item.quantity}}
+        try {
+            const response=await fetch(`${apiLink}/api/cart/${item.cartitemId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json',
+                    "Authorization": `Token ${localStorage.getItem("token")}`,
+                    
+                },
+                body: JSON.stringify(item.formData)
+            })
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            const data=await response.json()
+            // console.log(data)
+
+            return data
+        } 
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 export const updateCartItem = createAsyncThunk(
     'cart/updateCartItem',
     async (item) => {
@@ -121,7 +152,7 @@ export const updateCartItem = createAsyncThunk(
             const data=await response.json()
             // console.log(data)
 
-            return data
+            return {'updated': data, 'initId': item.cartitemId}
         } 
         catch(error){
             return Promise.reject(error);
@@ -343,34 +374,92 @@ const cartSlice=createSlice({
         .addCase(removeItemFromCart.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
+        .addCase(updateCartItemQty.pending, (state, action) => {
+            state.cart.status = 'loading'
+            console.log(action)
+            state.cart.affected = action.meta.arg.cartitemId
+        })
+        .addCase(updateCartItemQty.fulfilled, (state, action) => {
+            // [
+            //     {
+            //         "pk": 62,
+            //         "user_id": 2,
+            //         "menuitem_id": 2,
+            //         "quantity": 5,
+            //         "linetotal": 25.0,
+            //         "unit_price": 5.0,
+            //         "tax": 2.5,
+            //         "milk_id": 3
+            //     }
+            // ]
+            // {'updated': data, 'initId': item.cartitemId}
+            console.log(action.payload)
+            state.cart.status = 'succeeded'
+            // item must exist since updating qty from cart
+            let item = state.cart.cart_arr.find(item=>item.pk === action.payload.pk)
+            state.cart.subtotal = state.cart.subtotal - item.linetotal + action.payload.linetotal
+            state.cart.itemCount = state.cart.itemCount - item.quantity + action.payload.quantity 
+            
+            item.quantity = action.payload.quantity
+            item.linetotal = action.payload.linetotal
+
+            state.cart.tax = state.cart.subtotal * 0.1
+        })
+        .addCase(updateCartItemQty.rejected, (state, action) => {
+            state.cart.status = 'failed'
+        })
         .addCase(updateCartItem.pending, (state, action) => {
             state.cart.status = 'loading'
             console.log(action)
             state.cart.affected = action.meta.arg.cartitemId
         })
         .addCase(updateCartItem.fulfilled, (state, action) => {
-            // {
-            //     "pk": 30,
-            //     "user_id": 2,
-            //     "menuitem_id": 7,
-            //     "quantity": 1,
-            //     "linetotal": 5,
-            //     "unit_price": 5,
-            //      "tax": 0.5,
-            //     "milk_id": 3
-            // }
+            // [
+            //     {
+            //         "pk": 62,
+            //         "user_id": 2,
+            //         "menuitem_id": 2,
+            //         "quantity": 5,
+            //         "linetotal": 25.0,
+            //         "unit_price": 5.0,
+            //         "tax": 2.5,
+            //         "milk_id": 3
+            //     }
+            // ]
+            // {'updated': data, 'initId': item.cartitemId}
+            console.log(action.payload)
             state.cart.status = 'succeeded'
+            if(action.payload.updated.pk !== action.payload.initId){
+                state.cart.cart_arr = state.cart.cart_arr.filter(item=>{
+                    if(item.pk === action.payload.initId){
+                        state.cart.subtotal = state.cart.subtotal - item.linetotal
+                        state.cart.itemCount = state.cart.itemCount - item.quantity
+                        return null
+                    }
+                    if(item.pk === action.payload.updated.pk){
+                        state.cart.subtotal = state.cart.subtotal - item.linetotal + action.payload.updated.linetotal
+                        state.cart.itemCount = state.cart.itemCount - item.quantity + action.payload.updated.quantity 
+                        
+                        item.quantity = action.payload.updated.quantity
+                        item.linetotal = action.payload.updated.linetotal
 
-            let cartitem = state.cart.cart_arr.find(cartitem =>cartitem.pk === action.payload.pk)
-            state.cart.subtotal = state.cart.subtotal - cartitem.linetotal + action.payload.linetotal
-            state.cart.tax = state.cart.tax - cartitem.tax + action.payload.tax
-            state.cart.itemCount = state.cart.itemCount - cartitem.quantity + action.payload.quantity
+                    }
+                    return item
+                })
+            }
+            else {
+                let cartitem = state.cart.cart_arr.find(item=>item.pk === action.payload.initId)
+                state.cart.subtotal = state.cart.subtotal - cartitem.linetotal + action.payload.updated.linetotal
+                state.cart.itemCount = state.cart.itemCount - cartitem.quantity + action.payload.updated.quantity
+                cartitem.unit_price = action.payload.updated.unit_price
+                cartitem.quantity = action.payload.updated.quantity
+                cartitem.linetotal = action.payload.updated.linetotal
+                cartitem.milk_id = action.payload.updated.milk_id
 
-            cartitem.quantity = action.payload.quantity
-            cartitem.linetotal = action.payload.linetotal
-            cartitem.tax = action.payload.tax
-            cartitem.unit_price = action.payload.unit_price
-            cartitem.milk_id = action.payload.milk_id
+                // cartitem = action.payload.updated
+                
+            }
+            state.cart.tax = state.cart.subtotal * 0.1
         })
         .addCase(updateCartItem.rejected, (state, action) => {
             state.cart.status = 'failed'
