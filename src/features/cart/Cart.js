@@ -1,21 +1,21 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { fetchCart } from "./cartSlice"
-import { Button } from "react-bootstrap"
+import { fetchCart, getItemCount } from "./cartSlice"
 import { CartFill } from "react-bootstrap-icons"
-import { homeLink } from "../../app/global"
-import { Link } from "react-router-dom"
+
 import CartItem from "./CartItem"
 import CartSummary from "./CartSummary"
-import Spinner from "react-bootstrap/Spinner"
+
 import { batchAddItems } from "./cartSlice"
 import EmptyCart from "./EmptyCart"
+
 const Cart = () => {
     console.log("in cart")
     const dispatch = useDispatch()
     const current_user = useSelector(state => state.user.current_user)
     const cart = useSelector(state=>state.cart.cart)
-   
+    const itemCount = useSelector(state=>getItemCount(state.cart.cart.cart_arr))
+    
     useEffect(()=>{
         if(current_user.username && cart.status === 'idle' ){
             console.log("there is an user and api cart not fetched ('idle)")
@@ -44,7 +44,7 @@ const Cart = () => {
                 <div className="border border-bottom-0">
                     <div className="cart_a m-3">
                         <CartFill style={{fontSize:'2rem', marginRight: '1rem'}} /> 
-                        Your Cart: {cart.itemCount} item(s)
+                        Your Cart: {itemCount} item(s)
                     </div>
                 </div>
                 <div className="border borderSecondary cart_c px-3">

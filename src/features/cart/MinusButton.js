@@ -14,8 +14,8 @@ const MinusButton = ({cartId, cartItem, setQuantity, setError})=>{
         //    dispatch(decrement(cartId))
             dispatch(updateQty({'id': cartId, 'unit_price': -cartItem.unit_price}))
         }else{
-            dispatch(updateCartItemQty({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity-1}}))
-            // dispatch(updateCartItem({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity-1}}))
+            dispatch(updateCartItemQty({'cartitemId': cartItem.pk, 'quantity': cartItem.quantity-1}))
+        
         }
         // setQuantity(q=>q-1)
     }

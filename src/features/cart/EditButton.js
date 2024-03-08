@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import CustomizeList from "../menuitem/CustomizeList"
 import { getMenuitemById } from "../menuitem/menuitemSlice"
 import { updateCustomization } from "./cartSlice"
-import { updateCartItem } from "./cartSlice"
+import { updateCartItemOptions } from "./cartSlice"
 import { getMilkById } from "../menuitem/menuitemSlice"
 
 const EditButton = ({cartId, cartItem, prevMilk}) =>{
@@ -26,8 +26,8 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
             setShow(false)
         }
         else {
-            // {cartitemId: 33, formData: {'quantity': item.quantity}}
-            dispatch(updateCartItem(
+            
+            dispatch(updateCartItemOptions(
                 {cartitemId: cartItem.pk, formData: {'milk_pk': milk}}
             ))
             setShow(false)

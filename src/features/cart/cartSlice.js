@@ -102,8 +102,8 @@ export const addItemToCart = createAsyncThunk(
 export const updateCartItemQty = createAsyncThunk(
     'cart/updateCartItemQty',
     async (item) => {
-        console.log(item)
-        // {cartitemId: 33, formData: {'quantity': item.quantity}}
+        // console.log(item)
+        //{'cartitemId': cartItem.pk, 'quantity': cartItem.quantity+1}
         try {
             const response=await fetch(`${apiLink}/api/cart/${item.cartitemId}`, {
                 method: "PATCH",
@@ -113,15 +113,15 @@ export const updateCartItemQty = createAsyncThunk(
                     "Authorization": `Token ${localStorage.getItem("token")}`,
                     
                 },
-                body: JSON.stringify(item.formData)
+                
+                body: JSON.stringify({'quantity': item.quantity})
             })
 
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            // console.log(data)
-
+           
             return data
         } 
         catch(error){
@@ -129,11 +129,11 @@ export const updateCartItemQty = createAsyncThunk(
         }
     }
 )
-export const updateCartItem = createAsyncThunk(
-    'cart/updateCartItem',
+export const updateCartItemOptions = createAsyncThunk(
+    'cart/updateCartItemOptions',
     async (item) => {
         console.log(item)
-        // {cartitemId: 33, formData: {'quantity': item.quantity, 'milk_pk': milk}}
+        // {cartitemId: 33, formData: {'milk_pk': milk}}
         try {
             const response=await fetch(`${apiLink}/api/cart/${item.cartitemId}`, {
                 method: "PATCH",
@@ -192,9 +192,7 @@ const cartSlice=createSlice({
             temp_cart_arr:[],
             status: 'idle',
             affected: null,
-            subtotal: 0,
-            tax: 0,
-            itemCount: 0,
+
 
         },
        
@@ -337,20 +335,11 @@ const cartSlice=createSlice({
             if(cartitem === undefined){
                 console.log("item not in cart")
                 state.cart.cart_arr.push(action.payload)
-
-                state.cart.subtotal += action.payload.linetotal
-                state.cart.tax += action.payload.tax
-                state.cart.itemCount += action.payload.quantity
             }
             else{
                 console.log("item in cart")
-                state.cart.subtotal = state.cart.subtotal - cartitem.linetotal + action.payload.linetotal
-                state.cart.tax = state.cart.tax - cartitem.tax + action.payload.tax
-                state.cart.itemCount = state.cart.itemCount - cartitem.quantity + action.payload.quantity
-
                 cartitem.quantity = action.payload.quantity
                 cartitem.linetotal = action.payload.linetotal
-                cartitem.tax = action.payload.tax
             }
             
         })
@@ -362,12 +351,6 @@ const cartSlice=createSlice({
         })
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
-            console.log(action.payload)
-            let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.pk === action.payload.cartitemId)
-            state.cart.subtotal -= cartitem.linetotal
-            state.cart.tax -= cartitem.tax
-            state.cart.itemCount -= cartitem.quantity
-
             state.cart.cart_arr = state.cart.cart_arr.filter(cartitem=>cartitem.pk !== action.payload.cartitemId)
             
         })
@@ -392,28 +375,22 @@ const cartSlice=createSlice({
             //         "milk_id": 3
             //     }
             // ]
-            // {'updated': data, 'initId': item.cartitemId}
             console.log(action.payload)
             state.cart.status = 'succeeded'
             // item must exist since updating qty from cart
             let item = state.cart.cart_arr.find(item=>item.pk === action.payload.pk)
-            state.cart.subtotal = state.cart.subtotal - item.linetotal + action.payload.linetotal
-            state.cart.itemCount = state.cart.itemCount - item.quantity + action.payload.quantity 
-            
             item.quantity = action.payload.quantity
             item.linetotal = action.payload.linetotal
-
-            state.cart.tax = state.cart.subtotal * 0.1
         })
         .addCase(updateCartItemQty.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
-        .addCase(updateCartItem.pending, (state, action) => {
+        .addCase(updateCartItemOptions.pending, (state, action) => {
             state.cart.status = 'loading'
             console.log(action)
             state.cart.affected = action.meta.arg.cartitemId
         })
-        .addCase(updateCartItem.fulfilled, (state, action) => {
+        .addCase(updateCartItemOptions.fulfilled, (state, action) => {
             // [
             //     {
             //         "pk": 62,
@@ -429,17 +406,16 @@ const cartSlice=createSlice({
             // {'updated': data, 'initId': item.cartitemId}
             console.log(action.payload)
             state.cart.status = 'succeeded'
+
+            // item updated and merge with duplicated item
             if(action.payload.updated.pk !== action.payload.initId){
                 state.cart.cart_arr = state.cart.cart_arr.filter(item=>{
                     if(item.pk === action.payload.initId){
-                        state.cart.subtotal = state.cart.subtotal - item.linetotal
-                        state.cart.itemCount = state.cart.itemCount - item.quantity
+
                         return null
                     }
                     if(item.pk === action.payload.updated.pk){
-                        state.cart.subtotal = state.cart.subtotal - item.linetotal + action.payload.updated.linetotal
-                        state.cart.itemCount = state.cart.itemCount - item.quantity + action.payload.updated.quantity 
-                        
+                     
                         item.quantity = action.payload.updated.quantity
                         item.linetotal = action.payload.updated.linetotal
 
@@ -449,19 +425,17 @@ const cartSlice=createSlice({
             }
             else {
                 let cartitem = state.cart.cart_arr.find(item=>item.pk === action.payload.initId)
-                state.cart.subtotal = state.cart.subtotal - cartitem.linetotal + action.payload.updated.linetotal
-                state.cart.itemCount = state.cart.itemCount - cartitem.quantity + action.payload.updated.quantity
                 cartitem.unit_price = action.payload.updated.unit_price
-                cartitem.quantity = action.payload.updated.quantity
+                // cartitem.quantity = action.payload.updated.quantity
                 cartitem.linetotal = action.payload.updated.linetotal
                 cartitem.milk_id = action.payload.updated.milk_id
 
                 // cartitem = action.payload.updated
                 
             }
-            state.cart.tax = state.cart.subtotal * 0.1
+            
         })
-        .addCase(updateCartItem.rejected, (state, action) => {
+        .addCase(updateCartItemOptions.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
         .addCase(batchAddItems.pending, (state, action) => {
@@ -488,3 +462,18 @@ const cartSlice=createSlice({
 })
 export const { increment, decrement, updateQty, removeItem, emptyTempCart, updateCustomization } = cartSlice.actions
 export default cartSlice.reducer
+
+export const getSubtotalAndTax = (cart_arr) =>{
+    let subtotal = 0
+    for(let cart_item of cart_arr){
+        subtotal += cart_item.linetotal
+    }
+    return [subtotal, subtotal*0.4]
+}
+export const getItemCount = (cart_arr) =>{
+    let count = 0
+    for(let cart_item of cart_arr){
+        count += cart_item.quantity
+    }
+    return count
+}

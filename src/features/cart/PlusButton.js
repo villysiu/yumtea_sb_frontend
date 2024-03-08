@@ -15,7 +15,8 @@ const PlusButton = ({cartId, cartItem, setQuantity, inventory, setError})=>{
         }else{
             console.log('in plus')
             console.log(cartItem.quantity)
-            dispatch(updateCartItemQty({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity+1}}))        }
+            // dispatch(updateCartItemQty({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity+1}}))        }
+            dispatch(updateCartItemQty({'cartitemId': cartItem.pk, 'quantity': cartItem.quantity+1}))        }
         
     }
     const handleDisabledClick = () =>{
