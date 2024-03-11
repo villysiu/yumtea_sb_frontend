@@ -1,7 +1,7 @@
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
 import { getSubtotalAndTax } from "./cartSlice"
-const CartSummaryDetails = ({tip}) =>{
+const CartSummaryDetails = () =>{
     // const cart = useSelector(state=>state.cart.cart)
     const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
     return (
@@ -13,13 +13,13 @@ const CartSummaryDetails = ({tip}) =>{
                 <div>Subtotal</div>
                 <div>{USDollar.format(subtotal)}</div>
             </div>
-            {
-                tip>0 &&
+            {/* {
+               
                 <div className="cart_summary_line">
                     <div>Tip </div>
                     <div>{USDollar.format(tip)}</div>
                 </div>
-            }
+            } */}
             <div className="cart_summary_line">
                 <div>Tax</div>
                 <div>{USDollar.format(tax)}</div>

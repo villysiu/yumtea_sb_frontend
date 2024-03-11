@@ -290,22 +290,31 @@
 .cart_summary {
   width: var(--cart_summary_width);
 }
+.tipbox_wrapper {
+  display: flex;
+  flex-direction: column;
+}
 .tipbox_container{
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding-top: 10px;
+  
 }
 .tipbox {
-  border: black 1px solid;
-  /* width: 4rem; */
+  border: darkgray 1px solid;
   height: 2rem;
   display: flex;
-  /* flex-direction: column;
-  justify-content: space-around; */
+
   align-items: center;
   border-radius: 1rem;
+  margin-right: 0.5rem;
+}
+.selected {
+  border: none;
+  background-color: #d1c089;
+  color: white;
 }
 .tip_font {
   font-weight: bold;
@@ -329,7 +338,11 @@
   position: relative;
   display: flex;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-top: 1.5rem;
+  
 }
 .custom_tip_input {
   border: transparent !important;

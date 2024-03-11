@@ -12,7 +12,7 @@ const Checkout = () => {
     let { state } = useLocation();
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [tip, setTip] = useState(6);
+    const [tip, setTip] = useState(0);
     console.log(state)
     const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
 
@@ -55,7 +55,7 @@ const Checkout = () => {
                     <div>Tip </div>
                     <div>{USDollar.format(tip)}</div>
                 </div>
-                <Tip tip={tip} setTip={setTip} subtotal={subtotal} />
+                <Tip setTip={setTip} subtotal={subtotal} />
                 </>
             }
             <hr/>
