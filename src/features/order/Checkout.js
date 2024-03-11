@@ -6,7 +6,7 @@ import { getSubtotalAndTax } from "../cart/cartSlice"
 import { useDispatch } from "react-redux"
 import { CheckoutCart } from "./orderSlice"
 import { Navigate, useLocation } from "react-router-dom";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Tip from "./Tip"
 const Checkout = () => {
     let { state } = useLocation();
@@ -15,11 +15,17 @@ const Checkout = () => {
     const [tip, setTip] = useState(0);
     console.log(state)
     const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
+    const [total, setTotal] = useState(0)
+
+    useEffect(()=>{
+        setTotal(tip+subtotal+tax)
+    }, [tip, subtotal, tax])
 
     // prohibited direct access this page
     if(!state ){
         return <Navigate to="../../cart" replace={true} />}
-       
+    
+    
     const handleClick = () =>{
         dispatch(CheckoutCart())
         .unwrap()
@@ -50,7 +56,6 @@ const Checkout = () => {
             </div>
             {
                 <>
-                {/* // tip>0 && */}
                 <div className="cart_summary_line">
                     <div>Tip </div>
                     <div>{USDollar.format(tip)}</div>
@@ -61,7 +66,7 @@ const Checkout = () => {
             <hr/>
             <div className="cart_summary_line solid_link">
                 <div >Total </div>
-                <div>{USDollar.format(subtotal+tax)}</div>
+                <div>{USDollar.format(total)}</div>
             </div>
             
             

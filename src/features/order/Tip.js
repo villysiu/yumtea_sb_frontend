@@ -7,10 +7,10 @@ const Tip = ({setTip, subtotal}) =>{
     const [customTip, setCustomTip] = useState(0)
     const [isSelected, setSelected] = useState(0)
     const [custombox, showCustombox] = useState(false)
-    
+
     const handleChange = (e) =>{
         setCustomTip(e.target.value)
-        setTip(e.target.value)
+        setTip(Number(e.target.value))
 
     }
     const handleClick = percentage =>{
