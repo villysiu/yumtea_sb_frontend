@@ -187,13 +187,10 @@ const cartSlice=createSlice({
     name: 'cart',
     initialState: {
         cart: {
-
             cart_arr: [],
             temp_cart_arr:[],
             status: 'idle',
             affected: null,
-
-
         },
        
     },
@@ -207,9 +204,9 @@ const cartSlice=createSlice({
                         && item.milk_id === action.payload.milk.id)
             let unit_price = action.payload.singleMenuitem.price +action.payload.milk.price
 
-            state.cart.subtotal += unit_price
-            state.cart.tax += 0.1* unit_price
-            state.cart.itemCount += 1
+            // state.cart.subtotal += unit_price
+            // state.cart.tax += 0.1* unit_price
+            // state.cart.itemCount += 1
 
             if(cartitem === undefined){
                 // console.log("item not in cart")
@@ -308,15 +305,6 @@ const cartSlice=createSlice({
             state.cart.status = 'succeeded'
             state.cart.cart_arr = action.payload
 
-            let [itemCount, subtotal, tax] = action.payload.reduce(
-                (acumulator, currCartItem) => {
-                    return [acumulator[0]+currCartItem.quantity, acumulator[1]+currCartItem.linetotal, acumulator[2]+currCartItem.tax]
-                }, [0,0,0]
-            )
-            
-            state.cart.subtotal = subtotal
-            state.cart.tax = tax
-            state.cart.itemCount = itemCount
         })
         .addCase(fetchCart.rejected, (state, action) => {
             state.cart.status = 'failed'
@@ -468,7 +456,7 @@ export const getSubtotalAndTax = (cart_arr) =>{
     for(let cart_item of cart_arr){
         subtotal += cart_item.linetotal
     }
-    return [subtotal, subtotal*0.4]
+    return [subtotal, subtotal*0.1]
 }
 export const getItemCount = (cart_arr) =>{
     let count = 0

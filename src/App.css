@@ -269,8 +269,8 @@
   padding-top: 6rem;
 }
 .cart_summary, .checkout {
-  /* width: ?calc( var(--body_width) * 0.3 - 2rem); */
-  width: var(--cart_summary_width);
+  
+  /* width: var(--cart_summary_width); */
   min-width: 250px;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -285,40 +285,58 @@
 }
 .checkout{
   position: unset !important;
+  width: 500px;
+}
+.cart_summary {
+  width: var(--cart_summary_width);
 }
 .tipbox_container{
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  padding-top: 10px;
 }
 .tipbox {
   border: black 1px solid;
-  width: 100px;
-  height: 100px;
+  /* width: 4rem; */
+  height: 2rem;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  /* flex-direction: column;
+  justify-content: space-around; */
   align-items: center;
-  border-radius: 0.375rem;
+  border-radius: 1rem;
 }
 .tip_font {
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 .custom_tip_font{
   position: absolute;
   top: -12px;
+  left: 25px;
   background-color: white;
   padding-left: 5px;
   padding-right: 5px;
+  font-size: 12px;
 
+}
+.custom_tip_dollar{
+
+}
+.custom_tip_box {
+  border: 1px black solid;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
 }
 .custom_tip_input {
   border: transparent !important;
-  width: 90%;
+  /* width: 90%; */
   height: 90%;
   font-size: 1rem;
+  box-shadow: none !important;
 }
 .cart_summary_line {
   display: flex;
