@@ -194,15 +194,23 @@ const menuitemSlice=createSlice({
 export default menuitemSlice.reducer
 
 export const getMenuitemById = (state, id) =>{
-    console.log('getMenuitemById')
-    console.log(id)
     return state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
 }
 export const getMenuitemTitleById = (state, id) =>{
     const item =  state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
-    return item.title
+    return item===undefined ? "" : item.title
+}
+export const getMilks = (state) =>{
+    return state.menuitem.milk.array
 }
 export const getMilkById = (state, id) =>{
     const milk = state.menuitem.milk.array.find(milk => milk.id === id)
-    return milk === undefined? null : milk
+    return milk === undefined? null : milk.title
+}
+export const getCategoryById = (state, id) => {
+    let category = state.menuitem.category.array.find(cat=>cat.pk === id)
+    return category === undefined ? "" : category.title
+}
+export const getCategories = (state) =>{
+    return state.menuitem.category
 }

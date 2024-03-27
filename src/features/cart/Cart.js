@@ -47,7 +47,7 @@ const Cart = () => {
                         Your Cart: {itemCount} item(s)
                     </div>
                 </div>
-                <div className="border borderSecondary cart_c px-3">
+                <div className="border borderSecondary px-3">
                     {
                         cart.cart_arr.map((item, idx)=><CartItem key={idx} cartId={idx} cartItem={item} />)
                     }

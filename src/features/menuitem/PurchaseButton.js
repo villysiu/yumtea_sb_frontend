@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
 import { getMilkById } from "./menuitemSlice"
 import {Spinner} from "react-bootstrap"
-const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
+const PurchaseButton = ({singleMenuitem, milkId, setShow}) =>{
     const dispatch = useDispatch()
     const milk = useSelector(state => getMilkById(state, milkId))
     const current_user = useSelector(state => {
@@ -16,7 +16,7 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
         if(current_user.username === null){
             dispatch(increment({'singleMenuitem':singleMenuitem, 'milk': milk }))
             setShow(false)
-            setMessage(`${singleMenuitem.title} added to shopping cart.` )
+            // setMessage(`${singleMenuitem.title} added to shopping cart.` )
         } 
         else{
             const data = {'menuitem_pk': singleMenuitem.pk, 'milk_pk': milkId}
@@ -25,23 +25,23 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow, setMessage}) =>{
             .unwrap()
             .then((originalPromiseResult) => {
                 setShow(false)
-                setMessage(`${singleMenuitem.title} added to shopping cart.` )
+                // setMessage(`${singleMenuitem.title} added to shopping cart.` )
             })
             .catch((rejectedValueOrSerializedError) => {
                 setShow(false)
-                setMessage("Failed to add item to shopping cart.")
+                // setMessage("Failed to add item to shopping cart.")
             })  
         }     
     }
     if(cart.status === 'loading')
         return ( <div>
-            <Button className='gold_button short' disabled><Spinner animation="border" size="sm" /></Button>
+            <Button className='gold_button' disabled><Spinner animation="border" size="sm" /></Button>
             </div>
     )
     return(
         
         <div>
-            <Button className='gold_button short' onClick={handleClick}>Add to Cart</Button>
+            <Button className='gold_button' onClick={handleClick}>Add to Cart</Button>
         </div>
     )
 }

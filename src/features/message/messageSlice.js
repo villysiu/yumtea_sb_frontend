@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchCategories, fetchMenuitems } from '../menuitem/menuitemSlice'
-import { batchAddItems, removeItemFromCart } from '../cart/cartSlice'
+import { fetchCategories, fetchMenuitems, fetchMenuitemsByCategory } from '../menuitem/menuitemSlice'
+import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
 import { logoutUser,  } from '../user/userSlice'
 const messageSlice = createSlice({
     name: 'message',
@@ -34,6 +34,16 @@ const messageSlice = createSlice({
                 }
             )
         })
+        .addCase(fetchMenuitemsByCategory.rejected, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "danger",
+                    // content: `${action.error.name}: ${action.error.message} from API.`
+                    content: "Category not existed. Redirecting to Main Meun."
+                }
+            )
+        })
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.message_arr.push(
                 {
@@ -51,7 +61,7 @@ const messageSlice = createSlice({
                 {
                     status: true,
                     type: "success",
-                    content: `${action.payload.title} removed from shopping cart.`
+                    content: `Item removed from shopping cart.`
                 }
             )
         })
@@ -65,6 +75,35 @@ const messageSlice = createSlice({
                 }
             )
 
+        })
+        .addCase(updateCartItemQty.fulfilled, (state, action) => {
+            console.log(action)
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "success",
+                    content: `Item quantity updated to ${action.payload.quantity}.`
+                }
+            )
+        })
+        .addCase(updateCartItemOptions.fulfilled, (state, action) => {
+            console.log(action)
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "success",
+                    content: `Item's options updated.`
+                }
+            )
+        })
+        .addCase(addItemToCart.fulfilled, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "success",
+                    content: `Item added to shopping cart.`
+                }
+            )
         })
 
     }

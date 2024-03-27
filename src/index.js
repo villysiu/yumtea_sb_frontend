@@ -58,6 +58,54 @@ const router = createBrowserRouter([
                     path: "/cart",
                     element: <Cart />
                   },
+                  {
+                    path: "/secure",
+                    element: <Secure />,
+                    children: [
+                      {
+                        path: '/secure/account',
+                        element: <Account />
+                      },
+                      {
+                        path: "/secure/orders",
+                        element: <OrderHistory />
+                      },
+                      {
+                        path: "/secure/checkout",
+                        element: <Checkout />
+                      },
+                      {
+                        path: "/secure/ordersuccess",
+                        element: <OrderSuccess />
+                      },
+                      {
+                        path: "/secure/reserve",
+                        element: <Reserve />
+                      },
+                      
+                      {
+                        path: "/secure/reservations",
+                        element: <Reservations />,
+                      },
+                      {
+                        path: "/secure/reservation/",
+                        element: <UpdateReservationFrom />,
+                        children: [
+                          {
+                            path: "/secure/reservation/update",
+                            element: <UpdateReservation />,
+                          },
+                          {
+                            path: "/secure/reservation/success",
+                            element: <ReservationSuccess />
+                          },
+                        ]
+                      },
+      
+                    ]
+      
+      
+                },
               ]
           },
           {
@@ -79,54 +127,7 @@ const router = createBrowserRouter([
             path: "/visit-taste",
               element: <Location />,
           },
-          {
-              path: "/secure",
-              element: <Secure />,
-              children: [
-                {
-                  path: '/secure/account',
-                  element: <Account />
-                },
-                {
-                  path: "/secure/orders",
-                  element: <OrderHistory />
-                },
-                {
-                  path: "/secure/checkout",
-                  element: <Checkout />
-                },
-                {
-                  path: "/secure/ordersuccess",
-                  element: <OrderSuccess />
-                },
-                {
-                  path: "/secure/reserve",
-                  element: <Reserve />
-                },
-                
-                {
-                  path: "/secure/reservations",
-                  element: <Reservations />,
-                },
-                {
-                  path: "/secure/reservation/",
-                  element: <UpdateReservationFrom />,
-                  children: [
-                    {
-                      path: "/secure/reservation/update",
-                      element: <UpdateReservation />,
-                    },
-                    {
-                      path: "/secure/reservation/success",
-                      element: <ReservationSuccess />
-                    },
-                  ]
-                },
-
-              ]
-
-
-          },
+          
           
           {
               path: "/about",

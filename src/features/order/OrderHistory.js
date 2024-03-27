@@ -32,10 +32,9 @@ const OrderHistory = () =>{
         setShow(null)
     }, [filter])
    
-    if(order.status === 'loading' )
+    if(order.status === 'loading' || order.status === 'idle')
         return <FullSpinner />
-    if(order.orders_arr.length === 0)
-        return <div>No order</div>
+    
 
     return (
         <div className='app_width'>
@@ -45,15 +44,24 @@ const OrderHistory = () =>{
                 <div style={{width: '100%', textAlign: 'right'}}>
                     <OrderFilter filter={filter} setFilter={setFilter} />
                 </div>
-                {
-                    order.orders_arr.map(order => {
-                        return (
-                            <SingleOrder key={order.pk} order={order} show={show} setShow={setShow}/>
-                        )
-                    })
-                }
+                <Orders order = {order} show={show} setShow={setShow} />
+                
             </div>
         </div>
+    )
+}
+const Orders = ({order, show, setShow}) =>{
+    
+    if(order.status === 'succeeded' && order.orders_arr.length === 0)
+        return <div>No order</div>
+    return(
+        
+            order.orders_arr.map(order => {
+                return (
+                    <SingleOrder key={order.pk} order={order} show={show} setShow={setShow}/>
+                )
+            })
+        
     )
 }
 export default OrderHistory

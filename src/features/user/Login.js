@@ -29,20 +29,20 @@ const Login = () =>{
                 >
                     <Form.Control type="email" placeholder="name@example.com" />
                 </FloatingLabel> */}
-                <FloatingLabel
-                    controlId="floatingInput"
-                    label="Username"
-                    className="mb-3"
-                >
+
+                <FloatingLabel controlId="floatingInput" label="Username" className="mb-3">
                     <Form.Control type="text" placeholder="Username" value={username} 
-                onChange={e=>setUsername(e.target.value)} />
+                        onChange={e=>setUsername(e.target.value)} />
                 </FloatingLabel>
+
                 <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
                     <Form.Control type="password" placeholder="Password" value={password} 
-                onChange={e=>setPassword(e.target.value)} />
+                        onChange={e=>setPassword(e.target.value)} />
                 </FloatingLabel>
-                <Button type="submit" className='gold_button mb-3' 
-                    disabled={ !username || !password }>Sign In</Button>
+
+                <Button type="submit" className='gold_button mb-3' disabled={ !username || !password }>
+                    Sign In
+                </Button>
             </Form>
             <div>Forgot your password?</div>
             <Link to={`${homeLink}/user/signup`}>

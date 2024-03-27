@@ -13,7 +13,7 @@ const SingleMenuitem = () =>{
     let {itemId} = useParams()
     const [message, setMessage] = useState("")
     let singleMenuitem = useSelector(state => getMenuitemById(state, parseInt(itemId)))
-
+    console.log(singleMenuitem)
     const [show, setShow] = useState(false);
    
     const Title = () => {
@@ -80,7 +80,7 @@ const SingleMenuitem = () =>{
         <>
         {
             <Modal show={show} onHide={()=>setShow(false)}>
-                <CustomizeContainer singleMenuitem={singleMenuitem} setShow={setShow} setMessage={setMessage} /> 
+                <CustomizeContainer menuitem={singleMenuitem} setShow={setShow} setMessage={setMessage} /> 
             </Modal>
         }
         <div className="singlewine_wrapper">

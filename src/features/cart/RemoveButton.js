@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 import { removeItemFromCart } from "./cartSlice"
 import { useSelector } from "react-redux"
 
-const RemoveButton = ({cartId, cartItem, title}) =>{
-    console.log(cartItem)
+const RemoveButton = ({cartId, cartItem}) =>{
+    // console.log(cartItem)
     const dispatch = useDispatch()
     const current_user = useSelector(state => state.user.current_user)
     const handleClick = () => {
@@ -16,7 +16,7 @@ const RemoveButton = ({cartId, cartItem, title}) =>{
             
             
         }else{
-            dispatch(removeItemFromCart({'cartitemId': cartItem.pk, 'title': title}))
+            dispatch(removeItemFromCart({'cartitemId': cartItem.pk}))
         }
     }
 

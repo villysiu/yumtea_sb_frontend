@@ -14,7 +14,7 @@ const Message = ({message}) =>{
             dispatch(removeMessage())
             setShow(false)
 
-        }, 5000 )
+        }, 2000 )
         return function cleanup() {
             clearInterval(timer)
         }
@@ -36,11 +36,11 @@ const Message = ({message}) =>{
 const Messages = () =>{
     const {message_arr} = useSelector(state=>state.message)
     return (
-        <>
+        <div className="message_container">
             {
                 message_arr.map((message, idx)=><Message key={idx} message={message} />)
             }
-        </>
+        </div>
     )
 }
 export default Messages

@@ -16,7 +16,7 @@ const OrderSuccess = () =>{
             <div>order date: {state.order_date}</div>
             <div className='mt-3'>
             <Link to={`${homeLink}/menuitems`} >
-                <Button className='gold_button short'>Continue Shopping</Button>
+                <Button className='gold_button full'>Continue Shopping</Button>
             </Link>
             </div>
         </div>

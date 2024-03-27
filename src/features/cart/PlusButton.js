@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { updateCartItemQty, updateQty } from "./cartSlice"
 
 const PlusButton = ({cartId, cartItem, setQuantity, inventory, setError})=>{
-    console.log(cartItem)
+    // console.log(cartItem)
     const dispatch = useDispatch()
     const current_user = useSelector(state => state.user.current_user)
     // const cart_status = useSelector(state => state.cart.cart.status)
@@ -15,8 +15,7 @@ const PlusButton = ({cartId, cartItem, setQuantity, inventory, setError})=>{
         }else{
             console.log('in plus')
             console.log(cartItem.quantity)
-            // dispatch(updateCartItemQty({'cartitemId': cartItem.pk, formData: {'quantity': cartItem.quantity+1}}))        }
-            dispatch(updateCartItemQty({'cartitemId': cartItem.pk, 'quantity': cartItem.quantity+1}))        }
+            dispatch(updateCartItemQty({'cartitemId': cartItem.pk, 'quantity': cartItem.quantity+1}))}
         
     }
     const handleDisabledClick = () =>{

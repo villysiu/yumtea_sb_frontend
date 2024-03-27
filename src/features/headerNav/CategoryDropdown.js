@@ -1,18 +1,19 @@
 import { homeLink } from "../../app/global"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchCategories } from "../menuitem/menuitemSlice";
+import { fetchCategories, getCategories } from "../menuitem/menuitemSlice";
 import { Link } from 'react-router-dom';
 
 
 const CategoryDropdown = () =>{
     const dispatch=useDispatch();
-    let category = useSelector(state => state.menuitem.category)
+
+    let {array, status} = useSelector(state=>getCategories(state))
     useEffect(()=>{
-        if(category.status === 'idle'){
+        if(status === 'idle'){
             dispatch(fetchCategories())
         }
-    }, [category.status, dispatch])
+    }, [status, dispatch])
 
 
     const [show, setShow] = useState(false)
@@ -41,7 +42,7 @@ const CategoryDropdown = () =>{
             </div>
 
             {
-                category.array.map(category=>{
+                array.map(category=>{
                     return (
                         <div key={category.pk}  >
                             <Link to={`${homeLink}/menuitems/cat/${category.pk}`} 

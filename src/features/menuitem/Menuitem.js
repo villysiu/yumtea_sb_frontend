@@ -5,18 +5,18 @@ import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import OutOfStockButton from "./OutOfStockButton"
 import { useState } from "react"
-import CustomizeList from "./CustomizeContainer"
+import CustomizeContainer from "./CustomizeContainer"
 import { Button } from "react-bootstrap"
 import AddedOverlay from "./AddedOverlay"
 const Menuitem = ({menuitem}) =>{
-
+    console.log(menuitem)
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("") 
     return (
         <>
         {
             <Modal show={show} onHide={()=>setShow(false)}>
-                <CustomizeList singleMenuitem={menuitem} setShow={setShow} setMessage={setMessage} /> 
+                <CustomizeContainer menuitem={menuitem} setShow={setShow} /> 
             </Modal>
         }
         
@@ -35,8 +35,8 @@ const Menuitem = ({menuitem}) =>{
                 <OutOfStockButton />
                 :
                 <div style={{"position": "relative"}}>
-                    <Button className='gold_button short' onClick={()=>setShow(true)}>Customize</Button>
-                    {message && <AddedOverlay message={message} setMessage={setMessage}/>}
+                    <Button className='gold_button' onClick={()=>setShow(true)}>Customize</Button>
+                    {/* {message && <AddedOverlay message={message} setMessage={setMessage}/>} */}
                 </div>
             }
         </Col>

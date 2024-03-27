@@ -31,14 +31,19 @@ export const fetchCurrentUserOrders=createAsyncThunk(
 )
 export const CheckoutCart=createAsyncThunk(
     'order/CheckoutCart',
-    async () => {
+    async (tip) => {
         console.log("CheckoutCart orders")
         try {
             const response=await fetch(`${apiLink}/api/orders`, {
                 method: "POST",
                 headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json',
                     "Authorization": `Token ${localStorage.getItem("token")}`,
-                }
+                    
+                },
+                body: JSON.stringify({'tip': tip})
+                
             })
 
             if(!response.ok) {

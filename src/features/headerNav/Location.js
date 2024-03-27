@@ -32,12 +32,12 @@ const Location = () =>{
                     <div className='location_row'>
                         <div className='location_col'>Address:</div>
                         <div>
-                            14200 NE 145th Street, Suite C, Woodinville WA 98072
+                        398 Wallace Ranch Suite 593\nIvanburgh, AZ 80818 (FAKE)
                         </div>
                     </div>
                     <div className='location_row'>
                         <div className='location_col'>Phone:</div>
-                        <div>425-408-1608</div>
+                        <div>111-222-3333</div>
                     </div>
                     <div className='location_row'>
                         <div className='location_col'>Email: </div>

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import PlusButton from "./PlusButton"
 import MinusButton from "./MinusButton"
 import QtyInputBox from "./QtyInputBox"
@@ -12,24 +12,21 @@ import EditButton from "./EditButton"
 // import { Modal } from "react-bootstrap"
 // import CustomizeContainer from "../menuitem/CustomizeContainer"
 import { Spinner } from "react-bootstrap"
+import SmokySpinner from "../headerNav/SmokySpinner"
 
 const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
-    console.log("in cartitem")
-    console.log(cartItem)
-
+    // console.log("in cartitem")
+    // console.log(cartItem)
 
     const milk = useSelector(state=>getMilkById(state, cartItem.milk_id))
     const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
-    const cart = useSelector(state => state.cart.cart)
-    // if(cart.status === 'loading' && cart.affected === cartItem.pk)
-    //     return <div className="borderSecondary border-bottom pb-5 cartitem_container">loading</div>
+    
     return(
         <>
-            
             <div className="borderSecondary border-bottom pb-5 cartitem_container">
-                {cart.status === 'loading' && cart.affected === cartItem.pk &&
-                    <div className="white_film"><Spinner /></div>
+                {
+                    cartItem.status === 'loading' && <SmokySpinner />
                 }
                 <div className="cartitem_img_wrapper">
                     <Link to={`${homeLink}/menuitems/${cartItem.menuitem_id}`}>

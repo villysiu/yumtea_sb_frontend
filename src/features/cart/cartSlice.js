@@ -152,7 +152,7 @@ export const updateCartItemOptions = createAsyncThunk(
             const data=await response.json()
             // console.log(data)
 
-            return {'updated': data, 'initId': item.cartitemId}
+            return {'updated': data, 'initId': item.cartitemId }
         } 
         catch(error){
             return Promise.reject(error);
@@ -190,7 +190,7 @@ const cartSlice=createSlice({
             cart_arr: [],
             temp_cart_arr:[],
             status: 'idle',
-            affected: null,
+            // beingUpdated: null,
         },
        
     },
@@ -336,6 +336,9 @@ const cartSlice=createSlice({
         })
         .addCase(removeItemFromCart.pending, (state, action) => {
             state.cart.status = 'loading'
+            let toBeUpdated = action.meta.arg.cartitemId
+            let item = state.cart.cart_arr.find(item=>item.pk === toBeUpdated)
+            item.status = 'loading'
         })
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
             state.cart.status = 'succeeded'
@@ -346,9 +349,11 @@ const cartSlice=createSlice({
             state.cart.status = 'failed'
         })
         .addCase(updateCartItemQty.pending, (state, action) => {
+            // console.log(action)
             state.cart.status = 'loading'
-            console.log(action)
-            state.cart.affected = action.meta.arg.cartitemId
+            let toBeUpdated = action.meta.arg.cartitemId
+            let item = state.cart.cart_arr.find(item=>item.pk === toBeUpdated)
+            item.status = 'loading'
         })
         .addCase(updateCartItemQty.fulfilled, (state, action) => {
             // [
@@ -369,14 +374,18 @@ const cartSlice=createSlice({
             let item = state.cart.cart_arr.find(item=>item.pk === action.payload.pk)
             item.quantity = action.payload.quantity
             item.linetotal = action.payload.linetotal
+            item.tax = action.payload.tax
+          
+            delete item.status
         })
         .addCase(updateCartItemQty.rejected, (state, action) => {
             state.cart.status = 'failed'
         })
         .addCase(updateCartItemOptions.pending, (state, action) => {
             state.cart.status = 'loading'
-            console.log(action)
-            state.cart.affected = action.meta.arg.cartitemId
+            let toBeUpdated = action.meta.arg.cartitemId
+            let item = state.cart.cart_arr.find(item=>item.pk === toBeUpdated)
+            item.status = 'loading'
         })
         .addCase(updateCartItemOptions.fulfilled, (state, action) => {
             // [
@@ -395,33 +404,19 @@ const cartSlice=createSlice({
             console.log(action.payload)
             state.cart.status = 'succeeded'
 
-            // item updated and merge with duplicated item
+            // if returned updated item id is different than init Id, it means the item already existed and is merged. 
+            // so we deleted the init id from the cart
             if(action.payload.updated.pk !== action.payload.initId){
-                state.cart.cart_arr = state.cart.cart_arr.filter(item=>{
-                    if(item.pk === action.payload.initId){
-
-                        return null
-                    }
-                    if(item.pk === action.payload.updated.pk){
-                     
-                        item.quantity = action.payload.updated.quantity
-                        item.linetotal = action.payload.updated.linetotal
-
-                    }
-                    return item
-                })
+                state.cart.cart_arr = state.cart.cart_arr.filter(item=>item.pk !== action.payload.initId)
             }
-            else {
-                let cartitem = state.cart.cart_arr.find(item=>item.pk === action.payload.initId)
-                cartitem.unit_price = action.payload.updated.unit_price
-                // cartitem.quantity = action.payload.updated.quantity
-                cartitem.linetotal = action.payload.updated.linetotal
-                cartitem.milk_id = action.payload.updated.milk_id
-
-                // cartitem = action.payload.updated
-                
-            }
-            
+            //then we updated the exisiting item, whether updated id eq or not eq init id
+            let cartitem = state.cart.cart_arr.find(item=>item.pk === action.payload.updated.pk)
+            cartitem.unit_price = action.payload.updated.unit_price
+            cartitem.quantity = action.payload.updated.quantity
+            cartitem.linetotal = action.payload.updated.linetotal
+            cartitem.milk_id = action.payload.updated.milk_id
+            cartitem.tax = action.payload.updated.tax
+            delete cartitem.status
         })
         .addCase(updateCartItemOptions.rejected, (state, action) => {
             state.cart.status = 'failed'
@@ -452,11 +447,12 @@ export const { increment, decrement, updateQty, removeItem, emptyTempCart, updat
 export default cartSlice.reducer
 
 export const getSubtotalAndTax = (cart_arr) =>{
-    let subtotal = 0
+    let subtotal = 0, tax = 0
     for(let cart_item of cart_arr){
         subtotal += cart_item.linetotal
+        tax += cart_item.tax
     }
-    return [subtotal, subtotal*0.1]
+    return [subtotal, tax]
 }
 export const getItemCount = (cart_arr) =>{
     let count = 0

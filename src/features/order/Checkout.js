@@ -27,7 +27,7 @@ const Checkout = () => {
     
     
     const handleClick = () =>{
-        dispatch(CheckoutCart())
+        dispatch(CheckoutCart(tip))
         .unwrap()
         .then((originalPromiseResult) => {
             console.log(originalPromiseResult)
@@ -71,7 +71,7 @@ const Checkout = () => {
             
             
             <div className="cart_summary_checkout mt-5">
-                <Button className='gold_button' onClick={handleClick}>Pay Now</Button>
+                <Button className='gold_button full' onClick={handleClick}>Pay Now</Button>
             </div>
         </div>
     )
