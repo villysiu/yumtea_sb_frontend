@@ -80,7 +80,7 @@ const SingleMenuitem = () =>{
         <>
         {
             <Modal show={show} onHide={()=>setShow(false)}>
-                <CustomizeContainer menuitem={singleMenuitem} setShow={setShow} setMessage={setMessage} /> 
+                <CustomizeContainer menuitem={singleMenuitem} setShow={setShow}  /> 
             </Modal>
         }
         <div className="singlewine_wrapper">
