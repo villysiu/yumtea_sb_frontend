@@ -42,7 +42,11 @@ const CartItem = ({cartId, cartItem}) => {
                         <div className='cartitem_options'>
                             { cartItem.milk_id!==1 && milkTitle} 
                             {
-                                cartItem.temperature === "N" ? null : ` | ${cartItem.temperature === "H" ? "Hot" : " Iced"}`}
+                                cartItem.temperature === "N" ? null : ` | ${cartItem.temperature === "H" ? "Hot" : " Iced"}`
+                            }
+                            {
+                                cartItem.sweetness ==="N" ? null : ` | ${cartItem.sweetness}% Sugar`
+                            }
                         </div>
                     </div>
                     <div className='cartitem_qty'>
