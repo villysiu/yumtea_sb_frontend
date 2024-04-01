@@ -9,9 +9,6 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { getMenuitemById, getMilkById } from "../menuitem/menuitemSlice"
 import EditButton from "./EditButton"
-// import { Modal } from "react-bootstrap"
-// import CustomizeContainer from "../menuitem/CustomizeContainer"
-import { Spinner } from "react-bootstrap"
 import SmokySpinner from "../headerNav/SmokySpinner"
 
 const CartItem = ({cartId, cartItem}) => {
@@ -19,7 +16,7 @@ const CartItem = ({cartId, cartItem}) => {
     // console.log("in cartitem")
     // console.log(cartItem)
 
-    const milk = useSelector(state=>getMilkById(state, cartItem.milk_id))
+    const milkTitle = useSelector(state=>getMilkById(state, cartItem.milk_id))
     const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
     
     return(
@@ -43,7 +40,9 @@ const CartItem = ({cartId, cartItem}) => {
                             
                         </div>
                         <div className='cartitem_options'>
-                            { milk.id!==1 && milk.title}
+                            { cartItem.milk_id!==1 && milkTitle} 
+                            {
+                                cartItem.temperature === "N" ? null : ` | ${cartItem.temperature === "H" ? "Hot" : " Iced"}`}
                         </div>
                     </div>
                     <div className='cartitem_qty'>
@@ -69,7 +68,7 @@ const CartItem = ({cartId, cartItem}) => {
                             </div>
                         } */}
                         <div className='cartitem_other_width'>
-                            <EditButton cartId={cartId} cartItem={cartItem} prevMilk={milk} />
+                            <EditButton cartId={cartId} cartItem={cartItem} prevMilk={cartItem.milk_id} />
                         </div>
                         <div className='cartitem_other_width'>
                             <RemoveButton cartId={cartId} cartItem={cartItem} title={menuitem.title} />

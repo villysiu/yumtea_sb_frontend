@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
 import { getMilkById } from "./menuitemSlice"
 import {Spinner} from "react-bootstrap"
-const PurchaseButton = ({singleMenuitem, milkId, setShow}) =>{
+const PurchaseButton = ({singleMenuitem, milkId, temp, setShow}) =>{
     const dispatch = useDispatch()
     const milk = useSelector(state => getMilkById(state, milkId))
     const current_user = useSelector(state => {
@@ -19,7 +19,7 @@ const PurchaseButton = ({singleMenuitem, milkId, setShow}) =>{
             // setMessage(`${singleMenuitem.title} added to shopping cart.` )
         } 
         else{
-            const data = {'menuitem_pk': singleMenuitem.pk, 'milk_pk': milkId}
+            const data = {'menuitem_pk': singleMenuitem.pk, 'milk_pk': milkId, 'temperature': temp}
             console.log(data)
             dispatch(addItemToCart(data))
             .unwrap()

@@ -7,6 +7,8 @@ import { getMenuitemById } from "../menuitem/menuitemSlice"
 import { updateCustomization } from "./cartSlice"
 import { updateCartItemOptions } from "./cartSlice"
 import { getMilkById } from "../menuitem/menuitemSlice"
+// import CustomizeMilk from "../menuitem/CustomizeMilk"
+// import CustomizeTemp from "../menuitem/CustomizeTemp"
 
 const EditButton = ({cartId, cartItem, prevMilk}) =>{
     const dispatch = useDispatch()
@@ -15,6 +17,7 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
     const current_user = useSelector(state => {
         return state.user.current_user
     })
+    const [temp, setTemp] = useState(cartItem.temperature)
     const [milk, setMilk] = useState(cartItem.milk_id)
     const updatedMilk = useSelector(state=>getMilkById(state, milk))
     const handleClick = () =>{
@@ -28,7 +31,7 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
         else {
             
             dispatch(updateCartItemOptions(
-                {cartitemId: cartItem.pk, formData: {'milk_pk': milk}}
+                {cartitemId: cartItem.pk, formData: {'milk_pk': milk, 'temperature': temp}}
             ))
             setShow(false)
         }
@@ -43,7 +46,10 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
                         <Modal.Title>Customize {menuitem.title}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <CustomizeList menuitem={menuitem} milk={milk} setMilk={setMilk} />
+                    <CustomizeList menuitem={menuitem} 
+                        milk={milk} setMilk={setMilk} 
+                        temp={temp} setTemp={setTemp}
+                    />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={()=>setShow(false)}>

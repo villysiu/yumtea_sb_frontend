@@ -7,6 +7,8 @@ const CustomizeTemp = ({temp, setTemp}) => {
         console.log(e.target)
         setTemp(e.target.value)
     }
+    if(temp==="N")
+        return null
     return (
         <li className='single_item_customize ps-3'>
             <InputGroup className='customize_milk'>

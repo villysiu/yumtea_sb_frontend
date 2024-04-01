@@ -1,15 +1,14 @@
 import CustomizeMilk from "./CustomizeMilk"
+import CustomizeTemp from "./CustomizeTemp"
 
-
-const CustomizeList = ({menuitem, milk, setMilk}) =>{
+const CustomizeList = ({menuitem, milk, setMilk, temp, setTemp}) =>{
     console.log(menuitem)
     console.log(milk)
     return (
         <>
-
-            
-                
-                <CustomizeMilk milk={milk} setMilk={setMilk} />
+            <CustomizeTemp temp={temp} setTemp={setTemp} />
+            <br/>
+            <CustomizeMilk milk={milk} setMilk={setMilk} />
       
 
         </>

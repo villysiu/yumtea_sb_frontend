@@ -415,6 +415,7 @@ const cartSlice=createSlice({
             cartitem.quantity = action.payload.updated.quantity
             cartitem.linetotal = action.payload.updated.linetotal
             cartitem.milk_id = action.payload.updated.milk_id
+            cartitem.temperature = action.payload.updated.temperature
             cartitem.tax = action.payload.updated.tax
             delete cartitem.status
         })
