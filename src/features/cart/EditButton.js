@@ -19,6 +19,7 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
     })
     const [temp, setTemp] = useState(cartItem.temperature)
     const [milk, setMilk] = useState(cartItem.milk_id)
+    const [sweetness, setSweetness] = useState(cartItem.sweetness)
     const updatedMilk = useSelector(state=>getMilkById(state, milk))
     const handleClick = () =>{
         
@@ -31,7 +32,7 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
         else {
             
             dispatch(updateCartItemOptions(
-                {cartitemId: cartItem.pk, formData: {'milk_pk': milk, 'temperature': temp}}
+                {cartitemId: cartItem.pk, formData: {'milk_pk': milk, 'temperature': temp, 'sweetness': sweetness}}
             ))
             setShow(false)
         }
@@ -49,6 +50,7 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
                     <CustomizeList menuitem={menuitem} 
                         milk={milk} setMilk={setMilk} 
                         temp={temp} setTemp={setTemp}
+                        sweetness={sweetness} setSweetness={setSweetness}
                     />
                     </Modal.Body>
                     <Modal.Footer>

@@ -45,7 +45,9 @@ const CartItem = ({cartId, cartItem}) => {
                                 cartItem.temperature === "N" ? null : ` | ${cartItem.temperature === "H" ? "Hot" : " Iced"}`
                             }
                             {
-                                cartItem.sweetness ==="N" ? null : ` | ${cartItem.sweetness}% Sugar`
+                                cartItem.sweetness ==="N" ? null : 
+                                    cartItem.sweetness ==="0" ? ' | No Sugar' : 
+                                    ` | ${cartItem.sweetness}% Sugar`
                             }
                         </div>
                     </div>

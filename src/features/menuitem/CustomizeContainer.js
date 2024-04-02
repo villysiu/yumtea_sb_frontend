@@ -8,6 +8,7 @@ const CustomizeContainer = ({setShow, menuitem}) =>{
     console.log(menuitem)
     const [milk, setMilk] = useState(menuitem.milk_id)
     const [temp, setTemp] = useState(menuitem.temperature)
+    const [sweetness, setSweetness] = useState(menuitem.sweetness)
     return (
         <>
             <Modal.Header closeButton>
@@ -17,6 +18,7 @@ const CustomizeContainer = ({setShow, menuitem}) =>{
                 <CustomizeList menuitem={menuitem} 
                     milk={milk} setMilk={setMilk} 
                     temp={temp} setTemp={setTemp}
+                    sweetness={sweetness} setSweetness={setSweetness}
                 />
                 
                 
@@ -29,6 +31,7 @@ const CustomizeContainer = ({setShow, menuitem}) =>{
                 <PurchaseButton singleMenuitem={menuitem} 
                     milkId = {milk}
                     temp = {temp}
+                    sweetness = {sweetness}
                     setShow={setShow} 
                 />
                         
