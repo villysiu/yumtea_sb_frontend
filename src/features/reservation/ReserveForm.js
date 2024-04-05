@@ -1,8 +1,8 @@
 import ReserveTime from "./ReserveTime"
 import ReserveGuest from './ReserveGuest'
 import ReserveDate from "./ReserveDate"
-import { Button } from "react-bootstrap"
-const ReserveForm =({date, setDate, time, setTime, guest, setGuest, btnName})=>{
+
+const ReserveForm =({date, setDate, time, setTime, guest, setGuest})=>{
     
     return(
         <>
@@ -13,9 +13,7 @@ const ReserveForm =({date, setDate, time, setTime, guest, setGuest, btnName})=>{
             
                 <ReserveGuest guest={guest} setGuest={setGuest} />
             </div>
-            <div className='reserve_button_container'>
-                <Button type="submit" className='gold_button'>{btnName}</Button>
-            </div>
+            
         </>
             
     )

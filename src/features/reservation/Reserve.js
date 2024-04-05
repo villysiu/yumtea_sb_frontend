@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { makeReservation } from "./reservationSlice"
 import { useNavigate } from "react-router-dom"
 import ReserveForm from "./ReserveForm"
-
+import { Button } from "react-bootstrap"
 const Reserve = () =>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -49,7 +49,11 @@ const Reserve = () =>{
             </div>
             <Form onSubmit={handleSubmit} className='reserve_container'>
                 <ReserveForm date={date} setDate={setDate} time={time} setTime={setTime} 
-                    guest={guest} setGuest={setGuest} btnName={'Make Reservation'} />
+                    guest={guest} setGuest={setGuest}
+                />
+                <div className='reserve_button_container'>
+                    <Button type="submit" className='gold_button'>Make Reservation</Button>
+                </div>
             </Form>
         </div>
     )

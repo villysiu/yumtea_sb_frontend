@@ -10,6 +10,7 @@ import ReserveForm from "./ReserveForm"
 // import { useParams } from "react-router-dom"
 // import { useSelector } from "react-redux"
 // import { getReservationById } from "./reservationSlice"
+import { Button } from "react-bootstrap"
 
 const UpdateReservation =() =>{
 
@@ -59,7 +60,11 @@ const UpdateReservation =() =>{
             </div>
             <Form onSubmit={handleSubmit} className='reserve_container'>
                 <ReserveForm date={date} setDate={setDate} time={time} setTime={setTime} 
-                    guest={guest} setGuest={setGuest} btnName={'Update Reservation'} />
+                    guest={guest} setGuest={setGuest} 
+                />
+                <div className='reserve_button_container'>
+                    <Button type="submit" className='gold_button'>Update Reservation</Button>
+                </div>
             </Form>
         </div>
     )

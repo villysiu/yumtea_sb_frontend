@@ -5,37 +5,41 @@ import { useSelector } from "react-redux"
 import { getSubtotalAndTax } from "../cart/cartSlice"
 import { useDispatch } from "react-redux"
 import { CheckoutCart } from "./orderSlice"
-import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react"
 import Tip from "./Tip"
+
 const Checkout = () => {
-    let { state } = useLocation();
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const [tip, setTip] = useState(0);
-    console.log(state)
     const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
     const [total, setTotal] = useState(0)
-
+    const from = useSelector(state=>state.cart.from)
+    const checkout_status = useSelector(state=>state.order.checkout.status)
     useEffect(()=>{
         setTotal(tip+subtotal+tax)
     }, [tip, subtotal, tax])
 
-    // prohibited direct access this page
-    if(!state ){
-        return <Navigate to="../../cart" replace={true} />}
-    
+    useEffect(()=>{
+        console.log(checkout_status)
+        if(checkout_status === 'succeeded'){
+            navigate(`/secure/ordersuccess` )
+        }
+        // Check if it is coming from Cart Summary, if not, go back to cart
+        //restrict access from URL
+        if(from !== "CartSummary" || checkout_status === 'failed'){
+            navigate(`/cart` )
+           
+        }
+        //  if(checkout_status === 'loading'  {
+        //    spinner?
+        //     
+        // }
+    },[checkout_status, from])
     
     const handleClick = () =>{
         dispatch(CheckoutCart(tip))
-        .unwrap()
-        .then((originalPromiseResult) => {
-            console.log(originalPromiseResult)
-            navigate("../ordersuccess", { state: { from: "order_summary", order_pk: originalPromiseResult.pk, order_date: originalPromiseResult.date } });
-        })
-        .catch((rejectedValueOrSerializedError) => {
-        // handle error here
-        })
     }
 
     return(

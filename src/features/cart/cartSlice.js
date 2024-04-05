@@ -193,8 +193,10 @@ const cartSlice=createSlice({
             // beingUpdated: null,
         },
        
+       
     },
     reducers: {
+        
         increment(state, action) {
             console.log(action.payload)
 // {'singleMenuitem':singleMenuitem, 'milk': milk }
@@ -442,6 +444,7 @@ const cartSlice=createSlice({
             state.cart.cart_arr = []
             state.cart.temp_cart_arr = []
             state.cart.status = 'idle'
+            
         })
     }
 })

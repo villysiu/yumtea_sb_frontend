@@ -10,13 +10,14 @@ import { useSelector } from "react-redux"
 import { getMenuitemById, getMilkById } from "../menuitem/menuitemSlice"
 import EditButton from "./EditButton"
 import SmokySpinner from "../headerNav/SmokySpinner"
+import ItemCustomizationList from "./ItemCustomizationList"
 
 const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
     // console.log("in cartitem")
     // console.log(cartItem)
 
-    const milkTitle = useSelector(state=>getMilkById(state, cartItem.milk_id))
+    // const milkTitle = useSelector(state=>getMilkById(state, cartItem.milk_id))
     const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
     
     return(
@@ -40,15 +41,7 @@ const CartItem = ({cartId, cartItem}) => {
                             
                         </div>
                         <div className='cartitem_options'>
-                            { cartItem.milk_id!==1 && milkTitle} 
-                            {
-                                cartItem.temperature === "N" ? null : ` | ${cartItem.temperature === "H" ? "Hot" : " Iced"}`
-                            }
-                            {
-                                cartItem.sweetness ==="N" ? null : 
-                                    cartItem.sweetness ==="0" ? ' | No Sugar' : 
-                                    ` | ${cartItem.sweetness}% Sugar`
-                            }
+                            <ItemCustomizationList milk_id={cartItem.milk_id} temperature={cartItem.temperature} sweetness={cartItem.sweetness} />
                         </div>
                     </div>
                     <div className='cartitem_qty'>

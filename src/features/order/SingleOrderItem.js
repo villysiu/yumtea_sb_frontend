@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
 import { getMenuitemTitleById, getMilkById } from "../menuitem/menuitemSlice"
+import ItemCustomizationList from "../cart/ItemCustomizationList"
+
 const SingleOrderItem = ({item}) =>{
     const menuitem_title = useSelector(state=>getMenuitemTitleById(state, item.menuitem_id))
     const milk = useSelector(state=>getMilkById(state, item.milk_id))
@@ -20,7 +22,9 @@ const SingleOrderItem = ({item}) =>{
                 <Link to={`${homeLink}/menuitems/${item.menuitem_id}`} className="solid_link">
                     <b>{menuitem_title}</b>
                 </Link>
-                <div>Customize: {milk}</div>
+                <div>
+                    <ItemCustomizationList milk_id={item.milk_id} temperature={item.temperature} sweetness={item.sweetness} />
+                </div>
                 <div>Price: {USDollar.format(item.unit_price)}</div>
                 
             </div>

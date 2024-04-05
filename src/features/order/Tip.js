@@ -34,7 +34,7 @@ const Tip = ({setTip, subtotal}) =>{
                 {
                     tipArray.map(percentage=>{
                         return (
-                            <Button variant="light" 
+                            <Button variant="light" key={percentage}
                             className={percentage === isSelected ? 'tipbox selected': 'tipbox' }
                                 onClick={()=>handleClick(percentage)}>
                                     {percentage===0 ? "None" : 
