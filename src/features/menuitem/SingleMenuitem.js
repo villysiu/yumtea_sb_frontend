@@ -8,7 +8,7 @@ import { Button } from "react-bootstrap"
 import { Modal } from "react-bootstrap"
 import { getMenuitemById } from "./menuitemSlice"
 import AddedOverlay from "./AddedOverlay"
-
+import OutOfStockButton from "./OutOfStockButton"
 const SingleMenuitem = () =>{
     let {itemId} = useParams()
     const [message, setMessage] = useState("")
@@ -67,8 +67,12 @@ const SingleMenuitem = () =>{
                 <span className="singlewine_price pe-4 ">{USDollar.format(singleMenuitem.price)}</span>
                
                 {/* <PurchaseButton setShow={setShow} /> */}
+                { singleMenuitem.inventory === 0 ?
+                <OutOfStockButton />
+                :
                 <Button className='gold_button short' onClick={()=>setShow(true)}>Customize</Button>
-                {message && <AddedOverlay message={message} setMessage={setMessage}/>}
+    }
+                
             </div>
         )
     }
