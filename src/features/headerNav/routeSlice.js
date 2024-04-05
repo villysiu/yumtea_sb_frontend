@@ -5,7 +5,7 @@ const routeSlice=createSlice({
     name: 'route',
     initialState: {
         
-        from: 'No where',
+        from: '',
        
     },
     reducers: {
@@ -13,6 +13,7 @@ const routeSlice=createSlice({
             console.log(action.payload)
             state.from = action.payload
         },
+        
     
     },
     extraReducers(builder) {

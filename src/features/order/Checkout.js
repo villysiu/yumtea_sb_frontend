@@ -15,7 +15,7 @@ const Checkout = () => {
     const [tip, setTip] = useState(0);
     const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
     const [total, setTotal] = useState(0)
-    const from = useSelector(state=>state.cart.from)
+    const from = useSelector(state=>state.route.from)
     const checkout_status = useSelector(state=>state.order.checkout.status)
     useEffect(()=>{
         setTotal(tip+subtotal+tax)
@@ -23,12 +23,13 @@ const Checkout = () => {
 
     useEffect(()=>{
         console.log(checkout_status)
-        if(checkout_status === 'succeeded'){
+        console.log(from)
+        if(checkout_status === 'succeeded' && from === 'Checkout2'){
             navigate(`/secure/ordersuccess` )
         }
         // Check if it is coming from Cart Summary, if not, go back to cart
         //restrict access from URL
-        if(from !== "CartSummary" || checkout_status === 'failed'){
+        else if(from !== "CartSummary" || checkout_status === 'failed'){
             navigate(`/cart` )
            
         }

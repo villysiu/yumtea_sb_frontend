@@ -75,7 +75,9 @@ const orderSlice=createSlice({
        
     },
     reducers: {
-        
+        clearorder(state, action){
+            state.checkout.status="idle"
+        }
         //   emptyTempCart(state,action){
         //     state.cart.temp_cart_arr = []
         //   },
@@ -110,7 +112,7 @@ const orderSlice=createSlice({
         
     }
 })
-// export const {  } = orderSlice.actions
+export const { clearorder } = orderSlice.actions
 export default orderSlice.reducer
 export const lastthirtydaysOrders = (state) => {
     const current = new Date()
