@@ -8,6 +8,7 @@ import CartSummary from "./CartSummary"
 
 import { batchAddItems } from "./cartSlice"
 import EmptyCart from "./EmptyCart"
+import FullSpinner from "../headerNav/FullSpinner"
 
 const Cart = () => {
     console.log("in cart")
@@ -28,8 +29,8 @@ const Cart = () => {
     }, [dispatch, current_user.username, cart.cart_arr])
 
     // console.log(cart_arr)
-    // if(cart.status === 'loading' || current_user.status === 'loading')
-    //     return <div>Loading</div>
+    if(cart.status === 'idle'  || cart.status === 'loading')
+        return <FullSpinner />
 
     if(cart.cart_arr.length === 0){
         return <EmptyCart />

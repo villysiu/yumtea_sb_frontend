@@ -28,7 +28,7 @@ import Reservations from './features/reservation/Reservations';
 import UpdateReservation from './features/reservation/UpdateReservation';
 import UpdateReservationFrom from './features/reservation/UpdateReservationFrom';
 import MenuitemByCategory from './features/menuitem/MenuitemByCategory';
-
+import ResetApp from './features/menuitem/ResetApp';
 const router = createBrowserRouter([
   {
       path: "/",
@@ -38,26 +38,32 @@ const router = createBrowserRouter([
               path: "/",
               element: <MenuitemApp />,
               children: [
-                  {
-                    path: "/",
-                    element: <MenuitemList />,
-                  },
-                  {
-                    path: "/menuitems",
-                    element: <MenuitemList />,
-                  },
-                  {
-                    path: "menuitems/cat/:categoryId",
-                    element: <MenuitemByCategory />,
-                  },
-                  {
-                    path: "menuitems/:itemId",
-                    element: <SingleMenuitem />,
-                  },
-                  {
-                    path: "/cart",
-                    element: <Cart />
-                  },
+                {
+                  path: "/",
+                  element: <ResetApp />,
+                  children: [
+                    {
+                      path: "/",
+                      element: <MenuitemList />,
+                    },
+                    {
+                      path: "/menuitems",
+                      element: <MenuitemList />,
+                    },
+                    {
+                      path: "menuitems/cat/:categoryId",
+                      element: <MenuitemByCategory />,
+                    },
+                    {
+                      path: "menuitems/:itemId",
+                      element: <SingleMenuitem />,
+                    },
+                    {
+                      path: "/cart",
+                      element: <Cart />
+                    },
+                  ]},
+
                   {
                     path: "/secure",
                     element: <Secure />,

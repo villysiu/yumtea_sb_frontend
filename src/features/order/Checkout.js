@@ -22,8 +22,6 @@ const Checkout = () => {
     }, [tip, subtotal, tax])
 
     useEffect(()=>{
-        console.log(checkout_status)
-        console.log(from)
         if(checkout_status === 'succeeded' && from === 'Checkout2'){
             navigate(`/secure/ordersuccess` )
         }

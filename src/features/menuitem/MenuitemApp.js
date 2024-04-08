@@ -10,7 +10,7 @@ const MenuitemApp = () =>{
     let menuitems_status = useSelector(state => state.menuitem.menuitems.status)
     let milk_status = useSelector(state => state.menuitem.milk.status)
     // let menuitemsByCategory_status = useSelector(state=>state.menuitem.menuitemsByCategory.status)
-
+    
     useEffect(()=>{
         if(menuitems_status==='idle'){
             dispatch(fetchMenuitems())
@@ -20,11 +20,11 @@ const MenuitemApp = () =>{
    }
       }, [dispatch, menuitems_status, milk_status])
 
-      if(menuitems_status === "idle" || milk_status==="idle" ){
+      if(menuitems_status === "idle" || milk_status==="idle"){
         return <FullSpinner />
 
     }
-    if(menuitems_status === "loading" || milk_status==="loading" ){
+    if(menuitems_status === "loading" || milk_status==="loading"){
         return <FullSpinner />
 
     }
