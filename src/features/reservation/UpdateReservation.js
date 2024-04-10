@@ -5,46 +5,36 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { getReservationById, updateReservation } from "./reservationSlice"
-import { useLocation, useNavigate } from "react-router-dom"
-import { Navigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 import ReserveForm from "./ReserveForm"
-// import { useParams } from "react-router-dom"
-// import { useSelector } from "react-redux"
+
 import { Button } from "react-bootstrap"
 
 const UpdateReservation =() =>{
 
     //  setup no direct access later
     let {resId} = useParams()
-    // const {state} = useLocation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const reservation = useSelector(state => getReservationById(parseInt(resId), state))
+
     const create_or_update_status = useSelector(state => state.reservation.create_or_update.status)
-    // const from = useSelector(state=>state.route.from)
 
     console.log(reservation)
-    const [date, setDate] = useState(null)
-    const [time, setTime] = useState(null)
-    const [guest, setGuest] = useState(null)
+    const [date, setDate] = useState(reservation.reservation_date)
+    const [time, setTime] = useState(reservation.reservation_time.slice(0,5))
+    const [guest, setGuest] = useState(reservation.no_of_guests)
     // if reservation not existed, return to all reservation
 
     useEffect(()=>{
-        if(create_or_update_status==='succeeded' 
-        // && from === 'updated'
-        ){
+        if(create_or_update_status==='succeeded'){
             navigate('/secure/reservations/success')
         }
     }, [create_or_update_status])
 
     useEffect(()=>{
-        if(reservation){
-            setDate(reservation.reservation_date)
-            setTime(reservation.reservation_time.slice(0,5))
-            setGuest(reservation.no_of_guests)
-        }
-        else //if(!reservation)
+        if(reservation.reservation_date==="")
             navigate('/secure/reservations')
         
     },[reservation])

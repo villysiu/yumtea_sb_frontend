@@ -226,16 +226,13 @@ export const { clear_reservation_status } = reservationSlice.actions
 export default reservationSlice.reducer
 
 export const getReservationById =(resId, state)=>{
-    console.log(resId)
-    console.log(state)
     const res = state.reservation.reservations.array.find(res=>res.pk === resId)
     
-    return res === undefined ? null : res
+    return res === undefined ? {reservation_date: '', reservation_time:'', no_of_guests: 0} : res
     // return null
 }
 
 export const getUpcomingReservations = (state) => {
-    console.log('hhhhhhlkfjdfdlfdlfjklsdjgslj')
     return state.reservation.reservations.array.filter(res=>{
         const dt = new Date(`${res.reservation_date}T${res.reservation_time}`)
         return dt>new Date()

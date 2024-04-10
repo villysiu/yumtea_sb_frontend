@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { fetchCategories, fetchMenuitems, fetchMenuitemsByCategory } from '../menuitem/menuitemSlice'
 import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
 import { logoutUser,  } from '../user/userSlice'
+import { deleteReservation } from '../reservation/reservationSlice'
 const messageSlice = createSlice({
     name: 'message',
     initialState: {
@@ -102,6 +103,15 @@ const messageSlice = createSlice({
                     status: true,
                     type: "success",
                     content: `Item added to shopping cart.`
+                }
+            )
+        })
+        .addCase(deleteReservation.fulfilled, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "success",
+                    content: `Reservation cancelled .`
                 }
             )
         })

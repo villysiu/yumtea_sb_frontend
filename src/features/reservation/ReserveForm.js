@@ -3,7 +3,7 @@ import ReserveGuest from './ReserveGuest'
 import ReserveDate from "./ReserveDate"
 
 const ReserveForm =({date, setDate, time, setTime, guest, setGuest})=>{
-    
+
     return(
         <>
 

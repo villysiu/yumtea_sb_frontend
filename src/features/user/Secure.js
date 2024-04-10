@@ -12,7 +12,7 @@ const Secure = () => {
     if(current_user.status === 'loading')
         return <FullSpinner />
         
-    if(current_user.status === 'idle' || current_user.status === 'failed'){
+    if(current_user.username === null || current_user.status === 'failed'){
         return (
             <Navigate to="../user/signin"
             // replace={true} 
