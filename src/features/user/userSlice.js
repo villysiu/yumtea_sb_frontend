@@ -143,8 +143,8 @@ const userSlice=createSlice({
         })
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
-            state.token.status = 'succcess'
-
+            state.token.status = 'succeeded'
+            // state.current_user = action.payload
 
         })
         .addCase(loginUser.rejected, (state, action) => {

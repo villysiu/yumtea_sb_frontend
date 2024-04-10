@@ -1,13 +1,15 @@
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { homeLink } from '../../app/global';
 import { Link, Navigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from './userSlice';
 
 const Login = () =>{
+    const token_status = useSelector(state=>state.user.token.status)
+    const current_user_status = useSelector(state=>state.user.current_user.status)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const dispatch=useDispatch();
@@ -39,10 +41,15 @@ const Login = () =>{
                     <Form.Control type="password" placeholder="Password" value={password} 
                         onChange={e=>setPassword(e.target.value)} />
                 </FloatingLabel>
+                {
+                    token_status === 'loading' || current_user_status === 'loading' ? 
+                    <Button className='gold_button mb-3' style={{'width': '81px'}}><Spinner size="sm" /></Button>
 
-                <Button type="submit" className='gold_button mb-3' disabled={ !username || !password }>
-                    Sign In
-                </Button>
+                    :
+                    <Button type="submit" className='gold_button mb-3' disabled={ !username || !password }>
+                        Sign In
+                    </Button>
+                }              
             </Form>
             <div>Forgot your password?</div>
             <Link to={`${homeLink}/user/signup`}>

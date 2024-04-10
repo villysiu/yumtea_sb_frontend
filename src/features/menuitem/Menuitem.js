@@ -7,11 +7,10 @@ import OutOfStockButton from "./OutOfStockButton"
 import { useState } from "react"
 import CustomizeContainer from "./CustomizeContainer"
 import { Button } from "react-bootstrap"
-import AddedOverlay from "./AddedOverlay"
+
 const Menuitem = ({menuitem}) =>{
-    console.log(menuitem)
+    
     const [show, setShow] = useState(false);
-    const [message, setMessage] = useState("") 
     return (
         <>
         {

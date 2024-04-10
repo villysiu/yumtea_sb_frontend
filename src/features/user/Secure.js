@@ -9,7 +9,8 @@ const Secure = () => {
     console.log(location)
     const current_user = useSelector(state => state.user.current_user)
 
-    if(current_user.status === 'loading')
+    if(current_user.status === 'loading' ||
+    (localStorage.getItem("token") && current_user.username===null))
         return <FullSpinner />
         
     if(current_user.username === null || current_user.status === 'failed'){
