@@ -6,7 +6,7 @@ import menuitemSlice from '../features/menuitem/menuitemSlice'
 import cartSlice from '../features/cart/cartSlice'
 import orderSlice from '../features/order/orderSlice'
 import reservationSlice from '../features/reservation/reservationSlice'
-import routeSlice from '../features/headerNav/routeSlice'
+
 
 export default configureStore({
   reducer: {
@@ -16,6 +16,6 @@ export default configureStore({
     cart: cartSlice,
     order: orderSlice,
     reservation: reservationSlice,
-    route: routeSlice,
+    
   },
 })

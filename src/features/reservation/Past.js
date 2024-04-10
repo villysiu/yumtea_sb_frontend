@@ -10,12 +10,11 @@ import DeleteReservationButton from "./DeleteReservationButton"
 import { getPastReservations } from "./reservationSlice"
 
 const Past = () =>{
-    const dispatch = useDispatch()
-    const reservation_status = useSelector(state=>state.reservation.reservations.status)
+   
+   
     const reservation_array = useSelector(state=>getPastReservations(state))
 
-    if(reservation_status === 'loading')
-        return <Spinner />
+
 
     if(reservation_array.length===0)
         return null

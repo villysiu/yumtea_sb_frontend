@@ -1,13 +1,14 @@
 import { Form } from "react-bootstrap"
 import { homeLink } from "../../app/global"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { makeReservation } from "./reservationSlice"
 import { useNavigate } from "react-router-dom"
 import ReserveForm from "./ReserveForm"
 import { Button } from "react-bootstrap"
+
 const Reserve = () =>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -17,6 +18,14 @@ const Reserve = () =>{
     const [date, setDate] = useState(todayStr)
     const [time, setTime] = useState("12:00")
     const [guest, setGuest] = useState(2)
+
+    const create_or_update_status = useSelector(state => state.reservation.create_or_update.status)
+
+    useEffect(()=>{
+        if(create_or_update_status==='succeeded'){
+            navigate('/secure/reservations/success')
+        }
+    }, [create_or_update_status])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -28,15 +37,7 @@ const Reserve = () =>{
         }
         console.log(formData)
         dispatch(makeReservation(formData))
-        .unwrap()
-        .then((originalPromiseResult) => {
-            console.log(originalPromiseResult)
-            console.log('hhh?')
-            navigate("../reservation/success", { state: { reservation: originalPromiseResult} });
-        })
-        .catch((rejectedValueOrSerializedError) => {
-        // handle error here
-        })
+        
     }
     return(
         <div className="reserve_wrapper">

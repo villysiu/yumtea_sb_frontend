@@ -26,22 +26,25 @@ import Reserve from './features/reservation/Reserve';
 import ReservationSuccess from './features/reservation/ReservationSuccess';
 import Reservations from './features/reservation/Reservations';
 import UpdateReservation from './features/reservation/UpdateReservation';
-import UpdateReservationFrom from './features/reservation/UpdateReservationFrom';
+import UpdateReservationFrom from './features/reservation/ReservationsApp';
 import MenuitemByCategory from './features/menuitem/MenuitemByCategory';
 import ResetApp from './features/menuitem/ResetApp';
+import ReservationsApp from './features/reservation/ReservationsApp';
 const router = createBrowserRouter([
   {
       path: "/",
       element: <App />,
+
       children: [
+        {
+          path: "/",
+          element: <ResetApp />,
+          children: [
           {
               path: "/",
               element: <MenuitemApp />,
               children: [
-                {
-                  path: "/",
-                  element: <ResetApp />,
-                  children: [
+          
                     {
                       path: "/",
                       element: <MenuitemList />,
@@ -62,58 +65,59 @@ const router = createBrowserRouter([
                       path: "/cart",
                       element: <Cart />
                     },
-                  ]},
+              ]
+          },
 
-                  {
-                    path: "/secure",
-                    element: <Secure />,
-                    children: [
+          {
+              path: "/secure",
+              element: <Secure />,
+              children: [
+                {
+                  path: '/secure/account',
+                  element: <Account />
+                },
+                {
+                  path: "/secure/orders",
+                  element: <OrderHistory />
+                },
+                {
+                  path: "/secure/checkout",
+                  element: <Checkout />
+                },
+                {
+                  path: "/secure/ordersuccess",
+                  element: <OrderSuccess />
+                },        
+                {
+                  path: "/secure/reservations/",
+                  element: <ReservationsApp />,
+                  children: [
                       {
-                        path: '/secure/account',
-                        element: <Account />
-                      },
-                      {
-                        path: "/secure/orders",
-                        element: <OrderHistory />
-                      },
-                      {
-                        path: "/secure/checkout",
-                        element: <Checkout />
-                      },
-                      {
-                        path: "/secure/ordersuccess",
-                        element: <OrderSuccess />
-                      },
-                      {
-                        path: "/secure/reserve",
-                        element: <Reserve />
-                      },
-                      
-                      {
-                        path: "/secure/reservations",
+                        path: "/secure/reservations/",
                         element: <Reservations />,
                       },
                       {
-                        path: "/secure/reservation/",
-                        element: <UpdateReservationFrom />,
-                        children: [
-                          {
-                            path: "/secure/reservation/update",
-                            element: <UpdateReservation />,
-                          },
-                          {
-                            path: "/secure/reservation/success",
-                            element: <ReservationSuccess />
-                          },
-                        ]
+                        path: "/secure/reservations/reserve",
+                        element: <Reserve />
                       },
+                      {
+                        path: "/secure/reservations/:resId/update",
+                        element: <UpdateReservation />,
+                      },
+                      {
+                        path: "/secure/reservations/success",
+                        element: <ReservationSuccess />
+                      },
+                  ]
+                },
+
       
-                    ]
+                ]
       
       
                 },
-              ]
-          },
+              
+          
           {
               path: "/user",
               element: <User />,
@@ -139,6 +143,7 @@ const router = createBrowserRouter([
               path: "/about",
               element: <About />
           },
+        ]}
 
       ],
       

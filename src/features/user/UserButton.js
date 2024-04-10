@@ -39,6 +39,7 @@ const UserButton = () =>{
             <div className="hello_user" 
                 onMouseEnter={()=>setShow(true)}
                 onMouseLeave={()=>setShow(false)}
+                
             >
                 <div className="d-none d-sm-block pe-2">Hello {current_user.username}</div>
                 <PersonFill className='header_icon' />

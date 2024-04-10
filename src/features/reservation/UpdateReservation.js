@@ -1,32 +1,56 @@
-import { Form } from "react-bootstrap"
+import { Form, Spinner } from "react-bootstrap"
 import { homeLink } from "../../app/global"
 
-import { useState } from "react"
-
-import { useDispatch } from "react-redux"
-import { updateReservation } from "./reservationSlice"
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { getReservationById, updateReservation } from "./reservationSlice"
 import { useLocation, useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import ReserveForm from "./ReserveForm"
 // import { useParams } from "react-router-dom"
 // import { useSelector } from "react-redux"
-// import { getReservationById } from "./reservationSlice"
 import { Button } from "react-bootstrap"
 
 const UpdateReservation =() =>{
 
     //  setup no direct access later
-    // const {pk} = useParams()
-    const {state} = useLocation()
+    let {resId} = useParams()
+    // const {state} = useLocation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const reservation = state.reservation
-    console.log(reservation)
-    
+    const reservation = useSelector(state => getReservationById(parseInt(resId), state))
+    const create_or_update_status = useSelector(state => state.reservation.create_or_update.status)
+    // const from = useSelector(state=>state.route.from)
 
-    const [date, setDate] = useState(reservation.reservation_date)
-    const [time, setTime] = useState(reservation.reservation_time.slice(0,5))
-    const [guest, setGuest] = useState(reservation.no_of_guests)
+    console.log(reservation)
+    const [date, setDate] = useState(null)
+    const [time, setTime] = useState(null)
+    const [guest, setGuest] = useState(null)
+    // if reservation not existed, return to all reservation
+
+    useEffect(()=>{
+        if(create_or_update_status==='succeeded' 
+        // && from === 'updated'
+        ){
+            navigate('/secure/reservations/success')
+        }
+    }, [create_or_update_status])
+
+    useEffect(()=>{
+        if(reservation){
+            setDate(reservation.reservation_date)
+            setTime(reservation.reservation_time.slice(0,5))
+            setGuest(reservation.no_of_guests)
+        }
+        else //if(!reservation)
+            navigate('/secure/reservations')
+        
+    },[reservation])
+
+   
+    
     
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -38,15 +62,7 @@ const UpdateReservation =() =>{
         }
         console.log(formData)
         dispatch(updateReservation({pk:reservation.pk, data: formData}))
-        .unwrap()
-        .then((originalPromiseResult) => {
-            console.log(originalPromiseResult)
-            console.log('hhh?')
-            navigate("../../reservation/success", { state: { reservation: originalPromiseResult} });
-        })
-        .catch((rejectedValueOrSerializedError) => {
-        // handle error here
-        })
+
     }
     return(
        
@@ -62,9 +78,11 @@ const UpdateReservation =() =>{
                 <ReserveForm date={date} setDate={setDate} time={time} setTime={setTime} 
                     guest={guest} setGuest={setGuest} 
                 />
+                { create_or_update_status === 'loading' ? <Spinner /> :
                 <div className='reserve_button_container'>
                     <Button type="submit" className='gold_button'>Update Reservation</Button>
                 </div>
+}
             </Form>
         </div>
     )

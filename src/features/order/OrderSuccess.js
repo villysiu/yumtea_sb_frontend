@@ -7,11 +7,13 @@ import { useSelector } from "react-redux";
 
 const OrderSuccess = () =>{
 
-    const from = useSelector(state=>state.route.from)
+    // const from = useSelector(state=>state.route.from)
+    const order_status = useSelector(state=>state.order.checkout_status)
     const order = useSelector(state=>state.order.order.orders_arr[0])
     
     // prohibited direct access this page
-    if(from !== "Checkout2"){
+    // if(from !== "Checkout2"){
+    if(order_status !== "succeeded"){
         return <Navigate to={`/`}  />
     }
 

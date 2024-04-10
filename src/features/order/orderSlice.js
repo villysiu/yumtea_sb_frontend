@@ -68,15 +68,14 @@ const orderSlice=createSlice({
             orders_arr: [],
             status: 'idle',
         },
-        checkout:{
-            status: 'idle',
+        checkout_status: 'idle',
 
-        }
+        
        
     },
     reducers: {
         clearorder(state, action){
-            state.checkout.status="idle"
+            state.checkout_status="idle"
         }
         //   emptyTempCart(state,action){
         //     state.cart.temp_cart_arr = []
@@ -98,16 +97,16 @@ const orderSlice=createSlice({
             state.order.status = 'failed'
         })
         .addCase(CheckoutCart.pending, (state, action) => {
-            state.checkout.status = 'loading'
+            state.checkout_status = 'loading'
         })
         .addCase(CheckoutCart.fulfilled, (state, action) => {
             
             console.log(action.payload)
-            state.checkout.status = 'succeeded'
+            state.checkout_status = 'succeeded'
             state.order.orders_arr = [ action.payload, ...state.order.orders_arr]
         })
         .addCase(CheckoutCart.rejected, (state, action) => {
-            state.checkout.status = 'failed'
+            state.checkout_status = 'failed'
         })
         
     }

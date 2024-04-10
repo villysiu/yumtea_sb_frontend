@@ -5,18 +5,19 @@ import { useEffect } from "react";
 import { fetchAllReservations } from "./reservationSlice";
 import { useDispatch, useSelector } from "react-redux";
 const ReserveTime = ({time, setTime, date}) =>{
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     let timeArray = ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
                     "15:00", "15:30", "16:00"]
 
-    const all_reservations = useSelector(state=>state.reservation.all_reservations)
+    const reservations_array = useSelector(state=>state.reservation.reservations.array)
+    // const reservations_status = useSelector(state=>state.reservation.reservations.status)
 
-    useEffect(()=>{
-        if(all_reservations.status === 'idle')
-            dispatch(fetchAllReservations())
-    }, [dispatch, all_reservations.status])
+    // useEffect(()=>{
+    //     if(reservations_status === 'idle')
+    //         dispatch(fetchAllReservations())
+    // }, [dispatch, all_reservations.status])
 
-    const blocked = all_reservations.array.map(res=>{
+    const blocked = reservations_array.map(res=>{
         if(res.reservation_date === date){
             return res.reservation_time.slice(0,5)
         }

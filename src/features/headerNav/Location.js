@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
-import MakeReservationButton from "../reservation/MakeReservation"
+import MakeReservationButton from "../reservation/MakeReservationButton"
 const Location = () =>{
     return(
         <div className="location_wrapper">

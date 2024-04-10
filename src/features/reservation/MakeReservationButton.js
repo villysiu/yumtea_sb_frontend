@@ -5,7 +5,7 @@ import { homeLink } from "../../app/global"
 const MakeReservationButton = () =>{
     return(
         <div className='make_reservation_button'>
-            <Link to={`${homeLink}/secure/reserve`}>
+            <Link to={`${homeLink}/secure/reservations/reserve`}>
                 <Button className="gold_button">Make reservation</Button>
             </Link>
         </div>

@@ -1,20 +1,23 @@
-import { useLocation } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { homeLink } from "../../app/global";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Clock } from "react-bootstrap-icons"
 import { Calendar3 } from "react-bootstrap-icons"
 import { PeopleFill } from "react-bootstrap-icons"
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 const ReservationSuccess = () =>{
-    let {state} = useLocation();
-    console.log(state)
-    // prohibited direct access this page
-   
-    // if(!location.state || state.from !== '/secure/reservation')
-    //     return <Navigate to="../../" replace={true} />
-
+    // const from = useSelector(state=>state.route.from)
+    const reservation_status = useSelector(state=>state.reservation.create_or_update.status)
+    const reservation = useSelector(state=>state.reservation.create_or_update.item)
+    const navigate = useNavigate()
     
-    const {reservation} = state
+    console.log(reservation_status)
+    useEffect(()=>{
+        if(reservation_status !== "succeeded")
+            navigate('/secure/reservations')
+    }, [reservation_status])
     return (
         <div className="reserve_wrapper">
             <div className="reserve_bg_wrapper">

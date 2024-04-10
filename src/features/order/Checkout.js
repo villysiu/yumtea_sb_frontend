@@ -9,33 +9,34 @@ import { useEffect, useState } from "react"
 import Tip from "./Tip"
 
 const Checkout = () => {
+    console.log("chchhchchchchhc")
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const [tip, setTip] = useState(0);
     const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
     const [total, setTotal] = useState(0)
-    const from = useSelector(state=>state.route.from)
-    const checkout_status = useSelector(state=>state.order.checkout.status)
+    const cart_status = useSelector(state=>state.cart.cart.status)
+    const checkout_status = useSelector(state=>state.order.checkout_status)
+    
     useEffect(()=>{
         setTotal(tip+subtotal+tax)
     }, [tip, subtotal, tax])
 
     useEffect(()=>{
-        if(checkout_status === 'succeeded' && from === 'Checkout2'){
+        if(checkout_status === 'succeeded'){
             navigate(`/secure/ordersuccess` )
         }
-        // Check if it is coming from Cart Summary, if not, go back to cart
+        
         //restrict access from URL
-        else if(from !== "CartSummary" || checkout_status === 'failed'){
+        else if(checkout_status === 'failed' || cart_status==='idle'){
             navigate(`/cart` )
-           
         }
         //  if(checkout_status === 'loading'  {
         //    spinner?
         //     
         // }
-    },[checkout_status, from])
+    },[checkout_status, cart_status])
     
     const handleClick = () =>{
         dispatch(CheckoutCart(tip))

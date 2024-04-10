@@ -9,10 +9,10 @@ import { PeopleFill } from "react-bootstrap-icons"
 import DeleteReservationButton from "./DeleteReservationButton"
 import EditReservationButton from "./EditReservationButton"
 import { getUpcomingReservations } from "./reservationSlice"
-import ReservationButton from "./ReservationButton"
-import MakeReservationButton from "./MakeReservation"
+
+import MakeReservationButton from "./MakeReservationButton"
 const Upcoming = () =>{
-    const reservation_status = useSelector(state=>state.reservation.reservations.status)
+    // const reservation_status = useSelector(state=>state.reservation.reservations.status)
     const reservation_array = useSelector(state=>getUpcomingReservations(state))
    
 
@@ -28,9 +28,6 @@ const Upcoming = () =>{
         <div className='upcoming_reservation_container mt-5'>
             <div className='upcoming_reservation_title'>Upcoming reservation</div>
             {
-                reservation_status === 'loading' ? 
-                <Spinner />
-                :
                 reservation_array.map(reservation=>{
                     return (
                         <div key={reservation.pk} className='single_upcoming_reservation_container'>
