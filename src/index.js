@@ -40,110 +40,108 @@ const router = createBrowserRouter([
           path: "/",
           element: <ResetApp />,
           children: [
-          {
-              path: "/",
-              element: <MenuitemApp />,
-              children: [
-          
-                    {
-                      path: "/",
-                      element: <MenuitemList />,
-                    },
-                    {
-                      path: "/menuitems",
-                      element: <MenuitemList />,
-                    },
-                    {
-                      path: "menuitems/cat/:categoryId",
-                      element: <MenuitemByCategory />,
-                    },
-                    {
-                      path: "menuitems/:itemId",
-                      element: <SingleMenuitem />,
-                    },
-                    {
-                      path: "/cart",
-                      element: <Cart />
-                    },
-              ]
-          },
-
-          {
-              path: "/secure",
-              element: <Secure />,
-              children: [
-                {
-                  path: '/secure/account',
-                  element: <Account />
-                },
-                {
-                  path: "/secure/orders",
-                  element: <OrderHistory />
-                },
-                {
-                  path: "/secure/checkout",
-                  element: <Checkout />
-                },
-                {
-                  path: "/secure/ordersuccess",
-                  element: <OrderSuccess />
-                },        
-                {
-                  path: "/secure/reservations/",
-                  element: <ReservationsApp />,
-                  children: [
+            {
+                path: "/",
+                element: <MenuitemApp />,
+                children: [
+            
                       {
-                        path: "/secure/reservations/",
-                        element: <Reservations />,
+                        path: "/",
+                        element: <MenuitemList />,
                       },
                       {
-                        path: "/secure/reservations/reserve",
-                        element: <Reserve />
+                        path: "/menuitems",
+                        element: <MenuitemList />,
                       },
                       {
-                        path: "/secure/reservations/:resId/update",
-                        element: <UpdateReservation />,
+                        path: "menuitems/cat/:categoryId",
+                        element: <MenuitemByCategory />,
                       },
                       {
-                        path: "/secure/reservations/success",
-                        element: <ReservationSuccess />
+                        path: "menuitems/:itemId",
+                        element: <SingleMenuitem />,
                       },
-                  ]
-                },
-
-      
+                      {
+                        path: "/cart",
+                        element: <Cart />
+                      },
                 ]
-      
-      
-                },
-              
-          
-          {
-              path: "/user",
-              element: <User />,
-              children: [
+            },
 
+            {
+                path: "/secure",
+                element: <Secure />,
+                children: [
                   {
-                    path: '/user/signin',
-                    element: <Login />
+                    path: '/secure/account',
+                    element: <Account />
                   },
                   {
-                    path: '/user/signup',
-                    element: <Signup />
+                    path: "/secure/orders",
+                    element: <OrderHistory />
                   },
-              ]
-          },
-          {
-            path: "/visit-taste",
-              element: <Location />,
-          },
-          
-          
-          {
-              path: "/about",
-              element: <About />
-          },
-        ]}
+                  {
+                    path: "/secure/checkout",
+                    element: <Checkout />
+                  },
+                  {
+                    path: "/secure/ordersuccess",
+                    element: <OrderSuccess />
+                  },        
+                  {
+                    path: "/secure/reservations/",
+                    element: <ReservationsApp />,
+                    children: [
+                        {
+                          path: "/secure/reservations/",
+                          element: <Reservations />,
+                        },
+                        {
+                          path: "/secure/reservations/reserve",
+                          element: <Reserve />
+                        },
+                        {
+                          path: "/secure/reservations/:resId/update",
+                          element: <UpdateReservation />,
+                        },
+                        {
+                          path: "/secure/reservations/success",
+                          element: <ReservationSuccess />
+                        },
+                    ]
+                  },
+
+        
+                  ]
+        
+        
+                  },
+                
+            
+            {
+                path: "/user",
+                element: <User />,
+                children: [
+
+                    {
+                      path: '/user/signin',
+                      element: <Login />
+                    },
+                    {
+                      path: '/user/signup',
+                      element: <Signup />
+                    },
+                ]
+            },
+            {
+              path: "/visit-taste",
+                element: <Location />,
+            },
+            {
+                path: "/about",
+                element: <About />
+            },
+          ]}
 
       ],
       

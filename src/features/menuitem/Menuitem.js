@@ -7,17 +7,18 @@ import OutOfStockButton from "./OutOfStockButton"
 import { useState } from "react"
 import CustomizeContainer from "./CustomizeContainer"
 import { Button } from "react-bootstrap"
+import CustomizeButton from "./CustomizeButton"
 
 const Menuitem = ({menuitem}) =>{
-    
-    const [show, setShow] = useState(false);
+
+    // const [show, setShow] = useState(false);
     return (
         <>
-        {
+        {/* {
             <Modal show={show} onHide={()=>setShow(false)}>
                 <CustomizeContainer menuitem={menuitem} setShow={setShow} /> 
             </Modal>
-        }
+        } */}
         
         <Col sm={12} md={4} lg={3} className="winelist_wine_wrapper"> 
             <Link to={`${homeLink}/menuitems/${menuitem.pk}`} className='solid_link'>
@@ -34,7 +35,8 @@ const Menuitem = ({menuitem}) =>{
                 <OutOfStockButton />
                 :
                 <div style={{"position": "relative"}}>
-                    <Button className='gold_button' onClick={()=>setShow(true)}>Customize</Button>
+                    <CustomizeButton menuitem={menuitem}/>
+                    {/* <Button className='gold_button' onClick={()=>setShow(true)}>Customize</Button> */}
                     {/* {message && <AddedOverlay message={message} setMessage={setMessage}/>} */}
                 </div>
             }

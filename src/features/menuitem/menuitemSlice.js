@@ -134,9 +134,13 @@ const menuitemSlice=createSlice({
             array: [],
             status: 'idle',
         }, 
+        // click: null,
     },
     reducers: {
-
+        setClick(state, action) {
+            state.click = action.payload
+        }
+        
     },
     extraReducers(builder) {
       builder
@@ -191,6 +195,8 @@ const menuitemSlice=createSlice({
     }
 })
 
+export const { setClick } = menuitemSlice.actions
+
 export default menuitemSlice.reducer
 
 export const getMenuitemById = (state, id) =>{
@@ -205,7 +211,7 @@ export const getMilks = (state) =>{
 }
 export const getMilkById = (state, id) =>{
     const milk = state.menuitem.milk.array.find(milk => milk.id === id)
-    return milk === undefined? null : milk.title
+    return milk === undefined? null : milk
 }
 export const getCategoryById = (state, id) => {
     let category = state.menuitem.category.array.find(cat=>cat.pk === id)
@@ -213,4 +219,9 @@ export const getCategoryById = (state, id) => {
 }
 export const getCategories = (state) =>{
     return state.menuitem.category
+}
+export const getUnitprice = (state, menuitem_id, milk_id) => {
+    const menuitem = state.menuitem.menuitems.array.find(item=>item.pk === menuitem_id)
+    const milk = state.menuitem.milk.array.find(item=>item.id === milk_id)
+    return menuitem.price + milk.price
 }

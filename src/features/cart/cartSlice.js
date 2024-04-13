@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 import { logoutUser } from "../user/userSlice";
 import { CheckoutCart } from "../order/orderSlice";
+
 export const batchAddItems=createAsyncThunk(
     'cart/batchAddItems',
     async (_, thunkAPI) => {
@@ -9,15 +10,22 @@ export const batchAddItems=createAsyncThunk(
         const temp_cart_arr = thunkAPI.getState().cart.cart.temp_cart_arr
         // {
         //     "menuitem_id": action.payload.singleMenuitem.pk, 
-        //     // "title": action.payload.singleMenuitem.title,
         //     "quantity": 1,
-        //     "linetotal": action.payload.singleMenuitem.price,
         //     "unit_price": action.payload.singleMenuitem.price,
         //     "milk_id": action.payload.milkId,
         // }
         try {
             for (let item of temp_cart_arr){
-                await thunkAPI.dispatch(addItemToCart({'menuitem_pk': item.menuitem_id, 'milk_pk': item.milk_id, 'quantity': item.quantity}) )
+                console.log(item)
+                await thunkAPI.dispatch(addItemToCart(
+                    {
+                        'menuitem_pk': item.menuitem_id, 
+                        'milk_pk': item.milk_id, 
+                        'quantity': item.quantity, 
+                        'temperature': item.temperature,
+                        'sweetness': item.sweetness
+                    }
+                ))
             }
             return null
         }
@@ -41,18 +49,7 @@ export const fetchCart=createAsyncThunk(
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            const data=await response.json()
-            // console.log(data)
-            // {
-            //     linetotal: 5,
-            //     menuitem_id: 6, 
-            //     milk_id: 3,
-            //     pk: 12,
-            //     quantity: 1,
-            //     unit_price: 5, 
-            //     user_id: 2
-            // }
-            
+            const data=await response.json()        
             return data
         } 
         catch(error){
@@ -62,10 +59,10 @@ export const fetchCart=createAsyncThunk(
 )
 export const addItemToCart = createAsyncThunk(
     'cart/addItemToCart',
-    async (item, thunkAPI) => {
+    async (item) => {
         console.log(item)
-        // {menuitem_pk: 1, milk_pk: 7}
-        // {menuitem_pk: 1, milk_pk: 7, quantity: 1}
+        // api :{menuitem_pk: 6, milk_pk: {…}, temperature: 'I', sweetness: '100'} 
+        // no user: {menuitem_pk: 2, milk_pk: 2, quantity: 1, temperature: 'I', sweetness: '100'}
         try {
             const response=await fetch(`${apiLink}/api/cart`, {
                 method: "POST",
@@ -82,15 +79,7 @@ export const addItemToCart = createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            // 	{
-	// 	"pk": 20,
-	// 	"user_id": 2,
-	// 	"menuitem_id": 7,
-	// 	"quantity": 2,
-	// 	"linetotal": 10.0,
-	// 	"unit_price": 5.0,
-	// 	"milk_id": 2
-	// },
+
             return data
         } 
         catch(error){
@@ -190,7 +179,6 @@ const cartSlice=createSlice({
             cart_arr: [],
             temp_cart_arr:[],
             status: 'idle',
-            // beingUpdated: null,
         },
        
        
@@ -199,27 +187,27 @@ const cartSlice=createSlice({
         
         increment(state, action) {
             console.log(action.payload)
-// {'singleMenuitem':singleMenuitem, 'milk': milk }
+            // menuitem_id: 2, milk: 2, temp: 'I', sweetness: '100', unit_price: 5
             
             let cartitem = state.cart.temp_cart_arr
-                .find(item=> item.menuitem_id === action.payload.singleMenuitem.pk 
-                        && item.milk_id === action.payload.milk.id)
-            let unit_price = action.payload.singleMenuitem.price +action.payload.milk.price
+                .find(item=> item.menuitem_id === action.payload.menuitem_id
+                    && item.milk_id === action.payload.milk
+                    && item.temperature === action.payload.temp 
+                    && item.sweetness === action.payload.sweetness)
 
-            // state.cart.subtotal += unit_price
-            // state.cart.tax += 0.1* unit_price
-            // state.cart.itemCount += 1
-
+            
             if(cartitem === undefined){
-                // console.log("item not in cart")
-                
                 state.cart.temp_cart_arr.push(
                     {
-                        "menuitem_id": action.payload.singleMenuitem.pk, 
+                        "menuitem_id": action.payload.menuitem_id, 
                         "quantity": 1,
-                        "linetotal": unit_price,
-                        "unit_price": unit_price,
-                        "milk_id": action.payload.milk.id,
+                        
+                        "unit_price": action.payload.unit_price,
+                        // "tax": action.payload.unit_price * 0.1,
+                        "milk_id": action.payload.milk,
+                        "sweetness": action.payload.sweetness,
+                        "temperature": action.payload.temp,
+                        "pk": state.cart.temp_cart_arr.length+1
                     }
                 )
             }
@@ -227,7 +215,7 @@ const cartSlice=createSlice({
                 console.log("item in cart")
                 console.log(cartitem)
                 cartitem.quantity++
-                cartitem.linetotal += unit_price
+                // cartitem.linetotal += action.payload.unit_price
      
             }
             state.cart.cart_arr = state.cart.temp_cart_arr
@@ -237,55 +225,46 @@ const cartSlice=createSlice({
         updateQty(state, action) {
             console.log(action.payload)
             // cartitem existed since it is from shopping cart 
-            let cartitem = state.cart.temp_cart_arr[action.payload.id]
-            
-            state.cart.subtotal += action.payload.unit_price
-            state.cart.tax += 0.1* action.payload.unit_price
-            state.cart.itemCount += action.payload.unit_price>0 ? 1 : -1
-
+            let cartitem = state.cart.temp_cart_arr.find(item=>item.pk === action.payload.cartitem_id)
             cartitem.quantity += action.payload.unit_price>0 ? 1 : -1
-            cartitem.linetotal += action.payload.unit_price
 
             state.cart.cart_arr = state.cart.temp_cart_arr
         },
         removeItem(state, action){
-            console.log(action.payload)
-            // {menuitemId: 2, milkId: 2}
-            // state.cart.temp_cart_arr = state.cart.temp_cart_arr
-            //     .filter(item=> !(item.menuitem_id === action.payload.menuitemId 
-            //         && item.milk_id === action.payload.milkId))
-            state.cart.temp_cart_arr.splice(action.payload.id, 1)
-            state.cart.quantity -= action.payload.quantity
-            state.cart.subtotal -= action.payload.linetotal
-            state.cart.tax = state.cart.subtotal * 0.1
+            console.log(action.payload) 
+        
+            state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=>item.pk !== action.payload)
             state.cart.cart_arr = state.cart.temp_cart_arr
         },
-        emptyTempCart(state,action){
+        emptyTempCart(state,_){
             state.cart.temp_cart_arr = []
         },
         updateCustomization(state, action){
             console.log(action.payload)
-            // {'cartId': cartId, 'menuitemId': menuitemId, 'prevMilk': prevMilk, 'updatedMilk': updatedMilk}
-            let existed_item = state.cart.temp_cart_arr.find(item=> item.menuitem_id === action.payload.menuitemId 
-                && item.milk_id === action.payload.updatedMilk.id)
+            // {'cartitem_id': cartItem.pk, 'menuitem_id':cartItem.menuitem_id, 'milk_id': milk_id, 'temperature': temp, 'sweetness': sweetness
+            // unit_price: 7}
+            let existed_item = state.cart.temp_cart_arr.find(item=> 
+                item.menuitem_id === action.payload.menuitem_id 
+                && item.milk_id === action.payload.milk_id
+                && item.temperature === action.payload.temperature 
+                && item.sweetness === action.payload.sweetness
+            )
             console.log(existed_item)
             
-            let cartitem = state.cart.temp_cart_arr[action.payload.cartId]
+            let cartitem = state.cart.temp_cart_arr.find(item=>item.pk===action.payload.cartitem_id)
             console.log(cartitem)
 
-            state.cart.subtotal = state.cart.subtotal - cartitem.quantity * action.payload.prevMilk.price + cartitem.quantity * action.payload.updatedMilk.price
-            state.cart.tax = 0.1* state.cart.subtotal
-
             if(existed_item === undefined){
-                cartitem.milk_id = action.payload.updatedMilk.id
-                cartitem.unit_price = cartitem.unit_price - action.payload.prevMilk.price + action.payload.updatedMilk.price
-                cartitem.linetotal = cartitem.unit_price * cartitem.quantity
+                cartitem.milk_id = action.payload.milk_id
+                cartitem.temperature = action.payload.temperature 
+                cartitem.sweetness = action.payload.sweetness
+                cartitem.unit_price = action.payload.unit_price
             }
             else{
 
                 existed_item.quantity += cartitem.quantity
-                existed_item.linetotal += cartitem.quantity * existed_item.unit_price
-                state.cart.temp_cart_arr.splice(action.payload.cartId, 1)
+                state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=>item.pk!==action.payload.cartitem_id)
+
             }
             
             
@@ -329,7 +308,7 @@ const cartSlice=createSlice({
             else{
                 console.log("item in cart")
                 cartitem.quantity = action.payload.quantity
-                cartitem.linetotal = action.payload.linetotal
+                // cartitem.linetotal = action.payload.linetotal
             }
             
         })
@@ -337,13 +316,11 @@ const cartSlice=createSlice({
             state.cart.status = 'failed'
         })
         .addCase(removeItemFromCart.pending, (state, action) => {
-            state.cart.status = 'loading'
-            let toBeUpdated = action.meta.arg.cartitemId
-            let item = state.cart.cart_arr.find(item=>item.pk === toBeUpdated)
+            
+            let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
             item.status = 'loading'
         })
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
-            state.cart.status = 'succeeded'
             state.cart.cart_arr = state.cart.cart_arr.filter(cartitem=>cartitem.pk !== action.payload.cartitemId)
             
         })
@@ -352,41 +329,29 @@ const cartSlice=createSlice({
         })
         .addCase(updateCartItemQty.pending, (state, action) => {
             // console.log(action)
-            state.cart.status = 'loading'
-            let toBeUpdated = action.meta.arg.cartitemId
-            let item = state.cart.cart_arr.find(item=>item.pk === toBeUpdated)
+            // state.cart.status = 'loading'
+            let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
             item.status = 'loading'
         })
         .addCase(updateCartItemQty.fulfilled, (state, action) => {
-            // [
-            //     {
-            //         "pk": 62,
-            //         "user_id": 2,
-            //         "menuitem_id": 2,
-            //         "quantity": 5,
-            //         "linetotal": 25.0,
-            //         "unit_price": 5.0,
-            //         "tax": 2.5,
-            //         "milk_id": 3
-            //     }
-            // ]
+            
             console.log(action.payload)
-            state.cart.status = 'succeeded'
+            
             // item must exist since updating qty from cart
             let item = state.cart.cart_arr.find(item=>item.pk === action.payload.pk)
             item.quantity = action.payload.quantity
-            item.linetotal = action.payload.linetotal
-            item.tax = action.payload.tax
+            // item.linetotal = item.quantity * item.unit_price
+            // item.tax = action.payload.tax
           
             delete item.status
         })
         .addCase(updateCartItemQty.rejected, (state, action) => {
-            state.cart.status = 'failed'
+            let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
+            delete item.status
         })
         .addCase(updateCartItemOptions.pending, (state, action) => {
-            state.cart.status = 'loading'
-            let toBeUpdated = action.meta.arg.cartitemId
-            let item = state.cart.cart_arr.find(item=>item.pk === toBeUpdated)
+            console.log(action)
+            let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
             item.status = 'loading'
         })
         .addCase(updateCartItemOptions.fulfilled, (state, action) => {
@@ -415,15 +380,15 @@ const cartSlice=createSlice({
             let cartitem = state.cart.cart_arr.find(item=>item.pk === action.payload.updated.pk)
             cartitem.unit_price = action.payload.updated.unit_price
             cartitem.quantity = action.payload.updated.quantity
-            cartitem.linetotal = action.payload.updated.linetotal
             cartitem.milk_id = action.payload.updated.milk_id
             cartitem.temperature = action.payload.updated.temperature
             cartitem.sweetness = action.payload.updated.sweetness
-            cartitem.tax = action.payload.updated.tax
+            
             delete cartitem.status
         })
         .addCase(updateCartItemOptions.rejected, (state, action) => {
-            state.cart.status = 'failed'
+            let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
+            delete item.status
         })
         .addCase(batchAddItems.pending, (state, action) => {
             state.cart.status = 'loading'
@@ -454,10 +419,10 @@ export default cartSlice.reducer
 export const getSubtotalAndTax = (cart_arr) =>{
     let subtotal = 0, tax = 0
     for(let cart_item of cart_arr){
-        subtotal += cart_item.linetotal
-        tax += cart_item.tax
+        subtotal += cart_item.unit_price * cart_item.quantity
+        
     }
-    return [subtotal, tax]
+    return [subtotal, subtotal*0.1]
 }
 export const getItemCount = (cart_arr) =>{
     let count = 0

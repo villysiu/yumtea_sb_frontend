@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap"
 
 const CustomizeSweetness = ({sweetness, setSweetness}) =>{
     const sweetnessArr =  {'100':'100%', '75': "75%", '50': "50%", "25": "25%", '0': "No Sugar"}
-    console.log(sweetness)
+   
     const handleChange = e =>{
         // console.log(e.target)
         setSweetness(e.target.value)
@@ -22,7 +22,7 @@ const CustomizeSweetness = ({sweetness, setSweetness}) =>{
                 >
                     {
                         Object.entries(sweetnessArr).map(([key,val])=>{
-                            console.log(`${key} :${val}`)
+                            
                             return(
                                 <option key={key} value={key}>
                                     {val}

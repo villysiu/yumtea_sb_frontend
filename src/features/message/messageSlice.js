@@ -3,6 +3,7 @@ import { fetchCategories, fetchMenuitems, fetchMenuitemsByCategory } from '../me
 import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
 import { logoutUser,  } from '../user/userSlice'
 import { deleteReservation } from '../reservation/reservationSlice'
+import { increment } from '../cart/cartSlice'
 const messageSlice = createSlice({
     name: 'message',
     initialState: {
@@ -16,6 +17,7 @@ const messageSlice = createSlice({
     },
     extraReducers(builder) {
         builder
+
         .addCase(fetchCategories.rejected, (state, action) => {
             state.message_arr.push(
                 {
@@ -77,6 +79,15 @@ const messageSlice = createSlice({
             )
 
         })
+        .addCase(addItemToCart.rejected, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "danger",
+                    content: `Item failed added shopping cart.`
+                }
+            )
+        })
         .addCase(updateCartItemQty.fulfilled, (state, action) => {
             console.log(action)
             state.message_arr.push(
@@ -87,6 +98,15 @@ const messageSlice = createSlice({
                 }
             )
         })
+        .addCase(updateCartItemQty.rejected, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "danger",
+                    content: `Update Qty failed.`
+                }
+            )
+        })
         .addCase(updateCartItemOptions.fulfilled, (state, action) => {
             console.log(action)
             state.message_arr.push(
@@ -94,6 +114,15 @@ const messageSlice = createSlice({
                     status: true,
                     type: "success",
                     content: `Item's options updated.`
+                }
+            )
+        })
+        .addCase(updateCartItemOptions.rejected, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "danger",
+                    content: `Update Options failed.`
                 }
             )
         })
@@ -116,6 +145,15 @@ const messageSlice = createSlice({
             )
         })
 
+        .addCase(increment, (state, action) => {
+            state.message_arr.push(
+                {
+                    status: true,
+                    type: "success",
+                    content: `Item TTTTTT added to shopping cart.`
+                }
+            )
+        })
     }
 })
 export default messageSlice.reducer

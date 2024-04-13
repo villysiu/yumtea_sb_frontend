@@ -2,9 +2,9 @@ import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
 const CustomizeTemp = ({temp, setTemp}) => {
     const tempArr =  {'H':'Hot', 'I': "Iced"}
-    console.log(temp)
+
     const handleChange = e =>{
-        console.log(e.target)
+        
         setTemp(e.target.value)
     }
     if(temp==="N")
@@ -21,7 +21,7 @@ const CustomizeTemp = ({temp, setTemp}) => {
                 >
                     {
                         Object.entries(tempArr).map(([key,val])=>{
-                            console.log(`${key} :${val}`)
+                           
                             return(
                                 <option key={key} value={key}>
                                     {val}

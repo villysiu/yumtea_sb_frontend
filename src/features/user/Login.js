@@ -2,12 +2,14 @@ import { Button, Spinner } from 'react-bootstrap';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { homeLink } from '../../app/global';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from './userSlice';
 
 const Login = () =>{
+    const location = useLocation()
+    console.log(location.pathname)
     const token_status = useSelector(state=>state.user.token.status)
     const current_user_status = useSelector(state=>state.user.current_user.status)
     const [username, setUsername] = useState("")

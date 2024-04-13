@@ -1,38 +1,44 @@
 import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { addItemToCart, increment } from "../cart/cartSlice"
-import { getMilkById } from "./menuitemSlice"
+import { getMilkById, getUnitprice } from "./menuitemSlice"
 import {Spinner} from "react-bootstrap"
-const PurchaseButton = ({singleMenuitem, milkId, temp, sweetness, setShow}) =>{
+
+
+const PurchaseButton = ({setShow, menuitem_id, milk_id, temp, sweetness}) =>{
+    console.log("purchase button ")
+    // console.log(menuitem)
+    // console.log(milk_id)
     const dispatch = useDispatch()
-    const milk = useSelector(state => getMilkById(state, milkId))
-    const current_user = useSelector(state => {
-        return state.user.current_user
-    })
     const cart = useSelector(state => state.cart.cart)
+    const current_user = useSelector(state=>state.user.current_user)
+    // const milk = useSelector(state=>getMilkById(state, milk_id))
+    const unit_price = useSelector(state=>getUnitprice(state, menuitem_id, milk_id))
     const handleClick = (e) =>{
-        console.log("purchase button ")
-   
+        
         if(current_user.username === null){
-            dispatch(increment({'singleMenuitem':singleMenuitem, 'milk': milk }))
+            console.log("add to cart without user ")
+            
+            dispatch(increment({'menuitem_id':menuitem_id, 'milk': milk_id, temp: temp, sweetness: sweetness, unit_price: unit_price }))
             setShow(false)
-            // setMessage(`${singleMenuitem.title} added to shopping cart.` )
         } 
         else{
-            const data = {'menuitem_pk': singleMenuitem.pk, 'milk_pk': milkId, 'temperature': temp, 'sweetness': sweetness}
+            console.log("purchase login ")
+            const data = {'menuitem_pk': menuitem_id, 'milk_pk': milk_id, 'temperature': temp, 'sweetness': sweetness}
             console.log(data)
             dispatch(addItemToCart(data))
             .unwrap()
             .then((originalPromiseResult) => {
                 setShow(false)
-                // setMessage(`${singleMenuitem.title} added to shopping cart.` )
+                
             })
             .catch((rejectedValueOrSerializedError) => {
                 setShow(false)
-                // setMessage("Failed to add item to shopping cart.")
+                
             })  
         }     
     }
+    // 
     if(cart.status === 'loading')
         return ( <div>
             <Button className='gold_button' disabled><Spinner animation="border" size="sm" /></Button>

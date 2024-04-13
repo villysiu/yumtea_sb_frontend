@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { decrement, updateQty } from "./cartSlice"
 import { useEffect } from "react"
 import { updateCartItemQty } from "./cartSlice"
-const MinusButton = ({cartId, cartItem, setQuantity, setError})=>{
+const MinusButton = ({cartItem, setError})=>{
     const dispatch = useDispatch()
     const current_user = useSelector(state => {
         return state.user.current_user
     })
     const handleClick = () => {
         if(current_user.username === null){
-            // dispatch(decrement({'menuitemId':cartItem.menuitem_id, 'milkId': cartItem.milk_id }))
-        //    dispatch(decrement(cartId))
-            dispatch(updateQty({'id': cartId, 'unit_price': -cartItem.unit_price}))
+            dispatch(updateQty({'cartitem_id': cartItem.pk, 'unit_price': -cartItem.unit_price}))
         }else{
             dispatch(updateCartItemQty({'cartitemId': cartItem.pk, 'quantity': cartItem.quantity-1}))
         

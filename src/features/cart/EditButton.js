@@ -1,38 +1,48 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Modal, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import CustomizeList from "../menuitem/CustomizeList"
 import { getMenuitemById } from "../menuitem/menuitemSlice"
 import { updateCustomization } from "./cartSlice"
 import { updateCartItemOptions } from "./cartSlice"
-import { getMilkById } from "../menuitem/menuitemSlice"
-// import CustomizeMilk from "../menuitem/CustomizeMilk"
-// import CustomizeTemp from "../menuitem/CustomizeTemp"
 
-const EditButton = ({cartId, cartItem, prevMilk}) =>{
+
+import { getUnitprice } from "../menuitem/menuitemSlice"
+
+const EditButton = ({cartItem}) =>{
+
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
     const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
-    const current_user = useSelector(state => {
-        return state.user.current_user
-    })
+    const current_user = useSelector(state => state.user.current_user)
+
     const [temp, setTemp] = useState(cartItem.temperature)
-    const [milk, setMilk] = useState(cartItem.milk_id)
+    const [milk_id, setMilkID] = useState(cartItem.milk_id)
     const [sweetness, setSweetness] = useState(cartItem.sweetness)
-    const updatedMilk = useSelector(state=>getMilkById(state, milk))
+
+    const unit_price = useSelector(state=>getUnitprice(state, cartItem.menuitem_id, milk_id))
+
+    // useEffect(()=>{
+    //     console.log(temp)
+    //     console.log(cartItem.temperature)
+    //     setTemp(cartItem.temperature)
+    // }, [cartItem.temperature])
     const handleClick = () =>{
         
         if(current_user.username === null){
-            // dispatch(updateCustomization({'menuitemId':cartItem.menuitem_id, 
-            //                     'prevMilkId': cartItem.milk_id, 'updatedMilkId': milk }))
-            dispatch(updateCustomization({'cartId': cartId, 'menuitemId':cartItem.menuitem_id, 'prevMilk': prevMilk, 'updatedMilk': updatedMilk} ))
+            
+            dispatch(updateCustomization({'cartitem_id': cartItem.pk, 'menuitem_id':cartItem.menuitem_id,
+                'milk_id': milk_id, 'temperature': temp, 'sweetness': sweetness,
+                'unit_price': unit_price
+            
+            } ))
             setShow(false)
         }
         else {
             
             dispatch(updateCartItemOptions(
-                {cartitemId: cartItem.pk, formData: {'milk_pk': milk, 'temperature': temp, 'sweetness': sweetness}}
+                {cartitemId: cartItem.pk, formData: {'milk_pk': milk_id, 'temperature': temp, 'sweetness': sweetness}}
             ))
             setShow(false)
         }
@@ -42,15 +52,18 @@ const EditButton = ({cartId, cartItem, prevMilk}) =>{
     return (
         <>
             {
+
                 <Modal show={show} onHide={()=>setShow(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Customize {menuitem.title}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <CustomizeList menuitem={menuitem} 
-                        milk={milk} setMilk={setMilk} 
+                    
+                    <CustomizeList 
+                        milk_id={milk_id} setMilkID={setMilkID}
                         temp={temp} setTemp={setTemp}
                         sweetness={sweetness} setSweetness={setSweetness}
+
                     />
                     </Modal.Body>
                     <Modal.Footer>

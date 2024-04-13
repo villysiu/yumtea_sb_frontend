@@ -1,14 +1,13 @@
 import CustomizeMilk from "./CustomizeMilk"
 import CustomizeTemp from "./CustomizeTemp"
 import CustomizeSweetness from "./CustomizeSweetness"
-const CustomizeList = ({menuitem, milk, setMilk, temp, setTemp, sweetness, setSweetness}) =>{
-    console.log(menuitem)
-    console.log(sweetness)
+const CustomizeList = ({milk_id, setMilkID, temp, setTemp, sweetness, setSweetness}) =>{
+    // console.log( milk_id, temp, sweetness)
     return (
         <>
             <CustomizeTemp temp={temp} setTemp={setTemp} />
             <br/>
-            <CustomizeMilk milk={milk} setMilk={setMilk} />
+            <CustomizeMilk milk_id={milk_id} setMilkID={setMilkID} />
             <br/>
             <CustomizeSweetness sweetness={sweetness} setSweetness={setSweetness} />
       

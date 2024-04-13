@@ -28,8 +28,8 @@ const Cart = () => {
         }
     }, [dispatch, current_user.username, cart.cart_arr])
 
-    // console.log(cart_arr)
-    if(cart.status === 'idle'  || cart.status === 'loading')
+    console.log(cart)
+    if((cart.status === 'idle'  || cart.status === 'loading') && current_user.username!==null)
         return <FullSpinner />
 
     if(cart.cart_arr.length === 0){
@@ -50,7 +50,7 @@ const Cart = () => {
                 </div>
                 <div className="border borderSecondary px-3">
                     {
-                        cart.cart_arr.map((item, idx)=><CartItem key={idx} cartId={idx} cartItem={item} />)
+                        cart.cart_arr.map((item)=><CartItem key={item.pk} cartItem={item} />)
                     }
                 </div>       
             </div>

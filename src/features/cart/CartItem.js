@@ -14,10 +14,6 @@ import ItemCustomizationList from "./ItemCustomizationList"
 
 const CartItem = ({cartId, cartItem}) => {
     const [error, setError] = useState("")
-    // console.log("in cartitem")
-    // console.log(cartItem)
-
-    // const milkTitle = useSelector(state=>getMilkById(state, cartItem.milk_id))
     const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem_id))
     
     return(
@@ -46,12 +42,12 @@ const CartItem = ({cartId, cartItem}) => {
                     </div>
                     <div className='cartitem_qty'>
                         <div className="cartitem_qty_input">
-                            <MinusButton cartId={cartId} cartItem={cartItem} setError={setError}/>
+                            <MinusButton cartItem={cartItem} setError={setError}/>
                             <QtyInputBox cartItem={cartItem} />
                            
-                            <PlusButton cartId={cartId} cartItem={cartItem} 
-                            // inventory={menuItem.inventory}  
-                            inventory={100}
+                            <PlusButton cartItem={cartItem} 
+                            inventory={menuitem.inventory}  
+                            // inventory={100}
                             setError={setError} />
                         </div>    
                         {
@@ -67,15 +63,15 @@ const CartItem = ({cartId, cartItem}) => {
                             </div>
                         } */}
                         <div className='cartitem_other_width'>
-                            <EditButton cartId={cartId} cartItem={cartItem} prevMilk={cartItem.milk_id} />
+                            <EditButton cartItem={cartItem}  />
                         </div>
                         <div className='cartitem_other_width'>
-                            <RemoveButton cartId={cartId} cartItem={cartItem} title={menuitem.title} />
+                            <RemoveButton cartItem={cartItem} />
                         </div>
                     </div>
                     <div className='cartitem_price'>                       
                         <div>{USDollar.format(cartItem.unit_price)}</div>
-                        <div><b>Total {USDollar.format(cartItem.linetotal)}</b></div>
+                        <div><b>Total {USDollar.format(cartItem.unit_price * cartItem.quantity)}</b></div>
                     </div>
                 </div>
 

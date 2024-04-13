@@ -3,17 +3,17 @@ import { Form } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { USDollar } from "../../app/global"
 import { getMilks } from "./menuitemSlice"
-const CustomizeMilk = ({milk, setMilk}) =>{
+const CustomizeMilk = ({milk_id, setMilkID}) =>{
     
     const milksArray = useSelector(state=>getMilks(state))
 
     const handleChange = e =>{
-        setMilk(parseInt(e.target.value))
+        setMilkID(parseInt(e.target.value))
     }
     if(milksArray.length === 0)
         return null
 
-    if(milk === 1 )
+    if(milk_id === 1 )
         return null
     return (
         
@@ -22,7 +22,7 @@ const CustomizeMilk = ({milk, setMilk}) =>{
                 <span className="customize_milk_title">Milk Alternative</span>
             
                 <Form.Select className='customize_milk_select'
-                    onChange={handleChange} defaultValue={milk}
+                    onChange={handleChange} defaultValue={milk_id}
                 >
                     {
                         milksArray.map(choice =>{
