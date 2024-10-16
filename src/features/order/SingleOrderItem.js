@@ -2,12 +2,12 @@ import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
-import { getMenuitemTitleById, getMilkById } from "../menuitem/menuitemSlice"
+import { getMenuitemTitleById } from "../menuitem/menuitemSlice"
 import ItemCustomizationList from "../cart/ItemCustomizationList"
 
 const SingleOrderItem = ({item}) =>{
     const menuitem_title = useSelector(state=>getMenuitemTitleById(state, item.menuitem_id))
-    const milk = useSelector(state=>getMilkById(state, item.milk_id))
+    // const milk = useSelector(state=>getMilkById(state, item.milk_id))
 
     return(
         <div className='singleorder_item'>

@@ -13,10 +13,12 @@ const Reserve = () =>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const today = new Date() 
+    
     const todayStr= `${today.getFullYear()}-${parseInt((today.getMonth()) +1).toString().padStart(2,"0")}-${today.getDate()}`
+    console.log(todayStr)
 
     const [date, setDate] = useState(todayStr)
-    const [time, setTime] = useState("12:00")
+    const [time, setTime] = useState(`${today.getHours()+1}:00`)
     const [guest, setGuest] = useState(2)
 
     const create_or_update_status = useSelector(state => state.reservation.create_or_update.status)
@@ -25,7 +27,7 @@ const Reserve = () =>{
         if(create_or_update_status==='succeeded'){
             navigate('/secure/reservations/success')
         }
-    }, [create_or_update_status])
+    }, [create_or_update_status, navigate])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -40,20 +42,18 @@ const Reserve = () =>{
         
     }
     return(
-        <div className="reserve_wrapper">
+        <div>
             <div className="reserve_bg_wrapper">
-                <img src={`${homeLink}/A4CAC926-19A1-4D99-AA1A-F9CD36186C5C.jpeg`} alt="" className="singlewine_bg"></img>
-            
-                <div className='reserve_title_container'>
-                    <div className='reserve_title'><b>Little D Tasting Reservations </b></div>
-                </div>
+                
+                    <div className='reserve_title'><b>Yum Tea Tasting Reservations </b></div>
+      
             </div>
             <Form onSubmit={handleSubmit} className='reserve_container'>
                 <ReserveForm date={date} setDate={setDate} time={time} setTime={setTime} 
                     guest={guest} setGuest={setGuest}
                 />
                 <div className='reserve_button_container'>
-                    <Button type="submit" className='gold_button'>Make Reservation</Button>
+                    <Button type="submit" className='gold_button'>Reserve</Button>
                 </div>
             </Form>
         </div>

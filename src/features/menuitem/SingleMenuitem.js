@@ -7,11 +7,10 @@ import { useState } from "react"
 import { Button } from "react-bootstrap"
 import { Modal } from "react-bootstrap"
 import { getMenuitemById } from "./menuitemSlice"
-import AddedOverlay from "./AddedOverlay"
 import OutOfStockButton from "./OutOfStockButton"
+
 const SingleMenuitem = () =>{
     let {itemId} = useParams()
-    const [message, setMessage] = useState("")
     let singleMenuitem = useSelector(state => getMenuitemById(state, parseInt(itemId)))
     console.log(singleMenuitem)
     const [show, setShow] = useState(false);

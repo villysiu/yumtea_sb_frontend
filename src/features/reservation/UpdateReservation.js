@@ -31,13 +31,13 @@ const UpdateReservation =() =>{
         if(create_or_update_status==='succeeded'){
             navigate('/secure/reservations/success')
         }
-    }, [create_or_update_status])
+    }, [create_or_update_status, navigate])
 
     useEffect(()=>{
         if(reservation.reservation_date==="")
             navigate('/secure/reservations')
         
-    },[reservation])
+    },[reservation, navigate])
 
    
     

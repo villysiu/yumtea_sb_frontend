@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createSelector,current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 
 export const makeReservation=createAsyncThunk(

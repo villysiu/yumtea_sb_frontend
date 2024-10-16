@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
+import { homeLink } from '../../app/global';
 
 const Title = () => {
     return (
-        <div className="title_wrapper">
-           
-            <Link to={"/"} className="title">
-                Little D's 
-            </Link>
-        </div>
+        <Link to={`${homeLink}`} 
+            className="nav_brand header_title" 
+            // onClick={()=>setShow(false)}
+            >
+                Yum Cha 
+        </Link>
+                
         
     )
 }

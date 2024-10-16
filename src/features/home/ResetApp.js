@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { clearorder } from "../order/orderSlice"
 import { Outlet, useLocation } from "react-router-dom"
 import { clear_reservation_status } from "../reservation/reservationSlice"
-import { setClick } from "./menuitemSlice"
+
 const ResetApp =() =>{
     const location = useLocation()
 
@@ -16,13 +16,15 @@ const ResetApp =() =>{
     const regex = /\/secure\/reservations\/\d+\/update/
     
     useEffect(()=>{
-        // Reset order status
+        
 
         if( location.pathname !== '/secure/reservations/success' &&
             !regex.test(location.pathname)){
             if(reservation_status !== 'idle')
                 dispatch(clear_reservation_status())
         }
+
+        // Reset order status
         if(location.pathname !== "/secure/checkout" && 
             location.pathname !== "/secure/ordersuccess"
         ){
@@ -32,7 +34,8 @@ const ResetApp =() =>{
         }
         // if(click)
         //     dispatch(setClick(null))
-    },[order_status, location.pathname])
+    }, [order_status, location.pathname, dispatch, reservation_status])
+
     return(
         <Outlet />
     )

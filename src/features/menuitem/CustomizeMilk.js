@@ -27,7 +27,7 @@ const CustomizeMilk = ({milk_id, setMilkID}) =>{
                     {
                         milksArray.map(choice =>{
                             if(choice.id === 1 ) 
-                                return;
+                                return null;
 
                             return(
                                 <option key={choice.id} value={choice.id}>

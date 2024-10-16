@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Modal, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import CustomizeList from "../menuitem/CustomizeList"
@@ -22,12 +22,7 @@ const EditButton = ({cartItem}) =>{
     const [sweetness, setSweetness] = useState(cartItem.sweetness)
 
     const unit_price = useSelector(state=>getUnitprice(state, cartItem.menuitem_id, milk_id))
-
-    // useEffect(()=>{
-    //     console.log(temp)
-    //     console.log(cartItem.temperature)
-    //     setTemp(cartItem.temperature)
-    // }, [cartItem.temperature])
+    
     const handleClick = () =>{
         
         if(current_user.username === null){
@@ -35,18 +30,16 @@ const EditButton = ({cartItem}) =>{
             dispatch(updateCustomization({'cartitem_id': cartItem.pk, 'menuitem_id':cartItem.menuitem_id,
                 'milk_id': milk_id, 'temperature': temp, 'sweetness': sweetness,
                 'unit_price': unit_price
-            
             } ))
-            setShow(false)
         }
         else {
             
             dispatch(updateCartItemOptions(
                 {cartitemId: cartItem.pk, formData: {'milk_pk': milk_id, 'temperature': temp, 'sweetness': sweetness}}
             ))
-            setShow(false)
+            
         }
-
+        setShow(false)
         
     }
     return (

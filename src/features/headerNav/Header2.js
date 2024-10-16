@@ -10,11 +10,13 @@ import { X } from 'react-bootstrap-icons';
 import UserButton from '../user/UserButton';
 import HeaderCollapableItems from './HeaderCollapsableItems';
 import HeaderFullscreenList from './HeaderFullscreenList';
+import Title from './Title'
+
 const Header2 = () => {
-    
-    // const [showCategories, toggleShowCategories] = useState(false)
+
+    // manipulate HeaderFullscreenList when screen is small
     const [show, setShow] = useState(false)
-   
+
     useEffect(() => {
         const handleResize = () => setShow(false);
         window.addEventListener('resize', handleResize);
@@ -22,9 +24,16 @@ const Header2 = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    // Closes the fullscreen dropdown menu if clicked on any button other than open hamburger
     useEffect(() => {
+
         const handleClick = (e) => {
-            if(e.target.tagName.toLowerCase() === 'a')
+            // console.log(e.target)
+            // console.log(e.target.tagName)
+            if((e.target.tagName.toLowerCase() === 'a' || e.target.tagName === 'svg') && 
+                e.target.id!=="open")
+            
                 setShow(false)
         };
         window.addEventListener('click', handleClick);
@@ -33,42 +42,42 @@ const Header2 = () => {
             window.removeEventListener('click', handleClick);
         };
     }, []);
+    
+
 
     
     return (
         
         <div className="header2_wrapper">
             <div className='header_container'>
-                <Link to={`${homeLink}`} className="nav_brand header_title" onClick={()=>setShow(false)}>Little D</Link>
-                
+                <Title />
                 <div className="header_features">
-                    {/* show itesm when screen bigger than 992*/}
+                    {/* show items when screen bigger than 992*/}
                     <div className="d-none d-lg-block">
                         <HeaderCollapableItems />
                     </div>
 
                     <div className='user_items'>
                         {
-                            !show &&
-                            <div onClick={()=>setShow(false)}>
-                                <UserButton  />
-                            </div>
+                            !show && <UserButton />
                         }
 
-                        <Link to={`${homeLink}/cart`} onClick={()=>setShow(false)} >
+                        <Link to={`${homeLink}/cart`} >
                             <Cart className="circle_button" />
                         </Link>
 
                         {/* show hamburger dropdown list when screen smaller than 992*/}
-                        <div className="d-lg-none">
+                        <div className="d-lg-none" >
                             
                             {show ? 
                                 <>
-                                    <X className='header_dropdown_x_button header_nav_x_btn' onClick={()=>setShow(false)} />
+                                    <X className='header_dropdown_x_button header_nav_x_btn' />
                                     <HeaderFullscreenList />
                                 </>
                                 :
-                                <List className='header_dropdown_bar_button' onClick={()=>setShow(true)} />
+                                <List className='header_dropdown_bar_button' id="open"
+                                onClick={()=>setShow(true)} 
+                                />
                             }
                             
                         </div>

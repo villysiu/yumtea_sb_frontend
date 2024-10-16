@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Modal } from "react-bootstrap"
 import CustomizeContainer from "./CustomizeContainer"
 // import { useNavigate, useLocation } from "react-router-dom"

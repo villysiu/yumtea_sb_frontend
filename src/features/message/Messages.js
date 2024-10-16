@@ -19,7 +19,7 @@ const Message = ({message}) =>{
             clearInterval(timer)
         }
 
-    }, []);
+    }, [dispatch]);
     
     if(show){
         return (

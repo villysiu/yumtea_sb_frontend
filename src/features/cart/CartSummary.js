@@ -5,9 +5,7 @@ import CartSummaryDetails from "./CartSummaryDetails"
 import { useSelector } from "react-redux"
 import SmokySpinner from "../headerNav/SmokySpinner"
 
-import { useDispatch } from "react-redux"
 const CartSummary = () =>{
-    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.cart)
 
                 

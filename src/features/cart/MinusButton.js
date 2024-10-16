@@ -1,8 +1,9 @@
-import { Button, NavItem } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { decrement, updateQty } from "./cartSlice"
+import { updateQty } from "./cartSlice"
 import { useEffect } from "react"
 import { updateCartItemQty } from "./cartSlice"
+
 const MinusButton = ({cartItem, setError})=>{
     const dispatch = useDispatch()
     const current_user = useSelector(state => {

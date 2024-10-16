@@ -1,17 +1,16 @@
-import { Button } from "react-bootstrap"
 import { homeLink } from "../../app/global"
-import { Link } from "react-router-dom"
 import MakeReservationButton from "../reservation/MakeReservationButton"
-const Location = () =>{
+
+const VisitTaste = () =>{
     return(
-        <div className="location_wrapper">
+        <div>
             <div className="location_bg_wrapper">
-                <img src={`${homeLink}/A4CAC926-19A1-4D99-AA1A-F9CD36186C5C.jpeg`} className="singlewine_bg"></img>
+                {/* <img alt="" src={`${homeLink}/visit_taste.jpeg`} className="singlewine_bg"></img> */}
             
-                <div className='location_title_container'>
-                    <div className='location_title'><b>Little D Tasting Room </b></div>
+                
+                    <div className='location_title'><b>Yum Tea Tasting Room </b></div>
                     <MakeReservationButton />
-                </div>
+              
             </div>
             <div className="location_details_container">
                 
@@ -51,4 +50,4 @@ const Location = () =>{
         </div>
     )
 }
-export default Location
+export default VisitTaste

@@ -417,7 +417,8 @@ export const { increment, decrement, updateQty, removeItem, emptyTempCart, updat
 export default cartSlice.reducer
 
 export const getSubtotalAndTax = (cart_arr) =>{
-    let subtotal = 0, tax = 0
+    let subtotal = 0
+    // tax = 0
     for(let cart_item of cart_arr){
         subtotal += cart_item.unit_price * cart_item.quantity
         

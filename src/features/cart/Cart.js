@@ -26,7 +26,7 @@ const Cart = () => {
                     dispatch(batchAddItems())
             })
         }
-    }, [dispatch, current_user.username, cart.cart_arr])
+    }, [dispatch, current_user.username, cart.cart_arr, cart.status, cart.temp_cart_arr.length])
 
     console.log(cart)
     if((cart.status === 'idle'  || cart.status === 'loading') && current_user.username!==null)

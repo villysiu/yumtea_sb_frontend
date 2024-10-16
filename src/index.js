@@ -7,6 +7,7 @@ import store from './app/store'
 
 
 import App from './App';
+import Home from './features/home/Home'
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import About from './features/headerNav/About'
 import MenuitemList from './features/menuitem/MenuitemList';
@@ -21,14 +22,14 @@ import User from './features/user/User';
 import OrderHistory from './features/order/OrderHistory';
 import Checkout from './features/order/Checkout';
 import OrderSuccess from './features/order/OrderSuccess';
-import Location from './features/headerNav/Location';
+import VisitTaste from './features/home/VisitTaste';
 import Reserve from './features/reservation/Reserve';
 import ReservationSuccess from './features/reservation/ReservationSuccess';
 import Reservations from './features/reservation/Reservations';
 import UpdateReservation from './features/reservation/UpdateReservation';
-import UpdateReservationFrom from './features/reservation/ReservationsApp';
+// import UpdateReservationFrom from './features/reservation/ReservationsApp';
 import MenuitemByCategory from './features/menuitem/MenuitemByCategory';
-import ResetApp from './features/menuitem/ResetApp';
+import ResetApp from './features/home/ResetApp';
 import ReservationsApp from './features/reservation/ReservationsApp';
 const router = createBrowserRouter([
   {
@@ -45,10 +46,10 @@ const router = createBrowserRouter([
                 element: <MenuitemApp />,
                 children: [
             
-                      {
-                        path: "/",
-                        element: <MenuitemList />,
-                      },
+                      // {
+                      //   path: "/",
+                      //   element: <Home />,
+                      // },
                       {
                         path: "/menuitems",
                         element: <MenuitemList />,
@@ -135,7 +136,7 @@ const router = createBrowserRouter([
             },
             {
               path: "/visit-taste",
-                element: <Location />,
+                element: <VisitTaste />,
             },
             {
                 path: "/about",

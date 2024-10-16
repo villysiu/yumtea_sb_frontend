@@ -36,7 +36,7 @@ const Checkout = () => {
         //    spinner?
         //     
         // }
-    },[checkout_status, cart_status])
+    },[checkout_status, cart_status, navigate])
     
     const handleClick = () =>{
         dispatch(CheckoutCart(tip))

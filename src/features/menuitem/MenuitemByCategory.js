@@ -28,7 +28,7 @@ const MenuitemByCategory = () =>{
                 navigate("/menuitems");
             })  
 
-    }, [dispatch, menuitemsByCategory.category_id, id])
+    }, [dispatch, menuitemsByCategory.category_id, id, navigate])
 
     if(menuitemsByCategory.status === "idle" ){
         return <FullSpinner />

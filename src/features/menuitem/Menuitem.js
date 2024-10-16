@@ -1,12 +1,9 @@
 import { Col } from "react-bootstrap"
-import { Modal } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import OutOfStockButton from "./OutOfStockButton"
-import { useState } from "react"
-import CustomizeContainer from "./CustomizeContainer"
-import { Button } from "react-bootstrap"
+// import CustomizeContainer from "./CustomizeContainer"
 import CustomizeButton from "./CustomizeButton"
 
 const Menuitem = ({menuitem}) =>{

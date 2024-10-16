@@ -1,5 +1,3 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import { Check } from 'react-bootstrap-icons';
 import { Form } from "react-bootstrap"
 
 const OrderFilter = ({filter, setFilter}) =>{
