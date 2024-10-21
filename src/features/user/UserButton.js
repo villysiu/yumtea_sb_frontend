@@ -1,11 +1,10 @@
-import { useState } from "react"
-import { useSelector } from "react-redux"
-import { homeLink } from "../../app/global"
+import { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
+import { homeLink } from "../../app/global";
 import { Link } from 'react-router-dom';
 import { PersonCircle, PersonFill } from "react-bootstrap-icons";
 import UserDropdown from "./UserDropdown";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { fetchCurrentUser } from "./userSlice";
 import { Spinner } from "react-bootstrap";
 

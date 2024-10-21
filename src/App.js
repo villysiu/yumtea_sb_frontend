@@ -1,10 +1,10 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import { Outlet } from 'react-router-dom';
 import Messages from './features/message/Messages';
 import Header2 from './features/headerNav/Header2';
-
+import HomeBackground from './features/home/HomeBackground';
 function App() {
   console.log("in APP")
 
@@ -19,7 +19,9 @@ function App() {
               <div style={{'height': '4rem'}}></div>
              
               <Outlet />
-              </div>
+          </div>
+          <HomeBackground />
+          
               
       </div>
      

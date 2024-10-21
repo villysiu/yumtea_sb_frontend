@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current, createSelector } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 
 export const makeReservation=createAsyncThunk(
@@ -140,6 +140,9 @@ const reservationSlice=createSlice({
         create_or_update: {
             status: 'idle',
             item: null,
+        },
+        delete: {
+            status: 'idle'
         }
        
     },
@@ -147,6 +150,10 @@ const reservationSlice=createSlice({
         clear_reservation_status(state, action){
             state.create_or_update.status="idle"
             state.create_or_update.item=null
+            
+        },
+        clear_delete_status(state, action){
+            state.delete.status = 'idle'
         }
     },
     extraReducers(builder) {
@@ -178,11 +185,14 @@ const reservationSlice=createSlice({
         .addCase(fetchReservations.rejected, (state, action) => {
             state.reservations.status = 'failed'
         })
+
         .addCase(deleteReservation.pending, (state, action) => {
             state.reservations.status = 'loading'
+            state.delete.status = 'loading'
         })
         .addCase(deleteReservation.fulfilled, (state, action) => {
             state.reservations.status = 'succeeded'
+            state.delete.status = 'succeeded'
             state.reservations.array = 
             state.reservations.array.filter(res=>{
                 return res.pk!==action.payload
@@ -191,7 +201,9 @@ const reservationSlice=createSlice({
         })
         .addCase(deleteReservation.rejected, (state, action) => {
             state.reservations.status = 'failed'
+            state.delete.status = 'failed'
         })
+        
         .addCase(updateReservation.pending, (state, action) => {
             state.reservations.status = 'loading'
             state.create_or_update.status = 'loading'
@@ -222,7 +234,7 @@ const reservationSlice=createSlice({
         
     }
 })
-export const { clear_reservation_status } = reservationSlice.actions
+export const { clear_reservation_status, clear_delete_status } = reservationSlice.actions
 export default reservationSlice.reducer
 
 export const getReservationById =(resId, state)=>{
@@ -232,34 +244,20 @@ export const getReservationById =(resId, state)=>{
     // return null
 }
 
-export const getUpcomingReservations = (state) => {
-    return state.reservation.reservations.array.filter(res=>{
-        const dt = new Date(`${res.reservation_date}T${res.reservation_time}`)
-        return dt>new Date()
-    }).sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
-}
-export const getPastReservations = (state) => {
-    return state.reservation.reservations.array.filter(res=>{
+
+const res = state =>  state.reservation.reservations.array
+
+export const getPastReservations = createSelector([res], (arr) => {
+    return arr.filter(res=>{
         const dt = new Date(`${res.reservation_date}T${res.reservation_time}`)
         return dt<=new Date()
     }).sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
-}
-// const selectReservations = state => state.reservation.reservations.array
+})
 
-// export const getUpcomingReservations = createSelector([selectReservations], array=>{
-//     return array.filter(
-//         res=>{
-//             const date2 = new Date(`${res.reservation_date}T${res.reservation_time}`)
-//             return date2>new Date()
-//         }
-//     )
-// })
+export const getUpcomingReservations = createSelector([res], (arr) =>{
+    return arr.filter(res=>{
+        const dt = new Date(`${res.reservation_date}T${res.reservation_time}`)
+        return dt>new Date()
+    }).sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
+})
 
-// export const getPastReservations = createSelector([selectReservations], array=>{
-//     return array.filter(
-//         res=>{
-//             const date2 = new Date(`${res.reservation_date}T${res.reservation_time}`)
-//             return date2<=new Date()
-//         }
-//     )
-// })

@@ -4,11 +4,12 @@ import { homeLink } from "../../app/global"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { getReservationById, updateReservation } from "./reservationSlice"
+import { getReservationById, updateReservation, deleteReservation } from "./reservationSlice"
 import {  useNavigate } from "react-router-dom"
 import ReserveForm from "./ReserveForm"
-
+import ReserveBackground from "./ReserveBackground"
 import { Button } from "react-bootstrap"
+import DeleteReservation from './DeleteReservation'
 
 const UpdateReservation =() =>{
 
@@ -20,59 +21,75 @@ const UpdateReservation =() =>{
     const reservation = useSelector(state => getReservationById(parseInt(resId), state))
 
     const create_or_update_status = useSelector(state => state.reservation.create_or_update.status)
+    const delete_status = useSelector(state => state.reservation.delete.status)
 
     console.log(reservation)
-    const [date, setDate] = useState(reservation.reservation_date)
-    const [time, setTime] = useState(reservation.reservation_time.slice(0,5))
+    const [reservationDate, setReservationDate] = useState(reservation.reservation_date)
+    const [reservationTime, setReservationTime] = useState(reservation.reservation_time.slice(0,5))
     const [guest, setGuest] = useState(reservation.no_of_guests)
-    // if reservation not existed, return to all reservation
+    
 
     useEffect(()=>{
+        console.log("in update res")
+
         if(create_or_update_status==='succeeded'){
             navigate('/secure/reservations/success')
         }
+        if(delete_status === 'succeeded')
+            navigate('/secure/reservations')
     }, [create_or_update_status, navigate])
 
+    // if reservation not existed, return to all reservation
     useEffect(()=>{
         if(reservation.reservation_date==="")
             navigate('/secure/reservations')
         
     },[reservation, navigate])
 
-   
-    
-    
-    const handleSubmit = (e) => {
+
+    const handleUpdate = (e) => {
         e.preventDefault()
         
         const formData={
-            'reservation_date': date,
-            'reservation_time': `${time}:00`,
+            'reservation_date': reservationDate,
+            'reservation_time': `${reservationTime}:00`,
             'no_of_guests': guest
         }
         console.log(formData)
         dispatch(updateReservation({pk:reservation.pk, data: formData}))
 
     }
+    const handleDelete = () =>{
+        dispatch(deleteReservation(reservation.pk))
+    }
     return(
        
-        <div className="reserve_wrapper">
-            <div className="reserve_bg_wrapper">
-                <img src={`${homeLink}/2018-CK-lifestyle.jpeg`} alt="" className="singlewine_bg"></img>
+        <div>
+            <ReserveBackground />
             
-                <div className='reserve_title_container'>
-                    <div className='reserve_title'><b>Little D Tasting Reservations </b></div>
-                </div>
-            </div>
-            <Form onSubmit={handleSubmit} className='reserve_container'>
-                <ReserveForm date={date} setDate={setDate} time={time} setTime={setTime} 
-                    guest={guest} setGuest={setGuest} 
+            <Form className='reserve_container'>
+                <ReserveForm
+                    reservationDate={reservationDate} setReservationDate={setReservationDate}
+                    reservationTime={reservationTime} setReservationTime={setReservationTime}
+                    guest={guest} setGuest={setGuest}
                 />
-                { create_or_update_status === 'loading' ? <Spinner /> :
+                <div className="reservation_buttons_container">
+                { 
+                    create_or_update_status === 'loading' 
+                    ? 
+                    <Spinner /> 
+                    :
+                    <div className='reserve_button_container'>
+                        <Button onClick={handleUpdate}  className='gold_button'>Update Reservation</Button>
+                    </div>
+                }
+                
                 <div className='reserve_button_container'>
-                    <Button type="submit" className='gold_button'>Update Reservation</Button>
+                    <Button onClick={handleDelete} className='red_button'>Cancel Reservation</Button>
                 </div>
-}
+            
+                </div>
+
             </Form>
         </div>
     )

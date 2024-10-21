@@ -1,25 +1,21 @@
 import { Form } from "react-bootstrap"
-import { homeLink } from "../../app/global"
-
 import { useState, useEffect } from "react"
-
 import { useDispatch, useSelector } from "react-redux"
 import { makeReservation } from "./reservationSlice"
 import { useNavigate } from "react-router-dom"
 import ReserveForm from "./ReserveForm"
+import ReserveBackground from "./ReserveBackground"
 import { Button } from "react-bootstrap"
 
 const Reserve = () =>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const today = new Date() 
     
-    const todayStr= `${today.getFullYear()}-${parseInt((today.getMonth()) +1).toString().padStart(2,"0")}-${today.getDate()}`
-    console.log(todayStr)
+    const [reservationDate, setReservationDate] = useState("")
+    const [reservationTime, setReservationTime] = useState("")
 
-    const [date, setDate] = useState(todayStr)
-    const [time, setTime] = useState(`${today.getHours()+1}:00`)
     const [guest, setGuest] = useState(2)
+    
 
     const create_or_update_status = useSelector(state => state.reservation.create_or_update.status)
 
@@ -31,10 +27,9 @@ const Reserve = () =>{
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        
         const formData={
-            'reservation_date': date,
-            'reservation_time': `${time}:00`,
+            'reservation_date': reservationDate,
+            'reservation_time': `${reservationTime}:00`,
             'no_of_guests': guest
         }
         console.log(formData)
@@ -43,13 +38,12 @@ const Reserve = () =>{
     }
     return(
         <div>
-            <div className="reserve_bg_wrapper">
-                
-                    <div className='reserve_title'><b>Yum Tea Tasting Reservations </b></div>
-      
-            </div>
+            <ReserveBackground />
             <Form onSubmit={handleSubmit} className='reserve_container'>
-                <ReserveForm date={date} setDate={setDate} time={time} setTime={setTime} 
+
+                <ReserveForm
+                    reservationDate={reservationDate} setReservationDate={setReservationDate}
+                    reservationTime={reservationTime} setReservationTime={setReservationTime}
                     guest={guest} setGuest={setGuest}
                 />
                 <div className='reserve_button_container'>

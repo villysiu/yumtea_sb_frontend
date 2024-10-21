@@ -5,7 +5,7 @@ import { homeLink } from '../../app/global';
 const HeaderCollapableItems = () => {
     return (
         <div className="collapsable_items">
-            <Link to={`${homeLink}/menuitems`} className='collapsable_item_link header_text'>
+            <Link to={`${homeLink}/`} className='collapsable_item_link header_text'>
                 Home
             </Link>               
             <CategoryDropdown />

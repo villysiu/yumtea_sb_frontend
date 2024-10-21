@@ -1,15 +1,12 @@
-import { homeLink } from "../../app/global"
 import MakeReservationButton from "../reservation/MakeReservationButton"
 
 const VisitTaste = () =>{
     return(
         <div>
             <div className="location_bg_wrapper">
-                {/* <img alt="" src={`${homeLink}/visit_taste.jpeg`} className="singlewine_bg"></img> */}
-            
                 
-                    <div className='location_title'><b>Yum Tea Tasting Room </b></div>
-                    <MakeReservationButton />
+                <div className='location_title'><b>Yum Tea Tasting Room </b></div>
+                <MakeReservationButton />
               
             </div>
             <div className="location_details_container">

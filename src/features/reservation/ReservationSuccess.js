@@ -6,27 +6,26 @@ import { Calendar3 } from "react-bootstrap-icons"
 import { PeopleFill } from "react-bootstrap-icons"
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { Spinner } from "react-bootstrap"
+import ReserveBackground from "./ReserveBackground"
 
 const ReservationSuccess = () =>{
     // const from = useSelector(state=>state.route.from)
     const reservation_status = useSelector(state=>state.reservation.create_or_update.status)
     const reservation = useSelector(state=>state.reservation.create_or_update.item)
     const navigate = useNavigate()
-    
-    console.log(reservation_status)
+
     useEffect(()=>{
-        if(reservation_status !== "succeeded")
+        if(reservation_status !== "succeeded" || !reservation)
             navigate('/secure/reservations')
-    }, [reservation_status, navigate])
+    }, [reservation_status, navigate, reservation])
+   
+    if(!reservation)
+        return <Spinner />
     return (
-        <div className="reserve_wrapper">
-            <div className="reserve_bg_wrapper">
-                <img src={`${homeLink}/2018-CK-lifestyle.jpeg`} alt="" className="singlewine_bg"></img>
-            
-                <div className='reserve_title_container'>
-                    <div className='reserve_title'><b>Little D Tasting Reservations </b></div>
-                </div>
-            </div>
+        <div>
+            <ReserveBackground />
+           
             <div className='reservation_success_container'>
                 <div className='reservation_success_title mb-3'>Your reservaiotn is confirmed.</div>
                 <div key={reservation.pk} className='reservation_success_details_container'>

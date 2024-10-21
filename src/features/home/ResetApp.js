@@ -2,13 +2,14 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { clearorder } from "../order/orderSlice"
 import { Outlet, useLocation } from "react-router-dom"
-import { clear_reservation_status } from "../reservation/reservationSlice"
+import { clear_reservation_status, clear_delete_status } from "../reservation/reservationSlice"
 
 const ResetApp =() =>{
     const location = useLocation()
 
     const order_status = useSelector(state=>state.order.checkout_status)
-    const reservation_status = useSelector(state=>state.reservation.create_or_update_status)
+    const reservation_status = useSelector(state=>state.reservation.create_or_update.status)
+    const delete_status = useSelector(state=>state.reservation.delete.status)
     // const click = useSelector(state=>state.menuitem.click)
     const dispatch = useDispatch()
     
@@ -23,6 +24,9 @@ const ResetApp =() =>{
             if(reservation_status !== 'idle')
                 dispatch(clear_reservation_status())
         }
+        if( location.pathname === '/secure/reservations' && delete_status!=='idle'){
+            dispatch(clear_delete_status())
+        }
 
         // Reset order status
         if(location.pathname !== "/secure/checkout" && 
@@ -32,8 +36,7 @@ const ResetApp =() =>{
             if(order_status !== 'idle')
                 dispatch(clearorder())
         }
-        // if(click)
-        //     dispatch(setClick(null))
+        
     }, [order_status, location.pathname, dispatch, reservation_status])
 
     return(

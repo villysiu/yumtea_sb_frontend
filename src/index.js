@@ -46,10 +46,10 @@ const router = createBrowserRouter([
                 element: <MenuitemApp />,
                 children: [
             
-                      // {
-                      //   path: "/",
-                      //   element: <Home />,
-                      // },
+                      {
+                        path: "/",
+                        element: <Home />,
+                      },
                       {
                         path: "/menuitems",
                         element: <MenuitemList />,
