@@ -1,12 +1,6 @@
 const Brand = () =>{
     return(
-        <>
-              Yum
-              <img 
-            //   src = {tea_char} 
-              alt="" className='tea_chinese' />
-               Tea
-          </>
+            <img alt="" id='yumtea_logo' />
     )
 }
 export default Brand

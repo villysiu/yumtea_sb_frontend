@@ -12,7 +12,9 @@ const HomeBackground = () => {
     }, []);
     return(
         <div id="home_bg">
-        <Brand />
+            <div id="home_brand_container">
+                <Brand />
+            </div>
         </div>
     )
 }

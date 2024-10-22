@@ -1,12 +1,35 @@
+#home_brand_container {
+    width: 30rem;
+    height: 10rem;
+}
+
 .tea_chinese {
-    width: 15rem;
-    height: 15rem;
+    /* width: 15rem;
+    height: 15rem; */
     display:inline-block;
     background-color: rgb(192 149 83);;
     -webkit-mask:url("http://127.0.0.1:8001/tea_chinese_2.png") center/contain;
     margin: 2rem;
     
 }
+#brand {
+    --logo_width: 30rem;
+    --logo_height: 10rem;
+
+}
+#yumtea_logo {
+    width: 100%;
+    height: 100%;
+    display:inline-block;
+    background-color: rgb(192 149 83);;
+    -webkit-mask:url("http://127.0.0.1:8001/yumtea_logo.png") center/contain;
+}
+.brand {
+    /* font-size: 10rem; */
+    color:rgb(192 149 83);
+    
+  }
+
 #home_bg {
     width: 100vw;
     height: 100vh;
@@ -21,8 +44,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10rem;
-    color:rgb(192 149 83);
     
     z-index: 1050;
     text-shadow: 0 0 4px black;
@@ -33,3 +54,4 @@
     transition: opacity 6s;
     z-index: 0;
   }
+  
