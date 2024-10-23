@@ -1,14 +1,181 @@
-/* .tea_chinese {
-    width: 4rem;
-    height: 4rem;
-    margin: 0;
-    margin-bottom: 20px;
+#header_wrapper{
+    width: 100vw;
+    background-color: #d1c089;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1040;
+      position: fixed;
+      left:0;
+      top: 0;
+      padding: 0.5rem;
+  
+  
 }
-.brand {
-    font-size: 3rem;
-} */
+#headernav_wrapper {
+    display: flex;
+    align-items: center;
+}
+
 
 .header_brand_container {
     width: 15rem;
-    height: 4rem;
+    height: 5rem;
+    background-size: 100%;
+    background-image: url("http://127.0.0.1:8001/yumtea_logo.png");
+    -webkit-filter: drop-shadow(0px 0px 1px rgb(178, 177, 177));
 }
+
+.header_home_button {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 2rem;
+  font-weight: bolder;
+  color: var(--gold-text-color);
+  text-decoration: none;
+
+  position: relative;
+}
+.header_home_button:hover, .header_home_button.active {
+  color: var(--dark-brown-title);
+}
+/* .header_home_button:hover:after, .header_home_button.active:after {
+  content: "T";
+  font-size: 1rem;
+  position: absolute;
+  top: 2.2rem;
+  /* bottom: 1rem; */
+  /* left: 0;
+  right: 0;
+  height: 20px;
+  text-align: center;
+
+} */
+.header_drinks {
+  position: relative;
+}
+.header_drinks_dropdown_wrapper {
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  text-align: center;
+
+  width: 208px;
+    height: 370px;
+}
+.header_drinks_dropdown{
+  position: absolute;
+  top: 4rem;
+  background-color: var(--gold-text-color-hover);
+  border: solid 1px black;
+  width: 13rem;
+  color: white;
+
+
+}
+.header_drinks_box {
+  border-bottom: solid 1px white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+.header_drinks_link{
+  /* width: 100%;
+  height: 100%;*/
+  text-decoration: none;
+  color: white; 
+}
+
+.header_drinks_link:hover, .header_drinks_link:active{
+  color: white;
+}
+.header_drinks_box:hover {
+  background-color: rgb(72, 59, 24)
+}
+
+
+  
+  .header_text {
+  
+    /* mix-blend-mode: difference; */
+      color: var(--header_text_color);
+  }
+  
+  
+  
+  
+  .header_features {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    color: white;
+    align-items: center;
+  
+  }
+  .collapsable_items {
+    display: flex;
+    align-items: center;
+    
+  
+  }
+  .collapsable_item_link{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    text-decoration: none;
+  }
+  #navbarScrollingDropdown::after{
+    display: none; 
+  }
+  .header_dropdown_bar_button, .header_dropdown_x_button, .header_icon {
+    color: black;
+    font-size: 2rem;
+    
+  }
+  
+  .header_md_fullscreen_dropdown {
+    position: absolute;
+    color: black;
+    background-color: #d1c089;
+    width: 100%;
+    left: 0;
+    top: 48px;
+    height: 100vh;
+    z-index: 205;
+  }
+  
+   @media all and (max-width: 991.98px) {
+    .header_features{
+      justify-content: flex-end;
+    }
+    .navbar-collapse {
+      position: absolute;
+      top: 60px;
+      left: 0px;
+      background-color:  rgb(245, 237, 207);
+      width: 100%;
+      height: 100vh;
+    }
+    .header_md_dropdown {
+      text-align: center;
+      font-weight: bold; 
+    }
+    .header_nav_x_btn {
+      display: block;
+    }
+    .dropdown-menu{
+      /* top: 35px; */
+      text-align: center;
+      border: 0;
+    }
+    .collapsable_items {
+      flex-direction: column;
+    }
+    .header_text {
+      font-size: 1.5rem;
+    }
+    .single_cat_text{
+      font-size: 1rem !important;
+    }
+  
+  }

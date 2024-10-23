@@ -3,7 +3,8 @@ import React, {useEffect} from 'react';
 
 import { Outlet } from 'react-router-dom';
 import Messages from './features/message/Messages';
-import Header2 from './features/headerNav/Header2';
+// import Header2 from './features/headerNav/Header2';
+import Header from './features/headerNav/Header';
 import HomeBackground from './features/home/HomeBackground';
 function App() {
   console.log("in APP")
@@ -13,7 +14,7 @@ function App() {
       <div id="App">
           <div className='appbody border border-danger'>
             
-              <Header2 />
+              <Header />
               
               <Messages />
               <div style={{'height': '4rem'}}></div>

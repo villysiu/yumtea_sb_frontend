@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMenuitemsByCategory, getCategoryById } from "./menuitemSlice";
+import { getCategoryById, getMenuitemsByCategory } from "./menuitemSlice";
 import { useParams } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -13,20 +13,21 @@ const MenuitemByCategory = () =>{
 
     const navigate = useNavigate()
     const dispatch=useDispatch()
-    const menuitemsByCategory = useSelector(state=>state.menuitem.menuitemsByCategory)
+    const menuitemsByCategory = useSelector(state=>getMenuitemsByCategory(state, id))
+    // const menuitemsByCategory = useSelector(state=>state.menuitem.menuitemsByCategory)
     let categoryTitle = useSelector(state => getCategoryById(state, id))
 
     useEffect(()=>{
         if(menuitemsByCategory.category_id !== id)
-            dispatch(fetchMenuitemsByCategory(id))
-            .unwrap()
-            .then((originalPromiseResult) => {
+            // dispatch(fetchMenuitemsByCategory(id))
+            // .unwrap()
+            // .then((originalPromiseResult) => {
                 
-            })
-            .catch((rejectedValueOrSerializedError) => {
+            // })
+            // .catch((rejectedValueOrSerializedError) => {
                 // console.log("category not existed, redirect to all")
                 navigate("/menuitems");
-            })  
+            // })  
 
     }, [dispatch, menuitemsByCategory.category_id, id, navigate])
 

@@ -29,8 +29,6 @@ const Header2 = () => {
     useEffect(() => {
 
         const handleClick = (e) => {
-            // console.log(e.target)
-            // console.log(e.target.tagName)
             if((e.target.tagName.toLowerCase() === 'a' || e.target.tagName === 'svg') && 
                 e.target.id!=="open")
             

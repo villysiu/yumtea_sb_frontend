@@ -3,8 +3,6 @@ import {useEffect} from 'react';
 
 
 const Home = () =>{
-    
-
 
     return(
         
@@ -13,6 +11,7 @@ const Home = () =>{
 
                 <h1>Welcome to my website</h1>
                 <p>Some content here...</p>
+                
             </div>
             
             

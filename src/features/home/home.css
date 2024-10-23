@@ -1,41 +1,32 @@
 #home_brand_container {
-    width: 30rem;
-    height: 10rem;
-}
-
-.tea_chinese {
-    /* width: 15rem;
-    height: 15rem; */
-    display:inline-block;
-    background-color: rgb(192 149 83);;
-    -webkit-mask:url("http://127.0.0.1:8001/tea_chinese_2.png") center/contain;
-    margin: 2rem;
-    
-}
-#brand {
-    --logo_width: 30rem;
-    --logo_height: 10rem;
+    width: 60rem;
+    height: 20rem;
+    background-size: 100%;
+    background-image: url("http://127.0.0.1:8001/yumtea_logo.png");
+    -webkit-filter: drop-shadow(1px 1px 4px black);
 
 }
 #yumtea_logo {
     width: 100%;
     height: 100%;
     display:inline-block;
-    background-color: rgb(192 149 83);;
-    -webkit-mask:url("http://127.0.0.1:8001/yumtea_logo.png") center/contain;
+    background-color: var(--gold-text-color);
+    -webkit-mask:url("http://127.0.0.1:8001/yumtea_logo.png");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+
 }
-.brand {
-    /* font-size: 10rem; */
-    color:rgb(192 149 83);
-    
-  }
+
 
 #home_bg {
     width: 100vw;
     height: 100vh;
     margin: 0;
     background-size: cover;
-    background-image: url('http://127.0.0.1:8001/IMG_2488.webp');
+
+    background-image: url('http://127.0.0.1:8001/Black-Tea-History-1pc.jpg');
+    background-position: center;
     opacity: 1;
     position: absolute;
     top: 0;
@@ -54,4 +45,12 @@
     transition: opacity 6s;
     z-index: 0;
   }
+  .home {
+    position: relative;
+    width: 100vw;
+    
+  }
   
+  .home_content {
+    position: relative;
+  }

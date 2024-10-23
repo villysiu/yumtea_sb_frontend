@@ -31,6 +31,9 @@
   /* --cart_summary_top: 6rem/ */
 
   --hLink: 'http://127.0.0.1:8001';
+  --gold-text-color: rgb(194, 159, 106);
+  --gold-text-color-hover: rgb(138, 114, 77);
+  --dark-brown-title: rgb(104, 95, 81);
 
 } 
 
@@ -127,119 +130,7 @@
   padding-top: 0.5rem;
   padding-right: 1rem;
 } */
-.header2_wrapper{
-  width: 100%;
-  background-color: #d1c089;
-  display: flex;
-  justify-content: center;
-  z-index: 1040;
-    position: fixed;
-    left:0;
-    top: 0;
-    padding: 0.5rem;
 
-
-}
-.header_container {
-  width: var(--body_width);
-  display: flex;
-}
-
-.nav_brand {
-  font-size: 2rem;
-  font-weight: bold;
-  white-space: nowrap;
-  text-decoration: none;
-  margin-right: 1rem;
-  position: relative;
-}
-
-.header_title {
-  color: var(--header_text_color);
-}
-.header_text {
-
-  /* mix-blend-mode: difference; */
-    color: var(--header_text_color);
-}
-
-
-
-
-.header_features {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  color: white;
-  align-items: center;
-
-}
-.collapsable_items {
-  display: flex;
-  align-items: center;
-  
-
-}
-.collapsable_item_link{
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  text-decoration: none;
-}
-#navbarScrollingDropdown::after{
-  display: none; 
-}
-.header_dropdown_bar_button, .header_dropdown_x_button, .header_icon {
-  color: black;
-  font-size: 2rem;
-  
-}
-
-.header_md_fullscreen_dropdown {
-  position: absolute;
-  color: black;
-  background-color: #d1c089;
-  width: 100%;
-  left: 0;
-  top: 48px;
-  height: 100vh;
-  z-index: 205;
-}
-
- @media all and (max-width: 991.98px) {
-  .header_features{
-    justify-content: flex-end;
-  }
-  .navbar-collapse {
-    position: absolute;
-    top: 60px;
-    left: 0px;
-    background-color:  rgb(245, 237, 207);
-    width: 100%;
-    height: 100vh;
-  }
-  .header_md_dropdown {
-    text-align: center;
-    font-weight: bold; 
-  }
-  .header_nav_x_btn {
-    display: block;
-  }
-  .dropdown-menu{
-    /* top: 35px; */
-    text-align: center;
-    border: 0;
-  }
-  .collapsable_items {
-    flex-direction: column;
-  }
-  .header_text {
-    font-size: 1.5rem;
-  }
-  .single_cat_text{
-    font-size: 1rem !important;
-  }
-
-}
 
 
 .user_items {
@@ -1120,13 +1011,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100%;
   }
   
-}
-.home {
-  position: relative;
-  width: 100vw;
-  
-}
-
-.home_content {
-  position: relative;
 }

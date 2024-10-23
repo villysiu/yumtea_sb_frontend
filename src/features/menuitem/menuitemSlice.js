@@ -1,33 +1,33 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 
-export const fetchCategories=createAsyncThunk(
-    'menuitem/fetchCategories',
-    async () => {
-        try {
-            const response=await fetch(`${apiLink}/api/categories`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    'accept': 'application/json'
-                }
-            })
+// export const fetchCategories=createAsyncThunk(
+//     'menuitem/fetchCategories',
+//     async () => {
+//         try {
+//             const response=await fetch(`${apiLink}/api/categories`, {
+//                 method: "GET",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     'accept': 'application/json'
+//                 }
+//             })
 
-            if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
-            }
-            const data=await response.json()
-            // console.log(data)
-            // {"pk": 1, "title": "Red Wine", "slug": "red"}
+//             if(!response.ok) {
+//                 throw new Error(`${response.status} ${response.statusText}`)
+//             }
+//             const data=await response.json()
+//             // console.log(data)
+//             // {"pk": 1, "title": "Red Wine", "slug": "red"}
             
-            return data
+//             return data
             
-        } 
-        catch(error){
-            return Promise.reject(error);
-        }
-    }
-)
+//         } 
+//         catch(error){
+//             return Promise.reject(error);
+//         }
+//     }
+// )
 export const fetchMenuitems=createAsyncThunk(
     'menuitem/fetchMenuitems',
     async () => {
@@ -76,41 +76,41 @@ export const fetchMilks=createAsyncThunk(
         }
     }
 )
-export const fetchMenuitemsByCategory=createAsyncThunk(
-    'menuitem/fetchMenuitemsByCategory',
-    async (id) => {
-        try {
-            const response=await fetch(`${apiLink}/api/menuitem_categories?category_id=${id}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    'accept': 'application/json'
-                }
-            })
-            if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
-            }
-            const data=await response.json()
-            // {
-            //     "pk": 4,
-            //     "category_id": 1,
-            //     "menuitem_id": 2,
-            //     "menuitem": {
-            //         "pk": 2,
-            //         "title": "Jasmine Milk Tea",
-            //         "price": 5.0,
-            //         "description": "Jasmine Milk Tea",
-            //         "inventory": 7,
-            //         "milk_id": 2
-            //     }
-            // },
-            return {items: data.map(item=>item.menuitem), id: id}
-        } 
-        catch(error){
-            return Promise.reject(error);
-        }
-    }
-)
+// export const fetchMenuitemsByCategory=createAsyncThunk(
+//     'menuitem/fetchMenuitemsByCategory',
+//     async (id) => {
+//         try {
+//             const response=await fetch(`${apiLink}/api/menuitem_categories?category_id=${id}`, {
+//                 method: "GET",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     'accept': 'application/json'
+//                 }
+//             })
+//             if(!response.ok) {
+//                 throw new Error(`${response.status} ${response.statusText}`)
+//             }
+//             const data=await response.json()
+//             // {
+//             //     "pk": 4,
+//             //     "category_id": 1,
+//             //     "menuitem_id": 2,
+//             //     "menuitem": {
+//             //         "pk": 2,
+//             //         "title": "Jasmine Milk Tea",
+//             //         "price": 5.0,
+//             //         "description": "Jasmine Milk Tea",
+//             //         "inventory": 7,
+//             //         "milk_id": 2
+//             //     }
+//             // },
+//             return {items: data.map(item=>item.menuitem), id: id}
+//         } 
+//         catch(error){
+//             return Promise.reject(error);
+//         }
+//     }
+// )
 
 const menuitemSlice=createSlice({
     name: 'menuitem',
@@ -134,7 +134,7 @@ const menuitemSlice=createSlice({
             array: [],
             status: 'idle',
         }, 
-        // click: null,
+        click: null,
     },
     reducers: {
         setClick(state, action) {
@@ -144,16 +144,16 @@ const menuitemSlice=createSlice({
     },
     extraReducers(builder) {
       builder
-        .addCase(fetchCategories.pending, (state, action) => {
-            state.category.status = 'loading'
-        })
-        .addCase(fetchCategories.fulfilled, (state, action) => {
-            state.category.status = 'succeeded'
-            state.category.array = action.payload
-        })
-        .addCase(fetchCategories.rejected, (state, action) => {
-            state.category.status = 'failed'
-        })
+        // .addCase(fetchCategories.pending, (state, action) => {
+        //     state.category.status = 'loading'
+        // })
+        // .addCase(fetchCategories.fulfilled, (state, action) => {
+        //     state.category.status = 'succeeded'
+        //     state.category.array = action.payload
+        // })
+        // .addCase(fetchCategories.rejected, (state, action) => {
+        //     state.category.status = 'failed'
+        // })
 
         .addCase(fetchMenuitems.pending, (state, action) => {
             state.menuitems.status = 'loading'
@@ -167,19 +167,19 @@ const menuitemSlice=createSlice({
             
             state.menuitems.status = 'failed'
         })
-        .addCase(fetchMenuitemsByCategory.pending, (state, action) => {
-            state.menuitemsByCategory.status = 'loading'
-        })
-        .addCase(fetchMenuitemsByCategory.fulfilled, (state, action) => {
+        // .addCase(fetchMenuitemsByCategory.pending, (state, action) => {
+        //     state.menuitemsByCategory.status = 'loading'
+        // })
+        // .addCase(fetchMenuitemsByCategory.fulfilled, (state, action) => {
            
-            state.menuitemsByCategory.status = 'succeeded'
-            state.menuitemsByCategory.array = action.payload.items
-            state.menuitemsByCategory.category_id = action.payload.id
-        })
-        .addCase(fetchMenuitemsByCategory.rejected, (state, action) => {
+        //     state.menuitemsByCategory.status = 'succeeded'
+        //     state.menuitemsByCategory.array = action.payload.items
+        //     state.menuitemsByCategory.category_id = action.payload.id
+        // })
+        // .addCase(fetchMenuitemsByCategory.rejected, (state, action) => {
             
-            state.menuitemsByCategory.status = 'failed'
-        })
+        //     state.menuitemsByCategory.status = 'failed'
+        // })
 
         .addCase(fetchMilks.pending, (state, action) => {
             state.milk.status = 'loading'
@@ -218,7 +218,13 @@ export const getCategoryById = (state, id) => {
     return category === undefined ? "" : category.title
 }
 export const getCategories = (state) =>{
-    return state.menuitem.category
+    console.log(state.menuitem.menuitems.array)
+    let categories = state.menuitem.menuitems.array.map(menuitem=>menuitem.category.title)
+    return [...new Set(categories)];
+    
+}
+export const getMenuitemsByCategory = (state, ud) =>{
+    return state.menuitem.menuitems.array
 }
 export const getUnitprice = (state, menuitem_id, milk_id) => {
     const menuitem = state.menuitem.menuitems.array.find(item=>item.pk === menuitem_id)

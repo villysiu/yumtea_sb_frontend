@@ -18,16 +18,16 @@ const messageSlice = createSlice({
     extraReducers(builder) {
         builder
 
-        .addCase(fetchCategories.rejected, (state, action) => {
-            state.message_arr.push(
-                {
-                    status: true,
-                    type: "danger",
-                    content: `${action.error.name}: ${action.error.message} categories from API.`
-                }
-            )
+        // .addCase(fetchCategories.rejected, (state, action) => {
+        //     state.message_arr.push(
+        //         {
+        //             status: true,
+        //             type: "danger",
+        //             content: `${action.error.name}: ${action.error.message} categories from API.`
+        //         }
+        //     )
 
-        })
+        // })
         .addCase(fetchMenuitems.rejected, (state, action) => {
             state.message_arr.push(
                 {
@@ -37,16 +37,16 @@ const messageSlice = createSlice({
                 }
             )
         })
-        .addCase(fetchMenuitemsByCategory.rejected, (state, action) => {
-            state.message_arr.push(
-                {
-                    status: true,
-                    type: "danger",
-                    // content: `${action.error.name}: ${action.error.message} from API.`
-                    content: "Category not existed. Redirecting to Main Meun."
-                }
-            )
-        })
+        // .addCase(fetchMenuitemsByCategory.rejected, (state, action) => {
+        //     state.message_arr.push(
+        //         {
+        //             status: true,
+        //             type: "danger",
+        //             // content: `${action.error.name}: ${action.error.message} from API.`
+        //             content: "Category not existed. Redirecting to Main Meun."
+        //         }
+        //     )
+        // })
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.message_arr.push(
                 {
