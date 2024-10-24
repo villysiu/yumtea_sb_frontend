@@ -6,46 +6,39 @@ import { Link } from 'react-router-dom';
 
 
 const CategoryDropdown = () =>{
-    // const dispatch=useDispatch();
-
-    // let categories = useSelector(state=>getCategories(state))
-    // console.log(categories)
-
-    // const [show, setShow] = useState(false)
-    
-    // useEffect(() => {
-    //     const handleClick = (e) => {
-    //         if(e.target.tagName.toLowerCase() === 'a')
-    //             setShow(false)
-    //     };
-    //     window.addEventListener('click', handleClick);
-
-    //     return () => {
-    //         window.removeEventListener('click', handleClick);
-    //     };
-    // }, []);
-
-
-
-    
-        return (
+    return (
+        <div className="header_drinks_dropdown">
             
+            <Link to={`${homeLink}/menuitems`} className=' header_drinks_link' >
+                <div className='header_drinks_box'> 
+                    All Drinks
+                </div> 
+            </Link>
 
-            <div className="header_drinks_dropdown">
-                
-                    <Link to={`${homeLink}/menuitems`} className=' header_drinks_link' >
-                        <div className='header_drinks_box'> 
-                            All Drinks
-                        </div> 
-                    </Link>
+            <Link to={`${homeLink}/collection/oolong`} className=' header_drinks_link' >
+                <div className='header_drinks_box'> 
+                    Oolong Tea
+                </div> 
+            </Link>
+            <Link to={`${homeLink}/collection/blacktea`} className=' header_drinks_link' >
+                <div className='header_drinks_box'> 
+                    Black Tea
+                </div> 
+            </Link>
+            <Link to={`${homeLink}/collection/greentea`} className=' header_drinks_link' >
+                <div className='header_drinks_box'> 
+                    Green Tea
+                </div> 
+            </Link>
+            
+            <Link to={`${homeLink}/collection/caffeinefree`} className=' header_drinks_link' >
+                <div className='header_drinks_box'> 
+                    Caffeine Free
+                </div> 
+            </Link>
 
-                <div className='header_drinks_box'>Oolong Tea</div>
-                <div className='header_drinks_box'>Black Tea</div>
-                <div className='header_drinks_box'>Green Tea</div>
-                <div className='header_drinks_box'>Caffeine-Free </div>
 
-
-            </div>
+        </div>
         
     )
     

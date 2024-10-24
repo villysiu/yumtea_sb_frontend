@@ -223,8 +223,17 @@ export const getCategories = (state) =>{
     return [...new Set(categories)];
     
 }
-export const getMenuitemsByCategory = (state, ud) =>{
-    return state.menuitem.menuitems.array
+export const getMenuitemsByCategory = (state, category_id) =>{
+    console.log(category_id)
+    console.log("hehhehe?")
+    return state.menuitem.menuitems.array.filter(menuitem=>menuitem.category_id === category_id)
+}
+export const getMenuitems = (state, category_id) =>{
+    console.log(category_id)
+    if(category_id === 0)
+        return state.menuitem.menuitems.array
+    
+    return state.menuitem.menuitems.array.filter(menuitem=>menuitem.category_id === category_id)
 }
 export const getUnitprice = (state, menuitem_id, milk_id) => {
     const menuitem = state.menuitem.menuitems.array.find(item=>item.pk === menuitem_id)

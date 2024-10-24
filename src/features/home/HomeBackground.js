@@ -9,7 +9,7 @@ const HomeBackground = () => {
             const el = document.getElementById('home_bg')
             el.classList.add("hide")
             
-        }, 5000);
+        }, 1000);
         return () => clearTimeout(timeoutId);
     }, []);
 
@@ -17,7 +17,7 @@ const HomeBackground = () => {
         const www = setTimeout(() => {
             
             setShow(false)
-        }, 11000);
+        }, 2000);
         return () => clearTimeout(www);
     }, []);
     if(!show)
