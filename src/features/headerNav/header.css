@@ -1,6 +1,6 @@
 #header_wrapper{
     width: 100vw;
-    background-color: #d1c089;
+    background-color: rgb(111, 97, 80);
     display: flex;
     justify-content: space-between;
     z-index: 1040;
@@ -8,7 +8,7 @@
       left:0;
       top: 0;
       padding: 0.5rem;
-  
+    height: var(--header_height)
   
 }
 #headernav_wrapper {
@@ -36,7 +36,7 @@
   position: relative;
 }
 .header_home_button:hover, .header_home_button.active {
-  color: var(--dark-brown-title);
+  color: white;
 }
 /* .header_home_button:hover:after, .header_home_button.active:after {
   content: "T";

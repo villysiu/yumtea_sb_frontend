@@ -6,6 +6,7 @@
   min-width: 390px;
 
   position: relative;
+  font-family: fangsong;
   
 }
 
@@ -24,6 +25,7 @@
   --single_wine_img_height: 400px;
   /* --single_wine_details_width: calc(var(--single_wine_width) - var(--single_wine_img_width)); */
   --header_text_color: black;
+  --header_height: 6rem;
 
   --cartitem_img_width: 100px;
   --cart_summary_width: 450px;
@@ -90,8 +92,15 @@
   width: var(--body_width);
 
 }
+.spinner {
+  font-size: 2rem;
+  
+  width: 4rem;
+  height: 4rem;
+  color: white !important;
+}
 
-.full_spinner {
+/* .full_spinner {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -102,7 +111,8 @@
   z-index: 1041;
 
   
-}
+} */
+ 
 .App-header {
   background-color: #282c34;
   min-height: 20vh;
@@ -131,7 +141,9 @@
   padding-right: 1rem;
 } */
 
-
+.content {
+  margin-top: var(--header_height);
+}
 
 .user_items {
   display: flex;

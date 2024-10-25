@@ -129,31 +129,18 @@ const menuitemSlice=createSlice({
             array: [],
             status: 'idle',
         }, 
-        menuitemsByCategory: {
-            category_id: null,
-            array: [],
-            status: 'idle',
-        }, 
-        click: null,
+        // menuitemsByCategory: {
+        //     category_id: null,
+        //     array: [],
+        //     status: 'idle',
+        // }, 
+
     },
     reducers: {
-        setClick(state, action) {
-            state.click = action.payload
-        }
         
     },
     extraReducers(builder) {
       builder
-        // .addCase(fetchCategories.pending, (state, action) => {
-        //     state.category.status = 'loading'
-        // })
-        // .addCase(fetchCategories.fulfilled, (state, action) => {
-        //     state.category.status = 'succeeded'
-        //     state.category.array = action.payload
-        // })
-        // .addCase(fetchCategories.rejected, (state, action) => {
-        //     state.category.status = 'failed'
-        // })
 
         .addCase(fetchMenuitems.pending, (state, action) => {
             state.menuitems.status = 'loading'
@@ -167,19 +154,7 @@ const menuitemSlice=createSlice({
             
             state.menuitems.status = 'failed'
         })
-        // .addCase(fetchMenuitemsByCategory.pending, (state, action) => {
-        //     state.menuitemsByCategory.status = 'loading'
-        // })
-        // .addCase(fetchMenuitemsByCategory.fulfilled, (state, action) => {
-           
-        //     state.menuitemsByCategory.status = 'succeeded'
-        //     state.menuitemsByCategory.array = action.payload.items
-        //     state.menuitemsByCategory.category_id = action.payload.id
-        // })
-        // .addCase(fetchMenuitemsByCategory.rejected, (state, action) => {
-            
-        //     state.menuitemsByCategory.status = 'failed'
-        // })
+        
 
         .addCase(fetchMilks.pending, (state, action) => {
             state.milk.status = 'loading'
@@ -223,11 +198,7 @@ export const getCategories = (state) =>{
     return [...new Set(categories)];
     
 }
-export const getMenuitemsByCategory = (state, category_id) =>{
-    console.log(category_id)
-    console.log("hehhehe?")
-    return state.menuitem.menuitems.array.filter(menuitem=>menuitem.category_id === category_id)
-}
+
 export const getMenuitems = (state, category_id) =>{
     console.log(category_id)
     if(category_id === 0)

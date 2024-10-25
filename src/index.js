@@ -11,7 +11,7 @@ import Home from './features/home/Home'
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import About from './features/headerNav/About'
 import MenuitemList from './features/menuitem/MenuitemList';
-import MenuitemApp from './features/menuitem/MenuitemApp';
+// import MenuitemApp from './features/menuitem/MenuitemApp';
 import SingleMenuitem from './features/menuitem/SingleMenuitem';
 import Secure from './features/user/Secure';
 import Cart from './features/cart/Cart';
@@ -28,10 +28,10 @@ import ReservationSuccess from './features/reservation/ReservationSuccess';
 import Reservations from './features/reservation/Reservations';
 import UpdateReservation from './features/reservation/UpdateReservation';
 // import UpdateReservationFrom from './features/reservation/ReservationsApp';
-import MenuitemByCategory from './features/menuitem/MenuitemByCategory';
-import MenuitemsList from './features/menuitem/MenuItemsList';
 
-import ResetApp from './features/home/ResetApp';
+import MenuitemsList from './features/menuitem/MenuItemsList';
+import EnterPage from './features/home/EnterPage';
+// import ResetApp from './features/home/ResetApp';
 import ReservationsApp from './features/reservation/ReservationsApp';
 const router = createBrowserRouter([
   {
@@ -40,39 +40,37 @@ const router = createBrowserRouter([
 
       children: [
         {
-          path: "/",
-          element: <ResetApp />,
-          children: [
-            {
+            path: "/",
+            element: <EnterPage />,
+            children:[
+              {
                 path: "/",
-                element: <MenuitemApp />,
-                children: [
-            
-                      {
-                        path: "/",
-                        element: <Home />,
-                      },
-                      {
-                        path: "/menuitems",
-                        element: <MenuitemList />,
-                      },
-                      {
-                        path: "menuitems/cat/:categoryId",
-                        element: <MenuitemByCategory />,
-                      },
-                      {
-                        path: "menuitems/:itemId",
-                        element: <SingleMenuitem />,
-                      },
-            
-                      {
-                        path: "collection/:categoryName",
-                        element: <MenuitemsList />,
-                      },
-                      {
-                        path: "/cart",
-                        element: <Cart />
-                      },
+                element: <Home />,
+              },
+              // {
+              //   path: "/menuitems",
+              //   element: <MenuitemList />,
+              // },
+              // {
+              //   path: "menuitems/cat/:categoryId",
+              //   element: <MenuitemByCategory />,
+              // },
+              // {
+              //   path: "menuitems/:itemId",
+              //   element: <SingleMenuitem />,
+              // },
+              {
+                path: "collection/:itemId",
+                element: <SingleMenuitem />,
+              },
+              {
+                path: "collection/:categoryName",
+                element: <MenuitemsList />,
+              },
+              {
+                path: "/cart",
+                element: <Cart />
+              },
                 ]
             },
 
@@ -153,8 +151,9 @@ const router = createBrowserRouter([
 
       ],
       
-    }
-  ])
+  //   }
+  // ]
+)
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(

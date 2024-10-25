@@ -10,10 +10,9 @@ const ResetApp =() =>{
     const order_status = useSelector(state=>state.order.checkout_status)
     const reservation_status = useSelector(state=>state.reservation.create_or_update.status)
     const delete_status = useSelector(state=>state.reservation.delete.status)
-    // const click = useSelector(state=>state.menuitem.click)
+   
     const dispatch = useDispatch()
     
-   
     const regex = /\/secure\/reservations\/\d+\/update/
     
     useEffect(()=>{
@@ -39,8 +38,7 @@ const ResetApp =() =>{
         
     }, [order_status, location.pathname, dispatch, reservation_status])
 
-    return(
-        <Outlet />
-    )
+    return null
+    
 }
 export default ResetApp

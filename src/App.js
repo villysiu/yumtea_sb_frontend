@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import Messages from './features/message/Messages';
 // import Header2 from './features/headerNav/Header2';
 import Header from './features/headerNav/Header';
-import HomeBackground from './features/home/HomeBackground';
+
 function App() {
   console.log("in APP")
 
@@ -17,11 +17,12 @@ function App() {
               <Header />
               
               <Messages />
-              <div style={{'height': '4rem'}}></div>
-             
+              {/* <div style={{'height': '6rem'}}></div> */}
+              <div className="content" >
               <Outlet />
+              </div>
           </div>
-          <HomeBackground />
+
           
               
       </div>

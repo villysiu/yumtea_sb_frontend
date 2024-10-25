@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryById, getMenuitemsByCategory } from "./menuitemSlice";
+import { getCategoryById,  } from "./menuitemSlice";
 import { useParams } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -13,7 +13,7 @@ const MenuitemByCategory = () =>{
 
     const navigate = useNavigate()
     const dispatch=useDispatch()
-    const menuitemsByCategory = useSelector(state=>getMenuitemsByCategory(state, id))
+    // const menuitemsByCategory = useSelector(state=>getMenuitemsByCategory(state, id))
     // const menuitemsByCategory = useSelector(state=>state.menuitem.menuitemsByCategory)
     let categoryTitle = useSelector(state => getCategoryById(state, id))
 
