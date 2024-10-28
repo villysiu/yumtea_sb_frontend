@@ -9,7 +9,7 @@ const CategoryDropdown = () =>{
     return (
         <div className="header_drinks_dropdown">
             
-            <Link to={`${homeLink}/menuitems`} className=' header_drinks_link' >
+            <Link to={`${homeLink}/collection`} className=' header_drinks_link' >
                 <div className='header_drinks_box'> 
                     All Drinks
                 </div> 

@@ -1,42 +1,38 @@
-import { Col } from "react-bootstrap"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import OutOfStockButton from "./OutOfStockButton"
 // import CustomizeContainer from "./CustomizeContainer"
 import CustomizeButton from "./CustomizeButton"
-
+import {Col} from  'react-bootstrap'
 const Menuitem = ({menuitem}) =>{
 
-    // const [show, setShow] = useState(false);
+    
     return (
         <>
-        {/* {
-            <Modal show={show} onHide={()=>setShow(false)}>
-                <CustomizeContainer menuitem={menuitem} setShow={setShow} /> 
-            </Modal>
-        } */}
         
-        <Col sm={12} md={4} lg={3} className="winelist_wine_wrapper"> 
-            <Link to={`${homeLink}/menuitems/${menuitem.pk}`} className='solid_link'>
-                <div className="winelist_img_wrapper">
-                    <img src={`${homeLink}/IMG_0210.png`} className="winelist_img" alt={menuitem.title}></img>  
-                </div>      
-                <div className="winelist_wine_title">{menuitem.title}</div>
-            </Link>
-       
+        <Col xs={12} sm={6} className='menuitem_wrapper'>
+            <div className='menuitem'>
+                {menuitem.title} 
+                {USDollar.format(menuitem.price)}
+            </div>
+            <div className="menuitem_img_wrapper">
+                <img src={`${homeLink}/chai.jpg`} className="menuitem_img" alt={menuitem.title}></img>  
+            </div>      
+            
 
-            <div className='mb-3'>{USDollar.format(menuitem.price)}</div>
+       
+            {/* <div className='mb-3'></div>
 
             { menuitem.inventory === 0 ?
                 <OutOfStockButton />
                 :
-                <div style={{"position": "relative"}}>
+                <div>
                     <CustomizeButton menuitem={menuitem}/>
                     {/* <Button className='gold_button' onClick={()=>setShow(true)}>Customize</Button> */}
                     {/* {message && <AddedOverlay message={message} setMessage={setMessage}/>} */}
-                </div>
-            }
+                {/* </div>
+            } */}
         </Col>
         </>
     )

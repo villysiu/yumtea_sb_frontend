@@ -10,6 +10,7 @@ import App from './App';
 import Home from './features/home/Home'
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import About from './features/headerNav/About'
+import Collections from './features/menuitem/Collections'
 import MenuitemList from './features/menuitem/MenuitemList';
 // import MenuitemApp from './features/menuitem/MenuitemApp';
 import SingleMenuitem from './features/menuitem/SingleMenuitem';
@@ -47,18 +48,10 @@ const router = createBrowserRouter([
                 path: "/",
                 element: <Home />,
               },
-              // {
-              //   path: "/menuitems",
-              //   element: <MenuitemList />,
-              // },
-              // {
-              //   path: "menuitems/cat/:categoryId",
-              //   element: <MenuitemByCategory />,
-              // },
-              // {
-              //   path: "menuitems/:itemId",
-              //   element: <SingleMenuitem />,
-              // },
+              {
+                path: "collection",
+                element: <Collections />,
+              },
               {
                 path: "collection/:itemId",
                 element: <SingleMenuitem />,

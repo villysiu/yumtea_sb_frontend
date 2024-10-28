@@ -115,11 +115,11 @@ export const fetchMilks=createAsyncThunk(
 const menuitemSlice=createSlice({
     name: 'menuitem',
     initialState: {
-        category: {
-            array: [],
-            status: 'idle',
+        // category: {
+        //     array: [],
+        //     status: 'idle',
              
-        },
+        // },
         milk: {
             array: [],
             status: 'idle',
@@ -173,6 +173,7 @@ const menuitemSlice=createSlice({
 export const { setClick } = menuitemSlice.actions
 
 export default menuitemSlice.reducer
+
 
 export const getMenuitemById = (state, id) =>{
     return state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
