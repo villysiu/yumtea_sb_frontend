@@ -20,7 +20,7 @@ function App() {
               <Messages />
               {/* <div style={{'height': '6rem'}}></div> */}
               <div className="content" >
-              <Outlet />
+                <Outlet />
               
               </div>
               <Footer />

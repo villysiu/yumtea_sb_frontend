@@ -5,7 +5,7 @@
     background-size: cover;
 }
 .collection_img {
-    width: 100vw;
+    width: 100%;
     height: 50vh;
     background: url("http://127.0.0.1:8001/12typestea.jpg") center no-repeat;
     background-size: cover;
@@ -23,7 +23,7 @@
     flex-direction: column;
 }
 .category_img {
-    width: 100vw;
+    width: 100%;
     height: 40vh;
     
     display: flex;
@@ -42,34 +42,71 @@
 }
 .menuitems_wrapper {
     --white-outline: 0.5rem;
-    width: 100vw;
+    width: var(--body-width);
    
     display: flex;
     padding: var(--white-outline);
 }
-.menuitem_wrapper{
-    width: 50vw;
+.menuitem_row {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-  
-    /* align-items: center; */
-    border: black 1px solid;
-    margin: 1rem;
+    flex-wrap: wrap;
+}
+.menuitem_col{
+    width: calc(100% / 3 - 1rem);
+    margin: 0.5rem;
 
 }
-/* .menuitem_link {
-
-} */
-.menuitem_img_wrapper {
-    width: 10rem;
-    height: 10rem;
+.menuitem_wrapper {
+    --border-radius: 5px;
     display: flex;
+    justify-content: space-between;
+    border: rgb(196, 187, 187) 1px solid;
+    border-radius: var(--border-radius);
+    position: relative;
+
+}
+.menuitem_wrapper:hover {
+    --border-color: rgb(109, 83, 113);
+    border: var(--border-color) 1px solid;
+    box-shadow: 0 0 5px var(--border-color)
+}
+.menuitem_text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+.menuitem_img_wrapper {
+
+    width: 8rem;
+    height: 8rem;
 }
 .menuitem_img {
     
     width: 100%;
     height: 100%;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
-.menuitem_title {
+/* .menuitem_title {
     text-align: center;
+} */
+.menuitem_plus_circle {
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 0 5px rgb(152, 152, 152);
+}
+.menuitem_plus_circle:hover {
+    background-color: #f9f9f9;
 }

@@ -4,21 +4,25 @@ import { USDollar } from "../../app/global"
 import OutOfStockButton from "./OutOfStockButton"
 // import CustomizeContainer from "./CustomizeContainer"
 import CustomizeButton from "./CustomizeButton"
-import {Col} from  'react-bootstrap'
+
 const Menuitem = ({menuitem}) =>{
 
     
     return (
-        <>
+        <div className='menuitem_wrapper'>
         
-        <Col xs={12} sm={6} className='menuitem_wrapper'>
-            <div className='menuitem'>
-                {menuitem.title} 
-                {USDollar.format(menuitem.price)}
+        
+            <div className='menuitem_text'>
+                <div><b>{menuitem.title} </b></div>
+                <div>{USDollar.format(menuitem.price)}</div>
             </div>
             <div className="menuitem_img_wrapper">
                 <img src={`${homeLink}/chai.jpg`} className="menuitem_img" alt={menuitem.title}></img>  
-            </div>      
+            </div> 
+
+            <div className='menuitem_plus_circle'>
+                +
+            </div>     
             
 
        
@@ -33,8 +37,8 @@ const Menuitem = ({menuitem}) =>{
                     {/* {message && <AddedOverlay message={message} setMessage={setMessage}/>} */}
                 {/* </div>
             } */}
-        </Col>
-        </>
+
+        </div>
     )
 }
 export default Menuitem

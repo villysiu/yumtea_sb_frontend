@@ -1,6 +1,7 @@
 import {useSelector} from 'react-redux'
 import {getMenuitems} from './menuitemSlice'
 import Menuitem from './Menuitem'
+import {Container, Row, Col} from  'react-bootstrap'
 const BlackTea = () =>{
     const menuitems = useSelector(state => getMenuitems(state, 3))
     console.log(menuitems)
@@ -13,7 +14,7 @@ const BlackTea = () =>{
                 
                 
             </div>
-            <div className='menuitems_wrapper'>
+            {/* <div className='menuitems_wrapper'>
             {
                 menuitems.map((menuitem)=>{
                     return (
@@ -21,6 +22,21 @@ const BlackTea = () =>{
                     )
                 })
             }
+            </div> */}
+            
+            <div  className='menuitems_wrapper'>
+               
+                <div className='menuitem_row'>
+                    {
+                        menuitems.map((menuitem)=>{
+                            return (
+                            <div key={menuitem.pk} className='menuitem_col'>
+                                <Menuitem menuitem={menuitem} />
+                            </div>
+                            )
+                        })    
+                    }
+                </div>
             </div>
         </div>
     )

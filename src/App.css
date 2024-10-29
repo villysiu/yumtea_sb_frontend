@@ -145,6 +145,7 @@
 
 .content {
   margin-top: var(--header_height);
+  width: var(--body-width);
 }
 
 .user_items {
