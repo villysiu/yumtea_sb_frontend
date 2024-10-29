@@ -1,12 +1,21 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
-const CustomizeSize = ({size, setSize}) => {
 
-    const sizeArr =  [[12, 0], [16, 1]]
+const CustomizeSize = ({setSize, setPrice}) => {
 
-    const handleChange = e =>{
-        
-        setSize(e.target.value)
+    // const sizeMap =  [[12, 0], [16, 1]]
+    const sizeMap = new Map([[12, 0], [16, 1]])
+    const handleChange = (vol, cost) =>{
+        console.log(vol, cost)
+         setSize(prevSize=>{
+            console.log(prevSize)
+            if(prevSize!==null){
+                setPrice(p=>p-sizeMap.get(prevSize))
+            }
+            setPrice(p=>p+cost)
+            return vol
+         })
+        //  setPrice(p=>p+cost)
     }
     // if(temp==="N")
     //     return null
@@ -14,26 +23,51 @@ const CustomizeSize = ({size, setSize}) => {
         <div className='customize_item'>
             <b>Drink Size</b>
             <div>Required - Choose 1. </div>
-            <div className='customize_item_choices'>
+            
+            <Form className='customize_item_choices'>
             {
-                sizeArr.map(s=>{
-                    const [size, cost] = s
+                Array.from(sizeMap).map((s, idx)=>{
+                    const [vol, cost] = s
+                    const addCost = cost > 0 ? `+$${cost}.00` : ""
+                    const l = `${vol}oz ${addCost}`
                     return(
-                        <div className='customize_item_choice'>
-                        <input type="radio" id={size} value={size} />
-                        {" "}
-                        <label for="html">{size}oz
-                        { cost > 0 && <span> + ${cost}</span>}
-
-                        </label>
-                        </div>
+                        
+                        <Form.Check 
+                        className='customize_item_choice'
+                        onChange={()=>handleChange(vol, cost)} 
+                        inline 
+                        type="radio" 
+                        
+                        name="size" 
+                        label={l} 
+                        id={`inline-radio-${idx}`}
+                        />
+                        
                     )
                 })
-            } 
+                        
+            }
+
+            </Form>     
             </div>
-                
-               
-        </div>
     )
 }
-export default CustomizeSize
+export default CustomizeSize       
+                {/* //         // <div className='customize_item_choice'> */}
+                //         {/* <input type="radio" name='size' value={vol} />
+                //         {" "}
+                //         <label>{vol}oz
+                //         { cost > 0 && <span> + ${cost}</span>} */}
+
+                //         <Form.Check
+                //                     inline
+                //                     label={vol}
+                //                     name="size"
+                //                     type='radio'
+                //         />
+                //         // </label>
+                //         // </div>
+                  
+                
+               
+        

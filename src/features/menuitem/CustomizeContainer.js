@@ -4,16 +4,18 @@ import CustomizeSize from "./CustomizeSize"
 // import CustomizeMilk from "./CustomizeMilk"
 // import CustomizeSweetness from "./CustomizeSweetness"
 import PurchaseButton from "./PurchaseButton"
+import UpdateQuantity from "./UpdateQuantity"
 import { useState } from "react"
 
 const CustomizeContainer = ({setShow, menuitem}) =>{
     console.log(menuitem)
-
+    const [price, setPrice] = useState(menuitem.price)
     const [temp, setTemp] = useState(menuitem.temp)
     const [size, setSize] =useState(null)
     // const [milk_id, setMilkID] = useState(null)
     
     const [sweetness, setSweetness] = useState(null)
+    const [quantity, setQuantity] = useState(1)
     return (
         <>
             <Modal.Header closeButton>
@@ -21,7 +23,7 @@ const CustomizeContainer = ({setShow, menuitem}) =>{
             </Modal.Header>
             <Modal.Body className='customize_list'>
                 <CustomizeTemp temp={temp} setTemp={setTemp} />
-                <CustomizeSize size={size} setSize={setSize} />
+                <CustomizeSize size={size} setSize={setSize} setPrice={setPrice} />
                 
                 {/* <CustomizeMilk milk_id={milk_id} setMilkID={setMilkID} />
                 
@@ -29,16 +31,18 @@ const CustomizeContainer = ({setShow, menuitem}) =>{
                 
                 
             </Modal.Body>
-            <Modal.Footer>
-                Quantity: 1
+            <Modal.Footer className='customize_footer'>
+                <UpdateQuantity quantity={quantity} setQuantity={setQuantity} />
             
-                {/* <PurchaseButton 
-                    menuitem_id={menuitem.pk} 
-                    milk_id = {milk_id}
+                <PurchaseButton 
+                price = {price}
+                    // menuitem_id={menuitem.pk} 
+                    // milk_id = {milk_id}
                     temp = {temp}
-                    sweetness = {sweetness}
+                    size={size}
+                    // sweetness = {sweetness}
                     setShow={setShow} 
-                /> */}
+                />
                         
         
             </Modal.Footer>

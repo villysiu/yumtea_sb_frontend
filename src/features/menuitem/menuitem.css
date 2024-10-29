@@ -110,7 +110,11 @@
 .menuitem_plus_circle:hover {
     background-color: #f9f9f9;
 }
-
+.customize_footer{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
 .customize_list {
     display: flex;
     flex-direction: column;
@@ -128,4 +132,37 @@
 }
 .customize_item_choice {
     width: 33%;
+    margin-right: 0 !important;
+}
+
+.update_quantity{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.update_quantity_wrapper{
+    margin-left: 1rem;
+    width: 7rem;
+    height: 2.5rem;
+    border: black solid 1px;
+    display: flex;
+    border-radius: 30px;
+    
+}
+.minus_sign, .plus_sign {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+
+}
+.qty_box {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
