@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import Messages from './features/message/Messages';
 // import Header2 from './features/headerNav/Header2';
 import Header from './features/headerNav/Header';
+import Footer from './features/home/Footer'
 
 function App() {
   console.log("in APP")
@@ -20,7 +21,9 @@ function App() {
               {/* <div style={{'height': '6rem'}}></div> */}
               <div className="content" >
               <Outlet />
+              
               </div>
+              <Footer />
           </div>
 
           

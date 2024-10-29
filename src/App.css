@@ -7,14 +7,16 @@
 
   position: relative;
   font-family: fangsong;
-  
+  background: url("http://127.0.0.1:8001/contentBg.jpg") center no-repeat;
+    background-size: cover;
 }
 
 :root{
+  --body-width: 1080px;
   --bs-tertiary-bg-rgb: 245, 237, 207;
   /* --bs-body-bg: rgba(242,241,237); */
   --bs-body-bg: white;
-  --body_width: 1536px;
+  /* --body_width: 1536px; */
   --header_circle_btn: 2rem;
   --header_padding: 2rem;
 
@@ -475,7 +477,7 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   
 }
 .singlewine_bg_wrapper, .location_bg_wrapper, .reserve_bg_wrapper, .reservations_bg_wrapper {
-  width: 100vw;
+  width: var(--body-width);
   height: calc(100vh * 0.5);
   background-repeat: no-repeat;
   background-size: cover;
@@ -861,166 +863,4 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
 .order_filter_choice:hover {
   background-color: bisque;
 }
-.location_wrapper { 
-  height: 120vh;
-  background-color:#48333f
-}
-.location_bg_wrapper{
-  background-image: url('http://127.0.0.1:8001/chinese-gongfucha-teakan01.webp');
 
-}
-.location_details_container {
-  background-color: #522b52;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1rem;
-}
-
-
-
-.location_col{
-  width: 8rem;
-  min-width: 8rem;
-  max-width: 8rem;
-  
-}
-.location_row{
-  display: flex;
-  padding-bottom:2rem;
-}
-@media all and  (max-width: 767.98px) {
-  .location_row{
-    flex-direction: column;
-    padding-bottom: 1rem;
-  }
-  .location_col{
-    padding-bottom:0.5rem;
-  }
-}
-.reserve_wrapper { 
-  height: 120vh;
-  background-color:#f6f3c8
-}
-.reserve_bg_wrapper{
-  background-image: url('http://127.0.0.1:8001/IMG_2488 (1).jpg');
-}
-.reservations_bg_wrapper {
-  background-image: url('http://127.0.0.1:8001/teasets.jpg');
-  height: calc(100vh * 0.3);
-}
-.reservation_buttons_container{
-  display: flex;
-}
-.reserve_container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 1rem;
-}
-.reserve_date_time {
-  display: flex;
-  flex-direction: row;
-}
-.reserve_date, .reserve_time, .reserve_guest{ 
-  width: 33%;
-  margin-bottom: 1rem;
-  /* padding-left: 1rem; */
-  padding-right: 1rem;
-}
-
-.reserve_time_select, .reserve_date_input, .reserve_guest_count{
-  height: 3rem;
-}
-/* .reserve_button_container {
-  width: 15rem;
-  padding-left: 1rem;
-
-} */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: auto;
-  height: auto;
-  color: transparent;
-  background: transparent;
-}
-.reservation_container {
-  width: 768px;
-}
-.reservation_success_container{
-  display: flex;
-  flex-direction: column;
-}
-.reservation_success_date{
-  display: flex;
-  flex-direction: row;
-}
-.no_reservation {
-  padding-top: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.past_reservation_title, .upcoming_reservation_title,
-.reservation_success_title {
-  font-size: larger;
-  font-weight: bold;
-  padding-bottom: 0.5rem;
-  text-align: left;
-}
-.past_reservation_container, .upcoming_reservation_container, 
-.reservation_success_container{
-  padding-left: 2rem;
-  padding-right: 2rem;
-  width: 100%
-}
-.single_past_reservation_container, .single_upcoming_reservation_container,
-.reservation_success_details_container{
-  display: flex;
-  width: 100%;
-  
-  padding-bottom: 0.5rem;
-}
-.past_reservation_date, .past_reservation_time, 
-.upcoming_reservation_date, .upcoming_reservation_time,
-.reservation_success_date, .reservation_success_time, 
-.reservation_success_guests {
-  width: calc(100% / 3);
-}
-.past_reservation_guests, .past_reservation_edit_button,
-.upcoming_reservation_guests, .upcoming_reservation_edit_button {
-  width: calc(100% / 6);
-}
-.upcoming_reservation_edit_button, .past_reservation_edit_button {
-  display: flex;
-    justify-content: flex-end;
-}
-.trash_btn, .edit_btn {
-  cursor: pointer;
-  margin-right: 1rem;
-  color: black;
-
-
-}
-
-@media all and  (max-width: 767.98px) {
-  .reserve_date, .reserve_time,  .reserve_guest {
-    width: 100%;
-  }
-  .reserve_date_time {
-    flex-direction: column;
-  }
-  .reservation_success_details_container{
-    flex-direction: column;
-  }
-  .reservation_container {
-    width: 100%;
-  }
-  
-}

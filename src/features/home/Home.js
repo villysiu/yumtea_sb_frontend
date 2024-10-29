@@ -33,7 +33,7 @@ const Home = () =>{
             <HomeRow2 />
             <HomeRow3 />
 
-            <Footer />
+           
             
             
 

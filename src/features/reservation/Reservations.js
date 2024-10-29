@@ -1,3 +1,4 @@
+import './reservation.css'
 import Past from "./Past"
 import Upcoming from "./Upcoming"
 import MakeReservationButton from "./MakeReservationButton"
