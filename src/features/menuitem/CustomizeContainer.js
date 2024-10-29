@@ -1,40 +1,44 @@
 import { Modal, Button } from "react-bootstrap"
-import CustomizeList from "./CustomizeList"
+import CustomizeTemp from "./CustomizeTemp"
+import CustomizeSize from "./CustomizeSize"
+// import CustomizeMilk from "./CustomizeMilk"
+// import CustomizeSweetness from "./CustomizeSweetness"
 import PurchaseButton from "./PurchaseButton"
 import { useState } from "react"
 
 const CustomizeContainer = ({setShow, menuitem}) =>{
     console.log(menuitem)
+
+    const [temp, setTemp] = useState(menuitem.temp)
+    const [size, setSize] =useState(null)
+    // const [milk_id, setMilkID] = useState(null)
     
-    const [milk_id, setMilkID] = useState(menuitem.milk_id)
-    const [temp, setTemp] = useState(menuitem.temperature)
-    const [sweetness, setSweetness] = useState(menuitem.sweetness)
+    const [sweetness, setSweetness] = useState(null)
     return (
         <>
             <Modal.Header closeButton>
-            <Modal.Title>Customize {menuitem.title}</Modal.Title>
+                <Modal.Title>Customize {menuitem.title}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <CustomizeList 
-                    milk_id={milk_id} setMilkID={setMilkID} 
-                    temp={temp} setTemp={setTemp}
-                    sweetness={sweetness} setSweetness={setSweetness}
-                />
+            <Modal.Body className='customize_list'>
+                <CustomizeTemp temp={temp} setTemp={setTemp} />
+                <CustomizeSize size={size} setSize={setSize} />
+                
+                {/* <CustomizeMilk milk_id={milk_id} setMilkID={setMilkID} />
+                
+                <CustomizeSweetness sweetness={sweetness} setSweetness={setSweetness} /> */}
                 
                 
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={()=>setShow(false)}>
-                    Cancel
-                </Button>
+                Quantity: 1
             
-                <PurchaseButton 
+                {/* <PurchaseButton 
                     menuitem_id={menuitem.pk} 
                     milk_id = {milk_id}
                     temp = {temp}
                     sweetness = {sweetness}
                     setShow={setShow} 
-                />
+                /> */}
                         
         
             </Modal.Footer>

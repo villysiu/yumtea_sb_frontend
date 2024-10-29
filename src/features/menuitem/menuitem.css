@@ -110,3 +110,22 @@
 .menuitem_plus_circle:hover {
     background-color: #f9f9f9;
 }
+
+.customize_list {
+    display: flex;
+    flex-direction: column;
+}
+.customize_item {
+    margin: 0.5rem 0;
+    background-color: rgb(244, 240, 240);
+    padding: 0.5rem 1rem;
+}
+.customize_item_choices{
+    width: 100%;
+    display: flex;
+    margin: 0.25rem 0;
+    
+}
+.customize_item_choice {
+    width: 33%;
+}

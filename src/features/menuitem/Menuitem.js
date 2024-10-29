@@ -1,17 +1,27 @@
-// import { Link } from "react-router-dom"
+import { useState } from "react"
 import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import OutOfStockButton from "./OutOfStockButton"
-// import CustomizeContainer from "./CustomizeContainer"
+import CustomizeContainer from "./CustomizeContainer"
 import CustomizeButton from "./CustomizeButton"
-
+import {Modal} from "react-bootstrap"
 const Menuitem = ({menuitem}) =>{
 
+    const [show, setShow] = useState(false);
+    const handleClick = () => {
+        setShow(true);
+    }
     
     return (
-        <div className='menuitem_wrapper'>
+        <>
+        {
+            show && 
+            <Modal show={show} onHide={()=>setShow(false)}>
+                <CustomizeContainer menuitem={menuitem} setShow={setShow} /> 
+            </Modal>
         
-        
+        }
+        <div className='menuitem_wrapper' onClick={handleClick}>
             <div className='menuitem_text'>
                 <div><b>{menuitem.title} </b></div>
                 <div>{USDollar.format(menuitem.price)}</div>
@@ -26,7 +36,7 @@ const Menuitem = ({menuitem}) =>{
             
 
        
-            {/* <div className='mb-3'></div>
+            {/* 
 
             { menuitem.inventory === 0 ?
                 <OutOfStockButton />
@@ -39,6 +49,7 @@ const Menuitem = ({menuitem}) =>{
             } */}
 
         </div>
+        </>
     )
 }
 export default Menuitem

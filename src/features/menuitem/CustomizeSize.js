@@ -1,26 +1,31 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
-const CustomizeTemp = ({temp, setTemp}) => {
-    const tempArr =  ["Hot", "Cold"]
+const CustomizeSize = ({size, setSize}) => {
+
+    const sizeArr =  [[12, 0], [16, 1]]
 
     const handleChange = e =>{
         
-        setTemp(e.target.value)
+        setSize(e.target.value)
     }
-    if(temp==="N")
-        return null
+    // if(temp==="N")
+    //     return null
     return (
         <div className='customize_item'>
-            <b>Hot Or Cold</b>
+            <b>Drink Size</b>
             <div>Required - Choose 1. </div>
             <div className='customize_item_choices'>
             {
-                tempArr.map(t=>{
+                sizeArr.map(s=>{
+                    const [size, cost] = s
                     return(
                         <div className='customize_item_choice'>
-                        <input type="radio" id={t} value={t} />
+                        <input type="radio" id={size} value={size} />
                         {" "}
-                        <label for="html">{t}</label>
+                        <label for="html">{size}oz
+                        { cost > 0 && <span> + ${cost}</span>}
+
+                        </label>
                         </div>
                     )
                 })
@@ -31,4 +36,4 @@ const CustomizeTemp = ({temp, setTemp}) => {
         </div>
     )
 }
-export default CustomizeTemp
+export default CustomizeSize
