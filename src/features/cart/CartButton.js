@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import {Modal} from 'react-bootstrap'
 import CartModal from './CartModal'
 import {useSelector, useDispatch} from 'react-redux'
-import {resetAddToCart} from './cartSlice'
+
 
 const CartButton =() =>{
     const dispatch = useDispatch();
@@ -26,30 +26,14 @@ const CartButton =() =>{
         }
     }, [addToCartStatus])
 
-    useEffect(() => {
-        if(addToCartStatus === 'succeeded'){
-            const itemAddedTimer = setTimeout(() => {
-                dispatch(resetAddToCart());
-                
-            }, 3000);
-            return () => clearTimeout(itemAddedTimer);
-        }
-        if(show){
-            const closeCart = setTimeout(() => {
-                setShow(false)
-                
-            }, 10000);
-            return () => clearTimeout(closeCart);
-        }
-        
-    }, [addToCartStatus, resetAddToCart, dispatch, show]);
+    
 
     useEffect(()=>{
         const clickOutside = e =>{
-            console.log('clicked outside')
-            console.log(e.target.id)
 
-            if(ref.current && !ref.current.contains(e.target) && e.target.id!=='cartButton'){
+            if(ref.current && !ref.current.contains(e.target) 
+                && e.target.id!=='cartButton' && !e.target.classList.contains('remove_button')){
+                console.log('clicked outside')
                setShow(false)
             }
         }
@@ -67,7 +51,7 @@ const CartButton =() =>{
         {
             show && 
             <div  ref={ref} className='cart_dropdown'>
-                <CartModal addToCartStatus = {addToCartStatus} /> 
+                <CartModal /> 
             </div>
         
         }

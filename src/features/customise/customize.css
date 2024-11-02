@@ -1,0 +1,56 @@
+.addtocart_button, .addtocart_button:active:enabled, .addtocart_button:hover:enabled {
+    border-radius: var(--oblong-button-border-radius);
+    border: transparent;
+    padding: var(--oblong-button-padding);
+    background-color: #d1c089 !important;
+    color: white;
+
+    
+}
+.addtocart_button:active:enabled, .addtocart_button:hover:enabled
+{
+    border-color: transparent;
+    box-shadow: 0 0 5px black !important;
+}
+.addtocart_button:disabled, .addtocart_button:hover:disabled, .addtocart_button:active:disabled
+ {
+  border: transparent;
+  cursor: not-allowed;
+  pointer-events: all !important;
+  
+}
+
+.update_quantity{
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.update_quantity_wrapper{
+    margin-left: 1rem;
+    width: 7rem;
+    /* height: 2.5rem; */
+    border: black solid 1px;
+    display: flex;
+    border-radius: var(--oblong-button-border-radius);
+    padding-top: 0.5rem;
+    padding-bottom:0.5rem;
+    
+}
+.minus_sign, .plus_sign {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+
+}
+.qty_box {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

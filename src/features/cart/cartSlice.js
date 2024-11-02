@@ -181,7 +181,8 @@ const cartSlice=createSlice({
             status: 'idle',
         },
         temp_cart: [],
-        addToCartStatus: 'idle'
+        addToCartStatus: 'idle',
+        removeStatus: 'idle',
        
        
     },
@@ -236,10 +237,9 @@ const cartSlice=createSlice({
             state.cart.cart_arr = state.cart.temp_cart_arr
         },
         removeItem(state, action){
-            console.log(action.payload) 
-        
-            state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=>item.pk !== action.payload)
-            state.cart.cart_arr = state.cart.temp_cart_arr
+            state.temp_cart.splice(action.payload, 1 )
+            state.cart.cart_arr = state.temp_cart
+            state.removeStatus = 'succeeded'
         },
         emptyTempCart(state,_){
             state.cart.temp_cart_arr = []
@@ -278,9 +278,8 @@ const cartSlice=createSlice({
 
         }, 
         resetAddToCart(state, action){
-            console.log('reset????')
-            console.log(action.payload)
             state.addToCartStatus = 'idle'
+            state.removeStatus = 'idle'
         }
 
 

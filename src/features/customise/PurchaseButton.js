@@ -36,11 +36,19 @@ const PurchaseButton = ({
     //     }    
         setShow(false) 
     }
-
+    if(!size || !temp){
+        return (
+            <div>
+                <Button className='addtocart_button' disabled>
+                    Make Required Choices  {USDollar.format(quantity * price)}
+                </Button>
+        </div>
+        )
+    }
     return(
         <div>
-            <Button className='purchase_button' 
-            disabled={!size || !temp}
+            <Button className='addtocart_button' 
+            // disabled={!size || !temp}
             onClick={handleClick}
             >
                 Add to Cart  {USDollar.format(quantity * price)}

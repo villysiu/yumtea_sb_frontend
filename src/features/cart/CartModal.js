@@ -5,12 +5,12 @@ import EmptyCart from './EmptyCart'
 import CartModalItem from './CartModalItem'
 import Subtotal from './Subtotal'
 import CheckoutButton from './CheckoutButton'
+import CartModalBanner from './CartModalBanner'
 import {useSelector} from 'react-redux'
-
 const CartModal = (
-    {addToCartStatus
-    // itemAddedBanner, showItemAddedBanner
-    }
+    // {addToCartStatus
+    // // itemAddedBanner, showItemAddedBanner
+    // }
 ) =>{
     const cart = useSelector(state=>state.cart.cart.cart_arr)
     
@@ -25,19 +25,13 @@ const CartModal = (
             <div className='cart_modal_header'>
                 Your Cart
             </div>
-            {
-                addToCartStatus === 'succeeded' &&
-                <div className='item_added_banner'>
-                    Item added.
-                </div>
-            }
+            <CartModalBanner />
+            
             <div className='cart_modal_list'>
                 {
-                    cart.map(cartitem=>{
+                    cart.map((cartitem, idx)=>{
                         return(
-                            <CartModalItem cartitem={cartitem}/>
-
-
+                            <CartModalItem key={idx} cartitem={cartitem} idx={idx}/>
                         )
                     })
                 }

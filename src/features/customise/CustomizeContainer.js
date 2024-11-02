@@ -1,3 +1,4 @@
+import './customize.css'
 import { Modal, Button } from "react-bootstrap"
 import CustomizeTemp from "./CustomizeTemp"
 import CustomizeSize from "./CustomizeSize"
