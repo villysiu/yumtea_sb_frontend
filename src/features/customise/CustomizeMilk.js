@@ -2,7 +2,7 @@ import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { USDollar } from "../../app/global"
-import { getMilks } from "./menuitemSlice"
+import { getMilks } from "../menuitem/menuitemSlice"
 const CustomizeMilk = ({milk_id, setMilkID}) =>{
     
     const milksArray = useSelector(state=>getMilks(state))

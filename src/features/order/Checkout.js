@@ -14,7 +14,8 @@ const Checkout = () => {
     const navigate = useNavigate()
 
     const [tip, setTip] = useState(0);
-    const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
+    const [subtotal, tax] =[0,0]
+    // const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
     const [total, setTotal] = useState(0)
     const cart_status = useSelector(state=>state.cart.cart.status)
     const checkout_status = useSelector(state=>state.order.checkout_status)

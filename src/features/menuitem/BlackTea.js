@@ -4,7 +4,7 @@ import Menuitem from './Menuitem'
 import {Container, Row, Col} from  'react-bootstrap'
 const BlackTea = () =>{
     const menuitems = useSelector(state => getMenuitems(state, 3))
-    console.log(menuitems)
+    
     return (
         <div className='category'>
             <div className='category_img blacktea'>

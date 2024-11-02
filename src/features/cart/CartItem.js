@@ -8,7 +8,7 @@ import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { getMenuitemById } from "../menuitem/menuitemSlice"
-import EditButton from "./EditButton"
+
 import SmokySpinner from "../headerNav/SmokySpinner"
 import ItemCustomizationList from "./ItemCustomizationList"
 
@@ -62,9 +62,9 @@ const CartItem = ({cartId, cartItem}) => {
                                 Only a few left
                             </div>
                         } */}
-                        <div className='cartitem_other_width'>
+                        {/* <div className='cartitem_other_width'>
                             <EditButton cartItem={cartItem}  />
-                        </div>
+                        </div> */}
                         <div className='cartitem_other_width'>
                             <RemoveButton cartItem={cartItem} />
                         </div>

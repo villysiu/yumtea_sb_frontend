@@ -27,7 +27,7 @@ const CustomizeTemp = ({temp, setTemp}) => {
                         
                         name="size" 
                         label={t} 
-                        id={`inline-radio-${idx}`}
+                        id={`temp-radio-${idx}`}
                         />
                         
                     )

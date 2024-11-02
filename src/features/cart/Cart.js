@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { fetchCart, getItemCount } from "./cartSlice"
+import { fetchCart, getItemsCountInCart } from "./cartSlice"
 import { CartFill } from "react-bootstrap-icons"
 
 import CartItem from "./CartItem"
@@ -15,7 +15,8 @@ const Cart = () => {
     const dispatch = useDispatch()
     const current_user = useSelector(state => state.user.current_user)
     const cart = useSelector(state=>state.cart.cart)
-    const itemCount = useSelector(state=>getItemCount(state.cart.cart.cart_arr))
+    const temp_cart = useSelector(state=>state.cart.temp_cart)
+    const itemCount = useSelector(state=>getItemsCountInCart(state))
     
     useEffect(()=>{
         if(current_user.username && cart.status === 'idle' ){

@@ -5,7 +5,7 @@ import {homeLink} from '../../app/global.js'
 import HeaderDrinksButton from './HeaderDrinksButton'
 import HeaderVisitButton from './HeaderVisitButton'
 import HeaderHomeButton from './HeaderHomeButton'
-
+import CartButton from '../cart/CartButton'
 const HeaderNav = () =>{
     const location = useLocation()
     const [current, setCurrent] = useState(null)
@@ -29,7 +29,7 @@ const HeaderNav = () =>{
             <HeaderDrinksButton current={current} setCurrent={setCurrent} />
             
             <div>Member</div>
-            <div>cart</div>
+            <CartButton />
         </div>
     )
 }

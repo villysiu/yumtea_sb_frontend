@@ -13,21 +13,21 @@ const EnterPage = () =>{
     const [show, setShow] = useState(true);
     const [spinner, setSpinner] = useState(false);
 
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            const el = document.getElementById('home_bg')
-            el.classList.add("hide")
+    // useEffect(() => {
+    //     const timeoutId = setTimeout(() => {
+    //         const el = document.getElementById('home_bg')
+    //         el.classList.add("hide")
             
-        }, 1000);
-        return () => clearTimeout(timeoutId);
-    }, []);
+    //     }, 1000);
+    //     return () => clearTimeout(timeoutId);
+    // }, []);
 
-    useEffect(() => {
-        const www = setTimeout(() => {
-            setShow(false)
-        }, 7000);
-        return () => clearTimeout(www);
-    }, []);
+    // useEffect(() => {
+    //     const www = setTimeout(() => {
+    //         setShow(false)
+    //     }, 7000);
+    //     return () => clearTimeout(www);
+    // }, []);
 
     // if(!show)
     //     return 
@@ -37,7 +37,7 @@ const EnterPage = () =>{
             <MenuitemApp setSpinner={setSpinner}/>
             <ResetApp />
             <Outlet />
-            { show && 
+            {/* { show && 
             <div id="home_bg">
                 <div id="home_brand_container">
                     <Brand />
@@ -46,7 +46,7 @@ const EnterPage = () =>{
                     {spinner && <Spinner animation="border" className="spinner"/> }
                 </div>
             </div>  
-            }
+            } */}
             
         </>
     )

@@ -15,7 +15,7 @@ const CustomizeSize = ({setSize, setPrice}) => {
             setPrice(p=>p+cost)
             return vol
          })
-        //  setPrice(p=>p+cost)
+        
     }
     // if(temp==="N")
     //     return null
@@ -40,7 +40,7 @@ const CustomizeSize = ({setSize, setPrice}) => {
                         
                         name="size" 
                         label={l} 
-                        id={`inline-radio-${idx}`}
+                        id={`size-radio-${idx}`}
                         />
                         
                     )

@@ -1,4 +1,4 @@
-const UpdateQuantity =({quantity, setQuantity})=>{
+const UpdateQuantity =({quantity, setQuantity, setPrice})=>{
     const handleClick = (sign) =>{
         if(sign==='-')
             setQuantity(q=>q-1)

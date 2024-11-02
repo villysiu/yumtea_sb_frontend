@@ -24,6 +24,7 @@ const Home = () =>{
         //   once: true,
         });
       }, []);
+      
     return(
         
         <div className="home">

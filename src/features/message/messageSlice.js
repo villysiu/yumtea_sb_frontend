@@ -7,12 +7,18 @@ import { increment } from '../cart/cartSlice'
 const messageSlice = createSlice({
     name: 'message',
     initialState: {
-        message_arr: []    
+        message_arr: [],
+        cart_message: "",    
+
+
     },
     reducers: {
       removeMessage: (state)=>{
         state.message_arr = []
       },
+      removeCartMessage: (state) =>{
+        state.cart_message = null
+      }
 
     },
     extraReducers(builder) {
@@ -146,15 +152,16 @@ const messageSlice = createSlice({
         })
 
         .addCase(increment, (state, action) => {
-            state.message_arr.push(
-                {
-                    status: true,
-                    type: "success",
-                    content: `Item TTTTTT added to shopping cart.`
-                }
-            )
+            // state.cart_message.push(
+            //     {
+            //         status: true,
+            //         type: "success",
+            //         content: `Item TTTTTT added to shopping cart.`
+            //     }
+            // )
+            state.cart_message =  "Item Added"
         })
     }
 })
 export default messageSlice.reducer
-export const { removeMessage } = messageSlice.actions
+export const { removeMessage, removeCartMessage } = messageSlice.actions

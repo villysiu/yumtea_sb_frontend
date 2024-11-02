@@ -1,9 +1,10 @@
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
-import { getSubtotalAndTax } from "./cartSlice"
+// import { getSubtotalAndTax } from "./cartSlice"
 const CartSummaryDetails = () =>{
     // const cart = useSelector(state=>state.cart.cart)
-    const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
+    // const [subtotal, tax] = useSelector(state=>getSubtotalAndTax(state.cart.cart.cart_arr))
+    const [subtotal, tax] =[0,0]
     return (
         <>
             <div className='mb-3 solid_link'>

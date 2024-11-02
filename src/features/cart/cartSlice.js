@@ -180,6 +180,8 @@ const cartSlice=createSlice({
             temp_cart_arr:[],
             status: 'idle',
         },
+        temp_cart: [],
+        addToCartStatus: 'idle'
        
        
     },
@@ -187,38 +189,41 @@ const cartSlice=createSlice({
         
         increment(state, action) {
             console.log(action.payload)
-            // menuitem_id: 2, milk: 2, temp: 'I', sweetness: '100', unit_price: 5
+            // {menuitem_id: 7, quantity: 1, temp: 'Cold', size: 16, price: 6}
             
-            let cartitem = state.cart.temp_cart_arr
+            let cartitem = state.temp_cart
                 .find(item=> item.menuitem_id === action.payload.menuitem_id
-                    && item.milk_id === action.payload.milk
-                    && item.temperature === action.payload.temp 
-                    && item.sweetness === action.payload.sweetness)
+           
+                    && item.temp === action.payload.temp 
+                    && item.size === action.payload.size 
+            //         && item.milk_id === action.payload.milk
+            //         && item.sweetness === action.payload.sweetness
+                )
 
             
             if(cartitem === undefined){
-                state.cart.temp_cart_arr.push(
-                    {
-                        "menuitem_id": action.payload.menuitem_id, 
-                        "quantity": 1,
-                        
-                        "unit_price": action.payload.unit_price,
-                        // "tax": action.payload.unit_price * 0.1,
-                        "milk_id": action.payload.milk,
-                        "sweetness": action.payload.sweetness,
-                        "temperature": action.payload.temp,
-                        "pk": state.cart.temp_cart_arr.length+1
-                    }
-                )
+                // state.temp_cart.push(
+                //     {
+                //         "menuitem_id": action.payload.menuitem_id, 
+                //         "quantity": action.payload.quantity,
+                //         "price": action.payload.price,
+                //         "temp": action.payload.temp,
+                //         "size": action.payload.size,
+                //         // "pk": state.cart.temp_cart_arr.length+1
+                //     }
+                // )
+                state.temp_cart.push(action.payload)
+                state.cart.cart_arr.push(action.payload)
             }
             else{
                 console.log("item in cart")
                 console.log(cartitem)
-                cartitem.quantity++
+                cartitem.quantity+= action.payload.quantity
                 // cartitem.linetotal += action.payload.unit_price
      
             }
-            state.cart.cart_arr = state.cart.temp_cart_arr
+            state.cart.cart_arr = state.temp_cart
+            state.addToCartStatus = 'succeeded'
 
         },
         
@@ -271,6 +276,11 @@ const cartSlice=createSlice({
 
             state.cart.cart_arr = state.cart.temp_cart_arr
 
+        }, 
+        resetAddToCart(state, action){
+            console.log('reset????')
+            console.log(action.payload)
+            state.addToCartStatus = 'idle'
         }
 
 
@@ -411,24 +421,26 @@ const cartSlice=createSlice({
             state.cart.status = 'idle'
             
         })
-    }
-})
-export const { increment, decrement, updateQty, removeItem, emptyTempCart, updateCustomization } = cartSlice.actions
-export default cartSlice.reducer
 
-export const getSubtotalAndTax = (cart_arr) =>{
-    let subtotal = 0
-    // tax = 0
-    for(let cart_item of cart_arr){
-        subtotal += cart_item.unit_price * cart_item.quantity
         
     }
-    return [subtotal, subtotal*0.1]
+})
+export const { resetAddToCart, increment, decrement, updateQty, removeItem, emptyTempCart, updateCustomization } = cartSlice.actions
+export default cartSlice.reducer
+
+export const getSubtotal = (state) =>{
+    let subtotal = 0
+    // tax = 0
+    for(let cart_item of state.cart.cart.cart_arr){
+        subtotal += cart_item.price * cart_item.quantity
+        
+    }
+    return subtotal
 }
-export const getItemCount = (cart_arr) =>{
+export const getItemsCountInCart = (state) =>{
     let count = 0
-    for(let cart_item of cart_arr){
-        count += cart_item.quantity
+    for(let item of state.cart.cart.cart_arr){
+        count += item.quantity
     }
     return count
 }

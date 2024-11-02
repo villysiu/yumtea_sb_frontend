@@ -2,8 +2,8 @@ import { useState } from "react"
 import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import OutOfStockButton from "./OutOfStockButton"
-import CustomizeContainer from "./CustomizeContainer"
-import CustomizeButton from "./CustomizeButton"
+import CustomizeContainer from "../customise/CustomizeContainer"
+import CustomizeButton from "../customise/CustomizeButton"
 import {Modal} from "react-bootstrap"
 const Menuitem = ({menuitem}) =>{
 

@@ -207,8 +207,8 @@ export const getMenuitems = (state, category_id) =>{
     
     return state.menuitem.menuitems.array.filter(menuitem=>menuitem.category_id === category_id)
 }
-export const getUnitprice = (state, menuitem_id, milk_id) => {
-    const menuitem = state.menuitem.menuitems.array.find(item=>item.pk === menuitem_id)
-    const milk = state.menuitem.milk.array.find(item=>item.id === milk_id)
-    return menuitem.price + milk.price
-}
+// export const getUnitprice = (state, menuitem_id, milk_id) => {
+//     const menuitem = state.menuitem.menuitems.array.find(item=>item.pk === menuitem_id)
+//     const milk = state.menuitem.milk.array.find(item=>item.id === milk_id)
+//     return menuitem.price + milk.price
+// }

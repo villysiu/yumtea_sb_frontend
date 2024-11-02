@@ -18,7 +18,7 @@ const CustomizeContainer = ({setShow, menuitem}) =>{
     const [quantity, setQuantity] = useState(1)
     return (
         <>
-            <Modal.Header closeButton>
+            <Modal.Header className='customize_header' closeButton>
                 <Modal.Title>Customize {menuitem.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body className='customize_list'>
@@ -32,11 +32,12 @@ const CustomizeContainer = ({setShow, menuitem}) =>{
                 
             </Modal.Body>
             <Modal.Footer className='customize_footer'>
-                <UpdateQuantity quantity={quantity} setQuantity={setQuantity} />
+                <UpdateQuantity quantity={quantity} setQuantity={setQuantity} setPrice={setPrice}/>
             
                 <PurchaseButton 
-                price = {price}
-                    // menuitem_id={menuitem.pk} 
+                    price = {price}
+                    quantity = {quantity}
+                    menuitem_id={menuitem.pk} 
                     // milk_id = {milk_id}
                     temp = {temp}
                     size={size}
