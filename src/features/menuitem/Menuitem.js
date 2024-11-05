@@ -24,7 +24,7 @@ const Menuitem = ({menuitem}) =>{
         dispatch(resetMenuitemClicked())
     }
 
-    console.log(cartitem_tobeUpdated)
+    // console.log(cartitem_tobeUpdated)
     //  {menuitem_id: 7, quantity: 1, temperature: 'Hot', size: 16, price: 6, pk:"5c05757e-b91b-42cc-be62-348cdf400efd" }
 
     useEffect(()=>{
@@ -36,7 +36,6 @@ const Menuitem = ({menuitem}) =>{
     
     return (
         <>
-        {console.log(show, menuitemClicked, cartitem_tobeUpdated!=="")}
         {
             
             show && 

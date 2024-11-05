@@ -1,5 +1,6 @@
 import './menuitem.css'
 import {useEffect} from 'react';
+import Categories from './Categories'
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -32,7 +33,9 @@ const Collections = () =>{
             </div>
             Each cup of tea is made
             by the finest quality of tea leaves and made to order.
-            <BlackTea  />
+            {/* <BlackTea  /> */}
+
+            <Categories />
         </div>
     )
 }

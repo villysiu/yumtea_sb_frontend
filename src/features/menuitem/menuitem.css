@@ -40,6 +40,18 @@
     background: url("./img/EarlGrey.webp") center no-repeat;
     background-size: cover;
 }
+.greentea {
+    background: url("./img/jasmine.webp") center no-repeat;
+    background-size: cover;
+}
+.oolongtea {
+    background: url("./img/oolong.webp") center no-repeat;
+    background-size: cover;
+}
+.caffainefree {
+    background: url("./img/mint.webp") center no-repeat;
+    background-size: cover;
+}
 .menuitems_wrapper {
     --white-outline: 0.5rem;
     width: var(--body-width);
