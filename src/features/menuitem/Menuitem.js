@@ -1,23 +1,76 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { homeLink } from "../../app/global"
 import { USDollar } from "../../app/global"
 import OutOfStockButton from "./OutOfStockButton"
 import CustomizeContainer from "../customise/CustomizeContainer"
 import CustomizeButton from "../customise/CustomizeButton"
 import {Modal} from "react-bootstrap"
-const Menuitem = ({menuitem}) =>{
+import {useSelector, useDispatch} from 'react-redux'
+import {resetMenuitemClicked} from './menuitemSlice'
 
+const Menuitem = ({menuitem}) =>{
     const [show, setShow] = useState(false);
+    const dispatch = useDispatch()
+
+    const menuitemClicked = useSelector(state=>state.menuitem.menuitemButton.clicked)
+
+    const cartitem_tobeUpdated = useSelector(state=>state.menuitem.menuitemButton.cartitem)
+
     const handleClick = () => {
         setShow(true);
     }
+    const handleHide = () =>{
+        setShow(false)
+        dispatch(resetMenuitemClicked())
+    }
+
+    console.log(cartitem_tobeUpdated)
+    //  {menuitem_id: 7, quantity: 1, temperature: 'Hot', size: 16, price: 6, pk:"5c05757e-b91b-42cc-be62-348cdf400efd" }
+
+    useEffect(()=>{
+        if(menuitemClicked && cartitem_tobeUpdated.menuitem_id === menuitem.pk){
+            setShow(true)
+           
+        }
+    }, [menuitemClicked, cartitem_tobeUpdated,menuitem, setShow])
     
     return (
         <>
+        {console.log(show, menuitemClicked, cartitem_tobeUpdated!=="")}
         {
+            
             show && 
-            <Modal show={show} onHide={()=>setShow(false)}>
-                <CustomizeContainer menuitem={menuitem} setShow={setShow} /> 
+            <Modal show={show} onHide={handleHide}>
+                
+
+                {menuitemClicked && cartitem_tobeUpdated !== "" ?
+
+                <CustomizeContainer 
+                    cartitemPk = {cartitem_tobeUpdated.pk}
+                    itemId = {menuitem.pk}
+                    itemTitle={menuitem.title}
+                    itemTemp = {cartitem_tobeUpdated.temperature}
+                    itemSize = {cartitem_tobeUpdated.size}
+                    itemPrice = {cartitem_tobeUpdated.price}
+                    itemQty={cartitem_tobeUpdated.quantity} 
+                    setShow={setShow} 
+                    task='update' 
+                /> 
+                :
+                <CustomizeContainer 
+                    cartitemPk ={null}
+                    itemId = {menuitem.pk}
+                    itemTitle={menuitem.title}
+                    itemTemp = {menuitem.temperature}
+                    itemSize = {menuitem.size || null}
+                    itemPrice = {menuitem.price}
+                    itemQty={1} 
+                    setShow={setShow} 
+                    task='add' 
+                /> 
+                
+                
+                } 
             </Modal>
         
         }

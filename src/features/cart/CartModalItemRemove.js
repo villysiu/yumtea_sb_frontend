@@ -4,17 +4,18 @@ import {useRef, useState, useEffect} from 'react'
 
 import {Button} from 'react-bootstrap'
 import {removeItem} from './cartSlice'
-const CartModalItemRemove =({menuitem_title, idx}) =>{
+const CartModalItemRemove =({menuitem_title, pk}) =>{
     const dispatch = useDispatch()
     const ref = useRef();
     const [remove, setRemove] = useState(false)
 
     const handleClick = () =>{
         console.log('click ttach')
+
         setRemove(true);
     }
     const handleRemove = () =>{
-        dispatch(removeItem(idx))
+        dispatch(removeItem(pk))
         setRemove(false);
     }
     useEffect(()=>{
@@ -37,7 +38,7 @@ const CartModalItemRemove =({menuitem_title, idx}) =>{
                 </div>
             }
             <div className='cart_modal_item_remove' onClick={handleClick}>
-                <Trash /> 
+                <Trash />
             </div>
         </div>
     )

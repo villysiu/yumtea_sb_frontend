@@ -7,15 +7,9 @@ import Subtotal from './Subtotal'
 import CheckoutButton from './CheckoutButton'
 import CartModalBanner from './CartModalBanner'
 import {useSelector} from 'react-redux'
-const CartModal = (
-    // {addToCartStatus
-    // // itemAddedBanner, showItemAddedBanner
-    // }
-) =>{
+const CartModal = ({setCartShow}) =>{
     const cart = useSelector(state=>state.cart.cart.cart_arr)
-    
-    
-   
+
     if(cart.length === 0){
         return <EmptyCart />
     }
@@ -31,7 +25,7 @@ const CartModal = (
                 {
                     cart.map((cartitem, idx)=>{
                         return(
-                            <CartModalItem key={idx} cartitem={cartitem} idx={idx}/>
+                            <CartModalItem key={idx} cartitem={cartitem} idx={idx} setCartShow={setCartShow} />
                         )
                     })
                 }

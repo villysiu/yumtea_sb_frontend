@@ -129,15 +129,25 @@ const menuitemSlice=createSlice({
             array: [],
             status: 'idle',
         }, 
-        // menuitemsByCategory: {
-        //     category_id: null,
-        //     array: [],
-        //     status: 'idle',
-        // }, 
+        menuitemButton: {
+            clicked: false,
+            cartitem: "",
+        }
+
 
     },
     reducers: {
-        
+        triggerMenuItem(state, action) {
+            console.log(action.payload)
+            
+            state.menuitemButton.clicked = true
+            state.menuitemButton.cartitem = action.payload.cartitem
+            
+        },
+        resetMenuitemClicked(state){
+            state.menuitemButton.clicked = false
+            state.menuitemButton.cartitem = ""
+        }
     },
     extraReducers(builder) {
       builder
@@ -170,7 +180,7 @@ const menuitemSlice=createSlice({
     }
 })
 
-export const { setClick } = menuitemSlice.actions
+export const { triggerMenuItem, resetMenuitemClicked } = menuitemSlice.actions
 
 export default menuitemSlice.reducer
 

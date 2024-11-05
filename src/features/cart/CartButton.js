@@ -3,38 +3,43 @@ import { useState, useEffect, useRef } from 'react'
 import {Modal} from 'react-bootstrap'
 import CartModal from './CartModal'
 import {useSelector, useDispatch} from 'react-redux'
+import {resetCartBanner} from './cartSlice'
 
 
 const CartButton =() =>{
     const dispatch = useDispatch();
-    const addToCartStatus = useSelector(state => state.cart.addToCartStatus)
-    const [show, setShow] = useState(false);
-    
-
+    // const addToCartStatus = useSelector(state => state.cart.addToCartStatus)
+    const message = useSelector(state => state.cart.cartBannerMessage)
     const cart = useSelector(state=>state.cart.cart.cart_arr)
+    const [cartShow, setCartShow] = useState(false);
+
     const ref = useRef()
     
     const handleClick = () => {
         console.log('clicked')
-        setShow(!show);
+        setCartShow(!cartShow);
     }
     
     useEffect(()=>{
         // show maodal when item added to cart
-        if(addToCartStatus === 'succeeded'){
-            setShow(true)
+        // if(addToCartStatus === 'succeeded'){
+        if(message !== ""){
+            setCartShow(true)
         }
-    }, [addToCartStatus])
+    }, [message])
 
     
 
     useEffect(()=>{
         const clickOutside = e =>{
-
+            console.log(e.target)
             if(ref.current && !ref.current.contains(e.target) 
-                && e.target.id!=='cartButton' && !e.target.classList.contains('remove_button')){
+                && e.target.id!=='cartButton' && !e.target.classList.contains('remove_button')
+            
+            ){
                 console.log('clicked outside')
-               setShow(false)
+                setCartShow(false)
+                dispatch(resetCartBanner())
             }
         }
         document.addEventListener('click', clickOutside);
@@ -49,9 +54,9 @@ const CartButton =() =>{
     return (
         <div className="cart_button_wrapper">
         {
-            show && 
-            <div  ref={ref} className='cart_dropdown'>
-                <CartModal /> 
+            cartShow && 
+            <div ref={ref} className='cart_dropdown'>
+                <CartModal setCartShow={setCartShow} /> 
             </div>
         
         }

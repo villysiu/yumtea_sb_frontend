@@ -5,7 +5,7 @@ import { addItemToCart, increment } from "../cart/cartSlice"
 import { USDollar } from "../../app/global"
 
 
-const PurchaseButton = ({
+const AddtocartButton = ({
     price, quantity, menuitem_id, temp, size, setShow
     }) =>{
     console.log("purchase button ")
@@ -23,8 +23,10 @@ const PurchaseButton = ({
             dispatch(increment({
                 'menuitem_id':menuitem_id,
                 'quantity': quantity, 
-                'temp': temp, 
-                'size': size, 'price': price
+                'temperature': temp, 
+                'size': size, 
+                'price': price,
+                
                 //  'milk': milk_id, sweetness: sweetness, unit_price: unit_price
             }))
         } 
@@ -57,4 +59,4 @@ const PurchaseButton = ({
 
     )
 }
-export default PurchaseButton
+export default AddtocartButton

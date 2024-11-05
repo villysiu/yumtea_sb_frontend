@@ -4,47 +4,57 @@ import CustomizeTemp from "./CustomizeTemp"
 import CustomizeSize from "./CustomizeSize"
 // import CustomizeMilk from "./CustomizeMilk"
 // import CustomizeSweetness from "./CustomizeSweetness"
-import PurchaseButton from "./PurchaseButton"
+import AddtocartButton from "./AddtocartButton"
+import UpdateCartButton from './UpdateCartButton'
 import UpdateQuantity from "./UpdateQuantity"
 import { useState } from "react"
 
-const CustomizeContainer = ({setShow, menuitem}) =>{
-    console.log(menuitem)
-    const [price, setPrice] = useState(menuitem.price)
-    const [temp, setTemp] = useState(menuitem.temp)
-    const [size, setSize] =useState(null)
-    // const [milk_id, setMilkID] = useState(null)
-    
-    const [sweetness, setSweetness] = useState(null)
-    const [quantity, setQuantity] = useState(1)
+const CustomizeContainer = ({cartitemPk, itemId, itemTitle, itemTemp, itemSize, itemPrice, itemQty, setShow, task}) =>{
+
+
+    const [price, setPrice] = useState(itemPrice)
+    const [temp, setTemp] = useState(itemTemp)
+    const [size, setSize] =useState(itemSize)
+    const [quantity, setQuantity] = useState(itemQty)
+    console.log( price, temp, size, quantity)
     return (
         <>
             <Modal.Header className='customize_header' closeButton>
-                <Modal.Title>Customize {menuitem.title}</Modal.Title>
+                <Modal.Title>Customize {itemTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body className='customize_list'>
                 <CustomizeTemp temp={temp} setTemp={setTemp} />
                 <CustomizeSize size={size} setSize={setSize} setPrice={setPrice} />
-                
-                {/* <CustomizeMilk milk_id={milk_id} setMilkID={setMilkID} />
-                
-                <CustomizeSweetness sweetness={sweetness} setSweetness={setSweetness} /> */}
-                
+            
                 
             </Modal.Body>
             <Modal.Footer className='customize_footer'>
                 <UpdateQuantity quantity={quantity} setQuantity={setQuantity} setPrice={setPrice}/>
-            
-                <PurchaseButton 
-                    price = {price}
-                    quantity = {quantity}
-                    menuitem_id={menuitem.pk} 
-                    // milk_id = {milk_id}
-                    temp = {temp}
-                    size={size}
-                    // sweetness = {sweetness}
-                    setShow={setShow} 
-                />
+                {
+                    task === 'add' ?
+                        <AddtocartButton 
+                            
+                            price = {price}
+                            quantity = {quantity}
+                            menuitem_id={itemId} 
+                            temp = {temp}
+                            size={size}
+                            setShow={setShow} 
+                            
+                        />
+                        :
+                        <UpdateCartButton
+                            cartitem_pk={cartitemPk}
+                            price = {price}
+                            quantity = {quantity}
+                            menuitem_id={itemId} 
+                            temp = {temp}
+                            size={size}
+                            setShow={setShow} 
+                        />
+
+                }   
+
                         
         
             </Modal.Footer>

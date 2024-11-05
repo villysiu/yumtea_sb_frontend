@@ -42,6 +42,7 @@
     padding: 1rem;
     border-bottom: 1px solid darkgray;
     position: relative;
+    cursor: pointer;
 }
 .remove {
     background-color:rgb(234, 229, 205);
@@ -61,6 +62,7 @@
     padding: var(--oblong-button-padding);
     color: black;
     background-color: white !important;
+    /* cursor: pointer; */
 
 }
 .remove_button:hover {
@@ -86,6 +88,7 @@
 .cart_modal_item_remove{
     width: 10%;
     text-align: right;
+    cursor: pointer;
 }
 .cart_modal_item_price {
     width: 25%;

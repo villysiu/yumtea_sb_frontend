@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 import { logoutUser } from "../user/userSlice";
 import { CheckoutCart } from "../order/orderSlice";
+import { v4 as uuidv4 } from 'uuid';
 
 export const batchAddItems=createAsyncThunk(
     'cart/batchAddItems',
@@ -183,6 +184,8 @@ const cartSlice=createSlice({
         temp_cart: [],
         addToCartStatus: 'idle',
         removeStatus: 'idle',
+        updateStatus: 'idle',
+        cartBannerMessage: "",
        
        
     },
@@ -190,44 +193,106 @@ const cartSlice=createSlice({
         
         increment(state, action) {
             console.log(action.payload)
-            // {menuitem_id: 7, quantity: 1, temp: 'Cold', size: 16, price: 6}
-            
-            let cartitem = state.temp_cart
-                .find(item=> item.menuitem_id === action.payload.menuitem_id
-           
-                    && item.temp === action.payload.temp 
+            // {menuitem_id: 7, quantity: 1, temperature: 'Iced', size: 12, price: 5}
+         
+            let itemExisted = state.temp_cart
+                .find(item=> 
+                    item.menuitem_id === action.payload.menuitem_id
+                    && item.temperature === action.payload.temperature 
                     && item.size === action.payload.size 
-            //         && item.milk_id === action.payload.milk
-            //         && item.sweetness === action.payload.sweetness
                 )
 
-            
-            if(cartitem === undefined){
-                // state.temp_cart.push(
-                //     {
-                //         "menuitem_id": action.payload.menuitem_id, 
-                //         "quantity": action.payload.quantity,
-                //         "price": action.payload.price,
-                //         "temp": action.payload.temp,
-                //         "size": action.payload.size,
-                //         // "pk": state.cart.temp_cart_arr.length+1
-                //     }
-                // )
+            if(itemExisted === undefined){
+                action.payload.pk = uuidv4(); 
                 state.temp_cart.push(action.payload)
-                state.cart.cart_arr.push(action.payload)
+                // state.cart.cart_arr.push(action.payload)
             }
             else{
                 console.log("item in cart")
-                console.log(cartitem)
-                cartitem.quantity+= action.payload.quantity
+                console.log(itemExisted)
+                itemExisted.quantity+= action.payload.quantity
                 // cartitem.linetotal += action.payload.unit_price
      
             }
             state.cart.cart_arr = state.temp_cart
-            state.addToCartStatus = 'succeeded'
-
+            state.updateStatus = 'succeeded'
+            state.cartBannerMessage = "Item added."
         },
         
+        
+        updateItem(state, action){
+            console.log(action.payload)
+            // {cartitem_pk: 'beb3...', 
+            // menuitem_id: 7, quantity: 1, temperature: 'Iced', size: 16, …}
+
+            const itemToBeUpdated = state.temp_cart.find(item=> item.pk === action.payload.cartitem_pk)
+            let dupItem = state.temp_cart.find(item=> 
+                    item.menuitem_id === action.payload.menuitem_id
+                    && item.temperature === action.payload.temperature 
+                    && item.size === action.payload.size 
+                )
+            if(dupItem === undefined){
+                itemToBeUpdated.temperature = action.payload.temperature 
+                itemToBeUpdated.size = action.payload.size 
+                itemToBeUpdated.price = action.payload.price 
+                itemToBeUpdated.quantity = action.payload.quantity 
+            } 
+            // else {
+            //     //combine
+            // }
+
+            state.cart.cart_arr = state.temp_cart
+            state.addToCartStatus = 'succeeded'
+            state.cartBannerMessage = "Item updated."
+
+        },
+        removeItem(state, action){
+            // state.temp_cart.splice(action.payload, 1 )
+            state.temp_cart = state.temp_cart.filter(item=>item.pk !== action.payload)
+            state.cart.cart_arr = state.temp_cart
+            state.removeStatus = 'succeeded'
+            state.cartBannerMessage = "Item removed."
+        },
+        resetCartBanner(state, action){
+            state.cartBannerMessage = ''
+
+        },
+        emptyTempCart(state,_){
+            state.cart.temp_cart_arr = []
+        },
+        // updateCustomization(state, action){
+        //     console.log(action.payload)
+        //     // {'cartitem_id': cartItem.pk, 'menuitem_id':cartItem.menuitem_id, 'milk_id': milk_id, 'temperature': temp, 'sweetness': sweetness
+        //     // unit_price: 7}
+        //     let existed_item = state.cart.temp_cart_arr.find(item=> 
+        //         item.menuitem_id === action.payload.menuitem_id 
+        //         && item.milk_id === action.payload.milk_id
+        //         && item.temperature === action.payload.temperature 
+        //         && item.sweetness === action.payload.sweetness
+        //     )
+        //     console.log(existed_item)
+            
+        //     let cartitem = state.cart.temp_cart_arr.find(item=>item.pk===action.payload.cartitem_id)
+        //     console.log(cartitem)
+
+        //     if(existed_item === undefined){
+        //         cartitem.milk_id = action.payload.milk_id
+        //         cartitem.temperature = action.payload.temperature 
+        //         cartitem.sweetness = action.payload.sweetness
+        //         cartitem.unit_price = action.payload.unit_price
+        //     }
+        //     else{
+
+        //         existed_item.quantity += cartitem.quantity
+        //         state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=>item.pk!==action.payload.cartitem_id)
+
+        //     }
+            
+            
+
+        //     state.cart.cart_arr = state.cart.temp_cart_arr
+
+        // }, 
         updateQty(state, action) {
             console.log(action.payload)
             // cartitem existed since it is from shopping cart 
@@ -236,51 +301,12 @@ const cartSlice=createSlice({
 
             state.cart.cart_arr = state.cart.temp_cart_arr
         },
-        removeItem(state, action){
-            state.temp_cart.splice(action.payload, 1 )
-            state.cart.cart_arr = state.temp_cart
-            state.removeStatus = 'succeeded'
-        },
-        emptyTempCart(state,_){
-            state.cart.temp_cart_arr = []
-        },
-        updateCustomization(state, action){
-            console.log(action.payload)
-            // {'cartitem_id': cartItem.pk, 'menuitem_id':cartItem.menuitem_id, 'milk_id': milk_id, 'temperature': temp, 'sweetness': sweetness
-            // unit_price: 7}
-            let existed_item = state.cart.temp_cart_arr.find(item=> 
-                item.menuitem_id === action.payload.menuitem_id 
-                && item.milk_id === action.payload.milk_id
-                && item.temperature === action.payload.temperature 
-                && item.sweetness === action.payload.sweetness
-            )
-            console.log(existed_item)
-            
-            let cartitem = state.cart.temp_cart_arr.find(item=>item.pk===action.payload.cartitem_id)
-            console.log(cartitem)
-
-            if(existed_item === undefined){
-                cartitem.milk_id = action.payload.milk_id
-                cartitem.temperature = action.payload.temperature 
-                cartitem.sweetness = action.payload.sweetness
-                cartitem.unit_price = action.payload.unit_price
-            }
-            else{
-
-                existed_item.quantity += cartitem.quantity
-                state.cart.temp_cart_arr = state.cart.temp_cart_arr.filter(item=>item.pk!==action.payload.cartitem_id)
-
-            }
-            
-            
-
-            state.cart.cart_arr = state.cart.temp_cart_arr
-
-        }, 
         resetAddToCart(state, action){
             state.addToCartStatus = 'idle'
             state.removeStatus = 'idle'
-        }
+            state.updateStatus = 'idle'
+        },
+
 
 
     },
@@ -421,10 +447,15 @@ const cartSlice=createSlice({
             
         })
 
+        // .addCase(triggerMenuItem, (state, action) => {
+           
+        //     state.cartBannerMessage = ''
+        // })
+
         
     }
 })
-export const { resetAddToCart, increment, decrement, updateQty, removeItem, emptyTempCart, updateCustomization } = cartSlice.actions
+export const { resetCartBanner,resetAddToCart, increment, updateItem, updateQty, removeItem, emptyTempCart } = cartSlice.actions
 export default cartSlice.reducer
 
 export const getSubtotal = (state) =>{

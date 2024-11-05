@@ -1,18 +1,18 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
 
-const CustomizeSize = ({setSize, setPrice}) => {
+const CustomizeSize = ({size,setSize, setPrice}) => {
 
     // const sizeMap =  [[12, 0], [16, 1]]
     const sizeMap = new Map([[12, 0], [16, 1]])
+
     const handleChange = (vol, cost) =>{
         console.log(vol, cost)
          setSize(prevSize=>{
-            console.log(prevSize)
-            if(prevSize!==null){
+            if(prevSize){
                 setPrice(p=>p-sizeMap.get(prevSize))
             }
-            setPrice(p=>p+cost)
+            setPrice(prevPrice=>prevPrice+cost)
             return vol
          })
         
@@ -29,17 +29,17 @@ const CustomizeSize = ({setSize, setPrice}) => {
                 Array.from(sizeMap).map((s, idx)=>{
                     const [vol, cost] = s
                     const addCost = cost > 0 ? `+$${cost}.00` : ""
-                    const l = `${vol}oz ${addCost}`
+                    const content = `${vol}oz ${addCost}`
                     return(
                         
-                        <Form.Check 
+                        <Form.Check key={idx}
                         className='customize_item_choice'
                         onChange={()=>handleChange(vol, cost)} 
                         inline 
                         type="radio" 
-                        
+                        defaultChecked = {vol===size}
                         name="size" 
-                        label={l} 
+                        label={content} 
                         id={`size-radio-${idx}`}
                         />
                         

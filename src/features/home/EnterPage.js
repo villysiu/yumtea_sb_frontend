@@ -36,6 +36,7 @@ const EnterPage = () =>{
             
             <MenuitemApp setSpinner={setSpinner}/>
             <ResetApp />
+
             <Outlet />
             {/* { show && 
             <div id="home_bg">

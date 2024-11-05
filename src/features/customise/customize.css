@@ -1,4 +1,5 @@
-.addtocart_button, .addtocart_button:active:enabled, .addtocart_button:hover:enabled {
+.addtocart_button, .addtocart_button:active:enabled, .addtocart_button:hover:enabled,
+.update_cart_button {
     border-radius: var(--oblong-button-border-radius);
     border: transparent;
     padding: var(--oblong-button-padding);
@@ -7,7 +8,8 @@
 
     
 }
-.addtocart_button:active:enabled, .addtocart_button:hover:enabled
+.addtocart_button:active:enabled, .addtocart_button:hover:enabled,
+.update_cart_button:active, .update_cart_button:hover
 {
     border-color: transparent;
     box-shadow: 0 0 5px black !important;
