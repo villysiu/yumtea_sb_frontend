@@ -1,3 +1,42 @@
+.customize_header{
+    box-shadow: 0 0 6px rgb(144, 101, 101);
+}
+.customize_footer{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    box-shadow: 0 0 6px rgb(144, 101, 101);
+}
+.customize_list {
+    display: flex;
+    flex-direction: column;
+}
+.customize_img_wrapper {
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+}
+.customize_img {
+    object-fit: contain;
+    height: 100%;
+}
+.customize_item {
+    margin: 0.5rem 0;
+    background-color: rgb(244, 240, 240);
+    padding: 0.5rem 1rem;
+}
+.customize_item_choices{
+    width: 100%;
+    display: flex;
+    margin: 0.25rem 0;
+    
+}
+.customize_item_choice {
+    width: 33%;
+    margin-right: 0 !important;
+    
+}
+
 .addtocart_button, .addtocart_button:active:enabled, .addtocart_button:hover:enabled,
 .update_cart_button {
     border-radius: var(--oblong-button-border-radius);

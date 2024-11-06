@@ -39,7 +39,7 @@ const Menuitem = ({menuitem}) =>{
         {
             
             show && 
-            <Modal show={show} onHide={handleHide}>
+            <Modal show={show} onHide={handleHide} size='lg'>
                 
 
                 {menuitemClicked && cartitem_tobeUpdated !== "" ?
@@ -78,10 +78,14 @@ const Menuitem = ({menuitem}) =>{
                 <div><b>{menuitem.title} </b></div>
                 <div>{USDollar.format(menuitem.price)}</div>
             </div>
-            <div className="menuitem_img_wrapper">
-                <img src={`${homeLink}/chai.jpg`} className="menuitem_img" alt={menuitem.title}></img>  
-            </div> 
+            {
+                menuitem.image_path !== null &&  
+          
+                <div className="menuitem_img_wrapper">
 
+                    <img src={`${homeLink}/menuitem/${menuitem.image_path}`} className="menuitem_img" alt={menuitem.title}></img>  
+                </div> 
+            }
             <div className='menuitem_plus_circle'>
                 +
             </div>     
