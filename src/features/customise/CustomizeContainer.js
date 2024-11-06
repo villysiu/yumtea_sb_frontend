@@ -28,7 +28,7 @@ const CustomizeContainer = ({cartitemPk, itemId, itemTitle, itemTemp, itemSize, 
             </Modal.Header>
             <Modal.Body className='customize_list'>
                 <CustomizeImage menuitem={menuitem}/>
-                <CustomizeTemp temp={temp} setTemp={setTemp} />
+                <CustomizeTemp menuitem={menuitem} temp={temp} setTemp={setTemp} />
                 <CustomizeSize size={size} setSize={setSize} setPrice={setPrice} />
             
                 

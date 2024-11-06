@@ -1,11 +1,9 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
-const CustomizeTemp = ({temp, setTemp}) => {
+const CustomizeTemp = ({menuitem, temp, setTemp}) => {
     
     const tempArr =  ["Hot", "Iced"]
-    console.log(temp)
-    if(temp==="N")
-        return null
+
     return (
         <div className='customize_item'>
             <b>Hot Or Iced</b>
@@ -26,6 +24,7 @@ const CustomizeTemp = ({temp, setTemp}) => {
                         name="temp" 
                         label={t} 
                         id={`temp-radio-${idx}`}
+                        disabled = {menuitem.temperature !== ""}
                         />
                         
                     )
