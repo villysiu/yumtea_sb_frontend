@@ -1,26 +1,29 @@
 import SingleCategory from './SingleCategory'
 import {useSelector} from 'react-redux'
-
+import { useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 const Categories = () =>{
-
-    // const categories = [
-    //     [3, 'Black Tea'],
-    //     [1, 'Green Tea'],
-    //     [4, 'Oolong Tea'],
-    //     [5, 'Caffaine Free']
-        
-    // ]
+    const location = useLocation();
+    console.log(location)
+    
     const categories = useSelector(state=>state.menuitem.category.array)
-    console.log('in Categories')
+    // console.log('in Categories')
+
+    useLayoutEffect(() => {
+        if (location.hash) {
+          const element = document.getElementById(location.hash.slice(1));
+          if (element) {
+            element.scrollIntoView();
+          }
+        }
+      }, [location.hash]);
+
     return (
         <>
         <div>all the tea ,</div>
 
         {
-            categories.map(category=><SingleCategory category={category} />)
-                
-          
-        
+            categories.map(category=><SingleCategory key={category.pk} category={category} />)
         }
         </>
     )

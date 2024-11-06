@@ -16,7 +16,7 @@
   --bs-tertiary-bg-rgb: 245, 237, 207;
   /* --bs-body-bg: rgba(242,241,237); */
   --bs-body-bg: white;
-  /* --body_width: 1536px; */
+
   --header_circle_btn: 2rem;
   --header_padding: 2rem;
 
@@ -46,15 +46,15 @@
   --oblong-button-hover-box-shadow: 0 0 5px black !important;
 } 
 
-@media all and  (max-width: 1535.98px) {
+@media all and  (max-width: 1080.98px) {
   :root{
-    --body_width: 100vw;
+    --body-width: 100vw;
     --cart_summary_right: 0
   }
 }
 @media all and  (max-width: 389.98px) {
   :root{
-    --body_width: 390px;
+    --body-width: 390px;
     /* --single_wine_details_width: calc( 100vw - var(--single_wine_margin) - var(--single_wine_img_width)) */
   }
 }

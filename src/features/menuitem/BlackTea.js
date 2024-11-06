@@ -14,15 +14,7 @@ const BlackTea = () =>{
                 
                 
             </div>
-            {/* <div className='menuitems_wrapper'>
-            {
-                menuitems.map((menuitem)=>{
-                    return (
-                        <Menuitem key={menuitem.pk} menuitem={menuitem} />
-                    )
-                })
-            }
-            </div> */}
+
             
             <div  className='menuitems_wrapper'>
                

@@ -5,14 +5,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import BlackTea from './BlackTea'
+
+
 const Collections = () =>{
-    // const map = new Map([
-    //     // ['all', 0],
-    //     ["oolong", 4],
-    //     ["blacktea", 3],
-    //     ["greentea", 1],
-    //     ["caffeinefree", 5]
-    // ])
+
+    
 
     useEffect(() => {
         AOS.init({
@@ -33,7 +30,6 @@ const Collections = () =>{
             </div>
             Each cup of tea is made
             by the finest quality of tea leaves and made to order.
-            {/* <BlackTea  /> */}
 
             <Categories />
         </div>

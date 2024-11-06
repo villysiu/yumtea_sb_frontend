@@ -214,14 +214,14 @@ export const getCategoryById = (state, id) => {
     return category === undefined ? "" : category.title
 }
 export const getCategories = (state) =>{
-    console.log(state.menuitem.menuitems.array)
+    // console.log(state.menuitem.menuitems.array)
     let categories = state.menuitem.menuitems.array.map(menuitem=>menuitem.category.title)
     return [...new Set(categories)];
     
 }
 
 export const getMenuitems = (state, category_id) =>{
-    console.log(category_id)
+    // console.log(category_id)
     if(category_id === 0)
         return state.menuitem.menuitems.array
     

@@ -19,17 +19,26 @@
 
 }
 .category {
+    padding-top: 96px;
     display: flex;
     flex-direction: column;
 }
+.category_wrapper {
+    width: var(--body_width);
+    height: 20rem;
+}
 .category_img {
     width: 100%;
-    height: 40vh;
+    height: 100%;
     
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }
 .category_label {
     font-size: 3rem;
@@ -37,20 +46,22 @@
     text-shadow: 0 0 4px black;
 }
 .blacktea {
-    background: url("./img/EarlGrey.webp") center no-repeat;
-    background-size: cover;
+    background: url("./img/balcktea(2).jpeg");
+    background-position-y: 30% !important;
 }
 .greentea {
-    background: url("./img/jasmine.webp") center no-repeat;
-    background-size: cover;
+    background: url("./img/jasmins(3).jpg");
+    background-position-y: 20% !important;
+    
 }
 .oolongtea {
-    background: url("./img/oolong.webp") center no-repeat;
-    background-size: cover;
+    background: url("./img/oolong(2).jpg");
+    background-position-y: 30% !important;
+
 }
 .caffainefree {
-    background: url("./img/mint.webp") center no-repeat;
-    background-size: cover;
+    background: url("./img/peppermint-tea.jpg");
+    background-position-y: 30% !important;
 }
 .menuitems_wrapper {
     --white-outline: 0.5rem;

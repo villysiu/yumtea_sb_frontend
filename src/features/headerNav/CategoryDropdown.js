@@ -6,16 +6,31 @@ import { Link } from 'react-router-dom';
 
 
 const CategoryDropdown = () =>{
+    const categories = useSelector(state=>state.menuitem.category.array)
     return (
         <div className="header_drinks_dropdown">
             
             <Link to={`${homeLink}/collection`} className=' header_drinks_link' >
                 <div className='header_drinks_box'> 
-                    All Drinks
+                    Best Sellers
                 </div> 
             </Link>
+            {
+                categories.map(category=>{    
+                    return (
+                        <Link key={category.pk} to={`${homeLink}/collection#${category.image_path}`} className=' header_drinks_link' >
+                            <div className='header_drinks_box'> 
+                                {category.title}
+                            </div> 
+                        </Link>
+                    )
 
-            <Link to={`${homeLink}/collection/oolong`} className=' header_drinks_link' >
+                })
+                
+          
+        
+            }
+            {/* <Link to={`${homeLink}/collection/oolong`} className=' header_drinks_link' >
                 <div className='header_drinks_box'> 
                     Oolong Tea
                 </div> 
@@ -35,7 +50,7 @@ const CategoryDropdown = () =>{
                 <div className='header_drinks_box'> 
                     Caffeine Free
                 </div> 
-            </Link>
+            </Link> */}
 
 
         </div>
