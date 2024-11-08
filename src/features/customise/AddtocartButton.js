@@ -26,8 +26,6 @@ const AddtocartButton = ({
                 'temperature': temp, 
                 'size': size, 
                 'price': price,
-                
-                //  'milk': milk_id, sweetness: sweetness, unit_price: unit_price
             }))
         } 
     //     else{

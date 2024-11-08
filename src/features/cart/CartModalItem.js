@@ -9,41 +9,34 @@ import CustomizeContainer from '../customise/CustomizeContainer'
 
 const CartModalItem = ({cartitem, idx, setCartShow}) =>{
     console.log(cartitem)
-   
+    const cartitemRef = useRef();
+    const removeRef = useRef();
+
     const dispatch = useDispatch()
     const menuitem_title = useSelector(state=>getMenuitemTitleById(state, cartitem.menuitem_id))
 
 
     const handleUpdate=e=>{
-        dispatch(triggerMenuItem({cartitem: cartitem} ))
-        setCartShow(false);
-        dispatch(resetCartBanner())
+        console.log("cartitem clicked")
+        console.log(cartitemRef)
+        console.log(removeRef)
+        console.log(removeRef.current && !removeRef.current.contains(e.target))
 
+        if(removeRef.current && !removeRef.current.contains(e.target)){
+            dispatch(triggerMenuItem({cartitem: cartitem} ))
+            setCartShow(false);
+            dispatch(resetCartBanner())
+        }
     }
     return (
         <>
-        {/* {
-            show && 
-            <Modal show={show} onHide={()=>setShow(false)}>
-                <CustomizeContainer 
-                        itemId = {cartitem.menuitem_id}
-                        itemTitle={menuitem_title}
-                        itemTemp = {cartitem.temperature}
-                        itemSize = {cartitem.size}
-                        itemPrice = {cartitem.price}
-                        itemQty={cartitem.quantity} 
-                        setShow={setShow} 
-                        task='update' 
-                /> 
-            </Modal>
-        
-        } */}
-        <div className='cart_modal_item_wrapper' >
+
+        <div className='cart_modal_item_wrapper' ref={cartitemRef} onClick={handleUpdate} >
     
             <div className='cart_modal_item_header'>
                 <div className='cart_modal_item_qty'>{cartitem.quantity}</div>
-                <div className='cart_modal_item_title' onClick={handleUpdate}>{menuitem_title}</div>
-                <CartModalItemRemove pk={cartitem.pk} menuitem_title={menuitem_title}/>
+                <div className='cart_modal_item_title' >{menuitem_title}</div>
+                <CartModalItemRemove pk={cartitem.pk} menuitem_title={menuitem_title} ref={removeRef}/>
                 <div className='cart_modal_item_price'>{USDollar.format(cartitem.price * cartitem.quantity)}</div>
             </div>
             <div className='cart_modal_item_details'>

@@ -6,7 +6,7 @@ import { resetMenuitemClicked } from '../menuitem/menuitemSlice'
 import { USDollar } from "../../app/global"
 const UpdateCartButton = ({cartitem_pk, price, quantity, menuitem_id, temp, size, setShow}) =>{
     console.log("update cart button ")
-    console.log(temp, size)
+    console.log(temp, size, quantity, price)
 
     const dispatch = useDispatch()
     const current_user = useSelector(state=>state.user.current_user)

@@ -4,9 +4,10 @@ import './cart.css'
 import EmptyCart from './EmptyCart'
 import CartModalItem from './CartModalItem'
 import Subtotal from './Subtotal'
-import CheckoutButton from './CheckoutButton'
+import CheckoutButton from '../checkout/CheckoutButton'
 import CartModalBanner from './CartModalBanner'
 import {useSelector} from 'react-redux'
+
 const CartModal = ({setCartShow}) =>{
     const cart = useSelector(state=>state.cart.cart.cart_arr)
 
@@ -33,7 +34,7 @@ const CartModal = ({setCartShow}) =>{
             <div className='cart_modal_footer'>
                 <Subtotal />
                 
-                <CheckoutButton />
+                <CheckoutButton setCartShow={setCartShow}/>
             </div>
       </>
     )

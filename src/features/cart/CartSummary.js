@@ -1,29 +1,22 @@
-import { Button } from "react-bootstrap"
+// import { Button } from "react-bootstrap"
 import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
-import CartSummaryDetails from "./CartSummaryDetails"
+import CartSummaryLineItem from "./CartSummaryLineItem"
 import { useSelector } from "react-redux"
-import SmokySpinner from "../headerNav/SmokySpinner"
 
 const CartSummary = () =>{
-    const cart = useSelector(state => state.cart.cart)
-
+    const cart_arr = useSelector(state => state.cart.cart.cart_arr)
+    console.log(cart_arr)
                 
     return(
         <div className='cart_summary'>
-            <div style={{ 'position': "relative"}}>
-                { cart.status === 'loading' && <SmokySpinner /> }
-                <CartSummaryDetails/>
-                
-                <div className="cart_summary_checkout">
-                
-                    <Link to={`${homeLink}/secure/checkout`}
-                        // onClick={handleClick}
-                    >
-                        <Button className='gold_button full'>Checkout</Button>
-                    </Link>
-                </div>
-            </div>
+            {
+                cart_arr.map(cart_item=>{
+                    return (
+                        <CartSummaryLineItem cart_item={cart_item} />
+                    )
+                })
+            }
         </div>
     )
 }

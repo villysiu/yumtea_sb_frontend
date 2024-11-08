@@ -1,47 +1,41 @@
 import {Trash} from 'react-bootstrap-icons'
 import { useDispatch} from 'react-redux'
-import {useRef, useState, useEffect} from 'react'
+import {forwardRef, useState, useEffect} from 'react'
 
 import {Button} from 'react-bootstrap'
 import {removeItem} from './cartSlice'
-const CartModalItemRemove =({menuitem_title, pk}) =>{
-    const dispatch = useDispatch()
-    const ref = useRef();
-    const [remove, setRemove] = useState(false)
+const CartModalItemRemove = forwardRef(
+//     function CartModalItemRemove({menuitem_title, pk, removeRef}){
+    function CartModalItemRemove(props, ref){
+        const { menuitem_title, pk } = props;
+        const dispatch = useDispatch()
+        const [remove, setRemove] = useState(false)
 
-    const handleClick = () =>{
-        console.log('click ttach')
+        const handleClick = () =>{
+            console.log('click trash')
 
-        setRemove(true);
-    }
-    const handleRemove = () =>{
-        dispatch(removeItem(pk))
-        setRemove(false);
-    }
-    useEffect(()=>{
-        const clickOutside = e =>{
-            if(ref.current && !ref.current.contains(e.target)){
-                setRemove(false)
-            }
+            setRemove(true);
         }
-        document.addEventListener('click', clickOutside);
-        return () => {
-            document.removeEventListener("click", clickOutside);
-        };
-    },[])
+        const handleRemove = () =>{
+            console.log("inner remove button")
+            dispatch(removeItem(pk))
+            setRemove(false);
+        }
 
-    return (
-        <div ref={ref}>
-            {remove &&
-                <div className='remove'  > 
-                    <Button className='remove_button' onClick={handleRemove}>Remove {menuitem_title}? </Button>
+
+        return (
+            <div ref={ref}>
+                {remove &&
+                    <div className='remove'  > 
+                        <Button className='remove_button' onClick={handleRemove}>Remove {menuitem_title}? </Button>
+                    </div>
+                }
+                <div className='cart_modal_item_remove' onClick={handleClick}>
+                    <Trash />
                 </div>
-            }
-            <div className='cart_modal_item_remove' onClick={handleClick}>
-                <Trash />
             </div>
-        </div>
-    )
+        )
 
-}
+    }
+);
 export default CartModalItemRemove

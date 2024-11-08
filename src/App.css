@@ -185,107 +185,15 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
 .red_button {
   background:  #e74242;
 }
-.cart_container {
+/* .cart_container {
   width: var(--body_width);
   position: relative;
   border:1px pink solid;
-}
+} */
 
-.cart_summary, .checkout {
-  
-  /* width: var(--cart_summary_width); */
-  min-width: 250px;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  border: 1px black solid;
-  position: fixed;
-  top: 8rem;
-  bottom: unset;
-  right: var(--cart_summary_right);
-  padding: 1rem;
-  background-color: var(--bs-body-bg);
-  z-index: 200;
-}
-.checkout{
-  position: unset !important;
-  width: 500px;
-}
-.cart_summary {
-  width: var(--cart_summary_width);
-}
-.tipbox_wrapper {
-  display: flex;
-  flex-direction: column;
-}
-.tipbox_container{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  /* justify-content: space-between; */
-  padding-top: 10px;
-  
-}
-.tipbox {
-  border: darkgray 1px solid;
-  height: 2rem;
-  display: flex;
 
-  align-items: center;
-  border-radius: 1rem;
-  margin-right: 0.5rem;
-}
-.selected {
-  border: none;
-  background-color: #d1c089;
-  color: white;
-}
-.tip_font {
-  font-weight: bold;
-  font-size: 1rem;
-}
-.custom_tip_font{
-  position: absolute;
-  top: -12px;
-  left: 25px;
-  background-color: white;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-size: 12px;
 
-}
-.custom_tip_dollar{
 
-}
-.custom_tip_box {
-  border: 1px black solid;
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-radius: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin-top: 1.5rem;
-  
-}
-.custom_tip_input {
-  border: transparent !important;
-  /* width: 90%; */
-  height: 90%;
-  font-size: 1rem;
-  box-shadow: none !important;
-}
-.cart_summary_line {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.cart_summary_checkout {
-  text-align: center;
-  margin-top: 5rem;
-}
-.cart_cartitems{
-  width: calc( var(--body_width) - var(--cart_summary_width) - 2rem);
-}
 .loading{    
   background-color: rgba(240, 241, 237, 0.5);
   width: 100%;
@@ -653,9 +561,7 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   justify-content: center;
 }
 
-.login_form {
-  /* background-color: white; */
-}
+
 .hello_user, .header_category {
   position: relative;
   color: black;

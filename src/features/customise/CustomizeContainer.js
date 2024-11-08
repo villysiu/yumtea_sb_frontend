@@ -34,7 +34,7 @@ const CustomizeContainer = ({cartitemPk, itemId, itemTitle, itemTemp, itemSize, 
                 
             </Modal.Body>
             <Modal.Footer className='customize_footer'>
-                <UpdateQuantity quantity={quantity} setQuantity={setQuantity} setPrice={setPrice}/>
+                <UpdateQuantity quantity={quantity} setQuantity={setQuantity} />
                 {
                     task === 'add' ?
                         <AddtocartButton 

@@ -1,0 +1,104 @@
+.checkout {
+
+  width: 100%;
+  --checkout-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 1px black solid; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    padding: 2rem;
+  background-color: white;
+  
+
+}
+.checkout_order_summary {
+
+    width: var(--checkout-width);
+    border-bottom: gray 1px solid;
+    padding: 2rem 0;
+}
+.checkout_summary_line{
+    width: var(--checkout-width);
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout_subtotal {
+    padding: 2rem 0;
+}
+.checkout_tax {
+
+    border-bottom: 1px gray solid;
+    padding-bottom: 2rem;
+}
+.checkout_tip {
+    width: var(--checkout-width);
+    border-bottom: 1px gray solid;
+    padding: 2rem 0;
+}
+.checkout_total {
+    border-bottom: 1px gray solid;
+    padding: 2rem 0;
+}
+
+
+  .tipbox_container{
+    width: 70%;
+    margin-top: 1rem ;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 1px gray solid; */
+    border-radius: 25px;
+    
+
+    display: flex;
+    background-color: rgb(209, 192, 137);
+    color: white;
+
+    
+  }
+  .tipbox {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: black 1px solid; */
+    padding: 10px 0;
+    font-weight: bolder;
+    
+  }
+
+  .left {
+    border-radius: 25px 0 0 25px;
+  }
+  .right {
+    width: 25% !important;
+    border-radius: 0 25px 25px 0;
+  } 
+  .tipbox:hover{ 
+    background-color: #8b7e55;
+    
+  }
+    .input-dollar {
+        width: 25%;
+        position: relative;
+    }
+    .input-dollar input {
+        padding-left: 2rem;
+        width: 100%;
+        height: 100%;
+        border-radius: 0 25px 25px 0;
+        border: gray 1px solid;
+    }
+    .input-dollar:before {
+        position: absolute;
+        top: 0.625rem;
+        content:"$";
+        left: 1rem;
+        color: black;
+    }
+
+  
+
