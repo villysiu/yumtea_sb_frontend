@@ -3,29 +3,44 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { homeLink } from '../../app/global';
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {resetUserStatus} from './userSlice'
 import { loginUser } from './userSlice';
-
+import LoginButton from './LoginButton'
 const Login = () =>{
-    const location = useLocation()
-    console.log(location.pathname)
     const token_status = useSelector(state=>state.user.token.status)
     const current_user_status = useSelector(state=>state.user.current_user.status)
+    
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState('')
     const dispatch=useDispatch();
     // console.log(state)
+
     const handleSubmit=e=>{
         e.preventDefault()
         dispatch(loginUser({'username': username, 'password': password}))
         
     }
+    const handleClick=()=>{
+        setError('')
+    }
+    useEffect(()=>{
+        if(token_status === 'failed' || current_user_status === 'failed'){
+            setError("Eitehr username or password is incorrect. Please try again.")
+            setUsername('')
+            setPassword('')
+            dispatch(resetUserStatus())
+        }
+
+    }, [token_status, current_user_status, setError])
+
     return(
-       
-        <div className='login_form'>
+       <div className='login_wrapper'>
+        <div className='login'>
             <h1 className="mb-5">Sign in to your account</h1>
-            <Form onSubmit={handleSubmit}>
+            <Form className='login_form' onSubmit={handleSubmit}>
                 {/* <FloatingLabel
                     controlId="floatingInput"
                     label="Email address"
@@ -36,28 +51,27 @@ const Login = () =>{
 
                 <FloatingLabel controlId="floatingInput" label="Username" className="mb-3">
                     <Form.Control type="text" placeholder="Username" value={username} 
-                        onChange={e=>setUsername(e.target.value)} />
+                        onChange={e=>setUsername(e.target.value)} onClick={handleClick} />
                 </FloatingLabel>
 
                 <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
                     <Form.Control type="password" placeholder="Password" value={password} 
-                        onChange={e=>setPassword(e.target.value)} />
+                        onChange={e=>setPassword(e.target.value)} onClick={handleClick} />
                 </FloatingLabel>
-                {
-                    token_status === 'loading' || current_user_status === 'loading' ? 
-                    <Button className='gold_button mb-3' style={{'width': '81px'}}><Spinner size="sm" /></Button>
-
-                    :
-                    <Button type="submit" className='gold_button mb-3' disabled={ !username || !password }>
-                        Sign In
-                    </Button>
-                }              
+                {error && <div className='login_error'>{error} </div>}
+                <LoginButton username={username} password={password}/>
+                          
             </Form>
             <div>Forgot your password?</div>
             <Link to={`${homeLink}/user/signup`}>
-                <Button className='gold_button mt-5' >Create an account</Button>
+                <Button className='signup_button'>Create an account</Button>
             </Link>
 
+            
+
+    
+
+    </div>
     </div>
     
 

@@ -20,7 +20,7 @@ const HomeRow = () =>{
 
             
             </div>
-            <div class="home_col" >
+            <div className="home_col" >
                 <img src={`http://127.0.0.1:8001/leaf.png`} alt='' className='square_icon'/>
                 
                 <h3>Genuine Origin</h3>

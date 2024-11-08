@@ -6,7 +6,7 @@ const User = () => {
     console.log("in user")
     const location = useLocation()
     console.log(location)
-    const path=location.state ? `..${location.state.path}` : "../secure/account"
+    const path=location.state ? `..${location.state.from}` : "../secure/account"
 
     const current_user = useSelector(state => state.user.current_user)
     

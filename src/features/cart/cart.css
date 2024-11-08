@@ -55,6 +55,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: default;
 }
 .remove_button, .remove_button:hover, .remove_button:active {
     border-radius: var(--oblong-button-border-radius);

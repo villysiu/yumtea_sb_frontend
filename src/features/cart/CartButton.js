@@ -22,7 +22,6 @@ const CartButton =() =>{
     
     useEffect(()=>{
         // show maodal when item added to cart
-        // if(addToCartStatus === 'succeeded'){
         if(message !== ""){
             setCartShow(true)
         }
@@ -34,7 +33,8 @@ const CartButton =() =>{
         const clickOutside = e =>{
             console.log(e.target)
             if(ref.current && !ref.current.contains(e.target) 
-                && e.target.id!=='cartButton' && !e.target.classList.contains('remove_button')
+                && e.target.id!=='cartButton' 
+                && !e.target.classList.contains('remove_button')
             
             ){
                 console.log('clicked outside')

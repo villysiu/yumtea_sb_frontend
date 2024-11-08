@@ -14,14 +14,15 @@ import Collections from './features/menuitem/Collections'
 import MenuitemList from './features/menuitem/MenuitemList';
 // import MenuitemApp from './features/menuitem/MenuitemApp';
 import SingleMenuitem from './features/menuitem/SingleMenuitem';
-import Secure from './features/user/Secure';
+import SecureApp from './features/user/SecureApp';
 import Cart from './features/cart/Cart';
 import Login from './features/user/Login';
 import Signup from './features/user/Signup';
 import Account from './features/user/Account';
 import User from './features/user/User';
 import OrderHistory from './features/order/OrderHistory';
-import Checkout from './features/order/Checkout';
+
+import Checkout from './features/checkout/Checkout'
 import OrderSuccess from './features/order/OrderSuccess';
 import VisitTaste from './features/home/VisitTaste';
 import Reserve from './features/reservation/Reserve';
@@ -64,12 +65,27 @@ const router = createBrowserRouter([
                 path: "/cart",
                 element: <Cart />
               },
+              {
+                path: "/visit-taste",
+                  element: <VisitTaste />,
+              },
+              {
+                path: "/user",
+                element: <User />,
+                children: [
+                  {
+                    path: '/user/signin',
+                    element: <Login />
+                  },
+                  {
+                    path: '/user/signup',
+                    element: <Signup />
+                  },
                 ]
-            },
-
-            {
+              },
+              {
                 path: "/secure",
-                element: <Secure />,
+                element: <SecureApp />,
                 children: [
                   {
                     path: '/secure/account',
@@ -91,62 +107,36 @@ const router = createBrowserRouter([
                     path: "/secure/reservations/",
                     element: <ReservationsApp />,
                     children: [
-                        {
-                          path: "/secure/reservations/",
-                          element: <Reservations />,
-                        },
-                        {
-                          path: "/secure/reservations/reserve",
-                          element: <Reserve />
-                        },
-                        {
-                          path: "/secure/reservations/:resId/update",
-                          element: <UpdateReservation />,
-                        },
-                        {
-                          path: "/secure/reservations/success",
-                          element: <ReservationSuccess />
-                        },
+                      {
+                        path: "/secure/reservations/",
+                        element: <Reservations />,
+                      },
+                      {
+                        path: "/secure/reservations/reserve",
+                        element: <Reserve />
+                      },
+                      {
+                        path: "/secure/reservations/:resId/update",
+                        element: <UpdateReservation />,
+                      },
+                      {
+                        path: "/secure/reservations/success",
+                        element: <ReservationSuccess />
+                      },
                     ]
                   },
+                ]},
 
-        
-                  ]
-        
-        
-                  },
-                
-            
-            {
-                path: "/user",
-                element: <User />,
-                children: [
+            ]
+        },
+        {
+            path: "/about",
+            element: <About />
+        },
+      ]
+  }
 
-                    {
-                      path: '/user/signin',
-                      element: <Login />
-                    },
-                    {
-                      path: '/user/signup',
-                      element: <Signup />
-                    },
-                ]
-            },
-            {
-              path: "/visit-taste",
-                element: <VisitTaste />,
-            },
-            {
-                path: "/about",
-                element: <About />
-            },
-          ]}
-
-      ],
-      
-  //   }
-  // ]
-)
+])
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(

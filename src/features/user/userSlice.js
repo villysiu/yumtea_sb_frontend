@@ -17,17 +17,16 @@ export const fetchCurrentUser=createAsyncThunk(
             if(!response.ok) {
                 console.log(response)
                 // remove incorrect token from localstorage
-                localStorage.clear()
+                // localStorage.clear()
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
             
-            // timeOutUser2(data.curr_user.login, thunkAPI)
             return data
         } 
         catch(error){
             console.log(error)
-            localStorage.clear()
+            // localStorage.clear()
             return Promise.reject(error);
         }
     }
@@ -57,8 +56,8 @@ export const loginUser=createAsyncThunk(
             const data=await response.json()
             console.log(data)
 
-            localStorage.setItem('token', data.auth_token)
-            thunkAPI.dispatch(fetchCurrentUser())
+            // localStorage.setItem('token', data.auth_token)
+            // thunkAPI.dispatch(fetchCurrentUser())
             
             return data.auth_token
             
@@ -88,7 +87,7 @@ export const logoutUser=createAsyncThunk(
             console.log(response)
             
             console.log("clear storgae")
-            localStorage.clear()
+            // localStorage.clear()
             return null
             
         } 
@@ -109,7 +108,7 @@ const userSlice=createSlice({
             
         },
         token: {
-            status: 'idle',
+            status: localStorage.getItem("token")? 'succeeded': 'idle'
             
         }
 
@@ -122,6 +121,10 @@ const userSlice=createSlice({
         //     state.currUser.status = 'idle'
         //     state.currUser.error = null   
         //   },
+        resetUserStatus: (state) => {
+            state.token.status = 'idle'
+            state.current_user.status = 'idle'
+        }
     },
     extraReducers(builder) {
       builder
@@ -137,6 +140,7 @@ const userSlice=createSlice({
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
             state.current_user.status = 'failed'
+            localStorage.clear();
         })
         .addCase(loginUser.pending, (state, action) => {
             state.token.status = 'loading'
@@ -144,7 +148,7 @@ const userSlice=createSlice({
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
             state.token.status = 'succeeded'
-            // state.current_user = action.payload
+            localStorage.setItem('token', action.payload)
 
         })
         .addCase(loginUser.rejected, (state, action) => {
@@ -161,6 +165,7 @@ const userSlice=createSlice({
                 status: 'idle',
                 error: null,    
             }
+            localStorage.clear();
             
 
         })
@@ -170,5 +175,5 @@ const userSlice=createSlice({
         })
     }
 })
-// export const { logout } = usersSlice.actions
+export const { resetUserStatus } = userSlice.actions
 export default userSlice.reducer
