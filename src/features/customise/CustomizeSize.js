@@ -20,7 +20,7 @@ const CustomizeSize = ({size,setSize, setPrice}) => {
     // if(temp==="N")
     //     return null
     return (
-        <div className='customize_item'>
+        <div className='customize_item required'>
             <b>Drink Size</b>
             <div>Required - Choose 1. </div>
             

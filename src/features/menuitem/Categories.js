@@ -20,10 +20,10 @@ const Categories = () =>{
 
     return (
         <>
-        <div>all the tea ,</div>
+        <div key='bestseller'>Best sellers</div>
 
         {
-            categories.map(category=><SingleCategory key={category.pk} category={category} />)
+            categories.map(category=><SingleCategory key={category.slug} category={category} />)
         }
         </>
     )

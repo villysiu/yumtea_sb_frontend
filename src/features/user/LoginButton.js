@@ -8,15 +8,14 @@ const LoginButton = ({username, password}) =>{
         
         {
             token_status === 'loading' || current_user_status === 'loading' ? 
-            <Button className='signin_button mb-3' style={{'width': '81px'}}>
+            <Button className='signin_button'>
                 <Spinner size="sm" />
             </Button>
 
             :
             <Button type="submit" className='signin_button' disabled={ !username || !password }>
-                {
-                    (!username || !password) ? <>Enter Username and Password</>  : <>Sign In</>
-                }
+                
+                    Sign In
                 
             </Button>
         }   

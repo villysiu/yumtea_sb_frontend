@@ -1,11 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 
 export const fetchCategories=createAsyncThunk(
     'menuitem/fetchCategories',
     async () => {
         try {
-            const response=await fetch(`${apiLink}/api/categories`, {
+            // const response=await fetch(`${apiLink}/api/categories`, {
+            const response=await fetch(`http://127.0.0.1:8000/api/categories`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -14,6 +15,7 @@ export const fetchCategories=createAsyncThunk(
             })
 
             if(!response.ok) {
+                console.log(response)
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
@@ -207,7 +209,7 @@ export const getMilks = (state) =>{
 }
 export const getMilkById = (state, id) =>{
     const milk = state.menuitem.milk.array.find(milk => milk.id === id)
-    return milk === undefined? null : milk
+    return milk === undefined? "No Milk" : milk.title
 }
 export const getCategoryById = (state, id) => {
     let category = state.menuitem.category.array.find(cat=>cat.pk === id)
@@ -219,14 +221,22 @@ export const getCategories = (state) =>{
     return [...new Set(categories)];
     
 }
+const selectMenuitems = (state) => state.menuitem.menuitems.array;
+const selectCategoryId = (state, category_id) => category_id;
 
-export const getMenuitems = (state, category_id) =>{
-    // console.log(category_id)
-    if(category_id === 0)
-        return state.menuitem.menuitems.array
+export const getMenuitems = createSelector(
+    [selectMenuitems, selectCategoryId],
+    (menuitems, categoryId) => {
+        
+        if(categoryId === 0)
+            return menuitems
+        
+        return menuitems.filter(item=>item.category_id === categoryId)
+        
+    }
+)
     
-    return state.menuitem.menuitems.array.filter(menuitem=>menuitem.category_id === category_id)
-}
+
 export const getSingleMenuitem = (menuitem_array, menuitem_id) => {
     console.log('in getsingle ite,')
     

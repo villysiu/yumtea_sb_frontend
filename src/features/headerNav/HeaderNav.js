@@ -5,6 +5,8 @@ import {homeLink} from '../../app/global.js'
 import HeaderDrinksButton from './HeaderDrinksButton'
 import HeaderVisitButton from './HeaderVisitButton'
 import HeaderHomeButton from './HeaderHomeButton'
+import HeaderUserButton from './HeaderUserButton'
+
 import CartButton from '../cart/CartButton'
 const HeaderNav = () =>{
     const location = useLocation()
@@ -16,8 +18,8 @@ const HeaderNav = () =>{
                 setCurrent("visit-taste")
             else if(location.pathname === '/')
                 setCurrent("home")
-            else if(location.pathname === '/menuitems')
-                setCurrent("menuitems")
+            else if(location.pathname === '/collection')
+                setCurrent("collection")
         }
     }, [current, location])
    
@@ -28,7 +30,7 @@ const HeaderNav = () =>{
             <HeaderVisitButton current={current} setCurrent={setCurrent} />
             <HeaderDrinksButton current={current} setCurrent={setCurrent} />
             
-            <div>Member</div>
+            <HeaderUserButton />
             <CartButton />
         </div>
     )

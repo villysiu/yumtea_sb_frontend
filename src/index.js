@@ -11,11 +11,10 @@ import Home from './features/home/Home'
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import About from './features/headerNav/About'
 import Collections from './features/menuitem/Collections'
-import MenuitemList from './features/menuitem/MenuitemList';
-// import MenuitemApp from './features/menuitem/MenuitemApp';
-import SingleMenuitem from './features/menuitem/SingleMenuitem';
+
+
 import SecureApp from './features/user/SecureApp';
-import Cart from './features/cart/Cart';
+
 import Login from './features/user/Login';
 import Signup from './features/user/Signup';
 import Account from './features/user/Account';
@@ -31,7 +30,7 @@ import Reservations from './features/reservation/Reservations';
 import UpdateReservation from './features/reservation/UpdateReservation';
 // import UpdateReservationFrom from './features/reservation/ReservationsApp';
 
-import MenuitemsList from './features/menuitem/MenuItemsList';
+// import MenuitemsList from './features/menuitem/MenuItemsList';
 import EnterPage from './features/home/EnterPage';
 // import ResetApp from './features/home/ResetApp';
 import ReservationsApp from './features/reservation/ReservationsApp';
@@ -53,18 +52,18 @@ const router = createBrowserRouter([
                 path: "collection",
                 element: <Collections />,
               },
-              {
-                path: "collection/:itemId",
-                element: <SingleMenuitem />,
-              },
-              {
-                path: "collection/:categoryName",
-                element: <MenuitemsList />,
-              },
-              {
-                path: "/cart",
-                element: <Cart />
-              },
+              // {
+              //   path: "collection/:itemId",
+              //   element: <SingleMenuitem />,
+              // },
+              // {
+              //   path: "collection/:categoryName",
+              //   element: <MenuitemsList />,
+              // },
+              // {
+              //   path: "/cart",
+              //   element: <Cart />
+              // },
               {
                 path: "/visit-taste",
                   element: <VisitTaste />,

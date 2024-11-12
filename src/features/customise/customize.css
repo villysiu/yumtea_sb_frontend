@@ -22,18 +22,27 @@
 }
 .customize_item {
     margin: 0.5rem 0;
-    background-color: rgb(244, 240, 240);
+    
     padding: 0.5rem 1rem;
+}
+.required {
+    background-color: rgb(244, 240, 240);
+}
+.not_required {
+    border: rgb(224, 224, 224) solid 1px;
 }
 .customize_item_choices{
     width: 100%;
     display: flex;
     margin: 0.25rem 0;
+    flex-wrap: wrap;
     
 }
 .customize_item_choice {
-    width: 33%;
+    /* width: 33%; */
     margin-right: 0 !important;
+    flex: 0 0 auto;
+    width: 33.33333333%;
     
 }
 
@@ -70,23 +79,41 @@
 .update_quantity_wrapper{
     margin-left: 1rem;
     width: 7rem;
-    /* height: 2.5rem; */
+    height: 3rem;
     border: black solid 1px;
     display: flex;
     border-radius: var(--oblong-button-border-radius);
-    padding-top: 0.5rem;
-    padding-bottom:0.5rem;
+    /* padding-top: 0.5rem;
+    padding-bottom:0.5rem; */
     
 }
-.minus_sign, .plus_sign {
+.minus_sign_wrapper, .plus_sign_wrapper {
     width: 30%;
+    height: 100%;
+    background-color: transparent;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+
     cursor: pointer;
+}
+.minus_sign_wrapper {
+    border-radius: var(--oblong-button-border-radius) 0 0 var(--oblong-button-border-radius);
+}
+.plus_sign_wrapper {
+    border-radius: 0 var(--oblong-button-border-radius)  var(--oblong-button-border-radius) 0;
+}
+.minus_sign_wrapper:hover, .minus_sign_wrapper:active,
+.plus_sign_wrapper:hover, .plus_sign_wrapper:active  {
+    background-color: rgb(244, 240, 240);
+}
+.minus_sign, .plus_sign {
+
     border: 0;
     padding: 0;
     background-color: transparent;
+    
 
 }
 .qty_box {

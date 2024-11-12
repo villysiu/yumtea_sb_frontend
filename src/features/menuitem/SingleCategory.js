@@ -4,16 +4,16 @@ import Menuitem from './Menuitem'
 
 const SingleCategory = ({category}) => {
   
-    // {pk: 3, title: 'Black Tea', slug: 'blacktea', 
+    // {id: 3, title: 'Black Tea', slug: 'blacktea', 
     // desc: 'Black teas are grown in all major tea regions, esp…ollection of regional flavor profiles to explore.', 
     // image_path: 'blacktea.webp'}
-    const menuitems = useSelector(state => getMenuitems(state, category.pk))
+    const menuitems = useSelector(state => getMenuitems(state, category.id))
     // console.log(menuitems)
 
     return (
-        <div id={category.image_path} className='category'>
+        <div id={category.slug} className='category'>
             <div className='category_wrapper'>
-                <div className={`category_img ${category.image_path}`}>
+                <div className={`category_img ${category.slug}`}>
                     <div className='category_label'>
                         {category.title}
                     </div>

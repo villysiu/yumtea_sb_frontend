@@ -2,10 +2,10 @@ import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
 const CustomizeTemp = ({menuitem, temp, setTemp}) => {
     
-    const tempArr =  ["Hot", "Iced"]
+    const tempArr =  ["H", "I"]
 
     return (
-        <div className='customize_item'>
+        <div className='customize_item required'>
             <b>Hot Or Iced</b>
             <div>Required - Choose 1. </div>
             <Form className='customize_item_choices'>
@@ -22,7 +22,7 @@ const CustomizeTemp = ({menuitem, temp, setTemp}) => {
                         type="radio" 
                         defaultChecked = {temp===t}
                         name="temp" 
-                        label={t} 
+                        label={t==="H"? "Hot" : "Iced"} 
                         id={`temp-radio-${idx}`}
                         disabled = {menuitem.temperature !== ""}
                         />

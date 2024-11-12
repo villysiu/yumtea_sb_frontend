@@ -11,9 +11,9 @@ const CartSummary = () =>{
     return(
         <div className='cart_summary'>
             {
-                cart_arr.map(cart_item=>{
+                cart_arr.map(cartItem=>{
                     return (
-                        <CartSummaryLineItem cart_item={cart_item} />
+                        <CartSummaryLineItem cartItem={cartItem} />
                     )
                 })
             }

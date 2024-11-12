@@ -1,44 +1,80 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
-import { Form } from "react-bootstrap"
+import { Form} from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { USDollar } from "../../app/global"
 import { getMilks } from "../menuitem/menuitemSlice"
-const CustomizeMilk = ({milk_id, setMilkID}) =>{
+import { useState } from 'react'
+const CustomizeMilk = ({menuitem, milkId, setMilkId, setPrice}) =>{
     
     const milksArray = useSelector(state=>getMilks(state))
+    console.log(milksArray)
+    // {8: No Milk}
+    
 
-    const handleChange = e =>{
-        setMilkID(parseInt(e.target.value))
-    }
+    const handleChange = (milk) => {
+        console.log(milk)
+        if(milk.id === milkId){
+            setPrice(p=>p-milk.price)
+            setMilkId(8)
+        }
+        else{
+            setMilkId(prevMilkId=>{
+                if(prevMilkId){
+            
+                    const prevMilkPrice = milksArray.find(m=>m.id===prevMilkId).price
+                    setPrice(p=>p-prevMilkPrice)
+                }
+                
+                setPrice(prevPrice=>prevPrice+milk.price)
+                return milk.id
+            })
+        }
+    };
     if(milksArray.length === 0)
         return null
 
-    if(milk_id === 1 )
+    if(milkId === 6 )
         return null
-    return (
-        
-        <li className='single_item_customize ps-3'>
-            <InputGroup className='customize_milk'>
-                <span className="customize_milk_title">Milk Alternative</span>
-            
-                <Form.Select className='customize_milk_select'
-                    onChange={handleChange} defaultValue={milk_id}
-                >
-                    {
-                        milksArray.map(choice =>{
-                            if(choice.id === 1 ) 
-                                return null;
 
-                            return(
-                                <option key={choice.id} value={choice.id}>
-                                    {choice.title} +{USDollar.format(choice.price)}
-                                </option>
-                            )
-                        })
-                    }
-                </Form.Select>
-            </InputGroup>
-        </li>
+
+    return (
+
+        <div className='customize_item not_required'>
+            <b>Milk</b>
+            <div> Optional, choose 1 </div>
+            
+            <Form className='customize_item_choices'>
+
+                {milksArray.map((milk, idx)=>{
+                    if(milk.slug==='NA' || milk.id === 8) return null
+                 
+                    const addCost = milk.price > 0 ? `+$${milk.price}.00` : ""
+                    const content = `${milk.title}  ${addCost}`
+                    return(
+                        
+                        <Form.Check key={idx}
+                        className='customize_item_choice'
+                        onChange={()=>handleChange(milk)} 
+                        inline 
+                        type="checkbox" 
+                        // defaultChecked = {milk.id===milkId}
+                        checked = {milk.id===milkId}
+                        name="milk" 
+                        label={content} 
+                        id={`milk-radio-${idx}`}
+                        disabled = {menuitem.milk_id !== 8}
+                        />
+                        
+                    )
+                })
+            }
+            
+            </Form>    
+     
+            </div>
+            
+        
+        
     )
 }
 export default CustomizeMilk

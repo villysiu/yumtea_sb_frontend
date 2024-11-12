@@ -1,7 +1,10 @@
 import { USDollar } from "../../app/global"
 import { useRef } from "react"
 import SingleOrderItem from "./SingleOrderItem"
+import {useSelector} from 'react-redux'
+import {getSubtotal} from './orderSlice'
 const SingleOrder = ({order, show, setShow}) =>{
+    const subtotal = useSelector(state=>getSubtotal(order.orderitems))
     const ref=useRef()
     const handleOpen = e =>{
         setShow(order.pk)
@@ -21,8 +24,8 @@ const SingleOrder = ({order, show, setShow}) =>{
                         <div className='orderhistory_order_col'>Order #{order.pk}</div>
                     </div>
                     <div className='orderhistory_order_header_c'>
-                        <div className='orderhistory_order_col'>{USDollar.format(order.total)}</div>
-                        <div className='orderhistory_order_col'>{order.order_status}</div>
+                        <div className='orderhistory_order_col'>{USDollar.format(subtotal * 1.1 + order.tip)}</div>
+                        {/* <div className='orderhistory_order_col'>{order.order_status}</div> */}
                     </div>
                 </div>
                 {
@@ -53,11 +56,11 @@ const SingleOrder = ({order, show, setShow}) =>{
                     </div>
                     <div className="orderhistory_order_tip">
                         <div >Tax: </div>
-                        <div><b>{USDollar.format(order.tax)}</b></div>
+                        <div><b>{USDollar.format(subtotal * 0.1)}</b></div>
                     </div>
                     <div className="orderhistory_order_tip">
                         <div >Total: </div>
-                        <div><b>{USDollar.format(order.total)}</b></div>
+                        <div><b>{USDollar.format(subtotal*1.1 + order.tip)}</b></div>
                     </div>
                
                 </div>

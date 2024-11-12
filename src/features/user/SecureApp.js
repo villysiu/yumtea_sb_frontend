@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from 'react'
 import { Navigate, Outlet } from "react-router-dom"
 import { useLocation } from "react-router-dom"
-import FullSpinner from "../headerNav/FullSpinner"
+import FullSpinner from "./FullSpinner"
 import {fetchCurrentUser} from './userSlice'
 
 const SecureApp = () => {
@@ -12,27 +12,16 @@ const SecureApp = () => {
     let location = useLocation();
     console.log(location)
     const dispatch = useDispatch()
-    const current_user = useSelector(state => state.user.current_user)
-
-
-    // useEffect(()=>{
-    //     if(localStorage.getItem("token") && current_user.username===null)
-    //         dispatch(fetchCurrentUser())
-    // }, [])
-
-
-    // if(current_user.status === 'loading' 
-    //     || (localStorage.getItem("token") && current_user.username===null)
-    // )
-    //     return <FullSpinner />
-        
-    if(
-        // current_user.status === 'idle' || current_user.username === null || 
-        current_user.status === 'failed'
-    ){
+    const current_user_status = useSelector(state => state.user.current_user.status)
+    const user_token_status = useSelector(state => state.user.token.status)
+    
+    if(current_user_status !== 'succeeded'){
+        if(user_token_status === 'succeeded')  
+            return null
+    
         return (
             <Navigate to="../user/signin"
-            state = {{'from': location.pathname}}
+            state = {location.state}
             />
         )
     }

@@ -1,28 +1,32 @@
 import './checkout.css'
-// import { Button } from "react-bootstrap"
-// import { useNavigate } from "react-router-dom"
+
+import { useLocation, Navigate } from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
 import { getSubtotal, getItemsCountInCart } from "../cart/cartSlice"
-import CartSummary from '../cart/CartSummary'
-// import { useDispatch } from "react-redux"
-// import { CheckoutCart } from "./orderSlice"
+import CartSummary from './CartSummary'
+
 import { useEffect, useState } from "react"
 import Tip from "./Tip"
+import PlaceOrderButton from '../order/PlaceOrderButton'
 
 const Checkout = () => {
-    console.log("chchhchchchchhc")
-
+    console.log("in checkout page")
+    const location = useLocation()
+    console.log(location)
 
     const [tip, setTip] = useState(0);
     const [cartSummary, showCartSummary] = useState(false);
-
 
     const cart_status = useSelector(state=>state.cart.cart.status)
     const subtotal = useSelector(state => getSubtotal(state))
     const count = useSelector(state => getItemsCountInCart(state))
    
-
+    if(!location.state || location.state.clicked !== 'checkout_button'){
+        return (
+            <Navigate to="../../collection" />
+        )
+    }
 
     return(
         <div className='checkout'>
@@ -30,8 +34,7 @@ const Checkout = () => {
                 <div onClick={()=>showCartSummary(c=>!c)}>Order Summary</div> {" "}({count} items)
             </div>
             {
-                cartSummary && 
-                <CartSummary />
+                cartSummary && <CartSummary />
                 
             }
             
@@ -39,7 +42,6 @@ const Checkout = () => {
             <div className="checkout_summary_line checkout_subtotal">
                 <div>Subtotal</div>
                 <div>{USDollar.format(subtotal)}</div>
-                {/* <div>{USDollar.format(subtotal)}</div> */}
             </div>
             
             <div className="checkout_summary_line checkout_tax">
@@ -64,10 +66,8 @@ const Checkout = () => {
                 <div>{USDollar.format(subtotal + subtotal * 0.1 + tip)}</div>
             </div>
             
+            <PlaceOrderButton tip={tip}/>
             
-            {/* <div className="cart_summary_checkout mt-5"> */}
-                {/* <Button className='gold_button full' onClick={handleClick}>Pay Now</Button> */}
-            {/* </div> */}
         </div>
     )
 }

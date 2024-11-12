@@ -1,28 +1,35 @@
-import { Cart } from 'react-bootstrap-icons';
+import { CartFill } from 'react-bootstrap-icons';
 import { useState, useEffect, useRef } from 'react'
 import {Modal} from 'react-bootstrap'
 import CartModal from './CartModal'
 import {useSelector, useDispatch} from 'react-redux'
-import {resetCartBanner} from './cartSlice'
-
+import {resetCartBanner, getItemsCountInCart} from './cartSlice'
+import {useLocation} from 'react-router-dom'
+import EmptyCart from './EmptyCart'
 
 const CartButton =() =>{
     const dispatch = useDispatch();
-    // const addToCartStatus = useSelector(state => state.cart.addToCartStatus)
+    const location = useLocation();
+
+    const count = useSelector(state => getItemsCountInCart(state))
     const message = useSelector(state => state.cart.cartBannerMessage)
     const cart = useSelector(state=>state.cart.cart.cart_arr)
+
     const [cartShow, setCartShow] = useState(false);
 
     const ref = useRef()
-    
+    const cartModalRef = useRef()
     const handleClick = () => {
         console.log('clicked')
         setCartShow(!cartShow);
     }
     
     useEffect(()=>{
+        if(location.pathname === '/secure/checkout')
+            setCartShow(false)
         // show maodal when item added to cart
-        if(message !== ""){
+        
+        else if(message !== ""){
             setCartShow(true)
         }
     }, [message])
@@ -32,9 +39,15 @@ const CartButton =() =>{
     useEffect(()=>{
         const clickOutside = e =>{
             console.log(e.target)
-            if(ref.current && !ref.current.contains(e.target) 
-                && e.target.id!=='cartButton' 
-                && !e.target.classList.contains('remove_button')
+            // console.log(ref.current)
+            // console.log(ref.current.contains(e.target))
+            // console.log(cartModalRef.current)
+            // console.log(cartModalRef.current.contains(e.target))
+           
+            if(
+                (ref.current && !ref.current.contains(e.target))
+                && (cartModalRef.current && !cartModalRef.current.contains(e.target))
+                && (!e.target.classList.contains('remove_button'))
             
             ){
                 console.log('clicked outside')
@@ -52,16 +65,26 @@ const CartButton =() =>{
 
     
     return (
-        <div className="cart_button_wrapper">
+        <>
         {
             cartShow && 
-            <div ref={ref} className='cart_dropdown'>
-                <CartModal setCartShow={setCartShow} /> 
-            </div>
-        
+            
+            <Modal show={cartShow} onHide={()=>setCartShow(false)}  dialogClassName='cart_modal' >
+            
+                <div className='cart_modal_content' ref={cartModalRef} >
+                    <CartModal setCartShow={setCartShow} /> 
+                </div>
+            </Modal>
+            
         }
-        <Cart id='cartButton' className="cart_button" onClick={handleClick}/>
-        </div>
+            <div ref={ref} className="cart_button_wrapper">
+            
+                <div id='cartButton' onClick={handleClick} >
+                    <CartFill className="cart_button" />
+                    {count > 0 && <div className='cartitem_count'> {count} </div>}
+                </div>
+            </div>
+        </>
     )
 }
 export default CartButton

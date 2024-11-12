@@ -13,7 +13,6 @@ const Menuitem = ({menuitem}) =>{
     const dispatch = useDispatch()
 
     const menuitemClicked = useSelector(state=>state.menuitem.menuitemButton.clicked)
-
     const cartitem_tobeUpdated = useSelector(state=>state.menuitem.menuitemButton.cartitem)
 
     const handleClick = () => {
@@ -23,25 +22,27 @@ const Menuitem = ({menuitem}) =>{
         setShow(false)
         dispatch(resetMenuitemClicked())
     }
-
+    // console.log(menuitemClicked)
     // console.log(cartitem_tobeUpdated)
-    //  {menuitem_id: 7, quantity: 1, temperature: 'Hot', size: 16, price: 6, pk:"5c05757e-b91b-42cc-be62-348cdf400efd" }
+    
+    // from api
+    // menuitem_id: 17, milk_id: 8, pk: 7,price: 6, quantity: 1, size: 16, sweetness: 0, temperature: "I", user_id: 1
+    // from not login
+    // ?? {menuitem_id: 7, quantity: 1, temperature: 'Hot', size: 16, price: 6, pk:"5c05757e-b91b-42cc-be62-348cdf400efd" }
 
     useEffect(()=>{
+        console.log(cartitem_tobeUpdated.menuitem_id)
         if(menuitemClicked && cartitem_tobeUpdated.menuitem_id === menuitem.pk){
             setShow(true)
            
         }
-    }, [menuitemClicked, cartitem_tobeUpdated,menuitem, setShow])
+    }, [menuitemClicked, cartitem_tobeUpdated, menuitem])
     
     return (
         <>
         {
-            
             show && 
             <Modal show={show} onHide={handleHide} size='lg'>
-                
-
                 {menuitemClicked && cartitem_tobeUpdated !== "" ?
 
                 <CustomizeContainer 
@@ -50,6 +51,8 @@ const Menuitem = ({menuitem}) =>{
                     itemTitle={menuitem.title}
                     itemTemp = {cartitem_tobeUpdated.temperature}
                     itemSize = {cartitem_tobeUpdated.size}
+                    itemMilkId = {cartitem_tobeUpdated.milk_id}
+                    itemSweet = {cartitem_tobeUpdated.sweetness}
                     itemPrice = {cartitem_tobeUpdated.price}
                     itemQty={cartitem_tobeUpdated.quantity} 
                     setShow={setShow} 
@@ -62,6 +65,8 @@ const Menuitem = ({menuitem}) =>{
                     itemTitle={menuitem.title}
                     itemTemp = {menuitem.temperature}
                     itemSize = {menuitem.size || null}
+                    itemMilkId = {menuitem.milk_id}
+                    itemSweet = {0}
                     itemPrice = {menuitem.price}
                     itemQty={1} 
                     setShow={setShow} 
@@ -91,18 +96,9 @@ const Menuitem = ({menuitem}) =>{
             </div>     
             
 
-       
-            {/* 
+    
 
-            { menuitem.inventory === 0 ?
-                <OutOfStockButton />
-                :
-                <div>
-                    <CustomizeButton menuitem={menuitem}/>
-                    {/* <Button className='gold_button' onClick={()=>setShow(true)}>Customize</Button> */}
-                    {/* {message && <AddedOverlay message={message} setMessage={setMessage}/>} */}
-                {/* </div>
-            } */}
+           
 
         </div>
         </>

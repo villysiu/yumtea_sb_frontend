@@ -1,26 +1,12 @@
-import {useDispatch, useSelector} from 'react-redux'
-import {resetAddToCart, resetCartBanner} from './cartSlice'
-import {useEffect} from 'react'
+import {useSelector} from 'react-redux'
+
 
 const CartModalBanner = () => {
-    const addToCartStatus = useSelector(state=>state.cart.addToCartStatus)
-    const removeStatus = useSelector(state => state.cart.removeStatus)
-    const updateStatus = useSelector(state => state.cart.updateStatus)
+    
     const message = useSelector(state => state.cart.cartBannerMessage)
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if(message !== ""){
-            const itemAddedTimer = setTimeout(() => {
-                dispatch(resetCartBanner());
-            }, 3000);
-            return () => clearTimeout(itemAddedTimer);
-        }
-        
-        
-    }, []);
-
-   
+    const batchAddItemsStatus = useSelector(state => state.cart.batchAddStatus)
+    if(batchAddItemsStatus === 'loading')
+        return null
     return (
         <>
         {

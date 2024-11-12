@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 650px;
 }
 .login {
     margin: 5rem;
@@ -25,12 +26,12 @@
     padding: var(--oblong-button-padding);
     background-color: #d1c089 !important;
     color: white;
-    min-width: 7rem !important;
+    min-width: 8rem !important;
 
     
 }
 .signin_button:active:enabled, .signin_button:hover:enabled,
-.signup_button:active, .signup_button.hover
+.signup_button:active, .signup_button:hover
 {
     border-color: transparent;
     box-shadow: 0 0 5px black !important;
@@ -45,4 +46,17 @@
 }
 .signup_button {
     margin-top:3rem;
+}
+
+.full_spinner {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:black;
+  /* z-index: 1041; */
+
+  
 }

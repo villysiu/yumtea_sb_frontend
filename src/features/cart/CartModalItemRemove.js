@@ -1,9 +1,9 @@
 import {Trash} from 'react-bootstrap-icons'
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import {forwardRef, useState, useEffect} from 'react'
 
 import {Button} from 'react-bootstrap'
-import {removeItem} from './cartSlice'
+import {removeItem, removeItemFromCart} from './cartSlice'
 const CartModalItemRemove = forwardRef(
 //     function CartModalItemRemove({menuitem_title, pk, removeRef}){
     function CartModalItemRemove(props, ref){
@@ -11,6 +11,8 @@ const CartModalItemRemove = forwardRef(
         const dispatch = useDispatch()
         const [remove, setRemove] = useState(false)
 
+        const current_user_status = useSelector(state=>state.user.current_user.status)
+    
         const handleClick = () =>{
             console.log('click trash')
 
@@ -18,8 +20,15 @@ const CartModalItemRemove = forwardRef(
         }
         const handleRemove = () =>{
             console.log("inner remove button")
-            dispatch(removeItem(pk))
+            if(current_user_status !== 'succeeded'){
+                dispatch(removeItem(pk))
+                
+            }
+            else{
+                dispatch(removeItemFromCart(pk))
+            }
             setRemove(false);
+            
         }
 
 

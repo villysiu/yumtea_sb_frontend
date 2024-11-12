@@ -6,26 +6,10 @@ import { clear_reservation_status, clear_delete_status } from "../reservation/re
 
 const ResetApp =() =>{
     const location = useLocation()
-
     const order_status = useSelector(state=>state.order.checkout_status)
-    const reservation_status = useSelector(state=>state.reservation.create_or_update.status)
-    const delete_status = useSelector(state=>state.reservation.delete.status)
-   
     const dispatch = useDispatch()
     
-    const regex = /\/secure\/reservations\/\d+\/update/
-    
     useEffect(()=>{
-        
-
-        if( location.pathname !== '/secure/reservations/success' &&
-            !regex.test(location.pathname)){
-            if(reservation_status !== 'idle')
-                dispatch(clear_reservation_status())
-        }
-        if( location.pathname === '/secure/reservations' && delete_status!=='idle'){
-            dispatch(clear_delete_status())
-        }
 
         // Reset order status
         if(location.pathname !== "/secure/checkout" && 
@@ -36,7 +20,7 @@ const ResetApp =() =>{
                 dispatch(clearorder())
         }
         
-    }, [order_status, location.pathname, dispatch, reservation_status])
+    }, [order_status, location.pathname, dispatch])
 
     return null
     

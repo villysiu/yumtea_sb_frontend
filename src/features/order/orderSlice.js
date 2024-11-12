@@ -29,8 +29,8 @@ export const fetchCurrentUserOrders=createAsyncThunk(
         }
     }
 )
-export const CheckoutCart=createAsyncThunk(
-    'order/CheckoutCart',
+export const PlaceOrder=createAsyncThunk(
+    'order/PlaceOrder',
     async (tip) => {
         console.log("CheckoutCart orders")
         try {
@@ -63,11 +63,9 @@ export const CheckoutCart=createAsyncThunk(
 const orderSlice=createSlice({
     name: 'order',
     initialState: {
-        order: {
-
-            orders_arr: [],
-            status: 'idle',
-        },
+        orders: [],
+        status: 'idle',
+        
         checkout_status: 'idle',
 
         
@@ -85,27 +83,27 @@ const orderSlice=createSlice({
     extraReducers(builder) {
       builder
         .addCase(fetchCurrentUserOrders.pending, (state, action) => {
-            state.order.status = 'loading'
+            state.status = 'loading'
         })
         .addCase(fetchCurrentUserOrders.fulfilled, (state, action) => {
             
             console.log(action.payload)
-            state.order.status = 'succeeded'
-            state.order.orders_arr = action.payload.reverse()
+            state.status = 'succeeded'
+            state.orders = action.payload.reverse()
         })
         .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
-            state.order.status = 'failed'
+            state.status = 'failed'
         })
-        .addCase(CheckoutCart.pending, (state, action) => {
+        .addCase(PlaceOrder.pending, (state, action) => {
             state.checkout_status = 'loading'
         })
-        .addCase(CheckoutCart.fulfilled, (state, action) => {
+        .addCase(PlaceOrder.fulfilled, (state, action) => {
             
             console.log(action.payload)
             state.checkout_status = 'succeeded'
-            state.order.orders_arr = [ action.payload, ...state.order.orders_arr]
+            state.orders = [ action.payload, ...state.orders]
         })
-        .addCase(CheckoutCart.rejected, (state, action) => {
+        .addCase(PlaceOrder.rejected, (state, action) => {
             state.checkout_status = 'failed'
         })
         
@@ -113,30 +111,35 @@ const orderSlice=createSlice({
 })
 export const { clearorder } = orderSlice.actions
 export default orderSlice.reducer
-export const lastthirtydaysOrders = (state) => {
+export const lastthirtydaysOrders = (orders, days) => {
     const current = new Date()
-    current.setDate(current.getDate()-7)
-    return {
-        'orders_arr': state.order.order.orders_arr.filter(order=>new Date(order.date) > current), 
-        'status': 'succeeded'
-    }
+    current.setDate(current.getDate()-days)
+    return orders.filter(order=>new Date(order.date) > current)
+        
      
 }
-export const currentyearOrders = (state) =>{
-    const current_year = new Date().getFullYear()
-    const regex = /(\d{4})/g;
-    return {
-        'orders_arr': 
-            state.order.order.orders_arr.filter(order=>parseInt(order.date.match(regex)[0]) === current_year), 
-        'status': 'succeeded'
+// export const currentyearOrders = (orders) =>{
+//     const current_year = new Date().getFullYear()
+//     const regex = /(\d{4})/g;
+//     return {
+//         'orders_arr': 
+//             orders.filter(order=>parseInt(order.date.match(regex)[0]) === current_year), 
+//         'status': 'succeeded'
+//     }
+// }
+// export const lastyearOrders = (orders) =>{
+//     const last_year = new Date().getFullYear()-1
+//     const regex = /(\d{4})/g;
+//     return {
+//         'orders_arr': 
+//             orders.filter(order=>parseInt(order.date.match(regex)[0]) === last_year), 
+//         'status': 'succeeded'
+//     }
+// }
+export const getSubtotal = (orderitems) => {
+    let sum = 0
+    for(let lineitem of orderitems){
+        sum+=(lineitem.quantity * lineitem.price)
     }
-}
-export const lastyearOrders = (state) =>{
-    const last_year = new Date().getFullYear()-1
-    const regex = /(\d{4})/g;
-    return {
-        'orders_arr': 
-            state.order.order.orders_arr.filter(order=>parseInt(order.date.match(regex)[0]) === last_year), 
-        'status': 'succeeded'
-    }
+    return sum
 }

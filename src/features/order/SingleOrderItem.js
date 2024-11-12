@@ -2,13 +2,12 @@ import { homeLink } from "../../app/global"
 import { Link } from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
-import { getMenuitemTitleById } from "../menuitem/menuitemSlice"
-import ItemCustomizationList from "../cart/ItemCustomizationList"
+import { getMenuitemTitleById, getMilkById } from "../menuitem/menuitemSlice"
 
 const SingleOrderItem = ({item}) =>{
     const menuitem_title = useSelector(state=>getMenuitemTitleById(state, item.menuitem_id))
-    // const milk = useSelector(state=>getMilkById(state, item.milk_id))
-
+    const milkTitle = useSelector(state=>getMilkById(state, item.milk_id))
+ 
     return(
         <div className='singleorder_item'>
             <div className='orderhistory_order_img_container'>
@@ -23,12 +22,13 @@ const SingleOrderItem = ({item}) =>{
                     <b>{menuitem_title}</b>
                 </Link>
                 <div>
-                    <ItemCustomizationList milk_id={item.milk_id} temperature={item.temperature} sweetness={item.sweetness} />
+                    {item.size}oz | {item.temperature === "H"? "Hot": "Iced"} | {milkTitle} | {item.sweetness===0? "No Sugar" : `${item.sweetness}%`}
+                    
                 </div>
-                <div>Price: {USDollar.format(item.unit_price)}</div>
+                <div>Price: {USDollar.format(item.price)}</div>
                 
             </div>
-            <div style={{textAlign: 'right'}}><b>{USDollar.format(item.line_total)}</b></div>
+            <div style={{textAlign: 'right'}}><b>{USDollar.format(item.price * item.quantity)}</b></div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {useState, useRef} from 'react';
 import {Modal} from 'react-bootstrap'
-import {getMenuitemTitleById, triggerMenuItem} from '../menuitem/menuitemSlice'
+import {getMenuitemTitleById, triggerMenuItem, getMilkById} from '../menuitem/menuitemSlice'
 import {resetCartBanner} from './cartSlice'
 import {USDollar} from '../../app/global'
 import CartModalItemRemove from './CartModalItemRemove'
@@ -14,13 +14,13 @@ const CartModalItem = ({cartitem, idx, setCartShow}) =>{
 
     const dispatch = useDispatch()
     const menuitem_title = useSelector(state=>getMenuitemTitleById(state, cartitem.menuitem_id))
-
+    const milkTitle = useSelector(state=>getMilkById(state, cartitem.milk_id))
 
     const handleUpdate=e=>{
-        console.log("cartitem clicked")
-        console.log(cartitemRef)
-        console.log(removeRef)
-        console.log(removeRef.current && !removeRef.current.contains(e.target))
+        console.log("cartitem update clicked")
+        // console.log(cartitemRef)
+        // console.log(removeRef)
+        // console.log(removeRef.current && !removeRef.current.contains(e.target))
 
         if(removeRef.current && !removeRef.current.contains(e.target)){
             dispatch(triggerMenuItem({cartitem: cartitem} ))
@@ -40,7 +40,10 @@ const CartModalItem = ({cartitem, idx, setCartShow}) =>{
                 <div className='cart_modal_item_price'>{USDollar.format(cartitem.price * cartitem.quantity)}</div>
             </div>
             <div className='cart_modal_item_details'>
-                {cartitem.size}oz, {cartitem.temperature}
+                {cartitem.size}oz,  
+                {cartitem.temperature==="H"?"Hot": "Iced"}, 
+                {milkTitle}, 
+                {cartitem.sweetness === 0 ? 'No Sugar' : `${cartitem.sweetness}% Sugar`}
             </div>
 
         </div>

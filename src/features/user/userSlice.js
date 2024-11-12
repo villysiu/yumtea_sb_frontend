@@ -102,12 +102,13 @@ const userSlice=createSlice({
 
         current_user: {
             username: null,
-            email: null,
-            id: null,
+            // email: null,
+            // id: null,
             status: 'idle',
             
         },
         token: {
+            ttt: localStorage.getItem("token"),
             status: localStorage.getItem("token")? 'succeeded': 'idle'
             
         }
@@ -159,13 +160,13 @@ const userSlice=createSlice({
             state.token.status = 'loading'
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
+            localStorage.clear();
             state.token.status = 'idle'
             state.current_user={
                 username: null,
                 status: 'idle',
-                error: null,    
             }
-            localStorage.clear();
+            
             
 
         })

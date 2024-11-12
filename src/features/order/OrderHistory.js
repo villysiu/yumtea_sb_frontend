@@ -4,64 +4,51 @@ import { fetchCurrentUserOrders } from "./orderSlice"
 import SingleOrder from "./SingleOrder"
 import OrderFilter from "./OrderFilter"
 import { lastthirtydaysOrders, currentyearOrders, lastyearOrders } from "./orderSlice"
-import FullSpinner from "../headerNav/FullSpinner"
+import {Spinner} from 'react-bootstrap'
 
 const OrderHistory = () =>{
 
     const dispatch = useDispatch()
     const [show, setShow] = useState(null)
-    const [filter, setFilter] =useState(0)
+    const [filter, setFilter] =useState(7)
 
-    const order = useSelector(state =>{
-        if(filter === '1')
-            return lastthirtydaysOrders(state)
-        if(filter === '2')
-            return currentyearOrders(state)
-        if(filter === '3'){
-            return lastyearOrders(state)}
-        return state.order.order
-    } ) 
+    const ordersStatus = useSelector(state=>state.order.status)
+    const orders = useSelector(state =>lastthirtydaysOrders(state.order.orders, filter)) 
    
     useEffect(()=>{
-        if(order.status === 'idle')
+        if(ordersStatus === 'idle')
             dispatch(fetchCurrentUserOrders())
-    }, [order.status, dispatch])
+    }, [ordersStatus, dispatch])
 
     useEffect(()=>{
         // close order details when filter option changed
         setShow(null)
     }, [filter])
    
-    if(order.status === 'loading' || order.status === 'idle')
-        return <FullSpinner />
+    if(ordersStatus === 'loading' || ordersStatus === 'idle')
+        return <Spinner />
     
+    if(orders.length === 0)
+        return <div>No order</div> 
 
     return (
-        <div className='app_width'>
-            <h2 style={{textAlign: 'center'}}>Order History</h2>
+        <div className='order_history_wrapper'>
+            <h2 >Order History</h2>
             
-            <div className="orderhistory_wrapper">
-                <div style={{width: '100%', textAlign: 'right'}}>
+            <div className="order_history">
+                <div className="order_filter">
                     <OrderFilter filter={filter} setFilter={setFilter} />
                 </div>
-                <Orders order = {order} show={show} setShow={setShow} />
-                
+                {
+                    orders.map(order => {
+                        return (
+                            <SingleOrder key={order.pk} order={order} show={show} setShow={setShow}/>
+                        )
+                    })
+                } 
             </div>
         </div>
     )
 }
-const Orders = ({order, show, setShow}) =>{
-    
-    if(order.status === 'succeeded' && order.orders_arr.length === 0)
-        return <div>No order</div>
-    return(
-        
-            order.orders_arr.map(order => {
-                return (
-                    <SingleOrder key={order.pk} order={order} show={show} setShow={setShow}/>
-                )
-            })
-        
-    )
-}
+
 export default OrderHistory

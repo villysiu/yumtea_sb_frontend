@@ -5,21 +5,25 @@ import { fetchCategories, getCategories } from "../menuitem/menuitemSlice";
 import { Link } from 'react-router-dom';
 
 
-const CategoryDropdown = () =>{
+const CategoryDropdown = ({setShow}) =>{
     const categories = useSelector(state=>state.menuitem.category.array)
+
     return (
-        <div className="header_drinks_dropdown">
-            
-            <Link to={`${homeLink}/collection`} className=' header_drinks_link' >
-                <div className='header_drinks_box'> 
+        
+            <>
+            <Link key='bestseller' to={`${homeLink}/collection`} className=' header_drinks_link' 
+            onClick={()=>setShow(false)}>
+                <div className='header_drinks_box top'> 
                     Best Sellers
                 </div> 
             </Link>
             {
-                categories.map(category=>{    
+                categories.map((category, idx)=>{    
+                    console.log(idx)
                     return (
-                        <Link key={category.pk} to={`${homeLink}/collection#${category.image_path}`} className=' header_drinks_link' >
-                            <div className='header_drinks_box'> 
+                        <Link key={category.slug} to={`${homeLink}/collection#${category.slug}`} className=' header_drinks_link' 
+                        onClick={()=>setShow(false)}>
+                            <div className={`header_drinks_box ${categories.length-1===idx ? 'bottom' : ''}`}> 
                                 {category.title}
                             </div> 
                         </Link>
@@ -30,30 +34,9 @@ const CategoryDropdown = () =>{
           
         
             }
-            {/* <Link to={`${homeLink}/collection/oolong`} className=' header_drinks_link' >
-                <div className='header_drinks_box'> 
-                    Oolong Tea
-                </div> 
-            </Link>
-            <Link to={`${homeLink}/collection/blacktea`} className=' header_drinks_link' >
-                <div className='header_drinks_box'> 
-                    Black Tea
-                </div> 
-            </Link>
-            <Link to={`${homeLink}/collection/greentea`} className=' header_drinks_link' >
-                <div className='header_drinks_box'> 
-                    Green Tea
-                </div> 
-            </Link>
-            
-            <Link to={`${homeLink}/collection/caffeinefree`} className=' header_drinks_link' >
-                <div className='header_drinks_box'> 
-                    Caffeine Free
-                </div> 
-            </Link> */}
+            </>
 
 
-        </div>
         
     )
     

@@ -9,6 +9,10 @@ import {resetUserStatus} from './userSlice'
 import { loginUser } from './userSlice';
 import LoginButton from './LoginButton'
 const Login = () =>{
+
+    let location = useLocation();
+    console.log(location)
+
     const token_status = useSelector(state=>state.user.token.status)
     const current_user_status = useSelector(state=>state.user.current_user.status)
     
@@ -16,7 +20,7 @@ const Login = () =>{
     const [password, setPassword] = useState("")
     const [error, setError] = useState('')
     const dispatch=useDispatch();
-    // console.log(state)
+
 
     const handleSubmit=e=>{
         e.preventDefault()
@@ -38,16 +42,9 @@ const Login = () =>{
 
     return(
        <div className='login_wrapper'>
-        <div className='login'>
+        {/* <div className='login'> */}
             <h1 className="mb-5">Sign in to your account</h1>
             <Form className='login_form' onSubmit={handleSubmit}>
-                {/* <FloatingLabel
-                    controlId="floatingInput"
-                    label="Email address"
-                    className="mb-3"
-                >
-                    <Form.Control type="email" placeholder="name@example.com" />
-                </FloatingLabel> */}
 
                 <FloatingLabel controlId="floatingInput" label="Username" className="mb-3">
                     <Form.Control type="text" placeholder="Username" value={username} 
@@ -72,7 +69,7 @@ const Login = () =>{
     
 
     </div>
-    </div>
+    // </div>
     
 
     )

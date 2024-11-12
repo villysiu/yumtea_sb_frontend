@@ -6,34 +6,35 @@ import { USDollar } from "../../app/global"
 
 
 const AddtocartButton = ({
-    price, quantity, menuitem_id, temp, size, setShow
+    price, quantity, menuitem_id, temp, milk_id, sweetness, size, setShow
     }) =>{
     console.log("purchase button ")
-    console.log(temp, size)
+    console.log(milk_id, temp, size,sweetness)
 
     const dispatch = useDispatch()
-    const current_user = useSelector(state=>state.user.current_user)
+    const current_user_status = useSelector(state=>state.user.current_user.status)
     // // const milk = useSelector(state=>getMilkById(state, milk_id))
 
     const handleClick = (e) =>{
         console.log("clicl??? d")
-        if(current_user.username === null){
-            console.log("add to cart without user ")
+        const data = {
+            'menuitem_pk':menuitem_id,
+            'milk_pk': milk_id,
+            'price': price,
+            'quantity': quantity, 
+            'size': size, 
+            'sweetness': sweetness,
+            'temperature': temp, 
             
-            dispatch(increment({
-                'menuitem_id':menuitem_id,
-                'quantity': quantity, 
-                'temperature': temp, 
-                'size': size, 
-                'price': price,
-            }))
+        }
+        if(current_user_status !== 'succeeded'){
+            console.log("add to cart without user ")
+            dispatch(increment(data))
         } 
-    //     else{
-    //         console.log("purchase login ")
-    //         const data = {'menuitem_pk': menuitem_id, 'milk_pk': milk_id, 'temperature': temp, 'sweetness': sweetness}
-    //         console.log(data)
-    //         dispatch(addItemToCart(data))
-    //     }    
+        else{
+            console.log("purchase login ")
+            dispatch(addItemToCart(data))
+        }    
         setShow(false) 
     }
     if(!size || !temp){

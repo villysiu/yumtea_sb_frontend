@@ -1,13 +1,13 @@
 #header_wrapper{
     width: 100vw;
-    background-color: rgb(111, 97, 80);
+    background-color: var(--dark-brown-color);
     display: flex;
     justify-content: space-between;
     z-index: 1040;
       position: fixed;
       left:0;
       top: 0;
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
     height: var(--header_height)
   
 }
@@ -29,7 +29,7 @@
   margin-left: 1rem;
   margin-right: 1rem;
   font-size: 2rem;
-  font-weight: bolder;
+  /* font-weight: bolder; */
   color: var(--gold-text-color);
   text-decoration: none;
 
@@ -52,46 +52,79 @@
 } */
 .header_drinks {
   position: relative;
+  cursor: pointer;
 }
-.header_drinks_dropdown_wrapper {
-  position: absolute;
-  top: 0;
-  left: -2rem;
-  text-align: center;
-
-  width: 208px;
-    height: 370px;
+.category_dropdown_modal{
+    width: 13rem !important;
+    position: absolute;
+    right: 3.5rem;
+    top: 3rem;
+    /* background-color: var(--gold-text-color-hover); */
+    /* background-color: transparent; */
+    
 }
-.header_drinks_dropdown{
-  position: absolute;
-  top: 4rem;
-  background-color: var(--gold-text-color-hover);
-  border: solid 1px black;
-  width: 13rem;
-  color: white;
 
-
-}
-.header_drinks_box {
-  border-bottom: solid 1px white;
+.header_drinks_box, .header_user_box {
+  background-color: rgb(191, 183, 160);
   padding: 1rem 2rem;
   font-size: 1.2rem;
   font-weight: bold;
   text-decoration: none;
-  color: white;
+  color: black;
+  margin: 1px 0;
+  text-decoration: none !important;
 }
-.header_drinks_link{
-  /* width: 100%;
-  height: 100%;*/
+.top{
+  border-radius: var(--bs-modal-border-radius) var(--bs-modal-border-radius) 0 0;
+  margin-top: 0;
+  
+}
+.bottom {
+  border-radius: 0 0 var(--bs-modal-border-radius) var(--bs-modal-border-radius);
+  border-bottom: none;
+  margin-bottom: 0;
+
+}
+.header_drinks_link,.header_user_link {
+
   text-decoration: none;
-  color: white; 
 }
 
-.header_drinks_link:hover, .header_drinks_link:active{
+.header_drinks_box:hover, .header_user_box:hover {
+  background-color:rgb(139, 132, 113);
   color: white;
 }
-.header_drinks_box:hover {
-  background-color: rgb(72, 59, 24)
+.header_user_button {
+ /* border: solid 1px black; */
+ border-radius: 35px;
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ padding: 0.5rem;
+ margin:  0 2rem;
+ font-size: 1.5rem;
+ color: var(--gold-text-color); 
+ background-color: transparent;
+ text-decoration: none;
+}
+.header_user_icon {
+  font-size: 3rem;
+  /* color: var(--gold-text-color); */
+  /* color: var(--gold-text-color);  */
+}
+.header_user_button:hover, .header_user_icon:hover {
+  background-color: var(--gold-text-color); 
+  color: white;
+}
+
+.header_user_name {
+  padding: 0 0.5rem;
+}
+.user_dropdown_modal{
+  width: 13rem !important;
+    position: absolute;
+    right: 3.5rem;
+    top: 3rem;
 }
 
 

@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchReservations } from "./reservationSlice"
-import FullSpinner from "../headerNav/FullSpinner"
+import FullSpinner from "../user/FullSpinner"
 import { Navigate } from "react-router-dom"
 
 const ReservationsApp =() =>{

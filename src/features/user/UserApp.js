@@ -7,12 +7,13 @@ const UserApp = () =>{
     const dispatch = useDispatch()
     const current_user_status = useSelector(state => state.user.current_user.status)
     const token_status = useSelector(state => state.user.token.status)
-    // console.log(localStorage.getItem("token"))
+    console.log(token_status)
+
 
     useEffect(()=>{
         if(token_status === 'succeeded' && current_user_status==='idle')
             dispatch(fetchCurrentUser())
-    }, [token_status])
+    }, [token_status, current_user_status, dispatch])
 
 
     return null

@@ -201,5 +201,52 @@ div.slide-left p {
   width: var(--body-width);
   height: 15rem;
   color: white;
-  background-color: rgb(59, 46, 30);
+  background-color: var(--dark-brown-color);
+}
+
+location_wrapper { 
+  height: 120vh;
+  background-color:#48333f
+}
+.location_bg_wrapper{
+  background-image: url('http://127.0.0.1:8001/chinese-gongfucha-teakan01.webp');
+
+}
+.location_details_container {
+  width: var(--body-width);
+  background-color: rgb(191, 183, 160);
+  display: flex;
+  flex-direction: column;
+  color: white;
+ font-weight: bolder;
+
+  padding: 1.5rem;
+
+  outline: 2px solid white;
+outline-offset: -0.5rem;
+}
+
+
+
+
+
+
+.location_col{
+  width: 8rem;
+  min-width: 8rem;
+  max-width: 8rem;
+  
+}
+.location_row{
+  display: flex;
+  padding-bottom:2rem;
+}
+@media all and  (max-width: 767.98px) {
+  .location_row{
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+  .location_col{
+    padding-bottom:0.5rem;
+  }
 }

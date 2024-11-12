@@ -2,15 +2,21 @@ import { logoutUser } from "./userSlice"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { homeLink } from "../../app/global"
-const Logout = () =>{
+const Logout = ({setShow}) =>{
     const dispatch = useDispatch()
     const handleClick = e =>{
         console.log("logging out")
         dispatch(logoutUser())
+        setShow(show=>!show)
     }
     return(
-        <Link to={`${homeLink}`} className="solid_link pb-3" onClick={handleClick}>Sign out</Link>
-        // <div className="solid_link  mb-3" style={{'cursor': 'pointer'}} onClick={handleClick}>Sign out</div>
+        // <Link to={`${homeLink}`} className='header_user_link' onClick={handleClick} >
+        <div className='header_user_link' onClick={handleClick} >
+                <div className='header_user_box bottom'> 
+                    Sign out
+                </div> 
+            </div>
+       
     )
 }
 export default Logout

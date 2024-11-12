@@ -6,7 +6,7 @@ const VisitTaste = () =>{
             <div className="location_bg_wrapper">
                 
                 <div className='location_title'><b>Yum Tea Tasting Room </b></div>
-                <MakeReservationButton />
+                {/* <MakeReservationButton /> */}
               
             </div>
             <div className="location_details_container">

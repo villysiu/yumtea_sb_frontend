@@ -20,7 +20,7 @@ const EnterPage = () =>{
             
             <MenuitemApp setSpinner={setSpinner}/>
             <UserApp />
-            {/* <CartApp /> */}
+            <CartApp />
             <ResetApp />
 
             <Outlet />
