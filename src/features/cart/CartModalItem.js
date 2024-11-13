@@ -1,7 +1,7 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {useState, useRef} from 'react';
 import {Modal} from 'react-bootstrap'
-import {getMenuitemTitleById, triggerMenuItem, getMilkById} from '../menuitem/menuitemSlice'
+import {getMenuitemTitleById, triggerCustomizeModal, getMilkById} from '../menuitem/menuitemSlice'
 import {resetCartBanner} from './cartSlice'
 import {USDollar} from '../../app/global'
 import CartModalItemRemove from './CartModalItemRemove'
@@ -16,16 +16,19 @@ const CartModalItem = ({cartitem, idx, setCartShow}) =>{
     const menuitem_title = useSelector(state=>getMenuitemTitleById(state, cartitem.menuitem_id))
     const milkTitle = useSelector(state=>getMilkById(state, cartitem.milk_id))
 
+
     const handleUpdate=e=>{
         console.log("cartitem update clicked")
-        // console.log(cartitemRef)
-        // console.log(removeRef)
-        // console.log(removeRef.current && !removeRef.current.contains(e.target))
-
+        const data = {
+            ...cartitem,
+            // menuitem_pk: cartitem.menuitem_id,
+            // milk_pk: cartitem.milk_id,
+        }
+        
         if(removeRef.current && !removeRef.current.contains(e.target)){
-            dispatch(triggerMenuItem({cartitem: cartitem} ))
+            dispatch(triggerCustomizeModal(data ))
             setCartShow(false);
-            dispatch(resetCartBanner())
+            dispatch(resetCartBanner());
         }
     }
     return (

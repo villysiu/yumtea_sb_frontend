@@ -17,16 +17,16 @@ const CustomizeModal = ({handleHide}) =>{
     // const task = useSelector(state=>state.menuitem.customize.task)
 
     console.log(itemToCustomize)
-    const task = !itemToCustomize.carrtitem_pk  ? "add" : "update"
+    const task = !itemToCustomize.pk  ? "add" : "update"
     console.log(task)
-
-    
-    const menuitem = useSelector(state=>getMenuitemById(state, itemToCustomize.menuitem_pk))
+//item data sent from menu and order history is menutitem_pk 
+//item data sent from shopping cart is menuitem_id instead of menutitem_pk 
+    const menuitem = useSelector(state=>getMenuitemById(state, itemToCustomize.menuitem_pk || itemToCustomize.menuitem_id))
 
     const [price, setPrice] = useState(itemToCustomize.price)
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
     const [size, setSize] =useState(itemToCustomize.size)
-    const [milkId, setMilkId] = useState(itemToCustomize.milk_pk)
+    const [milkId, setMilkId] = useState(itemToCustomize.milk_pk || itemToCustomize.milk_id)
     const [quantity, setQuantity] = useState(1)
     const [sweetness, setSweetness] = useState(itemToCustomize.sweetness)
 
@@ -42,7 +42,7 @@ const CustomizeModal = ({handleHide}) =>{
     return (
         <>
             <Modal.Header className='customize_header' closeButton>
-                <Modal.Title>Customize {menuitem.title}</Modal.Title>
+                <Modal.Title>Customize {menuitem.title} new </Modal.Title>
             </Modal.Header>
             <Modal.Body className='customize_list'>
             {
@@ -59,32 +59,21 @@ const CustomizeModal = ({handleHide}) =>{
             </Modal.Body>
             <Modal.Footer className='customize_footer'>
                 <UpdateQuantity quantity={quantity} setQuantity={setQuantity} />
-                <AddCartButton 
-                    data={data}
-                    handleHide={handleHide} 
-                            
-                />
-                {/* {
+               
+                {
                     task === 'add' ?
                         <AddCartButton 
                             data={data}
                             handleHide={handleHide} 
-                            
-                />
+                        />
                         :
                         <UpdateCartButton
-                            cartitem_pk={cartitemPk}
-                            price = {price}
-                            quantity = {quantity}
-                            menuitem_id={itemId} 
-                            temp = {temp}
-                            sweetness = {sweetness}
-                            size={size}
-                            milk_id={milkId}
-                            setShow={setShow} 
+                            data={{...data, pk: itemToCustomize.pk}}
+                            handleHide={handleHide} 
                         />
+                    
 
-                }    */}
+                }   
 
                         
         

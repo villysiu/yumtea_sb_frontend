@@ -8,9 +8,6 @@ import BestSellers from './BestSellers'
 
 
 const Collections = () =>{
-
-    
-
     useEffect(() => {
         AOS.init({
           disable: "phone",
