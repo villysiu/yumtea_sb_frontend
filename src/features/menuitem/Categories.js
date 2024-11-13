@@ -20,7 +20,6 @@ const Categories = () =>{
 
     return (
         <>
-        <div key='bestseller'>Best sellers</div>
 
         {
             categories.map(category=><SingleCategory key={category.slug} category={category} />)

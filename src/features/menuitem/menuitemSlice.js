@@ -134,7 +134,13 @@ const menuitemSlice=createSlice({
         menuitemButton: {
             clicked: false,
             cartitem: "",
+        },
+        customize: {
+            clicked: false,
+            itemToCustomize: null,
+            task: "add"
         }
+
 
 
     },
@@ -149,7 +155,15 @@ const menuitemSlice=createSlice({
         resetMenuitemClicked(state){
             state.menuitemButton.clicked = false
             state.menuitemButton.cartitem = ""
-        }
+        },
+        triggerCustomizeModal(state, action) {
+            console.log(action.payload)
+            
+            state.customize.clicked = !state.customize.clicked
+            state.customize.itemToCustomize = action.payload
+            
+        },
+
     },
     extraReducers(builder) {
       builder
@@ -192,7 +206,7 @@ const menuitemSlice=createSlice({
     }
 })
 
-export const { triggerMenuItem, resetMenuitemClicked } = menuitemSlice.actions
+export const { triggerMenuItem, resetMenuitemClicked, triggerCustomizeModal } = menuitemSlice.actions
 
 export default menuitemSlice.reducer
 
@@ -237,9 +251,9 @@ export const getMenuitems = createSelector(
 )
     
 
-export const getSingleMenuitem = (menuitem_array, menuitem_id) => {
-    console.log('in getsingle ite,')
+// export const getSingleMenuitem = (menuitem_array, menuitem_id) => {
+//     console.log('in getsingle ite,')
     
-    return menuitem_array.find(item=>item.pk === menuitem_id)
+//     return menuitem_array.find(item=>item.pk === menuitem_id)
 
-}
+// }

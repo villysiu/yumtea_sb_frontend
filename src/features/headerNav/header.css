@@ -88,6 +88,7 @@
 .header_drinks_link,.header_user_link {
 
   text-decoration: none;
+  cursor: pointer;
 }
 
 .header_drinks_box:hover, .header_user_box:hover {

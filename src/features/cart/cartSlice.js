@@ -55,8 +55,6 @@ export const addItemToCart = createAsyncThunk(
         
 // {menuitem_pk: 12, milk_pk: 8, price: 6, quantity: 1, size: 12, 
 //     sweetness: 0, temperature: "H"}
-
-
         try {
             const response=await fetch(`${apiLink}/api/cart`, {
                 method: "POST",

@@ -13,18 +13,11 @@
 
 :root{
   --body-width: 1080px;
-  --bs-tertiary-bg-rgb: 245, 237, 207;
+  /* --bs-tertiary-bg-rgb: 245, 237, 207; */
   /* --bs-body-bg: rgba(242,241,237); */
   --bs-body-bg: white;
 
-  --header_circle_btn: 2rem;
-  --header_padding: 2rem;
 
-  --single_wine_margin: 2rem;
-  --single_wine_img_width: 250px;
-  --single_wine_img_pos: -170px;
-  --singlewine_title_font_size: 3rem;
-  --single_wine_img_height: 400px;
   /* --single_wine_details_width: calc(var(--single_wine_width) - var(--single_wine_img_width)); */
   --header_text_color: black;
   --header_height: 6rem;
@@ -50,7 +43,7 @@
 @media all and  (max-width: 1080.98px) {
   :root{
     --body-width: 100vw;
-    --cart_summary_right: 0
+    
   }
 }
 @media all and  (max-width: 389.98px) {
@@ -626,96 +619,6 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
     padding-top: 1rem;
   }
 }
-.orderhistory_wrapper {
-  /* border: black 1px solid; */
-  width: 100%;
-  padding: 1rem;
-}
-.orderhistory_order {
-  display: flex;
-  flex-direction: column;
-  border-bottom: black 1px solid;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
-.orderhistory_order_container{
-  display: flex;
-}
-.orderhistory_order_header {
-  display: flex;
-  flex-direction: row;
-  
-  width: 100%;
-}
-.orderhistory_order_col{
-  width: 50%;
-}
-.orderhistory_order_header_l{
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-}
-.orderhistory_order_header_c{
-  width:47%;
-  display: flex;
-  flex-direction: row;
-  
-}
-.orderhistory_order_header_r{
-  width:3%;
-  text-align: right;
-  cursor: pointer;
-}
-.orderhistory_order_img_container{
-  position: relative;
-  width: 7.5rem;
-  min-width: 7.5rem;
-  max-width: 7.5rem;
-  display: flex;
-}
-.orderhistory_order_img {
-  width: 60px;
-}
-.orderhistory_order_details {
-  /* display: flex; */
-}
-.orderhistory_order_tip_wrapper {
-  width: 100%;
-  display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-.orderhistory_order_tip {
-  width: 100px;
-  display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.qty_circle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: beige;
-  border: black 1px solid;
-  
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-  width: calc(var(--bs-body-font-size) * 2);
-  height: calc(var(--bs-body-font-size) * 2);
-  border-radius: 50%;
-  position:absolute;
-  left: 3rem;
-    top: 0.5rem;
-  
-}
-.singleorder_item{
-  display: flex;
-}
-@media all and  (max-width: 767.98px) {
-  .orderhistory_order_header_l, .orderhistory_order_header_c{
-    
-    flex-direction: column;
-  }
-}
+
 
 

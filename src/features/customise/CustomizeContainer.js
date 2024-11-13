@@ -11,10 +11,11 @@ import UpdateQuantity from "./UpdateQuantity"
 import { useState } from "react"
 import { useSelector} from 'react-redux'
 
-import {getSingleMenuitem} from '../menuitem/menuitemSlice'
+import {getMenuitemById} from '../menuitem/menuitemSlice'
+
 const CustomizeContainer = ({cartitemPk, itemId, itemTitle, itemTemp, itemSize, itemMilkId,itemSweet, itemPrice, itemQty, setShow, task}) =>{
     console.log(itemId)
-    const menuitem = useSelector(state=>getSingleMenuitem(state.menuitem.menuitems.array, itemId))
+    const menuitem = useSelector(state=>getMenuitemById(state, itemId))
 
     const [price, setPrice] = useState(itemPrice)
     const [temp, setTemp] = useState(itemTemp)

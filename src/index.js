@@ -56,14 +56,6 @@ const router = createBrowserRouter([
               //   path: "collection/:itemId",
               //   element: <SingleMenuitem />,
               // },
-              // {
-              //   path: "collection/:categoryName",
-              //   element: <MenuitemsList />,
-              // },
-              // {
-              //   path: "/cart",
-              //   element: <Cart />
-              // },
               {
                 path: "/visit-taste",
                   element: <VisitTaste />,

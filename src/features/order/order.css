@@ -59,3 +59,99 @@ padding-top:0 !important; */
     text-align: center;
     padding: 2rem;
 }
+.orderhistory_wrapper {
+    /* border: black 1px solid; */
+    width: 100%;
+    padding: 1rem;
+  }
+  .orderhistory_order {
+    display: flex;
+    flex-direction: column;
+    border-bottom: black 1px solid;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
+  .orderhistory_order_container{
+    display: flex;
+  }
+  .orderhistory_order_header {
+    display: flex;
+    flex-direction: row;
+    
+    width: 100%;
+  }
+  .orderhistory_order_col{
+    width: 50%;
+  }
+  .orderhistory_order_header_l{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+  }
+  .orderhistory_order_header_c{
+    width:47%;
+    display: flex;
+    flex-direction: row;
+    
+  }
+  .orderhistory_order_header_r{
+    width:3%;
+    text-align: right;
+    cursor: pointer;
+  }
+  .orderhistory_order_img_container{
+    position: relative;
+    --img_width: 5rem;
+    width: calc(var(--img_width) * 1.5);
+    height: var(--img_width);
+    /* display: flex; */
+  }
+  .orderhistory_order_img {
+    width: var(--img_width);
+    height: var(--img_width);
+    object-fit: cover;
+  }
+  .qty_circle {
+    width: calc(var(--img_width) /2);
+    height: calc(var(--img_width) /2);
+    border-radius: 50%;
+    position:absolute;
+    left: 3rem;
+    top: 0rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: beige;
+    border: black 1px solid;
+    
+    
+    
+  }
+  .orderhistory_order_details {
+    /* display: flex; */
+  }
+  .orderhistory_order_tip_wrapper {
+    width: 100%;
+    display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+  }
+  .orderhistory_order_tip {
+    width: 100px;
+    display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  }
+  
+  .singleorder_item{
+    display: flex;
+    padding-bottom: 1rem;
+    
+  }
+  @media all and  (max-width: 767.98px) {
+    .orderhistory_order_header_l, .orderhistory_order_header_c{
+      
+      flex-direction: column;
+    }
+  }
