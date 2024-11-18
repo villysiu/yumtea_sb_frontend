@@ -17,8 +17,8 @@ const CartButton =() =>{
 
     const [cartShow, setCartShow] = useState(false);
 
-    const ref = useRef()
-    const cartModalRef = useRef()
+    // const ref = useRef()
+    // const cartModalRef = useRef()
     const handleClick = () => {
         console.log('clicked')
         setCartShow(!cartShow);
@@ -36,32 +36,32 @@ const CartButton =() =>{
 
     
 
-    useEffect(()=>{
-        const clickOutside = e =>{
-            console.log(e.target)
-            // console.log(ref.current)
-            // console.log(ref.current.contains(e.target))
-            // console.log(cartModalRef.current)
-            // console.log(cartModalRef.current.contains(e.target))
+    // useEffect(()=>{
+    //     const clickOutside = e =>{
+    //         console.log(e.target)
+    //         // console.log(ref.current)
+    //         // console.log(ref.current.contains(e.target))
+    //         // console.log(cartModalRef.current)
+    //         // console.log(cartModalRef.current.contains(e.target))
            
-            if(
-                (ref.current && !ref.current.contains(e.target))
-                && (cartModalRef.current && !cartModalRef.current.contains(e.target))
-                && (!e.target.classList.contains('remove_button'))
+    //         if(
+    //             (ref.current && !ref.current.contains(e.target))
+    //             && (cartModalRef.current && !cartModalRef.current.contains(e.target))
+    //             && (!e.target.classList.contains('remove_button'))
             
-            ){
-                console.log('clicked outside')
-                setCartShow(false)
-                dispatch(resetCartBanner())
-            }
-        }
-        document.addEventListener('click', clickOutside);
+    //         ){
+    //             console.log('clicked outside')
+    //             setCartShow(false)
+    //             dispatch(resetCartBanner())
+    //         }
+    //     }
+    //     document.addEventListener('click', clickOutside);
         
-        return () => {
-            document.removeEventListener("click", clickOutside);
-        };
+    //     return () => {
+    //         document.removeEventListener("click", clickOutside);
+    //     };
 
-    },[])
+    // },[])
 
     
     return (
@@ -71,18 +71,22 @@ const CartButton =() =>{
             
             <Modal show={cartShow} onHide={()=>setCartShow(false)}  dialogClassName='cart_modal' >
             
-                <div className='cart_modal_content' ref={cartModalRef} >
+                <div className='cart_modal_content' 
+                // ref={cartModalRef} 
+                >
                     <CartModal setCartShow={setCartShow} /> 
                 </div>
             </Modal>
             
         }
-            <div ref={ref} className="cart_button_wrapper">
+            <div 
+            // ref={ref}
+             className="cart_button_wrapper" onClick={handleClick}>
             
-                <div id='cartButton' onClick={handleClick} >
-                    <CartFill className="cart_button" />
+                {/* <div id='cartButton' onClick={handleClick} > */}
+                    <CartFill className="cart_icon" />
                     {count > 0 && <div className='cartitem_count'> {count} </div>}
-                </div>
+                {/* </div> */}
             </div>
         </>
     )

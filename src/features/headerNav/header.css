@@ -1,43 +1,88 @@
-#header_wrapper{
+.header_wrapper{
     width: 100vw;
-    background-color: var(--dark-brown-color);
+    background-color: pink;
+   /* background-color: var(--dark-brown-color); */
     display: flex;
-    justify-content: space-between;
-    z-index: 1040;
-      position: fixed;
-      left:0;
-      top: 0;
-      padding: 0.5rem 1rem;
-    height: var(--header_height)
-  
-}
-#headernav_wrapper {
-    display: flex;
-    align-items: center;
+    justify-content: center;
+    
 }
 
-
-.header_brand_container {
-    width: 15rem;
-    height: 5rem;
-    background-size: 100%;
-    background-image: url("http://127.0.0.1:8001/yumtea_logo.png");
-    -webkit-filter: drop-shadow(0px 0px 1px rgb(178, 177, 177));
+.header_inner_wrapper{
+    max-width: 1400px;
+    width: 90vw;
+    padding: 1rem 0;
+    background-color: transparent !important;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
 }
-
-.header_home_button {
-  margin-left: 1rem;
-  margin-right: 1rem;
+.header_buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 1rem;
   font-size: 2rem;
-  /* font-weight: bolder; */
   color: var(--gold-text-color);
   text-decoration: none;
 
   position: relative;
+  cursor: pointer;
 }
-.header_home_button:hover, .header_home_button.active {
+.header_buttons:hover, .header_buttons.active {
   color: white;
 }
+
+
+
+.header_brand_container {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+}
+
+:root {
+  --yumtea_logo_width: 20rem;
+  --toggle_button_width: 56px;
+}
+@media all and (max-width: 991.98px) {
+  
+  :root {
+    --yumtea_logo_width: 5rem;
+  }
+}
+#yumtea_logo {
+  width: var(--yumtea_logo_width);
+  
+  /* height: 100%; */
+  display:inline-block;
+  background-color: var(--gold-text-color);
+  -webkit-mask:url("http://127.0.0.1:8001/yumtea_logo.png");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+}
+@media all and (max-width: 991.98px) {
+
+  #yumtea_logo {
+    width: var(--yumtea_logo_width);
+    -webkit-mask:url("http://127.0.0.1:8001/yumtea_logo_Char.png");
+    mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  }
+}
+.toogle_button {
+  width: var(--toggle_button_width);
+}
+@media all and (max-width: 1199.98px) {
+  .header_brand_container {
+    padding-left: calc(45vw - var(--yumtea_logo_width)/2 - var(--toggle_button_width));
+    
+  }
+}
+
+
+
 /* .header_home_button:hover:after, .header_home_button.active:after {
   content: "T";
   font-size: 1rem;
@@ -50,19 +95,11 @@
   text-align: center;
 
 } */
-.header_drinks {
+/* .header_drinks {
   position: relative;
   cursor: pointer;
-}
-.category_dropdown_modal{
-    width: 13rem !important;
-    position: absolute;
-    right: 3.5rem;
-    top: 3rem;
-    /* background-color: var(--gold-text-color-hover); */
-    /* background-color: transparent; */
-    
-}
+} */
+
 
 .header_drinks_box, .header_user_box {
   background-color: rgb(191, 183, 160);
@@ -74,6 +111,7 @@
   margin: 1px 0;
   text-decoration: none !important;
 }
+
 .top{
   border-radius: var(--bs-modal-border-radius) var(--bs-modal-border-radius) 0 0;
   margin-top: 0;
@@ -102,11 +140,13 @@
  flex-direction: row;
  align-items: center;
  padding: 0.5rem;
- margin:  0 2rem;
+ /* margin:  0 2rem; */
  font-size: 1.5rem;
  color: var(--gold-text-color); 
  background-color: transparent;
  text-decoration: none;
+
+ /* width: 196px; */
 }
 .header_user_icon {
   font-size: 3rem;
@@ -120,12 +160,24 @@
 
 .header_user_name {
   padding: 0 0.5rem;
+  text-wrap: nowrap;
 }
-.user_dropdown_modal{
+@media all and (max-width: 991.98px) {
+  .header_user_name {
+    display: none;
+  }
+}
+
+.user_dropdown_modal, .category_dropdown_modal {
   width: 13rem !important;
-    position: absolute;
-    right: 3.5rem;
-    top: 3rem;
+  position: absolute;
+  top: 4rem;
+}
+.user_dropdown_modal {
+  right: 4.75rem;
+}
+.category_dropdown_modal{
+  right: 14rem;
 }
 
 
@@ -178,7 +230,7 @@
     z-index: 205;
   }
   
-   @media all and (max-width: 991.98px) {
+   /* @media all and (max-width: 991.98px) {
     .header_features{
       justify-content: flex-end;
     }
@@ -199,7 +251,7 @@
     }
     .dropdown-menu{
       /* top: 35px; */
-      text-align: center;
+      /* text-align: center;
       border: 0;
     }
     .collapsable_items {
@@ -212,4 +264,4 @@
       font-size: 1rem !important;
     }
   
-  }
+  } */

@@ -1,37 +1,37 @@
 #App {
   /* text-align: center; */
-  display:flex;
   width: 100vw;
-  justify-content: center;
+  /* height: 10rem; */
   min-width: 390px;
+  display:flex;
+  justify-content: center;
 
+  
+  border: 1px red solid;
   position: relative;
   font-family: fangsong;
   background: url("http://127.0.0.1:8001/contentBg.jpg") center no-repeat;
-    background-size: cover;
+  background-size: cover;
 }
 
 :root{
   --body-width: 1080px;
-  /* --bs-tertiary-bg-rgb: 245, 237, 207; */
-  /* --bs-body-bg: rgba(242,241,237); */
-  --bs-body-bg: white;
+  /* --bs-body-bg: white; */
 
 
   /* --single_wine_details_width: calc(var(--single_wine_width) - var(--single_wine_img_width)); */
   --header_text_color: black;
   --header_height: 6rem;
 
-  --cartitem_img_width: 100px;
+  /* --cartitem_img_width: 100px;
   --cart_summary_width: 450px;
-  --cart_summary_right: calc((100vw - 1536px) / 2);
+  --cart_summary_right: calc((100vw - 1536px) / 2); */
   /* --cart_summary_top: 6rem/ */
 
   --hLink: 'http://127.0.0.1:8001';
   /* --gold-text-color: rgb(194, 159, 106); */
   --gold-text-color: rgb(191, 183, 160);
   --gold-text-color-hover: rgb(138, 114, 77);
-  /* --dark-brown-title: rgb(104, 95, 81); */
   --dark-brown-color: rgb(59 45 30);
   /* --oblong-button */
   --oblong-button-border-radius: 25px;
@@ -40,42 +40,19 @@
   --oblong-button-hover-box-shadow: 0 0 5px black !important;
 } 
 
-@media all and  (max-width: 1080.98px) {
+@media all and  (max-width: 1079.98px) {
   :root{
     --body-width: 100vw;
     
   }
 }
-@media all and  (max-width: 389.98px) {
+@media all and  (max-width: 739.98px) {
   :root{
-    --body-width: 390px;
+    --body-width: 100vw;
     /* --single_wine_details_width: calc( 100vw - var(--single_wine_margin) - var(--single_wine_img_width)) */
   }
 }
-@media all and  (max-width: 991.98px) {
-  :root {
-    --header_padding: 0.5rem;
-    
-  }
-}
-@media all and  (max-width: 1199.98px) {
-  :root {
-    
-    --cart_summary_width: 250px;
-  }
-}
 
-@media all and  (max-width: 767.98px) {
-  :root{
-    /* width: calc(358px * 250 / 640) */
-    --single_wine_img_width: 140px;
-    --single_wine_img_pos: -100px;
-    --singlewine_title_font_size: 35px;
-    --cart_summary_width: 90vw;
-    --cart_summary_right: 5vw;
- 
-  }
-}
 
 .appbody {
   position: relative; 
@@ -88,8 +65,8 @@
 
 }
 .app_width{
-  min-width: 390px;
-  max-width: 1536px;
+  /* min-width: 390px;
+  max-width: 1536px; */
   width: var(--body_width);
 
 }

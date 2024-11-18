@@ -5,7 +5,6 @@ import {getMenuitemTitleById, triggerCustomizeModal, getMilkById} from '../menui
 import {resetCartBanner} from './cartSlice'
 import {USDollar} from '../../app/global'
 import CartModalItemRemove from './CartModalItemRemove'
-import CustomizeContainer from '../customise/CustomizeContainer'
 
 const CartModalItem = ({cartitem, idx, setCartShow}) =>{
     console.log(cartitem)

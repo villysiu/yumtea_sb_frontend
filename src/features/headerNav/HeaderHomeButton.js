@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {homeLink} from '../../app/global.js'
 const HeaderHomeButton = ({current, setCurrent}) =>{
+    const location = useLocation()
     return(
         <Link to={`${homeLink}/`} 
-            className={current === "home" ? "header_home_button active" : "header_home_button"}
-            onClick={()=>setCurrent("home")}
+            className={`header_buttons ${location.pathname === '/' ? 'active' : ""}`}
         >
             Home
-        </Link>   
+        </Link>  
     )
 }
 export default HeaderHomeButton

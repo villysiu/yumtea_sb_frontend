@@ -14,7 +14,7 @@ import { useSelector} from 'react-redux'
 import {getMenuitemById} from '../menuitem/menuitemSlice'
 
 const CustomizeContainer = ({cartitemPk, itemId, itemTitle, itemTemp, itemSize, itemMilkId,itemSweet, itemPrice, itemQty, setShow, task}) =>{
-    console.log(itemId)
+    console.log("Am I here in container????")
     const menuitem = useSelector(state=>getMenuitemById(state, itemId))
 
     const [price, setPrice] = useState(itemPrice)

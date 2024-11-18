@@ -1,12 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {homeLink} from '../../app/global.js'
-const HeaderVisitButton = ({current, setCurrent}) =>{
+
+const HeaderVisitButton = () =>{
+    const location = useLocation()
+
+            // else if(location.pathname === '/collection')
+            //     setCurrent("collection")
+
     return(
         <Link to={`${homeLink}/visit-taste`} 
-            className={current === "visit-taste" ? "header_home_button active" : "header_home_button"}
-            onClick={()=>setCurrent("visit-taste")}
+            className={`header_buttons ${location.pathname === '/visit-taste' ? 'active' : ""}`}
         >
-            Visit & Taste
+            Visit
         </Link>   
     )
 }

@@ -29,11 +29,12 @@ function App() {
     setShow(false)
     dispatch(triggerCustomizeModal(null))
   }
+  console.log(window.innerWidth)
   return (
       <>
         {
             show && 
-             <Modal show={show} onHide={handleHide}   >
+             <Modal show={show} onHide={handleHide} size="lg"  >
                 <CustomizeModal handleHide={handleHide} />                
             </Modal>
            
@@ -50,7 +51,7 @@ function App() {
                 <Outlet />
               
               </div>
-              <Footer />
+              {/* <Footer /> */}
           </div>
 
           

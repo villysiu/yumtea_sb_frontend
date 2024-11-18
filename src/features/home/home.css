@@ -6,17 +6,7 @@
     -webkit-filter: drop-shadow(1px 1px 4px black);
 
 }
-#yumtea_logo {
-    width: 100%;
-    height: 100%;
-    display:inline-block;
-    background-color: var(--gold-text-color);
-    -webkit-mask:url("http://127.0.0.1:8001/yumtea_logo.png");
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
 
-}
 
 /* Enter page  */
 #home_bg {

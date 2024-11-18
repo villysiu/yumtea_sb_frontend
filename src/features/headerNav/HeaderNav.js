@@ -24,7 +24,7 @@ const HeaderNav = () =>{
     }, [current, location])
    
     return (
-        <div id="headernav_wrapper">
+        <div class="headernav_wrapper">
 
             <HeaderHomeButton current={current} setCurrent={setCurrent} />
             <HeaderVisitButton current={current} setCurrent={setCurrent} />

@@ -35,17 +35,20 @@ const UserButton = () =>{
     
     const UserButtonHelper = () =>{
         return (
+            <>
+            {
+                show && <UserDropdown />
+            }
             <div className="hello_user" 
                 onMouseEnter={()=>setShow(true)}
                 onMouseLeave={()=>setShow(false)}
                 
             >
-                <div className="d-none d-sm-block pe-2">Hello {current_user.username}</div>
+                <div className="d-none d-sm-block pe-2">Hello ggg {current_user.username}</div>
                 <PersonFill className='header_icon' />
-                {
-                    show && <UserDropdown />
-                }
+               
             </div>
+            </>
         )
     }
     if(current_user.status === 'loading')

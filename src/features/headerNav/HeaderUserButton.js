@@ -19,15 +19,12 @@ const HeaderUserButton =() =>{
                 show && 
                 <Modal show={show} onHide={()=>setShow(false)}  dialogClassName='user_dropdown_modal' >
                     <UserDropdown setShow={setShow} />
-               
-                
-            </Modal>
+                </Modal>
                 
             }
                 <div className="header_user_button" onClick={()=>setShow(!show)}>
                     <PersonCircle className='header_user_icon me-2' /> 
                     <div className='header_user_name'>Hi, {currentUserName}</div>
-                    
                 </div>
             </>
         )

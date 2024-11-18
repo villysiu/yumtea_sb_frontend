@@ -1,3 +1,4 @@
+import './customize.css'
 import {getMenuitemById} from '../menuitem/menuitemSlice'
 import {useSelector} from 'react-redux'
 import CustomizeTemp from "./CustomizeTemp"
