@@ -19,7 +19,7 @@ const CustomizeSugar = ({defaultSugar, sugar, setSugar}) =>{
     return (
         <div className='customize_item not_required'>
             <b>Sweetness</b>
-            <div>Optional</div>
+            <div>Optional, default choice - No sugar</div>
             <Form className='customize_item_choices'>
             {
                 sugarChoices.map(sgr=> {

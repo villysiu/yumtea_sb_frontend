@@ -23,19 +23,20 @@ const AddCartButton = ({data, handleHide}) => {
         handleHide() 
     }
 
-    if(!data.size || !data.temperature){
+    if(!data.size || data.temperature === "FREE"){
         return (
-            <div>
+            <>
                 <Button className='addtocart_button' disabled>
-                    Make Required Choices  {USDollar.format(data.quantity * data.menuitem.price)}
+                    Make Required Choices  {USDollar.format(data.quantity *
+                    (data.menuitem.price + data.milk.price + (data.size === null ? 0 : data.size.price)))}
                 </Button>
-        </div>
+            </>
         )
     }
     return(
         <>
             <Button className='addtocart_button' onClick={handleClick} >
-                Add to Cart {USDollar.format(data.quantity * (data.menuitem.price + data.size.price))}
+                Add to Cart {USDollar.format(data.quantity * (data.menuitem.price + data.size.price + data.milk.price))}
             </Button>
         </>
 

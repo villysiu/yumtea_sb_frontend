@@ -259,7 +259,7 @@ export const getMenuitemTitleById = (state, id) =>{
     return item===undefined ? "" : item.title
 }
 export const getMilks = (state) =>{
-    return state.menuitem.milk.array
+    return state.menuitem.milk.array.filter(m => m.title !== "NA")
 }
 
 export const getMilkById = (state, id) =>{

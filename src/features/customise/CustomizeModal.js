@@ -12,6 +12,7 @@ import AddCartButton from './AddCartButton'
 import { useState } from "react"
 import { Modal } from 'react-bootstrap'
 import  {homeLink} from '../../app/global'
+import menuitem from "../menuitem/Menuitem";
 
 const CustomizeModal = ({handleHide}) =>{
     const itemToCustomize = useSelector(state=>state.menuitem.customize.itemToCustomize)
@@ -27,7 +28,7 @@ const CustomizeModal = ({handleHide}) =>{
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
 
     const [size, setSize] =useState(itemToCustomize.size)
-    // const [milk, setMilk] = useState(itemToCustomize.milk)
+    const [milk, setMilk] = useState(itemToCustomize.milk)
     const [quantity, setQuantity] = useState(1)
     const [sugar, setSugar] = useState(itemToCustomize.sugar)
 
@@ -37,7 +38,7 @@ const CustomizeModal = ({handleHide}) =>{
         'temperature': temperature,
         'sugar': sugar,
         'size': size,
-        // 'milk': milk
+        'milk': milk
     }
 
     return (
@@ -55,7 +56,7 @@ const CustomizeModal = ({handleHide}) =>{
                 
                 <CustomizeTemp defaultTemperature={itemToCustomize.menuitem.temperature} temperature={temperature} setTemperature={setTemperature} />
                 <CustomizeSize size={size} setSize={setSize} />
-                {/*<CustomizeMilk menuitem={menuitem} milkId={milkId} setMilkId={setMilkId} setPrice={setPrice} />*/}
+                <CustomizeMilk defaultMilk={itemToCustomize.menuitem.milk} milk={milk} setMilk={setMilk} />
                 <CustomizeSugar defaultSugar={itemToCustomize.menuitem.sugar} sugar={sugar} setSugar={setSugar} />
             </Modal.Body>
             <Modal.Footer className='customize_footer'>
