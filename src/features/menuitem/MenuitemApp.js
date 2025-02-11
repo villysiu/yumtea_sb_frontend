@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { fetchMenuitems, fetchMilks, fetchCategories } from "./menuitemSlice"
+import {fetchMenuitems, fetchMilks, fetchCategories, fetchSizes} from "./menuitemSlice"
 // import FullSpinner from "../headerNav/FullSpinner"
 
 
@@ -11,6 +11,7 @@ const MenuitemApp = ({setSpinner}) =>{
     let menuitems_status = useSelector(state => state.menuitem.menuitems.status)
     let milk_status = useSelector(state => state.menuitem.milk.status)
     let category_status = useSelector(state => state.menuitem.category.status)
+    let size_status = useSelector(state => state.menuitem.size.status)
     
     console.log("menuitem: " + menuitems_status);
     console.log("milk: " + milk_status);
@@ -19,15 +20,19 @@ const MenuitemApp = ({setSpinner}) =>{
     useEffect(()=>{
         if(menuitems_status==='idle'){
             dispatch(fetchMenuitems())
-            setSpinner(true)
+            // setSpinner(true)
         }
         if(milk_status === 'idle'){
             dispatch(fetchMilks())
-            setSpinner(true)
+            // setSpinner(true)
         }
         if(category_status==='idle'){
             dispatch(fetchCategories())
-            setSpinner(true)
+            // setSpinner(true)
+        }
+        if(size_status === 'idle'){
+            dispatch(fetchSizes());
+            // setSpinner(true);
         }
         if(menuitems_status==='succeeded' && milk_status==='succeeded' && category_status==='succeeded'){
             setSpinner(false)

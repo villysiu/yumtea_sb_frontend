@@ -78,41 +78,29 @@ export const fetchMilks=createAsyncThunk(
         }
     }
 )
-// export const fetchMenuitemsByCategory=createAsyncThunk(
-//     'menuitem/fetchMenuitemsByCategory',
-//     async (id) => {
-//         try {
-//             const response=await fetch(`${apiLink}/api/menuitem_categories?category_id=${id}`, {
-//                 method: "GET",
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     'accept': 'application/json'
-//                 }
-//             })
-//             if(!response.ok) {
-//                 throw new Error(`${response.status} ${response.statusText}`)
-//             }
-//             const data=await response.json()
-//             // {
-//             //     "pk": 4,
-//             //     "category_id": 1,
-//             //     "menuitem_id": 2,
-//             //     "menuitem": {
-//             //         "pk": 2,
-//             //         "title": "Jasmine Milk Tea",
-//             //         "price": 5.0,
-//             //         "description": "Jasmine Milk Tea",
-//             //         "inventory": 7,
-//             //         "milk_id": 2
-//             //     }
-//             // },
-//             return {items: data.map(item=>item.menuitem), id: id}
-//         } 
-//         catch(error){
-//             return Promise.reject(error);
-//         }
-//     }
-// )
+export const fetchSizes=createAsyncThunk(
+    'menuitem/fetchSizes',
+    async () => {
+        try {
+            const response=await fetch(`${apiLink}/sizes`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json'
+                }
+            })
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            const data=await response.json()
+            return data
+        }
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
+
 
 const menuitemSlice=createSlice({
     name: 'menuitem',
@@ -126,6 +114,11 @@ const menuitemSlice=createSlice({
             array: [],
             status: 'idle',
              
+        },
+        size: {
+            array: [],
+            status: 'idle',
+
         },
         menuitems: {
             array: [],
@@ -171,7 +164,7 @@ const menuitemSlice=createSlice({
             state.category.status = 'loading'
         })
         .addCase(fetchCategories.fulfilled, (state, action) => {
-        
+
             state.category.status = 'succeeded'
             state.category.array = action.payload
         })
@@ -182,15 +175,15 @@ const menuitemSlice=createSlice({
             state.menuitems.status = 'loading'
         })
         .addCase(fetchMenuitems.fulfilled, (state, action) => {
-           
+
             state.menuitems.status = 'succeeded'
             state.menuitems.array = action.payload
         })
         .addCase(fetchMenuitems.rejected, (state, action) => {
-            
+
             state.menuitems.status = 'failed'
         })
-        
+
 
         .addCase(fetchMilks.pending, (state, action) => {
             state.milk.status = 'loading'
@@ -202,6 +195,17 @@ const menuitemSlice=createSlice({
         .addCase(fetchMilks.rejected, (state, action) => {
             state.milk.status = 'failed'
         })
+
+          .addCase(fetchSizes.pending, (state, action) => {
+              state.size.status = 'loading'
+          })
+          .addCase(fetchSizes.fulfilled, (state, action) => {
+              state.size.status = 'succeeded'
+              state.size.array = action.payload
+          })
+          .addCase(fetchSizes.rejected, (state, action) => {
+              state.size.status = 'failed'
+          })
        
     }
 })
@@ -221,10 +225,15 @@ export const getMenuitemTitleById = (state, id) =>{
 export const getMilks = (state) =>{
     return state.menuitem.milk.array
 }
+
 export const getMilkById = (state, id) =>{
     const milk = state.menuitem.milk.array.find(milk => milk.id === id)
     return milk === undefined? "No Milk" : milk.title
 }
+export const getSizes = (state) =>{
+    return state.menuitem.size.array
+}
+
 export const getCategoryById = (state, id) => {
     let category = state.menuitem.category.array.find(cat=>cat.pk === id)
     return category === undefined ? "" : category.title

@@ -2,6 +2,7 @@ import {Button} from 'react-bootstrap'
 import {USDollar} from '../../app/global'
 import {useDispatch, useSelector} from 'react-redux'
 import { increment, addItemToCart } from '../cart/cartSlice'
+import menuitem from "../menuitem/Menuitem";
 
 const AddCartButton = ({data, handleHide}) => {
     console.log(data)
@@ -9,6 +10,7 @@ const AddCartButton = ({data, handleHide}) => {
     const dispatch = useDispatch()
     const current_user_status = useSelector(state=>state.user.current_user.status)
 
+    // const price = data.menuitem.price + data.size.price
     const handleClick = (e) =>{
         if(current_user_status !== 'succeeded'){
             console.log("add to local temp cart ")
@@ -25,7 +27,7 @@ const AddCartButton = ({data, handleHide}) => {
         return (
             <div>
                 <Button className='addtocart_button' disabled>
-                    Make Required Choices  {USDollar.format(data.quantity * data.price)}
+                    Make Required Choices  {USDollar.format(data.quantity * data.menuitem.price)}
                 </Button>
         </div>
         )
@@ -33,7 +35,7 @@ const AddCartButton = ({data, handleHide}) => {
     return(
         <>
             <Button className='addtocart_button' onClick={handleClick} >
-                Add to Cart {USDollar.format(data.quantity * data.price)}
+                Add to Cart {USDollar.format(data.quantity * (data.menuitem.price + data.size.price))}
             </Button>
         </>
 

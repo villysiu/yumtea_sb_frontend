@@ -22,40 +22,40 @@ const CustomizeModal = ({handleHide}) =>{
     // console.log(task)
 //item data sent from menu and order history is menutitem_pk 
 //item data sent from shopping cart is menuitem_id instead of menutitem_pk 
-    const menuitem = useSelector(state=>getMenuitemById(state, itemToCustomize.menuitemId))
+//     const menuitem = useSelector(state=>getMenuitemById(state, itemToCustomize.menuitemId))
 
     const [price, setPrice] = useState(itemToCustomize.price)
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
 
-    // const [size, setSize] =useState(itemToCustomize.size)
-    // const [milkId, setMilkId] = useState(itemToCustomize.milk_pk || itemToCustomize.milk_id)
+    const [size, setSize] =useState(itemToCustomize.size)
+    // const [milk, setMilk] = useState(itemToCustomize.milk)
     const [quantity, setQuantity] = useState(1)
     // const [sugar, setSugar] = useState(itemToCustomize.sugar)
 
     const data = {
-        'menuitemId': menuitem.id,
-        'price': price,
+        'menuitem': itemToCustomize.menuitem,
         'quantity': quantity,
-        'temperature': temperature
+        'temperature': temperature,
         // 'sweetness': sweetness,
-        // 'size': size,
-        // 'milk_pk': milkId
+        'size': size,
+        // 'milk': milk
     }
+
     return (
         <>
             <Modal.Header className='customize_header' closeButton>
-                <Modal.Title>Customize {menuitem.title} new </Modal.Title>
+                <Modal.Title>Customize {itemToCustomize.menuitem.title} new </Modal.Title>
             </Modal.Header>
             <Modal.Body className='customize_list'>
             {
-                menuitem.image_path &&
+                itemToCustomize.menuitem.image_path &&
                 <div className='customize_img_wrapper'>
-                    <img src={`${homeLink}/menuitem/${menuitem.image_path}`} className="customize_img" alt={menuitem.title}></img>  
+                    <img src={`${homeLink}/menuitem/${itemToCustomize.menuitem.image_path}`} className="customize_img" alt={itemToCustomize.menuitem.title}></img>
                 </div>
             }
                 
-                <CustomizeTemp defaultTemperature={menuitem.temperature} temperature={temperature} setTemperature={setTemperature} />
-                <CustomizeSize size={size} setSize={setSize} setPrice={setPrice} />
+                <CustomizeTemp defaultTemperature={itemToCustomize.menuitem.temperature} temperature={temperature} setTemperature={setTemperature} />
+                <CustomizeSize size={size} setSize={setSize} />
                 {/*<CustomizeMilk menuitem={menuitem} milkId={milkId} setMilkId={setMilkId} setPrice={setPrice} />*/}
                 {/*<CustomizeSweet sweetness={sweetness} setSweetness={setSweetness} />*/}
             </Modal.Body>
