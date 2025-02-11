@@ -47,8 +47,7 @@
   width: 100%;
   /* height: 100vh; */
   height: calc(100vh - var(--header_height));
-  background: url("http://127.0.0.1:8001/pouring_tea.jpg") no-repeat ;  
-  background-position: left; 
+  background: url("http://127.0.0.1:8001/homepage/pouring_tea.jpg") no-repeat left;
   background-size: cover;
 
 
@@ -111,24 +110,43 @@ div.slide-left p {
   height: 500px;
   object-fit: cover;
 }
-.homerow1_content{
-  margin: 3rem;
-  margin-top: 0;
+/*.homepage_content{*/
+/*  margin: 3rem;*/
+/*  margin-top: 0;*/
+/*}*/
+/* INGREDIENTS */
+.ingredients_col{
+  position: relative;
+
+  text-align: left;
+  font-size: 2rem;
+  color: white;
+  font-family: fangsong;
+
 }
-.homerow3 {
+.ingredients_text{
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  padding-right: 2rem;
+}
+.ingredients_img {
+  width: 100%;
+}
+
+.homepage_section {
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
     align-items: center;
-    
-    
+
 }
-.homerow3_text {
+.homepage_subtitle {
   font-size: 4rem;
     color: black;
     font-family: fangsong;
 }
-.homerow3_text:after, .homerow3_text:before {
+.homepage_subtitle:after, .homepage_subtitle:before {
   margin-left: 35px;
   margin-right: 35px;
   content: '';
@@ -140,51 +158,51 @@ div.slide-left p {
   transform: translateY(-1rem);
     
 }
-.homerow3_row {
+.homepage_row {
   --row3-margin: 2rem;
   --row3-width: calc(var(--body-width) - 2 * var(--row3-margin));
   margin: var(--row3-margin);
   width: var(--row3-width);
   display: flex;
 }
-.homerow3_col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: calc(var(--row3-width) / 4);
-}
-.homerow3_img {
-  /* --img-w: 275px;
-  --img-h: 445px; */
-  height: calc(var(--row3-width) * 0.225 * 445 / 275);
-  width: calc(var(--row3-width) * 0.225);
-  outline: 1px solid white;
-  outline-offset: -0.5rem;
+/*.homerow3_col {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  width: calc(var(--row3-width) / 4);*/
+/*}*/
+/*.homerow3_img {*/
+/*  !* --img-w: 275px;*/
+/*  --img-h: 445px; *!*/
+/*  height: calc(var(--row3-width) * 0.225 * 445 / 275);*/
+/*  width: calc(var(--row3-width) * 0.225);*/
+/*  outline: 1px solid white;*/
+/*  outline-offset: -0.5rem;*/
 
-  font-size: 2rem;
-    color: white;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 4rem;
-    font-family: fangsong;
+/*  font-size: 2rem;*/
+/*    color: white;*/
+/*    padding-left: 2rem;*/
+/*    padding-right: 2rem;*/
+/*    padding-top: 4rem;*/
+/*    font-family: fangsong;*/
 
-    background-size: contain;
-}
-.brown01 {
-  background: url('http://127.0.0.1:8001/brown_01.jpg') no-repeat center;
-  
-}
-.brown02 {
-  background: url('http://127.0.0.1:8001/brown_02.jpg') no-repeat center;
-  
-}
-.brown03 {
-  background: url('http://127.0.0.1:8001/brown_03.jpg') no-repeat center;
-  
-}
-.brown04 {
-  background: url('http://127.0.0.1:8001/brown_04.jpg') no-repeat center;
-}
+/*    background-size: contain;*/
+/*}*/
+/*.brown01 {*/
+/*  background: url('http://127.0.0.1:8001/homepage/brown_01.jpg') no-repeat center;*/
+/*  */
+/*}*/
+/*.brown02 {*/
+/*  background: url('http://127.0.0.1:8001/homepage/brown_02.jpg') no-repeat center;*/
+/*  */
+/*}*/
+/*.brown03 {*/
+/*  background: url('http://127.0.0.1:8001/homepage/brown_03.jpg') no-repeat center;*/
+/*  */
+/*}*/
+/*.brown04 {*/
+/*  background: url('http://127.0.0.1:8001/homepage/brown_04.jpg') no-repeat center;*/
+/*}*/
 
 
 .footer {

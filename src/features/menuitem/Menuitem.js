@@ -6,19 +6,16 @@ import {useSelector, useDispatch} from 'react-redux'
 import {triggerCustomizeModal} from './menuitemSlice'
 
 const Menuitem = ({menuitem}) =>{
-    const [show, setShow] = useState(false);
-    const dispatch = useDispatch()
 
-    // const menuitemClicked = useSelector(state=>state.menuitem.menuitemButton.clicked)
-    // const cartitem_tobeUpdated = useSelector(state=>state.menuitem.menuitemButton.cartitem)
+    const dispatch = useDispatch()
 
     const handleClick = () => {
         dispatch(triggerCustomizeModal(
             {
-                menuitem_pk: menuitem.pk,
-                milk_pk: menuitem.milk_id,
+                menuitemId: menuitem.id,
+                milkId: menuitem.milk.id,
                 temperature: menuitem.temperature,
-                sweetness: 0,
+                sugar: menuitem.sugar,
                 size: null,
                 price: menuitem.price,
                 quantity: 1
@@ -38,21 +35,16 @@ const Menuitem = ({menuitem}) =>{
                 <div>{USDollar.format(menuitem.price)}</div>
             </div>
             {
-                menuitem.image_path !== null &&  
+                menuitem.imageUrl !== null &&
           
                 <div className="menuitem_img_wrapper">
-
-                    <img src={`${homeLink}/menuitem/${menuitem.image_path}`} className="menuitem_img" alt={menuitem.title}></img>  
+                    <img src={`${homeLink}/menuitem/${menuitem.imageUrl}`} className="menuitem_img" alt={menuitem.title}></img>
                 </div> 
             }
             <div className='menuitem_plus_circle'>
                 +
             </div>     
-            
 
-    
-
-           
 
         </div>
         </>

@@ -9,40 +9,37 @@ const CategoryDropdown = ({setShow}) =>{
     const categories = useSelector(state=>state.menuitem.category.array)
 
     return (
-        
-            <>
-            <Link key='bestseller' to={`${homeLink}/collection`} className=' header_drinks_link' 
-            onClick={()=>setShow(false)}>
-                <div className='header_drinks_box top'> 
+
+        <>
+            <Link key='bestseller' to={`${homeLink}/collection`} className=' header_drinks_link'
+                  onClick={() => setShow(false)}>
+                <div className='header_drinks_box top'>
                     Best Sellers
-                </div> 
+                </div>
             </Link>
             {
-                categories.map((category, idx)=>{    
-                    console.log(idx)
+                categories.map((category) => {
+
                     return (
-                        <Link key={category.slug} to={`${homeLink}/collection#${category.slug}`} className=' header_drinks_link' 
-                        onClick={()=>setShow(false)}>
-                            <div className={`header_drinks_box ${categories.length-1===idx ? 'bottom' : ''}`}> 
+                        <Link key={category.id} to={`${homeLink}/collection#${category.id}`}
+                              className=' header_drinks_link'
+                              onClick={() => setShow(false)}>
+                            <div className="header_drinks_box">
                                 {category.title}
-                            </div> 
+                            </div>
                         </Link>
                     )
 
                 })
-                
-          
-        
             }
-            </>
+            <div className='header_drinks_box bottom'>
+
+            </div>
+        </>
 
 
-        
     )
-    
-   
-        
-                        
-                    
+
+
 }
 export default CategoryDropdown

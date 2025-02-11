@@ -1,7 +1,7 @@
 const BestSellers = () =>{
     return(
         <div className='bestsellers_wrapper'>
-            Coming soon
+            Best Sellers
         </div>
     )
 }

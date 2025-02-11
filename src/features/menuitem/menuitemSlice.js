@@ -6,7 +6,7 @@ export const fetchCategories=createAsyncThunk(
     async () => {
         try {
             // const response=await fetch(`${apiLink}/api/categories`, {
-            const response=await fetch(`http://127.0.0.1:8000/api/categories`, {
+            const response=await fetch(`${apiLink}/categories`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -19,8 +19,8 @@ export const fetchCategories=createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            // console.log(data)
-            // {"pk": 1, "title": "Red Wine", "slug": "red"}
+            console.log(data)
+
             
             return data
             
@@ -34,7 +34,7 @@ export const fetchMenuitems=createAsyncThunk(
     'menuitem/fetchMenuitems',
     async () => {
         try {
-            const response=await fetch(`${apiLink}/api/menuitems`, {
+            const response=await fetch(`${apiLink}/menuitems`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export const fetchMenuitems=createAsyncThunk(
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            
+            console.log(data)
             return data
         } 
         catch(error){
@@ -60,7 +60,7 @@ export const fetchMilks=createAsyncThunk(
     'menuitem/fetchMilks',
     async () => {
         try {
-            const response=await fetch(`${apiLink}/api/milks`, {
+            const response=await fetch(`${apiLink}/milks`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -138,7 +138,7 @@ const menuitemSlice=createSlice({
         customize: {
             clicked: false,
             itemToCustomize: null,
-            task: "add"
+            task: "add" //add or update
         }
 
 
@@ -212,7 +212,7 @@ export default menuitemSlice.reducer
 
 
 export const getMenuitemById = (state, id) =>{
-    return state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
+    return state.menuitem.menuitems.array.find(menuitem => menuitem.id === id)
 }
 export const getMenuitemTitleById = (state, id) =>{
     const item =  state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
@@ -231,29 +231,35 @@ export const getCategoryById = (state, id) => {
 }
 export const getCategories = (state) =>{
     // console.log(state.menuitem.menuitems.array)
-    let categories = state.menuitem.menuitems.array.map(menuitem=>menuitem.category.title)
-    return [...new Set(categories)];
+    return  state.menuitem.category.array
+    // return [...new Set(categories)];
     
 }
-const selectMenuitems = (state) => state.menuitem.menuitems.array;
-const selectCategoryId = (state, category_id) => category_id;
+export const getMenuitemsByCategoryId = (state, categoryId) =>{
+    // console.log(categoryId)
+    // let arr = []
+    // for(let item of state.menuitem.menuitems.array){
+    //     console.log(item)
+    //     if(item.category.id === categoryId)
+    //         arr.push(item)
+    // }
+    return state.menuitem.menuitems.array.filter(menuitem => menuitem.category.id === categoryId)
+   //  console.log(arrs.length)
 
-export const getMenuitems = createSelector(
-    [selectMenuitems, selectCategoryId],
-    (menuitems, categoryId) => {
-        
-        if(categoryId === 0)
-            return menuitems
-        
-        return menuitems.filter(item=>item.category_id === categoryId)
-        
-    }
-)
+}
+// const selectMenuitems = (state) => state.menuitem.menuitems.array;
+// const selectCategoryId = (state, category_id) => category_id;
+//
+// export const getMenuitems = createSelector(
+//     [selectMenuitems, selectCategoryId],
+//     (menuitems, categoryId) => {
+//
+//         if(categoryId === 0)
+//             return menuitems
+//
+//         return menuitems.filter(item=>item.category_id === categoryId)
+//
+//     }
+// )
     
 
-// export const getSingleMenuitem = (menuitem_array, menuitem_id) => {
-//     console.log('in getsingle ite,')
-    
-//     return menuitem_array.find(item=>item.pk === menuitem_id)
-
-// }

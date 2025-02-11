@@ -12,7 +12,7 @@ import { Outlet } from 'react-router-dom';
 const EnterPage = () =>{
     console.log("in Enter Page")
 
-    const [show, setShow] = useState(true);
+    // const [show, setShow] = useState(true);
     const [spinner, setSpinner] = useState(false);
 
     return(
@@ -22,8 +22,7 @@ const EnterPage = () =>{
             <UserApp />
             <CartApp />
             <ResetApp />
-
-            <Outlet />
+            {spinner ? <Spinner animation="border" className="spinner"/> : <Outlet /> }
         
             
         </>

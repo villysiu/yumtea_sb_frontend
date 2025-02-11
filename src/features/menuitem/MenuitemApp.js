@@ -12,7 +12,10 @@ const MenuitemApp = ({setSpinner}) =>{
     let milk_status = useSelector(state => state.menuitem.milk.status)
     let category_status = useSelector(state => state.menuitem.category.status)
     
-    console.log(menuitems_status)
+    console.log("menuitem: " + menuitems_status);
+    console.log("milk: " + milk_status);
+    console.log("category: " + category_status);
+
     useEffect(()=>{
         if(menuitems_status==='idle'){
             dispatch(fetchMenuitems())
@@ -29,20 +32,12 @@ const MenuitemApp = ({setSpinner}) =>{
         if(menuitems_status==='succeeded' && milk_status==='succeeded' && category_status==='succeeded'){
             setSpinner(false)
         }
+        else
+            setSpinner(true)
         
 
         
     }, [dispatch, menuitems_status, milk_status])
 
-
-    // if(menuitems_status === "idle" || milk_status==="idle"){    
-    //     return <Spinner animation="border" className="spinner"/>
-    // }
-    // if(menuitems_status === "loading" || milk_status==="loading"){
-       
-    //     return <Spinner animation="border" className="spinner"/>
-    // }
-
-    return null
 }
 export default MenuitemApp
