@@ -100,7 +100,28 @@ export const fetchSizes=createAsyncThunk(
         }
     }
 )
-
+export const fetchSugars = createAsyncThunk(
+    'menuitem/fetchSugars',
+    async () => {
+        try {
+            const response=await fetch(`${apiLink}/sugars`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json'
+                }
+            })
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            const data=await response.json()
+            return data
+        }
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 
 const menuitemSlice=createSlice({
     name: 'menuitem',
@@ -116,6 +137,11 @@ const menuitemSlice=createSlice({
              
         },
         size: {
+            array: [],
+            status: 'idle',
+
+        },
+        sugar: {
             array: [],
             status: 'idle',
 
@@ -206,7 +232,17 @@ const menuitemSlice=createSlice({
           .addCase(fetchSizes.rejected, (state, action) => {
               state.size.status = 'failed'
           })
-       
+
+          .addCase(fetchSugars.pending, (state, action) => {
+              state.sugar.status = 'loading'
+          })
+          .addCase(fetchSugars.fulfilled, (state, action) => {
+              state.sugar.status = 'succeeded'
+              state.sugar.array = action.payload
+          })
+          .addCase(fetchSugars.rejected, (state, action) => {
+              state.sugar.status = 'failed'
+          })
     }
 })
 
@@ -232,6 +268,9 @@ export const getMilkById = (state, id) =>{
 }
 export const getSizes = (state) =>{
     return state.menuitem.size.array
+}
+export const getSugars = (state) =>{
+    return state.menuitem.sugar.array.filter(s=>s!=="NA");
 }
 
 export const getCategoryById = (state, id) => {

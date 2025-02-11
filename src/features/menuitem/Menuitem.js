@@ -13,7 +13,7 @@ const Menuitem = ({menuitem}) =>{
         dispatch(triggerCustomizeModal(
             {
                 menuitem: menuitem,
-                milkId: menuitem.milk.id,
+                // milkId: menuitem.milk.id,
                 temperature: menuitem.temperature,
                 sugar: menuitem.sugar,
                 size: null,

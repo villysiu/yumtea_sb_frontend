@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 import CustomizeTemp from "./CustomizeTemp"
 import CustomizeSize from "./CustomizeSize"
 import CustomizeMilk from "./CustomizeMilk"
-import CustomizeSweet from "./CustomizeSweet"
+import CustomizeSugar from "./CustomizeSugar"
 import AddtocartButton from "./AddtocartButton"
 import UpdateCartButton from './UpdateCartButton'
 import UpdateQuantity from "./UpdateQuantity"
@@ -24,19 +24,18 @@ const CustomizeModal = ({handleHide}) =>{
 //item data sent from shopping cart is menuitem_id instead of menutitem_pk 
 //     const menuitem = useSelector(state=>getMenuitemById(state, itemToCustomize.menuitemId))
 
-    const [price, setPrice] = useState(itemToCustomize.price)
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
 
     const [size, setSize] =useState(itemToCustomize.size)
     // const [milk, setMilk] = useState(itemToCustomize.milk)
     const [quantity, setQuantity] = useState(1)
-    // const [sugar, setSugar] = useState(itemToCustomize.sugar)
+    const [sugar, setSugar] = useState(itemToCustomize.sugar)
 
     const data = {
         'menuitem': itemToCustomize.menuitem,
         'quantity': quantity,
         'temperature': temperature,
-        // 'sweetness': sweetness,
+        'sugar': sugar,
         'size': size,
         // 'milk': milk
     }
@@ -57,7 +56,7 @@ const CustomizeModal = ({handleHide}) =>{
                 <CustomizeTemp defaultTemperature={itemToCustomize.menuitem.temperature} temperature={temperature} setTemperature={setTemperature} />
                 <CustomizeSize size={size} setSize={setSize} />
                 {/*<CustomizeMilk menuitem={menuitem} milkId={milkId} setMilkId={setMilkId} setPrice={setPrice} />*/}
-                {/*<CustomizeSweet sweetness={sweetness} setSweetness={setSweetness} />*/}
+                <CustomizeSugar defaultSugar={itemToCustomize.menuitem.sugar} sugar={sugar} setSugar={setSugar} />
             </Modal.Body>
             <Modal.Footer className='customize_footer'>
                 <UpdateQuantity quantity={quantity} setQuantity={setQuantity} />
