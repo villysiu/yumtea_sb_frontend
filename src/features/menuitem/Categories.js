@@ -9,20 +9,19 @@ const Categories = () =>{
     const categories = useSelector(state=>state.menuitem.category.array)
     // console.log('in Categories')
 
-    useLayoutEffect(() => {
-        if (location.hash) {
-          const element = document.getElementById(location.hash.slice(1));
-          if (element) {
-            element.scrollIntoView();
-          }
-        }
-      }, [location.hash]);
+    // useLayoutEffect(() => {
+    //     if (location.hash) {
+    //       const element = document.getElementById(location.hash.slice(1));
+    //       if (element) {
+    //         element.scrollIntoView();
+    //       }
+    //     }
+    //   }, [location.hash]);
 
     return (
         <>
-
         {
-            categories.map(category=><SingleCategory key={category.slug} category={category} />)
+            categories.map(category=><SingleCategory key={category.id} category={category} />)
         }
         </>
     )

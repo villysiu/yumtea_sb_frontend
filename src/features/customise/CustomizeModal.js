@@ -15,30 +15,31 @@ import  {homeLink} from '../../app/global'
 
 const CustomizeModal = ({handleHide}) =>{
     const itemToCustomize = useSelector(state=>state.menuitem.customize.itemToCustomize)
-    // const task = useSelector(state=>state.menuitem.customize.task)
+    const task = useSelector(state=>state.menuitem.customize.task)
 
-    console.log(itemToCustomize)
-    const task = !itemToCustomize.pk  ? "add" : "update"
-    console.log(task)
+    // console.log(itemToCustomize)
+    // const task = !itemToCustomize.pk  ? "add" : "update"
+    // console.log(task)
 //item data sent from menu and order history is menutitem_pk 
 //item data sent from shopping cart is menuitem_id instead of menutitem_pk 
-    const menuitem = useSelector(state=>getMenuitemById(state, itemToCustomize.menuitem_pk || itemToCustomize.menuitem_id))
+    const menuitem = useSelector(state=>getMenuitemById(state, itemToCustomize.menuitemId))
 
     const [price, setPrice] = useState(itemToCustomize.price)
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
-    const [size, setSize] =useState(itemToCustomize.size)
-    const [milkId, setMilkId] = useState(itemToCustomize.milk_pk || itemToCustomize.milk_id)
+
+    // const [size, setSize] =useState(itemToCustomize.size)
+    // const [milkId, setMilkId] = useState(itemToCustomize.milk_pk || itemToCustomize.milk_id)
     const [quantity, setQuantity] = useState(1)
-    const [sweetness, setSweetness] = useState(itemToCustomize.sweetness)
+    // const [sugar, setSugar] = useState(itemToCustomize.sugar)
 
     const data = {
-        'menuitem_pk': menuitem.pk,
+        'menuitemId': menuitem.id,
         'price': price,
         'quantity': quantity,
-        'temperature': temperature,
-        'sweetness': sweetness,
-        'size': size,
-        'milk_pk': milkId
+        'temperature': temperature
+        // 'sweetness': sweetness,
+        // 'size': size,
+        // 'milk_pk': milkId
     }
     return (
         <>
@@ -53,28 +54,28 @@ const CustomizeModal = ({handleHide}) =>{
                 </div>
             }
                 
-                <CustomizeTemp menuitem={menuitem} temperature={temperature} setTemperature={setTemperature} />
+                <CustomizeTemp defaultTemperature={menuitem.temperature} temperature={temperature} setTemperature={setTemperature} />
                 <CustomizeSize size={size} setSize={setSize} setPrice={setPrice} />
-                <CustomizeMilk menuitem={menuitem} milkId={milkId} setMilkId={setMilkId} setPrice={setPrice} />
-                <CustomizeSweet sweetness={sweetness} setSweetness={setSweetness} />
+                {/*<CustomizeMilk menuitem={menuitem} milkId={milkId} setMilkId={setMilkId} setPrice={setPrice} />*/}
+                {/*<CustomizeSweet sweetness={sweetness} setSweetness={setSweetness} />*/}
             </Modal.Body>
             <Modal.Footer className='customize_footer'>
                 <UpdateQuantity quantity={quantity} setQuantity={setQuantity} />
                
-                {
-                    task === 'add' ?
+                {/*{*/}
+                {/*    task === 'add' ?*/}
                         <AddCartButton 
                             data={data}
                             handleHide={handleHide} 
                         />
-                        :
-                        <UpdateCartButton
-                            data={{...data, pk: itemToCustomize.pk}}
-                            handleHide={handleHide} 
-                        />
-                    
+                {/*        :*/}
+                {/*        <UpdateCartButton*/}
+                {/*            data={{...data, pk: itemToCustomize.pk}}*/}
+                {/*            handleHide={handleHide} */}
+                {/*        />*/}
+                {/*    */}
 
-                }   
+                {/*}   */}
 
                         
         

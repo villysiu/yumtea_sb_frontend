@@ -1,40 +1,40 @@
 import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
-const CustomizeTemp = ({menuitem, temperature, setTemperature}) => {
+const CustomizeTemp = ({defaultTemperature, temperature, setTemperature}) => {
     
-    const tempArr =  ["H", "I"]
+    const tempChoices =  ["Hot", "Iced"]
+
+    if(defaultTemperature !== "FREE")
+        return null;
+
 
     return (
         <div className='customize_item required'>
             <b>Hot Or Iced</b>
-            <div>Required - Choose 1. </div>
+            <div>Required - Choose 1.</div>
             <Form className='customize_item_choices'>
-            {
-                tempArr.map((t, idx)=>{
-                    // console.log(temp, t, t[0], t[0]===temp)
-                    return(
-                        
-                        <Form.Check 
-                        key={idx}
-                        className='customize_item_choice'
-                        onChange={()=>setTemperature(t)} 
-                        inline 
-                        type="radio" 
-                        defaultChecked = {temperature===t}
-                        name="temp" 
-                        label={t==="H"? "Hot" : "Iced"} 
-                        id={`temp-radio-${idx}`}
-                        disabled = {menuitem.temperature !== ""}
-                        />
-                        
-                    )
-                })
-                        
-            }
+                {
+                    tempChoices.map((temp, idx) => {
+                        return (
 
-            </Form>     
-                
-               
+                            <Form.Check
+                                key={idx}
+                                className='customize_item_choice'
+                                onChange={() => setTemperature(temp)}
+                                inline
+                                type="radio"
+                                defaultChecked={temperature === temp}
+                                name="temp"
+                                label={temp}
+                                id={`temp-radio-${idx}`}
+                            />
+
+                        )
+                    })
+
+                }
+
+            </Form>
         </div>
     )
 }
