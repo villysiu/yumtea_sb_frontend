@@ -9,12 +9,13 @@ import CartModalBanner from './CartModalBanner'
 import {useSelector} from 'react-redux'
 
 const CartModal = ({setCartShow}) =>{
-    const cart = useSelector(state=>state.cart.cart.cart_arr)
+    const {carts} = useSelector(state=>state.cart)
 
-    if(cart.length === 0){
+    if(carts.length === 0){
         return <EmptyCart />
     }
 
+    
     return (
         <>
             <div className='cart_modal_header'>
@@ -24,15 +25,15 @@ const CartModal = ({setCartShow}) =>{
             
             <div className='cart_modal_list'>
                 {
-                    cart.map((cartitem, idx)=>{
+                    carts.map((cartitem)=>{
                         return(
-                            <CartModalItem key={idx} cartitem={cartitem} idx={idx} setCartShow={setCartShow} />
+                            <CartModalItem key={cartitem.id} cartitem={cartitem}  setCartShow={setCartShow} />
                         )
                     })
                 }
             </div>
             <div className='cart_modal_footer'>
-                <Subtotal />
+                <Subtotal cartLength = {carts.length} />
                 
                 <CheckoutButton setCartShow={setCartShow}/>
             </div>

@@ -13,7 +13,7 @@ const CartButton =() =>{
 
     // const count = useSelector(state => getItemsCountInCart(state))
     const message = useSelector(state => state.cart.cartBannerMessage)
-    const cart = useSelector(state=>state.cart.cart.cart_arr)
+    const cart = useSelector(state=>state.cart.carts)
 
     const [cartShow, setCartShow] = useState(false);
 

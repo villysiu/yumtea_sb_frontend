@@ -30,17 +30,18 @@ export const fetchCart=createAsyncThunk(
     async (_, thunkAPI) => {
         console.log("fetching cart")
         try {
-            const response=await fetch(`${apiLink}/api/cart`, {
+            const response=await fetch(`${apiLink}/cartsByProjection`, {
                 method: "GET",
-                headers: {
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-                }
+                // headers: {
+                //     "Authorization": `Token ${localStorage.getItem("token")}`,
+                // }
+                credentials: 'include'
             })
 
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            const data=await response.json()        
+            const data=await response.json()
             return data
         } 
         catch(error){
@@ -140,11 +141,8 @@ export const removeItemFromCart = createAsyncThunk(
 const cartSlice=createSlice({
     name: 'cart',
     initialState: {
-        cart: {
-            cart_arr: [],
-            // temp_cart_arr:[],
-            status: 'idle',
-        },
+        carts: [],
+        fetchCartStatus: 'idle',
         temp_cart: [],
         batchAddStatus: 'idle',
         addToCartStatus: 'idle',
@@ -289,18 +287,18 @@ const cartSlice=createSlice({
     extraReducers(builder) {
       builder
         .addCase(fetchCart.pending, (state, action) => {
-            state.cart.status = 'loading'
+            state.fetchCartStatus = 'loading'
         })
         .addCase(fetchCart.fulfilled, (state, action) => {
             console.log('CART FETCHED FROM API')
             console.log(action.payload)
-            state.cart.status = 'succeeded'
-            state.cart.cart_arr = action.payload
+            state.fetchCartStatus = 'succeeded'
+            state.carts = action.payload
             // state.cartBannerMessage = "Cart combined."
 
         })
         .addCase(fetchCart.rejected, (state, action) => {
-            state.cart.status = 'failed'
+            state.fetchCartStatus = 'failed'
         })
         .addCase(addItemToCart.pending, (state, action) => {
             state.addToCartStatus = 'loading'
@@ -312,19 +310,6 @@ const cartSlice=createSlice({
             // state.cart.status = 'succeeded'
             console.log('ITEM ADDED TO API')
             console.log(action.payload)
-            
-            // let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.pk === action.payload.pk)
-            //
-            // if(cartitem === undefined){
-            //     console.log("item not in cart")
-            //     state.cart.cart_arr.push(action.payload)
-            // }
-            // else{
-            //     console.log("item in cart")
-            //     cartitem.quantity = action.payload.quantity
-            //     // cartitem.linetotal = action.payload.linetotal
-            // }
-
             
         })
         .addCase(addItemToCart.rejected, (state, action) => {
@@ -340,7 +325,6 @@ const cartSlice=createSlice({
         })
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
             state.removeStatus = 'succeeded'
-            state.cart.cart_arr = state.cart.cart_arr.filter(cartitem=>cartitem.pk !== action.payload)
             state.cartBannerMessage = "Item removed."
         })
         .addCase(removeItemFromCart.rejected, (state, action) => {
@@ -363,27 +347,6 @@ const cartSlice=createSlice({
             state.cartBannerMessage = 'Item updated.'
             // if returned updated item id is different than init Id, it means the item already existed and is merged. 
             // so we deleted the init id from the cart
-            if(action.payload.updated.pk !== action.payload.initId){
-                state.cart.cart_arr = state.cart.cart_arr.filter(item=>item.pk !== action.payload.initId)
-                // update the quantity in cart state
-                const cartitem = state.cart.cart_arr.find(item=>item.pk === action.payload.updated.pk)
-                cartitem.quantity = action.payload.updated.quantity
-            }
-            else{
-                console.log('update item')
-                //returned item_id === initId,  ----> no dup item
-                //  updated the item
-                let cartitem = state.cart.cart_arr.find(item=>item.pk === action.payload.updated.pk)
-               
-                cartitem.price = action.payload.updated.price
-                cartitem.quantity = action.payload.updated.quantity
-                cartitem.milk_id = action.payload.updated.milk_id
-                cartitem.temperature = action.payload.updated.temperature
-                cartitem.sweetness = action.payload.updated.sweetness
-                cartitem.size = action.payload.updated.size
-
-            }
-            
             
         })
         .addCase(updateItemInCart.rejected, (state, action) => {
@@ -405,12 +368,12 @@ const cartSlice=createSlice({
             state.batchAddStatus = 'failed'
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
-            state.cart.cart_arr = []
-            state.cart.temp_cart = []
-            state.cart.status = 'idle'
+            state.carts = []
+            state.temp_cart = []
+            state.fetchCartstatus = 'idle'
         })
         .addCase(PlaceOrder.fulfilled, (state, action) => {
-            state.cart.cart_arr = []
+            state.carts = null;
             state.temp_cart = []
             // state.cart.status = 'idle'
             
@@ -425,16 +388,9 @@ export default cartSlice.reducer
 export const getSubtotal = (state) =>{
     let subtotal = 0
     // tax = 0
-    for(let cart_item of state.cart.cart.cart_arr){
-        subtotal += cart_item.price * cart_item.quantity
+    for(let item of state.cart.carts){
+        subtotal += item.price * item.quantity;
         
     }
     return subtotal
-}
-export const getItemsCountInCart = (state) =>{
-    let count = 0
-    for(let item of state.cart.cart.cart_arr){
-        count += item.quantity
-    }
-    return count
 }

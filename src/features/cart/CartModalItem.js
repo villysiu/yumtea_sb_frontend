@@ -6,14 +6,39 @@ import {resetCartBanner} from './cartSlice'
 import {USDollar} from '../../app/global'
 import CartModalItemRemove from './CartModalItemRemove'
 
-const CartModalItem = ({cartitem, idx, setCartShow}) =>{
+const CartModalItem = ({cartitem, setCartShow}) =>{
+
     console.log(cartitem)
+    // {
+    // 		"sugar": "SEVENTY_FIVE",
+    // 		"temperature": "HOT",
+    // 		"quantity": 1,
+    // 		"milk": {
+    // 			"title": "Whole Milk",
+    // 			"id": 2
+    // 		},
+    // 		"price": 5.0,
+    // 		"menuitem": {
+    // 			"title": "Chai",
+    // 			"id": 2
+    // 		},
+    // 		"id": 12,
+    // 		"size": {
+    // 			"title": "8oz",
+    // 			"id": 1
+    // 		}
+    // 	},
+    const sugarMap = new Map([
+        ["ZERO", "No"],
+        ["TWENTY_FIVE", "25%"],
+        ["FIFTY", "50%"],
+        ["SEVENTY_FIVE", "75%"],
+        ["HUNDRED", "100%"]
+    ]);
     const cartitemRef = useRef();
     const removeRef = useRef();
 
     const dispatch = useDispatch()
-    const menuitem_title = useSelector(state=>getMenuitemTitleById(state, cartitem.menuitem_id))
-    const milkTitle = useSelector(state=>getMilkById(state, cartitem.milk_id))
 
 
     const handleUpdate=e=>{
@@ -37,15 +62,15 @@ const CartModalItem = ({cartitem, idx, setCartShow}) =>{
     
             <div className='cart_modal_item_header'>
                 <div className='cart_modal_item_qty'>{cartitem.quantity}</div>
-                <div className='cart_modal_item_title' >{menuitem_title}</div>
-                <CartModalItemRemove pk={cartitem.pk} menuitem_title={menuitem_title} ref={removeRef}/>
+                <div className='cart_modal_item_title' >{cartitem.menuitem.title}</div>
+                <CartModalItemRemove pk={cartitem.pk} menuitem_title={cartitem.menuitem.title} ref={removeRef}/>
                 <div className='cart_modal_item_price'>{USDollar.format(cartitem.price * cartitem.quantity)}</div>
             </div>
             <div className='cart_modal_item_details'>
-                {cartitem.size}oz,  
-                {cartitem.temperature==="H"?"Hot": "Iced"}, 
-                {milkTitle}, 
-                {cartitem.sweetness === 0 ? 'No Sugar' : `${cartitem.sweetness}% Sugar`}
+                {cartitem.size.title}
+                , {cartitem.temperature}
+                , {cartitem.milk.title}
+                {cartitem.sugar === "NA" ? null: `, ${sugarMap.get(cartitem.sugar)} Sugar`}
             </div>
 
         </div>

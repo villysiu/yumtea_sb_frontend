@@ -53,7 +53,7 @@
     /* background-position-y: 30% !important; */
     
 .cart_modal {
-    /* width: 13rem !important; */
+     width: 25rem !important;
     position: absolute;
     top: 4rem;
     right: 1rem;

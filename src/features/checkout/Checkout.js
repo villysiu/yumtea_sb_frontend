@@ -20,7 +20,7 @@ const Checkout = () => {
 
     const cart_status = useSelector(state=>state.cart.cart.status)
     const subtotal = useSelector(state => getSubtotal(state))
-    const count = useSelector(state => getItemsCountInCart(state))
+    // const count = useSelector(state => getItemsCountInCart(state))
    
     if(!location.state || location.state.clicked !== 'checkout_button'){
         return (
@@ -31,7 +31,7 @@ const Checkout = () => {
     return(
         <div className='checkout'>
             <div className='checkout_order_summary '>
-                <div onClick={()=>showCartSummary(c=>!c)}>Order Summary</div> {" "}({count} items)
+                {/*<div onClick={()=>showCartSummary(c=>!c)}>Order Summary</div> {" "}({count} items)*/}
             </div>
             {
                 cartSummary && <CartSummary />

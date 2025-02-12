@@ -11,8 +11,8 @@ import LoginButton from './LoginButton'
 const Login = () =>{
 
     let location = useLocation();
-    console.log(location)
-
+    // console.log(location)
+    //
     const login_status = useSelector(state => state.user.login_status)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
