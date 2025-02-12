@@ -258,43 +258,45 @@ export const getMenuitemTitleById = (state, id) =>{
     const item =  state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
     return item===undefined ? "" : item.title
 }
-export const getMilks = (state) =>{
-    return state.menuitem.milk.array.filter(m => m.title !== "NA")
-}
+const selectMilks = (state) => state.menuitem.milk.array;
+export const getMilks = createSelector(
+    [selectMilks],
+    (milks) => {
+        return milks.filter(m => m.title !== "NA")
+    }
+)
 
-export const getMilkById = (state, id) =>{
-    const milk = state.menuitem.milk.array.find(milk => milk.id === id)
-    return milk === undefined? "No Milk" : milk.title
-}
 export const getSizes = (state) =>{
     return state.menuitem.size.array
 }
-export const getSugars = (state) =>{
-    return state.menuitem.sugar.array.filter(s=>s!=="NA");
-}
+const selectSugars = (state) => state.menuitem.sugar.array;
+export const getSugars = createSelector(
+    [selectSugars],
+    (sugars) => {
+        return sugars.filter(s => s !== "NA")
 
-export const getCategoryById = (state, id) => {
-    let category = state.menuitem.category.array.find(cat=>cat.pk === id)
-    return category === undefined ? "" : category.title
-}
+    }
+)
+
+// export const getCategoryById = (state, id) => {
+//     let category = state.menuitem.category.array.find(cat=>cat.pk === id)
+//     return category === undefined ? "" : category.title
+// }
 export const getCategories = (state) =>{
-    // console.log(state.menuitem.menuitems.array)
-    return  state.menuitem.category.array
-    // return [...new Set(categories)];
-    
+    return  state.menuitem.category.array;
 }
-export const getMenuitemsByCategoryId = (state, categoryId) =>{
-    // console.log(categoryId)
-    // let arr = []
-    // for(let item of state.menuitem.menuitems.array){
-    //     console.log(item)
-    //     if(item.category.id === categoryId)
-    //         arr.push(item)
-    // }
-    return state.menuitem.menuitems.array.filter(menuitem => menuitem.category.id === categoryId)
-   //  console.log(arrs.length)
+// export const getMenuitemsByCategoryId = (state, categoryId) =>{
+//     return state.menuitem.menuitems.array.filter(menuitem => menuitem.category.id === categoryId)
+// }
+const selectMenuitems = (state) => state.menuitem.menuitems.array;
+const selectCategoryId = (state, category_id) => category_id;
 
-}
+export const getMenuitemsByCategoryId = createSelector(
+    [selectMenuitems, selectCategoryId],
+    (menuitems, categoryId) => {
+        return menuitems.filter(menuitem=>menuitem.category.id === categoryId)
+    }
+)
 // const selectMenuitems = (state) => state.menuitem.menuitems.array;
 // const selectCategoryId = (state, category_id) => category_id;
 //

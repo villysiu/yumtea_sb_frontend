@@ -13,12 +13,8 @@ const SecureApp = () => {
     console.log(location)
     const dispatch = useDispatch()
     const current_user_status = useSelector(state => state.user.current_user.status)
-    const user_token_status = useSelector(state => state.user.token.status)
     
     if(current_user_status !== 'succeeded'){
-        if(user_token_status === 'succeeded')  
-            return null
-    
         return (
             <Navigate to="../user/signin"
             state = {location.state}

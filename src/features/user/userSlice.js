@@ -6,18 +6,15 @@ export const fetchCurrentUser=createAsyncThunk(
         console.log("in fetching???")
         
         try {
-            const response=await fetch(`${apiLink}/auth/users/me`, {
+            const response=await fetch(`${apiLink}/resource/user`, {
                 method: "GET",
-                // headers: {
-                //     "Content-Type": "application/json",
-                //
-                // },
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json'
+                }
             })
 
             if(!response.ok) {
-                console.log(response)
-                // remove incorrect token from localstorage
-                // localStorage.clear()
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
@@ -77,12 +74,12 @@ export const logoutUser=createAsyncThunk(
     async () =>{
         console.log("in lougout redux")
         try {
-            const response=await fetch(`${apiLink}/auth/logout/`, {
+            const response=await fetch(`${apiLink}/auth/logout`, {
                 'method': "POST",
-                // 'headers': {
-                //     'content-type': 'application/json',
-                //     "Authorization": `Token ${localStorage.getItem("token")}`,
-                // },
+                'headers': {
+                    'content-type': 'application/json',
+                    // "Authorization": `Token ${localStorage.getItem("token")}`,
+                },
             
    
             })

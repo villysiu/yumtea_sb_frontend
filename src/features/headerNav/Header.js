@@ -29,7 +29,7 @@ const Header = () =>{
 
     if(noHeader.includes( location.pathname )){
         return(
-            <div class='header_wrapper'>
+            <div className='header_wrapper'>
                 <Title />
             </div>
         )
