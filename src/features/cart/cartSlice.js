@@ -50,23 +50,19 @@ export const fetchCart=createAsyncThunk(
 )
 export const addItemToCart = createAsyncThunk(
     'cart/addItemToCart',
-    async (item) => {
-        console.log(item)
+    async (customizedItem) => {
+        // console.log(customizedItem)
         
-// {menuitem_pk: 12, milk_pk: 8, price: 6, quantity: 1, size: 12, 
-//     sweetness: 0, temperature: "H"}
+
         try {
-            const response=await fetch(`${apiLink}/api/cart`, {
+            const response=await fetch(`${apiLink}/cart`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     'accept': 'application/json',
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-                    
                 },
-                body: JSON.stringify(item)
-
-
+                body: JSON.stringify(customizedItem),
+                credentials: 'include'
             })
 
             if(!response.ok) {
@@ -74,10 +70,10 @@ export const addItemToCart = createAsyncThunk(
             }
             const data=await response.json()
             console.log(data)
-            // {pk: 11, user_id: 1, menuitem_id: 12, milk_id: 8, quantity: 1, 
+            // {pk: 11, user_id: 1, menuitem_id: 12, milk_id: 8, quantity: 1,
 //     price: 6, size: 12, sweetness: 0, temperature: "H"}
             return data
-        } 
+        }
         catch(error){
             return Promise.reject(error);
         }
@@ -317,18 +313,18 @@ const cartSlice=createSlice({
             console.log('ITEM ADDED TO API')
             console.log(action.payload)
             
-            let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.pk === action.payload.pk)
-            
-            if(cartitem === undefined){
-                console.log("item not in cart")
-                state.cart.cart_arr.push(action.payload)
-            }
-            else{
-                console.log("item in cart")
-                cartitem.quantity = action.payload.quantity
-                // cartitem.linetotal = action.payload.linetotal
-            }
-            state.cartBannerMessage = "Item added."
+            // let cartitem = state.cart.cart_arr.find(cartitem=>cartitem.pk === action.payload.pk)
+            //
+            // if(cartitem === undefined){
+            //     console.log("item not in cart")
+            //     state.cart.cart_arr.push(action.payload)
+            // }
+            // else{
+            //     console.log("item in cart")
+            //     cartitem.quantity = action.payload.quantity
+            //     // cartitem.linetotal = action.payload.linetotal
+            // }
+
             
         })
         .addCase(addItemToCart.rejected, (state, action) => {

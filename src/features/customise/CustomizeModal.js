@@ -32,7 +32,8 @@ const CustomizeModal = ({handleHide}) =>{
     const [quantity, setQuantity] = useState(1)
     const [sugar, setSugar] = useState(itemToCustomize.sugar)
 
-    const data = {
+
+    const customizedItem = {
         'menuitem': itemToCustomize.menuitem,
         'quantity': quantity,
         'temperature': temperature,
@@ -64,8 +65,8 @@ const CustomizeModal = ({handleHide}) =>{
                
                 {/*{*/}
                 {/*    task === 'add' ?*/}
-                        <AddCartButton 
-                            data={data}
+                        <AddCartButton
+                            customizedItem={customizedItem}
                             handleHide={handleHide} 
                         />
                 {/*        :*/}

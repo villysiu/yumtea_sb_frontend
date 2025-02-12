@@ -11,7 +11,7 @@ const CartButton =() =>{
     const dispatch = useDispatch();
     const location = useLocation();
 
-    const count = useSelector(state => getItemsCountInCart(state))
+    // const count = useSelector(state => getItemsCountInCart(state))
     const message = useSelector(state => state.cart.cartBannerMessage)
     const cart = useSelector(state=>state.cart.cart.cart_arr)
 
@@ -85,7 +85,7 @@ const CartButton =() =>{
             
                 {/* <div id='cartButton' onClick={handleClick} > */}
                     <CartFill className="cart_icon" />
-                    {count > 0 && <div className='cartitem_count'> {count} </div>}
+                    {/*{count > 0 && <div className='cartitem_count'> {count} </div>}*/}
                 {/* </div> */}
             </div>
         </>
