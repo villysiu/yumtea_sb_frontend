@@ -8,10 +8,10 @@ export const fetchCurrentUser=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/auth/users/me`, {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-                },
+                // headers: {
+                //     "Content-Type": "application/json",
+                //
+                // },
             })
 
             if(!response.ok) {
@@ -36,32 +36,37 @@ export const loginUser=createAsyncThunk(
     async (userInfo, thunkAPI ) =>{
         
         console.log(userInfo)
-        // { 'username': 'danielle', 'password': 'mpassword3@!' }
+        // {
+        // 	"email": "springuser@gg.com",
+        // 	"password": "password"
+        // }
 
         try {
-            const response=await fetch(`${apiLink}/auth/token/login/`, {
+            const response=await fetch(`${apiLink}/auth/login`, {
                 'method': "POST",
                 'headers': {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    
+
                 },
                 'body': JSON.stringify(userInfo)
-   
+
             })
-            
-            if(!response.ok) 
+
+            if(!response.ok) {
+                console.log(response.status, " ", response.statusText)
                 throw new Error(`${response.status} ${response.statusText}`)
-            
+            }
+
             const data=await response.json()
             console.log(data)
 
             // localStorage.setItem('token', data.auth_token)
             // thunkAPI.dispatch(fetchCurrentUser())
-            
-            return data.auth_token
-            
-        } 
+
+            return data
+
+        }
         catch(error){
             return Promise.reject(error.message)
         }
@@ -72,12 +77,12 @@ export const logoutUser=createAsyncThunk(
     async () =>{
         console.log("in lougout redux")
         try {
-            const response=await fetch(`${apiLink}/auth/token/logout/`, {
+            const response=await fetch(`${apiLink}/auth/logout/`, {
                 'method': "POST",
-                'headers': {
-                    'content-type': 'application/json',
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-                },
+                // 'headers': {
+                //     'content-type': 'application/json',
+                //     "Authorization": `Token ${localStorage.getItem("token")}`,
+                // },
             
    
             })
@@ -101,20 +106,13 @@ const userSlice=createSlice({
     initialState: {
 
         current_user: {
-            username: null,
-            // email: null,
-            // id: null,
+            email: null,
+            nickname: null,
             status: 'idle',
-            
         },
-        token: {
-            ttt: localStorage.getItem("token"),
-            status: localStorage.getItem("token")? 'succeeded': 'idle'
-            
-        }
-
-       
-        
+        login_status: 'idle',
+        logout_status: 'idle',
+        signup_status:'idle'
     },
     reducers: {
         // logout: (state) => {
@@ -122,10 +120,10 @@ const userSlice=createSlice({
         //     state.currUser.status = 'idle'
         //     state.currUser.error = null   
         //   },
-        resetUserStatus: (state) => {
-            state.token.status = 'idle'
-            state.current_user.status = 'idle'
-        }
+        // resetUserStatus: (state) => {
+        //
+        //     state.current_user.status = 'idle'
+        // }
     },
     extraReducers(builder) {
       builder
@@ -141,37 +139,40 @@ const userSlice=createSlice({
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
             state.current_user.status = 'failed'
-            localStorage.clear();
         })
+
         .addCase(loginUser.pending, (state, action) => {
-            state.token.status = 'loading'
+            state.login_status = 'loading'
         })
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
-            state.token.status = 'succeeded'
-            localStorage.setItem('token', action.payload)
+            state.login_status = 'succeeded'
+            state.current_user={
+                email: action.payload.email,
+                nickname: action.payload.nickname,
+                status: 'succeeded',
+            }
 
         })
         .addCase(loginUser.rejected, (state, action) => {
-            state.token.status = 'failed'
+            state.login_status = 'failed'
+
             
         })
+
         .addCase(logoutUser.pending, (state, action) => {
-            state.token.status = 'loading'
+            state.logout_status = 'loading'
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
-            localStorage.clear();
-            state.token.status = 'idle'
+            state.logout_status = 'succeeded';
             state.current_user={
-                username: null,
+                email: null,
+                nickname: null,
                 status: 'idle',
             }
-            
-            
-
         })
         .addCase(logoutUser.rejected, (state, action) => {
-            state.token.status = 'failed'
+            state.logout_status = 'failed'
             
         })
     }

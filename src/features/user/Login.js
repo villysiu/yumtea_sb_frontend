@@ -13,10 +13,8 @@ const Login = () =>{
     let location = useLocation();
     console.log(location)
 
-    const token_status = useSelector(state=>state.user.token.status)
-    const current_user_status = useSelector(state=>state.user.current_user.status)
-    
-    const [username, setUsername] = useState("")
+    const login_status = useSelector(state => state.user.login_status)
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState('')
     const dispatch=useDispatch();
@@ -24,21 +22,21 @@ const Login = () =>{
 
     const handleSubmit=e=>{
         e.preventDefault()
-        dispatch(loginUser({'username': username, 'password': password}))
+        dispatch(loginUser({'email': email, 'password': password}))
         
     }
     const handleClick=()=>{
         setError('')
     }
     useEffect(()=>{
-        if(token_status === 'failed' || current_user_status === 'failed'){
-            setError("Eitehr username or password is incorrect. Please try again.")
-            setUsername('')
+        if(login_status === 'failed'){
+            setError("Either username or password is incorrect. Please try again.")
+            setEmail('')
             setPassword('')
-            dispatch(resetUserStatus())
+            // dispatch(resetUserStatus())
         }
 
-    }, [token_status, current_user_status, setError])
+    }, [login_status, setError])
 
     return(
        <div className='login_wrapper'>
@@ -46,9 +44,9 @@ const Login = () =>{
             <h1 className="mb-5">Sign in to your account</h1>
             <Form className='login_form' onSubmit={handleSubmit}>
 
-                <FloatingLabel controlId="floatingInput" label="Username" className="mb-3">
-                    <Form.Control type="text" placeholder="Username" value={username} 
-                        onChange={e=>setUsername(e.target.value)} onClick={handleClick} />
+                <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
+                    <Form.Control type="text" placeholder="Email" value={email}
+                        onChange={e=>setEmail(e.target.value)} onClick={handleClick} />
                 </FloatingLabel>
 
                 <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
@@ -56,7 +54,7 @@ const Login = () =>{
                         onChange={e=>setPassword(e.target.value)} onClick={handleClick} />
                 </FloatingLabel>
                 {error && <div className='login_error'>{error} </div>}
-                <LoginButton username={username} password={password}/>
+                <LoginButton email={email} password={password}/>
                           
             </Form>
             <div>Forgot your password?</div>
