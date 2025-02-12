@@ -38,23 +38,23 @@ export const fetchCart=createAsyncThunk(
                 credentials: 'include'
             })
 
-            if(!response.ok) {
+            if(response.ok) {
+                const carts = await response.json();
+                return carts;
+            }
+            else{
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            const data=await response.json()
-            return data
         } 
         catch(error){
-            return Promise.reject(error);
+            throw Promise.reject(error);
         }
     }
 )
 export const addItemToCart = createAsyncThunk(
     'cart/addItemToCart',
-    async (customizedItem) => {
-        // console.log(customizedItem)
-        
-
+    async (customizedItem,thunkAPI) => {
+        console.log(customizedItem);
         try {
             const response=await fetch(`${apiLink}/cart`, {
                 method: "POST",
@@ -66,14 +66,15 @@ export const addItemToCart = createAsyncThunk(
                 credentials: 'include'
             })
 
-            if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(response.ok){
+                console.log("hfjdhh")
+                const newCartItem = await response.json();
+                await thunkAPI.dispatch(fetchCart());
+                // console.log(newCartItem)
+                // return newCartItem;
             }
-            const data=await response.json()
-            console.log(data)
-            // {pk: 11, user_id: 1, menuitem_id: 12, milk_id: 8, quantity: 1,
-//     price: 6, size: 12, sweetness: 0, temperature: "H"}
-            return data
+
+
         }
         catch(error){
             return Promise.reject(error);
@@ -300,6 +301,7 @@ const cartSlice=createSlice({
         .addCase(fetchCart.rejected, (state, action) => {
             state.fetchCartStatus = 'failed'
         })
+
         .addCase(addItemToCart.pending, (state, action) => {
             state.addToCartStatus = 'loading'
            
@@ -307,9 +309,11 @@ const cartSlice=createSlice({
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.addToCartStatus = 'succeeded'
             state.cartBannerMessage = "Item added."
+
             // state.cart.status = 'succeeded'
             console.log('ITEM ADDED TO API')
             console.log(action.payload)
+
             
         })
         .addCase(addItemToCart.rejected, (state, action) => {

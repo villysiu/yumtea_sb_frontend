@@ -20,7 +20,7 @@ const CustomizeTemp = ({defaultTemperature, temperature, setTemperature}) => {
                             <Form.Check
                                 key={idx}
                                 className='customize_item_choice'
-                                onChange={() => setTemperature(temp)}
+                                onChange={() => setTemperature(temp.toUpperCase())}
                                 inline
                                 type="radio"
                                 defaultChecked={temperature === temp}

@@ -14,8 +14,6 @@ const CartModal = ({setCartShow}) =>{
     if(carts.length === 0){
         return <EmptyCart />
     }
-
-    
     return (
         <>
             <div className='cart_modal_header'>
