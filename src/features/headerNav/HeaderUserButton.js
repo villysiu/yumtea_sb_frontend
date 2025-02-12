@@ -8,11 +8,10 @@ import UserDropdown from '../user/UserDropdown'
 
 const HeaderUserButton =() =>{
 
-    const current_user_status = useSelector(state => state.user.current_user.status)
-    const currentUserName = useSelector(state => state.user.current_user.username)
+    const {current_user, login_status} = useSelector(state => state.user)
     const [show, setShow] = useState(false)
 
-    if(current_user_status === 'succeeded'){
+    if(login_status === 'succeeded'){
         return (
             <>
             {
@@ -24,7 +23,7 @@ const HeaderUserButton =() =>{
             }
                 <div className="header_user_button" onClick={()=>setShow(!show)}>
                     <PersonCircle className='header_user_icon me-2' /> 
-                    <div className='header_user_name'>Hi, {currentUserName}</div>
+                    <div className='header_user_name'>Hi, {current_user.email}</div>
                 </div>
             </>
         )

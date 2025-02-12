@@ -265,6 +265,14 @@ export const getMilks = createSelector(
         return milks.filter(m => m.title !== "NA")
     }
 )
+const selectMilkId = (state, milk_id) => milk_id;
+
+export const getMilkById = createSelector(
+    [selectMilks, selectMilkId],
+    (milks, milkId) => {
+        return milks.filter(milk=>milk.id === milkId);
+    }
+)
 
 export const getSizes = (state) =>{
     return state.menuitem.size.array
@@ -285,9 +293,7 @@ export const getSugars = createSelector(
 export const getCategories = (state) =>{
     return  state.menuitem.category.array;
 }
-// export const getMenuitemsByCategoryId = (state, categoryId) =>{
-//     return state.menuitem.menuitems.array.filter(menuitem => menuitem.category.id === categoryId)
-// }
+
 const selectMenuitems = (state) => state.menuitem.menuitems.array;
 const selectCategoryId = (state, category_id) => category_id;
 
@@ -297,19 +303,6 @@ export const getMenuitemsByCategoryId = createSelector(
         return menuitems.filter(menuitem=>menuitem.category.id === categoryId)
     }
 )
-// const selectMenuitems = (state) => state.menuitem.menuitems.array;
-// const selectCategoryId = (state, category_id) => category_id;
-//
-// export const getMenuitems = createSelector(
-//     [selectMenuitems, selectCategoryId],
-//     (menuitems, categoryId) => {
-//
-//         if(categoryId === 0)
-//             return menuitems
-//
-//         return menuitems.filter(item=>item.category_id === categoryId)
-//
-//     }
-// )
+
     
 

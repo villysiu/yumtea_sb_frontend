@@ -13,7 +13,19 @@ const SecureApp = () => {
     console.log(location)
     const dispatch = useDispatch()
     const current_user_status = useSelector(state => state.user.current_user.status)
-    
+
+    // useEffect(() => {
+    //     if (!user && status === 'idle') {
+    //       dispatch(fetchCurrentUser());
+    //     }
+    //   }, [dispatch, status, user]);
+    // if (status === 'loading') {
+    //     return <p>Loading...</p>;
+    //   }
+    //
+    //   if (status === 'failed') {
+    //     return <p>{error}</p>;
+    //   }
     if(current_user_status !== 'succeeded'){
         return (
             <Navigate to="../user/signin"

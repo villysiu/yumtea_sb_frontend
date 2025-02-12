@@ -9,7 +9,7 @@ import CartButton from '../cart/CartButton'
 
 const HeaderNavbarLG = () =>{
     return(
-        <div class='header_wrapper'>
+        <div className='header_wrapper'>
             <Navbar collapseOnSelect expand={false} sticky="top" className="bg-body-tertiary header_inner_wrapper">
             
            

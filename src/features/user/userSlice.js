@@ -8,10 +8,11 @@ export const fetchCurrentUser=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/resource/user`, {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    'accept': 'application/json'
-                }
+                // headers: {
+                //     "Content-Type": "application/json",
+                //     'accept': 'application/json'
+                // }
+                credentials: 'include'
             })
 
             if(!response.ok) {
@@ -46,7 +47,8 @@ export const loginUser=createAsyncThunk(
                     'accept': 'application/json',
 
                 },
-                'body': JSON.stringify(userInfo)
+                'body': JSON.stringify(userInfo),
+                credentials: 'include'
 
             })
 
@@ -58,14 +60,12 @@ export const loginUser=createAsyncThunk(
             const data=await response.json()
             console.log(data)
 
-            // localStorage.setItem('token', data.auth_token)
-            // thunkAPI.dispatch(fetchCurrentUser())
-
             return data
 
         }
         catch(error){
-            return Promise.reject(error.message)
+            // return Promise.reject(error.message)
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 )
@@ -101,21 +101,21 @@ export const logoutUser=createAsyncThunk(
 const userSlice=createSlice({
     name: 'user',
     initialState: {
-
-        current_user: {
-            email: null,
-            nickname: null,
-            status: 'idle',
-        },
+        // const { user, status, error } = useSelector((state) => state.auth);
+        // current_user: {
+        //     email: null,
+        //     nickname: null,
+        // },
+        current_user: null,
         login_status: 'idle',
         logout_status: 'idle',
         signup_status:'idle'
     },
     reducers: {
         // logout: (state) => {
-        //     state.currUser.currUser = null
-        //     state.currUser.status = 'idle'
-        //     state.currUser.error = null   
+        //     state.current_user = null
+        //     state.logout_status = 'succeeded'
+        //     state.currUser.error = null
         //   },
         // resetUserStatus: (state) => {
         //
@@ -125,17 +125,18 @@ const userSlice=createSlice({
     extraReducers(builder) {
       builder
         .addCase(fetchCurrentUser.pending, (state, action) => {
-            state.current_user.status = 'loading'
+            state.login_status = 'loading'
         })
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
             // console.log(action.payload)
             
             state.current_user = action.payload
-            state.current_user.status = 'succeeded'
+            state.login_status = 'succeeded'
+            state.logout_status = 'idle'
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
-            state.current_user.status = 'failed'
+            state.login_status = 'failed'
         })
 
         .addCase(loginUser.pending, (state, action) => {
@@ -144,17 +145,12 @@ const userSlice=createSlice({
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
             state.login_status = 'succeeded'
-            state.current_user={
-                email: action.payload.email,
-                nickname: action.payload.nickname,
-                status: 'succeeded',
-            }
+            state.current_user=action.payload
+            state.logout_status = 'idle'
 
         })
         .addCase(loginUser.rejected, (state, action) => {
             state.login_status = 'failed'
-
-            
         })
 
         .addCase(logoutUser.pending, (state, action) => {
@@ -162,11 +158,8 @@ const userSlice=createSlice({
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.logout_status = 'succeeded';
-            state.current_user={
-                email: null,
-                nickname: null,
-                status: 'idle',
-            }
+            state.login_status = 'idle';
+            state.current_user=null;
         })
         .addCase(logoutUser.rejected, (state, action) => {
             state.logout_status = 'failed'

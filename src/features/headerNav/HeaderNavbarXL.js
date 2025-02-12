@@ -10,7 +10,7 @@ import CartButton from '../cart/CartButton'
 const HeaderNavbarXL = () =>{
     
     return(
-        <div class='header_wrapper'>
+        <div className='header_wrapper'>
             <Navbar expand="xl" sticky="top" className="bg-body-tertiary header_inner_wrapper">
             
                 
