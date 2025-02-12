@@ -1,5 +1,5 @@
-import Logout from "./Logout"
-import AccountButton from "./AccountButton"
+import Logout from "../user/Logout"
+import AccountButton from "../user/AccountButton"
 import OrdersButton from "../order/OrdersButton"
 // import ReservationButton from "../reservation/ReservationButton"
 import { Link } from 'react-router-dom';

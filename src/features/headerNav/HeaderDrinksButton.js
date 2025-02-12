@@ -26,7 +26,7 @@ const Header_Drinks_Button =() => {
             
             <div className={`header_buttons ${location.pathname === '/collection' ? 'active' : ""}`}
             onClick={handleClick}>
-                Drinks
+                Menu
             </div>   
                 
         </>

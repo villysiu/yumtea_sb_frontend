@@ -8,10 +8,6 @@ export const fetchCurrentUser=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/resource/user`, {
                 method: "GET",
-                // headers: {
-                //     "Content-Type": "application/json",
-                //     'accept': 'application/json'
-                // }
                 credentials: 'include'
             })
 
@@ -76,10 +72,11 @@ export const logoutUser=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/auth/logout`, {
                 'method': "POST",
-                'headers': {
-                    'content-type': 'application/json',
-                    // "Authorization": `Token ${localStorage.getItem("token")}`,
-                },
+                // 'headers': {
+                //     'content-type': 'application/json',
+                //     // "Authorization": `Token ${localStorage.getItem("token")}`,
+                // },
+                credentials: 'include',
             
    
             })
@@ -87,9 +84,7 @@ export const logoutUser=createAsyncThunk(
             if(!response.ok) 
                 throw new Error(`${response.status} ${response.statusText}`)
             console.log(response)
-            
-            console.log("clear storgae")
-            // localStorage.clear()
+
             return null
             
         } 
@@ -101,12 +96,12 @@ export const logoutUser=createAsyncThunk(
 const userSlice=createSlice({
     name: 'user',
     initialState: {
-        // const { user, status, error } = useSelector((state) => state.auth);
         // current_user: {
         //     email: null,
         //     nickname: null,
         // },
         current_user: null,
+        fetch_user_status: 'idle',
         login_status: 'idle',
         logout_status: 'idle',
         signup_status:'idle'
@@ -125,18 +120,19 @@ const userSlice=createSlice({
     extraReducers(builder) {
       builder
         .addCase(fetchCurrentUser.pending, (state, action) => {
-            state.login_status = 'loading'
+            state.fetch_user_status = 'loading'
         })
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
             // console.log(action.payload)
             
             state.current_user = action.payload
+            state.fetch_user_status = 'succeeded'
             state.login_status = 'succeeded'
             state.logout_status = 'idle'
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
-            state.login_status = 'failed'
+            state.fetch_user_status = 'failed'
         })
 
         .addCase(loginUser.pending, (state, action) => {
@@ -145,6 +141,7 @@ const userSlice=createSlice({
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
             state.login_status = 'succeeded'
+            state.fetch_user_status = 'succeeded'
             state.current_user=action.payload
             state.logout_status = 'idle'
 
@@ -159,6 +156,7 @@ const userSlice=createSlice({
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.logout_status = 'succeeded';
             state.login_status = 'idle';
+            state.fetch_user_status = 'idle'
             state.current_user=null;
         })
         .addCase(logoutUser.rejected, (state, action) => {
