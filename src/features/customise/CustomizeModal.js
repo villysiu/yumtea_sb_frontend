@@ -17,7 +17,7 @@ const CustomizeModal = ({handleHide}) =>{
     const itemToCustomize = useSelector(state=>state.menuitem.customize.itemToCustomize)
     const task = useSelector(state=>state.menuitem.customize.task)
 
-    // console.log(itemToCustomize)
+    console.log(itemToCustomize)
     // const task = !itemToCustomize.pk  ? "add" : "update"
     // console.log(task)
 //item data sent from menu and order history is menutitem_pk 

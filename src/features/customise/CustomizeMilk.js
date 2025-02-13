@@ -7,7 +7,8 @@ import { useState } from 'react'
 const CustomizeMilk = ({defaultMilk, milk, setMilk}) =>{
     
     const milkChoices = useSelector(state=>getMilks(state));
-
+    console.log(defaultMilk)
+    console.log(milk)
 
     if(milkChoices.length === 0 || defaultMilk.title === "NA" )
         return null;

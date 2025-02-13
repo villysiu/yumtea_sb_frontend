@@ -1,7 +1,13 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {useState, useRef} from 'react';
 import {Modal} from 'react-bootstrap'
-import {getMenuitemTitleById, triggerCustomizeModal, getMilkById} from '../menuitem/menuitemSlice'
+import {
+    getMenuitemTitleById,
+    triggerCustomizeModal,
+    getMilkById,
+    getMenuitemById,
+    getSizeById
+} from '../menuitem/menuitemSlice'
 import {resetCartBanner} from './cartSlice'
 import {USDollar} from '../../app/global'
 import CartModalRemove from './CartModalRemove'
@@ -35,24 +41,36 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
         ["SEVENTY_FIVE", "75%"],
         ["HUNDRED", "100%"]
     ]);
+    const menuitem = useSelector(state => getMenuitemById(state, cartitem.menuitem.id))
+    const milk = useSelector(state => getMilkById(state, cartitem.milk.id))
+    const size = useSelector((state) => getSizeById(state, cartitem.size.id))
     const cartitemRef = useRef();
     const removeRef = useRef();
 
     const dispatch = useDispatch()
 
-
     const handleUpdate=e=>{
         console.log("cartitem update clicked")
-        const data = {
-            ...cartitem,
-            // menuitem_pk: cartitem.menuitem_id,
-            // milk_pk: cartitem.milk_id,
-        }
-        
+
         if(removeRef.current && !removeRef.current.contains(e.target)){
-            dispatch(triggerCustomizeModal(data ))
+            dispatch(triggerCustomizeModal(
+                {
+                    "item": {
+                        'menuitem': menuitem,
+                        'milk': milk,
+                        'temperature': cartitem.temperature,
+                        'sugar': cartitem.sugar,
+                        'size': size,
+                        'quantity': cartitem.quantity
+                    },
+                    "task": "update",
+                    "trigger": true
+                }
+            ))
+
+
             setCartShow(false);
-            dispatch(resetCartBanner());
+            // dispatch(resetCartBanner());
         }
     }
     return (

@@ -4,10 +4,7 @@ import {useSelector} from "react-redux";
 import {getSizes} from "../menuitem/menuitemSlice";
 
 const CustomizeSize = ({size, setSize}) => {
-
-
     const sizeChoices = useSelector(state=>getSizes(state));
-
     return (
         <div className='customize_item required'>
             <b>Drink Size</b>
@@ -25,7 +22,7 @@ const CustomizeSize = ({size, setSize}) => {
                             onChange={()=>setSize(sz)}
                             inline
                             type="radio"
-                            defaultChecked = {sz.title===size}
+                            defaultChecked = {size!==null && sz.id===size.id}
                             name="size"
                             label={content}
                             id={`size-radio-${sz.id}`}
@@ -33,7 +30,6 @@ const CustomizeSize = ({size, setSize}) => {
                         
                     )
                 })
-                        
             }
 
             </Form>     

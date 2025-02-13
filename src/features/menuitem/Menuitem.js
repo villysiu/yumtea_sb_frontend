@@ -12,12 +12,16 @@ const Menuitem = ({menuitem}) =>{
     const handleClick = () => {
         dispatch(triggerCustomizeModal(
             {
-                menuitem: menuitem,
-                milk: menuitem.milk,
-                temperature: menuitem.temperature,
-                sugar: menuitem.sugar,
-                size: null,
-                quantity: 1
+                "item": {
+                    menuitem: menuitem,
+                    milk: menuitem.milk,
+                    temperature: menuitem.temperature,
+                    sugar: menuitem.sugar,
+                    size: null,
+                    quantity: 1
+                },
+                "task": "add",
+                "trigger": 'true'
             }
         ))
 

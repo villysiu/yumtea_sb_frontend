@@ -23,7 +23,7 @@ const CustomizeTemp = ({defaultTemperature, temperature, setTemperature}) => {
                                 onChange={() => setTemperature(temp.toUpperCase())}
                                 inline
                                 type="radio"
-                                defaultChecked={temperature === temp}
+                                defaultChecked={temperature === temp.toUpperCase()}
                                 name="temp"
                                 label={temp}
                                 id={`temp-radio-${idx}`}

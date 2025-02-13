@@ -64,20 +64,21 @@ export const addItemToCart = createAsyncThunk(
 
 export const updateItemInCart = createAsyncThunk(
     'cart/updateItemInCart',
-    async (item, thunkAPI) => {
-        console.log(item)
+    async (updatedItem, thunkAPI) => {
+        console.log(updatedItem)
 // {pk: 9, menuitem_pk: 11, milk_pk:8, price: 6, quantity: 1, temperature: 'H', size: 16, sweetness: 0}
 
 
         try {
-            const response=await fetch(`${apiLink}/api/cart/${item.pk}`, {
-                method: "PATCH",
+            const response=await fetch(`${apiLink}/cart/${updatedItem.id}`, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     'accept': 'application/json',
 
                 },
-                body: JSON.stringify(item)
+                body: JSON.stringify(updatedItem),
+                credentials: 'include'
             })
 
             if(response.ok) {

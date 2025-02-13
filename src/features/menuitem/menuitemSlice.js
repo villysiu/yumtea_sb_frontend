@@ -157,7 +157,7 @@ const menuitemSlice=createSlice({
         customize: {
             clicked: false,
             itemToCustomize: null,
-            task: "add" //add or update
+            task: null //add or update
         }
 
 
@@ -178,8 +178,9 @@ const menuitemSlice=createSlice({
         triggerCustomizeModal(state, action) {
             console.log(action.payload)
             
-            state.customize.clicked = !state.customize.clicked
-            state.customize.itemToCustomize = action.payload
+            state.customize.clicked =action.payload.trigger
+            state.customize.itemToCustomize = action.payload.item
+            state.task = action.payload.task
             
         },
 
@@ -252,12 +253,21 @@ export default menuitemSlice.reducer
 
 
 export const getMenuitemById = (state, id) =>{
-    return state.menuitem.menuitems.array.find(menuitem => menuitem.id === id)
+    // console.log(state.menuitem.menuitems.array.length)
+    const menuitem = state.menuitem.menuitems.array.find(menuitem => menuitem.id === id)
+    return {
+        'id': menuitem.id,
+        'milk': menuitem.milk,
+        'price': menuitem.price,
+        'sugar': menuitem.sugar,
+        'temperature': menuitem.temperature,
+        'title': menuitem.title
+    }
 }
-export const getMenuitemTitleById = (state, id) =>{
-    const item =  state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
-    return item===undefined ? "" : item.title
-}
+// export const getMenuitemTitleById = (state, id) =>{
+//     const item =  state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
+//     return item===undefined ? "" : item.title
+// }
 const selectMilks = (state) => state.menuitem.milk.array;
 export const getMilks = createSelector(
     [selectMilks],
@@ -270,12 +280,15 @@ const selectMilkId = (state, milk_id) => milk_id;
 export const getMilkById = createSelector(
     [selectMilks, selectMilkId],
     (milks, milkId) => {
-        return milks.filter(milk=>milk.id === milkId);
+        return milks.find(milk=>milk.id === milkId);
     }
 )
 
 export const getSizes = (state) =>{
     return state.menuitem.size.array
+}
+export const getSizeById = (state, sizeId) => {
+    return state.menuitem.size.array.find(s => s.id === sizeId)
 }
 const selectSugars = (state) => state.menuitem.sugar.array;
 export const getSugars = createSelector(

@@ -27,7 +27,13 @@ function App() {
 
   const handleHide = () =>{
     setShow(false)
-    dispatch(triggerCustomizeModal(null))
+    dispatch(triggerCustomizeModal(
+        {
+            "item": null,
+            "task": null,
+            "trigger": false
+        }
+    ))
   }
   return (
       <>
