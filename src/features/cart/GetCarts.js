@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import {addItemToCart, fetchCart} from "./cartSlice"
 import { resetCartBanner} from './cartSlice'
 
-const CartApp = () => {
+const GetCarts = () => {
     console.log("in cartApp")
     const dispatch = useDispatch()
     const {currentUser} = useSelector(state => state.user)
@@ -38,4 +38,4 @@ const CartApp = () => {
 
     return null
 }
-export default CartApp
+export default GetCarts

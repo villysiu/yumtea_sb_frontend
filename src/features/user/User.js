@@ -7,7 +7,7 @@ const User = () => {
     const navigate = useNavigate()
     const location = useLocation()
     console.log(location)
-    const path=location.state ? "../collection" : "../secure/account"
+    const path=location.state ? `..${location.state.from.pathname}` : "../secure/account"
 
     
     const {loginStatus} = useSelector(state => state.user)
@@ -17,7 +17,7 @@ const User = () => {
         console.log('in user effect?')
         
         if(loginStatus === 'succeeded'){
-            navigate(path, {state: location.state})
+            navigate(path, { state: { from: location } })
         }
     }, [loginStatus])
 
