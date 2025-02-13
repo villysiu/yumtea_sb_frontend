@@ -1,32 +1,29 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { batchAddItems, fetchCart } from "./cartSlice"
+import {addItemToCart, fetchCart} from "./cartSlice"
 import { resetCartBanner} from './cartSlice'
 
 const CartApp = () => {
     console.log("in cartApp")
     const dispatch = useDispatch()
-    const {fetch_user_status, } = useSelector(state => state.user)
-    const {fetchCartStatus, cartBannerMessage} = useSelector(state => state.cart)
-    const batchAddStatus = useSelector(state=>state.cart.batchAddStatus)
+    const {currentUser} = useSelector(state => state.user)
+    const {fetchCartStatus, cartBannerMessage, tempCart} = useSelector(state => state.cart)
 
-
-    // useEffect(()=>{
-    //     if(current_user_status === 'succeeded' && batchAddStatus === 'idle' ){
-    //         dispatch(batchAddItems(temp_cart))
-    //
-    //     }
-    // }, [current_user_status, batchAddStatus, temp_cart, dispatch])
 
     useEffect(()=>{
-        if(fetch_user_status === 'succeeded' && fetchCartStatus === 'idle'
-            // && batchAddStatus ==='succeeded'
-        ){
+        if(currentUser !== null && tempCart !== null){
+            dispatch(addItemToCart(tempCart));
+
+        }
+    }, [currentUser, dispatch])
+
+    useEffect(()=>{
+        if(currentUser !== null && fetchCartStatus === 'idle'){
             console.log("there is an user and api cart not fetched ('idle)")
             dispatch(fetchCart())
             
         }
-    }, [dispatch, fetch_user_status, fetchCartStatus, batchAddStatus])
+    }, [dispatch, currentUser, fetchCartStatus])
 
     useEffect(() => {
         if(cartBannerMessage !== ""){

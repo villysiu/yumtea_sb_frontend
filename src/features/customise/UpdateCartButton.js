@@ -23,13 +23,7 @@ const UpdateCartButton = ({data, handleHide}) =>{
     const current_user_status = useSelector(state=>state.user.current_user.status)
 
     const handleClick = (e) =>{
-    
-        if(current_user_status !== 'succeeded'){
-            dispatch(updateItem(data))
-        } 
-        else{
-            dispatch(updateItemInCart(data))
-        }    
+        dispatch(updateItemInCart(data))
 
         handleHide()
     }

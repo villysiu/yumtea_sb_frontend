@@ -31,7 +31,7 @@ const CartModal = ({setCartShow}) =>{
                 }
             </div>
             <div className='cart_modal_footer'>
-                <Subtotal cartLength = {carts.length} />
+                <Subtotal />
                 
                 <CheckoutButton setCartShow={setCartShow}/>
             </div>

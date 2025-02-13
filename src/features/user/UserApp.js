@@ -5,12 +5,12 @@ import { fetchCurrentUser } from "./userSlice"
 const UserApp = () =>{
     console.log("in user app?")
     const dispatch = useDispatch()
-    const {current_user, fetch_user_status} = useSelector(state => state.user)
+    const {currentUser, fetchUserStatus} = useSelector(state => state.user)
 
     useEffect(()=>{
-        if(!current_user && fetch_user_status==='idle')
+        if(!currentUser && fetchUserStatus==='idle')
             dispatch(fetchCurrentUser())
-    }, [fetch_user_status, dispatch])
+    }, [fetchUserStatus, dispatch])
 
 
     return null

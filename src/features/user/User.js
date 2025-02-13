@@ -7,19 +7,19 @@ const User = () => {
     const navigate = useNavigate()
     const location = useLocation()
     console.log(location)
-    const path=location.state ? `..${location.state.path}` : "../secure/account"
+    const path=location.state ? "../collection" : "../secure/account"
 
     
-    const {login_status} = useSelector(state => state.user)
+    const {loginStatus} = useSelector(state => state.user)
     
     
     useEffect(()=>{
         console.log('in user effect?')
         
-        if(login_status === 'succeeded'){
+        if(loginStatus === 'succeeded'){
             navigate(path, {state: location.state})
         }
-    }, [login_status])
+    }, [loginStatus])
 
 
     return(

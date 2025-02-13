@@ -1,14 +1,17 @@
 import {Button} from 'react-bootstrap'
 import {USDollar} from '../../app/global'
 import {useDispatch, useSelector} from 'react-redux'
-import { increment, addItemToCart } from '../cart/cartSlice'
+import {addItemToTempCart, addItemToCart, resetCartBanner} from '../cart/cartSlice'
 import menuitem from "../menuitem/Menuitem";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const AddCartButton = ({customizedItem, handleHide}) => {
     console.log(customizedItem)
     
     const dispatch = useDispatch()
-    const {current_user} = useSelector(state=>state.user)
+    const {currentUser} = useSelector(state=>state.user)
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // const customizedItem = {
     //         'menuitem': itemToCustomize.menuitem,
@@ -28,24 +31,36 @@ const AddCartButton = ({customizedItem, handleHide}) => {
     // }
     // const price = data.menuitem.price + data.size.price
     const handleClick = (e) =>{
-        if(current_user === null){
-            console.log("add to local temp cart ")
-            dispatch(increment(customizedItem))
-        } 
-        else{
+
+        if(currentUser === null){
+            console.log(location.pathname)
+            dispatch(addItemToTempCart(
+                {
+                    "menuitemId": customizedItem.menuitem.id,
+                    "milkId": customizedItem.milk.id,
+                    "sizeId": customizedItem.size.id,
+                    "quantity": customizedItem.quantity,
+                    "sugar": customizedItem.sugar,
+                    "temperature": customizedItem.temperature
+                }
+            ));
+            navigate('/user/signin', { state: { from: location } });
+        }
+        else {
             console.log("add to API cart  ")
             dispatch(addItemToCart(
                 {
-                	"menuitemId": customizedItem.menuitem.id,
-                	"milkId": customizedItem.milk.id,
-                	"sizeId": customizedItem.size.id,
-                	"quantity": customizedItem.quantity,
-                	"sugar": customizedItem.sugar,
-                	"temperature": customizedItem.temperature
+                    "menuitemId": customizedItem.menuitem.id,
+                    "milkId": customizedItem.milk.id,
+                    "sizeId": customizedItem.size.id,
+                    "quantity": customizedItem.quantity,
+                    "sugar": customizedItem.sugar,
+                    "temperature": customizedItem.temperature
                 }
             ))
-        }    
-        handleHide() 
+
+        }
+        handleHide();
     }
 
     if(!customizedItem.size || customizedItem.temperature === "FREE"){

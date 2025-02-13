@@ -10,8 +10,6 @@ const CartModalItemRemove = forwardRef(
         const { menuitem_title, pk } = props;
         const dispatch = useDispatch()
         const [remove, setRemove] = useState(false)
-
-        const current_user_status = useSelector(state=>state.user.current_user.status)
     
         const handleClick = () =>{
             console.log('click trash')
@@ -20,13 +18,9 @@ const CartModalItemRemove = forwardRef(
         }
         const handleRemove = () =>{
             console.log("inner remove button")
-            if(current_user_status !== 'succeeded'){
-                dispatch(removeItem(pk))
-                
-            }
-            else{
-                dispatch(removeItemFromCart(pk))
-            }
+
+            dispatch(removeItemFromCart(pk))
+
             setRemove(false);
             
         }

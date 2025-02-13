@@ -5,7 +5,6 @@ import CustomizeTemp from "./CustomizeTemp"
 import CustomizeSize from "./CustomizeSize"
 import CustomizeMilk from "./CustomizeMilk"
 import CustomizeSugar from "./CustomizeSugar"
-import AddtocartButton from "./AddtocartButton"
 import UpdateCartButton from './UpdateCartButton'
 import UpdateQuantity from "./UpdateQuantity"
 import AddCartButton from './AddCartButton'

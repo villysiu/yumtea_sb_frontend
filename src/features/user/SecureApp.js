@@ -12,9 +12,9 @@ const SecureApp = () => {
     let location = useLocation();
     console.log(location)
 
-    const {login_status} = useSelector(state => state.user)
+    const {loginStatus} = useSelector(state => state.user)
 
-    if(login_status !== 'succeeded'){
+    if(loginStatus !== 'succeeded'){
         return (
             <Navigate to="../user/signin"
             state = {location.state}

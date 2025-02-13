@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 // import { fetchCategories, fetchMenuitems, fetchMenuitemsByCategory } from '../menuitem/menuitemSlice'
 // import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
-import { logoutUser,  } from '../user/userSlice'
+import {loginUser, logoutUser,} from '../user/userSlice'
 // import { deleteReservation } from '../reservation/reservationSlice'
 // import { increment } from '../cart/cartSlice'
 const messageSlice = createSlice({
     name: 'message',
     initialState: {
         message_arr: [],
-        cart_message: "",    
+        // cart_message: "",
 
 
     },
@@ -16,9 +16,9 @@ const messageSlice = createSlice({
       removeMessage: (state)=>{
         state.message_arr = []
       },
-      removeCartMessage: (state) =>{
-        state.cart_message = null
-      }
+      // removeCartMessage: (state) =>{
+      //   state.cart_message = null
+      // }
 
     },
     extraReducers(builder) {
@@ -43,7 +43,15 @@ const messageSlice = createSlice({
         //         }
         //     )
         // })
-       
+            .addCase(loginUser.rejected, (state, action) => {
+                state.message_arr.push(
+                    {
+                        status: true,
+                        type: "danger",
+                        content: "Either username or password is incorrect. Please try again."
+                    }
+                )
+            })
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.message_arr.push(
                 {

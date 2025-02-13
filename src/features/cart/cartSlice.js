@@ -1,30 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import { logoutUser } from "../user/userSlice";
+import {loginUser, logoutUser} from "../user/userSlice";
 import { PlaceOrder } from "../order/orderSlice";
 import { v4 as uuidv4 } from 'uuid';
 
-export const batchAddItems=createAsyncThunk(
-    'cart/batchAddItems',
-    async (temp_cart, thunkAPI) => {
-        console.log(temp_cart)
-       
 
-        try {
-            for (let item of temp_cart){
-                console.log(item)
-                // {menuitem_pk: 4, milk_pk: 8...}
-                await thunkAPI.dispatch(addItemToCart(item
-          
-                ))
-            }
-            return null
-        }
-        catch(error){
-            return Promise.reject(error);
-        }
-    }
-)
 export const fetchCart=createAsyncThunk(
     'cart/fetchCart',
     async (_, thunkAPI) => {
@@ -67,8 +47,7 @@ export const addItemToCart = createAsyncThunk(
             })
 
             if(response.ok){
-                console.log("hfjdhh")
-                const newCartItem = await response.json();
+                // const newCartItem = await response.json();
                 await thunkAPI.dispatch(fetchCart());
                 // console.log(newCartItem)
                 // return newCartItem;
@@ -139,137 +118,25 @@ export const removeItemFromCart = createAsyncThunk(
         }
     }
 )
+
 const cartSlice=createSlice({
     name: 'cart',
     initialState: {
         carts: [],
+        tempCart: null,
         fetchCartStatus: 'idle',
-        temp_cart: [],
-        batchAddStatus: 'idle',
         addToCartStatus: 'idle',
         removeStatus: 'idle',
         updateStatus: 'idle',
         cartBannerMessage: "",
+
        
        
     },
     reducers: {
-        
-        increment(state, action) {
-            console.log(action.payload)
-            // {
-            //     'menuitem_pk': item.menuitem_id, 
-            //     'milk_pk': item.milk_id, 
-            //     'price': item.price,
-            //     'quantity': item.quantity, 
-            //     'size': item.size,
-            //     'sweetness': item.sweetness,
-            //     'temperature': item.temperature
-            // }
-            let dupItem = state.temp_cart.find(item=> 
-                    item.menuitem_pk === action.payload.menuitem_pk
-                    && item.milk_pk === action.payload.milk_pk
-                    && item.temperature === action.payload.temperature 
-                    && item.size === action.payload.size 
-                    && item.sweetness === action.payload.sweetness 
-            )
-
-            if(dupItem === undefined){
-                action.payload.pk = uuidv4(); 
-                // action.payload.menuitem_id = action.payload.menuitem_pk
-                // action.payload.milk_id = action.payload.milk_pk
-                state.temp_cart.push(action.payload)
-
-                // copy item and update keys sync with result returned from API
-                const copy = { ...action.payload,
-                    menuitem_id: action.payload.menuitem_pk,
-                    milk_id: action.payload.milk_pk
-                 };
-                delete copy.menuitem_pk
-                delete copy.milk_pk
-                state.cart.cart_arr.push(copy)
-            }
-            else{
-                console.log("item in cart, update quantity in local and api")
-                dupItem.quantity+= action.payload.quantity
-
-                const dupItemInAPI = state.cart.cart_arr.find(item=>item.pk === dupItem.pk)
-                dupItemInAPI.quantity += action.payload.quantity
-            }
-            // state.cart.cart_arr = state.temp_cart
-            state.addToCartStatus = 'succeeded'
-            state.cartBannerMessage = "Item added."
-        },
-        
-        
-        updateItem(state, action){
-            console.log(action.payload)
-            // {'pk': 'b68b4acf-1610-4b3f-b2ec-ca83f6325d85',
-            // 'menuitem_pk':7,
-            // 'milk_pk': 8,
-            // 'quantity': 2, 
-            // 'temperature': 'H'', 
-            // 'size': 16, 
-            // 'sweetness': 0,
-            // 'price': 6}
-            
-            let dupItem = state.temp_cart.find(item=>{ 
-                return(
-                    item.menuitem_pk === action.payload.menuitem_pk
-                    && item.milk_pk === action.payload.milk_pk 
-                    && item.temperature === action.payload.temperature 
-                    && item.size === action.payload.size 
-                    && item.sweetness === action.payload.sweetness 
-                )}
-            )
-            console.log(dupItem)
-            if(dupItem === undefined){
-                state.temp_cart = state.temp_cart.map(item=>{
-                    if(item.pk === action.payload.pk)
-                        return action.payload
-                    return item
-                })
-
-                state.cart.cart_arr = state.cart.cart_arr.map(item=>{
-                    if(item.pk === action.payload.pk){
-                        const copy = { ...action.payload,
-                            menuitem_id: action.payload.menuitem_pk,
-                            milk_id: action.payload.milk_pk
-                         };
-                        delete copy.menuitem_pk
-                        delete copy.milk_pk
-                        return copy
-                    }  
-                    return item
-                })
-            } 
-            else {
-                dupItem.quantity += action.payload.quantity
-                state.temp_cart = state.temp_cart.filter(item=>item.pk !== action.payload.pk)
-
-                state.cart.cart_arr = state.cart.cart_arr.map(item=>{
-                    // if(item.pk === action.payload.pk)
-                    //     return null
-                    if(item.pk === dupItem.pk)
-                        item.quantity += action.payload.quantity
-                    return item
-                    
-                })
-                state.cart.cart_arr = state.cart.cart_arr.filter(item=>item.pk !== action.payload.pk)
-
-            }
-
-           
-            state.updateStatus = 'succeeded'
-            state.cartBannerMessage = "Item updated."
-
-        },
-        removeItem(state, action){
-            // state.temp_cart.splice(action.payload, 1 )
-            state.temp_cart = state.temp_cart.filter(item=>item.pk !== action.payload)
-            state.cart.cart_arr = state.cart.cart_arr.filter(item=>item.pk !== action.payload)
-            state.removeStatus = 'succeeded'
-            state.cartBannerMessage = "Item removed."
+        addItemToTempCart(state, action){
+            console.log(action.payload);
+            state.tempCart = action.payload;
         },
         resetCartBanner(state, action){
             state.cartBannerMessage = ''
@@ -277,11 +144,6 @@ const cartSlice=createSlice({
             state.removeStatus = 'idle'
             state.updateStatus = 'idle'
         },
-        emptyTempCart(state,_){
-            state.cart.temp_cart_arr = []
-        },
-       
-
 
 
     },
@@ -295,7 +157,6 @@ const cartSlice=createSlice({
             console.log(action.payload)
             state.fetchCartStatus = 'succeeded'
             state.carts = action.payload
-            // state.cartBannerMessage = "Cart combined."
 
         })
         .addCase(fetchCart.rejected, (state, action) => {
@@ -304,24 +165,18 @@ const cartSlice=createSlice({
 
         .addCase(addItemToCart.pending, (state, action) => {
             state.addToCartStatus = 'loading'
-           
+
         })
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.addToCartStatus = 'succeeded'
             state.cartBannerMessage = "Item added."
-
-            // state.cart.status = 'succeeded'
-            console.log('ITEM ADDED TO API')
-            console.log(action.payload)
-
-            
         })
         .addCase(addItemToCart.rejected, (state, action) => {
             state.addToCartStatus = 'failed'
         })
 
         .addCase(removeItemFromCart.pending, (state, action) => {
-            
+
             // let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
             // item.status = 'loading'
 
@@ -334,7 +189,7 @@ const cartSlice=createSlice({
         .addCase(removeItemFromCart.rejected, (state, action) => {
             state.removeStatus = 'failed'
         })
-       
+
         .addCase(updateItemInCart.pending, (state, action) => {
             // console.log(action)
             // let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
@@ -349,52 +204,43 @@ const cartSlice=createSlice({
 
             state.updateStatus = 'succeeded'
             state.cartBannerMessage = 'Item updated.'
-            // if returned updated item id is different than init Id, it means the item already existed and is merged. 
+            // if returned updated item id is different than init Id, it means the item already existed and is merged.
             // so we deleted the init id from the cart
-            
+
         })
         .addCase(updateItemInCart.rejected, (state, action) => {
             // let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
             // delete item.status
             state.updateStatus = 'failed'
         })
-
-
-        .addCase(batchAddItems.pending, (state, action) => {
-            state.batchAddStatus = 'loading'
-        })
-        .addCase(batchAddItems.fulfilled, (state, action) => {
-            state.batchAddStatus = 'succeeded'
-            state.temp_cart = []
-            state.cart.cart_arr = []
-        })
-        .addCase(batchAddItems.rejected, (state, action) => {
-            state.batchAddStatus = 'failed'
-        })
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.carts = []
-            state.temp_cart = []
-            state.fetchCartstatus = 'idle'
+            state.fetchCartStatus = 'idle'
         })
         .addCase(PlaceOrder.fulfilled, (state, action) => {
             state.carts = null;
-            state.temp_cart = []
+            state.fetchCartStatus = 'idle'
             // state.cart.status = 'idle'
             
         })
 
+
         
     }
 })
-export const { batchAddItemsTeset, resetCartBanner,resetAddToCart, increment, updateItem, updateQty, removeItem, emptyTempCart } = cartSlice.actions
+export const { resetCartBanner, addItemToTempCart} = cartSlice.actions
 export default cartSlice.reducer
 
 export const getSubtotal = (state) =>{
-    let subtotal = 0
+    let subtotal = 0;
+    let quantity = 0;
     // tax = 0
     for(let item of state.cart.carts){
         subtotal += item.price * item.quantity;
-        
+        quantity += item.quantity;
     }
-    return subtotal
+    return {
+                'subtotal': subtotal,
+                'count': quantity
+    }
 }

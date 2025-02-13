@@ -27,7 +27,7 @@ export const fetchCurrentUser=createAsyncThunk(
 )
 export const loginUser=createAsyncThunk(
     'user/loginUser',
-    async (userInfo, thunkAPI ) =>{
+    async (userInfo, { rejectWithValue} ) =>{
         
         console.log(userInfo)
         // {
@@ -61,7 +61,7 @@ export const loginUser=createAsyncThunk(
         }
         catch(error){
             // return Promise.reject(error.message)
-            return thunkAPI.rejectWithValue(error.message);
+            return rejectWithValue(error.message);
         }
     }
 )
@@ -100,11 +100,11 @@ const userSlice=createSlice({
         //     email: null,
         //     nickname: null,
         // },
-        current_user: null,
-        fetch_user_status: 'idle',
-        login_status: 'idle',
-        logout_status: 'idle',
-        signup_status:'idle'
+        currentUser: null,
+        fetchUserStatus: 'idle',
+        loginStatus: 'idle',
+        logoutStatus: 'idle',
+        signupStatus:'idle'
     },
     reducers: {
         // logout: (state) => {
@@ -120,47 +120,47 @@ const userSlice=createSlice({
     extraReducers(builder) {
       builder
         .addCase(fetchCurrentUser.pending, (state, action) => {
-            state.fetch_user_status = 'loading'
+            state.fetchUserStatus = 'loading'
         })
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
             // console.log(action.payload)
             
-            state.current_user = action.payload
-            state.fetch_user_status = 'succeeded'
-            state.login_status = 'succeeded'
-            state.logout_status = 'idle'
+            state.currentUser = action.payload
+            state.fetchUserStatus = 'succeeded'
+            state.loginStatus = 'succeeded'
+            state.logoutStatus = 'idle'
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
-            state.fetch_user_status = 'failed'
+            state.fetchUserStatus = 'failed'
         })
 
         .addCase(loginUser.pending, (state, action) => {
-            state.login_status = 'loading'
+            state.loginStatus = 'loading'
         })
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
-            state.login_status = 'succeeded'
-            state.fetch_user_status = 'succeeded'
-            state.current_user=action.payload
-            state.logout_status = 'idle'
+            state.loginStatus = 'succeeded'
+            state.fetchUserStatus = 'succeeded'
+            state.currentUser=action.payload
+            state.logoutStatus = 'idle'
 
         })
         .addCase(loginUser.rejected, (state, action) => {
-            state.login_status = 'failed'
+            state.loginStatus = 'failed'
         })
 
         .addCase(logoutUser.pending, (state, action) => {
-            state.logout_status = 'loading'
+            state.logoutStatus = 'loading'
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
-            state.logout_status = 'succeeded';
-            state.login_status = 'idle';
-            state.fetch_user_status = 'idle'
-            state.current_user=null;
+            state.logoutStatus = 'succeeded';
+            state.loginStatus = 'idle';
+            state.fetchUserStatus = 'idle'
+            state.currentUser=null;
         })
         .addCase(logoutUser.rejected, (state, action) => {
-            state.logout_status = 'failed'
+            state.logoutStatus = 'failed'
             
         })
     }

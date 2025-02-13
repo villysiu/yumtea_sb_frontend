@@ -3,8 +3,8 @@ import { Button, Spinner } from 'react-bootstrap';
 const LoginButton = ({email, password}) =>{
 
     // console.log(email, password)
-    const login_status = useSelector(state=>state.user.login_status)
-    if(login_status === 'loading')
+    const {loginStatus} = useSelector(state=>state.user)
+    if(loginStatus === 'loading')
         return(
             <Button className='signin_button'>
                 <Spinner size="sm" />
