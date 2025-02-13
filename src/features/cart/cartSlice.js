@@ -64,7 +64,7 @@ export const addItemToCart = createAsyncThunk(
 
 export const updateItemInCart = createAsyncThunk(
     'cart/updateItemInCart',
-    async (item) => {
+    async (item, thunkAPI) => {
         console.log(item)
 // {pk: 9, menuitem_pk: 11, milk_pk:8, price: 6, quantity: 1, temperature: 'H', size: 16, sweetness: 0}
 
@@ -75,19 +75,15 @@ export const updateItemInCart = createAsyncThunk(
                 headers: {
                     "Content-Type": "application/json",
                     'accept': 'application/json',
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-                    
+
                 },
                 body: JSON.stringify(item)
             })
 
-            if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(response.ok) {
+                // const newCartItem = await response.json();
+                await thunkAPI.dispatch(fetchCart());
             }
-            const data=await response.json()
-            // console.log(data)
-
-            return {'updated': data, 'initId': item.pk }
         } 
         catch(error){
             return Promise.reject(error);
@@ -97,21 +93,17 @@ export const updateItemInCart = createAsyncThunk(
 
 export const removeItemFromCart = createAsyncThunk(
     'cart/removeItemFromCart',
-    async (cartitemId) => {
+    async (cartitemId, thunkAPI) => {
         console.log(cartitemId)
         try {
-            const response=await fetch(`${apiLink}/api/cart/${cartitemId}`, {
+            const response=await fetch(`${apiLink}/cart/${cartitemId}`, {
                 method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    'accept': 'application/json',
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-                },
+                credentials: 'include'
             })
-            if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(response.ok) {
+                // const newCartItem = await response.json();
+                await thunkAPI.dispatch(fetchCart());
             }
-            return cartitemId
         } 
         catch(error){
             return Promise.reject(error);
@@ -128,7 +120,7 @@ const cartSlice=createSlice({
         addToCartStatus: 'idle',
         removeStatus: 'idle',
         updateStatus: 'idle',
-        cartBannerMessage: "",
+
 
        
        
@@ -139,7 +131,6 @@ const cartSlice=createSlice({
             state.tempCart = action.payload;
         },
         resetCartBanner(state, action){
-            state.cartBannerMessage = ''
             state.addToCartStatus = 'idle'
             state.removeStatus = 'idle'
             state.updateStatus = 'idle'
@@ -169,22 +160,16 @@ const cartSlice=createSlice({
         })
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.addToCartStatus = 'succeeded'
-            state.cartBannerMessage = "Item added."
         })
         .addCase(addItemToCart.rejected, (state, action) => {
             state.addToCartStatus = 'failed'
         })
 
         .addCase(removeItemFromCart.pending, (state, action) => {
-
-            // let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
-            // item.status = 'loading'
-
             state.removeStatus = 'loading'
         })
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
             state.removeStatus = 'succeeded'
-            state.cartBannerMessage = "Item removed."
         })
         .addCase(removeItemFromCart.rejected, (state, action) => {
             state.removeStatus = 'failed'
@@ -203,7 +188,6 @@ const cartSlice=createSlice({
 
 
             state.updateStatus = 'succeeded'
-            state.cartBannerMessage = 'Item updated.'
             // if returned updated item id is different than init Id, it means the item already existed and is merged.
             // so we deleted the init id from the cart
 
@@ -220,7 +204,6 @@ const cartSlice=createSlice({
         .addCase(PlaceOrder.fulfilled, (state, action) => {
             state.carts = null;
             state.fetchCartStatus = 'idle'
-            // state.cart.status = 'idle'
             
         })
 

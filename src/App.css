@@ -109,7 +109,7 @@
 } */
 
 .content {
-  margin-top: var(--header_height);
+  /*margin-top: var(--header_height);*/
   width: var(--body-width);
   display: flex;
   flex-direction: column;

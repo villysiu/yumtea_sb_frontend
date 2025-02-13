@@ -4,33 +4,33 @@ import {forwardRef, useState, useEffect} from 'react'
 
 import {Button} from 'react-bootstrap'
 import {removeItem, removeItemFromCart} from './cartSlice'
-const CartModalItemRemove = forwardRef(
-//     function CartModalItemRemove({menuitem_title, pk, removeRef}){
-    function CartModalItemRemove(props, ref){
-        const { menuitem_title, pk } = props;
+const CartModalRemove = forwardRef(
+//     function CartModalRemove({menuitem_title, pk, removeRef}){
+    function CartModalItemRemove({cartitem}, ref){
+
         const dispatch = useDispatch()
-        const [remove, setRemove] = useState(false)
+        const [confirm, setConfirm] = useState(false)
     
         const handleClick = () =>{
             console.log('click trash')
 
-            setRemove(true);
+            setConfirm(true);
         }
-        const handleRemove = () =>{
+        const handleConfirm = () =>{
             console.log("inner remove button")
 
-            dispatch(removeItemFromCart(pk))
+            dispatch(removeItemFromCart(cartitem.id))
 
-            setRemove(false);
+            setConfirm(false);
             
         }
 
 
         return (
             <div ref={ref}>
-                {remove &&
+                {confirm &&
                     <div className='remove'  > 
-                        <Button className='remove_button' onClick={handleRemove}>Remove {menuitem_title}? </Button>
+                        <Button className='remove_button' onClick={handleConfirm}>Remove {cartitem.menuitem.title}? </Button>
                     </div>
                 }
                 <div className='cart_modal_item_remove' onClick={handleClick}>
@@ -41,4 +41,4 @@ const CartModalItemRemove = forwardRef(
 
     }
 );
-export default CartModalItemRemove
+export default CartModalRemove

@@ -4,7 +4,7 @@ import {Modal} from 'react-bootstrap'
 import {getMenuitemTitleById, triggerCustomizeModal, getMilkById} from '../menuitem/menuitemSlice'
 import {resetCartBanner} from './cartSlice'
 import {USDollar} from '../../app/global'
-import CartModalItemRemove from './CartModalItemRemove'
+import CartModalRemove from './CartModalRemove'
 
 const CartModalItem = ({cartitem, setCartShow}) =>{
 
@@ -63,7 +63,7 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
             <div className='cart_modal_item_header'>
                 <div className='cart_modal_item_qty'>{cartitem.quantity}</div>
                 <div className='cart_modal_item_title' >{cartitem.menuitem.title}</div>
-                <CartModalItemRemove pk={cartitem.pk} menuitem_title={cartitem.menuitem.title} ref={removeRef}/>
+                <CartModalRemove cartitem={cartitem} ref={removeRef}/>
                 <div className='cart_modal_item_price'>{USDollar.format(cartitem.price * cartitem.quantity)}</div>
             </div>
             <div className='cart_modal_item_details'>

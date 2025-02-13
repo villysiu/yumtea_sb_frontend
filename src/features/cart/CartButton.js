@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import {Modal} from 'react-bootstrap'
 import CartModal from './CartModal'
 import {useSelector, useDispatch} from 'react-redux'
-import {resetCartBanner, getItemsCountInCart} from './cartSlice'
+import {getSubtotal, getItemsCountInCart} from './cartSlice'
 import {useLocation} from 'react-router-dom'
 import EmptyCart from './EmptyCart'
 
@@ -11,9 +11,8 @@ const CartButton =() =>{
     const dispatch = useDispatch();
     const location = useLocation();
 
-    // const count = useSelector(state => getItemsCountInCart(state))
-    const message = useSelector(state => state.cart.cartBannerMessage)
-    const cart = useSelector(state=>state.cart.carts)
+    const {count} = useSelector(state => getSubtotal(state))
+    const {cartMessage} = useSelector(state => state.message)
 
     const [cartShow, setCartShow] = useState(false);
 
@@ -29,10 +28,10 @@ const CartButton =() =>{
             setCartShow(false)
         // show maodal when item added to cart
         
-        else if(message !== ""){
+        else if(cartMessage !== null){
             setCartShow(true)
         }
-    }, [message])
+    }, [cartMessage])
 
     
 
@@ -85,7 +84,7 @@ const CartButton =() =>{
             
                 {/* <div id='cartButton' onClick={handleClick} > */}
                     <CartFill className="cart_icon" />
-                    {/*{count > 0 && <div className='cartitem_count'> {count} </div>}*/}
+                    {count > 0 && <div className='cartitem_count'> {count} </div>}
                 {/* </div> */}
             </div>
         </>

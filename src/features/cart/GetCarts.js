@@ -25,16 +25,16 @@ const GetCarts = () => {
         }
     }, [dispatch, currentUser, fetchCartStatus])
 
-    useEffect(() => {
-        if(cartBannerMessage !== ""){
-            const msgTimer = setTimeout(() => {
-                dispatch(resetCartBanner());
-            }, 3000);
-            return () => clearTimeout(msgTimer);
-        }
-        
-        
-    }, [cartBannerMessage, dispatch]);
+    // useEffect(() => {
+    //     if(cartBannerMessage !== ""){
+    //         const msgTimer = setTimeout(() => {
+    //             dispatch(resetCartBanner());
+    //         }, 3000);
+    //         return () => clearTimeout(msgTimer);
+    //     }
+    //
+    //
+    // }, [cartBannerMessage, dispatch]);
 
     return null
 }
