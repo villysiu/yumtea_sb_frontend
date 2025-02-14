@@ -1,8 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 import {loginUser, logoutUser} from "../user/userSlice";
 import { PlaceOrder } from "../order/orderSlice";
 import { v4 as uuidv4 } from 'uuid';
+import {clearCartMessage} from "../message/messageSlice";
 
 
 export const fetchCart=createAsyncThunk(
@@ -47,10 +48,9 @@ export const addItemToCart = createAsyncThunk(
             })
 
             if(response.ok){
-                // const newCartItem = await response.json();
+                const newCartItem = await response.json();
                 await thunkAPI.dispatch(fetchCart());
-                // console.log(newCartItem)
-                // return newCartItem;
+
             }
 
 
@@ -122,9 +122,6 @@ const cartSlice=createSlice({
         removeStatus: 'idle',
         updateStatus: 'idle',
 
-
-       
-       
     },
     reducers: {
         addItemToTempCart(state, action){
@@ -215,16 +212,22 @@ const cartSlice=createSlice({
 export const { resetCartBanner, addItemToTempCart} = cartSlice.actions
 export default cartSlice.reducer
 
-export const getSubtotal = (state) =>{
-    let subtotal = 0;
-    let quantity = 0;
-    // tax = 0
-    for(let item of state.cart.carts){
-        subtotal += item.price * item.quantity;
-        quantity += item.quantity;
+const selectCarts = state => state.cart.carts;
+
+export const getSubtotal = createSelector(
+    [selectCarts],
+    (carts) => {
+        let subtotal = 0;
+        let quantity = 0;
+        // tax = 0
+        for(let item of carts){
+            subtotal += item.price * item.quantity;
+            quantity += item.quantity;
+        }
+        return {
+            'subtotal': subtotal,
+            'count': quantity
+        }
     }
-    return {
-                'subtotal': subtotal,
-                'count': quantity
-    }
-}
+)
+

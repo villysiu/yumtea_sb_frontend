@@ -2,11 +2,12 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Alert } from "react-bootstrap"
 import { useDispatch } from "react-redux"
-import { removeMessage } from "./messageSlice"
+import {clearCartMessage, removeMessage} from "./messageSlice"
 const Message = ({message}) =>{
     const [show, setShow] = useState(false)
-
     const dispatch = useDispatch()
+
+
     useEffect(() => {
         
         setShow(true)

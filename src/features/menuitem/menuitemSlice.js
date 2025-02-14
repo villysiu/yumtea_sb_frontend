@@ -246,23 +246,31 @@ export const { triggerMenuItem, resetMenuitemClicked, triggerCustomizeModal } = 
 
 export default menuitemSlice.reducer
 
-
-export const getMenuitemById = (state, id) =>{
-    // console.log(state.menuitem.menuitems.array.length)
-    const menuitem = state.menuitem.menuitems.array.find(menuitem => menuitem.id === id)
-    return {
-        'id': menuitem.id,
-        'milk': menuitem.milk,
-        'price': menuitem.price,
-        'sugar': menuitem.sugar,
-        'temperature': menuitem.temperature,
-        'title': menuitem.title
+const selectMenuitems = state => state.menuitem.menuitems.array;
+const selectMenuitemId = (state, id) => id;
+export const getMenuitemById =createSelector(
+    [selectMenuitems, selectMenuitemId],
+    (menuitems, menuitemId) => {
+        const menuitem = menuitems.find(m=>m.id === menuitemId);
+        return {
+            'id': menuitem.id,
+            'milk': menuitem.milk,
+            'price': menuitem.price,
+            'sugar': menuitem.sugar,
+            'temperature': menuitem.temperature,
+            'title': menuitem.title
+        }
     }
-}
-// export const getMenuitemTitleById = (state, id) =>{
-//     const item =  state.menuitem.menuitems.array.find(menuitem => menuitem.pk === id)
-//     return item===undefined ? "" : item.title
-// }
+)
+const selectCategoryId = (state, category_id) => category_id;
+
+export const getMenuitemsByCategoryId = createSelector(
+    [selectMenuitems, selectCategoryId],
+    (menuitems, categoryId) => {
+        return menuitems.filter(menuitem=>menuitem.category.id === categoryId)
+    }
+)
+
 const selectMilks = (state) => state.menuitem.milk.array;
 export const getMilks = createSelector(
     [selectMilks],
@@ -302,15 +310,8 @@ export const getCategories = (state) =>{
     return  state.menuitem.category.array;
 }
 
-const selectMenuitems = (state) => state.menuitem.menuitems.array;
-const selectCategoryId = (state, category_id) => category_id;
 
-export const getMenuitemsByCategoryId = createSelector(
-    [selectMenuitems, selectCategoryId],
-    (menuitems, categoryId) => {
-        return menuitems.filter(menuitem=>menuitem.category.id === categoryId)
-    }
-)
+
 
     
 

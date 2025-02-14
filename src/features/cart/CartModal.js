@@ -5,10 +5,11 @@ import EmptyCart from './EmptyCart'
 import CartModalItem from './CartModalItem'
 import Subtotal from './Subtotal'
 import CheckoutButton from '../checkout/CheckoutButton'
-import CartModalBanner from './CartModalBanner'
+import CartMessage from './CartMessage'
 import {useSelector} from 'react-redux'
 
 const CartModal = ({setCartShow}) =>{
+    console.log("in cart modal")
     const {carts} = useSelector(state=>state.cart)
 
     if(carts.length === 0){
@@ -19,7 +20,7 @@ const CartModal = ({setCartShow}) =>{
             <div className='cart_modal_header'>
                 Your Cart
             </div>
-            <CartModalBanner />
+            <CartMessage />
             
             <div className='cart_modal_list'>
                 {

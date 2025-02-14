@@ -2,19 +2,18 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useState, useRef} from 'react';
 import {Modal} from 'react-bootstrap'
 import {
-    getMenuitemTitleById,
     triggerCustomizeModal,
     getMilkById,
     getMenuitemById,
     getSizeById
 } from '../menuitem/menuitemSlice'
-import {resetCartBanner} from './cartSlice'
+
 import {USDollar} from '../../app/global'
 import CartModalRemove from './CartModalRemove'
 
 const CartModalItem = ({cartitem, setCartShow}) =>{
 
-    console.log(cartitem)
+    // console.log(cartitem)
     // {
     // 		"sugar": "SEVENTY_FIVE",
     // 		"temperature": "HOT",

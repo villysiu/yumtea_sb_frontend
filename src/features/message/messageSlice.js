@@ -4,6 +4,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import {loginUser, logoutUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 // import { deleteReservation } from '../reservation/reservationSlice'
+
+
 // import { increment } from '../cart/cartSlice'
 const messageSlice = createSlice({
     name: 'message',
@@ -17,10 +19,9 @@ const messageSlice = createSlice({
       removeMessage: (state)=>{
         state.message_arr = []
       },
-      removeCartMessage: (state) =>{
-        state.cartMessage = null
+        clearCartMessage: (state) =>{
+            state.cartMessage = null
       }
-
     },
     extraReducers(builder) {
         builder
@@ -78,4 +79,13 @@ const messageSlice = createSlice({
     }
 })
 export default messageSlice.reducer
-export const { removeMessage, removeCartMessage } = messageSlice.actions
+export const { removeMessage, clearCartMessage } = messageSlice.actions
+
+// export const showMessage = (message, messageType, timeout = 3000) => (dispatch) => {
+//     // dispatch(setMessage({ message, messageType }));
+//
+//     // Clear the message after the timeout
+//     setTimeout(() => {
+//         dispatch(clearMessage());
+//     }, timeout);
+// };
