@@ -7,12 +7,6 @@ import {useLocation, useNavigate} from "react-router-dom";
 
 const AddCartButton = ({customizedItem, handleHide}) => {
     console.log(customizedItem)
-    
-    const dispatch = useDispatch()
-    const {currentUser} = useSelector(state=>state.user)
-    const location = useLocation();
-    const navigate = useNavigate();
-
     // const customizedItem = {
     //         'menuitem': itemToCustomize.menuitem,
     //         'quantity': quantity,
@@ -21,6 +15,13 @@ const AddCartButton = ({customizedItem, handleHide}) => {
     //         'size': size,
     //         'milk': milk
     //     }
+    const dispatch = useDispatch()
+    const {currentUser} = useSelector(state=>state.user)
+    const location = useLocation();
+    const navigate = useNavigate();
+
+
+    // to dispatch
     // {
     // 	"menuitemId": 2,
     // 	"milkId": 3,
@@ -29,7 +30,7 @@ const AddCartButton = ({customizedItem, handleHide}) => {
     // 	"sugar": "SEVENTY_FIVE",
     // 	"temperature": "ICED"
     // }
-    // const price = data.menuitem.price + data.size.price
+
     const handleClick = (e) =>{
 
         if(currentUser === null){

@@ -56,6 +56,7 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
             dispatch(triggerCustomizeModal(
                 {
                     "item": {
+                        'id': cartitem.id,
                         'menuitem': menuitem,
                         'milk': milk,
                         'temperature': cartitem.temperature,
@@ -64,7 +65,7 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
                         'quantity': cartitem.quantity
                     },
                     "task": "update",
-                    "trigger": true
+
                 }
             ))
 

@@ -21,7 +21,7 @@ const Menuitem = ({menuitem}) =>{
                     quantity: 1
                 },
                 "task": "add",
-                "trigger": 'true'
+                // "trigger": 'true'
             }
         ))
 

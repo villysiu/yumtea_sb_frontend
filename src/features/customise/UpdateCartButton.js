@@ -5,25 +5,33 @@ import { updateItem, updateItemInCart } from "../cart/cartSlice"
 import { resetMenuitemClicked } from '../menuitem/menuitemSlice'
 import { USDollar } from "../../app/global"
 
-const UpdateCartButton = ({data, handleHide}) =>{
+const UpdateCartButton = ({customizedItem, handleHide}) =>{
     console.log("update cart button ")
-    console.log(data)
-    // {
-        //     'pk': cartitem_pk,
-        //     'menuitem_pk':menuitem_id,
-        //     'milk_pk': milk_id,
-        //     'quantity': quantity, 
-        //     'temperature': temp, 
-        //     'size': size, 
-        //     'sweetness': sweetness,
-        //     'price': price
-        // }
+    console.log(customizedItem)
+    // const customizedItem = {
+    //          'id': itemToCustomize.id,
+    //         'menuitem': itemToCustomize.menuitem,
+    //         'quantity': quantity,
+    //         'temperature': temperature,
+    //         'sugar': sugar,
+    //         'size': size,
+    //         'milk': milk
+    //     }
 
     const dispatch = useDispatch()
-    const current_user_status = useSelector(state=>state.user.current_user.status)
 
     const handleClick = (e) =>{
-        dispatch(updateItemInCart(data))
+        dispatch(updateItemInCart(
+            {
+                "id": customizedItem.id,
+                "milkId": customizedItem.milk.id,
+                "sizeId": customizedItem.size.id,
+                "quantity": customizedItem.quantity,
+                "sugar": customizedItem.sugar,
+                "temperature": customizedItem.temperature
+            }
+        ))
+
 
         handleHide()
     }
@@ -33,7 +41,8 @@ const UpdateCartButton = ({data, handleHide}) =>{
             <Button className='update_cart_button' 
             onClick={handleClick}
             >
-                Update  {USDollar.format(data.quantity * data.price)}
+                Update {USDollar.format(customizedItem.quantity * (customizedItem.menuitem.price + customizedItem.size.price + customizedItem.milk.price))}
+
             </Button>
         </div>
 

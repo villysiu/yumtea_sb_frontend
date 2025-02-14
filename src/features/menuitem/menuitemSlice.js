@@ -155,7 +155,7 @@ const menuitemSlice=createSlice({
             cartitem: "",
         },
         customize: {
-            clicked: false,
+            // trigger: false,
             itemToCustomize: null,
             task: null //add or update
         }
@@ -178,9 +178,9 @@ const menuitemSlice=createSlice({
         triggerCustomizeModal(state, action) {
             console.log(action.payload)
             
-            state.customize.clicked =action.payload.trigger
+            // state.customize.clicked =action.payload.trigger
             state.customize.itemToCustomize = action.payload.item
-            state.task = action.payload.task
+            state.customize.task = action.payload.task
             
         },
 

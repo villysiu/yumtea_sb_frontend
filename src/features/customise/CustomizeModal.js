@@ -18,17 +18,11 @@ const CustomizeModal = ({handleHide}) =>{
     const task = useSelector(state=>state.menuitem.customize.task)
 
     console.log(itemToCustomize)
-    // const task = !itemToCustomize.pk  ? "add" : "update"
-    // console.log(task)
-//item data sent from menu and order history is menutitem_pk 
-//item data sent from shopping cart is menuitem_id instead of menutitem_pk 
-//     const menuitem = useSelector(state=>getMenuitemById(state, itemToCustomize.menuitemId))
 
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
-
     const [size, setSize] =useState(itemToCustomize.size)
     const [milk, setMilk] = useState(itemToCustomize.milk)
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(itemToCustomize.quantity)
     const [sugar, setSugar] = useState(itemToCustomize.sugar)
 
 
@@ -62,20 +56,35 @@ const CustomizeModal = ({handleHide}) =>{
             <Modal.Footer className='customize_footer'>
                 <UpdateQuantity quantity={quantity} setQuantity={setQuantity} />
                
-                {/*{*/}
-                {/*    task === 'add' ?*/}
+                {
+                    task === 'add' ?
                         <AddCartButton
-                            customizedItem={customizedItem}
+                            customizedItem={{
+                                'menuitem': itemToCustomize.menuitem,
+                                'quantity': quantity,
+                                'temperature': temperature,
+                                'sugar': sugar,
+                                'size': size,
+                                'milk': milk
+                            }}
                             handleHide={handleHide} 
                         />
-                {/*        :*/}
-                {/*        <UpdateCartButton*/}
-                {/*            data={{...data, pk: itemToCustomize.pk}}*/}
-                {/*            handleHide={handleHide} */}
-                {/*        />*/}
-                {/*    */}
+                        :
+                        <UpdateCartButton
+                            customizedItem={{
+                                'id':itemToCustomize.id,
+                                'menuitem': itemToCustomize.menuitem,
+                                'quantity': quantity,
+                                'temperature': temperature,
+                                'sugar': sugar,
+                                'size': size,
+                                'milk': milk
+                            }}
+                            handleHide={handleHide}
+                        />
 
-                {/*}   */}
+
+                }
 
                         
         
