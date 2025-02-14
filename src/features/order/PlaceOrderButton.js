@@ -9,7 +9,7 @@ const PlaceOrderButton = ({tip}) =>{
     const navigate = useNavigate()
 
     
-    const cart_status = useSelector(state=>state.cart.cart.status)
+    // const cart_status = useSelector(state=>state.cart.cart.status)
     const checkout_status = useSelector(state=>state.order.checkout_status)
 
 
@@ -19,13 +19,13 @@ const PlaceOrderButton = ({tip}) =>{
         }
         
         // restrict access from URL
-        else if(checkout_status === 'failed'
-            //  || cart_status==='idle'
-            ){
-            navigate(`/cart` )
-        }
+        // else if(checkout_status === 'failed'
+        //     //  || cart_status==='idle'
+        //     ){
+        //     navigate(`/cart` ) //dont have a cart page!!!
+        // }
         
-    },[checkout_status, cart_status, navigate])
+    },[checkout_status, navigate])
     
     const handleClick = () =>{
         dispatch(PlaceOrder(tip))

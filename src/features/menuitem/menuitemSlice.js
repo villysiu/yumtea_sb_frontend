@@ -258,7 +258,8 @@ export const getMenuitemById =createSelector(
             'price': menuitem.price,
             'sugar': menuitem.sugar,
             'temperature': menuitem.temperature,
-            'title': menuitem.title
+            'title': menuitem.title,
+            'imageUrl': menuitem.imageUrl
         }
     }
 )
@@ -310,6 +311,13 @@ export const getCategories = (state) =>{
     return  state.menuitem.category.array;
 }
 
+export const sugarMap = new Map([
+    ["ZERO", "No Sugar"],
+    ["TWENTY_FIVE", "25% Sugar"],
+    ["FIFTY", "50% Sugar"],
+    ["SEVENTY_FIVE", "75% Sugar"],
+    ["HUNDRED", "100% Sugar"]
+]);
 
 
 

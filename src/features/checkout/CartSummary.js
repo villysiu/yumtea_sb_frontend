@@ -5,15 +5,15 @@ import CartSummaryLineItem from "./CartSummaryLineItem"
 import { useSelector } from "react-redux"
 
 const CartSummary = () =>{
-    const cart_arr = useSelector(state => state.cart.cart.cart_arr)
-    console.log(cart_arr)
-                
+    const {carts} = useSelector(state => state.cart)
+    console.log(carts)
+
     return(
         <div className='cart_summary'>
             {
-                cart_arr.map(cartItem=>{
+                carts.map(cartItem=>{
                     return (
-                        <CartSummaryLineItem cartItem={cartItem} />
+                        <CartSummaryLineItem key={cartItem.id} cartItem={cartItem} />
                     )
                 })
             }

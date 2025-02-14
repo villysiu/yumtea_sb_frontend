@@ -8,7 +8,9 @@ const CheckoutButton = ({setCartShow}) =>{
         setCartShow(false)
     }
     return (
-        <Link to={`${homeLink}/secure/checkout`}  state={{ clicked: "checkout_button", path: '/secure/checkout'}} onClick={handleClick}>
+        <Link to={`${homeLink}/secure/checkout`}
+              state={{ clicked: "checkout_button", from: '/secure/checkout'}}
+              onClick={handleClick}>
             <Button className='checkout_button' >Proceed to Checkout</Button>
         </Link>
     )

@@ -18,25 +18,20 @@ const Checkout = () => {
     const [tip, setTip] = useState(0);
     const [cartSummary, showCartSummary] = useState(false);
 
-    const cart_status = useSelector(state=>state.cart.cart.status)
-    const subtotal = useSelector(state => getSubtotal(state))
-    // const count = useSelector(state => getItemsCountInCart(state))
+    const {subtotal} = useSelector(state => getSubtotal(state))
    
-    if(!location.state || location.state.clicked !== 'checkout_button'){
-        return (
-            <Navigate to="../../collection" />
-        )
-    }
+    // if(!location.state || location.state.clicked !== 'checkout_button'){
+    //     return (
+    //         <Navigate to="../../collection" />
+    //     )
+    // }
 
     return(
         <div className='checkout'>
             <div className='checkout_order_summary '>
                 {/*<div onClick={()=>showCartSummary(c=>!c)}>Order Summary</div> {" "}({count} items)*/}
             </div>
-            {
-                cartSummary && <CartSummary />
-                
-            }
+           <CartSummary />
             
             
             <div className="checkout_summary_line checkout_subtotal">
