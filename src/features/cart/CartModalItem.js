@@ -55,17 +55,13 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
         if(removeRef.current && !removeRef.current.contains(e.target)){
             dispatch(triggerCustomizeModal(
                 {
-                    "item": {
-                        'id': cartitem.id,
-                        'menuitem': menuitem,
-                        'milk': milk,
-                        'temperature': cartitem.temperature,
-                        'sugar': cartitem.sugar,
-                        'size': size,
-                        'quantity': cartitem.quantity
-                    },
-                    "task": "update",
-
+                    'id': cartitem.id,
+                    'menuitem': menuitem,
+                    'milk': milk,
+                    'temperature': cartitem.temperature,
+                    'sugar': cartitem.sugar,
+                    'size': size,
+                    'quantity': cartitem.quantity
                 }
             ))
 

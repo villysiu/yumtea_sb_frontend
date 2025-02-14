@@ -15,24 +15,19 @@ import CustomizeModal from './features/customise/CustomizeModal'
 function App() {
   console.log("in APP")
   const [show, setShow] = useState(false);
-  const {task} = useSelector(state=>state.menuitem.customize)
-  console.log(task)
+  const {itemToCustomize} = useSelector(state=>state.menuitem)
+  // console.log(task)
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    if(task !== null)
+    if(itemToCustomize !== null)
       setShow(true)
     
-  }, [task])
+  }, [itemToCustomize])
 
   const handleHide = () =>{
     setShow(false)
-    dispatch(triggerCustomizeModal(
-        {
-            "item": null,
-            "task": null,
-        }
-    ))
+    dispatch(triggerCustomizeModal(null))
   }
   return (
       <>

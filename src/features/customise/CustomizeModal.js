@@ -14,9 +14,9 @@ import  {homeLink} from '../../app/global'
 import menuitem from "../menuitem/Menuitem";
 
 const CustomizeModal = ({handleHide}) =>{
-    const itemToCustomize = useSelector(state=>state.menuitem.customize.itemToCustomize)
-    const task = useSelector(state=>state.menuitem.customize.task)
-
+    // const itemToCustomize = useSelector(state=>state.menuitem.customize.itemToCustomize)
+    // const task = useSelector(state=>state.menuitem.customize.task)
+    const {itemToCustomize} = useSelector(state=>state.menuitem)
     console.log(itemToCustomize)
 
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
@@ -26,19 +26,19 @@ const CustomizeModal = ({handleHide}) =>{
     const [sugar, setSugar] = useState(itemToCustomize.sugar)
 
 
-    const customizedItem = {
-        'menuitem': itemToCustomize.menuitem,
-        'quantity': quantity,
-        'temperature': temperature,
-        'sugar': sugar,
-        'size': size,
-        'milk': milk
-    }
+    // const customizedItem = {
+    //     'menuitem': itemToCustomize.menuitem,
+    //     'quantity': quantity,
+    //     'temperature': temperature,
+    //     'sugar': sugar,
+    //     'size': size,
+    //     'milk': milk
+    // }
 
     return (
         <>
             <Modal.Header className='customize_header' closeButton>
-                <Modal.Title>Customize {itemToCustomize.menuitem.title} new </Modal.Title>
+                <Modal.Title>Customize {itemToCustomize.menuitem.title} </Modal.Title>
             </Modal.Header>
             <Modal.Body className='customize_list'>
             {
@@ -57,7 +57,7 @@ const CustomizeModal = ({handleHide}) =>{
                 <UpdateQuantity quantity={quantity} setQuantity={setQuantity} />
                
                 {
-                    task === 'add' ?
+                    itemToCustomize.id === null ?
                         <AddCartButton
                             customizedItem={{
                                 'menuitem': itemToCustomize.menuitem,
