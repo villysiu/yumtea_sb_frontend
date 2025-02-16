@@ -28,7 +28,10 @@ const PlaceOrderButton = ({tip}) =>{
     },[checkout_status, navigate])
     
     const handleClick = () =>{
-        dispatch(PlaceOrder(tip))
+        dispatch(PlaceOrder({
+            "tip": tip,
+            "state": "WA"
+        }))
     }
     if(checkout_status === 'loading'){
         return(

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchCurrentUserOrders } from "./orderSlice"
+import {fetchCurrentUserOrders, getOrders} from "./orderSlice"
 import SingleOrder from "./SingleOrder"
 import OrderFilter from "./OrderFilter"
 import { lastthirtydaysOrders, currentyearOrders, lastyearOrders } from "./orderSlice"
@@ -13,7 +13,7 @@ const OrderHistory = () =>{
     const [filter, setFilter] =useState(7)
 
     const ordersStatus = useSelector(state=>state.order.status)
-    const orders = useSelector(state =>lastthirtydaysOrders(state.order.orders, filter)) 
+    const orders = useSelector(state =>getOrders(state, 7))
    
     useEffect(()=>{
         if(ordersStatus === 'idle')
@@ -36,13 +36,13 @@ const OrderHistory = () =>{
             <h2 >Order History</h2>
             
             <div className="order_history">
-                <div className="order_filter">
-                    <OrderFilter filter={filter} setFilter={setFilter} />
-                </div>
+                {/*<div className="order_filter">*/}
+                {/*    <OrderFilter filter={filter} setFilter={setFilter} />*/}
+                {/*</div>*/}
                 {
                     orders.map(order => {
                         return (
-                            <SingleOrder key={order.pk} order={order} show={show} setShow={setShow}/>
+                            <SingleOrder key={order.id} order={order} show={show} setShow={setShow} />
                         )
                     })
                 } 

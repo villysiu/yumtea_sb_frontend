@@ -1,7 +1,7 @@
 .collection_wrapper{
     display: flex;
     flex-direction: column;
-    background: url("./img/contentBg.jpg") center no-repeat;
+    /*background: url("./img/contentBg.jpg") center no-repeat;*/
     background-size: cover;
 }
 /* .collection_img_wrapper{

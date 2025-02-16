@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { homeLink } from "../../app/global";
 import { useSelector } from "react-redux";
-import {formatTimestamp} from "./orderSlice";
+import {convertTimestampToDatetime} from "./orderSlice";
 
 
 const OrderSuccess = () =>{
@@ -11,7 +11,7 @@ const OrderSuccess = () =>{
     console.log(location)
     const checkout_status = useSelector(state=>state.order.checkout_status)
     const order = useSelector(state=>state.order.newestOrder)
-    const orderDate = useSelector(state => formatTimestamp(state.order.newestOrder.purchaseDate))
+    const orderDate = useSelector(state => convertTimestampToDatetime(state.order.newestOrder.purchaseDate))
     // prohibited direct access this page
     // if(from !== "Checkout2"){
     if(checkout_status !== "succeeded"){
