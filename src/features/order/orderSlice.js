@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
+import {fetchCart} from "../cart/cartSlice";
 
 
 
@@ -10,9 +11,7 @@ export const fetchCurrentUserOrders=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/api/orders`, {
                 method: "GET",
-                headers: {
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-                }
+
             })
 
             if(!response.ok) {
@@ -34,26 +33,28 @@ export const PlaceOrder=createAsyncThunk(
     async (tip) => {
         console.log("CheckoutCart orders")
         try {
-            const response=await fetch(`${apiLink}/api/orders`, {
+            const response=await fetch(`${apiLink}/purchase`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    'accept': 'application/json',
-                    "Authorization": `Token ${localStorage.getItem("token")}`,
-                    
+                    'accept': 'application/json'
                 },
-                body: JSON.stringify({'tip': tip})
+                body: JSON.stringify({'tip': tip}),
+                credentials: "include"
                 
             })
-
-            if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(response.ok) {
+               return await response.json();
             }
-            const data=await response.json()
-            console.log(data)
+
+            // if(!response.ok) {
+            //     throw new Error(`${response.status} ${response.statusText}`)
+            // }
+            // const data=await response.json()
+            // console.log(data)
             // {"pk": 1, "title": "Red Wine", "slug": "red"}
             
-            return data
+            // return data
         } 
         catch(error){
             return Promise.reject(error);
@@ -65,7 +66,7 @@ const orderSlice=createSlice({
     initialState: {
         orders: [],
         status: 'idle',
-        
+        newestOrder: null,
         checkout_status: 'idle',
 
         
@@ -99,9 +100,10 @@ const orderSlice=createSlice({
         })
         .addCase(PlaceOrder.fulfilled, (state, action) => {
             
-            console.log(action.payload)
+            // console.log(action.payload)
             state.checkout_status = 'succeeded'
-            state.orders = [ action.payload, ...state.orders]
+            state.newestOrder = action.payload;
+            // state.orders = [ action.payload, ...state.orders]
         })
         .addCase(PlaceOrder.rejected, (state, action) => {
             state.checkout_status = 'failed'
@@ -111,6 +113,7 @@ const orderSlice=createSlice({
 })
 export const { clearorder } = orderSlice.actions
 export default orderSlice.reducer
+
 export const lastthirtydaysOrders = (orders, days) => {
     const current = new Date()
     current.setDate(current.getDate()-days)
@@ -142,4 +145,19 @@ export const getSubtotal = (orderitems) => {
         sum+=(lineitem.quantity * lineitem.price)
     }
     return sum
+}
+export const formatTimestamp = (timestamp) =>{
+    const date = new Date(timestamp); // Convert the timestamp to a Date object
+
+    // Extract the month, day,  year, hour, min, sec
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so add 1
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+
+    return `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
 }

@@ -200,7 +200,7 @@ const cartSlice=createSlice({
             state.fetchCartStatus = 'idle'
         })
         .addCase(PlaceOrder.fulfilled, (state, action) => {
-            state.carts = null;
+            state.carts = [];
             state.fetchCartStatus = 'idle'
             
         })

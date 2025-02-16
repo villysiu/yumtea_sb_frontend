@@ -7,7 +7,7 @@ const User = () => {
     const navigate = useNavigate()
     const location = useLocation()
     console.log(location)
-    const path=location.state ? `..${location.state.from.pathname}` : "../secure/account"
+    const path=location.state ? `../..${location.state.from.pathname}` : "../secure/account"
 
     
     const {loginStatus} = useSelector(state => state.user)
