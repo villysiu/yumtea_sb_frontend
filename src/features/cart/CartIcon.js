@@ -7,7 +7,7 @@ import {getSubtotal, getItemsCountInCart} from './cartSlice'
 import {useLocation} from 'react-router-dom'
 import EmptyCart from './EmptyCart'
 
-const CartButton =() =>{
+const CartIcon =() =>{
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -90,4 +90,4 @@ const CartButton =() =>{
         </>
     )
 }
-export default CartButton
+export default CartIcon

@@ -7,7 +7,7 @@ import HeaderVisitButton from './HeaderVisitButton'
 import HeaderHomeButton from './HeaderHomeButton'
 import HeaderUserButton from './HeaderUserButton'
 
-import CartButton from '../cart/CartButton'
+import CartIcon from '../cart/CartIcon'
 const HeaderNav = () =>{
     const location = useLocation()
     const [current, setCurrent] = useState(null)
@@ -31,7 +31,7 @@ const HeaderNav = () =>{
             <HeaderDrinksButton current={current} setCurrent={setCurrent} />
             
             <HeaderUserButton />
-            <CartButton />
+            <CartIcon />
         </div>
     )
 }

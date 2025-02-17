@@ -1,6 +1,6 @@
 import './checkout.css'
 
-import { useLocation, Navigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
 import { getSubtotal } from "../cart/cartSlice"
@@ -11,26 +11,47 @@ import Tip from "./Tip"
 import PlaceOrderButton from '../order/PlaceOrderButton'
 import CartSummaryLineItem from "./CartSummaryLineItem";
 import {calculateTax} from "../taxRate/taxRateSlice";
+import BackToMenuButton from "./BackToMenuButton";
 
 const Checkout = () => {
     console.log("in checkout page")
     const location = useLocation()
     console.log(location)
+    const navigate = useNavigate()
 
     const {carts} = useSelector(state => state.cart)
-    // const {taxRate} = useSelector(state=>state.taxRate)
+
     const {subtotal, count} = useSelector(state => getSubtotal(state))
     const tax = useSelector(state => calculateTax(state, subtotal))
     const [tip, setTip] = useState("0");
-    // if(!location.state || location.state.clicked !== 'checkout_button'){
-    //     return (
-    //         <Navigate to="../../collection" />
-    //     )
-    // }
+
+    const {newestOrder} = useSelector(state=>state.order)
+
+    useEffect(()=>{
+        console.log(newestOrder)
+        if(newestOrder !== null){
+            navigate('/secure/ordersuccess')
+        }
+
+        // restrict access from URL
+        // else if(checkout_status === 'failed'
+        //     //  || cart_status==='idle'
+        //     ){
+        //     navigate(`/cart` ) //dont have a cart page!!!
+        // }
+
+    },[newestOrder, navigate])
+
+    if(carts.length === 0)
+        return(
+            <div className='checkout'>
+                <div><b>Shopping Cart is empty</b></div>
+                <BackToMenuButton />
+            </div>
+        )
 
 
-
-    return(
+    return (
         <div className='checkout'>
             <div className='checkout_order_summary '>
                 <div><b>Shopping Cart </b></div> ({`${count} ${count === 1 ? 'item' : 'items'}`})

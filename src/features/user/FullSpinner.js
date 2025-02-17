@@ -4,7 +4,7 @@ const FullSpinner = () =>{
     return (
         
         <div className="full_spinner">
-            <Spinner className={{width: "10rem"}} />
+            <Spinner className={{width: "10rem"}} /> HAHAHHAHAHAHHA
         </div>
 
     )

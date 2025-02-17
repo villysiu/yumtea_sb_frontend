@@ -65,15 +65,18 @@ const orderSlice=createSlice({
         orders: [],
         status: 'idle',
         newestOrder: null,
-        checkout_status: 'idle',
+        checkoutStatus: 'idle',
     },
     reducers: {
-        clearorder(state, action){
-            state.checkout_status="idle"
+        // clearorder(state, action){
+        //     state.checkoutStatus="idle"
+        // }
+
+        clearNewestOrder(state){
+            console.log("clea djafhsj")
+            state.newestOrder = null;
+            state.checkoutStatus = 'idle';
         }
-        //   emptyTempCart(state,action){
-        //     state.cart.temp_cart_arr = []
-        //   },
 
     },
     extraReducers(builder) {
@@ -91,22 +94,21 @@ const orderSlice=createSlice({
             state.status = 'failed'
         })
         .addCase(PlaceOrder.pending, (state, action) => {
-            state.checkout_status = 'loading'
+            state.checkoutStatus = 'loading'
         })
         .addCase(PlaceOrder.fulfilled, (state, action) => {
-            
-            console.log(action.payload)
-            state.checkout_status = 'succeeded'
+
+            state.checkoutStatus = 'succeeded'
             state.newestOrder = action.payload;
-            // rest orders status to fetch update orders list from api
+            // rest orders status to fetch  updated orders list from api
             state.status = "idle";
         })
         .addCase(PlaceOrder.rejected, (state, action) => {
-            state.checkout_status = 'failed'
+            state.checkoutStatus = 'failed'
         })
     }
 })
-export const { clearorder } = orderSlice.actions
+export const { clearNewestOrder } = orderSlice.actions
 export default orderSlice.reducer
 
 const selectOrders = (state) => state.order.orders;
@@ -125,8 +127,11 @@ export const getOrders = createSelector(
 )
 
 
-export const convertTimestampToDatetime = (timestamp) =>{
+export const convertTimestampToDatetime = (state) =>{
+    if(state.order.newestOrder === null)
+        return null
 
+    const timestamp = state.order.newestOrder.purchaseDate;
     const date = new Date(timestamp); // Convert the timestamp to a Date object
 
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so add 1

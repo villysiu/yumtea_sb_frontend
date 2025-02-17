@@ -5,7 +5,7 @@ import HeaderDrinksButton from './HeaderDrinksButton'
 import HeaderVisitButton from './HeaderVisitButton'
 import HeaderHomeButton from './HeaderHomeButton'
 import HeaderUserButton from './HeaderUserButton'
-import CartButton from '../cart/CartButton'
+import CartIcon from '../cart/CartIcon'
 
 const HeaderNavbarXL = () =>{
     
@@ -21,7 +21,7 @@ const HeaderNavbarXL = () =>{
                 <HeaderDrinksButton />
             
                 <HeaderUserButton />
-                <CartButton />
+                <CartIcon />
     
           
             </Navbar>

@@ -12,7 +12,7 @@ const SecureApp = () => {
     let location = useLocation();
     console.log(location)
 
-    const {currentUser, fetchUserStatus} = useSelector(state => state.user)
+    const {currentUser} = useSelector(state => state.user)
 
     if(currentUser === null){
         return (

@@ -107,8 +107,7 @@ export const fetchSugars = createAsyncThunk(
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            const data=await response.json()
-            return data
+            return await response.json()
         }
         catch(error){
             return Promise.reject(error);

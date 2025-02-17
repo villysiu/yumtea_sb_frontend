@@ -96,10 +96,7 @@ export const logoutUser=createAsyncThunk(
 const userSlice=createSlice({
     name: 'user',
     initialState: {
-        // current_user: {
-        //     email: null,
-        //     nickname: null,
-        // },
+
         currentUser: null,
         fetchUserStatus: 'idle',
         loginStatus: 'idle',

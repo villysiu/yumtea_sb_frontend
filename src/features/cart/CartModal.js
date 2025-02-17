@@ -4,7 +4,7 @@ import './cart.css'
 import EmptyCart from './EmptyCart'
 import CartModalItem from './CartModalItem'
 import Subtotal from './Subtotal'
-import CheckoutButton from '../checkout/CheckoutButton'
+import CheckoutButton from './CheckoutButton'
 import CartMessage from './CartMessage'
 import {useSelector} from 'react-redux'
 
