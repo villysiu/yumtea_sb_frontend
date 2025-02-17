@@ -1,20 +1,17 @@
 import './header.css';
 
-import {homeLink} from '../../app/global.js'
-import HeaderNav from './HeaderNav'
-
 import { useState, useEffect } from 'react';
 import {useLocation} from 'react-router-dom'
 import HeaderNavbarXL from './HeaderNavbarXL';
-import HeaderNavbarLG from './HeaderNavbarLG';
 import HeaderNavbarMD from './HeaderNavbarMD';
-import Title from './Title';
+
 
 const Header = () =>{
     
     const location = useLocation();
     // const noHeader = ['/secure/checkout', '/user/signin']
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    console.log(windowWidth);
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -37,9 +34,7 @@ const Header = () =>{
     if(windowWidth < 992){
         return <HeaderNavbarMD />
     }
-    // else if(windowWidth >= 992 && windowWidth < 1200){
-    //     return <HeaderNavbarLG />
-    // }
+
     else{ //windowWidth >= 1200){
         return <HeaderNavbarXL />
     }
