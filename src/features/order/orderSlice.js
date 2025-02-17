@@ -58,6 +58,7 @@ export const PlaceOrder=createAsyncThunk(
         }
     }
 )
+
 const orderSlice=createSlice({
     name: 'order',
     initialState: {
@@ -65,9 +66,6 @@ const orderSlice=createSlice({
         status: 'idle',
         newestOrder: null,
         checkout_status: 'idle',
-
-        
-       
     },
     reducers: {
         clearorder(state, action){
@@ -100,22 +98,22 @@ const orderSlice=createSlice({
             console.log(action.payload)
             state.checkout_status = 'succeeded'
             state.newestOrder = action.payload;
-            // state.orders = [ action.payload, ...state.orders]
+            // rest orders status to fetch update orders list from api
+            state.status = "idle";
         })
         .addCase(PlaceOrder.rejected, (state, action) => {
             state.checkout_status = 'failed'
         })
-        
     }
 })
 export const { clearorder } = orderSlice.actions
 export default orderSlice.reducer
 
 const selectOrders = (state) => state.order.orders;
-const selectSpan = (state, days) => days
+const selectDays = (state, days) => days
 
 export const getOrders = createSelector(
-    [selectOrders, selectSpan],
+    [selectOrders, selectDays],
     (orders, days) => {
         const current = new Date();
         current.setDate(current.getDate() - days);
@@ -126,49 +124,11 @@ export const getOrders = createSelector(
     }
 )
 
-// export const getSubtotal = createSelector(
-//     [selectOrders],
-//     (orders) => {
-//         let
-//     }
-// )
-// export const getSubtotal = (orderitems) => {
-//     let sum = 0
-//     for(let lineitem of orderitems){
-//         sum+=(lineitem.quantity * lineitem.price)
-//     }
-//     return sum
-// }
-// export const lastthirtydaysOrders = (orders, days) => {
-//     const current = new Date()
-//     current.setDate(current.getDate()-days)
-//     return orders.filter(order=>new Date(order.date) > current)
-//
-//
-// }
-// export const currentyearOrders = (orders) =>{
-//     const current_year = new Date().getFullYear()
-//     const regex = /(\d{4})/g;
-//     return {
-//         'orders_arr': 
-//             orders.filter(order=>parseInt(order.date.match(regex)[0]) === current_year), 
-//         'status': 'succeeded'
-//     }
-// }
-// export const lastyearOrders = (orders) =>{
-//     const last_year = new Date().getFullYear()-1
-//     const regex = /(\d{4})/g;
-//     return {
-//         'orders_arr': 
-//             orders.filter(order=>parseInt(order.date.match(regex)[0]) === last_year), 
-//         'status': 'succeeded'
-//     }
-// }
 
 export const convertTimestampToDatetime = (timestamp) =>{
-    console.log(typeof timestamp)
+
     const date = new Date(timestamp); // Convert the timestamp to a Date object
-console.log(date)
+    console.log(date)
     // 1739736534782 from place order
     // 1739736534782
     // Extract the month, day,  year, hour, min, sec

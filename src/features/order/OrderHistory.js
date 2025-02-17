@@ -10,10 +10,10 @@ const OrderHistory = () =>{
 
     const dispatch = useDispatch()
     const [show, setShow] = useState(null)
-    const [filter, setFilter] =useState(7)
+    const [filter, setFilter] =useState(3)
 
     const ordersStatus = useSelector(state=>state.order.status)
-    const orders = useSelector(state =>getOrders(state, 7))
+    const orders = useSelector(state =>getOrders(state, filter))
    
     useEffect(()=>{
         if(ordersStatus === 'idle')
@@ -36,9 +36,9 @@ const OrderHistory = () =>{
             <h2 >Order History</h2>
             
             <div className="order_history">
-                {/*<div className="order_filter">*/}
-                {/*    <OrderFilter filter={filter} setFilter={setFilter} />*/}
-                {/*</div>*/}
+                <div className="order_filter">
+                    <OrderFilter filter={filter} setFilter={setFilter} />
+                </div>
                 {
                     orders.map(order => {
                         return (

@@ -3,23 +3,25 @@ import './checkout.css'
 import { useLocation, Navigate } from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
-import { getSubtotal, getItemsCountInCart } from "../cart/cartSlice"
-import CartSummary from './CartSummary'
+import { getSubtotal } from "../cart/cartSlice"
+
 
 import { useEffect, useState } from "react"
 import Tip from "./Tip"
 import PlaceOrderButton from '../order/PlaceOrderButton'
+import CartSummaryLineItem from "./CartSummaryLineItem";
+import {calculateTax} from "../taxRate/taxRateSlice";
 
 const Checkout = () => {
     console.log("in checkout page")
     const location = useLocation()
     console.log(location)
 
-    const [tip, setTip] = useState(0);
-    const [cartSummary, showCartSummary] = useState(false);
-
-    const {subtotal} = useSelector(state => getSubtotal(state))
-   
+    const {carts} = useSelector(state => state.cart)
+    // const {taxRate} = useSelector(state=>state.taxRate)
+    const {subtotal, count} = useSelector(state => getSubtotal(state))
+    const tax = useSelector(state => calculateTax(state, subtotal))
+    const [tip, setTip] = useState(0.0);
     // if(!location.state || location.state.clicked !== 'checkout_button'){
     //     return (
     //         <Navigate to="../../collection" />
@@ -29,40 +31,34 @@ const Checkout = () => {
     return(
         <div className='checkout'>
             <div className='checkout_order_summary '>
-                {/*<div onClick={()=>showCartSummary(c=>!c)}>Order Summary</div> {" "}({count} items)*/}
+                <div><b>Shopping Cart </b></div> ({`${count} ${count === 1 ? 'item' : 'items'}`})
             </div>
-           <CartSummary />
-            
-            
+            <div className='cart_summary'>
+                {
+                    carts.map(cartItem => <CartSummaryLineItem key={cartItem.id} cartItem={cartItem} />)
+                }
+            </div>
+
+
             <div className="checkout_summary_line checkout_subtotal">
                 <div>Subtotal</div>
                 <div>{USDollar.format(subtotal)}</div>
             </div>
-            
+
             <div className="checkout_summary_line checkout_tax">
                 <div>Estimated Tax</div>
-                <div>{USDollar.format(subtotal * 0.1)}</div>
+                <div>{USDollar.format(tax)}</div>
             </div>
-   
-            {
-                <div className='checkout_tip'>
-                    <div className="checkout_summary_line">
-                        <div>Tip </div>
-                        <div>{USDollar.format(tip)}</div>
+            <Tip tip={tip} setTip={setTip} subtotal={subtotal}/>
 
-                    </div>
-                    <Tip tip={tip} setTip={setTip} subtotal={subtotal} />
-                
-                 </div>
-            }
-    
+
             <div className="checkout_summary_line checkout_total">
                 <div>Total</div>
-                <div>{USDollar.format(subtotal + subtotal * 0.1 + tip)}</div>
+                <div>{USDollar.format(subtotal  + parseFloat(tip) + tax)}</div>
             </div>
-            
+
             <PlaceOrderButton tip={tip}/>
-            
+
         </div>
     )
 }

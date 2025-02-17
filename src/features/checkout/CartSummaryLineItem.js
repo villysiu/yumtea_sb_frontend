@@ -5,15 +5,8 @@ import { homeLink, USDollar } from "../../app/global"
 const CartSummaryLineItem = ({cartItem})=>{
 
     const menuitem = useSelector(state=>getMenuitemById(state, cartItem.menuitem.id))
-    // const milk = useSelector(state=>getMilkById(state, cartItem.menuitem_id))
 console.log(menuitem)
-    // const sugarMap = new Map([
-    //     ["ZERO", "No Sugar"],
-    //     ["TWENTY_FIVE", "25%"],
-    //     ["FIFTY", "50%"],
-    //     ["SEVENTY_FIVE", "75%"],
-    //     ["HUNDRED", "100%"]
-    // ]);
+
 
     return(
         <div className='summary_lineitem_wrapper'>

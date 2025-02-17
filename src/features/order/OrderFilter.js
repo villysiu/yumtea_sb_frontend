@@ -4,9 +4,10 @@ const OrderFilter = ({filter, setFilter}) =>{
 
     const filterChoices = [
         // "All Order",
+        ["Past 3 days", 3],
         ["Past 7 days", 7],
         ["Past 30 day", 30],
-        ["Last Year", 365]
+
     ]
     const handleChange = e =>{
         // console.log(e.target.value)

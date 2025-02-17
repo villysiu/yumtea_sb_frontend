@@ -6,6 +6,7 @@ import menuitemSlice from '../features/menuitem/menuitemSlice'
 import cartSlice from '../features/cart/cartSlice'
 import orderSlice from '../features/order/orderSlice'
 import reservationSlice from '../features/reservation/reservationSlice'
+import taxRateSlice from "../features/taxRate/taxRateSlice";
 
 
 export default configureStore({
@@ -16,6 +17,6 @@ export default configureStore({
     cart: cartSlice,
     order: orderSlice,
     reservation: reservationSlice,
-    
+    taxRate: taxRateSlice
   },
 })
