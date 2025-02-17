@@ -11,21 +11,33 @@ import { Outlet } from 'react-router-dom';
 import GetTaxRate from "../taxRate/GetTaxRate";
 
 const EnterPage = () =>{
-    console.log("in Enter Page")
+    console.log("ENTER PAGE")
 
     // const [show, setShow] = useState(true);
-    const [spinner, setSpinner] = useState(false);
 
+    const [getUser, setGetUser] = useState(false);
+    const [getMenuitem, setGetMenuitem] = useState(false);
+
+    const [spinner, setSpinner] = useState(!getUser || !getMenuitem);
+
+    useEffect(()=>{
+        setSpinner(!getUser || !getMenuitem);
+
+    }, [getUser, getMenuitem])
     return(
         <>
             
-            <GetMenuitems setSpinner={setSpinner} />
-            <GetUser setSpinner={setSpinner} />
+            <GetMenuitems setGetMenuitem={setGetMenuitem} />
+            <GetUser setGetUser={setGetUser} />
             <GetCarts />
             <GetTaxRate />
             <ResetApp />
 
-            {spinner ? <Spinner animation="border" className="spinner"/> : <Outlet /> }
+            {spinner ?
+                <Spinner animation="border" className="spinner"/>
+                :
+                <Outlet />
+            }
         
             
         </>

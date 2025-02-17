@@ -5,7 +5,7 @@ import {fetchMenuitems, fetchMilks, fetchCategories, fetchSizes, fetchSugars} fr
 // import FullSpinner from "../headerNav/FullSpinner"
 
 
-const GetMenuitems = ({setSpinner}) =>{
+const GetMenuitems = ({setGetMenuitem}) =>{
     console.log("Menuitem App")
     const dispatch = useDispatch()
     let menuitems_status = useSelector(state => state.menuitem.menuitems.status)
@@ -44,10 +44,10 @@ const GetMenuitems = ({setSpinner}) =>{
             && category_status === 'succeeded'
             && size_status === 'succeeded'
             && sugar_status === 'succeeded'){
-            setSpinner(false)
+            setGetMenuitem(true)
         }
         else
-            setSpinner(true)
+            setGetMenuitem(false)
         
 
         

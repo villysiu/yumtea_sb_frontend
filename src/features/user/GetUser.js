@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { fetchCurrentUser } from "./userSlice"
 
-const GetUser = ({setSpinner}) =>{
-    console.log("in user app?")
+const GetUser = ({setGetUser}) =>{
+    console.log("GET USER")
     const dispatch = useDispatch()
     const {currentUser, fetchUserStatus} = useSelector(state => state.user)
 
@@ -11,11 +11,13 @@ const GetUser = ({setSpinner}) =>{
         if(!currentUser && fetchUserStatus==='idle')
             dispatch(fetchCurrentUser());
 
-        if(fetchUserStatus === 'loading')
-            setSpinner(true);
-
-        else
-            setSpinner(false);
+        if(fetchUserStatus === 'loading') {
+            setGetUser(false);
+        }
+        else {
+            // when fetchUser process completed, either result succeeded or failed
+            setGetUser(true);
+        }
     }, [fetchUserStatus, dispatch])
 
 

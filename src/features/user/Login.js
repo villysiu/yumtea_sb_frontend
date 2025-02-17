@@ -9,7 +9,7 @@ import {resetUserStatus} from './userSlice'
 import { loginUser } from './userSlice';
 import LoginButton from './LoginButton'
 const Login = () =>{
-
+console.log("LOGIN PAGE")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const dispatch=useDispatch();

@@ -8,16 +8,16 @@ import FullSpinner from "./FullSpinner"
 import {fetchCurrentUser} from './userSlice'
 
 const SecureApp = () => {
-    console.log("in secure")
+    console.log("SECURE")
     let location = useLocation();
     console.log(location)
 
-    const {loginStatus} = useSelector(state => state.user)
+    const {currentUser, fetchUserStatus} = useSelector(state => state.user)
 
-    if(loginStatus !== 'succeeded'){
+    if(currentUser === null){
         return (
             <Navigate to="../user/signin"
-            state = {location.state}
+            state = {location.pathname}
             />
         )
     }

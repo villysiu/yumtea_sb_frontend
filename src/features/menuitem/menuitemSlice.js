@@ -18,11 +18,8 @@ export const fetchCategories=createAsyncThunk(
                 console.log(response)
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            const data=await response.json()
-            console.log(data)
 
-            
-            return data
+            return await response.json()
             
         } 
         catch(error){
@@ -43,15 +40,11 @@ export const fetchMenuitems=createAsyncThunk(
             })
 
             if(!response.ok) {
-                
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            const data=await response.json()
-            console.log(data)
-            return data
+            return await response.json()
         } 
         catch(error){
-            console.log("i m in error fetching menu items")
             return Promise.reject(error);
         }
     }
@@ -70,8 +63,8 @@ export const fetchMilks=createAsyncThunk(
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            const data=await response.json()
-            return data
+
+            return await response.json();
         } 
         catch(error){
             return Promise.reject(error);

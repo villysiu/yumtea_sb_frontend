@@ -14,9 +14,8 @@ export const fetchTaxRate = createAsyncThunk(
             if(!response.ok)
                 throw new Error(`Server error: ${response.status} ${response.statusText}`);
 
-            const data = await response.json();
-            console.log(data)
-            return data
+
+            return await response.json();
         }
         catch(error){
             rejectWithValue(error.message);
@@ -36,8 +35,6 @@ const taxRateSlice=createSlice({
                 state.fetchTaxRateStatus = 'loading'
             })
             .addCase(fetchTaxRate.fulfilled, (state, action) => {
-
-                console.log(action.payload)
                 state.fetchTaxRateStatus = 'succeeded'
                 state.taxRate = action.payload;
             })
