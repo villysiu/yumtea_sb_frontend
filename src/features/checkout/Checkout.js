@@ -21,12 +21,14 @@ const Checkout = () => {
     // const {taxRate} = useSelector(state=>state.taxRate)
     const {subtotal, count} = useSelector(state => getSubtotal(state))
     const tax = useSelector(state => calculateTax(state, subtotal))
-    const [tip, setTip] = useState(0.0);
+    const [tip, setTip] = useState("0");
     // if(!location.state || location.state.clicked !== 'checkout_button'){
     //     return (
     //         <Navigate to="../../collection" />
     //     )
     // }
+
+
 
     return(
         <div className='checkout'>
@@ -54,10 +56,10 @@ const Checkout = () => {
 
             <div className="checkout_summary_line checkout_total">
                 <div>Total</div>
-                <div>{USDollar.format(subtotal  + parseFloat(tip) + tax)}</div>
+                <div>{USDollar.format(subtotal  + (tip===""? 0.0 : parseFloat(tip)) + tax)}</div>
             </div>
 
-            <PlaceOrderButton tip={tip}/>
+            <PlaceOrderButton tip={parseFloat(tip)}/>
 
         </div>
     )

@@ -9,11 +9,11 @@ const Tip = ({tip, setTip, subtotal}) =>{
     
 
     const handleChange = (e) =>{
-        console.log(e.target.value)
-        console.log(typeof e.target.value)
-        // const val = parseFloat(e.target.value);
-        // setTip(isNaN(val) ? 0.0 : val);
-        setTip(e.target.value)
+        const val = e.target.value;
+
+        const regex = /^(\d+(\.\d{0,2})?)?$/;  // Allows numbers with at most 2 decimals
+        if (regex.test(val) || val==="")
+            setTip(val === "" ? "" : e.target.value)
     }
 
      const handleTip = p =>{
@@ -41,7 +41,10 @@ const Tip = ({tip, setTip, subtotal}) =>{
                                 return (
                                     tipbox ?
                                         <div key={idx} className="className='tipbox input-dollar">
-                                            <input type="text" placeholder="0.00" value={tip} onChange={handleChange}/>
+                                            <input type="text" placeholder="0.00" value={tip}
+                                                   onChange={handleChange}
+                                                   // onFocus={()=>setTip("")}
+                                            />
                                         </div>
                                         :
                                         <div key={idx} className='tipbox right'
