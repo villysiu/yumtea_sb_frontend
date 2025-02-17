@@ -5,9 +5,7 @@ import {useSelector} from 'react-redux'
 import {convertTimestampToDatetime, getSubtotal} from './orderSlice'
 const SingleOrder = ({order, show, setShow}) =>{
 
-    // 1739731901066
-    console.log(typeof order.purchaseDate)
-    const orderDate = useSelector(state=>convertTimestampToDatetime(order.purchaseDate))
+
     const ref=useRef()
     const handleOpen = e =>{
         setShow(order.id)
@@ -23,7 +21,7 @@ const SingleOrder = ({order, show, setShow}) =>{
             <div className='orderhistory_order_container'>
                 <div className='orderhistory_order_header' onClick={handleOpen}>
                     <div className='orderhistory_order_header_l'>
-                        <div className='orderhistory_order_col'>{orderDate}</div>
+                        <div className='orderhistory_order_col'>{order.formatedDate}</div>
                         <div className='orderhistory_order_col'>Order #{order.id}</div>
                     </div>
                     <div className='orderhistory_order_header_c'>

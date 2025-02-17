@@ -1,7 +1,6 @@
 import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import {fetchCart} from "../cart/cartSlice";
-import {useSelector} from "react-redux";
+import { format } from 'date-fns';
 
 
 
@@ -19,11 +18,9 @@ export const fetchCurrentUserOrders=createAsyncThunk(
                 throw new Error(`Server error: ${response.status} ${response.statusText}`);
 
             }
-            const data=await response.json()
-            console.log(data)
-            // {"pk": 1, "title": "Red Wine", "slug": "red"}
 
-            return data
+
+            return await response.json()
         } 
         catch(error){
             return error.message;
@@ -86,9 +83,16 @@ const orderSlice=createSlice({
         })
         .addCase(fetchCurrentUserOrders.fulfilled, (state, action) => {
             
-            console.log(action.payload)
+            // console.log(action.payload)
+
+            const formattedData = action.payload.map(order => ({
+                ...order,
+                formatedDate: format(new Date(order.purchaseDate), 'MM/dd/yyyy hh:mm:ss a')
+
+            }));
+            console.log(formattedData)
             state.status = 'succeeded'
-            state.orders = action.payload.reverse()
+            state.orders = formattedData.reverse()
         })
         .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
             state.status = 'failed'
@@ -97,10 +101,14 @@ const orderSlice=createSlice({
             state.checkoutStatus = 'loading'
         })
         .addCase(PlaceOrder.fulfilled, (state, action) => {
-
             state.checkoutStatus = 'succeeded'
-            state.newestOrder = action.payload;
-            // rest orders status to fetch  updated orders list from api
+
+            state.newestOrder = {
+                ...action.payload,
+                formatedDate: format(new Date(action.payload.purchaseDate), 'MM/dd/yyyy hh:mm:ss a')
+            }
+
+            // reset orders status to fetch  updated orders list from api
             state.status = "idle";
         })
         .addCase(PlaceOrder.rejected, (state, action) => {
@@ -118,7 +126,7 @@ export const getOrders = createSelector(
     [selectOrders, selectDays],
     (orders, days) => {
         const current = new Date();
-        current.setDate(current.getDate() - days);
+        current.setDate(current.getDate() - days +1);
         current.setHours(0, 0, 0, 0);
         console.log(current)
 
@@ -126,22 +134,3 @@ export const getOrders = createSelector(
     }
 )
 
-
-export const convertTimestampToDatetime = (state) =>{
-    if(state.order.newestOrder === null)
-        return null
-
-    const timestamp = state.order.newestOrder.purchaseDate;
-    const date = new Date(timestamp); // Convert the timestamp to a Date object
-
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so add 1
-    const day = String(date.getDate()).padStart(2, '0');
-    const year = date.getFullYear();
-
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-
-
-    return `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
-}
