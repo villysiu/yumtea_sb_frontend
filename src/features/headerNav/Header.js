@@ -13,7 +13,7 @@ import Title from './Title';
 const Header = () =>{
     
     const location = useLocation();
-    const noHeader = ['/secure/checkout', '/user/signin']
+    // const noHeader = ['/secure/checkout', '/user/signin']
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     useEffect(() => {
         const handleResize = () => {
@@ -27,19 +27,19 @@ const Header = () =>{
         };
       }, []);
 
-    if(noHeader.includes( location.pathname )){
-        return(
-            <div className='header_wrapper'>
-                <Title />
-            </div>
-        )
-    }
+    // if(noHeader.includes( location.pathname )){
+    //     return(
+    //         <div className='header_wrapper'>
+    //             <Title />
+    //         </div>
+    //     )
+    // }
     if(windowWidth < 992){
         return <HeaderNavbarMD />
     }
-    else if(windowWidth >= 992 && windowWidth < 1200){
-        return <HeaderNavbarLG />
-    }
+    // else if(windowWidth >= 992 && windowWidth < 1200){
+    //     return <HeaderNavbarLG />
+    // }
     else{ //windowWidth >= 1200){
         return <HeaderNavbarXL />
     }
