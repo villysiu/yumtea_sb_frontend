@@ -29,9 +29,9 @@
     justify-content: center;
     background-color: white;
 }
-.cart_button_wrapper:hover,  .cart_button_wrapper:active {
-    background-color: var(--gold-text-color); 
-}
+/*.cart_button_wrapper:hover,  .cart_button_wrapper:active {*/
+/*    background-color: var(--gold-text-color); */
+/*}*/
 .cart_icon:hover, .cart_icon:active {
     color: white;
 }

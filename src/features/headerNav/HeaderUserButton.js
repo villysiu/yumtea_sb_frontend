@@ -10,16 +10,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Spinner from "react-bootstrap/Spinner";
 import LogoutNavButton from "../user/LogoutNavButton";
+import CartModal from "../cart/CartModal";
 const HeaderUserButton =() =>{
 
     const {currentUser, fetchUserStatus, loginStatus, logoutStatus} = useSelector(state => state.user)
     const [show, setShow] = useState(false)
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     // Handle dropdown open
-    const handleToggle = (isOpen) => {
-        setIsDropdownOpen(!isDropdownOpen);
+    const handleToggle = () => {
+        setShow(!show);
     };
 
 
@@ -33,29 +34,54 @@ const HeaderUserButton =() =>{
     if(currentUser !== null){
         return(
             <>
-                {isDropdownOpen && <div className="dropdown-overlay" />}
-                <NavDropdown
-                    className="nav-dropdown mx-2"
-                    show={isDropdownOpen}
-                    onToggle={handleToggle}
-                    title={
-                        <div className="header_user_name">
-                            <PersonCircle size={45} className='me-2' />
-                            <span>{currentUser.nickname}</span>
-                        </div>
-                        }
-                >
-                    <NavDropdown.Item className="nav-dropdown-item" href={`${homeLink}/secure/account`} >
-                        Account
-                    </NavDropdown.Item>
-                    <NavDropdown.Item className="nav-dropdown-item" href={`${homeLink}/secure/orders`} >
-                        Order History
-                    </NavDropdown.Item>
+                {
+                    show &&
+                    <Modal show={show} onHide={()=>setShow(false)}
+                           dialogClassName='user_modal'
+                        >
+                        <Link to={`${homeLink}/secure/account`} className="user_modal_link ">
+                            <div className="user_modal_item top">
+                                Account
+                            </div>
+                        </Link>
 
-                    <NavDropdown.Divider />
+                        <Link to={`${homeLink}/secure/orders`}  className="user_modal_link">
+                            <div className="user_modal_item">
+                                Order History
+                            </div>
+                        </Link>
+                        <LogoutNavButton />
 
-                    <LogoutNavButton />
-                </NavDropdown>
+                    </Modal>
+                }
+
+    <div className="header_user_name" onClick={handleToggle}>
+    <PersonCircle size={45} className='me-2'/>
+                    <span className="nav_username">{currentUser.nickname}</span>
+                </div>
+                {/*{isDropdownOpen && <div className="dropdown-overlay" />}*/}
+                {/*<NavDropdown*/}
+                {/*    className="nav-dropdown mx-2"*/}
+                {/*    show={isDropdownOpen}*/}
+                {/*    onToggle={handleToggle}*/}
+                {/*    title={*/}
+                {/*        <div className="header_user_name">*/}
+                {/*            <PersonCircle size={45} className='me-2' />*/}
+                {/*            <span className="nav_username">{currentUser.nickname}</span>*/}
+                {/*        </div>*/}
+                {/*        }*/}
+                {/*>*/}
+                {/*    <NavDropdown.Item className="nav-dropdown-item" href={`${homeLink}/secure/account`} >*/}
+                {/*        Account*/}
+                {/*    </NavDropdown.Item>*/}
+                {/*    <NavDropdown.Item className="nav-dropdown-item" href={`${homeLink}/secure/orders`} >*/}
+                {/*        Order History*/}
+                {/*    </NavDropdown.Item>*/}
+
+                {/*    <NavDropdown.Divider />*/}
+
+                {/*    <LogoutNavButton />*/}
+                {/*</NavDropdown>*/}
             </>
         )
     }
@@ -64,10 +90,10 @@ const HeaderUserButton =() =>{
     return (
 
         <Link to={`${homeLink}/user/signin`} className="header_user_button">
-            <PersonCircle size={45} className='mx-2' />
+            <PersonCircle size={45} className='mx-2'/>
             {/*Sign in*/}
-        </Link>   
-        
+        </Link>
+
     )
 }
 export default HeaderUserButton

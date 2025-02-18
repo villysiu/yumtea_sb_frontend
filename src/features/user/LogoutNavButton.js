@@ -16,9 +16,10 @@ const LogoutNavButton = () =>{
     }
     return(
 
-        <NavDropdown.Item className="nav-dropdown-item" onClick={handleClick} >
+        <div className="user_modal_item bottom" onClick={handleClick} >
             Sign out
-        </NavDropdown.Item >
+        </div >
+
        
     )
 }

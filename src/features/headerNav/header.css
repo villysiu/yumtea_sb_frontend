@@ -14,6 +14,15 @@
   width: var(--body-width);
   margin-right: 2rem;
 }
+@media all and (max-width: 768px) {
+
+  .header_wrapper{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-right: 0;
+    height: 6rem;
+  }
+}
 
 .header_left_wrapper{
   display: flex;
@@ -86,18 +95,13 @@
     margin-right: 2rem;
   }
 }
-
-
-.header_drinks_box, .header_user {
-  position: relative;
-  background-color: rgb(191, 183, 160);
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  margin: 1px 0;
-  text-decoration: none !important;
+@media all and (max-width: 768px) {
+  .header_brand_container{
+    position: absolute;
+    top: 8px;
+    left: calc(50vw - (var(--yumtea_logo_width) / 2));
+    z-index: 1400;
+  }
 }
 
 .top{
@@ -130,6 +134,16 @@
  background-color: transparent;
  text-decoration: none;
 }
+.nav_username{
+  /*visibility: unset;*/
+}
+
+@media all and (max-width: 768px) {
+
+  .nav_username{
+    display: none;
+  }
+}
 
 .header_user_name {
   color: var(--gold-text-color);
@@ -137,41 +151,64 @@
   text-wrap: nowrap;
   font-size: 2rem;
 }
+
 .header_user_button:hover, .header_user_name:hover{
   color: white;
 }
-.navbar-nav .nav-link.dropdown-toggle::after {
-  display: none !important;
-}
-.nav-dropdown-item:hover {
-  color: white; /* Change text color on hover */
-  background-color: var(--gold-text-color);/* Optional: change background color */
-}
 
-.dropdown-overlay {
+.user_modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Dark background */
-  z-index: 1040; /* Make sure overlay is above other content */
-}
-.nav-dropdown .dropdown-menu {
-  z-index: 1050; /* Ensure dropdown is above the overlay */
-
-
-}
-
-
-.user_dropdown_modal, .category_dropdown_modal {
-  width: 13rem !important;
-  position: absolute;
+  right: calc((100vw - var(--body-width )) / 2 + 5.5rem);
   top: 4rem;
+  width: 10rem;
+  padding: 0.5rem;
 }
-.user_dropdown_modal {
-  right: 4.75rem;
+.user_modal_item{
+  height: 3rem;
+  /*border-bottom: 1px lightgray solid;*/
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+
 }
+.user_modal_item.top{
+  border-radius: var(--bs-modal-border-radius) var(--bs-modal-border-radius) 0  0;
+}
+.user_modal_item.bottom{
+  border-radius: 0  0 var(--bs-modal-border-radius) var(--bs-modal-border-radius);
+}
+.user_modal_item:hover{
+  background-color: var(--gold-text-color);
+  color: white;
+}
+.user_modal_link{
+  text-decoration: none !important;
+}
+/*.navbar-nav .nav-link.dropdown-toggle::after {*/
+/*  display: none !important;*/
+/*}*/
+/*.nav-dropdown-item:hover {*/
+/*  color: white; !* Change text color on hover *!*/
+/*  background-color: var(--gold-text-color);!* Optional: change background color *!*/
+/*}*/
+
+/*.dropdown-overlay {*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  background-color: rgba(0, 0, 0, 0.4); !* Dark background *!*/
+/*  z-index: 1040; !* Make sure overlay is above other content *!*/
+/*}*/
+/*.nav-dropdown .dropdown-menu {*/
+/*  z-index: 1050; !* Ensure dropdown is above the overlay *!*/
+/*}*/
+
+
+
 .category_dropdown_modal{
   right: 14rem;
 }
@@ -211,13 +248,27 @@
     
   }
   
-  .header_md_fullscreen_dropdown {
-    position: absolute;
-    color: black;
-    background-color: #d1c089;
-    width: 100%;
-    left: 0;
-    top: 48px;
-    height: 100vh;
-    z-index: 205;
+  /*.header_md_fullscreen_dropdown {*/
+  /*  position: absolute;*/
+  /*  color: black;*/
+  /*  background-color: #d1c089;*/
+  /*  width: 100%;*/
+  /*  left: 0;*/
+  /*  top: 48px;*/
+  /*  height: 100vh;*/
+  /*  z-index: 205;*/
+  /*}*/
+  .hamburger_button{
+    /*width: 45px;*/
+    /*height: 45px;*/
+    background: var(--gold-text-color);
+    border: 0;
+    color: white;
+    align-items: center;
+    justify-content: center;
   }
+  .hamburger_button:hover, .hamburger_button:active{
+    border: 2px solid white !important;
+    background: var(--gold-text-color) !important;
+  }
+
