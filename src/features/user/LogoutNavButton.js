@@ -22,4 +22,4 @@ const LogoutNavButton = () =>{
        
     )
 }
-export default LogoutNavButtonre
+export default LogoutNavButton

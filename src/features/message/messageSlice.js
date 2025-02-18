@@ -10,14 +10,14 @@ import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartS
 const messageSlice = createSlice({
     name: 'message',
     initialState: {
-        message_arr: [],
+        messages: [],
         cartMessage: null
 
 
     },
     reducers: {
       removeMessage: (state)=>{
-        state.message_arr = []
+        state.messages = state.messages.slice(1)
       },
         clearCartMessage: (state) =>{
             state.cartMessage = null
@@ -45,24 +45,38 @@ const messageSlice = createSlice({
         //         }
         //     )
         // })
-        .addCase(loginUser.rejected, (state, action) => {
-            state.message_arr.push(
+        .addCase(loginUser.fulfilled, (state, action) => {
+            state.messages.push(
                 {
-                    status: true,
+                    type: "success",
+                    content: "Welcome back."
+                }
+            )
+        })
+        .addCase(loginUser.rejected, (state, action) => {
+            state.messages.push(
+                {
                     type: "danger",
                     content: "Either username or password is incorrect. Please try again."
                 }
             )
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
-            state.message_arr.push(
+            state.messages.push(
                 {
-                    status: true,
                     type: "success",
                     content: "Good bye"
                 }
             )
         })
+            .addCase(logoutUser.rejected, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "danger",
+                        content: "Logout failed. Please try again."
+                    }
+                )
+            })
 
             .addCase(addItemToCart.fulfilled, (state, action) => {
                 state.cartMessage = "Item added."

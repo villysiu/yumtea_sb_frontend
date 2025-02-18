@@ -11,6 +11,7 @@ import { useDispatch, useSelector} from 'react-redux'
 import {Modal} from 'react-bootstrap'
 import {triggerCustomizeModal} from './features/menuitem/menuitemSlice'
 import CustomizeModal from './features/customise/CustomizeModal'
+import Messages from "./features/message/Messages";
 
 function App() {
   console.log("in APP")
@@ -41,7 +42,7 @@ function App() {
       <div id="App">
           <div className='appbody border border-danger'>
               <Header />
-              {/* <Messages /> */}
+               <Messages />
               <div className="content" >
                 <Outlet />
               </div>
