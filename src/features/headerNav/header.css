@@ -8,12 +8,14 @@
 }
 
 .header_inner_wrapper{
-    max-width: 1400px;
-    width: 90vw;
-    padding: 1rem 0;
-    background-color: transparent !important;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+  display: flex;
+  max-width: var(--body-width);
+  width: 100vw;
+  padding: 1rem 0;
+  background-color: transparent !important;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 .header_buttons{
   display: flex;
@@ -157,6 +159,8 @@
 }
 .nav-dropdown .dropdown-menu {
   z-index: 1050; /* Ensure dropdown is above the overlay */
+
+
 }
 
 @media all and (max-width: 991.98px) {

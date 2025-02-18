@@ -5,7 +5,8 @@
 
     border-radius: 35px;
     background-color: transparent;
-    /* width: 64px;  */
+     width: 64px;
+    height: 64px;
 }
 
 .cart_icon {
@@ -57,8 +58,8 @@
 .cart_modal {
      width: 25rem !important;
     position: absolute;
-    top: 4rem;
-    right: 1rem;
+    top: 5rem;
+    right: calc((100vw - var(--body-width)) / 2);
 }
 
 .cart_modal_content{
@@ -94,7 +95,7 @@
 
 .cart_modal_item_wrapper{
     padding: 1rem;
-    border-bottom: 1px solid var(--bs-dropdown-divider-bg);;
+    border-bottom: 1px solid lightgray;
     position: relative;
     cursor: pointer;
 }

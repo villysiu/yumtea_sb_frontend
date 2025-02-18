@@ -7,7 +7,7 @@ const GetCarts = () => {
     console.log("in cartApp")
     const dispatch = useDispatch()
     const {currentUser} = useSelector(state => state.user)
-    const {fetchCartStatus, cartBannerMessage, tempCart} = useSelector(state => state.cart)
+    const {fetchCartStatus, tempCart} = useSelector(state => state.cart)
 
 
     useEffect(()=>{
@@ -25,16 +25,6 @@ const GetCarts = () => {
         }
     }, [dispatch, currentUser, fetchCartStatus])
 
-    // useEffect(() => {
-    //     if(cartBannerMessage !== ""){
-    //         const msgTimer = setTimeout(() => {
-    //             dispatch(resetCartBanner());
-    //         }, 3000);
-    //         return () => clearTimeout(msgTimer);
-    //     }
-    //
-    //
-    // }, [cartBannerMessage, dispatch]);
 
     return null
 }

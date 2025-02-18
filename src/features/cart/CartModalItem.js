@@ -11,7 +11,7 @@ import {
 import {USDollar} from '../../app/global'
 import CartModalRemove from './CartModalRemove'
 
-const CartModalItem = ({cartitem, setIsDropdownOpen}) =>{
+const CartModalItem = ({cartitem, setCartShow}) =>{
 
     // console.log(cartitem)
     // {
@@ -63,7 +63,7 @@ const CartModalItem = ({cartitem, setIsDropdownOpen}) =>{
                     'quantity': cartitem.quantity
                 }
             ))
-            setIsDropdownOpen(false);
+            setCartShow(false);
         }
     }
     return (

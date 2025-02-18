@@ -38,6 +38,7 @@ const Header = () =>{
     else{ //windowWidth >= 1200){
         return <HeaderNavbarXL />
     }
+
     
 
 }
