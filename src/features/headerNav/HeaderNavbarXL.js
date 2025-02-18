@@ -9,9 +9,9 @@ import CartIcon from '../cart/CartIcon'
 const HeaderNavbarXL = () =>{
     
     return(
-        <div className='header_wrapper'>
-            <Navbar expand="xl" sticky="top" className="bg-body-tertiary">
-                <Nav className="header_inner_wrapper">
+        <div className='header_full_wrapper'>
+            <Navbar expand="xl" sticky="top" className="bg-body-tertiary header_wrapper">
+                <Nav className="header_content_wrapper">
 
                 <Title />
                 

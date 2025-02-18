@@ -26,7 +26,7 @@ const HeaderUserButton =() =>{
     if(fetchUserStatus==="loading" ||  loginStatus==="loading" || logoutStatus === "loading")
         return (
             <div>
-            <Spinner animation="border" className="spinner"/>
+                <Spinner animation="border" className="spinner"/>
             </div>
         )
 
@@ -34,11 +34,8 @@ const HeaderUserButton =() =>{
         return(
             <>
                 {isDropdownOpen && <div className="dropdown-overlay" />}
-        <Navbar.Toggle aria-controls="navbar-dark-example" />
-        <Navbar.Collapse id="navbar-dark-example">
-            <Nav>
                 <NavDropdown
-                    className="nav-dropdown"
+                    className="nav-dropdown mx-2"
                     show={isDropdownOpen}
                     onToggle={handleToggle}
                     title={
@@ -58,40 +55,19 @@ const HeaderUserButton =() =>{
                     <NavDropdown.Divider />
 
                     <LogoutNavButton />
-
                 </NavDropdown>
-            </Nav>
-        </Navbar.Collapse>
-        </>
-    )
+            </>
+        )
     }
 
 
     return (
 
         <Link to={`${homeLink}/user/signin`} className="header_user_button">
-            <PersonCircle size={45} className='me-2' />
+            <PersonCircle size={45} className='mx-2' />
             {/*Sign in*/}
         </Link>   
         
     )
 }
 export default HeaderUserButton
-
-// if(currentUser !== null){
-//     return (
-//         <>
-//         {
-//             show &&
-//             <Modal show={show} onHide={()=>setShow(false)}  dialogClassName='user_dropdown_modal' >
-//                 <UserDropdown setShow={setShow} />
-//             </Modal>
-//
-//         }
-//             <div className="header_user_button" onClick={()=>setShow(!show)}>
-//                 <PersonCircle className='header_user_icon me-2' />
-//                 <div className='header_user_name'>Hi, {currentUser.nickname}</div>
-//             </div>
-//         </>
-//     )
-// }

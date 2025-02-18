@@ -1,13 +1,16 @@
-.header_wrapper{
+.header_full_wrapper{
     width: 100vw;
-    background-color: pink;
-   /* background-color: var(--dark-brown-color); */
+    /*background-color: pink;*/
+    background-color: var(--dark-brown-color);
     display: flex;
     justify-content: center;
     
 }
+.header_wrapper{
+  background-color: var(--dark-brown-color) !important;
+}
 
-.header_inner_wrapper{
+.header_content_wrapper{
   display: flex;
   max-width: var(--body-width);
   width: 100vw;
