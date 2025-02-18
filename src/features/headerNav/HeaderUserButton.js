@@ -15,6 +15,14 @@ const HeaderUserButton =() =>{
     const {currentUser, fetchUserStatus, loginStatus, logoutStatus} = useSelector(state => state.user)
     const [show, setShow] = useState(false)
 
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    // Handle dropdown open
+    const handleToggle = (isOpen) => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+
     if(fetchUserStatus==="loading" ||  loginStatus==="loading" || logoutStatus === "loading")
         return (
             <div>
@@ -25,11 +33,14 @@ const HeaderUserButton =() =>{
     if(currentUser !== null){
         return(
             <>
+                {isDropdownOpen && <div className="dropdown-overlay" />}
         <Navbar.Toggle aria-controls="navbar-dark-example" />
         <Navbar.Collapse id="navbar-dark-example">
             <Nav>
                 <NavDropdown
-                    // className="header_user_button"
+                    className="nav-dropdown"
+                    show={isDropdownOpen}
+                    onToggle={handleToggle}
                     title={
                         <div className="header_user_name">
                             <PersonCircle size={45} className='me-2' />
