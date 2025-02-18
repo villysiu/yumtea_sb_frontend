@@ -31,11 +31,11 @@ const Header = () =>{
     //         </div>
     //     )
     // }
-    if(windowWidth < 992){
+    if(windowWidth <= 768){
         return <HeaderNavbarMD />
     }
 
-    else{ //windowWidth >= 1200){
+    else{ //windowWidth >= 768){
         return <HeaderNavbarXL />
     }
 

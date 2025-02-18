@@ -8,23 +8,34 @@
 }
 .header_wrapper{
   background-color: var(--dark-brown-color) !important;
+  display: flex
+;
+  justify-content: space-between;
+  width: var(--body-width);
+  margin-right: 2rem;
 }
 
-.header_content_wrapper{
+.header_left_wrapper{
   display: flex;
-  max-width: var(--body-width);
-  width: 100vw;
-  padding: 1rem 0;
-  background-color: transparent !important;
-  flex-wrap: nowrap;
+  /*padding: 1rem 0;*/
+  /*background-color: transparent !important;*/
+  /* flex-wrap: nowrap; */
   justify-content: flex-start;
+   align-items: center;
+  flex-direction: row;
+}
+.header_right_wrapper{
+  display: flex
+;
+  flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
 }
 .header_buttons{
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 0 1rem;
+/*center  margin: 0 1rem;*/
   font-size: 2rem;
   color: var(--gold-text-color);
   text-decoration: none;
@@ -48,47 +59,33 @@
   --yumtea_logo_width: 20rem;
   --toggle_button_width: 56px;
 }
-@media all and (max-width: 991.98px) {
-  
-  :root {
-    --yumtea_logo_width: 5rem;
-  }
-}
+
 #yumtea_logo {
   width: var(--yumtea_logo_width);
-  
-  /* height: 100%; */
   display:inline-block;
   background-color: var(--gold-text-color);
-  -webkit-mask:url("http://127.0.0.1:8001/yumtea_logo.png");
+  -webkit-mask:url("http://127.0.0.1:8001/logo/yumtea_logo.png");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
-
 }
 @media all and (max-width: 991.98px) {
 
+  :root {
+    --yumtea_logo_width: 5rem;
+  }
   #yumtea_logo {
     width: var(--yumtea_logo_width);
-    -webkit-mask:url("http://127.0.0.1:8001/yumtea_logo_Char.png");
+    /*display:inline-block;*/
+    /*background-color: var(--gold-text-color);*/
+    -webkit-mask:url("http://127.0.0.1:8001/logo/yumtea_logo_Char.png");
     mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    margin-left: 1rem;
+    margin-right: 2rem;
   }
 }
-.toogle_button {
-  width: var(--toggle_button_width);
-}
-@media all and (max-width: 1199.98px) {
-  .header_brand_container {
-    padding-left: calc(45vw - var(--yumtea_logo_width)/2 - var(--toggle_button_width));
-    
-  }
-}
-
-
-
-
 
 
 .header_drinks_box, .header_user {
@@ -166,11 +163,6 @@
 
 }
 
-@media all and (max-width: 991.98px) {
-  .header_user_name {
-    display: none;
-  }
-}
 
 .user_dropdown_modal, .category_dropdown_modal {
   width: 13rem !important;
@@ -184,16 +176,12 @@
   right: 14rem;
 }
 
+.header_text {
 
-  
-  .header_text {
-  
-    /* mix-blend-mode: difference; */
-      color: var(--header_text_color);
-  }
-  
-  
-  
+  /* mix-blend-mode: difference; */
+    color: var(--header_text_color);
+}
+
   
   .header_features {
     display: flex;
@@ -233,39 +221,3 @@
     height: 100vh;
     z-index: 205;
   }
-  
-   /* @media all and (max-width: 991.98px) {
-    .header_features{
-      justify-content: flex-end;
-    }
-    .navbar-collapse {
-      position: absolute;
-      top: 60px;
-      left: 0px;
-      background-color:  rgb(245, 237, 207);
-      width: 100%;
-      height: 100vh;
-    }
-    .header_md_dropdown {
-      text-align: center;
-      font-weight: bold; 
-    }
-    .header_nav_x_btn {
-      display: block;
-    }
-    .dropdown-menu{
-      /* top: 35px; */
-      /* text-align: center;
-      border: 0;
-    }
-    .collapsable_items {
-      flex-direction: column;
-    }
-    .header_text {
-      font-size: 1.5rem;
-    }
-    .single_cat_text{
-      font-size: 1rem !important;
-    }
-  
-  } */

@@ -9,7 +9,7 @@ const HeaderVisitButton = () =>{
 
     return(
         <Link to={`${homeLink}/visit-taste`} 
-            className={`header_buttons ${location.pathname === '/visit-taste' ? 'active' : ""}`}
+            className={`header_buttons mx-3 ${location.pathname === '/visit-taste' ? 'active' : ""}`}
         >
             Visit
         </Link>   

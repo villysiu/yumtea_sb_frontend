@@ -40,18 +40,13 @@
   --oblong-button-hover-box-shadow: 0 0 5px black !important;
 } 
 
-@media all and  (max-width: 1079.98px) {
+@media all and  (max-width: 1399.98px) {
   :root{
     --body-width: 100vw;
     
   }
 }
-@media all and  (max-width: 739.98px) {
-  :root{
-    --body-width: 100vw;
-    /* --single_wine_details_width: calc( 100vw - var(--single_wine_margin) - var(--single_wine_img_width)) */
-  }
-}
+
 
 
 .appbody {

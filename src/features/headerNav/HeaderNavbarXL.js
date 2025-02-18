@@ -10,17 +10,20 @@ const HeaderNavbarXL = () =>{
     
     return(
         <div className='header_full_wrapper'>
-            <Navbar expand="xl" sticky="top" className="bg-body-tertiary header_wrapper">
-                <Nav className="header_content_wrapper">
+            <Navbar expand="false" sticky="top" className="bg-body-tertiary header_wrapper">
+                <Nav
+                    className="header_left_wrapper"
+                >
+                    <Title />
 
-                <Title />
-                
-                <HeaderHomeButton />
-                <HeaderVisitButton />
-                <HeaderDrinksButton />
-            
-                <HeaderUserButton />
-
+                    {/*<HeaderHomeButton />*/}
+                    <HeaderDrinksButton />
+                    <HeaderVisitButton />
+                </Nav>
+                <Nav
+                    className="header_right_wrapper"
+                >
+                    <HeaderUserButton />
                     <CartIcon />
                 </Nav>
             </Navbar>
