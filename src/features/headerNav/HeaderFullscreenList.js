@@ -2,7 +2,7 @@ import HeaderCollapableItems from "./HeaderCollapsableItems"
 import AccountButton from "../user/AccountButton"
 import OrdersButton from "../order/OrdersButton"
 import ReservationButton from "../reservation/ReservationButton"
-import Logout from "../user/Logout"
+import LogoutNavButton from "../user/LogoutNavButton"
 
 const HeaderFullscreenList =() =>{
     return(
@@ -21,7 +21,7 @@ const HeaderFullscreenList =() =>{
                 </div>
                 
                 <div className='header_text pt-3'>
-                    <Logout />
+                    <LogoutNavButton />
                 </div> 
                 
             </div>

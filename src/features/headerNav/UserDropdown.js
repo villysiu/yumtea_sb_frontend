@@ -1,4 +1,4 @@
-import Logout from "../user/Logout"
+import LogoutNavButton from "../user/LogoutNavButton"
 import AccountButton from "../user/AccountButton"
 import OrdersButton from "../order/OrdersButton"
 // import ReservationButton from "../reservation/ReservationButton"
@@ -18,7 +18,7 @@ const UserDropdown = ({setShow}) =>{
                 </div> 
             </Link>
             
-            <Logout setShow={setShow} />
+            <LogoutNavButton setShow={setShow} />
         
         </>
 

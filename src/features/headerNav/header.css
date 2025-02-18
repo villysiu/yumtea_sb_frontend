@@ -83,25 +83,11 @@
 
 
 
-/* .header_home_button:hover:after, .header_home_button.active:after {
-  content: "T";
-  font-size: 1rem;
-  position: absolute;
-  top: 2.2rem;
-  /* bottom: 1rem; */
-  /* left: 0;
-  right: 0;
-  height: 20px;
-  text-align: center;
 
-} */
-/* .header_drinks {
+
+
+.header_drinks_box, .header_user {
   position: relative;
-  cursor: pointer;
-} */
-
-
-.header_drinks_box, .header_user_box {
   background-color: rgb(191, 183, 160);
   padding: 1rem 2rem;
   font-size: 1.2rem;
@@ -134,34 +120,38 @@
   color: white;
 }
 .header_user_button {
- /* border: solid 1px black; */
- border-radius: 35px;
  display: flex;
  flex-direction: row;
  align-items: center;
- padding: 0.5rem;
- /* margin:  0 2rem; */
  font-size: 1.5rem;
- color: var(--gold-text-color); 
+ color: var(--gold-text-color);
  background-color: transparent;
  text-decoration: none;
-
- /* width: 196px; */
-}
-.header_user_icon {
-  font-size: 3rem;
-  /* color: var(--gold-text-color); */
-  /* color: var(--gold-text-color);  */
-}
-.header_user_button:hover, .header_user_icon:hover {
-  background-color: var(--gold-text-color); 
-  color: white;
 }
 
 .header_user_name {
-  padding: 0 0.5rem;
+  color: var(--gold-text-color);
+  /*padding: 0 0.5rem;*/
   text-wrap: nowrap;
+  font-size: 2rem;
 }
+.header_user_button:hover, .header_user_name:hover{
+  color: white;
+}
+.navbar-nav .nav-link.dropdown-toggle::after {
+  display: none !important;
+}
+.nav-dropdown-item:hover {
+  color: white; /* Change text color on hover */
+  background-color: var(--gold-text-color);/* Optional: change background color */
+}
+
+/*.nav-dropdown-item:hover::after {*/
+/*  content: " (Logging out...)"; !* Appends text to the link when hovered *!*/
+/*  font-size: 0.8em; !* Adjust font size *!*/
+/*  color: red; !* Optional: change color of the appended text *!*/
+/*}*/
+
 @media all and (max-width: 991.98px) {
   .header_user_name {
     display: none;

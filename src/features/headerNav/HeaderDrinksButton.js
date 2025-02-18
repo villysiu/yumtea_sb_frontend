@@ -6,30 +6,12 @@ import CategoryDropdown from './CategoryDropdown'
 import {Modal} from 'react-bootstrap'
 const Header_Drinks_Button =() => {
     const location = useLocation()
-    const [show, setShow] = useState(false);
-    
-    const handleClick = () =>{
-        setShow(!show);
-    }
-
     return (
-        <>
-        {
-            show && 
-             <Modal show={show} onHide={()=>setShow(false)}  dialogClassName='category_dropdown_modal' >
-                <CategoryDropdown setShow={setShow} />
-                
-            </Modal>
-           
-        }
-
-            
-            <div className={`header_buttons ${location.pathname === '/collection' ? 'active' : ""}`}
-            onClick={handleClick}>
+            <Link to={`${homeLink}/collection`}
+                  className={`header_buttons ${location.pathname === '/collection' ? 'active' : ""}`}
+            >
                 Menu
-            </div>   
-                
-        </>
+            </Link>
 
     )
 }
