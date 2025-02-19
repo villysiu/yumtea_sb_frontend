@@ -10,7 +10,7 @@
   border: 1px red solid;
   position: relative;
   font-family: fangsong;
-  background: url("http://127.0.0.1:8001/contentBg.jpg") center no-repeat;
+  background: url("http://127.0.0.1:8001/homepage/contentBg.jpg") center no-repeat;
   background-size: cover;
 }
 
@@ -338,7 +338,7 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
     background-color: white;
   
 }
-.singlewine_bg_wrapper, .location_bg_wrapper, .reserve_bg_wrapper, .reservations_bg_wrapper {
+reserve_bg_wrapper, .reservations_bg_wrapper {
   width: var(--body-width);
   height: calc(100vh * 0.5);
   background-repeat: no-repeat;
@@ -379,7 +379,7 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   bottom: 0;
   padding-left: var(--single_wine_img_width);
 }
-.singlewine_title, .location_title, .reserve_title {
+.reserve_title {
   font-size: var(--singlewine_title_font_size);
   color:white;
   text-shadow: 0px 0px 4px black;

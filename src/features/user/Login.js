@@ -14,6 +14,15 @@ console.log("LOGIN PAGE")
     const [password, setPassword] = useState("")
     const dispatch=useDispatch();
 
+    const {loginStatus} = useSelector(state=>state.user)
+
+    useEffect(()=>{
+       if(loginStatus === "failed"){
+            setEmail("");
+            setPassword("");
+        }
+    }, [loginStatus])
+
 
     const handleSubmit=e=>{
         e.preventDefault()
@@ -24,7 +33,7 @@ console.log("LOGIN PAGE")
     return(
        <div className='login_wrapper'>
 
-            <h1 className="mb-5">Sign in to your account</h1>
+            <h4 className="mb-4">Sign in to your account</h4>
             <Form className='login_form' onSubmit={handleSubmit}>
 
                 <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
@@ -45,7 +54,9 @@ console.log("LOGIN PAGE")
             </Form>
             <div>Forgot your password?</div>
             <Link to={`${homeLink}/user/signup`}>
-                <Button className='signup_button'>Create an account</Button>
+
+                    Create an account
+
             </Link>
     </div>
 

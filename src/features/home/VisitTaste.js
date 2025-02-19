@@ -1,10 +1,11 @@
 import MakeReservationButton from "../reservation/MakeReservationButton"
+import {homeLink} from "../../app/global";
 
 const VisitTaste = () =>{
     return(
         <div>
             <div className="location_bg_wrapper">
-                
+                <img src={`${homeLink}/homepage/chinese-gongfucha-teakan01.webp`} alt="" className="loaction_bg" />
                 <div className='location_title'><b>Yum Tea Tasting Room </b></div>
                 {/* <MakeReservationButton /> */}
               

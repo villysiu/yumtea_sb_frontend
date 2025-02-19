@@ -98,7 +98,7 @@
 
 }
 .menuitem_wrapper:hover {
-    --border-color: rgb(109, 83, 113);
+    --border-color: rgb(90 53 49);;
     border: var(--border-color) 1px solid;
     box-shadow: 0 0 5px var(--border-color)
 }

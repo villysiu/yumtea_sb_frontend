@@ -93,6 +93,34 @@ export const logoutUser=createAsyncThunk(
         }
     }
 )
+export const registerUser = createAsyncThunk(
+    'user/registerUser',
+    async(userInfo) => {
+        console.log(userInfo)
+        try{
+            const response = await fetch(`${apiLink}/auth/signup`, {
+                'method': "POST",
+                'headers': {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+
+                },
+                'body': JSON.stringify(userInfo),
+                credentials: 'include'
+            })
+            if(!response.ok)
+                throw new Error(`${response.status} ${response.statusText}`)
+
+            // const data=await response.json()
+            // console.log(data)
+            console.log(`${response.status} ${response.statusText}`)
+
+            return null
+        } catch(error){
+            return Promise.reject(error.message)
+        }
+    }
+)
 const userSlice=createSlice({
     name: 'user',
     initialState: {
@@ -101,7 +129,7 @@ const userSlice=createSlice({
         fetchUserStatus: 'idle',
         loginStatus: 'idle',
         logoutStatus: 'idle',
-        signupStatus:'idle'
+        registerStatus:'idle'
     },
     reducers: {
         // logout: (state) => {
@@ -160,6 +188,19 @@ const userSlice=createSlice({
             state.logoutStatus = 'failed'
             
         })
+          .addCase(registerUser.pending, (state, action) => {
+              state.registerStatus = 'loading'
+          })
+          .addCase(registerUser.fulfilled, (state, action) => {
+              state.registerStatus = 'succeeded';
+              // state.loginStatus = 'idle';
+              // state.fetchUserStatus = 'idle'
+              // state.currentUser=null;
+          })
+          .addCase(registerUser.rejected, (state, action) => {
+              state.registerStatus = 'failed'
+
+          })
     }
 })
 export const { resetUserStatus } = userSlice.actions

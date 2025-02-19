@@ -1,8 +1,23 @@
 .login_wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 650px;
+    /*align-items: center;*/
+    width: 390px;
+    /*. border: 1px black solid;*/
+    margin: 2rem;
+    padding: 1rem;
+    --border-color: rgb(90 53 49);;
+    border: var(--border-color) 1px solid;
+    box-shadow: 0 0 5px var(--border-color)
+
+
+
+}
+@media all and  (max-width: 389.98px) {
+    .login_wrapper{
+        width: 100vw;
+    }
+
 }
 .login {
     margin: 5rem;
@@ -12,7 +27,7 @@
     align-items: center;
     
   }
-.login_form {
+.login_form, .signup_form {
     width: 100%
 }
 .login_error {
@@ -27,6 +42,7 @@
     background-color: #d1c089 !important;
     color: white;
     min-width: 8rem !important;
+    margin-bottom: 1rem;
 
     
 }

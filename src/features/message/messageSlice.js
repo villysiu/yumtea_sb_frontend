@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 // import { fetchCategories, fetchMenuitems, fetchMenuitemsByCategory } from '../menuitem/menuitemSlice'
 // import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
-import {loginUser, logoutUser,} from '../user/userSlice'
+import {loginUser, logoutUser, registerUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 // import { deleteReservation } from '../reservation/reservationSlice'
 
@@ -76,6 +76,15 @@ const messageSlice = createSlice({
                         content: "Logout failed. Please try again."
                     }
                 )
+            })
+            .addCase(registerUser.rejected, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "danger",
+                        content: "Email already used. Please try again."
+                    }
+                )
+
             })
 
             .addCase(addItemToCart.fulfilled, (state, action) => {
