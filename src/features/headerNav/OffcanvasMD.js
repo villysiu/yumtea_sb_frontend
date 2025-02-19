@@ -21,15 +21,20 @@ const OffcanvasMD = ({show, setShow}) =>{
                             <Col xs={6} className="offcanvas_category_img_wrapper">
                                 <Link to={`${homeLink}/collection`} className="offcanvas_category_link" onClick={()=>setShow(false)}>
                                 <img src={`${homeLink}/category/${category.imageUrl}`} className="offcanvas_category_img"/>
-                                <div className="offcanvas_category_img_dark">{category.title} </div>
+                                <div className="offcanvas_category_img_overlay">{category.title} </div>
                                 </Link>
                             </Col>
                         )
                     })
                 }
                 </Row>
-                Some text as placeholder. In real life you can have the elements you
-                have chosen. Like, text, images, lists, etc.
+                <Row>
+                    <Col xs={12}>
+                        <Link to={`${homeLink}/visit-taste`} className="offcanvas_category_link text">
+                            Visit Us
+                        </Link>
+                    </Col>
+                </Row>
             </Offcanvas.Body>
         </Offcanvas>
     )

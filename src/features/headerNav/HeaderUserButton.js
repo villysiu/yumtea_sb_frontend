@@ -16,7 +16,6 @@ const HeaderUserButton =() =>{
     const {currentUser, fetchUserStatus, loginStatus, logoutStatus} = useSelector(state => state.user)
     const [show, setShow] = useState(false)
 
-    // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     // Handle dropdown open
     const handleToggle = () => {
@@ -39,18 +38,18 @@ const HeaderUserButton =() =>{
                     <Modal show={show} onHide={()=>setShow(false)}
                            dialogClassName='user_modal'
                         >
-                        <Link to={`${homeLink}/secure/account`} className="user_modal_link ">
+                        <Link to={`${homeLink}/secure/account`} className="user_modal_link" onClick={handleToggle}>
                             <div className="user_modal_item top">
                                 Account
                             </div>
                         </Link>
 
-                        <Link to={`${homeLink}/secure/orders`}  className="user_modal_link">
+                        <Link to={`${homeLink}/secure/orders`}  className="user_modal_link" onClick={handleToggle}>
                             <div className="user_modal_item">
                                 Order History
                             </div>
                         </Link>
-                        <LogoutNavButton />
+                        <LogoutNavButton setShow={setShow}/>
 
                     </Modal>
                 }

@@ -4,13 +4,14 @@ import {Link, useNavigate} from "react-router-dom"
 import { homeLink } from "../../app/global"
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-const LogoutNavButton = () =>{
+const LogoutNavButton = ({setShow}) =>{
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const {currentUser} = useSelector((state)=>state.user)
     const handleClick = e =>{
         console.log("logging out")
         dispatch(logoutUser())
+        setShow(false);
         if(!currentUser)
             navigate("http://127.0.0.1:8001/");
     }
