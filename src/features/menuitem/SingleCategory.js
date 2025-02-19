@@ -2,6 +2,7 @@ import {useSelector} from 'react-redux'
 import {getMenuitemsByCategoryId} from './menuitemSlice'
 import Menuitem from './Menuitem'
 import {homeLink} from "../../app/global";
+import {Col, Row} from "react-bootstrap";
 
 const SingleCategory = ({category}) => {
 
@@ -21,17 +22,20 @@ const SingleCategory = ({category}) => {
             
             <div  className='menuitems_wrapper'>
 
-                <div className='menuitem_row'>
+                <Row className='menuitem_row'>
                     {
                         menuitems.map((menuitem)=>{
                             return (
-                            <div key={menuitem.id} className='menuitem_col'>
+                            <Col xs={12} md={4} className="mb-3" key={menuitem.id}
+                                 // className='menuitem_col'
+                            >
                                 <Menuitem menuitem={menuitem} />
-                            </div>
+                            </Col>
                             )
                         })
                     }
-                </div>
+
+                </Row>
             </div>
         </div>
     )

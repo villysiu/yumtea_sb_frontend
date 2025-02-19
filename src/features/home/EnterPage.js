@@ -1,7 +1,6 @@
 import './home.css'
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import Brand from './Brand'
+
 import GetMenuitems from '../menuitem/GetMenuitems'
 import GetCarts from '../cart/GetCarts'
 import GetUser from '../user/GetUser'
@@ -13,11 +12,8 @@ import ResetAccess from "./ResetAccess";
 const EnterPage = () =>{
     console.log("ENTER PAGE")
 
-    // const [show, setShow] = useState(true);
-
     const [getUser, setGetUser] = useState(false);
     const [getMenuitem, setGetMenuitem] = useState(false);
-
     const [spinner, setSpinner] = useState(!getUser || !getMenuitem);
 
     useEffect(()=>{
