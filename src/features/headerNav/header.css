@@ -102,6 +102,18 @@
     left: calc(50vw - (var(--yumtea_logo_width) / 2));
     z-index: 1400;
   }
+  #yumtea_logo {
+    width: 45px;
+    height: 45px;
+    /*display:inline-block;*/
+    background-color: black;
+    -webkit-mask:url("http://127.0.0.1:8001/logo/yumtea_logo_Char.png");
+    mask-size: contain;
+    /*mask-repeat: no-repeat;*/
+    /*mask-position: center;*/
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .top{
@@ -114,6 +126,9 @@
   border-bottom: none;
   margin-bottom: 0;
 
+}
+.offcanvas_logo {
+  width: 200px;
 }
 .header_drinks_link,.header_user_link {
 
@@ -186,27 +201,43 @@
 .user_modal_link{
   text-decoration: none !important;
 }
-/*.navbar-nav .nav-link.dropdown-toggle::after {*/
-/*  display: none !important;*/
-/*}*/
-/*.nav-dropdown-item:hover {*/
-/*  color: white; !* Change text color on hover *!*/
-/*  background-color: var(--gold-text-color);!* Optional: change background color *!*/
-/*}*/
+.offcanvas_category_img_wrapper{
+  --offcanvas_category_img_width: 195px;
+  --offcanvas_category_img_padding: 12px;
+  position: relative;
+  width: var(--offcanvas_category_img_width);
+  height: var(--offcanvas_category_img_width);
+  padding-top: var(--offcanvas_category_img_padding);
+  padding-bottom: var(--offcanvas_category_img_padding);
+}
+.offcanvas_category_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.offcanvas_category_img_dark{
 
-/*.dropdown-overlay {*/
-/*  position: fixed;*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  width: 100%;*/
-/*  height: 100%;*/
-/*  background-color: rgba(0, 0, 0, 0.4); !* Dark background *!*/
-/*  z-index: 1040; !* Make sure overlay is above other content *!*/
-/*}*/
-/*.nav-dropdown .dropdown-menu {*/
-/*  z-index: 1050; !* Ensure dropdown is above the overlay *!*/
-/*}*/
+  width: calc( var(--offcanvas_category_img_width) - 2 * var(--offcanvas_category_img_padding));
+  height: calc( var(--offcanvas_category_img_width) - 2 * var(--offcanvas_category_img_padding));
+  position: absolute;
+  left: var(--offcanvas_category_img_padding);
+  top: var(--offcanvas_category_img_padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  font-weight: bolder;
+}
+.offcanvas_category_img_dark:hover{
+  opacity: 1;
+  background-color: #808080ba;
 
+
+}
+.offcanvas_category_link:hover{
+  text-decoration: none;
+  color: black;
+}
 
 
 .category_dropdown_modal{

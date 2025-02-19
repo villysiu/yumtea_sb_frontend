@@ -59,29 +59,7 @@ const HeaderUserButton =() =>{
     <PersonCircle size={45} className='me-2'/>
                     <span className="nav_username">{currentUser.nickname}</span>
                 </div>
-                {/*{isDropdownOpen && <div className="dropdown-overlay" />}*/}
-                {/*<NavDropdown*/}
-                {/*    className="nav-dropdown mx-2"*/}
-                {/*    show={isDropdownOpen}*/}
-                {/*    onToggle={handleToggle}*/}
-                {/*    title={*/}
-                {/*        <div className="header_user_name">*/}
-                {/*            <PersonCircle size={45} className='me-2' />*/}
-                {/*            <span className="nav_username">{currentUser.nickname}</span>*/}
-                {/*        </div>*/}
-                {/*        }*/}
-                {/*>*/}
-                {/*    <NavDropdown.Item className="nav-dropdown-item" href={`${homeLink}/secure/account`} >*/}
-                {/*        Account*/}
-                {/*    </NavDropdown.Item>*/}
-                {/*    <NavDropdown.Item className="nav-dropdown-item" href={`${homeLink}/secure/orders`} >*/}
-                {/*        Order History*/}
-                {/*    </NavDropdown.Item>*/}
 
-                {/*    <NavDropdown.Divider />*/}
-
-                {/*    <LogoutNavButton />*/}
-                {/*</NavDropdown>*/}
             </>
         )
     }
