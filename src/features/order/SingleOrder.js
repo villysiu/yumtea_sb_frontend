@@ -21,7 +21,7 @@ const SingleOrder = ({order, show, setShow}) =>{
             <div className='orderhistory_order_container'>
                 <div className='orderhistory_order_header' onClick={handleOpen}>
                     <div className='orderhistory_order_header_l'>
-                        <div className='orderhistory_order_col'>{order.formatedDate}</div>
+                        <div className='orderhistory_order_col'>{order.purchaseDate.slice(0, 10)}</div>
                         <div className='orderhistory_order_col'>Order #{order.id}</div>
                     </div>
                     <div className='orderhistory_order_header_c'>

@@ -42,9 +42,9 @@ function App() {
       <div id="App">
           <div className='appbody border border-danger'>
               <Header />
-               <Messages />
+              <Messages />
               <div className="content" >
-                <Outlet />
+                    <Outlet />
               </div>
               {/* <Footer /> */}
           </div>

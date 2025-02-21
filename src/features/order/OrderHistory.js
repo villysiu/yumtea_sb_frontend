@@ -10,10 +10,10 @@ const OrderHistory = () =>{
 
     const dispatch = useDispatch()
     const [show, setShow] = useState(null)
-    const [filter, setFilter] =useState(3)
+    const [days, setDays] =useState(3)
 
     const ordersStatus = useSelector(state=>state.order.status)
-    const orders = useSelector(state =>getOrders(state, filter))
+    const orders = useSelector(state =>getOrders(state, days))
    
     useEffect(()=>{
         if(ordersStatus === 'idle')
@@ -23,7 +23,7 @@ const OrderHistory = () =>{
     useEffect(()=>{
         // close order details when filter option changed
         setShow(null)
-    }, [filter])
+    }, [days])
    
     if(ordersStatus === 'loading' || ordersStatus === 'idle')
         return <Spinner />
@@ -37,7 +37,7 @@ const OrderHistory = () =>{
             
             <div className="order_history">
                 <div className="order_filter">
-                    <OrderFilter filter={filter} setFilter={setFilter} />
+                    <OrderFilter filter={days} setFilter={setDays} />
                 </div>
                 {
                     orders.map(order => {

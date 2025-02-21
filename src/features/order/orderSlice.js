@@ -82,17 +82,9 @@ const orderSlice=createSlice({
             state.status = 'loading'
         })
         .addCase(fetchCurrentUserOrders.fulfilled, (state, action) => {
-            
-            // console.log(action.payload)
-
-            const formattedData = action.payload.map(order => ({
-                ...order,
-                formatedDate: format(new Date(order.purchaseDate), 'MM/dd/yyyy hh:mm:ss a')
-
-            }));
-            console.log(formattedData)
             state.status = 'succeeded'
-            state.orders = formattedData.reverse()
+
+            state.orders = action.payload
         })
         .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
             state.status = 'failed'
@@ -103,10 +95,10 @@ const orderSlice=createSlice({
         .addCase(PlaceOrder.fulfilled, (state, action) => {
             state.checkoutStatus = 'succeeded'
 
-            state.newestOrder = {
-                ...action.payload,
-                formatedDate: format(new Date(action.payload.purchaseDate), 'MM/dd/yyyy hh:mm:ss a')
-            }
+            // state.newestOrder = {
+            //     ...action.payload,
+            //     formatedDate: format(new Date(action.payload.purchaseDate), 'MM/dd/yyyy hh:mm:ss a')
+            // }
 
             // reset orders status to fetch  updated orders list from api
             state.status = "idle";
@@ -128,9 +120,12 @@ export const getOrders = createSelector(
         const current = new Date();
         current.setDate(current.getDate() - days +1);
         current.setHours(0, 0, 0, 0);
-        console.log(current)
+        const formattedDate = format(current, 'yyyy-MM-dd')
+        console.log(formattedDate);
 
-        return orders.filter(o => o.purchaseDate > current)
+    console.log(orders)
+        return orders.filter(o => o.purchaseDate > formattedDate)
+        // return orders
     }
 )
 

@@ -23,7 +23,7 @@
 
 } */
 .category {
-    padding-top: 96px;
+    padding-bottom: 5rem;
     display: flex;
     flex-direction: column;
 }
@@ -58,12 +58,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 3rem;
+    font-size: 2rem;
     color: black;
     text-shadow: 0 0 4px white;
 }
-/*.collection {*/
-/*    background: url("http://127.0.0.1:8001/12typestea.jpg") center no-repeat;*/
+/*@media all and  (max-width: 991.98px) {*/
+/*    .collection_text{*/
+/*        font-size: 2rem;*/
+/*    }*/
 /*}*/
 
 .menuitems_wrapper {
