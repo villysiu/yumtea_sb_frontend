@@ -17,6 +17,8 @@ const GetUser = ({setGetUser}) =>{
         else {
             // when fetchUser process completed, either result succeeded or failed
             setGetUser(true);
+
+
         }
     }, [fetchUserStatus, dispatch])
 

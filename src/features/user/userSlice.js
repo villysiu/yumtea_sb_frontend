@@ -137,10 +137,13 @@ const userSlice=createSlice({
         //     state.logout_status = 'succeeded'
         //     state.currUser.error = null
         //   },
-        // resetUserStatus: (state) => {
-        //
-        //     state.current_user.status = 'idle'
-        // }
+        removeUser: (state) => {
+             console.log('removing??')
+            state.currentUser = null
+            state.fetchUserStatus = 'idle'
+            state.loginStatus = 'idle'
+
+        }
     },
     extraReducers(builder) {
       builder
@@ -203,5 +206,5 @@ const userSlice=createSlice({
           })
     }
 })
-export const { resetUserStatus } = userSlice.actions
+export const { removeUser } = userSlice.actions
 export default userSlice.reducer

@@ -5,7 +5,7 @@ import { homeLink } from '../../app/global';
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {resetUserStatus} from './userSlice'
+import { removeUser } from "./userSlice"
 import { loginUser } from './userSlice';
 import LoginButton from './LoginButton'
 const Login = () =>{
@@ -20,6 +20,13 @@ console.log("LOGIN PAGE")
        if(loginStatus === "failed"){
             setEmail("");
             setPassword("");
+        }
+        if(loginStatus === 'succeeded'){
+            console.log("user session expired in 10 min 5 secs");
+            setTimeout(() => {
+                console.log("expired ");
+                dispatch(removeUser());
+            }, 105000);
         }
     }, [loginStatus])
 
