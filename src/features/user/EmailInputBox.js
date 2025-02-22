@@ -4,26 +4,41 @@ import {useState} from "react";
 
 const EmailInputBox = ({email, setEmail}) => {
     const [emailError, setEmailError] = useState("")
-    const validateEmail = () =>{
-        console.log("validate email")
-        const re = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/
-        if(!re.test(email)) {
-            setEmailError("Enter a valid email")
 
-        }
+    const handleChange = e =>{
+        setEmail(e.target.value)
+        if(emailError)
+            validateEmail(e.target.value)
     }
-    const resetEmailInputBox = () =>{
-        setEmailError("");
-        setEmail("");
+    const validateEmail = (email) =>{
+        console.log("validate email: " + email +" hah")
+
+        const re = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/
+
+        if(email === "")
+            setEmailError("Email is required")
+        else if(!re.test(email))
+            setEmailError("Email format is invalid")
+
+        else
+            setEmailError("")
+
+
     }
+    // const resetEmailInputBox = () =>{
+        // setEmailError("");
+        // setEmail("");
+    // }
     return (
         <>
             <FloatingLabel controlId="floatingInput" label="Email" className={emailError? "" : "mb-3"}
             >
-                <Form.Control type="email" placeholder="Email" value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      onFocus={resetEmailInputBox}
-                      onBlur={validateEmail}
+                <Form.Control type="email"
+                              placeholder="Email"
+                              value={email}
+                      onChange={handleChange}
+                      // onFocus={resetEmailInputBox}
+                      onBlur={e=>validateEmail(e.target.value)}
                 />
             </FloatingLabel>
         {emailError && <p className="inpurbox_error">{emailError}.</p>}
