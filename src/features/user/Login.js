@@ -8,10 +8,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from "./userSlice"
 import { loginUser } from './userSlice';
 import LoginButton from './LoginButton'
+import EmailInputBox from "./EmailInputBox";
+import PasswordInputBox from "./PasswordInputBox";
 const Login = () =>{
 console.log("LOGIN PAGE")
     const [email, setEmail] = useState("")
+    const [emailError, setEmailError] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordError, setPasswordError] = useState("")
     const dispatch=useDispatch();
 
     const {loginStatus} = useSelector(state=>state.user)
@@ -37,37 +41,26 @@ console.log("LOGIN PAGE")
         
     }
 
+
     return(
        <div className='login_wrapper'>
 
             <h4 className="mb-4">Sign in to your account</h4>
-            <Form className='login_form' onSubmit={handleSubmit}>
+           <Form className='login_form' onSubmit={handleSubmit}>
 
-                <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
-                    <Form.Control type="text" placeholder="Email" value={email}
-                        onChange={e=>setEmail(e.target.value)}
-                                  // onClick={handleClick}
-                    />
-                </FloatingLabel>
+               <EmailInputBox email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
+               <PasswordInputBox password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
+               <LoginButton email={email} password={password} emailError={emailError} passwordError={passwordError}/>
 
-                <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
-                    <Form.Control type="password" placeholder="Password" value={password} 
-                        onChange={e=>setPassword(e.target.value)}
-                                  // onClick={handleClick}
-                    />
-                </FloatingLabel>
-                <LoginButton email={email} password={password}/>
-                          
-            </Form>
-            <div>Forgot your password?</div>
-            <Link to={`${homeLink}/user/signup`}>
+           </Form>
+           <div>Forgot your password?</div>
+           <Link to={`${homeLink}/user/signup`}>
 
-                    Create an account
+               Create an account
 
-            </Link>
-    </div>
+           </Link>
+       </div>
 
-    
 
     )
 }

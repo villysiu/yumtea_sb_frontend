@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Button, Spinner } from 'react-bootstrap';
-const LoginButton = ({email, password}) =>{
+const LoginButton = ({email, password, emailError, passwordError}) =>{
 
     // console.log(email, password)
     const {loginStatus} = useSelector(state=>state.user)
@@ -12,7 +12,7 @@ const LoginButton = ({email, password}) =>{
         )
 
     return (
-            <Button type="submit" className='signin_button' disabled={ !email || !password }>
+            <Button type="submit" className='signin_button' disabled={ emailError!=="" || passwordError!=="" || email==="" || password==="" }>
                     Sign In
             </Button>
     )

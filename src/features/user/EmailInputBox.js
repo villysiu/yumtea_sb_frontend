@@ -2,8 +2,8 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import {useState} from "react";
 
-const EmailInputBox = ({email, setEmail}) => {
-    const [emailError, setEmailError] = useState("")
+const EmailInputBox = ({email, setEmail, emailError, setEmailError}) => {
+
 
     const handleChange = e =>{
         setEmail(e.target.value)
@@ -31,7 +31,7 @@ const EmailInputBox = ({email, setEmail}) => {
     // }
     return (
         <>
-            <FloatingLabel controlId="floatingInput" label="Email" className={emailError? "" : "mb-3"}
+            <FloatingLabel controlId="floatingEmailInput" label="Email" className={emailError? "" : "mb-3"}
             >
                 <Form.Control type="email"
                               placeholder="Email"
