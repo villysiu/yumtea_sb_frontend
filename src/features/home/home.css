@@ -164,6 +164,8 @@ div.slide-left p {
   margin: var(--row3-margin);
   width: var(--row3-width);
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /*.homerow3_col {*/
 /*  display: flex;*/
