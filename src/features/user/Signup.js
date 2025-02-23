@@ -8,12 +8,20 @@ import {Link, useNavigate} from "react-router-dom";
 import {homeLink} from "../../app/global";
 import {Button} from "react-bootstrap";
 import SignupButton from "./SignupButton";
+import EmailInputBox from "./EmailInputBox";
+import PasswordInputBox from "./PasswordInputBox";
+import NameInputBox from "./NameInputBox";
 
 const Signup = () =>{
     console.log("SIGNUP PAGE")
     const [nickname, setNickname] = useState("");
+    const [nicknameError, setNicknameError] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState("")
+    const [password, setPassword] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+
+
     const dispatch=useDispatch();
     const {registerStatus} = useSelector(state=>state.user)
     const navigate = useNavigate();
@@ -40,31 +48,15 @@ const Signup = () =>{
 
             <h4 className="mb-4">Sign up a new account</h4>
             <Form className='signup_form' onSubmit={handleSubmit}>
-
-                <FloatingLabel controlId="floatingNickname" label="Nickname" className="mb-3">
-                    <Form.Control type="text" placeholder="Nickname" value={nickname}
-                                  onChange={e=>setNickname(e.target.value)}
-                        // onClick={handleClick}
-                    />
-                </FloatingLabel>
-                <FloatingLabel controlId="floatingEmail" label="Email" className="mb-3">
-                    <Form.Control type="text" placeholder="Email" value={email}
-                                  onChange={e=>setEmail(e.target.value)}
-                        // onClick={handleClick}
-                    />
-                </FloatingLabel>
-
-                <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
-                    <Form.Control type="password" placeholder="Password" value={password}
-                                  onChange={e=>setPassword(e.target.value)}
-                        // onClick={handleClick}
-                    />
-                </FloatingLabel>
-                <SignupButton nickname={nickname} email={email} password={password}/>
+                <NameInputBox nickname={nickname} setNickname={setNickname} nicknameError={nicknameError} setNicknameError={setNicknameError}/>
+                <EmailInputBox email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
+                <PasswordInputBox password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError}/>
+                <SignupButton nickname={nickname} email={email} password={password}
+                              nicknameError={nicknameError} emailError={emailError} passwordError={passwordError}  />
 
             </Form>
 
-            <span>Have an accunt? <Link to={`${homeLink}/user/signin`}> login here</Link></span>
+            <span>Have an account? <Link to={`${homeLink}/user/signin`}> login here</Link></span>
 
         </div>
 

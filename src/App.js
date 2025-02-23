@@ -46,7 +46,7 @@ function App() {
               <div className="content" >
                     <Outlet />
               </div>
-              {/* <Footer /> */}
+               <Footer />
           </div>
       </div>
       </>

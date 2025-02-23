@@ -30,49 +30,79 @@
 .login_form, .signup_form {
     width: 100%
 }
-.login_error {
+.inpurbox_error {
     color: red;
 }
-.signin_button, .signin_button:active:enabled, .signin_button:hover:enabled,
-.signup_button
-{
-    border-radius: var(--oblong-button-border-radius);
-    border: transparent;
-    padding: var(--oblong-button-padding);
-    background-color: #d1c089 !important;
-    color: white;
-    min-width: 8rem !important;
-    margin-bottom: 1rem;
-
-    
+.password_eye_box {
+    display:flex;
+    flex-direction: row;
+    position: relative;
 }
-.signin_button:active:enabled, .signin_button:hover:enabled,
-.signup_button:active, .signup_button:hover
-{
-    border-color: transparent;
-    box-shadow: 0 0 5px black !important;
+/*.password_eye_box.focus {*/
+/*    border: red 3px solid;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+.password_input {
+    /*width: 85%;*/
+    /*border-radius: var(--bs-border-radius) 0 0 var(--bs-border-radius);*/
 
 }
-.signin_button:disabled, .signin_button:hover:disabled, .signin_button:active:disabled
- {
-  border: transparent;
-  cursor: not-allowed;
-  pointer-events: all !important;
-  
-}
-.signup_button {
-    margin-top:3rem;
+.password_input:focus {
+    border: 0;
 }
 
-.full_spinner {
-  width: 100vw;
-  height: 100vh;
+.password_eye {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(3.5rem + calc(var(--bs-border-width)* 2));
+     width: 15%;
+     cursor: pointer;
+     justify-content: center;
+     border-radius: 0 var(--bs-border-radius)  var(--bs-border-radius) 0;
+ }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color:black;
-  /* z-index: 1041; */
+    .signin_button, .signin_button:active:enabled, .signin_button:hover:enabled,
+    .signup_button
+    {
+        border-radius: var(--oblong-button-border-radius);
+        border: transparent;
+        padding: var(--oblong-button-padding);
+        background-color: #d1c089 !important;
+        color: white;
+        min-width: 8rem !important;
+        margin-bottom: 1rem;
 
-  
-}
+
+    }
+    .signin_button:active:enabled, .signin_button:hover:enabled,
+    .signup_button:active, .signup_button:hover
+    {
+        border-color: transparent;
+        box-shadow: 0 0 5px black !important;
+
+    }
+    .signin_button:disabled, .signin_button:hover:disabled, .signin_button:active:disabled
+    {
+        border: transparent;
+        cursor: not-allowed;
+        pointer-events: all !important;
+
+    }
+    .signup_button {
+        margin-top:3rem;
+    }
+
+    .full_spinner {
+        width: 100vw;
+        height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color:black;
+        /* z-index: 1041; */
+
+
+    }
