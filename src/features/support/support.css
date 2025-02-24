@@ -1,0 +1,27 @@
+.error {
+    color: red;
+}
+.error_border{
+    border: red 1px solid !important;
+}
+.submit_button_wrapper{
+    display: flex;
+    justify-content: center;
+}
+.submit_button {
+    text-align: center;
+}
+.qnas{
+    width: var(--body-width);
+    padding: 1rem;
+}
+.qna {
+    width: 100%;
+    background-color: var(--gold-text-color);
+    margin-bottom: 5px;
+    cursor: pointer;
+    padding: 1rem 2rem;
+}
+.ans {
+    padding: 0.5rem;
+}

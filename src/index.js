@@ -34,6 +34,7 @@ import UpdateReservation from './features/reservation/UpdateReservation';
 import EnterPage from './features/home/EnterPage';
 // import ResetApp from './features/home/ResetApp';
 import ReservationsApp from './features/reservation/ReservationsApp';
+import Support from "./features/support/Support";
 const router = createBrowserRouter([
   {
       path: "/",
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
               {
                 path: "/visit-taste",
                   element: <VisitTaste />,
+              },
+              {
+                path: "/support",
+                element: <Support />,
               },
               {
                 path: "/user",

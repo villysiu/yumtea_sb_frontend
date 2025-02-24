@@ -10,9 +10,9 @@ const NameInputBox = ({nickname, setNickname, nicknameError, setNicknameError}) 
             validateNickname(e.target.value)
     }
     const validateNickname = (nickname) =>{
-        console.log("validateing nick "+ nickname)
-        const re = /^^[a-zA-Z.-]{2,20}$/
-        console.log(re.test(nickname))
+        // console.log("validateing nick "+ nickname)
+        const re = /^[a-zA-Z.-]{2,20}$/
+
         if(nickname === "")
             setNicknameError("Nickname is required")
         else if(!re.test(nickname))
