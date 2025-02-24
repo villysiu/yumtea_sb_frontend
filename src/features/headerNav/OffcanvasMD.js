@@ -34,6 +34,11 @@ const OffcanvasMD = ({show, setShow}) =>{
                             Visit Us
                         </Link>
                     </Col>
+                    <Col xs={12}>
+                        <Link to={`${homeLink}/support`} className="offcanvas_category_link text">
+                            Support
+                        </Link>
+                    </Col>
                 </Row>
             </Offcanvas.Body>
         </Offcanvas>

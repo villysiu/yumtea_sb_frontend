@@ -6,6 +6,7 @@ import HeaderVisitButton from './HeaderVisitButton'
 import HeaderHomeButton from './HeaderHomeButton'
 import HeaderUserButton from './HeaderUserButton'
 import CartIcon from '../cart/CartIcon'
+import HeaderSupportButton from "./HeaderSupportButton";
 const HeaderNavbarXL = () =>{
     
     return(
@@ -19,6 +20,7 @@ const HeaderNavbarXL = () =>{
                     {/*<HeaderHomeButton />*/}
                     <HeaderDrinksButton />
                     <HeaderVisitButton />
+                    <HeaderSupportButton />
                 </Nav>
                 <Nav
                     className="header_right_wrapper"

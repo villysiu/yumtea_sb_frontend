@@ -33,6 +33,7 @@
 .inpurbox_error {
     color: red;
 }
+
 .password_eye_box {
     display:flex;
     flex-direction: row;
@@ -64,12 +65,12 @@
  }
 
     .signin_button, .signin_button:active:enabled, .signin_button:hover:enabled,
-    .signup_button
+    .submit_button, .submit_button:active:enabled, .submit_button:hover:enabled
     {
         border-radius: var(--oblong-button-border-radius);
         border: transparent;
         padding: var(--oblong-button-padding);
-        background-color: #d1c089 !important;
+        background-color: var(--signin-button-color) !important;
         color: white;
         min-width: 8rem !important;
         margin-bottom: 1rem;
@@ -77,13 +78,16 @@
 
     }
     .signin_button:active:enabled, .signin_button:hover:enabled,
-    .signup_button:active, .signup_button:hover
+    .signup_button:active, .signup_button:hover,
+    .submit_button:active, .submit_button:hover
     {
         border-color: transparent;
         box-shadow: 0 0 5px black !important;
 
     }
-    .signin_button:disabled, .signin_button:hover:disabled, .signin_button:active:disabled
+    .signin_button:disabled, .signin_button:hover:disabled, .signin_button:active:disabled,
+    .submit_button:disabled, .submit_button:hover:disabled, .submit_button:active:disabled
+
     {
         border: transparent;
         cursor: not-allowed;
