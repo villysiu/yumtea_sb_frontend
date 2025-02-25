@@ -64,8 +64,7 @@
      border-radius: 0 var(--bs-border-radius)  var(--bs-border-radius) 0;
  }
 
-    .signin_button, .signin_button:active:enabled, .signin_button:hover:enabled,
-    .submit_button, .submit_button:active:enabled, .submit_button:hover:enabled
+    .signin_button, .signup_button, .submit_button
     {
         border-radius: var(--oblong-button-border-radius);
         border: transparent;
@@ -77,25 +76,21 @@
 
 
     }
-    .signin_button:active:enabled, .signin_button:hover:enabled,
-    .signup_button:active, .signup_button:hover,
-    .submit_button:active, .submit_button:hover
+    .signin_button:hover:enabled,
+    .signup_button:hover:enabled,
+    .submit_button:hover:enabled
     {
         border-color: transparent;
         box-shadow: 0 0 5px black !important;
 
     }
-    .signin_button:disabled, .signin_button:hover:disabled, .signin_button:active:disabled,
-    .submit_button:disabled, .submit_button:hover:disabled, .submit_button:active:disabled
-
+    .signin_button:disabled,
+    .signup_button:disabled,
+    .submit_button:disabled
     {
-        border: transparent;
         cursor: not-allowed;
         pointer-events: all !important;
 
-    }
-    .signup_button {
-        margin-top:3rem;
     }
 
     .full_spinner {

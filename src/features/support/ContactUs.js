@@ -18,7 +18,7 @@ const ContactUs =() => {
     }
     return(
         <div className="contactus_wrapper">
-            <div className="contactus_title">Contact Us</div>
+            <div className="support_title mb-3">Contact Us</div>
 
             <Form className='contactus_form'
                   onSubmit={handleSubmit}

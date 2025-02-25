@@ -45,7 +45,7 @@ console.log("LOGIN PAGE")
     return(
        <div className='login_wrapper'>
 
-            <h4 className="mb-4">Sign in to your account</h4>
+            <h3 className="mb-4">Sign in to your account</h3>
            <Form className='login_form' onSubmit={handleSubmit}>
 
                <EmailInputBox email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />

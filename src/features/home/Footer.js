@@ -1,7 +1,10 @@
 const Footer = () =>{
     return(
-        <div className='footer'>
-            SITE MAP
+        <div className='footer_wrapper'>
+            <div className="footer">
+                SITE MAP
+            </div>
+
 
 
         </div>

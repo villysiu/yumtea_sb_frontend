@@ -46,7 +46,7 @@ const Signup = () =>{
     return(
         <div className='login_wrapper'>
 
-            <h4 className="mb-4">Sign up a new account</h4>
+            <h3 className="mb-4">Sign up a new account</h3>
             <Form className='signup_form' onSubmit={handleSubmit}>
                 <NameInputBox nickname={nickname} setNickname={setNickname} nicknameError={nicknameError} setNicknameError={setNicknameError}/>
                 <EmailInputBox email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />

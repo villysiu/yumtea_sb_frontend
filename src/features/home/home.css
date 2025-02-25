@@ -206,12 +206,18 @@ div.slide-left p {
 /*  background: url('http://127.0.0.1:8001/homepage/brown_04.jpg') no-repeat center;*/
 /*}*/
 
-
-.footer {
-  width: var(--body-width);
+.footer_wrapper{
+  width: 100vw;
   height: 15rem;
   color: white;
   background-color: var(--dark-brown-color);
+  display: flex;
+  justify-content: center;
+}
+.footer {
+  width: var(--body-width);
+  margin:1rem;
+
 }
 
 location_wrapper { 
