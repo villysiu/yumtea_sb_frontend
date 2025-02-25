@@ -30,12 +30,12 @@ const OffcanvasMD = ({show, setShow}) =>{
                 </Row>
                 <Row>
                     <Col xs={12}>
-                        <Link to={`${homeLink}/visit-taste`} className="offcanvas_category_link text">
+                        <Link to={`${homeLink}/visit-taste`} className="offcanvas_category_link text" onClick={()=>setShow(false)}>
                             Visit Us
                         </Link>
                     </Col>
                     <Col xs={12}>
-                        <Link to={`${homeLink}/support`} className="offcanvas_category_link text">
+                        <Link to={`${homeLink}/support`} className="offcanvas_category_link text" onClick={()=>setShow(false)}>
                             Support
                         </Link>
                     </Col>
