@@ -1,3 +1,4 @@
+
 .header_full_wrapper{
     width: 100vw;
     /*background-color: pink;*/
@@ -78,22 +79,26 @@
   mask-repeat: no-repeat;
   mask-position: center;
 }
+.yumtea_char {
+  width: 100%;
+  height: 100%
+}
 @media all and (max-width: 991.98px) {
 
   :root {
     --yumtea_logo_width: 5rem;
   }
-  #yumtea_logo {
-    width: var(--yumtea_logo_width);
-    /*display:inline-block;*/
-    /*background-color: var(--gold-text-color);*/
-    -webkit-mask:url("http://127.0.0.1:8001/logo/yumtea_logo_Char.png");
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    margin-left: 1rem;
-    margin-right: 2rem;
-  }
+  /*#yumtea_logo {*/
+  /*  width: var(--yumtea_logo_width);*/
+  /*  !*display:inline-block;*!*/
+  /*  !*background-color: var(--gold-text-color);*!*/
+  /*  -webkit-mask:url("http://127.0.0.1:8001/logo/yumtea_logo_Char.png");*/
+  /*  mask-size: contain;*/
+  /*  mask-repeat: no-repeat;*/
+  /*  mask-position: center;*/
+  /*  margin-left: 1rem;*/
+  /*  margin-right: 2rem;*/
+  /*}*/
 }
 @media all and (max-width: 768px) {
   .header_brand_container{
@@ -140,18 +145,33 @@
   background-color:rgb(139, 132, 113);
   color: white;
 }
-.header_user_button {
- display: flex;
- flex-direction: row;
- align-items: center;
- font-size: 1.5rem;
- color: var(--gold-text-color);
- background-color: transparent;
- text-decoration: none;
+
+.user_button_wrapper {
+  /*width: var(--header-button-size);*/
+  height: var(--header-button-size);
+  color: var(--gold-text-color);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-color: transparent;
+}
+
+.user_button {
+  width: var(--header-button-size);
+  height: var(--header-button-size);
 }
 .nav_username{
-  /*visibility: unset;*/
+  padding-left: 0.5rem;
+  font-size: 1.2rem;
 }
+.user_button_wrapper:hover{
+  color: white;
+}
+
+
 
 @media all and (max-width: 768px) {
 
@@ -160,16 +180,7 @@
   }
 }
 
-.header_user_name {
-  color: var(--gold-text-color);
-  /*padding: 0 0.5rem;*/
-  text-wrap: nowrap;
-  font-size: 2rem;
-}
 
-.header_user_button:hover, .header_user_name:hover{
-  color: white;
-}
 
 .user_modal {
   position: fixed;
@@ -309,8 +320,8 @@
   /*  z-index: 205;*/
   /*}*/
   .hamburger_button{
-    /*width: 45px;*/
-    /*height: 45px;*/
+    width: var(--header-button-size);
+    height: var(--header-button-size);
     background: var(--gold-text-color);
     border: 0;
     color: white;
@@ -318,6 +329,7 @@
     justify-content: center;
   }
   .hamburger_button:hover, .hamburger_button:active{
+
     border: 2px solid white !important;
     background: var(--gold-text-color) !important;
   }

@@ -1,12 +1,9 @@
 .cart_button_wrapper{
     position: relative;
-    padding: 0.5rem;
-    cursor: pointer;
 
-    border-radius: 35px;
-    background-color: transparent;
-     width: 64px;
-    height: 64px;
+    cursor: pointer;
+    /*background-color: transparent;*/
+
 }
 
 .cart_icon {

@@ -40,6 +40,8 @@
   --oblong-button-padding: 0.5rem 2rem;
   --oblong-button-border: 1px solid rgb(169, 166, 150) !important;
   --oblong-button-hover-box-shadow: 0 0 5px black !important;
+
+  --header-button-size: 45px;
 } 
 
 @media all and  (max-width: 1399.98px) {

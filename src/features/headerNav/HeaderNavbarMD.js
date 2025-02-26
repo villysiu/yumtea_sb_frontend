@@ -9,6 +9,7 @@ import CartIcon from '../cart/CartIcon'
 import {useState} from "react";
 import {List} from "react-bootstrap-icons";
 import OffcanvasMD from "./OffcanvasMD";
+import {homeLink} from "../../app/global";
 
 const HeaderNavbarMD = () =>{
     const [show, setShow] = useState(false);
@@ -20,7 +21,8 @@ const HeaderNavbarMD = () =>{
             <Navbar collapseOnSelect expand={false} sticky="top" className="bg-body-tertiary header_wrapper">
 
                 <Button className="hamburger_button" onClick={()=>setShow(true)}>
-                    <img alt="" id='yumtea_logo'/>
+                    {/*<img alt="" id='yumtea_logo'/>*/}
+                    <img src ={`${homeLink}/logo/yumtea_logo_Char.png`} alt="logo" className="yumtea_char" />
                 </Button>
 
                 <OffcanvasMD show={show} setShow={setShow} />

@@ -39,8 +39,8 @@ const CartIcon =() =>{
                 </Modal>
 
             }
-            <div  className="cart_button_wrapper ms-2" onClick={handleClick}>
-                <CartFill className="cart_icon " />
+            <div  className="cart_button_wrapper me-2" onClick={handleClick}>
+                <CartFill className="cart_icon" size={45} />
                 {count > 0 && <div className='cartitem_count'> {count} </div>}
             </div>
         </>
