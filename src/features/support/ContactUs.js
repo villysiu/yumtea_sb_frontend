@@ -14,7 +14,7 @@ const ContactUs =() => {
     const [desc, setDesc] =useState("")
     const [descError, setDescError] = useState("")
     const handleSubmit = () => {
-
+        console.log("message sent")
     }
     return(
         <div className="contactus_wrapper">
@@ -22,6 +22,7 @@ const ContactUs =() => {
 
             <Form className='contactus_form'
                   onSubmit={handleSubmit}
+                  // action="mailto:someone@example.com" method="post" enctype="text/plain"
             >
                 <EmailBox email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
 

@@ -30,6 +30,7 @@ console.log("LOGIN PAGE")
             setTimeout(() => {
                 console.log("expired ");
                 dispatch(removeUser());
+                // dispatch()
             }, 105000);
         }
     }, [loginStatus])

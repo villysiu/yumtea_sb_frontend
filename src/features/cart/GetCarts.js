@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import {addItemToCart, fetchCart} from "./cartSlice"
+import {addItemToCart, clearCart, fetchCart} from "./cartSlice"
 import { resetCartBanner} from './cartSlice'
 
 const GetCarts = () => {
@@ -14,6 +14,9 @@ const GetCarts = () => {
         if(currentUser !== null && tempCart !== null){
             dispatch(addItemToCart(tempCart));
 
+        }
+        else if(currentUser === null){
+            dispatch(clearCart())
         }
     }, [currentUser, dispatch])
 

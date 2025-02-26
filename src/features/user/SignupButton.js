@@ -3,8 +3,8 @@ import { Button, Spinner } from 'react-bootstrap';
 const SignupButton = ({nickname, email, password, nicknameError, emailError, passwordError}) =>{
 
     // console.log(email, password)
-    const {signupStatus} = useSelector(state=>state.user)
-    if(signupStatus === 'loading')
+    const {registerStatus} = useSelector(state=>state.user)
+    if(registerStatus === 'loading')
         return(
             <Button className='signin_button'>
                 <Spinner size="sm" />

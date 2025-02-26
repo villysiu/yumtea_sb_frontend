@@ -28,7 +28,7 @@ const Signup = () =>{
 
     useEffect(()=>{
         if(registerStatus === 'succeeded')
-            navigate('../user/login' )
+            navigate('/user/signin' )
         else if(registerStatus === "failed"){
             setNickname("")
             setEmail("");

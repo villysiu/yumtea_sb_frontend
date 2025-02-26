@@ -133,6 +133,11 @@ const cartSlice=createSlice({
             state.removeStatus = 'idle'
             state.updateStatus = 'idle'
         },
+        clearCart(state){
+            state.carts = []
+            state.fetchCartStatus = 'idle'
+        }
+
 
 
     },
@@ -209,7 +214,7 @@ const cartSlice=createSlice({
         
     }
 })
-export const { resetCartBanner, addItemToTempCart} = cartSlice.actions
+export const { resetCartBanner, addItemToTempCart, clearCart} = cartSlice.actions
 export default cartSlice.reducer
 
 const selectCarts = state => state.cart.carts;

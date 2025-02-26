@@ -77,6 +77,15 @@ const messageSlice = createSlice({
                     }
                 )
             })
+            .addCase(registerUser.fulfilled, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "success",
+                        content: "New user registered. Please login with credentials"
+                    }
+                )
+
+            })
             .addCase(registerUser.rejected, (state, action) => {
                 state.messages.push(
                     {
