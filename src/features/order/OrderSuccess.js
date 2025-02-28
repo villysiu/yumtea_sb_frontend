@@ -23,7 +23,7 @@ const OrderSuccess = () =>{
         <div className='order_success'>
             <div><b>Thank you for your purchase.</b></div>
             <div>order number: {newestOrder.id}</div>
-            <div>order date: {newestOrder.purchaseDate}</div>
+            <div>order date: {newestOrder.purchaseDate.slice(0, 10)}</div>
             <div className='mt-5'>
                 <Link to={`../../collection`} state={location.pathname}>
                     <Button className='continue_button'>Continue Shopping</Button>

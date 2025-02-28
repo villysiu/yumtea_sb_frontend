@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 
 export const fetchCurrentUserOrders=createAsyncThunk(
     'order/fetchCurrentUserOrders',
-    async () => {
+    async (_, {rejectWithValue}) => {
         console.log("fetching orders")
         try {
             const response=await fetch(`${apiLink}/purchases`, {
@@ -16,20 +16,17 @@ export const fetchCurrentUserOrders=createAsyncThunk(
 
             if(!response.ok) {
                 throw new Error(`Server error: ${response.status} ${response.statusText}`);
-
             }
-
-
             return await response.json()
         } 
         catch(error){
-            return error.message;
+            return rejectWithValue(error.message);
         }
     }
 )
 export const PlaceOrder=createAsyncThunk(
     'order/PlaceOrder',
-    async (order) => {
+    async (order, {rejectWithValue}) => {
         console.log("CheckoutCart orders")
         try {
             const response=await fetch(`${apiLink}/purchase`, {
@@ -51,7 +48,7 @@ export const PlaceOrder=createAsyncThunk(
             return await response.json()
         } 
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
@@ -70,7 +67,6 @@ const orderSlice=createSlice({
         // }
 
         clearNewestOrder(state){
-            console.log("clea djafhsj")
             state.newestOrder = null;
             state.checkoutStatus = 'idle';
         }
@@ -83,11 +79,11 @@ const orderSlice=createSlice({
         })
         .addCase(fetchCurrentUserOrders.fulfilled, (state, action) => {
             state.status = 'succeeded'
-
             state.orders = action.payload
         })
         .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
             state.status = 'failed'
+            // state.orders = []
         })
         .addCase(PlaceOrder.pending, (state, action) => {
             state.checkoutStatus = 'loading'
@@ -95,10 +91,10 @@ const orderSlice=createSlice({
         .addCase(PlaceOrder.fulfilled, (state, action) => {
             state.checkoutStatus = 'succeeded'
 
-            // state.newestOrder = {
-            //     ...action.payload,
-            //     formatedDate: format(new Date(action.payload.purchaseDate), 'MM/dd/yyyy hh:mm:ss a')
-            // }
+            state.newestOrder = {
+                ...action.payload,
+                // formatedDate: format(new Date(action.payload.purchaseDate), 'MM/dd/yyyy hh:mm:ss a')
+            }
 
             // reset orders status to fetch  updated orders list from api
             state.status = "idle";

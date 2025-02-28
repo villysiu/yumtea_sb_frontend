@@ -42,6 +42,8 @@
   --oblong-button-hover-box-shadow: 0 0 5px black !important;
 
   --header-button-size: 45px;
+
+  --yumtea_logo_width: 15rem;
 } 
 
 @media all and  (max-width: 1399.98px) {
@@ -51,6 +53,12 @@
   }
 }
 
+@media all and (max-width: 991.98px) {
+
+  :root {
+    --yumtea_logo_width: 5rem;
+  }
+}
 
 
 .appbody {

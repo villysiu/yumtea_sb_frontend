@@ -10,7 +10,7 @@ const Messages = () =>{
 
     return(
         <>
-        {  messages.map(m => <Message message ={m} />)  }
+        {  messages.map((m, idx) => <Message key={idx} message ={m} />)  }
         </>
     )
 }

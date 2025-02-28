@@ -18,7 +18,7 @@ const OffcanvasMD = ({show, setShow}) =>{
                     category.array.map(category => {
                         return(
 
-                            <Col xs={6} className="offcanvas_category_img_wrapper">
+                            <Col key={category.id} xs={6} className="offcanvas_category_img_wrapper">
                                 <Link to={`${homeLink}/collection`} className="offcanvas_category_link" onClick={()=>setShow(false)}>
                                 <img src={`${homeLink}/category/${category.imageUrl}`} className="offcanvas_category_img"/>
                                 <div className="offcanvas_category_img_overlay">{category.title} </div>

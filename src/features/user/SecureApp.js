@@ -24,7 +24,7 @@ const SecureApp = () => {
 
     if(currentUser === null){
         return (
-            <Navigate to="../user/signin"
+            <Navigate to="/user/signin"
             state = {location.pathname}
             />
         )

@@ -5,7 +5,7 @@ import { homeLink } from '../../app/global';
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeUser } from "./userSlice"
+import {fetchCurrentUser, removeUser} from "./userSlice"
 import { loginUser } from './userSlice';
 import LoginButton from './LoginButton'
 import EmailInputBox from "./EmailInputBox";
@@ -26,12 +26,25 @@ console.log("LOGIN PAGE")
             setPassword("");
         }
         if(loginStatus === 'succeeded'){
-            console.log("user session expired in 10 min 5 secs");
-            setTimeout(() => {
-                console.log("expired ");
-                dispatch(removeUser());
-                // dispatch()
-            }, 105000);
+            dispatch(fetchCurrentUser());
+            // console.log("user session expired in 5 min 5 secs");
+            // setTimeout(() => {
+            //     console.log("expired ");
+            //     // dispatch(removeUser());
+            //     dispatch(fetchCurrentUser());
+            //     // dispatch()
+            // }, 55000);
+            // let secs = 0
+
+            // const tracktime = setInterval(()=>{
+            //     secs += 1
+            //     console.log(secs)
+            //     if (secs >=330) {
+            //         clearInterval(tracktime);
+            //         console.log('Interval stopped after 5.5 minutes.');
+            //     }
+            //     }, 1000
+            // )
         }
     }, [loginStatus])
 

@@ -3,7 +3,7 @@ import { apiLink } from "../../app/global";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
     async () => {
-        console.log("in fetching???")
+        console.log("fetching current login user")
         
         try {
             const response=await fetch(`${apiLink}/resource/user`, {
@@ -14,9 +14,10 @@ export const fetchCurrentUser=createAsyncThunk(
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
-            const data=await response.json()
+            console.log("user is herer not expored?")
+            return await response.json()
             
-            return data
+
         } 
         catch(error){
             console.log(error)
@@ -129,7 +130,9 @@ const userSlice=createSlice({
         fetchUserStatus: 'idle',
         loginStatus: 'idle',
         logoutStatus: 'idle',
-        registerStatus:'idle'
+        registerStatus:'idle',
+        expires: null
+
     },
     reducers: {
         // logout: (state) => {
@@ -152,8 +155,12 @@ const userSlice=createSlice({
         })
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
             // console.log(action.payload)
-            
-            state.currentUser = action.payload
+
+            state.currentUser= {
+                nickname: action.payload.nickname,
+                email: action.payload.email
+            }
+            state.expires = action.payload.expires;
             state.fetchUserStatus = 'succeeded'
             state.loginStatus = 'succeeded'
             state.logoutStatus = 'idle'
@@ -161,6 +168,10 @@ const userSlice=createSlice({
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
             state.fetchUserStatus = 'failed'
+            state.currentUser = null
+            state.expires = null
+            state.loginStatus = 'idle'
+            state.logoutStatus = 'idle'
         })
 
         .addCase(loginUser.pending, (state, action) => {
@@ -169,8 +180,12 @@ const userSlice=createSlice({
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
             state.loginStatus = 'succeeded'
-            state.fetchUserStatus = 'succeeded'
-            state.currentUser=action.payload
+            // state.fetchUserStatus = 'succeeded'
+            // state.currentUser= {
+            //     nickname: action.payload.nickname,
+            //     email: action.payload.email
+            // }
+            // state.expires = action.payload.expires;
             state.logoutStatus = 'idle'
 
         })
@@ -186,6 +201,7 @@ const userSlice=createSlice({
             state.loginStatus = 'idle';
             state.fetchUserStatus = 'idle'
             state.currentUser=null;
+            state.expires = null
         })
         .addCase(logoutUser.rejected, (state, action) => {
             state.logoutStatus = 'failed'

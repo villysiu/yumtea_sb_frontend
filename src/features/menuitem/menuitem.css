@@ -126,6 +126,8 @@
     right: 0;
     bottom: 0;
     box-shadow: 0 0 5px rgb(152, 152, 152);
+
+    cursor: pointer;
 }
 .menuitem_plus_circle:hover {
     background-color: #f9f9f9;

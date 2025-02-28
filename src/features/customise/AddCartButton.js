@@ -1,8 +1,7 @@
 import {Button} from 'react-bootstrap'
 import {USDollar} from '../../app/global'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItemToTempCart, addItemToCart, resetCartBanner} from '../cart/cartSlice'
-import menuitem from "../menuitem/Menuitem";
+import {addItemToTempCart, addItemToCart} from '../cart/cartSlice'
 import {useLocation, useNavigate} from "react-router-dom";
 
 const AddCartButton = ({customizedItem, handleHide}) => {
@@ -45,7 +44,7 @@ const AddCartButton = ({customizedItem, handleHide}) => {
                     "temperature": customizedItem.temperature
                 }
             ));
-            navigate('/user/signin', { state: { from: location } });
+            navigate('/user/signin', { state: location.pathname });
         }
         else {
             console.log("add to API cart  ")

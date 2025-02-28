@@ -5,7 +5,7 @@ import { fetchCurrentUser } from "./userSlice"
 const GetUser = ({setGetUser}) =>{
     console.log("GET USER")
     const dispatch = useDispatch()
-    const {currentUser, fetchUserStatus} = useSelector(state => state.user)
+    const {currentUser, fetchUserStatus, expires} = useSelector(state => state.user)
 
     useEffect(()=>{
         if(!currentUser && fetchUserStatus==='idle')
@@ -16,6 +16,10 @@ const GetUser = ({setGetUser}) =>{
         }
         else {
             // when fetchUser process completed, either result succeeded or failed
+            if(fetchUserStatus === 'succeeded'){
+                console.log("do timeout here!!!!")
+                console.log("expire in "+ new Date(expires))
+            }
             setGetUser(true);
 
 
