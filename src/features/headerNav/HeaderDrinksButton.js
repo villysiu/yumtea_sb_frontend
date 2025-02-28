@@ -8,7 +8,7 @@ const Header_Drinks_Button =() => {
     const location = useLocation()
     return (
             <Link to={`${homeLink}/collection`}
-                  className={`header_buttons me-3 ${location.pathname === '/collection' ? 'active' : ""}`}
+                  className={`header_buttons mx-3 ${location.pathname === '/collection' ? 'active' : ""}`}
             >
                 Menu
             </Link>
