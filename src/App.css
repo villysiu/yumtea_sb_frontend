@@ -116,11 +116,12 @@
 } */
 
 .content {
-  /*margin-top: var(--header_height);*/
+  min-height: calc(100vh - 96px - 240px);
   width: var(--body-width);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .user_items {

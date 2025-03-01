@@ -8,7 +8,7 @@ import {clearCartMessage} from "../message/messageSlice";
 
 export const fetchCart=createAsyncThunk(
     'cart/fetchCart',
-    async (_, thunkAPI) => {
+    async (_, {thunkAPI, rejectWithValue}) => {
         console.log("fetching cart")
         try {
             const response=await fetch(`${apiLink}/cartsByProjection`, {
@@ -19,22 +19,21 @@ export const fetchCart=createAsyncThunk(
                 credentials: 'include'
             })
 
-            if(response.ok) {
-                const carts = await response.json();
-                return carts;
-            }
-            else{
-                throw new Error(`${response.status} ${response.statusText}`)
-            }
+            if(!response.ok)
+
+
+            return await response.json();
+
+
         } 
         catch(error){
-            throw Promise.reject(error);
+            throw rejectWithValue(error.message);
         }
     }
 )
 export const addItemToCart = createAsyncThunk(
     'cart/addItemToCart',
-    async (customizedItem,thunkAPI) => {
+    async (customizedItem,{thunkAPI, rejectWithValue}) => {
         console.log(customizedItem);
         try {
             const response=await fetch(`${apiLink}/cart`, {
@@ -47,16 +46,18 @@ export const addItemToCart = createAsyncThunk(
                 credentials: 'include'
             })
 
-            if(response.ok){
-                const newCartItem = await response.json();
-                await thunkAPI.dispatch(fetchCart());
+            if(!response.ok)
+                throw new Error(`${response.status} ${response.statusText}`)
 
-            }
+
+            const newCartItem = await response.json();
+            await thunkAPI.dispatch(fetchCart());
+            return newCartItem;
 
 
         }
         catch(error){
-            return Promise.reject(error);
+            throw rejectWithValue(error.message);
         }
     }
 )
@@ -64,7 +65,7 @@ export const addItemToCart = createAsyncThunk(
 
 export const updateItemInCart = createAsyncThunk(
     'cart/updateItemInCart',
-    async (updatedItem, thunkAPI) => {
+    async (updatedItem, {thunkAPI, rejectWithValue}) => {
         console.log(updatedItem)
 // {pk: 9, menuitem_pk: 11, milk_pk:8, price: 6, quantity: 1, temperature: 'H', size: 16, sweetness: 0}
 
@@ -81,33 +82,37 @@ export const updateItemInCart = createAsyncThunk(
                 credentials: 'include'
             })
 
-            if(response.ok) {
-                // const newCartItem = await response.json();
+            if(!response.ok)
+                throw new Error(`${response.status} ${response.statusText}`)
+
+
                 await thunkAPI.dispatch(fetchCart());
-            }
+
         } 
         catch(error){
-            return Promise.reject(error);
+            throw rejectWithValue(error.message);
         }
     }
 )
 
 export const removeItemFromCart = createAsyncThunk(
     'cart/removeItemFromCart',
-    async (cartitemId, thunkAPI) => {
+    async (cartitemId, {thunkAPI, rejectWithValue}) => {
         console.log(cartitemId)
         try {
             const response=await fetch(`${apiLink}/cart/${cartitemId}`, {
                 method: "DELETE",
                 credentials: 'include'
             })
-            if(response.ok) {
+            if(!response.ok)
+                throw new Error(`${response.status} ${response.statusText}`)
+
                 // const newCartItem = await response.json();
-                await thunkAPI.dispatch(fetchCart());
-            }
+            await thunkAPI.dispatch(fetchCart());
+
         } 
         catch(error){
-            return Promise.reject(error);
+            throw rejectWithValue(error.message);
         }
     }
 )
@@ -179,9 +184,6 @@ const cartSlice=createSlice({
         })
 
         .addCase(updateItemInCart.pending, (state, action) => {
-            // console.log(action)
-            // let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
-            // item.status = 'loading'
             state.updateStatus = 'loading'
         })
         .addCase(updateItemInCart.fulfilled, (state, action) => {
@@ -189,17 +191,13 @@ const cartSlice=createSlice({
             // {'updated': data, 'initId': item.cartitemId}
             // (updated: {pk: 12, user_id: 1, menuitem_id: 1, milk_id: 8, quantity: 3, …}, initId: 14 )
 
-
             state.updateStatus = 'succeeded'
-            // if returned updated item id is different than init Id, it means the item already existed and is merged.
-            // so we deleted the init id from the cart
 
         })
         .addCase(updateItemInCart.rejected, (state, action) => {
-            // let item = state.cart.cart_arr.find(item=>item.pk === action.meta.arg.cartitemId)
-            // delete item.status
             state.updateStatus = 'failed'
         })
+
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.carts = []
             state.fetchCartStatus = 'idle'
