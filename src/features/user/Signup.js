@@ -50,7 +50,7 @@ const Signup = () =>{
             <Form className='signup_form' onSubmit={handleSubmit}>
                 <NameInputBox nickname={nickname} setNickname={setNickname} nicknameError={nicknameError} setNicknameError={setNicknameError}/>
                 <EmailInputBox email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
-                <PasswordInputBox password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError}/>
+                <PasswordInputBox password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} placeHolder="Password"/>
                 <SignupButton nickname={nickname} email={email} password={password}
                               nicknameError={nicknameError} emailError={emailError} passwordError={passwordError}  />
 

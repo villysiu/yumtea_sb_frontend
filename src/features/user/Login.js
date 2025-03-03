@@ -45,7 +45,7 @@ console.log("LOGIN PAGE")
            <Form className='login_form' onSubmit={handleSubmit}>
 
                <EmailInputBox email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
-               <PasswordInputBox password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
+               <PasswordInputBox password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} placeHolder="Password" />
                <LoginButton email={email} password={password} emailError={emailError} passwordError={passwordError}/>
 
            </Form>

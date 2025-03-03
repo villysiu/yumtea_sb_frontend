@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 // import { fetchCategories, fetchMenuitems, fetchMenuitemsByCategory } from '../menuitem/menuitemSlice'
 // import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
-import {loginUser, logoutUser, registerUser, updateUser,} from '../user/userSlice'
+import {loginUser, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 // import { deleteReservation } from '../reservation/reservationSlice'
 
@@ -121,6 +121,26 @@ const messageSlice = createSlice({
                     {
                         type: "danger",
                         content: "Update failed. Please try again."
+                    }
+                )
+
+            })
+            .addCase(updatePassword.fulfilled, (state, action) => {
+                console.log("update Password succeeded")
+                state.messages.push(
+                    {
+                        type: "success",
+                        content: "User password updated."
+                    }
+                )
+
+            })
+            .addCase(updatePassword.rejected, (state, action) => {
+                console.log(action.payload)
+                state.messages.push(
+                    {
+                        type: "danger",
+                        content: "Update password failed. Please try again."
                     }
                 )
 

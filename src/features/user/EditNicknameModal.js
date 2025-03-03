@@ -1,9 +1,9 @@
 import Form from 'react-bootstrap/Form';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Button, Modal} from "react-bootstrap";
 import NameInputBox from "./NameInputBox";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchCurrentUser, updateUser} from "./userSlice";
+import {useDispatch} from "react-redux";
+import {updateUser} from "./userSlice";
 const EditNicknameModal = ({setShow}) =>{
 
     // const {updateStatus} = useSelector(state=>state.user)
@@ -14,9 +14,9 @@ const EditNicknameModal = ({setShow}) =>{
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log("ipfate?")
+        console.log("update user name?")
         dispatch(updateUser({'nickname': nickname}))
-        setShow(false);
+        setShow("");
     }
 
     // useEffect(()=>{

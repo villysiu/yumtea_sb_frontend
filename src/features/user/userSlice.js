@@ -138,6 +138,31 @@ export const updateUser = createAsyncThunk(
         }
     }
 )
+export const updatePassword = createAsyncThunk(
+    'user/updatePassword',
+    async(userPassword, {rejectWithValue}) =>{
+        try{
+            console.log("updatePassword?")
+            const response = await fetch(`${apiLink}/resource/updatePassword`, {
+                'method': "PATCH",
+                'headers': {
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+
+                },
+                'body': JSON.stringify(userPassword),
+                credentials: 'include'
+            })
+            if(!response.ok)
+                throw new Error(`${response.status} ${response.statusText}`)
+
+            // return await response.json();
+
+        } catch(error){
+            return rejectWithValue(error.message);
+        }
+    }
+)
 const userSlice=createSlice({
     name: 'user',
     initialState: {
@@ -237,6 +262,19 @@ const userSlice=createSlice({
 
           })
           .addCase(updateUser.rejected, (state, action) => {
+              state.updateStatus = 'failed'
+
+          })
+
+          .addCase(updatePassword.pending, (state, action) => {
+              state.updateStatus = 'loading'
+          })
+          .addCase(updatePassword.fulfilled, (state, action) => {
+              state.updateStatus = 'succeeded';
+              // state.currentUser = action.payload;
+
+          })
+          .addCase(updatePassword.rejected, (state, action) => {
               state.updateStatus = 'failed'
 
           })

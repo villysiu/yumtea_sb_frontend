@@ -4,7 +4,7 @@ import {useState} from "react";
 import InputGroup from "react-bootstrap/esm/InputGroup";
 import {Eye, EyeSlash} from "react-bootstrap-icons";
 
-const PasswordInputBox = ({password, setPassword, passwordError, setPasswordError}) => {
+const PasswordInputBox = ({password, setPassword, passwordError, setPasswordError, placeHolder}) => {
 
     const [showPassword, toggleShowPassword] = useState(false)
 
@@ -27,13 +27,13 @@ const PasswordInputBox = ({password, setPassword, passwordError, setPasswordErro
     }
     return (
         <>
-            <FloatingLabel controlId="floatingPasswordInput" label="Password"
+            <FloatingLabel controlId="floatingPasswordInput" label={placeHolder}
                 className={passwordError? "password_eye_box" : "password_eye_box mb-3"}
 
             >
 
                 <Form.Control type={showPassword ? "text" : "password"} className="password_input"
-                              placeholder="Password"
+                              placeholder={placeHolder}
                               value={password}
                               onChange={handleChange}
                               onBlur={e=>validatePassword(e.target.value)}

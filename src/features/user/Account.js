@@ -5,20 +5,25 @@ import {Modal} from "react-bootstrap";
 import CartModal from "../cart/CartModal";
 import {useState} from "react";
 import EditNicknameModal from "./EditNicknameModal";
+import EditPasswordModal from "./EditPasswordModal";
 
 const Account = () => {
 
     const {currentUser} = useSelector(state => state.user );
     console.log(currentUser);
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState("")
 
     return (
         <>
             {
                 show &&
-                <Modal show={show} onHide={()=>setShow(false)}  dialogClassName='edit_account_modal_wrapper' >
-
-                        <EditNicknameModal setShow={setShow}/>
+                <Modal show={ show!=="" } onHide={()=>setShow("")}  dialogClassName='edit_account_modal_wrapper' >
+                    {
+                        show === "nickname" ?
+                            <EditNicknameModal setShow={setShow}/>
+                            :
+                            <EditPasswordModal setShow={setShow} />
+                }
 
                 </Modal>
 
@@ -32,18 +37,15 @@ const Account = () => {
                 </div>
                 <div className="account_line">
                     <div><b>Nickname: </b>{currentUser.nickname}</div>
-                    <div className="edit_account_button" onClick={()=>setShow(true)}>edit</div>
+                    <div className="edit_account_button" onClick={()=>setShow("nickname")}>edit</div>
                 </div>
                 <div className="account_line">
-                    <div><b>Password: </b> password</div>
-                    <div>edit</div>
+                    <div><b>Password </b> </div>
+                    <div className="edit_account_button" onClick={()=>setShow("password")}>edit</div>
                 </div>
 
             </div>
-            {/*<p> name --- edit</p><p>email --- cannot be changed???</p><p>change passwotd</p>*/}
-            {/*<div> make a left panel for choices</div>*/}
-            {/*<div>previous orders</div>*/}
-            {/*<div>upcoming orders</div>*/}
+
 
             <LogoutButton />
         </>
