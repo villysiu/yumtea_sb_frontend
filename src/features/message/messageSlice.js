@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 // import { fetchCategories, fetchMenuitems, fetchMenuitemsByCategory } from '../menuitem/menuitemSlice'
 // import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
-import {loginUser, logoutUser, registerUser,} from '../user/userSlice'
+import {loginUser, logoutUser, registerUser, updateUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 // import { deleteReservation } from '../reservation/reservationSlice'
 
@@ -106,6 +106,24 @@ const messageSlice = createSlice({
 
             .addCase(updateItemInCart.fulfilled, (state, action) => {
                 state.cartMessage = 'Item updated.'
+            })
+
+            .addCase(updateUser.fulfilled, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "success",
+                        content: "User updated."
+                    }
+                )
+            })
+            .addCase(updateUser.rejected, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "danger",
+                        content: "Update failed. Please try again."
+                    }
+                )
+
             })
 
     }

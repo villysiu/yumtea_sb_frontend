@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
-    async () => {
+    async (_, {rejectWithValue}) => {
         console.log("fetching current login user")
         
         try {
@@ -22,7 +22,7 @@ export const fetchCurrentUser=createAsyncThunk(
         catch(error){
             console.log(error)
             // localStorage.clear()
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
@@ -49,26 +49,20 @@ export const loginUser=createAsyncThunk(
 
             })
 
-            if(!response.ok) {
-                console.log(response.status, " ", response.statusText)
+            if(!response.ok)
                 throw new Error(`${response.status} ${response.statusText}`)
-            }
 
-            const data=await response.json()
-            console.log(data)
-
-            return data
+            return await response.json()
 
         }
         catch(error){
-            // return Promise.reject(error.message)
             return rejectWithValue(error.message);
         }
     }
 )
 export const logoutUser=createAsyncThunk(
     'user/logoutUser',
-    async () =>{
+    async (_, {rejectWithValue}) =>{
         console.log("in lougout redux")
         try {
             const response=await fetch(`${apiLink}/auth/logout`, {
@@ -90,13 +84,13 @@ export const logoutUser=createAsyncThunk(
             
         } 
         catch(error){
-            return Promise.reject(error.message)
+            return rejectWithValue(error.message);
         }
     }
 )
 export const registerUser = createAsyncThunk(
     'user/registerUser',
-    async(userInfo) => {
+    async(userInfo, {rejectWithValue}) => {
         console.log(userInfo)
         try{
             const response = await fetch(`${apiLink}/auth/signup`, {
@@ -112,13 +106,35 @@ export const registerUser = createAsyncThunk(
             if(!response.ok)
                 throw new Error(`${response.status} ${response.statusText}`)
 
-            // const data=await response.json()
-            // console.log(data)
-            console.log(`${response.status} ${response.statusText}`)
+            return null;
 
-            return null
         } catch(error){
-            return Promise.reject(error.message)
+            return rejectWithValue(error.message);
+        }
+    }
+)
+export const updateUser = createAsyncThunk(
+    'user/update',
+    async(userInfo, {rejectWithValue}) =>{
+        try{
+            console.log("ipfate?")
+            const response = await fetch(`${apiLink}/resource/user`, {
+                'method': "PATCH",
+                'headers': {
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+
+                },
+                'body': JSON.stringify(userInfo),
+                credentials: 'include'
+            })
+            if(!response.ok)
+                throw new Error(`${response.status} ${response.statusText}`)
+
+            return await response.json();
+
+        } catch(error){
+            return rejectWithValue(error.message);
         }
     }
 )
@@ -131,6 +147,7 @@ const userSlice=createSlice({
         loginStatus: 'idle',
         logoutStatus: 'idle',
         registerStatus:'idle',
+        updateStatus: 'idle',
         expires: null
 
     },
@@ -154,13 +171,9 @@ const userSlice=createSlice({
             state.fetchUserStatus = 'loading'
         })
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-            // console.log(action.payload)
+            console.log(action.payload)
 
-            state.currentUser= {
-                nickname: action.payload.nickname,
-                email: action.payload.email
-            }
-            state.expires = action.payload.expires;
+            state.currentUser= action.payload
             state.fetchUserStatus = 'succeeded'
             state.loginStatus = 'succeeded'
             state.logoutStatus = 'idle'
@@ -179,13 +192,9 @@ const userSlice=createSlice({
         })
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
+            state.currentUser= action.payload
+            state.fetchUserStatus = 'succeeded'
             state.loginStatus = 'succeeded'
-            // state.fetchUserStatus = 'succeeded'
-            // state.currentUser= {
-            //     nickname: action.payload.nickname,
-            //     email: action.payload.email
-            // }
-            // state.expires = action.payload.expires;
             state.logoutStatus = 'idle'
 
         })
@@ -201,7 +210,6 @@ const userSlice=createSlice({
             state.loginStatus = 'idle';
             state.fetchUserStatus = 'idle'
             state.currentUser=null;
-            state.expires = null
         })
         .addCase(logoutUser.rejected, (state, action) => {
             state.logoutStatus = 'failed'
@@ -212,12 +220,24 @@ const userSlice=createSlice({
           })
           .addCase(registerUser.fulfilled, (state, action) => {
               state.registerStatus = 'succeeded';
-              // state.loginStatus = 'idle';
-              // state.fetchUserStatus = 'idle'
-              // state.currentUser=null;
           })
           .addCase(registerUser.rejected, (state, action) => {
               state.registerStatus = 'failed'
+
+          })
+
+
+          .addCase(updateUser.pending, (state, action) => {
+              state.updateStatus = 'loading'
+          })
+          .addCase(updateUser.fulfilled, (state, action) => {
+              console.log(action.payload)
+              state.updateStatus = 'succeeded';
+              state.currentUser = action.payload;
+
+          })
+          .addCase(updateUser.rejected, (state, action) => {
+              state.updateStatus = 'failed'
 
           })
     }

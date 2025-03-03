@@ -28,8 +28,7 @@ const OrderHistory = () =>{
     if(ordersStatus === 'loading' || ordersStatus === 'idle')
         return <Spinner />
     
-    if(orders.length === 0)
-        return <div>No order</div> 
+
 
     return (
         <div className='order_history_wrapper'>
@@ -39,12 +38,17 @@ const OrderHistory = () =>{
                 <div className="order_filter">
                     <OrderFilter filter={days} setFilter={setDays} />
                 </div>
+
                 {
-                    orders.map(order => {
-                        return (
-                            <SingleOrder key={order.id} order={order} show={show} setShow={setShow} />
-                        )
-                    })
+                    orders.length === 0 ?
+
+                        <h3>You don't have any recent orders.</h3>
+                    :
+                        orders.map(order => {
+                            return (
+                                <SingleOrder key={order.id} order={order} show={show} setShow={setShow} />
+                            )
+                        })
                 } 
             </div>
         </div>

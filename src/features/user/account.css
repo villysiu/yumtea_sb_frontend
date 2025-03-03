@@ -1,0 +1,65 @@
+.account_wrapper {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 390px;
+    margin: 2rem;
+    padding: 1rem;
+    --border-color: rgb(90 53 49);
+    border: var(--border-color) 1px solid;
+    box-shadow: 0 0 5px var(--border-color);
+}
+
+.account_line{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+}
+.edit_account_button {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--border-color);
+}
+/*.edit_account_button :hover{*/
+/*    color: var(--border-color);*/
+
+/*}*/
+/*.edit_account_modal{*/
+/*    width: 400px;*/
+/*}*/
+
+.edit_account_modal_wrapper{
+    width: 400px;
+    /* height: 400px !important; */
+    max-height: 400px;
+    background-color: rgb(249, 247, 247);
+    border-radius: 10px;
+}
+.edit_account_modal{
+    width: 100%;
+    padding: 1rem;
+}
+.edit_account_modal_header{
+    border-bottom: unset !important;
+}
+.save_account_button
+{
+    /*width: 100%;*/
+    border-radius: var(--oblong-button-border-radius);
+    border: transparent;
+    padding: var(--oblong-button-padding);
+    background-color: var(--signin-button-color) !important;
+    color: white;
+    margin: 0.5rem 0;
+}
+.save_account_button:active, .save_account_button:hover
+{
+    border-color: transparent;
+    box-shadow: 0 0 5px black !important;
+}
+.save_account_button:disabled
+{
+    cursor: not-allowed;
+    pointer-events: all !important;
+
+}

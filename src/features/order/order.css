@@ -22,11 +22,11 @@
     width: 100%;
     /* border: 1px gray solid; */
     padding: 2rem;
-    background-color: rgb(191, 183, 160);
+    /*background-color: var(--gold-text-color);*/
     
     /* padding: 1.5rem; */
-    outline: 2px solid white;
-    outline-offset: -0.5rem;
+    /*outline: 2px solid white;*/
+    /*outline-offset: -0.5rem;*/
 }
 .order_history {
 

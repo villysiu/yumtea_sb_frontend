@@ -25,27 +25,9 @@ console.log("LOGIN PAGE")
             setEmail("");
             setPassword("");
         }
-        if(loginStatus === 'succeeded'){
-            dispatch(fetchCurrentUser());
-            // console.log("user session expired in 5 min 5 secs");
-            // setTimeout(() => {
-            //     console.log("expired ");
-            //     // dispatch(removeUser());
-            //     dispatch(fetchCurrentUser());
-            //     // dispatch()
-            // }, 55000);
-            // let secs = 0
-
-            // const tracktime = setInterval(()=>{
-            //     secs += 1
-            //     console.log(secs)
-            //     if (secs >=330) {
-            //         clearInterval(tracktime);
-            //         console.log('Interval stopped after 5.5 minutes.');
-            //     }
-            //     }, 1000
-            // )
-        }
+        // if(loginStatus === 'succeeded'){
+        //     dispatch(fetchCurrentUser());
+        // }
     }, [loginStatus])
 
 

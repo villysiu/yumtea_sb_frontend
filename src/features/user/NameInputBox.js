@@ -11,12 +11,12 @@ const NameInputBox = ({nickname, setNickname, nicknameError, setNicknameError}) 
     }
     const validateNickname = (nickname) =>{
         // console.log("validateing nick "+ nickname)
-        const re = /^[a-zA-Z.-]{2,20}$/
+        const re = /^[a-zA-Z0-9.-]{2,20}$/
 
         if(nickname === "")
             setNicknameError("Nickname is required")
         else if(!re.test(nickname))
-            setNicknameError("Nickname may not exceed 20 letters and  must contain only alphabetic characters and -.")
+            setNicknameError("Nickname must be between 2 and 20 letters and  must contain only alphanumeric characters and -.")
         else
             setNicknameError("")
     }
