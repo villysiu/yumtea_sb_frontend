@@ -27,7 +27,7 @@ const EnterPage = () =>{
             <GetUser setGetUser={setGetUser} />
             <GetCarts />
             <GetTaxRate />
-            <ResetAccess />
+            {/*<ResetAccess />*/}
 
             {spinner ?
                 <Spinner animation="border" className="spinner"/>
