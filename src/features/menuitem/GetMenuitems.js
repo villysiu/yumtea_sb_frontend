@@ -6,7 +6,7 @@ import {fetchMenuitems, fetchMilks, fetchCategories, fetchSizes, fetchSugars} fr
 
 
 const GetMenuitems = ({setGetMenuitem}) =>{
-    console.log("Menuitem App")
+    console.log("Getting Menuitem")
     const dispatch = useDispatch()
     let menuitems_status = useSelector(state => state.menuitem.menuitems.status)
     let milk_status = useSelector(state => state.menuitem.milk.status)

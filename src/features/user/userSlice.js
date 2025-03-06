@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
+import {fetchCurrentUserOrders} from "../order/orderSlice";
+import {addItemToCart, fetchCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
     async (_, {rejectWithValue}) => {
@@ -172,9 +174,7 @@ const userSlice=createSlice({
         loginStatus: 'idle',
         logoutStatus: 'idle',
         registerStatus:'idle',
-        updateStatus: 'idle',
-        expires: null
-
+        updateStatus: 'idle'
     },
     reducers: {
         // logout: (state) => {
@@ -205,11 +205,12 @@ const userSlice=createSlice({
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
-            state.fetchUserStatus = 'failed'
-            state.currentUser = null
-            state.expires = null
-            state.loginStatus = 'idle'
-            state.logoutStatus = 'idle'
+            state.currentUser = null;
+            state.fetchUserStatus = 'failed';
+            state.loginStatus = 'idle';
+            state.logoutStatus = 'idle';
+            state.registerStatus = 'idle';
+            state.updateStatus = 'idle';
         })
 
         .addCase(loginUser.pending, (state, action) => {
@@ -231,10 +232,12 @@ const userSlice=createSlice({
             state.logoutStatus = 'loading'
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
-            state.logoutStatus = 'succeeded';
+            state.currentUser = null;
+            state.fetchUserStatus = 'idle';
             state.loginStatus = 'idle';
-            state.fetchUserStatus = 'idle'
-            state.currentUser=null;
+            state.logoutStatus = 'succeeded';
+            state.registerStatus = 'idle';
+            state.updateStatus = 'idle';
         })
         .addCase(logoutUser.rejected, (state, action) => {
             state.logoutStatus = 'failed'
@@ -278,7 +281,54 @@ const userSlice=createSlice({
               state.updateStatus = 'failed'
 
           })
+
+
     }
 })
 export const { removeUser } = userSlice.actions
 export default userSlice.reducer
+
+
+// .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
+//     state.currentUser = null;
+//     state.fetchUserStatus = 'idle';
+//     state.loginStatus = 'idle';
+//     state.logoutStatus = 'idle';
+//     state.registerStatus = 'idle';
+//     state.updateStatus = 'idle';
+// })
+// .addCase(fetchCart.rejected, (state, action) => {
+//     state.currentUser = null;
+//     state.fetchUserStatus = 'idle';
+//     state.loginStatus = 'idle';
+//     state.logoutStatus = 'idle';
+//     state.registerStatus = 'idle';
+//     state.updateStatus = 'idle';
+// })
+//
+// .addCase(addItemToCart.rejected, (state, action) => {
+//     state.currentUser = null;
+//     state.fetchUserStatus = 'idle';
+//     state.loginStatus = 'idle';
+//     state.logoutStatus = 'idle';
+//     state.registerStatus = 'idle';
+//     state.updateStatus = 'idle';
+// })
+//
+// .addCase(removeItemFromCart.rejected, (state, action) => {
+//     state.currentUser = null;
+//     state.fetchUserStatus = 'idle';
+//     state.loginStatus = 'idle';
+//     state.logoutStatus = 'idle';
+//     state.registerStatus = 'idle';
+//     state.updateStatus = 'idle';
+// })
+//
+// .addCase(updateItemInCart.rejected, (state, action) => {
+//     state.currentUser = null;
+//     state.fetchUserStatus = 'idle';
+//     state.loginStatus = 'idle';
+//     state.logoutStatus = 'idle';
+//     state.registerStatus = 'idle';
+//     state.updateStatus = 'idle';
+// })

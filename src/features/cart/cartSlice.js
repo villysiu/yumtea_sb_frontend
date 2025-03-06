@@ -11,7 +11,7 @@ export const fetchCart=createAsyncThunk(
     async (_, {thunkAPI, rejectWithValue}) => {
         console.log("fetching cart")
         try {
-            const response=await fetch(`${apiLink}/cartsByProjection`, {
+            const response=await fetch(`${apiLink}/carts`, {
                 method: "GET",
                 // headers: {
                 //     "Authorization": `Token ${localStorage.getItem("token")}`,
@@ -49,10 +49,7 @@ export const addItemToCart = createAsyncThunk(
             if(!response.ok)
                 throw new Error(`${response.status} ${response.statusText}`)
 
-
-            const newCartItem = await response.json();
-            await thunkAPI.dispatch(fetchCart());
-            return newCartItem;
+            return await response.json();
 
 
         }
@@ -85,8 +82,7 @@ export const updateItemInCart = createAsyncThunk(
             if(!response.ok)
                 throw new Error(`${response.status} ${response.statusText}`)
 
-
-                await thunkAPI.dispatch(fetchCart());
+            return await response.json();
 
         } 
         catch(error){
@@ -107,8 +103,7 @@ export const removeItemFromCart = createAsyncThunk(
             if(!response.ok)
                 throw new Error(`${response.status} ${response.statusText}`)
 
-                // const newCartItem = await response.json();
-            await thunkAPI.dispatch(fetchCart());
+            return null;
 
         } 
         catch(error){
@@ -150,13 +145,15 @@ const cartSlice=createSlice({
       builder
         .addCase(fetchCart.pending, (state, action) => {
             state.fetchCartStatus = 'loading'
+            state.addToCartStatus ='idle'
+            state.removeStatus = 'idle'
+            state.updateStatus = 'idle'
         })
         .addCase(fetchCart.fulfilled, (state, action) => {
             console.log('CART FETCHED FROM API')
             console.log(action.payload)
             state.fetchCartStatus = 'succeeded'
             state.carts = action.payload
-
         })
         .addCase(fetchCart.rejected, (state, action) => {
             state.fetchCartStatus = 'failed'
@@ -164,20 +161,27 @@ const cartSlice=createSlice({
 
         .addCase(addItemToCart.pending, (state, action) => {
             state.addToCartStatus = 'loading'
+            state.removeStatus = 'idle'
+            state.updateStatus = 'idle'
 
         })
         .addCase(addItemToCart.fulfilled, (state, action) => {
             state.addToCartStatus = 'succeeded'
+            state.tempCart = null;
+            state.fetchCartStatus = "idle"
         })
         .addCase(addItemToCart.rejected, (state, action) => {
-            state.addToCartStatus = 'failed'
+            state.addToCartStatus = "failed";
         })
 
         .addCase(removeItemFromCart.pending, (state, action) => {
             state.removeStatus = 'loading'
+            state.addToCartStatus = 'idle'
+            state.updateStatus = 'idle'
         })
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
             state.removeStatus = 'succeeded'
+            state.fetchCartStatus = "idle"
         })
         .addCase(removeItemFromCart.rejected, (state, action) => {
             state.removeStatus = 'failed'
@@ -185,13 +189,17 @@ const cartSlice=createSlice({
 
         .addCase(updateItemInCart.pending, (state, action) => {
             state.updateStatus = 'loading'
+            state.removeStatus = 'idle'
+            state.addToCartStatus = 'idle'
+
         })
         .addCase(updateItemInCart.fulfilled, (state, action) => {
-            console.log(action.payload)
             // {'updated': data, 'initId': item.cartitemId}
             // (updated: {pk: 12, user_id: 1, menuitem_id: 1, milk_id: 8, quantity: 3, …}, initId: 14 )
 
             state.updateStatus = 'succeeded'
+            state.fetchCartStatus = "idle"
+
 
         })
         .addCase(updateItemInCart.rejected, (state, action) => {
@@ -200,11 +208,18 @@ const cartSlice=createSlice({
 
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.carts = []
+            state.tempCart = null;
             state.fetchCartStatus = 'idle'
+            state.updateStatus = 'idle'
+            state.removeStatus = 'idle'
+            state.addToCartStatus = 'idle'
         })
         .addCase(PlaceOrder.fulfilled, (state, action) => {
             state.carts = [];
-            state.fetchCartStatus = 'idle'
+            state.fetchCartStatus = 'succeeded'
+            state.updateStatus = 'idle'
+            state.removeStatus = 'idle'
+            state.addToCartStatus = 'idle'
             
         })
 
