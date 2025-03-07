@@ -7,7 +7,6 @@ import GetUser from '../user/GetUser'
 import Spinner from 'react-bootstrap/Spinner';
 import { Outlet } from 'react-router-dom';
 import GetTaxRate from "../taxRate/GetTaxRate";
-import ResetAccess from "./ResetAccess";
 
 const EnterPage = () =>{
     console.log("ENTER PAGE")
@@ -27,7 +26,6 @@ const EnterPage = () =>{
             <GetUser setGetUser={setGetUser} />
             <GetCarts />
             <GetTaxRate />
-            {/*<ResetAccess />*/}
 
             {spinner ?
                 <Spinner animation="border" className="spinner"/>

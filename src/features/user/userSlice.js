@@ -215,13 +215,15 @@ const userSlice=createSlice({
 
         .addCase(loginUser.pending, (state, action) => {
             state.loginStatus = 'loading'
+            state.registerStatus = 'idle'
+            state.logoutStatus = 'idle'
         })
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
-            state.currentUser= action.payload
+            state.currentUser = action.payload
             state.fetchUserStatus = 'succeeded'
             state.loginStatus = 'succeeded'
-            state.logoutStatus = 'idle'
+
 
         })
         .addCase(loginUser.rejected, (state, action) => {
@@ -281,6 +283,22 @@ const userSlice=createSlice({
               state.updateStatus = 'failed'
 
           })
+        .addCase(addItemToCart.rejected, (state, action) => {
+            console.log(action.payload)
+            if(action.payload === 401){
+
+                state.currentUser = null;
+                state.fetchUserStatus = 'idle';
+                state.loginStatus = 'idle';
+            }
+
+            // state.currentUser = null;
+            // state.fetchUserStatus = 'idle';
+            // state.loginStatus = 'idle';
+            // state.logoutStatus = 'idle';
+            // state.registerStatus = 'idle';
+            // state.updateStatus = 'idle';
+        })
 
 
     }

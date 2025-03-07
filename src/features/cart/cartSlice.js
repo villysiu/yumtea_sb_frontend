@@ -46,16 +46,24 @@ export const addItemToCart = createAsyncThunk(
                 credentials: 'include'
             })
 
-            if(!response.ok)
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(!response.ok) {
+                console.log(response)
 
+                throw new Error(`${response.status} ${response.statusText}`)
+                // throw new Error
+            }
             return await response.json();
 
 
         }
         catch(error){
-            throw rejectWithValue(error.message);
+            // throw rejectWithValue(error.message);
+            throw rejectWithValue( {
+                "msg": error.message,
+                "item": customizedItem
+            })
         }
+
     }
 )
 
@@ -172,6 +180,8 @@ const cartSlice=createSlice({
         })
         .addCase(addItemToCart.rejected, (state, action) => {
             state.addToCartStatus = "failed";
+            console.log(action.payload)
+            state.tempCart = action.payload.item;
         })
 
         .addCase(removeItemFromCart.pending, (state, action) => {

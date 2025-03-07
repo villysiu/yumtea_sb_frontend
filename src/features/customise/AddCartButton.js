@@ -1,4 +1,4 @@
-import {Button} from 'react-bootstrap'
+ import {Button} from 'react-bootstrap'
 import {USDollar} from '../../app/global'
 import {useDispatch, useSelector} from 'react-redux'
 import {addItemToTempCart, addItemToCart} from '../cart/cartSlice'
