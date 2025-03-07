@@ -2,12 +2,15 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import {addItemToCart, clearCart, fetchCart} from "./cartSlice"
 import { resetCartBanner} from './cartSlice'
+import {useLocation, useNavigate} from "react-router-dom";
 
 const GetCarts = () => {
     console.log("in cartApp")
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const {currentUser} = useSelector(state => state.user)
     const {fetchCartStatus, tempCart} = useSelector(state => state.cart)
+    const location = useLocation();
 
 
     useEffect(()=>{
@@ -15,8 +18,9 @@ const GetCarts = () => {
             dispatch(addItemToCart(tempCart));
 
         }
-        else if(currentUser === null){
-            dispatch(clearCart())
+        else if(currentUser === null && tempCart !== null){
+
+            navigate('/user/signin', { state: location.pathname });
         }
     }, [currentUser, dispatch])
 

@@ -3,6 +3,7 @@ import {USDollar} from '../../app/global'
 import {useDispatch, useSelector} from 'react-redux'
 import {addItemToTempCart, addItemToCart} from '../cart/cartSlice'
 import {useLocation, useNavigate} from "react-router-dom";
+ import {useEffect} from "react";
 
 const AddCartButton = ({customizedItem, handleHide}) => {
     console.log(customizedItem)
@@ -18,8 +19,12 @@ const AddCartButton = ({customizedItem, handleHide}) => {
     const {currentUser} = useSelector(state=>state.user)
     const location = useLocation();
     const navigate = useNavigate();
+    const {tempCart} = useSelector(state=>state.cart)
 
-
+    useEffect(()=>{
+        if(currentUser === null && tempCart !== null)
+            console.log("fail adding item because user is timed out")
+    },[tempCart,currentUser])
     // to dispatch
     // {
     // 	"menuitemId": 2,

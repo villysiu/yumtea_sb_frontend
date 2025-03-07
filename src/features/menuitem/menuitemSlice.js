@@ -113,6 +113,28 @@ export const fetchSugars = createAsyncThunk(
         }
     }
 )
+export const fetchBestSellerss=createAsyncThunk(
+    'menuitem/fetchBestSellerss',
+    async () => {
+        try {
+            const response=await fetch(`${apiLink}/bestsellers`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json'
+                }
+            })
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+            return await response.json()
+        }
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 
 const menuitemSlice=createSlice({
     name: 'menuitem',
@@ -140,13 +162,19 @@ const menuitemSlice=createSlice({
         menuitems: {
             array: [],
             status: 'idle',
-        }, 
+        },
+        bestSellers: {
+            array: [],
+            status: 'idle'
+        },
+
         menuitemButton: {
             clicked: false,
             cartitem: "",
         },
 
         itemToCustomize: null,
+
 
 
 
@@ -184,6 +212,7 @@ const menuitemSlice=createSlice({
         .addCase(fetchCategories.rejected, (state, action) => {
             state.category.status = 'failed'
         })
+
         .addCase(fetchMenuitems.pending, (state, action) => {
             state.menuitems.status = 'loading'
         })
@@ -229,6 +258,19 @@ const menuitemSlice=createSlice({
           })
           .addCase(fetchSugars.rejected, (state, action) => {
               state.sugar.status = 'failed'
+          })
+
+          .addCase(fetchBestSellerss.pending, (state, action) => {
+              state.bestSellers.status = 'loading'
+          })
+          .addCase(fetchBestSellerss.fulfilled, (state, action) => {
+
+              state.bestSellers.status = 'succeeded'
+              state.bestSellers.array = action.payload
+          })
+          .addCase(fetchBestSellerss.rejected, (state, action) => {
+
+              state.bestSellers.status = 'failed'
           })
     }
 })

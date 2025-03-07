@@ -1,11 +1,14 @@
 import {useSelector} from "react-redux";
 import {getMenuitemsByCategoryId} from "./menuitemSlice";
 import {homeLink} from "../../app/global";
-import {Col, Row} from "react-bootstrap";
 import Menuitem from "./Menuitem";
+import {Col, Row} from "react-bootstrap";
+import SingleBestSeller from "./SingleBestSeller";
+
 
 const BestSellers = () =>{
-   const bestsellers = []
+   const {array, status} = useSelector(state => state.menuitem.bestSellers)
+
 
     return (
         <div className='category'>
@@ -17,6 +20,19 @@ const BestSellers = () =>{
                     Best Sellers
                 </div>
 
+            </div>
+            <div className='menuitems_wrapper'>
+
+                <Row className='menuitem_row'>
+                    {
+                        array.map((menuitem) => {
+                            return (
+                                <SingleBestSeller key={menuitem.menuitemId} menuitemId={menuitem.menuitemId} />
+                            )
+                        })
+                    }
+
+                </Row>
             </div>
         </div>
     )

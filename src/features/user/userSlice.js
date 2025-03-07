@@ -285,7 +285,7 @@ const userSlice=createSlice({
           })
         .addCase(addItemToCart.rejected, (state, action) => {
             console.log(action.payload)
-            if(action.payload === 401){
+            if(action.payload.msg === "401"){
 
                 state.currentUser = null;
                 state.fetchUserStatus = 'idle';
@@ -293,7 +293,7 @@ const userSlice=createSlice({
             }
 
             // state.currentUser = null;
-            // state.fetchUserStatus = 'idle';
+            // state.fetchUserStatus = 'idle';m
             // state.loginStatus = 'idle';
             // state.logoutStatus = 'idle';
             // state.registerStatus = 'idle';

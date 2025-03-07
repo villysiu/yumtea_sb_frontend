@@ -49,7 +49,7 @@ export const addItemToCart = createAsyncThunk(
             if(!response.ok) {
                 console.log(response)
 
-                throw new Error(`${response.status} ${response.statusText}`)
+                throw new Error(`${response.status}`)
                 // throw new Error
             }
             return await response.json();
@@ -141,10 +141,10 @@ const cartSlice=createSlice({
             state.removeStatus = 'idle'
             state.updateStatus = 'idle'
         },
-        clearCart(state){
-            state.carts = []
-            state.fetchCartStatus = 'idle'
-        }
+        // clearCart(state){
+        //     state.carts = []
+        //     state.fetchCartStatus = 'idle'
+        // }
 
 
 
