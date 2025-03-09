@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import {addItemToCart, clearCart, fetchCart} from "./cartSlice"
-import { resetCartBanner} from './cartSlice'
+import {addItemToCart, fetchCart} from "./cartSlice"
 import {useLocation, useNavigate} from "react-router-dom";
 
 const GetCarts = () => {
@@ -14,15 +13,13 @@ const GetCarts = () => {
 
 
     useEffect(()=>{
-        if(currentUser !== null && tempCart !== null){
-            dispatch(addItemToCart(tempCart));
-
+        if(tempCart !== null){
+            currentUser !== null ?
+                dispatch(addItemToCart(tempCart))
+                :
+                navigate('/user/signin', { state: location.pathname });
         }
-        else if(currentUser === null && tempCart !== null){
-
-            navigate('/user/signin', { state: location.pathname });
-        }
-    }, [currentUser, dispatch])
+    }, [currentUser, dispatch, location.pathname, navigate, tempCart])
 
     useEffect(()=>{
         if(currentUser !== null && fetchCartStatus === 'idle'){

@@ -11,7 +11,7 @@ const SingleBestSeller = ({menuitemId}) =>{
 
             <Menuitem menuitem={menuitem}/>
             <StarFill className="yellowbookmark" />
-            3
+
         </Col>
 
     )
