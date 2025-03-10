@@ -57,35 +57,37 @@ The React development server should open the application in your default web bro
 
 ## About the project ##
 
-### / ###
-### /visit-taste ###
-### /support ###
+`/`
+
+`/visit-taste `
+
+`/support `
   - has a form to submit
 
-  ### /collection ###
+`/collection`
   - Displays all tea `Menuitem` by `Category` 
   - The `Menuitem` and `Category` are fetched from backendAPI
-### /user/signin ###
+ `/user/signin` 
   - User signs in with valid credentials, `email` and `password`
   - Validations applied
 
-### /user/signup ###
+`/user/signup `
   - User signs up with `nickname`, `email` and `password`
   - After successful signup, user signs in in `/signin`
 
-### /logout ###
+`/logout`
   - User signs out
 
-### /secure/account ###
+`/secure/account `
 - Only authenticated user has access
 - Authenticated user can change his `nickname`
 - Authenticated user can change his `pasoword`
 
-### /secure/orders ###
+` /secure/orders`
 - Only authenticated user has access
 - Authenticated user can view all his `Purchase` in the last 3, 7 or 30 days
 
-### /secure/checkout ###
+`/secure/checkout `
 - Only authenticated user has access
 - Authenticated can see all the `Cart` items in shopping cart
 - Adds gratuity
