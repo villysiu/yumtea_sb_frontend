@@ -13,12 +13,12 @@ const GetCarts = () => {
 
 
     useEffect(()=>{
-        if(tempCart !== null){
-            currentUser !== null ?
-                dispatch(addItemToCart(tempCart))
-                :
-                navigate('/user/signin', { state: location.pathname });
-        }
+        // if(tempCart !== null){
+        //     currentUser !== null ?
+        //         dispatch(addItemToCart(tempCart))
+        //         :
+        //         navigate('/user/signin', { state: location.pathname });
+        // }
     }, [currentUser, dispatch, location.pathname, navigate, tempCart])
 
     useEffect(()=>{
