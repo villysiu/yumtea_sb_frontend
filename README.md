@@ -2,8 +2,9 @@
 This is the frontend for a tea e-commerce website.
 It is developed with React.js.
 
-The Backend Api is created in **Springboot** and can be found here:
-https://github.com/villysiu/yum_tea_sb.git
+The Backend Api is created in **Springboot**. Please follow the instruction in
+https://github.com/villysiu/yum_tea_sb.git to start up the backend API.
+
 
 Youtube: Coming soon
 ### Technology and Packages
@@ -23,8 +24,16 @@ Youtube: Coming soon
     - File -> New -> Project from Version Control
     - Paste the cloned git link into the `URL` box
     - Click `Clone`
-  or VSCode,
+  
+- Open VSCode,
+- Select the Clone Repository button in the Source Control view.
+- Paste the cloned git link into the `URL` box
+- Click `Clone from GitHub`
 
-Run npm install on another machine to install the dependencies listed in package.json
-- The server should start.
-- You are ready to test out the api in any api clients.
+- Once the project is cloned, navigate to the project directory `/yumtea_sb_forntend`
+
+- Run `npm install` to install the dependencies listed in package.json
+- Once the dependencies are installed, you can start the development server, by running `npm start`
+
+The React development server should open the application in your default web browser, usually at **http://localhost:3000**.
+
