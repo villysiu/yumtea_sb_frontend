@@ -13,12 +13,7 @@ const EnterPage = () =>{
 
     const [getUser, setGetUser] = useState(false);
     const [getMenuitem, setGetMenuitem] = useState(false);
-    const [spinner, setSpinner] = useState(!getUser || !getMenuitem);
 
-    useEffect(()=>{
-        setSpinner(!getUser || !getMenuitem);
-
-    }, [getUser, getMenuitem])
     return(
         <>
             
@@ -27,7 +22,7 @@ const EnterPage = () =>{
             <GetCarts />
             <GetTaxRate />
 
-            {spinner ?
+            {!getUser || !getMenuitem ?
                 <Spinner animation="border" className="spinner"/>
                 :
                 <Outlet />

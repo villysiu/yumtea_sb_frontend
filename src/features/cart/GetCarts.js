@@ -13,13 +13,10 @@ const GetCarts = () => {
 
 
     useEffect(()=>{
-        // if(tempCart !== null){
-        //     currentUser !== null ?
-        //         dispatch(addItemToCart(tempCart))
-        //         :
-        //         navigate('/user/signin', { state: location.pathname });
-        // }
-    }, [currentUser, dispatch, location.pathname, navigate, tempCart])
+        if(tempCart !== null && currentUser !== null)
+                dispatch(addItemToCart(tempCart))
+
+    }, [currentUser, dispatch, tempCart])
 
     useEffect(()=>{
         if(currentUser !== null && fetchCartStatus === 'idle'){

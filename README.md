@@ -2,20 +2,35 @@
 This is the frontend for a tea e-commerce website.
 It is developed with React.js.
 
-The Backend Api is created in **Springboot**. Please follow the instruction in
-https://github.com/villysiu/yum_tea_sb.git to start up the backend API.
-
-
-Youtube: Coming soon
-### Technology and Packages
+## Technology and Packages
 - React
 - React  18
 - React redux
-- React router dom 
+- React router dom
 - reduxjs/toolkit
 - react bootstrp
 - react bootstrap icon
 
+
+## Before You start
+Setup the backend API and import data before starting up the frontend.
+### Running BackendAPI ###
+The Backend Api is created in **Springboot**.
+Visit [here](https://github.com/villysiu/yum_tea_sb?tab=readme-ov-file#running-the-project)
+and follow the instruction to start the backend server in Springboot.
+
+### Import Data ###
+- Open MySQLWorkbench,
+- Follow instruction to connect to MySQL data source with valid credentials
+- File -> Open Sql Script
+- Open the directory where the backend git is stored
+- In `/src/main/resources/static/data/`, open **yumtea_data.sql**
+- In Query -> execute(ALL or Selection)
+- The menuitem and other necessary backbone data will be added
+- 
+## Youtube:  ##
+
+Coming soon
 
 
 ## Running the project ##
@@ -38,14 +53,7 @@ Youtube: Coming soon
 
 The React development server should open the application in your default web browser, usually at **http://localhost:3000**.
 
-## Running BackendAPI ##
-Visit [here](https://github.com/villysiu/yum_tea_sb?tab=readme-ov-file#running-the-project) 
-and follow the instruction to start the backend server in Springboot.
 
-## Import Data ##
-Coming soon.
-
-In /src/resource/,,, open the yumtea_data.sql in MySQLWorkbench and import the data. 
 
 ## About the project ##
 
@@ -61,7 +69,7 @@ In /src/resource/,,, open the yumtea_data.sql in MySQLWorkbench and import the d
   - User signs in with valid credentials, `email` and `password`
   - Validations applied
 
-### '/user/signup ###
+### /user/signup ###
   - User signs up with `nickname`, `email` and `password`
   - After successful signup, user signs in in `/signin`
 
@@ -76,7 +84,6 @@ In /src/resource/,,, open the yumtea_data.sql in MySQLWorkbench and import the d
 ### /secure/orders ###
 - Only authenticated user has access
 - Authenticated user can view all his `Purchase` in the last 3, 7 or 30 days
-- Authenticated user can delete `Purchase`
 
 ### /secure/checkout ###
 - Only authenticated user has access
