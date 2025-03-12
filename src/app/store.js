@@ -7,6 +7,7 @@ import cartSlice from '../features/cart/cartSlice'
 import orderSlice from '../features/order/orderSlice'
 import reservationSlice from '../features/reservation/reservationSlice'
 import taxRateSlice from "../features/taxRate/taxRateSlice";
+import adminSlice from "../features/admin/adminSlice";
 
 
 export default configureStore({
@@ -17,6 +18,7 @@ export default configureStore({
     cart: cartSlice,
     order: orderSlice,
     reservation: reservationSlice,
-    taxRate: taxRateSlice
+    taxRate: taxRateSlice,
+    admin: adminSlice
   },
 })

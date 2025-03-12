@@ -13,7 +13,8 @@ const SingleOrder = ({order, show, setShow}) =>{
     const handleClose = e =>{
         setShow(null)
     }
-
+console.log(order.purchaseDate)
+    console.log(new Date(order.purchaseDate).toLocaleString())
     
     return(
         <>
@@ -22,11 +23,12 @@ const SingleOrder = ({order, show, setShow}) =>{
                 <div className='orderhistory_order_header' onClick={handleOpen}>
                     <div className='orderhistory_order_header_l'>
                         <div className='orderhistory_order_col'>{order.purchaseDate.slice(0, 10)}</div>
+                        <div className='orderhistory_order_col'>{new Date(order.purchaseDate).toLocaleDateString()}</div>
                         <div className='orderhistory_order_col'>Order #{order.id}</div>
                     </div>
                     <div className='orderhistory_order_header_c'>
 
-                        <div className='orderhistory_order_col'>{USDollar.format(order.total)}</div>
+                    <div className='orderhistory_order_col'>{USDollar.format(order.total)}</div>
 
                     </div>
                 </div>

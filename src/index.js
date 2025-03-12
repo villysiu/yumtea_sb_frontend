@@ -35,6 +35,9 @@ import EnterPage from './features/home/EnterPage';
 // import ResetApp from './features/home/ResetApp';
 import ReservationsApp from './features/reservation/ReservationsApp';
 import Support from "./features/support/Support";
+import AdminApp from "./features/admin/AdminApp";
+import AdminSignin from "./features/admin/AdminSignin";
+import ControlPanel from "./features/admin/ControlPanel";
 const router = createBrowserRouter([
   {
       path: "/",
@@ -121,8 +124,23 @@ const router = createBrowserRouter([
                       },
                     ]
                   },
-                ]},
+                ]
+              },
+              {
+                path: "/admin",
+                element: <AdminApp />,
+                children: [
+                  {
+                    path: "/admin/signin",
+                    element: <AdminSignin/>,
+                  },
+                  {
+                    path: "/admin/hub",
+                    element: <ControlPanel />
+                  }
+                ]
 
+              }
             ]
         },
         {

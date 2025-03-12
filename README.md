@@ -1,6 +1,5 @@
 # YumTea #
-This is the frontend for a tea e-commerce website.
-It is developed with React.js.
+This is the frontend for a tea e-commerce website developed with React.js.
 
 ## Technology and Packages
 - React

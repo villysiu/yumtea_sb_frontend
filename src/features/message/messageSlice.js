@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 // import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
 import {loginUser, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
+import {loginAdmin} from "../admin/adminSlice";
 // import { deleteReservation } from '../reservation/reservationSlice'
 
 
@@ -144,6 +145,24 @@ const messageSlice = createSlice({
                     }
                 )
 
+            })
+            .addCase(loginAdmin.fulfilled, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "success",
+                        content: "Welcome Admin"
+                    }
+                )
+            })
+
+            .addCase(loginAdmin.rejected, (state, action) => {
+                console.log(action.payload)
+                state.messages.push(
+                    {
+                        type: "danger",
+                        content: action.payload===401 ? "Not an admin" : "Bad Credential"
+                    }
+                )
             })
 
     }
