@@ -11,6 +11,7 @@ const HeaderUserButton =() =>{
     const {currentUser, fetchUserStatus, loginStatus, logoutStatus} = useSelector(state => state.user)
     const [show, setShow] = useState(false)
 
+    console.log(currentUser)
 
     // Handle dropdown open
     const handleToggle = () => {

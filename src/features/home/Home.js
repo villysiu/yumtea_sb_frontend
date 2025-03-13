@@ -13,15 +13,6 @@ import "aos/dist/aos.css";
 
 const Home = () =>{
 
-    // useEffect(() => {
-    //     AOS.init({
-    //       disable: "phone",
-    //       duration: 500,
-    //       easing: "ease-out-cubic",
-    //       delay: 1000,
-    //     //   once: true,
-    //     });
-    //   }, []);
       
     return(
         

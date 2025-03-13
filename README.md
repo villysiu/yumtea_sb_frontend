@@ -92,3 +92,6 @@ The React development server should open the application in your default web bro
 - Adds gratuity
 - Shows total including gratuity and tax
 - Upon successful checkout, shopping cart is emptied
+
+## Coming Soon
+`/admin`

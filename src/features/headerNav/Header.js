@@ -20,17 +20,14 @@ const Header = () =>{
         window.addEventListener('resize', handleResize);
     
         return () => {
-          window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
       }, []);
 
-    // if(noHeader.includes( location.pathname )){
-    //     return(
-    //         <div className='header_wrapper'>
-    //             <Title />
-    //         </div>
-    //     )
-    // }
+
+
+
+
     if(windowWidth <= 768){
         return <HeaderNavbarMD />
     }

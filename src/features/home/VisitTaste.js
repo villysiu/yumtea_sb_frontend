@@ -1,6 +1,7 @@
 import MakeReservationButton from "../reservation/MakeReservationButton"
 import {homeLink} from "../../app/global";
 import ContactUs from "../support/ContactUs";
+import Reservations from "../reservation/Reservations";
 
 const VisitTaste = () =>{
     return(
@@ -48,7 +49,7 @@ const VisitTaste = () =>{
 
 
             </div>
-
+{/*<Reservations />*/}
 
         </div>
     )

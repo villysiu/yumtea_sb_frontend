@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 // import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
 import {loginUser, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
-import {loginAdmin} from "../admin/adminSlice";
+import {loginAdmin, logoutAdmin} from "../admin/adminSlice";
 // import { deleteReservation } from '../reservation/reservationSlice'
 
 
@@ -160,7 +160,23 @@ const messageSlice = createSlice({
                 state.messages.push(
                     {
                         type: "danger",
-                        content: action.payload===401 ? "Not an admin" : "Bad Credential"
+                        content: action.payload===401 ? "Bad Credential" : "Not an admin"
+            }
+                )
+            })
+            .addCase(logoutAdmin.fulfilled, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "success",
+                        content: "Good bye Admin"
+                    }
+                )
+            })
+            .addCase(logoutAdmin.rejected, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "danger",
+                        content: "Logout failed. Please try again."
                     }
                 )
             })

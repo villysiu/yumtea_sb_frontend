@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginUser} from "../user/userSlice";
 import {loginAdmin} from "./adminSlice";
+import {useNavigate} from "react-router-dom";
 
 
 const AdminSignin = () =>{
@@ -18,18 +19,19 @@ const AdminSignin = () =>{
     const [error, setError] = useState({})
 
 
-
-    // const {loginStatus} = useSelector(state=>state.user)
+    const navigate = useNavigate()
+    const {loginStatus} = useSelector(state=>state.user)
     //
-    // useEffect(()=>{
+    console.log(loginStatus)
+    useEffect(()=>{
     //     if(loginStatus === "failed"){
     //         setEmail("");
     //         setPassword("");
     //     }
-    //     // if(loginStatus === 'succeeded'){
-    //     //     dispatch(fetchCurrentUser());
-    //     // }
-    // }, [loginStatus])
+        if(loginStatus === 'succeeded'){
+           navigate("/admin/hub")
+        }
+    }, [loginStatus])
 
 
     const handleSubmit=e=>{

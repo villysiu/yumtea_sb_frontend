@@ -44,14 +44,41 @@ const router = createBrowserRouter([
       element: <App />,
 
       children: [
+        // {
+        //   path: "/h",
+        //   element: <Home />,
+        //   children: [
+        //     {
+        //       path: "/h",
+        //       element: <Home />,
+        //     },
+        //     {
+        //       path: "/h/visit-taste",
+        //       element: <VisitTaste />,
+        //     },
+        //     {
+        //       path: "/h/support",
+        //       element: <Support />,
+        //     },
+        //   ]
+        // },
+
         {
             path: "/",
             element: <EnterPage />,
             children:[
               {
-                path: "/",
-                element: <Home />,
-              },
+                    path: "/",
+                    element: <Home />,
+                  },
+                  {
+                    path: "/visit-taste",
+                    element: <VisitTaste />,
+                  },
+                  {
+                    path: "/support",
+                    element: <Support />,
+                  },
               {
                 path: "/collection",
                 element: <Collections />,
@@ -60,14 +87,7 @@ const router = createBrowserRouter([
               //   path: "collection/:itemId",
               //   element: <SingleMenuitem />,
               // },
-              {
-                path: "/visit-taste",
-                  element: <VisitTaste />,
-              },
-              {
-                path: "/support",
-                element: <Support />,
-              },
+
               {
                 path: "/user",
                 element: <User />,
@@ -126,13 +146,14 @@ const router = createBrowserRouter([
                   },
                 ]
               },
+
               {
                 path: "/admin",
                 element: <AdminApp />,
                 children: [
                   {
                     path: "/admin/signin",
-                    element: <AdminSignin/>,
+                    element: <AdminSignin />,
                   },
                   {
                     path: "/admin/hub",

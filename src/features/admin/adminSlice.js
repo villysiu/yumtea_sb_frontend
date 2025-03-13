@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {apiLink} from "../../app/global";
+import {logoutUser} from "../user/userSlice";
 
 export const loginAdmin=createAsyncThunk(
     'admin/loginAdmin',
@@ -36,7 +37,34 @@ export const loginAdmin=createAsyncThunk(
         }
     }
 )
+export const logoutAdmin=createAsyncThunk(
+    'user/logoutAdmin',
+    async (_, {rejectWithValue}) =>{
+        console.log("in lougout redux")
+        try {
+            const response=await fetch(`${apiLink}/auth/logout`, {
+                'method': "POST",
+                // 'headers': {
+                //     'content-type': 'application/json',
+                //     // "Authorization": `Token ${localStorage.getItem("token")}`,
+                // },
+                credentials: 'include',
 
+
+            })
+
+            if(!response.ok) {
+                return rejectWithValue(response.status);
+            }
+
+            return null
+
+        }
+        catch(error){
+            return rejectWithValue(error.message);
+        }
+    }
+)
 const adminSlice=createSlice({
     name: 'admin',
     initialState: {
@@ -67,6 +95,20 @@ const adminSlice=createSlice({
             })
             .addCase(loginAdmin.rejected, (state, action) => {
                 state.loginStatus = 'failed'
+            })
+
+            .addCase(logoutAdmin.pending, (state, action) => {
+                state.logoutStatus = 'loading'
+            })
+            .addCase(logoutAdmin.fulfilled, (state, action) => {
+                state.currentAdmin = null;
+                // state.fetchUserStatus = 'idle';
+                state.loginStatus = 'idle';
+                state.logoutStatus = 'succeeded';
+            })
+            .addCase(logoutAdmin.rejected, (state, action) => {
+                state.logoutStatus = 'failed'
+
             })
     }
 })
