@@ -1,8 +1,36 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {apiLink} from "../../app/global";
-import {logoutUser} from "../user/userSlice";
+import {fetchCurrentUser, loginUser, logoutUser} from "../user/userSlice";
 
+
+
+export const fetchCurrentAdmin=createAsyncThunk(
+    'user/fetchCurrentAdmin',
+    async (_, {rejectWithValue}) => {
+        console.log("fetching current admin ")
+
+        try {
+            const response=await fetch(`${apiLink}/resource/admin`, {
+                method: "GET",
+                credentials: 'include'
+            })
+
+            if(!response.ok) {
+                return rejectWithValue(response.status);
+            }
+            return await response.json()
+
+
+        }
+        catch(error){
+            console.log(error)
+            // localStorage.clear()
+            return rejectWithValue(error.message);
+        }
+    }
+)
 export const loginAdmin=createAsyncThunk(
+
     'admin/loginAdmin',
     async (userInfo, { rejectWithValue} ) =>{
 
@@ -44,10 +72,6 @@ export const logoutAdmin=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/auth/logout`, {
                 'method': "POST",
-                // 'headers': {
-                //     'content-type': 'application/json',
-                //     // "Authorization": `Token ${localStorage.getItem("token")}`,
-                // },
                 credentials: 'include',
 
 
@@ -79,7 +103,25 @@ const adminSlice=createSlice({
     },
     extraReducers(builder) {
         builder
+            .addCase(fetchCurrentAdmin.pending, (state, action) => {
+                state.fetchAdminStatus = 'loading'
+            })
+            .addCase(fetchCurrentAdmin.fulfilled, (state, action) => {
+                console.log(action.payload)
 
+                state.currentAdmin= action.payload
+                state.fetchAdminStatus = 'succeeded'
+                state.loginStatus = 'succeeded'
+                state.logoutStatus = 'idle'
+            })
+            .addCase(fetchCurrentAdmin.rejected, (state, action) => {
+                // DO NOTHING WHEN NO CURRENT USER
+                state.currentAdmin = null;
+                state.fetchAdminStatus = 'failed';
+                state.loginStatus = 'idle';
+                state.logoutStatus = 'idle';
+
+            })
 
             .addCase(loginAdmin.pending, (state, action) => {
                 state.loginStatus = 'loading'
@@ -108,6 +150,14 @@ const adminSlice=createSlice({
             })
             .addCase(logoutAdmin.rejected, (state, action) => {
                 state.logoutStatus = 'failed'
+
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.currentAdmin = null
+                state.fetchAdminStatus = null
+                state.loginStatus = 'idle'
+
 
             })
     }

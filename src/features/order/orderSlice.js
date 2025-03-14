@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 import { format } from 'date-fns';
+import {logoutUser} from "../user/userSlice";
 
 
 
@@ -102,6 +103,12 @@ const orderSlice=createSlice({
         .addCase(PlaceOrder.rejected, (state, action) => {
             state.checkoutStatus = 'failed'
         })
+          .addCase(logoutUser.fulfilled, (state, action) => {
+              state.orders = []
+              state.status ='idle'
+              state.newestOrder = null
+              state.checkoutStatus = 'idle'
+          })
     }
 })
 export const { clearNewestOrder } = orderSlice.actions

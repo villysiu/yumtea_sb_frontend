@@ -10,12 +10,14 @@ import {useState} from "react";
 import {List} from "react-bootstrap-icons";
 import OffcanvasMD from "./OffcanvasMD";
 import {homeLink} from "../../app/global";
+import {useSelector} from "react-redux";
 
 const HeaderNavbarMD = () =>{
     const [show, setShow] = useState(false);
 
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
+    const {currentAdmin} = useSelector(state=>state.admin)
     return(
         <>
             <Navbar collapseOnSelect expand={false} sticky="top" className="bg-body-tertiary header_wrapper">
@@ -29,10 +31,12 @@ const HeaderNavbarMD = () =>{
 
 
                 {/*<Title />*/}
+                { !currentAdmin  &&
                 <Nav className="header_right_wrapper">
                     <HeaderUserButton />
                     <CartIcon />
                 </Nav>
+                }
          
           
         </Navbar>

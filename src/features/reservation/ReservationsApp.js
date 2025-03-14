@@ -8,17 +8,18 @@ import { Navigate } from "react-router-dom"
 const ReservationsApp =() =>{
     const dispatch = useDispatch()
     const reservation_status = useSelector(state=>state.reservation.reservations.status)
+
     useEffect(()=>{
         if(reservation_status==='idle'){
             dispatch(fetchReservations())
         }
     }, [dispatch, reservation_status])
 
-    if(reservation_status === "idle" || reservation_status === 'loading')
+    if(reservation_status === 'loading')
         return <FullSpinner />
 
     if(reservation_status === "failed")
-    return <Navigate to={`/`}  />
+        return <Navigate to={`/`}  />
     return (
         <Outlet />
     )

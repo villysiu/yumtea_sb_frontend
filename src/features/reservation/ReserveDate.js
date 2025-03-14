@@ -1,7 +1,7 @@
 import { Form, InputGroup } from "react-bootstrap"
 import { Calendar3 } from "react-bootstrap-icons"
 import { useEffect, useMemo } from "react"
-const ReserveDate = ({reservationDate, setReservationDate}) =>{
+const ReserveDate = ({resDate, setResDate}) =>{
     
     const dateToStringHelper =(dt)=>{
         const yearStr = dt.getFullYear()
@@ -10,26 +10,27 @@ const ReserveDate = ({reservationDate, setReservationDate}) =>{
         const dtStr = `${yearStr}-${monthStr}-${dateStr}`
         return dtStr
     }
+
     // const minDate = new Date()
     // minDate.setDate(minDate.getDate()+1)
-
-    const minDate = useMemo(()=>{
-        let p=new Date()
-        p.setDate(p.getDate()+1)
-
-        return p
-    },[])
-    const maxDate = new Date()
-    maxDate.setDate(maxDate.getDate()+30)
+    //
+    // const minDate = useMemo(()=>{
+    //     let p=new Date()
+    //     p.setDate(p.getDate()+1)
+    //
+    //     return p
+    // },[])
+    // const maxDate = new Date()
+    maxDate.setDate(maxDate.getDate()+8)
 
     useEffect(()=>{
-        console.log(reservationDate)
-        if(!reservationDate)
-            setReservationDate(dateToStringHelper(minDate))
-    }, [reservationDate, minDate, setReservationDate])
+        console.log(resDate)
+        if(!resDate)
+            setResDate(dateToStringHelper(minDate))
+    }, [resDate, minDate, setResDate])
     
     const handleDate = (e) =>{
-        setReservationDate(e.target.value)
+        setResDate(e.target.value)
     }
     
 
@@ -37,14 +38,14 @@ const ReserveDate = ({reservationDate, setReservationDate}) =>{
 
         <InputGroup className='reserve_date' >
            
-           <InputGroup.Text><Calendar3 /></InputGroup.Text>
-           <Form.Control
-               type="date" className='reserve_date_input'
-               value={reservationDate} 
-               min={dateToStringHelper(minDate)} 
-                max={dateToStringHelper(maxDate)}
-               onChange={handleDate}
-           />
+           {/*<InputGroup.Text><Calendar3 /></InputGroup.Text>*/}
+           {/*<Form.Control*/}
+           {/*    type="date" className='reserve_date_input'*/}
+           {/*    value={resDate}*/}
+           {/*    // min={dateToStringHelper(minDate)} */}
+           {/*    //  max={dateToStringHelper(maxDate)}*/}
+           {/*    onChange={handleDate}*/}
+           {/*/>*/}
        </InputGroup>
         
 

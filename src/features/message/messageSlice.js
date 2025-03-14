@@ -1,13 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import { fetchCategories, fetchMenuitems, fetchMenuitemsByCategory } from '../menuitem/menuitemSlice'
-// import { batchAddItems, removeItemFromCart, updateCartItemQty,updateCartItemOptions, addItemToCart } from '../cart/cartSlice'
 import {loginUser, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 import {loginAdmin, logoutAdmin} from "../admin/adminSlice";
-// import { deleteReservation } from '../reservation/reservationSlice'
 
 
-// import { increment } from '../cart/cartSlice'
 const messageSlice = createSlice({
     name: 'message',
     initialState: {
@@ -17,6 +13,9 @@ const messageSlice = createSlice({
 
     },
     reducers: {
+        setMessage: (state, action) => {
+            state.messages.push(action.payload); // Add the message to the messages array
+        },
       removeMessage: (state)=>{
         state.messages = state.messages.slice(1)
       },
@@ -146,45 +145,12 @@ const messageSlice = createSlice({
                 )
 
             })
-            .addCase(loginAdmin.fulfilled, (state, action) => {
-                state.messages.push(
-                    {
-                        type: "success",
-                        content: "Welcome Admin"
-                    }
-                )
-            })
 
-            .addCase(loginAdmin.rejected, (state, action) => {
-                console.log(action.payload)
-                state.messages.push(
-                    {
-                        type: "danger",
-                        content: action.payload===401 ? "Bad Credential" : "Not an admin"
-            }
-                )
-            })
-            .addCase(logoutAdmin.fulfilled, (state, action) => {
-                state.messages.push(
-                    {
-                        type: "success",
-                        content: "Good bye Admin"
-                    }
-                )
-            })
-            .addCase(logoutAdmin.rejected, (state, action) => {
-                state.messages.push(
-                    {
-                        type: "danger",
-                        content: "Logout failed. Please try again."
-                    }
-                )
-            })
 
     }
 })
 export default messageSlice.reducer
-export const { removeMessage, clearCartMessage } = messageSlice.actions
+export const { setMessage, removeMessage, clearCartMessage } = messageSlice.actions
 
 // export const showMessage = (message, messageType, timeout = 3000) => (dispatch) => {
 //     // dispatch(setMessage({ message, messageType }));

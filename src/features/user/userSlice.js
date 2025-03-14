@@ -291,14 +291,8 @@ const userSlice=createSlice({
                 state.fetchUserStatus = 'idle';
                 state.loginStatus = 'idle';
             }
-
-            // state.currentUser = null;
-            // state.fetchUserStatus = 'idle';m
-            // state.loginStatus = 'idle';
-            // state.logoutStatus = 'idle';
-            // state.registerStatus = 'idle';
-            // state.updateStatus = 'idle';
         })
+
 
 
     }
@@ -306,47 +300,3 @@ const userSlice=createSlice({
 export const { removeUser } = userSlice.actions
 export default userSlice.reducer
 
-
-// .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
-//     state.currentUser = null;
-//     state.fetchUserStatus = 'idle';
-//     state.loginStatus = 'idle';
-//     state.logoutStatus = 'idle';
-//     state.registerStatus = 'idle';
-//     state.updateStatus = 'idle';
-// })
-// .addCase(fetchCart.rejected, (state, action) => {
-//     state.currentUser = null;
-//     state.fetchUserStatus = 'idle';
-//     state.loginStatus = 'idle';
-//     state.logoutStatus = 'idle';
-//     state.registerStatus = 'idle';
-//     state.updateStatus = 'idle';
-// })
-//
-// .addCase(addItemToCart.rejected, (state, action) => {
-//     state.currentUser = null;
-//     state.fetchUserStatus = 'idle';
-//     state.loginStatus = 'idle';
-//     state.logoutStatus = 'idle';
-//     state.registerStatus = 'idle';
-//     state.updateStatus = 'idle';
-// })
-//
-// .addCase(removeItemFromCart.rejected, (state, action) => {
-//     state.currentUser = null;
-//     state.fetchUserStatus = 'idle';
-//     state.loginStatus = 'idle';
-//     state.logoutStatus = 'idle';
-//     state.registerStatus = 'idle';
-//     state.updateStatus = 'idle';
-// })
-//
-// .addCase(updateItemInCart.rejected, (state, action) => {
-//     state.currentUser = null;
-//     state.fetchUserStatus = 'idle';
-//     state.loginStatus = 'idle';
-//     state.logoutStatus = 'idle';
-//     state.registerStatus = 'idle';
-//     state.updateStatus = 'idle';
-// })

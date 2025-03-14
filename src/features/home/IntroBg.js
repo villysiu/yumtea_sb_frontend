@@ -1,4 +1,4 @@
-const HomeBanner = () =>{
+const IntroBg = () =>{
     
     return (
         <div className='teapouring_img'>
@@ -13,4 +13,4 @@ const HomeBanner = () =>{
         </div>
     )
 }
-export default HomeBanner
+export default IntroBg

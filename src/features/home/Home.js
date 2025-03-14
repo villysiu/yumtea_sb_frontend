@@ -1,27 +1,57 @@
-import SmokySpinner from '../headerNav/SmokySpinner'
-import {useEffect} from 'react';
-import { homeLink } from "../../app/global"
-// import {teacup} from '../home/img/teacup.png'
+import '../../App.css';
+import React, {useEffect} from 'react';
 
-import HomeBanner from '../home/HomeBanner'
-import AboutUs from './AboutUs'
-import Ingredients from './Ingredients'
-import Footer from '../home/Footer'
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { Outlet } from 'react-router-dom';
+// import Messages from './features/message/Messages';
 
+import Header from '../headerNav/Header';
+import Footer from './Footer'
+import { useState } from 'react';
+import { useDispatch, useSelector} from 'react-redux'
+import {Modal} from 'react-bootstrap'
+import {triggerCustomizeModal} from '../menuitem/menuitemSlice'
+import CustomizeModal from '../customise/CustomizeModal'
+import Messages from "../message/Messages";
 
-const Home = () =>{
+function Home() {
+  console.log("in APP")
+  const [show, setShow] = useState(false);
+  const {itemToCustomize} = useSelector(state=>state.menuitem)
+  // console.log(task)
+  const dispatch = useDispatch()
 
-      
-    return(
-        
-        <div className="home">
-            <HomeBanner />
-            <AboutUs />
-            <Ingredients />
+  useEffect(()=>{
+    if(itemToCustomize !== null)
+      setShow(true)
+    
+  }, [itemToCustomize])
 
-        </div>
-    )
+  const handleHide = () =>{
+    setShow(false)
+    dispatch(triggerCustomizeModal(null))
+  }
+  return (
+      <>
+        {
+            show && 
+             <Modal show={show} onHide={handleHide} size="lg"  >
+                <CustomizeModal handleHide={handleHide} />                
+            </Modal>
+           
+        }
+      <div id="App">
+          <div className='appbody border border-danger'>
+              <Header />
+              <Messages />
+              <div className="content" >
+                    <Outlet />
+              </div>
+               <Footer />
+          </div>
+      </div>
+      </>
+     
+  );
 }
-export default Home
+
+export default Home;

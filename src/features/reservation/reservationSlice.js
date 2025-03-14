@@ -9,13 +9,12 @@ export const makeReservation=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/bookingApi/`, {
                 method: "POST",
-                
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'Authorization': `Token ${localStorage.getItem("token")}`,
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
+                credentials: "include"
             })
 
             if(!response.ok) {
@@ -46,24 +45,14 @@ export const fetchReservations=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/bookingApi/`, {
                 method: "GET",
-                
-                headers: {
-                    'Authorization': `Token ${localStorage.getItem("token")}`,
-                },
+                credentials: "include"
             })
 
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`)
             }
             const data=await response.json()
-            // console.log(data)
-            // {
-            //     "pk": 38,
-            //     "user_id": 4,
-            //     "no_of_guests": 2,
-            //     "reservation_date": "2024-02-03",
-            //     "reservation_time": "16:00:00"
-            // }
+
             
             return data
         } 
@@ -81,10 +70,7 @@ export const deleteReservation=createAsyncThunk(
         try {
             const response=await fetch(`${apiLink}/bookingApi/${pk}`, {
                 method: "DELETE",
-                
-                headers: {
-                    'Authorization': `Token ${localStorage.getItem("token")}`,
-                },
+                credentials: "include"
             })
 
             if(!response.ok) {
@@ -109,10 +95,10 @@ export const updateReservation=createAsyncThunk(
                 
                 headers: {
                     'content-type': 'application/json',
-                    'accept': 'application/json',
-                    'Authorization': `Token ${localStorage.getItem("token")}`,
+                    'accept': 'application/json'
                 },
-                body: JSON.stringify(formData.data)
+                body: JSON.stringify(formData.data),
+                credentials: "include"
             })
 
             if(!response.ok) {
@@ -133,102 +119,70 @@ export const updateReservation=createAsyncThunk(
 const reservationSlice=createSlice({
     name: 'reservation',
     initialState: {
-        reservations: {
-            array: [],
-            status: 'idle',
-        },
-        create_or_update: {
-            status: 'idle',
-            item: null,
-        },
-        delete: {
-            status: 'idle'
-        }
-       
+        reservations: [],
+        fetchResStatus: 'idle',
+        createResStatus:'idle',
+        updateResStatus: 'idle',
+        deleteResStatus: 'idle'
     },
     reducers: {
-        clear_reservation_status(state, action){
-            state.create_or_update.status="idle"
-            state.create_or_update.item=null
-            
-        },
-        clear_delete_status(state, action){
-            state.delete.status = 'idle'
-        }
+        // clear_reservation_status(state, action){
+        //     // state.create_or_update.status="idle"
+        //     // state.create_or_update.item=null
+        //
+        // },
+        // clear_delete_status(state, action){
+        //     // state.delete.status = 'idle'
+        // }
     },
     extraReducers(builder) {
       builder
-        .addCase(makeReservation.pending, (state, action) => {
-            state.reservations.status = 'loading'
-            state.create_or_update.status = 'loading'
-        })
-        .addCase(makeReservation.fulfilled, (state, action) => {
-            state.create_or_update.status = 'succeeded'
-            state.create_or_update.item = action.payload
-            console.log(action.payload)
-            state.reservations.status = 'succeeded'
-            state.reservations.array.push(action.payload)
-            // state.reservations.array = state.reservations.array.concat().sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
-            
-        })
-        .addCase(makeReservation.rejected, (state, action) => {
-            state.reservations.status = 'failed'
-            state.create_or_update.status = 'failed'
-        })
         .addCase(fetchReservations.pending, (state, action) => {
-            state.reservations.status = 'loading'
+          state.fetchReservationsStatus = 'loading'
         })
         .addCase(fetchReservations.fulfilled, (state, action) => {
-            state.reservations.status = 'succeeded'
-            state.reservations.array = action.payload
+          state.fetchReservationsStatus = 'succeeded'
+          state.fetchReservationsStatus = "idle"
         })
         .addCase(fetchReservations.rejected, (state, action) => {
-            state.reservations.status = 'failed'
+          state.fetchReservationsStatus = 'failed'
         })
+
+        .addCase(makeReservation.pending, (state, action) => {
+            state.reservations.status = 'loading'
+            state.createResStatus.status = 'loading'
+        })
+        .addCase(makeReservation.fulfilled, (state, action) => {
+            state.createResStatus.status = 'succeeded'
+            state.fetchReservationsStatus = "idle"
+        })
+        .addCase(makeReservation.rejected, (state, action) => {
+            state.createResStatus = 'failed'
+
+        })
+
 
         .addCase(deleteReservation.pending, (state, action) => {
-            state.reservations.status = 'loading'
-            state.delete.status = 'loading'
+            state.deleteResStatus = 'loading'
         })
         .addCase(deleteReservation.fulfilled, (state, action) => {
-            state.reservations.status = 'succeeded'
-            state.delete.status = 'succeeded'
-            state.reservations.array = 
-            state.reservations.array.filter(res=>{
-                return res.pk!==action.payload
-            })
-            
+            state.deleteResStatus = 'succeeded'
+            state.fetchReservationsStatus = "idle"
         })
         .addCase(deleteReservation.rejected, (state, action) => {
-            state.reservations.status = 'failed'
-            state.delete.status = 'failed'
+            state.deleteResStatus = 'failed'
         })
-        
+
+
         .addCase(updateReservation.pending, (state, action) => {
-            state.reservations.status = 'loading'
-            state.create_or_update.status = 'loading'
+            state.updateResStatus = 'loading'
         })
         .addCase(updateReservation.fulfilled, (state, action) => {
-            state.reservations.status = 'succeeded'
-            // console.log(action.payload)
-            // console.log(state.reservations.array)
-            state.create_or_update.status = 'succeeded'
-            state.create_or_update.item = action.payload
-
-            console.log(current(state.reservations.array));
-            state.reservations.array  = 
-                state.reservations.array
-                .map(res=>{
-                    if(res.pk===action.payload.pk)
-                        return action.payload
-                    return res
-                })
-
-            // state.reservations.array = state.reservations.array.concat().sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
+            state.updateResStatus = 'succeeded'
+            state.fetchReservationsStatus = "idle"
         })
         .addCase(updateReservation.rejected, (state, action) => {
-            state.reservations.status = 'failed'
-            state.create_or_update.status = 'failed'
+            state.updateResStatus = 'failed'
         })
        
         
@@ -248,16 +202,10 @@ export const getReservationById =(resId, state)=>{
 const res = state =>  state.reservation.reservations.array
 
 export const getPastReservations = createSelector([res], (arr) => {
-    return arr.filter(res=>{
-        const dt = new Date(`${res.reservation_date}T${res.reservation_time}`)
-        return dt<=new Date()
-    }).sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
+    return arr
 })
 
 export const getUpcomingReservations = createSelector([res], (arr) =>{
-    return arr.filter(res=>{
-        const dt = new Date(`${res.reservation_date}T${res.reservation_time}`)
-        return dt>new Date()
-    }).sort((a,b)=>new Date(a.reservation_date)-new Date(b.reservation_date))
+    return arr
 })
 

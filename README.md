@@ -64,8 +64,8 @@ The React development server should open the application in your default web bro
   - has a form to submit
 
 `/collection`
-  - Displays all tea `Menuitem` by `Category` 
-  - The `Menuitem` and `Category` are fetched from backendAPI
+  - Displays all tea `ManageMenuitem` by `Category` 
+  - The `ManageMenuitem` and `Category` are fetched from backendAPI
  `/user/signin` 
   - User signs in with valid credentials, `email` and `password`
   - Validations applied

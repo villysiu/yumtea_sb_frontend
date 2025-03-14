@@ -14,8 +14,8 @@ const Reservations = () =>{
             <div className='reservation_container'>
 
                 
-                <Upcoming />
-                <Past/>
+                {/*<Upcoming />*/}
+                {/*<Past/>*/}
             </div>
         </div>
     )

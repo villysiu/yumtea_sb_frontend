@@ -8,12 +8,14 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Outlet } from 'react-router-dom';
 import GetTaxRate from "../taxRate/GetTaxRate";
 
-const EnterPage = () =>{
+const GetData = () =>{
     console.log("ENTER PAGE")
 
     const [getUser, setGetUser] = useState(false);
     const [getMenuitem, setGetMenuitem] = useState(false);
 
+    console.log("getUser " +getUser)
+    console.log("getMenuitem" + getMenuitem)
     return(
         <>
             
@@ -33,4 +35,4 @@ const EnterPage = () =>{
     )
     
 }
-export default EnterPage
+export default GetData

@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 
 const OffcanvasMD = ({show, setShow}) =>{
     const {category} = useSelector(state=>state.menuitem)
+    const {currentUser} = useSelector(state=>state.user)
     return(
         <Offcanvas show={show} onHide={()=>setShow(false)}>
             <Offcanvas.Header closeButton>
@@ -39,11 +40,12 @@ const OffcanvasMD = ({show, setShow}) =>{
                             Support
                         </Link>
                     </Col>
+                    {currentUser && currentUser.isAdmin &&
                     <Col xs={12}>
                         <Link to={`${homeLink}/admin/signin`} className="offcanvas_category_link text" onClick={()=>setShow(false)}>
-                            Admin Login
+                            Admin Panel
                         </Link>
-                    </Col>
+                    </Col>}
                 </Row>
             </Offcanvas.Body>
         </Offcanvas>

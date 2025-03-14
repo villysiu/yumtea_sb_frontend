@@ -6,34 +6,45 @@ import { useNavigate } from "react-router-dom"
 import ReserveForm from "./ReserveForm"
 import ReserveBackground from "./ReserveBackground"
 import { Button } from "react-bootstrap"
+import ReserveDateTime from "./ReserveDateTime";
+import ReserveGuest from "./ReserveGuest";
 
 const Reserve = () =>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    
-    const [reservationDate, setReservationDate] = useState("")
-    const [reservationTime, setReservationTime] = useState("")
 
+   const [res, setRes] = useState({
+       'resDate': "",
+       'resTime': "",
+       'guestCount': 2
+   })
+
+
+
+    // const [resDate, setResDate] = useState("")
+    //
+    // const [resTime, setResTime] = useState("")
+    //
     const [guest, setGuest] = useState(2)
     
 
-    const create_or_update_status = useSelector(state => state.reservation.create_or_update.status)
+    const {createResStatus, updateReeStatus} = useSelector(state => state.reservation)
 
     useEffect(()=>{
-        if(create_or_update_status==='succeeded'){
+        if(createResStatus==='succeeded'){
             navigate('/secure/reservations/success')
         }
-    }, [create_or_update_status, navigate])
+    }, [createResStatus, navigate])
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const formData={
-            'reservation_date': reservationDate,
-            'reservation_time': `${reservationTime}:00`,
-            'no_of_guests': guest
+            'resDate': res.resDate,
+            'resTime': res.resDate,
+            'guestCount': res.guestCount
         }
         console.log(formData)
-        dispatch(makeReservation(formData))
+        // dispatch(makeReservation(formData))
         
     }
     return(
@@ -41,11 +52,8 @@ const Reserve = () =>{
             <ReserveBackground />
             <Form onSubmit={handleSubmit} className='reserve_container'>
 
-                <ReserveForm
-                    reservationDate={reservationDate} setReservationDate={setReservationDate}
-                    reservationTime={reservationTime} setReservationTime={setReservationTime}
-                    guest={guest} setGuest={setGuest}
-                />
+                <ReserveDateTime res={res} setRes={setRes} />
+                <ReserveGuest guest={guest} setGuest={setGuest} />
                 <div className='reserve_button_container'>
                     <Button type="submit" className='gold_button'>Reserve</Button>
                 </div>

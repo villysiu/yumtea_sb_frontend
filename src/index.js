@@ -6,8 +6,8 @@ import { Provider } from 'react-redux'
 import store from './app/store'
 
 
-import App from './App';
-import Home from './features/home/Home'
+import Home from './features/home/Home';
+import Intro from './features/home/Intro'
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import About from './features/headerNav/About'
 import Collections from './features/menuitem/Collections'
@@ -31,153 +31,128 @@ import UpdateReservation from './features/reservation/UpdateReservation';
 // import UpdateReservationFrom from './features/reservation/ReservationsApp';
 
 // import MenuitemsList from './features/menuitem/MenuItemsList';
-import EnterPage from './features/home/EnterPage';
+import GetData from './features/home/GetData';
 // import ResetApp from './features/home/ResetApp';
 import ReservationsApp from './features/reservation/ReservationsApp';
 import Support from "./features/support/Support";
 import AdminApp from "./features/admin/AdminApp";
-import AdminSignin from "./features/admin/AdminSignin";
-import ControlPanel from "./features/admin/ControlPanel";
+import Manage from "./features/admin/Manage";
+
 const router = createBrowserRouter([
-  {
-      path: "/",
-      element: <App />,
+    {
+        path: "/",
+        element: <GetData />,
+        children:[
 
-      children: [
-        // {
-        //   path: "/h",
-        //   element: <Home />,
-        //   children: [
-        //     {
-        //       path: "/h",
-        //       element: <Home />,
-        //     },
-        //     {
-        //       path: "/h/visit-taste",
-        //       element: <VisitTaste />,
-        //     },
-        //     {
-        //       path: "/h/support",
-        //       element: <Support />,
-        //     },
-        //   ]
-        // },
-
-        {
-            path: "/",
-            element: <EnterPage />,
-            children:[
-              {
-                    path: "/",
-                    element: <Home />,
-                  },
-                  {
-                    path: "/visit-taste",
-                    element: <VisitTaste />,
-                  },
-                  {
-                    path: "/support",
-                    element: <Support />,
-                  },
-              {
-                path: "/collection",
-                element: <Collections />,
-              },
-              // {
-              //   path: "collection/:itemId",
-              //   element: <SingleMenuitem />,
-              // },
-
-              {
-                path: "/user",
-                element: <User />,
+            {
+                path: "/",
+                element: <Home />,
                 children: [
-                  {
-                    path: '/user/signin',
-                    element: <Login />
-                  },
-                  {
-                    path: '/user/signup',
-                    element: <Signup />
-                  },
-                ]
-              },
-              {
-                path: "/secure",
-                element: <SecureApp />,
-                children: [
-                  {
-                    path: '/secure/account',
-                    element: <Account />
-                  },
-                  {
-                    path: "/secure/orders",
-                    element: <OrderHistory />
-                  },
-                  {
-                    path: "/secure/checkout",
-                    element: <Checkout />
-                  },
-                  {
-                    path: "/secure/ordersuccess",
-                    element: <OrderSuccess />
-                  },        
-                  {
-                    path: "/secure/reservations/",
-                    element: <ReservationsApp />,
-                    children: [
-                      {
-                        path: "/secure/reservations/",
-                        element: <Reservations />,
-                      },
-                      {
-                        path: "/secure/reservations/reserve",
-                        element: <Reserve />
-                      },
-                      {
-                        path: "/secure/reservations/:resId/update",
-                        element: <UpdateReservation />,
-                      },
-                      {
-                        path: "/secure/reservations/success",
-                        element: <ReservationSuccess />
-                      },
-                    ]
-                  },
-                ]
-              },
+                    {
+                        path: "/",
+                        element: <Intro />,
+                    },
+                    {
+                        path: "/visit-taste",
+                        element: <VisitTaste />,
+                    },
+                    {
+                        path: "/support",
+                        element: <Support />,
+                    }, {
+                        path: "/collection",
+                        element: <Collections />,
+                    },
+                    // {
+                    //   path: "collection/:itemId",
+                    //   element: <SingleMenuitem />,
+                    // },
 
-              {
+                    {
+                        path: "/user",
+                        element: <User />,
+                        children: [
+                            {
+                                path: '/user/signin',
+                                element: <Login />
+                            },
+                            {
+                                path: '/user/signup',
+                                element: <Signup />
+                            },
+                        ]
+                    },
+                    {
+                        path: "/secure",
+                        element: <SecureApp />,
+                        children: [
+                            {
+                                path: '/secure/account',
+                                element: <Account />
+                            },
+                            {
+                                path: "/secure/orders",
+                                element: <OrderHistory />
+                            },
+                            {
+                                path: "/secure/checkout",
+                                element: <Checkout />
+                            },
+                            {
+                                path: "/secure/ordersuccess",
+                                element: <OrderSuccess />
+                            },
+                            {
+                                path: "/secure/reservations/",
+                                element: <ReservationsApp />,
+                                children: [
+                                    {
+                                        path: "/secure/reservations/",
+                                        element: <Reservations />,
+                                    },
+                                    {
+                                        path: "/secure/reservations/reserve",
+                                        element: <Reserve />
+                                    },
+                                    {
+                                        path: "/secure/reservations/:resId/update",
+                                        element: <UpdateReservation />,
+                                    },
+                                    {
+                                        path: "/secure/reservations/success",
+                                        element: <ReservationSuccess />
+                                    },
+                                ]
+                            },
+                        ]
+                    },
+                ]
+            },
+            {
                 path: "/admin",
                 element: <AdminApp />,
                 children: [
-                  {
-                    path: "/admin/signin",
-                    element: <AdminSignin />,
-                  },
-                  {
-                    path: "/admin/hub",
-                    element: <ControlPanel />
-                  }
+                    {
+                        path: "/admin/hub",
+                        element: <Manage />
+                    }
                 ]
 
-              }
-            ]
-        },
-        {
-            path: "/about",
-            element: <About />
-        },
-      ]
-  }
+            }
+        ]
 
+    },
+    {
+        path: "/about",
+        element: <About />
+    },
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
-  <Provider store={store}>
-    
-    <RouterProvider router={router} />
-  </Provider>
+    <Provider store={store}>
+
+        <RouterProvider router={router} />
+    </Provider>
 )
 

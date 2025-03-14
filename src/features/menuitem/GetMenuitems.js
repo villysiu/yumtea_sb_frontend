@@ -6,7 +6,7 @@ import {fetchMenuitems, fetchMilks, fetchCategories, fetchSizes, fetchSugars, fe
 
 
 const GetMenuitems = ({setGetMenuitem}) =>{
-    console.log("Getting Menuitem")
+    console.log("Getting ManageMenuitem")
     const dispatch = useDispatch()
     let menuitems_status = useSelector(state => state.menuitem.menuitems.status)
     let milk_status = useSelector(state => state.menuitem.milk.status)
@@ -15,9 +15,12 @@ const GetMenuitems = ({setGetMenuitem}) =>{
     let sugar_status = useSelector(state => state.menuitem.sugar.status)
     let bestsellers_status = useSelector(state=>state.menuitem.bestSellers.status)
     
-    // console.log("menuitem: " + menuitems_status);
-    // console.log("milk: " + milk_status);
-    // console.log("category: " + category_status);
+    console.log("menuitem: " + menuitems_status);
+    console.log("milk: " + milk_status);
+    console.log("category: " + category_status);
+    console.log("size_status: " + size_status);
+    console.log("sugar_status: " + sugar_status);
+    console.log("bestsellers_status: " + bestsellers_status);
 
     useEffect(()=>{
         if(menuitems_status==='idle'){
@@ -45,12 +48,14 @@ const GetMenuitems = ({setGetMenuitem}) =>{
             // setSpinner(true);
         }
 
+
         if(menuitems_status === 'succeeded'
             && milk_status === 'succeeded'
             && category_status === 'succeeded'
             && size_status === 'succeeded'
             && sugar_status === 'succeeded'
             && bestsellers_status === 'succeeded'){
+            console.log("all succeded")
             setGetMenuitem(true)
         }
         else
@@ -58,7 +63,7 @@ const GetMenuitems = ({setGetMenuitem}) =>{
         
 
         
-    }, [dispatch, menuitems_status, milk_status, category_status, size_status, sugar_status])
+    }, [dispatch, menuitems_status, milk_status, category_status, size_status, sugar_status, bestsellers_status, setGetMenuitem])
 
 }
 export default GetMenuitems
