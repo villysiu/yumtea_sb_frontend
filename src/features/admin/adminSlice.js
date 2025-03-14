@@ -32,13 +32,39 @@ export const addMenuitem = createAsyncThunk(
 
     }
 )
+export const deleteMenuitem = createAsyncThunk(
+    'admin/deleteMenuitem',
+    async (id,{rejectWithValue}) => {
+
+        try {
+            const response=await fetch(`${apiLink}/menuitem/${id}`, {
+                method: "DELETE",
+                credentials: 'include'
+            })
+
+            if(!response.ok) {
+                console.log(response)
+                return response
+            }
+            return null
+
+
+        }
+        catch(error){
+            throw rejectWithValue(error.message);
+
+        }
+
+    }
+)
 
 
 
 const adminSlice=createSlice({
     name: 'admin',
     initialState: {
-        addMenuitemStatus: 'idle'
+        addMenuitemStatus: 'idle',
+        deleteMenuitemStatus: 'idle'
 
     },
     reducers: {
@@ -55,6 +81,17 @@ const adminSlice=createSlice({
             })
             .addCase(addMenuitem.rejected, (state, action) => {
                 state.addMenuitemStatus = 'failed';
+            })
+
+            .addCase(deleteMenuitem.pending, (state, action) => {
+                state.deleteMenuitemStatus = 'loading'
+            })
+            .addCase(deleteMenuitem.fulfilled, (state, action) => {
+
+                state.deleteMenuitemStatus = 'succeeded'
+            })
+            .addCase(deleteMenuitem.rejected, (state, action) => {
+                state.deleteMenuitemStatus = 'failed';
             })
 
 

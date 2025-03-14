@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import {addMenuitem} from "../admin/adminSlice";
+import {addMenuitem, deleteMenuitem} from "../admin/adminSlice";
 
 export const fetchCategories=createAsyncThunk(
     'menuitem/fetchCategories',
@@ -308,6 +308,10 @@ const menuitemSlice=createSlice({
           })
           .addCase(addMenuitem.fulfilled, (state, action) => {
               console.log(action.payload)
+              state.menuitems.status = "idle"
+              state.menuitems.array = []
+          })
+          .addCase(deleteMenuitem.fulfilled, (state, action) => {
               state.menuitems.status = "idle"
               state.menuitems.array = []
           })

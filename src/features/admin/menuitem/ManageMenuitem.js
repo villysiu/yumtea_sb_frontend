@@ -1,14 +1,17 @@
 import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Form from 'react-bootstrap/Form';
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import {PencilSquare, Plus, Trash3Fill} from "react-bootstrap-icons";
 import AddMenuitemButton from "./AddMenuitemButton";
+import {deleteMenuitem} from "../adminSlice";
 
 const ManageMenuitem = () =>{
     const {array, status} = useSelector(state=>state.menuitem.menuitems)
-
-
+    const dispatch = useDispatch()
+const handleDelete = (id) =>{
+        dispatch(deleteMenuitem(id));
+}
     return(
         <>
 
@@ -61,7 +64,7 @@ const ManageMenuitem = () =>{
                             <Col xs={1}>{menuitem.temperature}</Col>
                             <Col xs={1} className="text-end">
                                 <PencilSquare className="mx-2"/>
-                                <Trash3Fill className="mx-2"/>
+                                <Trash3Fill className="mx-2" onClick={ ()=>handleDelete(menuitem.id) } />
                             </Col>
                         </Row>
                     )
