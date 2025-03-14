@@ -6,16 +6,15 @@ const CategoryDropdown = ({newMenuitem, setNewMenuitem}) =>{
     const handleChange = (e) =>{
         setNewMenuitem({
             ...newMenuitem,
-            "categoryId": e.target.value,
+            "categoryId": parseInt(e.target.value),
         })
     }
     return (
-        <Form.Select >
+        <Form.Select onChange={handleChange} >
             <option>Pick Category</option>
             {
                 categories.map(c=>(
-                    <option value={c.id}
-                            onChange={handleChange}
+                    <option value={c.id} key={c.id}
                             selected={c.id === newMenuitem.categoryId}>
                         {c.title}
                     </option>

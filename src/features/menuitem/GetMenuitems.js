@@ -1,7 +1,15 @@
 import { Outlet } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import {fetchMenuitems, fetchMilks, fetchCategories, fetchSizes, fetchSugars, fetchBestSellerss} from "./menuitemSlice"
+import {
+    fetchMenuitems,
+    fetchMilks,
+    fetchCategories,
+    fetchSizes,
+    fetchSugars,
+    fetchBestSellerss,
+    fetchTemperatures
+} from "./menuitemSlice"
 // import FullSpinner from "../headerNav/FullSpinner"
 
 
@@ -13,6 +21,7 @@ const GetMenuitems = ({setGetMenuitem}) =>{
     let category_status = useSelector(state => state.menuitem.category.status)
     let size_status = useSelector(state => state.menuitem.size.status)
     let sugar_status = useSelector(state => state.menuitem.sugar.status)
+    let temperature_status = useSelector(state => state.menuitem.temperature.status)
     let bestsellers_status = useSelector(state=>state.menuitem.bestSellers.status)
     
     console.log("menuitem: " + menuitems_status);
@@ -43,6 +52,10 @@ const GetMenuitems = ({setGetMenuitem}) =>{
             dispatch(fetchSugars());
             // setSpinner(true);
         }
+        if(temperature_status === 'idle'){
+            dispatch(fetchTemperatures());
+            // setSpinner(true);
+        }
         if(bestsellers_status === 'idle'){
             dispatch(fetchBestSellerss());
             // setSpinner(true);
@@ -54,6 +67,7 @@ const GetMenuitems = ({setGetMenuitem}) =>{
             && category_status === 'succeeded'
             && size_status === 'succeeded'
             && sugar_status === 'succeeded'
+            && temperature_status === 'succeeded'
             && bestsellers_status === 'succeeded'){
             console.log("all succeded")
             setGetMenuitem(true)
@@ -63,7 +77,7 @@ const GetMenuitems = ({setGetMenuitem}) =>{
         
 
         
-    }, [dispatch, menuitems_status, milk_status, category_status, size_status, sugar_status, bestsellers_status, setGetMenuitem])
+    }, [dispatch, menuitems_status, milk_status, category_status, size_status, sugar_status,temperature_status, bestsellers_status, setGetMenuitem])
 
 }
 export default GetMenuitems

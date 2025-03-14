@@ -7,8 +7,11 @@ import CategoryDropdown from "../category/CategoryDropdown";
 import MilkDropdown from "../milk/MilkDropdown";
 import SugarDropdown from "../sugar/SugarDropdown";
 import TempDropdown from "../temperature/TempDropdown";
+import {useDispatch} from "react-redux";
+import {addMenuitem} from "../adminSlice";
 
 const AddMenuitemButton = () =>{
+    const dispatch = useDispatch();
     const [create, showCreate] = useState(false)
     const handleClose = () => {
         showCreate(false)
@@ -21,9 +24,26 @@ const AddMenuitemButton = () =>{
             "milkId": null,
             "temperature": null,
             "sugar": null,
-            "price": 0
+            "price": 0,
+            "description":"",
+            "imageUrl": ""
         }
     )
+
+    const handleSubmit = () =>{
+        console.log(newMenuitem)
+
+        dispatch(addMenuitem(newMenuitem))
+
+        showCreate(false)
+    }
+    const handleChange = e => {
+        setNewMenuitem(prev => ({
+            ...prev,
+            [e.target.id]: e.target.value
+        }))
+    }
+
     return (
         <>
 
@@ -36,7 +56,7 @@ const AddMenuitemButton = () =>{
                         <Row className="mb-3">
                             <Col xs={2}>Title</Col>
                             <Col>
-                                <Form.Control type="text" placeholder="Enter name"/>
+                                <Form.Control type="text" placeholder="Enter name" id="title" onChange={handleChange}/>
                             </Col>
                         </Row>
                         <Row className="mb-3">
@@ -44,7 +64,7 @@ const AddMenuitemButton = () =>{
                             <Col xs={4}>
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>$</InputGroup.Text>
-                                    <Form.Control type="number" max={100} placeholder="Enter Price" />
+                                    <Form.Control type="number" max={100} id="price" placeholder="Enter Price" />
 
                                 </InputGroup>
                             </Col>
@@ -79,7 +99,7 @@ const AddMenuitemButton = () =>{
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleSubmit}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

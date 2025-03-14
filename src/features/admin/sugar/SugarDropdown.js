@@ -10,12 +10,11 @@ const SugarDropdown = ({newMenuitem, setNewMenuitem}) =>{
         })
     }
     return (
-        <Form.Select >
+        <Form.Select onChange={handleChange}>
             <option>Pick Sugar</option>
             {
                 sugars.map(s=>(
-                    <option value={s}
-                            onChange={handleChange}
+                    <option value={s} key={s}
                             selected={s === newMenuitem.sugar}>
                         {s}
                     </option>

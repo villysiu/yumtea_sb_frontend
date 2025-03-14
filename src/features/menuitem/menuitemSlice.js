@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
+import {addMenuitem} from "../admin/adminSlice";
 
 export const fetchCategories=createAsyncThunk(
     'menuitem/fetchCategories',
@@ -113,6 +114,23 @@ export const fetchSugars = createAsyncThunk(
         }
     }
 )
+export const fetchTemperatures = createAsyncThunk(
+    'menuitem/fetchTemperatures',
+    async () => {
+        try {
+            const response=await fetch(`${apiLink}/temperatures`, {
+                method: "GET",
+            })
+            if(!response.ok) {
+                return response
+            }
+            return await response.json()
+        }
+        catch(error){
+            return Promise.reject(error);
+        }
+    }
+)
 export const fetchBestSellerss=createAsyncThunk(
     'menuitem/fetchBestSellerss',
     async () => {
@@ -155,6 +173,11 @@ const menuitemSlice=createSlice({
 
         },
         sugar: {
+            array: [],
+            status: 'idle',
+
+        },
+        temperature: {
             array: [],
             status: 'idle',
 
@@ -259,6 +282,17 @@ const menuitemSlice=createSlice({
           .addCase(fetchSugars.rejected, (state, action) => {
               state.sugar.status = 'failed'
           })
+          .addCase(fetchTemperatures.pending, (state, action) => {
+              state.temperature.status = 'loading'
+          })
+          .addCase(fetchTemperatures.fulfilled, (state, action) => {
+              console.log(action.payload)
+              state.temperature.status = 'succeeded'
+              state.temperature.array = action.payload
+          })
+          .addCase(fetchTemperatures.rejected, (state, action) => {
+              state.temperature.status = 'failed'
+          })
 
           .addCase(fetchBestSellerss.pending, (state, action) => {
               state.bestSellers.status = 'loading'
@@ -271,6 +305,11 @@ const menuitemSlice=createSlice({
           .addCase(fetchBestSellerss.rejected, (state, action) => {
 
               state.bestSellers.status = 'failed'
+          })
+          .addCase(addMenuitem.fulfilled, (state, action) => {
+              console.log(action.payload)
+              state.menuitems.status = "idle"
+              state.menuitems.array = []
           })
     }
 })
@@ -332,6 +371,15 @@ export const getSugars = createSelector(
     [selectSugars],
     (sugars) => {
         return sugars.filter(s => s !== "NA")
+
+    }
+)
+const selectTemperatures = (state) => state.menuitem.temperature.array;
+export const getTemperatures = createSelector(
+    [selectTemperatures],
+    (temperatures) => {
+        console.log(temperatures.length)
+        return temperatures.filter(s => s !== "FREE")
 
     }
 )

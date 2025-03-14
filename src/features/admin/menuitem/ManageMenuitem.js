@@ -51,7 +51,7 @@ const ManageMenuitem = () =>{
             {
                 array.map(menuitem => {
                     return (
-                        <Row className="manage_list_row">
+                        <Row className="manage_list_row" key={menuitem.id}>
                             <Col xs={1}>{menuitem.id}</Col>
                             <Col xs={4}>{menuitem.title}</Col>
                             <Col xs={1}>{menuitem.price}</Col>
