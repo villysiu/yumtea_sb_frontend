@@ -44,6 +44,7 @@ const AdminApp = () =>{
 
         <Outlet />
 
+
     )
 }
 export default AdminApp

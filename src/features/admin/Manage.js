@@ -3,9 +3,9 @@ import {logoutAdmin} from "./adminSlice";
 import {useDispatch} from "react-redux";
 import {logoutUser} from "../user/userSlice";
 import AdminOffcanvas from "./AdminOffcanvas";
-import ManageMenuitem from "./ManageMenuitem"
+import ManageMenuitem from "./menuitem/ManageMenuitem"
 import {useState} from "react";
-import ManageCategory from "./ManageCategory";
+import ManageCategory from "./category/ManageCategory";
 const Manage = () =>{
     const dispatch = useDispatch()
     const [choice, setChoice] = useState("Home")
@@ -26,7 +26,9 @@ const Manage = () =>{
     }
     console.log(choice)
     return (
+        <div  className="admin_full_wrapper">
         <div className="admin_wrapper">
+
             <div className="admin_left">
                 <AdminOffcanvas choice={choice} setChoice={setChoice} />
             </div>
@@ -36,6 +38,8 @@ const Manage = () =>{
                  }
 
             </div>
+
+        </div>
         </div>
     )
 }

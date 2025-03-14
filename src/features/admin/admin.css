@@ -1,9 +1,14 @@
-.admin_wrapper{
-    width: 100%;
-    height: 100vh;
+.admin_full_wrapper{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #ece8e8;
+}
+.admin_wrapper{
+    width: 1400px;
+    display: flex;
 
+    border: solid 1px red;
 }
 .admin_left{
     width: 250px;
@@ -12,7 +17,7 @@
 }
 .admin_right{
     width: 100%;
-    margin: 4rem 2rem;
+    margin: 4rem 0 2rem 2rem;
     /*background-color: #f9f9f9;*/
 }
 .sidebar {
@@ -47,4 +52,32 @@
     display: flex;
     align-items: center;
     padding-left: 6px;
+}
+.manage_list_title {
+    background-color: #918c85;
+    color: white;
+    padding: 1rem 0;
+    margin: 0;
+}
+.manage_list_row {
+    border-bottom: 1px #c6ccd3 solid;
+    /*height: 5rem;*/
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+}
+.manage_list_row:hover {
+    background-color: #f1f1f1;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
