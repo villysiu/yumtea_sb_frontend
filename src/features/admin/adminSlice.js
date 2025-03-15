@@ -57,6 +57,36 @@ export const deleteMenuitem = createAsyncThunk(
 
     }
 )
+export const updateMenuitem = createAsyncThunk(
+    'admin/addMenuitem',
+    async (editMenuitem,{rejectWithValue}) => {
+
+        try {
+            const response=await fetch(`${apiLink}/menuitem/${editMenuitem.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json',
+                },
+                body: JSON.stringify(editMenuitem),
+                credentials: 'include'
+            })
+
+            if(!response.ok) {
+                console.log(response)
+                return response
+            }
+            return await response.json();
+
+
+        }
+        catch(error){
+            throw rejectWithValue(error.message);
+
+        }
+
+    }
+)
 
 
 

@@ -109,22 +109,19 @@
     align-items: center;
     cursor: default;
 }
-.remove_button, .remove_button:hover, .remove_button:active {
-    border-radius: var(--oblong-button-border-radius);
-    border: var(--oblong-button-border);
-    padding: var(--oblong-button-padding);
-    color: black;
+.remove_button {
+
     background-color: white !important;
-    /* cursor: pointer; */
+    color: black  !important;
 
 }
-.remove_button:hover {
+/*.remove_button:hover {*/
 
-    box-shadow: var(--oblong-button-hover-box-shadow)
-}
-.remove_button:active{
-    background-color: rgb(169, 166, 150) !important;
-}
+/*    box-shadow: var(--oblong-button-hover-box-shadow)*/
+/*}*/
+/*.remove_button:active{*/
+/*    background-color: rgb(169, 166, 150) !important;*/
+/*}*/
 .cart_modal_item_header{
     display: flex;
     width: 100%;

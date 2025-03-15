@@ -36,7 +36,8 @@ import GetData from './features/home/GetData';
 import ReservationsApp from './features/reservation/ReservationsApp';
 import Support from "./features/support/Support";
 import AdminApp from "./features/admin/AdminApp";
-import Manage from "./features/admin/Manage";
+import Hub from "./features/admin/Hub";
+import ManageMenuitem from "./features/admin/menuitem/ManageMenuitem";
 
 const router = createBrowserRouter([
     {
@@ -134,7 +135,11 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "/admin/hub",
-                        element: <Manage />
+                        element: <Hub />
+                    },
+                    {
+                        path: "/admin/menuitems",
+                        element: <ManageMenuitem />
                     }
                 ]
 

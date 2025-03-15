@@ -1,17 +1,23 @@
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import Form from 'react-bootstrap/Form';
 import {Button, Col, Modal, Row} from "react-bootstrap";
-import {PencilSquare, Plus, Trash3Fill} from "react-bootstrap-icons";
 import AddMenuitemButton from "./AddMenuitemButton";
-import {deleteMenuitem} from "../adminSlice";
 
-const ManageMenuitem = () =>{
+import EditMenuitemButton from "./EditMenuitemButton";
+import DeleteMenuitemButton from "./DeleteMenuitemButton";
+
+const ManageMenuitem = ({setChoice}) =>{
     const {array, status} = useSelector(state=>state.menuitem.menuitems)
-    const dispatch = useDispatch()
-const handleDelete = (id) =>{
-        dispatch(deleteMenuitem(id));
-}
+
+    const sugarAbbr = new Map([
+        ["NA", "NA"],
+        ["ZERO", "0%"],
+        ["TWENTY_FIVE", "25%"],
+        ["FIFTY", "50%"],
+        ["SEVENTY_FIVE", "75%"],
+        ["HUNDRED", "100%"]
+    ]);
     return(
         <>
 
@@ -45,26 +51,24 @@ const handleDelete = (id) =>{
                 <Col xs={1}>Milk</Col>
                 <Col xs={1}>Sugar</Col>
                 <Col xs={1}>Temperature</Col>
-                <Col xs={1}>
-
-                </Col>
+                <Col xs={1}></Col>
 
             </Row>
 
             {
                 array.map(menuitem => {
                     return (
-                        <Row className="manage_list_row" key={menuitem.id}>
+                        <Row className="manage_list_row" key={menuitem.id} >
                             <Col xs={1}>{menuitem.id}</Col>
                             <Col xs={4}>{menuitem.title}</Col>
                             <Col xs={1}>{menuitem.price}</Col>
                             <Col xs={2}>{menuitem.category.title}</Col>
                             <Col xs={1}>{menuitem.milk.title}</Col>
-                            <Col xs={1}>{menuitem.sugar}</Col>
+                            <Col xs={1}>{sugarAbbr.get(menuitem.sugar)}</Col>
                             <Col xs={1}>{menuitem.temperature}</Col>
-                            <Col xs={1} className="text-end">
-                                <PencilSquare className="mx-2"/>
-                                <Trash3Fill className="mx-2" onClick={ ()=>handleDelete(menuitem.id) } />
+                            <Col xs={1} >
+                                <EditMenuitemButton menuitem={menuitem} />
+                                <DeleteMenuitemButton menuitem={menuitem}  />
                             </Col>
                         </Row>
                     )

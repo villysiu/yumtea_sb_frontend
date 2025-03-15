@@ -1,12 +1,11 @@
 import { USDollar } from "../../app/global"
-import { useRef } from "react"
+// import { useRef } from "react"
 import SingleOrderItem from "./SingleOrderItem"
-import {useSelector} from 'react-redux'
-import {convertTimestampToDatetime, getSubtotal} from './orderSlice'
+
 const SingleOrder = ({order, show, setShow}) =>{
 
 
-    const ref=useRef()
+    // const ref=useRef()
     const handleOpen = e =>{
         setShow(order.id)
     }
@@ -18,7 +17,9 @@ console.log(order.purchaseDate)
     
     return(
         <>
-        <div className='orderhistory_order' ref={ref} id={order.id} >
+        <div className='orderhistory_order'
+             // ref={ref}
+             id={order.id} >
             <div className='orderhistory_order_container'>
                 <div className='orderhistory_order_header' onClick={handleOpen}>
                     <div className='orderhistory_order_header_l'>

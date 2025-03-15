@@ -9,9 +9,14 @@ import SugarDropdown from "../sugar/SugarDropdown";
 import TempDropdown from "../temperature/TempDropdown";
 import {useDispatch} from "react-redux";
 import {addMenuitem} from "../adminSlice";
+import MenuitemForm from "./MenuitemForm";
+import menuitemForm from "./MenuitemForm";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const AddMenuitemButton = () =>{
     const dispatch = useDispatch();
+
+    // const navigate = useNavigate()
     const [create, showCreate] = useState(false)
     const handleClose = () => {
         showCreate(false)
@@ -34,8 +39,9 @@ const AddMenuitemButton = () =>{
         console.log(newMenuitem)
 
         dispatch(addMenuitem(newMenuitem))
-
+        // navigate('/admin/hub', { state: "Menuitem" });
         showCreate(false)
+
     }
     const handleChange = e => {
         setNewMenuitem(prev => ({
@@ -52,48 +58,7 @@ const AddMenuitemButton = () =>{
                     <Modal.Title>Add Menuitem</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <Row className="mb-3">
-                            <Col xs={2}>Title</Col>
-                            <Col>
-                                <Form.Control type="text" placeholder="Enter name" id="title" onChange={handleChange}/>
-                            </Col>
-                        </Row>
-                        <Row className="mb-3">
-                            <Col xs={2}>Price</Col>
-                            <Col xs={4}>
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Text>$</InputGroup.Text>
-                                    <Form.Control type="number" max={100} id="price" placeholder="Enter Price" />
-
-                                </InputGroup>
-                            </Col>
-                        </Row>
-                        <Row className="mb-3">
-                            <Col xs={2}>Category</Col>
-                            <Col>
-                                <CategoryDropdown newMenuitem={newMenuitem} setNewMenuitem={setNewMenuitem} />
-                            </Col>
-                        </Row>
-                        <Row className="mb-3">
-                            <Col xs={2}>Milk</Col>
-                            <Col>
-                                <MilkDropdown newMenuitem={newMenuitem} setNewMenuitem={setNewMenuitem} />
-                            </Col>
-                        </Row>
-                        <Row className="mb-3">
-                            <Col xs={2}>Sugar</Col>
-                            <Col>
-                                <SugarDropdown newMenuitem={newMenuitem} setNewMenuitem={setNewMenuitem} />
-                            </Col>
-                        </Row>
-                        <Row className="mb-3">
-                            <Col xs={3}>Temperature</Col>
-                            <Col>
-                                <TempDropdown newMenuitem={newMenuitem} setNewMenuitem={setNewMenuitem} />
-                            </Col>
-                        </Row>
-                    </Form>
+                    <MenuitemForm menuitem={newMenuitem} setMenuitem={setNewMenuitem} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

@@ -10,10 +10,9 @@ const AdminOffCanvas = ({choice, setChoice}) =>{
             <div><h2>Yum Tea Management</h2></div>
             <div className="sidebar">
                 <div className="sidebar_box"><Link  to="/" > Back to YumTea </Link></div>
-                <div onClick={()=>setChoice("Category")} className="sidebar_box">Manage Category </div>
 
-                <div onClick={()=>setChoice("Menuitem")} className="sidebar_box">Manage Menuitem</div>
-                <div onClick={()=>setChoice("Milk")} className="sidebar_box">Manage Milk</div>
+                <div className="sidebar_box"><Link to="/admin/menuitems"> Manage Menuitem </Link></div>
+
                 {/*Sugar*/}
                 {/*Temperature*/}
                 {/*Size*/}

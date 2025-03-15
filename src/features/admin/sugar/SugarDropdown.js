@@ -1,11 +1,11 @@
 import Form from "react-bootstrap/Form";
 import {useSelector} from "react-redux";
 
-const SugarDropdown = ({newMenuitem, setNewMenuitem}) =>{
+const SugarDropdown = ({menuitem, setMenuitem}) =>{
     const sugars = useSelector(state=>state.menuitem.sugar.array)
     const handleChange = (e) =>{
-        setNewMenuitem({
-            ...newMenuitem,
+        setMenuitem({
+            ...menuitem,
             "sugar": e.target.value,
         })
     }
@@ -15,7 +15,7 @@ const SugarDropdown = ({newMenuitem, setNewMenuitem}) =>{
             {
                 sugars.map(s=>(
                     <option value={s} key={s}
-                            selected={s === newMenuitem.sugar}>
+                            selected={s === menuitem.sugar}>
                         {s}
                     </option>
                 ))

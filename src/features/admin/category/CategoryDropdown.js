@@ -1,11 +1,12 @@
 import Form from "react-bootstrap/Form";
 import {useSelector} from "react-redux";
 
-const CategoryDropdown = ({newMenuitem, setNewMenuitem}) =>{
+const CategoryDropdown = ({menuitem, setMenuitem}) =>{
+    console.log(menuitem)
     const categories = useSelector(state=>state.menuitem.category.array)
     const handleChange = (e) =>{
-        setNewMenuitem({
-            ...newMenuitem,
+        setMenuitem({
+            ...menuitem,
             "categoryId": parseInt(e.target.value),
         })
     }
@@ -15,7 +16,7 @@ const CategoryDropdown = ({newMenuitem, setNewMenuitem}) =>{
             {
                 categories.map(c=>(
                     <option value={c.id} key={c.id}
-                            selected={c.id === newMenuitem.categoryId}>
+                            selected={c.id === menuitem.categoryId}>
                         {c.title}
                     </option>
                 ))

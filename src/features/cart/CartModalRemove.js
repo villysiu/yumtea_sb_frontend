@@ -30,7 +30,7 @@ const CartModalRemove = forwardRef(
             <div ref={ref}>
                 {confirm &&
                     <div className='remove'  > 
-                        <Button className='remove_button' onClick={handleConfirm}>Remove {cartitem.menuitem.title}? </Button>
+                        <Button className='oblong_button remove_button ' onClick={handleConfirm}>Remove {cartitem.menuitem.title}? </Button>
                     </div>
                 }
                 <div className='cart_modal_item_remove' onClick={handleClick}>

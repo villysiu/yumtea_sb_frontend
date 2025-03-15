@@ -1,12 +1,13 @@
 import {Navigate, Outlet, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import Manage from "./Manage";
+import Hub from "./Hub";
 import {fetchCurrentAdmin} from "./adminSlice";
 import {useEffect} from "react";
 import Spinner from "react-bootstrap/Spinner";
 import {fetchCurrentUser} from "../user/userSlice";
 import {setMessage} from "../message/messageSlice";
 import "./admin.css"
+import AdminOffcanvas from "./AdminOffcanvas";
 const AdminApp = () =>{
 
     // if current user is admin role, redirect to control panel
@@ -42,7 +43,18 @@ const AdminApp = () =>{
     }
     return (
 
-        <Outlet />
+        <div  className="admin_full_wrapper">
+            <div className="admin_wrapper">
+
+                <div className="admin_left">
+                    <AdminOffcanvas />
+                </div>
+                <div className="admin_right">
+                    <Outlet />
+                </div>
+
+            </div>
+        </div>
 
 
     )

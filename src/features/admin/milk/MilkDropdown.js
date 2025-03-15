@@ -1,10 +1,10 @@
 import Form from "react-bootstrap/Form";
 import {useSelector} from "react-redux";
 
-const MilkDropdown = ({newMenuitem, setNewMenuitem}) =>{
+const MilkDropdown = ({menuitem, setMenuitem}) =>{
     const milks = useSelector(state=>state.menuitem.milk.array)
     const handleChange = (e) =>{
-        setNewMenuitem(prev=>({
+        setMenuitem(prev=>({
             ...prev,
             "milkId": parseInt(e.target.value),
         }))
@@ -17,7 +17,7 @@ const MilkDropdown = ({newMenuitem, setNewMenuitem}) =>{
                 milks.map(m=>(
                     <option value={m.id} key={m.id}
 
-                            selected={m.id === newMenuitem.milkd}>
+                            selected={m.id === menuitem.milkId}>
                         {m.title}
                     </option>
                 ))
