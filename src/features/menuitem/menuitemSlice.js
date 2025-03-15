@@ -324,6 +324,7 @@ export default menuitemSlice.reducer
 
 const selectMenuitems = state => state.menuitem.menuitems.array;
 const selectMenuitemId = (state, id) => id;
+const selectSearchText = (state, searchText) => searchText
 export const getMenuitemById =createSelector(
     [selectMenuitems, selectMenuitemId],
     (menuitems, menuitemId) => {
@@ -337,6 +338,17 @@ export const getMenuitemById =createSelector(
             'title': menuitem.title,
             'imageUrl': menuitem.imageUrl
         }
+    }
+)
+export const searchMenuitem = createSelector(
+    [selectMenuitems, selectSearchText],
+    (menuitems, searchText) => {
+        if(searchText === "")
+            return menuitems
+        // const regex = /jasmi/
+        const regex = new RegExp(searchText, "i");
+        return menuitems.filter(m=>regex.test(m.title.toLowerCase()) || regex.test(m.category.title.toLowerCase()))
+        // return menuitems.filter(m=>m.title===searchText || m.category.title===searchText)
     }
 )
 const selectCategoryId = (state, category_id) => category_id;

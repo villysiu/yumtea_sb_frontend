@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { useSelector} from "react-redux";
 import Form from 'react-bootstrap/Form';
 import {Button, Col, Modal, Row} from "react-bootstrap";
@@ -6,10 +6,11 @@ import AddMenuitemButton from "./AddMenuitemButton";
 
 import EditMenuitemButton from "./EditMenuitemButton";
 import DeleteMenuitemButton from "./DeleteMenuitemButton";
+import SearchMenuitem from "./SearchMenuitem";
 
 const ManageMenuitem = ({setChoice}) =>{
-    const {array, status} = useSelector(state=>state.menuitem.menuitems)
-
+    // const {array, status} = useSelector(state=>state.menuitem.menuitems)
+    const [menuitems, setMenuitems] = useState([])
     const sugarAbbr = new Map([
         ["NA", "NA"],
         ["ZERO", "0%"],
@@ -18,27 +19,18 @@ const ManageMenuitem = ({setChoice}) =>{
         ["SEVENTY_FIVE", "75%"],
         ["HUNDRED", "100%"]
     ]);
+
+    // useEffect(() => {
+    //     setMenuitems(array)
+    // }, [array]);
+
     return(
         <>
 
 
         <h2 className="manage_title">Menuitem</h2>
-        {/*<Form.Label>Search</Form.Label>*/}
-        {/*<Form.Control type="text" placeholder="Search menuitem" />*/}
-        <Form className="my-4">
-            <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
 
-                <Col sm={6}>
-                    <Form.Control type="text" placeholder="Search menuitem"/>
-                </Col>
-                <Col sm={2}>
-                    <Button>
-                        Search
-                    </Button>
-                </Col>
-            </Form.Group>
-
-        </Form>
+        <SearchMenuitem setMenuitems={setMenuitems}/>
 
         <AddMenuitemButton />
 
@@ -56,7 +48,7 @@ const ManageMenuitem = ({setChoice}) =>{
             </Row>
 
             {
-                array.map(menuitem => {
+                menuitems.map(menuitem => {
                     return (
                         <Row className="manage_list_row" key={menuitem.id} >
                             <Col xs={1}>{menuitem.id}</Col>
