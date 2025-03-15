@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 import {fetchCurrentUserOrders} from "../order/orderSlice";
 import {addItemToCart, fetchCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
@@ -299,4 +299,6 @@ const userSlice=createSlice({
 })
 export const { removeUser } = userSlice.actions
 export default userSlice.reducer
+
+
 

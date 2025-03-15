@@ -5,9 +5,9 @@
     background-color: #ece8e8;
 
 
-    width: 100vw;
-    /* height: 10rem; */
-    min-width: 390px;
+    min-width: 100vw;
+    min-height: 100vh;
+    /*min-width: 390px;*/
     display:flex;
     justify-content: center;
 }
@@ -104,4 +104,8 @@ input[type="number"] {
     justify-content: center;
     align-items: center;
     cursor: default;
+}
+a {
+    text-decoration: unset !important;
+    color: black;
 }

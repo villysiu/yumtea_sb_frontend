@@ -38,6 +38,7 @@ import Support from "./features/support/Support";
 import AdminApp from "./features/admin/AdminApp";
 import Hub from "./features/admin/Hub";
 import ManageMenuitem from "./features/admin/menuitem/ManageMenuitem";
+import ManageAccount from "./features/admin/account/ManageAccount";
 
 const router = createBrowserRouter([
     {
@@ -140,6 +141,10 @@ const router = createBrowserRouter([
                     {
                         path: "/admin/menuitems",
                         element: <ManageMenuitem />
+                    },
+                    {
+                        path: "/admin/accounts",
+                        element: <ManageAccount />
                     }
                 ]
 
