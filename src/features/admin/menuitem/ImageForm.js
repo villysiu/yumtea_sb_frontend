@@ -20,7 +20,7 @@ const ImageForm = ({image, setImage, file, setFile}) => {
             <div>
                 <h4>Preview:</h4>
                 {/* Image Preview */}
-                <img src={image} alt="Selected" style={{ width: '300px', height: 'auto' }} />
+                <img src={image} alt="Selected" style={{ width: '300px', height: '300px' }} />
             </div>
         )}
         </>

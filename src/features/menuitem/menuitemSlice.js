@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import {addMenuitem, deleteMenuitem, updateMenuitem, uploadImage} from "../admin/adminSlice";
+import {addMenuitem, deleteImage, deleteMenuitem, updateMenuitem, uploadImage} from "../admin/adminSlice";
 
 export const fetchCategories=createAsyncThunk(
     'menuitem/fetchCategories',
@@ -324,6 +324,10 @@ const menuitemSlice=createSlice({
               state.menuitems.array = []
 
               // "blob:http://127.0.0.1:8001/be663c6a-d6d2-42be-a5cf-a1b30f6bb585"
+          })
+          .addCase(deleteImage.fulfilled, (state, action) => {
+              state.menuitems.status = "idle"
+              state.menuitems.array = []
           })
     }
 })

@@ -130,7 +130,7 @@ export const deleteImage = createAsyncThunk(
     async (id,{rejectWithValue}) => {
 
         try {
-            const response=await fetch(`${apiLink}/menuitem/img/${id})}`, {
+            const response=await fetch(`${apiLink}/menuitem/img/${id}`, {
                 method: "DELETE",
                 credentials: 'include'
             })
@@ -212,6 +212,17 @@ const adminSlice=createSlice({
                 state.updateImgStatus = 'failed';
             })
 
+            .addCase(deleteImage.pending, (state, action) => {
+                state.updateImgStatus = 'loading'
+            })
+            .addCase(deleteImage.fulfilled, (state, action) => {
+
+                state.updateImgStatus = 'succeeded'
+                // "blob:http://127.0.0.1:8001/be663c6a-d6d2-42be-a5cf-a1b30f6bb585"
+            })
+            .addCase(deleteImage.rejected, (state, action) => {
+                state.updateImgStatus = 'failed';
+            })
 
     }
 })

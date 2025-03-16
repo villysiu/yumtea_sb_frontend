@@ -9,6 +9,7 @@ import {apiLink, homeLink} from "../../../app/global";
 import {Image, PencilSquare, PlusCircle, PlusCircleFill} from "react-bootstrap-icons";
 import AddImageButton from "./AddImageButton";
 import ImageForm from "./ImageForm";
+import EditImage from "./EditImage";
 
 const ManageImage = () => {
     const [menuitems, setMenuitems] = useState([])
@@ -44,13 +45,7 @@ const ManageImage = () => {
                                           menuitem.imageUrl === "" ?
                                               <AddImageButton menuitem={menuitem} />
                                               :
-                                              <div>
-                                              <img src={`${apiLink}/images/${menuitem.imageUrl}`}
-                                                   className="menuitem_img"
-                                                   alt={menuitem.title}></img>
-                                                  <PencilSquare />
-
-                                              </div>
+                                              <EditImage menuitem={menuitem} />
                                       }
 
                                   </div>
