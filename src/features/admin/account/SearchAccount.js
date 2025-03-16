@@ -21,7 +21,7 @@ const SearchAccount = ({setAccounts}) =>{
                                   value={search} onChange={e=>setSearch(e.target.value)}/>
                 </Col>
                 <Col sm={2}>
-                    <Button>
+                    <Button className="oblong_button search_btn">
                         Search
                     </Button>
                 </Col>

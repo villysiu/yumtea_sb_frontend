@@ -58,7 +58,7 @@ export const deleteMenuitem = createAsyncThunk(
     }
 )
 export const updateMenuitem = createAsyncThunk(
-    'admin/addMenuitem',
+    'admin/updateMenuitem',
     async (editMenuitem,{rejectWithValue}) => {
 
         try {
@@ -87,14 +87,79 @@ export const updateMenuitem = createAsyncThunk(
 
     }
 )
+// json content-type cant have a file appended to it. For APIs its better to separately do a file upload, then use the path to the file (or the disk and file name) for relating the resource to the file
+export const uploadImage = createAsyncThunk(
+    'admin/uploadImage',
+    async (formData,{rejectWithValue}) => {
+        console.log(formData)
+        for (const pair of formData.entries()) {
+            console.log(pair[0], pair[1]);
+        }
+        try {
+            const response=await fetch(`${apiLink}/menuitem/img/${formData.get('id')}`, {
+                method: "POST",
+                // headers: {
+        //             // "Content-Type": "application/json",
+        //             // 'accept': 'application/json',
+        //             'enctype':"multipart/form-data"
+        //
+        // },
+                body: formData,
+                credentials: 'include'
+            })
 
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error uploading image:", errorText);
+                return rejectWithValue(errorText);
+            }
+
+            return await response.json();
+
+        }
+        catch(error){
+            throw rejectWithValue(error.message);
+
+        }
+
+    }
+)
+
+export const deleteImage = createAsyncThunk(
+    'admin/deleteImage',
+    async (id,{rejectWithValue}) => {
+
+        try {
+            const response=await fetch(`${apiLink}/menuitem/img/${id})}`, {
+                method: "DELETE",
+                credentials: 'include'
+            })
+
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error deleting image:", errorText);
+                return rejectWithValue(errorText);
+            }
+
+            return await response.json();
+
+        }
+        catch(error){
+            throw rejectWithValue(error.message);
+
+        }
+
+    }
+)
 
 
 const adminSlice=createSlice({
     name: 'admin',
     initialState: {
         addMenuitemStatus: 'idle',
-        deleteMenuitemStatus: 'idle'
+        deleteMenuitemStatus: 'idle',
+        updateMenuitemStatus: 'idle',
+        updateImgStatus: 'idle'
 
     },
     reducers: {
@@ -122,6 +187,29 @@ const adminSlice=createSlice({
             })
             .addCase(deleteMenuitem.rejected, (state, action) => {
                 state.deleteMenuitemStatus = 'failed';
+            })
+
+            .addCase(updateMenuitem.pending, (state, action) => {
+            state.updateMenuitemStatus = 'loading'
+        })
+            .addCase(updateMenuitem.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.updateMenuitemStatus = 'succeeded'
+            })
+            .addCase(updateMenuitem.rejected, (state, action) => {
+                state.updateMenuitemStatus = 'failed';
+            })
+
+            .addCase(uploadImage.pending, (state, action) => {
+                state.updateImgStatus = 'loading'
+            })
+            .addCase(uploadImage.fulfilled, (state, action) => {
+
+                state.updateImgStatus = 'succeeded'
+                // "blob:http://127.0.0.1:8001/be663c6a-d6d2-42be-a5cf-a1b30f6bb585"
+            })
+            .addCase(uploadImage.rejected, (state, action) => {
+                state.updateImgStatus = 'failed';
             })
 
 

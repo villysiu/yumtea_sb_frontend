@@ -69,7 +69,7 @@ const AddMenuitemButton = () =>{
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <Button className="add_new mb-3" onClick={() => showCreate(true)}>
+            <Button className="oblong_button mb-4" onClick={() => showCreate(true)}>
                 <Plus size={25}/>
                 Add
             </Button>

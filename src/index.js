@@ -39,6 +39,8 @@ import AdminApp from "./features/admin/AdminApp";
 import Hub from "./features/admin/Hub";
 import ManageMenuitem from "./features/admin/menuitem/ManageMenuitem";
 import ManageAccount from "./features/admin/account/ManageAccount";
+import ComingSoon from "./features/admin/ComingSoon";
+import ManageImage from "./features/admin/menuitem/ManageImage";
 
 const router = createBrowserRouter([
     {
@@ -143,8 +145,16 @@ const router = createBrowserRouter([
                         element: <ManageMenuitem />
                     },
                     {
+                        path: "/admin/images",
+                        element: <ManageImage />
+                    },
+                    {
                         path: "/admin/accounts",
                         element: <ManageAccount />
+                    },
+                    {
+                        path: "/admin/coming_soon",
+                        element: <ComingSoon />
                     }
                 ]
 

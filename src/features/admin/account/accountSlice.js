@@ -7,7 +7,7 @@ export const fetchAccounts=createAsyncThunk(
         console.log("fetching accounts")
 
         try {
-            const response=await fetch(`${apiLink}/`, {
+            const response=await fetch(`${apiLink}/resource/accounts`, {
                 method: "GET",
                 credentials: 'include'
             })
@@ -24,47 +24,34 @@ export const fetchAccounts=createAsyncThunk(
     }
 )
 
-// export const deleteAccount=createAsyncThunk(
-//     'account/deleteAccount',
-//     async (_, {rejectWithValue}) =>{
-//         console.log("in lougout redux")
-//         try {
-//             const response=await fetch(`${apiLink}/auth/logout`, {
-//                 'method': "POST",
-//                 // 'headers': {
-//                 //     'content-type': 'application/json',
-//                 //     // "Authorization": `Token ${localStorage.getItem("token")}`,
-//                 // },
-//                 credentials: 'include',
-//
-//
-//             })
-//
-//             if(!response.ok)
-//                 throw new Error(`${response.status} ${response.statusText}`)
-//             console.log(response)
-//
-//             return null
-//
-//         }
-//         catch(error){
-//             return rejectWithValue(error.message);
-//         }
-//     }
-// )
-export const updateAccount = createAsyncThunk(
-    'account/updateAccount',
-    async(userInfo, {rejectWithValue}) => {
-        console.log(userInfo)
-        try{
-            const response = await fetch(`${apiLink}/auth/signup`, {
-                'method': "PATCH",
-                'headers': {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
+export const deleteAccount=createAsyncThunk(
+    'account/deleteAccount',
+    async (id, {rejectWithValue}) =>{
+        try {
+            const response=await fetch(`${apiLink}/resource/accounts/${id}`, {
+                'method': "DELETE",
+                credentials: 'include',
 
-                },
-                'body': JSON.stringify(userInfo),
+
+            })
+
+            if(!response.ok)
+                return response
+
+            return null
+
+        }
+        catch(error){
+            return rejectWithValue(error.message);
+        }
+    }
+)
+export const toggleAdminRole = createAsyncThunk(
+    'account/toggleAdminRole',
+    async(id, {rejectWithValue}) => {
+        try{
+            const response = await fetch(`${apiLink}/resource/accounts/${id}`, {
+                'method': "PATCH",
                 credentials: 'include'
             })
             if(!response.ok)
@@ -108,31 +95,31 @@ const accountSlice=createSlice({
 
             })
 
-            .addCase(updateAccount.pending, (state, action) => {
+            .addCase(toggleAdminRole.pending, (state, action) => {
                 state.updateStatus = 'loading'
 
             })
-            .addCase(updateAccount.fulfilled, (state, action) => {
+            .addCase(toggleAdminRole.fulfilled, (state, action) => {
                 state.updateStatus = 'succeeded'
                 state.fetchAccountsStatus = 'idle'
 
 
             })
-            .addCase(updateAccount.rejected, (state, action) => {
+            .addCase(toggleAdminRole.rejected, (state, action) => {
                 state.updateStatus = 'failed'
             })
 
-            // .addCase(deleteAccount.pending, (state, action) => {
-            //     state.deleteStatus = 'loading'
-            // })
-            // .addCase(deleteAccount.fulfilled, (state, action) => {
-            //     state.deleteStatus = 'idle';
-            //     state.fetchAccountsStatus = 'idle'
-            // })
-            // .addCase(deleteAccount.rejected, (state, action) => {
-            //     state.deleteStatus = 'failed'
-            //
-            // })
+            .addCase(deleteAccount.pending, (state, action) => {
+                state.deleteStatus = 'loading'
+            })
+            .addCase(deleteAccount.fulfilled, (state, action) => {
+                state.deleteStatus = 'idle';
+                state.fetchAccountsStatus = 'idle'
+            })
+            .addCase(deleteAccount.rejected, (state, action) => {
+                state.deleteStatus = 'failed'
+
+            })
 
 
 
