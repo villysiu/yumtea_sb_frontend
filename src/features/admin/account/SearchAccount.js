@@ -17,7 +17,7 @@ const SearchAccount = ({setAccounts}) =>{
             <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
 
                 <Col sm={6}>
-                    <Form.Control type="text" placeholder="Search by email or idt"
+                    <Form.Control type="text" placeholder="Search by email or id or name"
                                   value={search} onChange={e=>setSearch(e.target.value)}/>
                 </Col>
                 <Col sm={2}>

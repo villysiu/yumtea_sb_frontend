@@ -38,7 +38,7 @@ export const deleteAccount=createAsyncThunk(
             if(!response.ok)
                 return response
 
-            return null
+            return id
 
         }
         catch(error){
@@ -57,7 +57,7 @@ export const toggleAdminRole = createAsyncThunk(
             if(!response.ok)
                 return response
 
-            return null;
+            return id;
 
         } catch(error){
             return rejectWithValue(error.message);
@@ -101,7 +101,13 @@ const accountSlice=createSlice({
             })
             .addCase(toggleAdminRole.fulfilled, (state, action) => {
                 state.updateStatus = 'succeeded'
-                state.fetchAccountsStatus = 'idle'
+                state.accounts = state.accounts.map(a=>{
+                    if(a.id === action.payload) {
+                        a.isAdmin = !a.isAdmin
+                    }
+                    return a
+                })
+
 
 
             })
@@ -113,8 +119,9 @@ const accountSlice=createSlice({
                 state.deleteStatus = 'loading'
             })
             .addCase(deleteAccount.fulfilled, (state, action) => {
-                state.deleteStatus = 'idle';
-                state.fetchAccountsStatus = 'idle'
+                state.deleteStatus = 'succeeded';
+                state.accounts = state.accounts.filter(a=>a.id !== action.payload)
+
             })
             .addCase(deleteAccount.rejected, (state, action) => {
                 state.deleteStatus = 'failed'
@@ -146,7 +153,13 @@ export const searchAccount = createSelector(
             return accounts
 
         const regex = new RegExp(text, "i");
-        return accounts.filter(account=>regex.test(account.email.toLowerCase()) || account.id===parseInt(text))
+        return accounts.filter(a=>regex.test(a.email.toLowerCase()) || regex.test(a.id) || regex.test(a.nickname.toLowerCase()))
     }
 )
 
+// if(searchText === "")
+//     return menuitems
+//
+// const regex = new RegExp(searchText, "i");
+// return menuitems.filter(m=>regex.test(m.title.toLowerCase()) || regex.test(m.category.title.toLowerCase()))
+// }
