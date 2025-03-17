@@ -43,7 +43,7 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
     const menuitem = useSelector(state => getMenuitemById(state, cartitem.menuitem.id))
     const milk = useSelector(state => getMilkById(state, cartitem.milk.id))
     const size = useSelector((state) => getSizeById(state, cartitem.size.id))
-    const cartitemRef = useRef();
+    // const cartitemRef = useRef();
     const removeRef = useRef();
 
     const dispatch = useDispatch()
@@ -69,13 +69,15 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
     return (
         <>
 
-        <div className='cart_modal_item_wrapper' ref={cartitemRef} onClick={handleUpdate} >
+        <div className='cart_modal_item_wrapper' onClick={handleUpdate} >
     
             <div className='cart_modal_item_header'>
                 <div className='cart_modal_item_qty'>{cartitem.quantity}</div>
                 <div className='cart_modal_item_title' >{cartitem.menuitem.title}</div>
-                <CartModalRemove cartitem={cartitem} ref={removeRef}/>
-                <div className='cart_modal_item_price'>{USDollar.format(cartitem.price * cartitem.quantity)}</div>
+                <div ref={removeRef}>
+                    <CartModalRemove cartitem={cartitem}/>
+                </div>
+                    <div className='cart_modal_item_price'>{USDollar.format(cartitem.price * cartitem.quantity)}</div>
             </div>
             <div className='cart_modal_item_details'>
                 {cartitem.size.title}
