@@ -308,16 +308,26 @@ const menuitemSlice=createSlice({
           })
           .addCase(addMenuitem.fulfilled, (state, action) => {
               console.log(action.payload)
-              state.menuitems.status = "idle"
-              state.menuitems.array = []
+              state.menuitems.status = "succeeded"
+              state.menuitems.array = [
+                  ... state.menuitems.array,
+                  action.payload
+              ]
           })
           .addCase(deleteMenuitem.fulfilled, (state, action) => {
-              state.menuitems.status = "idle"
-              state.menuitems.array = []
+              console.log(action.payload)
+              state.menuitems.status = "succeeded"
+              state.menuitems.array = state.menuitems.array.filter(m=>m.id !== parseInt(action.payload))
+
           })
           .addCase(updateMenuitem.fulfilled, (state, action) => {
-              state.menuitems.status = "idle"
-              state.menuitems.array = []
+              state.menuitems.status = "succeeded"
+              state.menuitems.array = state.menuitems.array.map(m=>{
+                  if(m.id===action.payload.id)
+                      return action.payload
+                  return m;
+              })
+
           })
           .addCase(uploadImage.fulfilled, (state, action) => {
               state.menuitems.status = "idle"

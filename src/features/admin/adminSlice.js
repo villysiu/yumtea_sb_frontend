@@ -46,7 +46,7 @@ export const deleteMenuitem = createAsyncThunk(
                 console.log(response)
                 return response
             }
-            return null
+            return id
 
 
         }

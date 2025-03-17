@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import {getMenuitemById, sugarMap} from '../menuitem/menuitemSlice'
-import { homeLink, USDollar } from "../../app/global"
+import {apiLink, homeLink, USDollar} from "../../app/global"
 
 const CartSummaryLineItem = ({cartItem})=>{
 
@@ -13,7 +13,7 @@ console.log(menuitem)
             <div className='summary_lineitem_details'>
                 <div className='me-4 cart_button_wrapper'>
 
-                    <img src={`${homeLink}/menuitem/${menuitem.imageUrl}`} alt={menuitem.title} className='summary_lineitem_img' />
+                    <img src={`${apiLink}/images/${menuitem.imageUrl}`} alt={menuitem.title} className='summary_lineitem_img' />
                     <div className='cartitem_count'> {cartItem.quantity} </div>
                 </div>
                 <div>

@@ -1,4 +1,4 @@
-import { homeLink } from "../../app/global"
+import {apiLink, homeLink} from "../../app/global"
 import { Link } from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector, useDispatch } from "react-redux"
@@ -28,7 +28,7 @@ const SingleOrderItem = ({item}) =>{
 
              {/*<Link to={`${homeLink}/menuitems/${item.menuitem_id}`} className='orderhistory_order_img_container'> */}
             <div className='orderhistory_order_img_container' onClick={handleClick}>
-                <img src={`${homeLink}/menuitem/${menuitem.imageUrl}`} className="orderhistory_order_img" alt="{item.title}"></img>
+                <img src={`${apiLink}/images/${menuitem.imageUrl}`} className="orderhistory_order_img" alt="{item.title}"></img>
                 <div className="qty_circle">{item.quantity}</div>
             </div>
             {/*/!* </Link> *!/*/}

@@ -51,16 +51,16 @@ const EditImage =({menuitem}) =>{
                 </Modal.Footer>
             </Modal>
 
-        <div className="editImg_wrapper" onClick={()=>setShow(true)}>
-            <img src={`${apiLink}/images/${menuitem.imageUrl}`}
-                 className="menuitem_img "
-                 alt={menuitem.title}
+            <div className="editImg_wrapper" onClick={()=>setShow(true)}>
+                <img src={`${apiLink}/images/${menuitem.imageUrl}`}
+                     className="menuitem_img "
+                     alt={menuitem.title}
 
-            ></img>
-            <PencilSquare size={27} className="editImg"/>
+                ></img>
+                <PencilSquare size={27} className="editImg"/>
 
-        </div>
-            </>
+            </div>
+        </>
     )
 }
 export default EditImage

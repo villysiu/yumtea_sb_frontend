@@ -1,7 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {loginUser, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
-import {loginAdmin, logoutAdmin} from "../admin/adminSlice";
+import {
+    addMenuitem,
+    deleteImage,
+    deleteMenuitem,
+    loginAdmin,
+    logoutAdmin,
+    updateMenuitem,
+    uploadImage
+} from "../admin/adminSlice";
 
 
 const messageSlice = createSlice({
@@ -26,25 +34,7 @@ const messageSlice = createSlice({
     extraReducers(builder) {
         builder
 
-        // .addCase(fetchCategories.rejected, (state, action) => {
-        //     state.message_arr.push(
-        //         {
-        //             status: true,
-        //             type: "danger",
-        //             content: `${action.error.name}: ${action.error.message} categories from API.`
-        //         }
-        //     )
 
-        // })
-        // .addCase(fetchMenuitems.rejected, (state, action) => {
-        //     state.message_arr.push(
-        //         {
-        //             status: true,
-        //             type: "danger",
-        //             content: `${action.error.name}: ${action.error.message} from API.`
-        //         }
-        //     )
-        // })
         .addCase(loginUser.fulfilled, (state, action) => {
             state.messages.push(
                 {
@@ -136,7 +126,6 @@ const messageSlice = createSlice({
 
             })
             .addCase(updatePassword.rejected, (state, action) => {
-                console.log(action.payload)
                 state.messages.push(
                     {
                         type: "danger",
@@ -145,7 +134,43 @@ const messageSlice = createSlice({
                 )
 
             })
+            .addCase(addMenuitem.fulfilled, (state, action) => {
+                state.messages.push({
+                    type: "success",
+                    content: "Added new item."
 
+                })
+            })
+            .addCase(deleteMenuitem.fulfilled, (state, action) => {
+                state.messages.push(
+                    {
+                        type: "success",
+                        content: "Item removed."
+                    }
+                )
+            })
+            .addCase(updateMenuitem.fulfilled, (state, action) => {
+                state.messages.push({
+                    type: "success",
+                    content: "Updated item."
+
+                })
+            })
+            .addCase(uploadImage.fulfilled, (state, action) => {
+                state.messages.push({
+                    type: "success",
+                    content: "Updated image."
+
+                })
+            })
+            .addCase(deleteImage.fulfilled, (state, action) => {
+                state.messages.push({
+                    type: "success",
+                    content: "Deleted image."
+
+                })
+            })
+    //
 
     }
 })
