@@ -11,6 +11,7 @@ import {useSelector} from 'react-redux'
 const CartModal = ({setCartShow}) =>{
     console.log("in cart modal")
     const {carts} = useSelector(state=>state.cart)
+    const [remove, setRemove] = useState(null)
 
     if(carts.length === 0){
         return <EmptyCart />
@@ -26,7 +27,7 @@ const CartModal = ({setCartShow}) =>{
                 {
                     carts.map((cartitem)=>{
                         return(
-                            <CartModalItem key={cartitem.id} cartitem={cartitem}  setCartShow={setCartShow} />
+                            <CartModalItem key={cartitem.id} cartitem={cartitem}  setCartShow={setCartShow} remove={remove} setRemove={setRemove} />
                         )
                     })
                 }

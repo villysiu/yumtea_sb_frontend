@@ -11,7 +11,7 @@ import {
 import {USDollar} from '../../app/global'
 import CartModalRemove from './CartModalRemove'
 
-const CartModalItem = ({cartitem, setCartShow}) =>{
+const CartModalItem = ({cartitem, setCartShow, remove, setRemove}) =>{
 
     // console.log(cartitem)
     // {
@@ -43,7 +43,7 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
     const menuitem = useSelector(state => getMenuitemById(state, cartitem.menuitem.id))
     const milk = useSelector(state => getMilkById(state, cartitem.milk.id))
     const size = useSelector((state) => getSizeById(state, cartitem.size.id))
-    // const cartitemRef = useRef();
+
     const removeRef = useRef();
 
     const dispatch = useDispatch()
@@ -75,9 +75,9 @@ const CartModalItem = ({cartitem, setCartShow}) =>{
                 <div className='cart_modal_item_qty'>{cartitem.quantity}</div>
                 <div className='cart_modal_item_title' >{cartitem.menuitem.title}</div>
                 <div ref={removeRef}>
-                    <CartModalRemove cartitem={cartitem}/>
+                    <CartModalRemove cartitem={cartitem} remove={remove} setRemove={setRemove}/>
                 </div>
-                    <div className='cart_modal_item_price'>{USDollar.format(cartitem.price * cartitem.quantity)}</div>
+                <div className='cart_modal_item_price'>{USDollar.format(cartitem.price * cartitem.quantity)}</div>
             </div>
             <div className='cart_modal_item_details'>
                 {cartitem.size.title}

@@ -6,30 +6,30 @@ import {Button} from 'react-bootstrap'
 import {removeItem, removeItemFromCart} from './cartSlice'
 const CartModalRemove = forwardRef(
 //     function CartModalRemove({menuitem_title, pk, removeRef}){
-    function CartModalItemRemove({cartitem}){
+    function CartModalItemRemove({cartitem, remove, setRemove}){
 
         const dispatch = useDispatch()
-        const [confirm, setConfirm] = useState(false)
 
-        const handleConfirm = () =>{
+
+        const handleDelete = () =>{
             console.log("inner remove button")
 
             dispatch(removeItemFromCart(cartitem.id))
 
-            setConfirm(false);
-            
+            // setConfirm(false);
+            setRemove(null)
         }
 
 
         return (
             <>
-                {confirm &&
-                    <div className='remove'  > 
-                        <Button className='oblong_button remove_button me-2' onClick={handleConfirm}>Remove {cartitem.menuitem.title}? </Button>
-                        <Button className='oblong_button remove_button' onClick={()=>setConfirm(false)}>Cancel</Button>
+                {remove && remove === cartitem.id &&
+                    <div className='remove'>
+                        <Button className='oblong_button remove_button me-2' onClick={handleDelete}>Remove {cartitem.menuitem.title}? </Button>
+                        <Button className='oblong_button remove_button' onClick={()=>setRemove(null)}>Cancel</Button>
                     </div>
                 }
-                <div className='cart_modal_item_remove' onClick={()=>setConfirm(true)}>
+                <div className='cart_modal_item_remove' onClick={()=>setRemove(cartitem.id)}>
                     <Trash />
                 </div>
             </>

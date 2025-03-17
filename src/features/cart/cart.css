@@ -1,21 +1,18 @@
 .cart_button_wrapper{
     position: relative;
-
     cursor: pointer;
-    /*background-color: transparent;*/
 
 }
 
 .cart_icon {
-    font-size: 3rem;
-    /* color: rgb(191, 183, 160); */
+
     color: var(--gold-text-color);
 
 }
 .cartitem_count{
     position: absolute;
     border: 1px gray solid;
-    top: -9px;
+    top: -0.5rem;
     right: -9px;
     border-radius: 25px;
     width: 2rem;
@@ -139,6 +136,9 @@
     width: 10%;
     text-align: right;
     cursor: pointer;
+}
+.cart_modal_item_remove:hover{
+    color: red;
 }
 .cart_modal_item_price {
     width: 25%;
