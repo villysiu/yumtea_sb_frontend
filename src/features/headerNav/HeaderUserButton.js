@@ -54,7 +54,7 @@ const HeaderUserButton =() =>{
                         </div>
                     </Link>
                     {currentUser && currentUser.isAdmin &&
-                        <Link to={`${homeLink}/admin/hub`} className='user_modal_link' onClick={handleToggle} >
+                        <Link to={`${homeLink}/admin/menuitems`} className='user_modal_link' onClick={handleToggle} >
                             <div className='user_modal_item'>
                                 Admin Panel
                             </div>

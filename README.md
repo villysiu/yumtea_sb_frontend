@@ -93,5 +93,20 @@ The React development server should open the application in your default web bro
 - Shows total including gratuity and tax
 - Upon successful checkout, shopping cart is emptied
 
-## Coming Soon
-`/admin`
+## Admin Only ##
+Only Authenticated Admin with `ADMIN_ROLE` can access 
+`/admin/accounts`
+ - can delete user account
+ - can assign new `ADMIN_ROLE`
+ - can search for accounts by name or email, or id
+
+`/admin/menuitems`
+ - can add new menuitem
+ - can edit menuitem
+ - can delete menuitem
+ - can search for menuitem by name or category,
+
+`/admin/images`
+- can add new image 
+- can edit image
+- can delete image
