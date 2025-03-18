@@ -111,7 +111,7 @@ export const removeItemFromCart = createAsyncThunk(
             if(!response.ok)
                 throw new Error(`${response.status} ${response.statusText}`)
 
-            return null;
+            return cartitemId;
 
         } 
         catch(error){
@@ -191,7 +191,8 @@ const cartSlice=createSlice({
         })
         .addCase(removeItemFromCart.fulfilled, (state, action) => {
             state.removeStatus = 'succeeded'
-            state.fetchCartStatus = "idle"
+            state.carts = state.carts.filter(c=>c.id !== action.payload)
+            // state.fetchCartStatus = "idle"
         })
         .addCase(removeItemFromCart.rejected, (state, action) => {
             state.removeStatus = 'failed'
