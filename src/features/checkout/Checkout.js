@@ -10,7 +10,7 @@ import { useEffect, useState } from "react"
 import Tip from "./Tip"
 import PlaceOrderButton from './PlaceOrderButton'
 import CartSummaryLineItem from "./CartSummaryLineItem";
-import {calculateTax} from "../taxRate/taxRateSlice";
+import {calculateTax} from "../order/orderSlice";
 import BackToMenuButton from "./BackToMenuButton";
 
 const Checkout = () => {

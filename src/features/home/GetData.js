@@ -6,7 +6,7 @@ import GetCarts from '../cart/GetCarts'
 import GetUser from '../user/GetUser'
 import Spinner from 'react-bootstrap/Spinner';
 import { Outlet } from 'react-router-dom';
-import GetTaxRate from "../taxRate/GetTaxRate";
+import GetTaxRate from "../order/GetTaxRate";
 
 const GetData = () =>{
     console.log("ENTER PAGE")

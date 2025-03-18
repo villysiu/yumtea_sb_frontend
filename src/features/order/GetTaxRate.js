@@ -1,11 +1,13 @@
 import {useEffect} from "react";
-import {fetchTaxRate} from "./taxRateSlice";
+
 import {useDispatch, useSelector} from "react-redux";
+import {fetchTaxRate} from "./orderSlice";
+
 
 const GetTaxRate = () => {
     const zipcode = "WA";
     const dispatch = useDispatch();
-    const {fetchTaxRateStatus} = useSelector(state => state.taxRate)
+    const {fetchTaxRateStatus} = useSelector(state => state.order)
 
     useEffect(() => {
         if(fetchTaxRateStatus === "idle")

@@ -165,6 +165,7 @@ export const updatePassword = createAsyncThunk(
         }
     }
 )
+
 const userSlice=createSlice({
     name: 'user',
     initialState: {

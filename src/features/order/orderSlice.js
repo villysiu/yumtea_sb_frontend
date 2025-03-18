@@ -53,6 +53,25 @@ export const PlaceOrder=createAsyncThunk(
         }
     }
 )
+export const fetchTaxRate = createAsyncThunk(
+    'order/fetchTaxRate',
+    async(zip, {rejectWithValue}) => {
+        try{
+            const response = await fetch(`${apiLink}/taxes/${zip}`, {
+                method: "GET",
+                // credential: "include"
+            })
+            if(!response.ok)
+                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+
+
+            return await response.json();
+        }
+        catch(error){
+            rejectWithValue(error.message);
+        }
+    }
+)
 
 const orderSlice=createSlice({
     name: 'order',
@@ -61,6 +80,9 @@ const orderSlice=createSlice({
         status: 'idle',
         // newestOrder: null,
         checkoutStatus: 'idle',
+
+        taxRate: 0.0,
+        fetchTaxRateStatus: 'idle'
     },
     reducers: {
         // clearorder(state, action){
@@ -105,6 +127,17 @@ const orderSlice=createSlice({
               state.status ='idle'
               state.checkoutStatus = 'idle'
           })
+
+          .addCase(fetchTaxRate.pending, (state, action) => {
+              state.fetchTaxRateStatus = 'loading'
+          })
+          .addCase(fetchTaxRate.fulfilled, (state, action) => {
+              state.fetchTaxRateStatus = 'succeeded'
+              state.taxRate = action.payload;
+          })
+          .addCase(fetchTaxRate.rejected, (state, action) => {
+              state.fetchTaxRateStatus = 'failed'
+          })
     }
 })
 export const { resetOrderStatus } = orderSlice.actions
@@ -127,4 +160,7 @@ export const getOrders = createSelector(
         // return orders
     }
 )
+export const calculateTax = (state, subtotal) =>{
+    return subtotal * state.taxRate.taxRate / 100;
+}
 
