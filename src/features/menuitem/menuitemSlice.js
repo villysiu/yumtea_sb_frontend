@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import {addMenuitem, deleteImage, deleteMenuitem, updateMenuitem, uploadImage} from "../admin/adminSlice";
+import {addMenuitem, deleteImage, deleteMenuitem, toggleActive, updateMenuitem, uploadImage} from "../admin/adminSlice";
 
 export const fetchCategories=createAsyncThunk(
     'menuitem/fetchCategories',
@@ -339,6 +339,16 @@ const menuitemSlice=createSlice({
               state.menuitems.status = "idle"
               state.menuitems.array = []
           })
+          .addCase(toggleActive.fulfilled, (state, action) => {
+              state.menuitems.array = state.menuitems.array.map(m=>{
+                  if(m.id===action.payload) {
+                      m.active = !m.active;
+                  }
+                  return m;
+              })
+
+          })
+
     }
 })
 
@@ -379,7 +389,7 @@ const selectCategoryId = (state, category_id) => category_id;
 export const getMenuitemsByCategoryId = createSelector(
     [selectMenuitems, selectCategoryId],
     (menuitems, categoryId) => {
-        return menuitems.filter(menuitem=>menuitem.category.id === categoryId)
+        return menuitems.filter(menuitem=>menuitem.category.id === categoryId && menuitem.active===true)
     }
 )
 

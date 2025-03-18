@@ -7,6 +7,7 @@ import AddMenuitemButton from "./AddMenuitemButton";
 import EditMenuitemButton from "./EditMenuitemButton";
 import DeleteMenuitemButton from "./DeleteMenuitemButton";
 import SearchMenuitem from "./SearchMenuitem";
+import ActiveCheckbox from "./ActiveCheckbox";
 
 const ManageMenuitem = ({setChoice}) =>{
     // const {array, status} = useSelector(state=>state.menuitem.menuitems)
@@ -36,8 +37,9 @@ const ManageMenuitem = ({setChoice}) =>{
 
         <div className="manage_list">
             <Row className="manage_list_title">
+                <Col xs={1}>Active</Col>
                 <Col xs={1}>Id</Col>
-                <Col xs={4}>Name</Col>
+                <Col xs={3}>Name</Col>
                 <Col xs={1}>Price</Col>
                 <Col xs={2}>Category</Col>
                 <Col xs={1}>Milk</Col>
@@ -51,8 +53,11 @@ const ManageMenuitem = ({setChoice}) =>{
                 menuitems.map(menuitem => {
                     return (
                         <Row className="manage_list_row" key={menuitem.id} >
+                            <Col xs={1}>
+                                <ActiveCheckbox menuitem={menuitem} />
+                            </Col>
                             <Col xs={1}>{menuitem.id}</Col>
-                            <Col xs={4}>{menuitem.title}</Col>
+                            <Col xs={3}>{menuitem.title}</Col>
                             <Col xs={1}>{menuitem.price}</Col>
                             <Col xs={2}>{menuitem.category.title}</Col>
                             <Col xs={1}>{menuitem.milk.title}</Col>
@@ -60,7 +65,8 @@ const ManageMenuitem = ({setChoice}) =>{
                             <Col xs={1}>{menuitem.temperature}</Col>
                             <Col xs={1} >
                                 <EditMenuitemButton menuitem={menuitem} />
-                                <DeleteMenuitemButton menuitem={menuitem}  />
+
+                                {/*<DeleteMenuitemButton menuitem={menuitem}  />*/}
                             </Col>
                         </Row>
                     )

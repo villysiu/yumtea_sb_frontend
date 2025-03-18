@@ -151,6 +151,32 @@ export const deleteImage = createAsyncThunk(
 
     }
 )
+export const toggleActive = createAsyncThunk(
+    'admin/toggleActive',
+    async (id,{rejectWithValue}) => {
+
+        try {
+            const response=await fetch(`${apiLink}/menuitem/toggleActive/${id}`, {
+                method: "PATCH",
+                credentials: 'include'
+            })
+
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error toggling visibility:", errorText);
+                return rejectWithValue(errorText);
+            }
+
+           return id
+
+        }
+        catch(error){
+            throw rejectWithValue(error.message);
+
+        }
+
+    }
+)
 
 
 const adminSlice=createSlice({
@@ -159,8 +185,8 @@ const adminSlice=createSlice({
         addMenuitemStatus: 'idle',
         deleteMenuitemStatus: 'idle',
         updateMenuitemStatus: 'idle',
-        updateImgStatus: 'idle'
-
+        updateImgStatus: 'idle',
+        toggleVisibilityStatus: 'idle'
     },
     reducers: {
 
@@ -222,6 +248,18 @@ const adminSlice=createSlice({
             })
             .addCase(deleteImage.rejected, (state, action) => {
                 state.updateImgStatus = 'failed';
+            })
+
+            .addCase(toggleActive.pending, (state, action) => {
+                state.toggleVisibilityStatus = 'loading'
+            })
+            .addCase(toggleActive.fulfilled, (state, action) => {
+
+                state.toggleVisibilityStatus = 'succeeded'
+                // "blob:http://127.0.0.1:8001/be663c6a-d6d2-42be-a5cf-a1b30f6bb585"
+            })
+            .addCase(toggleActive.rejected, (state, action) => {
+                state.toggleVisibilityStatus = 'failed';
             })
 
     }
