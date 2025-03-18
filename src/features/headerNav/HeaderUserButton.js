@@ -1,5 +1,5 @@
 import { PersonCircle } from "react-bootstrap-icons";
-import { Link } from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import {homeLink} from '../../app/global.js'
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
@@ -10,7 +10,7 @@ const HeaderUserButton =() =>{
 
     const {currentUser, fetchUserStatus, loginStatus, logoutStatus} = useSelector(state => state.user)
     const [show, setShow] = useState(false)
-
+    const location = useLocation()
     console.log(currentUser)
 
     // Handle dropdown open
@@ -42,19 +42,19 @@ const HeaderUserButton =() =>{
                 <Modal show={show} onHide={()=>setShow(false)}
                        dialogClassName='user_modal'
                     >
-                    <Link to={`${homeLink}/secure/account`} className="user_modal_link" onClick={handleToggle}>
+                    <Link to="/secure/account"  state={location.pathname} className="user_modal_link" onClick={handleToggle}>
                         <div className="user_modal_item top">
                             Account
                         </div>
                     </Link>
 
-                    <Link to={`${homeLink}/secure/orders`}  className="user_modal_link" onClick={handleToggle}>
+                    <Link to="secure/orders"  state={location.pathname} className="user_modal_link" onClick={handleToggle}>
                         <div className="user_modal_item">
                             Order History
                         </div>
                     </Link>
                     {currentUser && currentUser.isAdmin &&
-                        <Link to={`${homeLink}/admin/menuitems`} className='user_modal_link' onClick={handleToggle} >
+                        <Link to="/admin/menuitems" state={location.pathname} className='user_modal_link' onClick={handleToggle} >
                             <div className='user_modal_item'>
                                 Admin Panel
                             </div>

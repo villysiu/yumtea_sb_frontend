@@ -4,11 +4,8 @@ import {homeLink} from '../../app/global.js'
 const HeaderVisitButton = () =>{
     const location = useLocation()
 
-            // else if(location.pathname === '/collection')
-            //     setCurrent("collection")
-
     return(
-        <Link to={`${homeLink}/visit-taste`} 
+        <Link to="/visit-taste" state={location.pathname}
             className={`header_buttons me-3 ${location.pathname === '/visit-taste' ? 'active' : ""}`}
         >
             Visit

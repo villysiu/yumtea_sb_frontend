@@ -4,31 +4,24 @@ import { Button } from "react-bootstrap";
 import { homeLink } from "../../app/global";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {clearNewestOrder} from "./orderSlice"
+import {resetOrderStatus} from "./orderSlice"
 
 
 const OrderSuccess = () =>{
 
     const location = useLocation();
-    const {newestOrder} = useSelector(state=>state.order)
-    // const orderDate = useSelector(state => convertTimestampToDatetime(state))
+    const {checkoutStatus, orders} = useSelector(state=>state.order)
     const dispatch = useDispatch()
     const [seconds, setSeconds] = useState(10);
 
     const handleClick = () =>{
-        dispatch(clearNewestOrder())
+        dispatch(resetOrderStatus())
     }
-    useEffect(()=>{
-        if(newestOrder !== null){
-            const timer = setTimeout(()=>{
-                    dispatch(clearNewestOrder())
-                }, 10000
 
-            )
-            return () => clearTimeout(timer);
-        }
-    }, [newestOrder, dispatch])
+
     useEffect(() => {
+        if(seconds === 0)
+            dispatch(resetOrderStatus())
         if (seconds > 0) {
             const timer = setInterval(() => {
                 setSeconds((prevSeconds) => prevSeconds - 1);
@@ -41,25 +34,28 @@ const OrderSuccess = () =>{
 
 
     // prohibited direct access this page
-    if(newestOrder === null) {
-        return <Navigate to={`../../collection`} />
+    if(checkoutStatus === 'succeeded') {
+
+
+        return (
+            <div className='order_success'>
+                <div><b>Thank you for your purchase.</b></div>
+                <div>order number: {orders[0].id}</div>
+                <div>order date: {orders[0].purchaseDate.slice(0, 10)}</div>
+                <div className='mt-5'>
+                    <Link to={`/collection`} state={location.pathname}>
+                        <Button className='continue_button' onClick={handleClick}>Continue Shopping</Button>
+                    </Link>
+                </div>
+                <div>
+                    <p>Redirecting in {seconds} seconds</p>
+                </div>
+
+            </div>
+        )
     }
 
-    return (
-        <div className='order_success'>
-            <div><b>Thank you for your purchase.</b></div>
-            <div>order number: {newestOrder.id}</div>
-            <div>order date: {newestOrder.purchaseDate.slice(0, 10)}</div>
-            <div className='mt-5'>
-                <Link to={`../../collection`} state={location.pathname} >
-                    <Button className='continue_button' onClick={handleClick} >Continue Shopping</Button>
-                </Link>
-            </div>
-            <div>
-                <p>Redirecting in {seconds} seconds</p>
-            </div>
+    return <Navigate to={`/collection`} />
 
-        </div>
-    )
 }
 export default OrderSuccess

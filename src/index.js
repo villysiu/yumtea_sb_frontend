@@ -107,28 +107,28 @@ const router = createBrowserRouter([
                                 path: "/secure/ordersuccess",
                                 element: <OrderSuccess />
                             },
-                            {
-                                path: "/secure/reservations/",
-                                element: <ReservationsApp />,
-                                children: [
-                                    {
-                                        path: "/secure/reservations/",
-                                        element: <Reservations />,
-                                    },
-                                    {
-                                        path: "/secure/reservations/reserve",
-                                        element: <Reserve />
-                                    },
-                                    {
-                                        path: "/secure/reservations/:resId/update",
-                                        element: <UpdateReservation />,
-                                    },
-                                    {
-                                        path: "/secure/reservations/success",
-                                        element: <ReservationSuccess />
-                                    },
-                                ]
-                            },
+                            // {
+                            //     path: "/secure/reservations/",
+                            //     element: <ReservationsApp />,
+                            //     children: [
+                            //         {
+                            //             path: "/secure/reservations/",
+                            //             element: <Reservations />,
+                            //         },
+                            //         {
+                            //             path: "/secure/reservations/reserve",
+                            //             element: <Reserve />
+                            //         },
+                            //         {
+                            //             path: "/secure/reservations/:resId/update",
+                            //             element: <UpdateReservation />,
+                            //         },
+                            //         {
+                            //             path: "/secure/reservations/success",
+                            //             element: <ReservationSuccess />
+                            //         },
+                            //     ]
+                            // },
                         ]
                     },
                 ]

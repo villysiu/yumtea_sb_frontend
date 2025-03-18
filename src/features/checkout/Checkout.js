@@ -1,6 +1,6 @@
 import './checkout.css'
 
-import { useLocation, useNavigate } from "react-router-dom"
+import {Navigate, useLocation, useNavigate} from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
 import { getSubtotal } from "../cart/cartSlice"
@@ -8,7 +8,7 @@ import { getSubtotal } from "../cart/cartSlice"
 
 import { useEffect, useState } from "react"
 import Tip from "./Tip"
-import PlaceOrderButton from '../order/PlaceOrderButton'
+import PlaceOrderButton from './PlaceOrderButton'
 import CartSummaryLineItem from "./CartSummaryLineItem";
 import {calculateTax} from "../taxRate/taxRateSlice";
 import BackToMenuButton from "./BackToMenuButton";
@@ -24,23 +24,14 @@ const Checkout = () => {
     const {subtotal, count} = useSelector(state => getSubtotal(state))
     const tax = useSelector(state => calculateTax(state, subtotal))
     const [tip, setTip] = useState("0");
+    const {checkoutStatus} = useSelector(state=>state.order)
 
-    const {newestOrder} = useSelector(state=>state.order)
-
-    useEffect(()=>{
-        console.log(newestOrder)
-        if(newestOrder !== null){
-            navigate('/secure/ordersuccess')
-        }
-
-        // restrict access from URL
-        // else if(checkout_status === 'failed'
-        //     //  || cart_status==='idle'
-        //     ){
-        //     navigate(`/cart` ) //dont have a cart page!!!
-        // }
-
-    },[newestOrder, navigate])
+console.log(checkoutStatus)
+    if(checkoutStatus === 'failed') {
+        return <Navigate to="/secure/checkout" />
+    }
+    if(checkoutStatus === "succeeded")
+        return <Navigate to="/secure/ordersuccess" />
 
     if(carts.length === 0)
         return(

@@ -59,18 +59,22 @@ const orderSlice=createSlice({
     initialState: {
         orders: [],
         status: 'idle',
-        newestOrder: null,
+        // newestOrder: null,
         checkoutStatus: 'idle',
     },
     reducers: {
         // clearorder(state, action){
         //     state.checkoutStatus="idle"
         // }
-
-        clearNewestOrder(state){
-            state.newestOrder = null;
-            state.checkoutStatus = 'idle';
+        //
+        // clearNewestOrder(state){
+        //     state.newestOrder = null;
+        //     state.checkoutStatus = 'idle';
+        // }
+        resetOrderStatus(state){
+            state.checkoutStatus = 'idle'
         }
+
 
     },
     extraReducers(builder) {
@@ -80,7 +84,7 @@ const orderSlice=createSlice({
         })
         .addCase(fetchCurrentUserOrders.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            state.orders = action.payload
+            state.orders = action.payload.reverse()
         })
         .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
             state.status = 'failed'
@@ -91,14 +95,7 @@ const orderSlice=createSlice({
         })
         .addCase(PlaceOrder.fulfilled, (state, action) => {
             state.checkoutStatus = 'succeeded'
-
-            state.newestOrder = {
-                ...action.payload,
-                // formatedDate: format(new Date(action.payload.purchaseDate), 'MM/dd/yyyy hh:mm:ss a')
-            }
-
-            // reset orders status to fetch  updated orders list from api
-            state.status = "idle";
+            state.orders = [action.payload, ...state.orders]
         })
         .addCase(PlaceOrder.rejected, (state, action) => {
             state.checkoutStatus = 'failed'
@@ -106,12 +103,11 @@ const orderSlice=createSlice({
           .addCase(logoutUser.fulfilled, (state, action) => {
               state.orders = []
               state.status ='idle'
-              state.newestOrder = null
               state.checkoutStatus = 'idle'
           })
     }
 })
-export const { clearNewestOrder } = orderSlice.actions
+export const { resetOrderStatus } = orderSlice.actions
 export default orderSlice.reducer
 
 const selectOrders = (state) => state.order.orders;

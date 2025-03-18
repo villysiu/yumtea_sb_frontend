@@ -1,7 +1,7 @@
 import '../../App.css';
 import React, {useEffect} from 'react';
 
-import { Outlet } from 'react-router-dom';
+import {Outlet, useLocation} from 'react-router-dom';
 // import Messages from './features/message/Messages';
 
 import Header from '../headerNav/Header';
@@ -12,6 +12,7 @@ import {Modal} from 'react-bootstrap'
 import {triggerCustomizeModal} from '../menuitem/menuitemSlice'
 import CustomizeModal from '../customise/CustomizeModal'
 import Messages from "../message/Messages";
+import {resetOrderStatus} from "../order/orderSlice";
 
 function Home() {
   console.log("in APP")
@@ -19,12 +20,22 @@ function Home() {
   const {itemToCustomize} = useSelector(state=>state.menuitem)
   // console.log(task)
   const dispatch = useDispatch()
+    const location = useLocation()
+    console.log(location)
 
   useEffect(()=>{
     if(itemToCustomize !== null)
       setShow(true)
     
   }, [itemToCustomize])
+
+    useEffect(() => {
+        if(location.state === '/secure/ordersuccess'){
+            console.log("reset order status")
+            dispatch(resetOrderStatus())
+        }
+
+    }, [location]);
 
   const handleHide = () =>{
     setShow(false)

@@ -1,8 +1,8 @@
-import './order.css'
+import '../order/order.css'
 import { Button, Spinner } from "react-bootstrap"
-import {PlaceOrder} from './orderSlice'
+import {PlaceOrder} from '../order/orderSlice'
 import {useDispatch, useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 import {useEffect } from 'react'
 const PlaceOrderButton = ({tip}) =>{
     const dispatch = useDispatch()
@@ -19,6 +19,7 @@ const PlaceOrderButton = ({tip}) =>{
             "state": "WA"
         }))
     }
+
     if(checkoutStatus === 'loading'){
         return(
             <div className="place_order_wrapper"> 

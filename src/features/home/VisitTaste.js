@@ -2,8 +2,10 @@ import MakeReservationButton from "../reservation/MakeReservationButton"
 import {homeLink} from "../../app/global";
 import ContactUs from "../support/ContactUs";
 import Reservations from "../reservation/Reservations";
+import {useLocation} from "react-router-dom";
 
 const VisitTaste = () =>{
+
     return(
         <div>
             <div className="location_bg_wrapper">
