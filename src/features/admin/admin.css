@@ -76,9 +76,10 @@
     position: relative;
 
 }
-.manage_list_row:hover {
+.manage_list_row:hover, .manage_list_row.active {
     background-color: #f1f1f1;
 }
+
 .manage_list_dropdown{
     margin: 0 1rem;
     background-color: #f1f1f1;

@@ -16,9 +16,15 @@ import {USDollar} from "../../../app/global";
 const ManagePurchases = () =>{
     const dispatch = useDispatch()
     const [purchases, setPurchases] = useState([])
-    const [dropdown, showDropdown] = useState(null)
+    const [dropdown, setDropdown] = useState(null)
     const {fetchAllOrdersStatus} = useSelector(state=>state.order)
 
+    const handleDropdown = (id) =>{
+        if(dropdown === null || dropdown !== id)
+            setDropdown(id)
+        else
+            setDropdown(null)
+    }
     useEffect(() => {
         if(fetchAllOrdersStatus === "idle")
             dispatch(fetchAllOrders())
@@ -51,7 +57,7 @@ const ManagePurchases = () =>{
                         return (
 
 <>
-                                <Row className="manage_list_row mx-0" key={p.id} onClick={()=>showDropdown(p.id)}>
+                                <Row className={dropdown===p.id ? "manage_list_row active mx-0 ": "manage_list_row  mx-0 "} key={p.id} onClick={()=>handleDropdown(p.id)}>
                                     <Col xs={1}>{p.id}</Col>
                                     <Col xs={3}>{p.purchaseDate.slice(0,10)}</Col>
                                     <Col >{p.account.email}</Col>
