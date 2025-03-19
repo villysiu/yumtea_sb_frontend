@@ -72,14 +72,57 @@ export const fetchTaxRate = createAsyncThunk(
         }
     }
 )
+export const fetchAllOrders=createAsyncThunk(
+    'order/fetchAllOrders',
+    async (_, {rejectWithValue}) => {
+        console.log("fetching orders")
+        try {
+            const response=await fetch(`${apiLink}/purchases/all`, {
+                method: "GET",
+                credentials: "include"
+            })
+
+            if(!response.ok) {
+                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+            }
+            return await response.json()
+        }
+        catch(error){
+            return rejectWithValue(error.message);
+        }
+    }
+)
+export const deleteOrder=createAsyncThunk(
+    'order/deleteOrder',
+    async (id, {rejectWithValue}) => {
+        console.log("delete orders" + id)
+        try {
+            const response=await fetch(`${apiLink}/purchase/${id}`, {
+                method: "DELETE",
+                credentials: "include"
+            })
+
+            if(!response.ok) {
+                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+            }
+            return id
+        }
+        catch(error){
+            return rejectWithValue(error.message);
+        }
+    }
+)
 
 const orderSlice=createSlice({
     name: 'order',
     initialState: {
         orders: [],
-        status: 'idle',
-        // newestOrder: null,
+        fetchOrdersStatus: 'idle',
+        allOrders: [],
+        fetchAllOrdersStatus: 'idle',
         checkoutStatus: 'idle',
+        deleteOrderStatus: 'idle',
+
 
         taxRate: 0.0,
         fetchTaxRateStatus: 'idle'
@@ -102,14 +145,14 @@ const orderSlice=createSlice({
     extraReducers(builder) {
       builder
         .addCase(fetchCurrentUserOrders.pending, (state, action) => {
-            state.status = 'loading'
+            state.fetchOrdersStatus = 'loading'
         })
         .addCase(fetchCurrentUserOrders.fulfilled, (state, action) => {
-            state.status = 'succeeded'
+            state.fetchOrdersStatus = 'succeeded'
             state.orders = action.payload.reverse()
         })
         .addCase(fetchCurrentUserOrders.rejected, (state, action) => {
-            state.status = 'failed'
+            state.fetchOrdersStatus = 'failed'
             // state.orders = []
         })
         .addCase(PlaceOrder.pending, (state, action) => {
@@ -124,7 +167,7 @@ const orderSlice=createSlice({
         })
           .addCase(logoutUser.fulfilled, (state, action) => {
               state.orders = []
-              state.status ='idle'
+              state.fetchOrdersStatus ='idle'
               state.checkoutStatus = 'idle'
           })
 
@@ -137,6 +180,28 @@ const orderSlice=createSlice({
           })
           .addCase(fetchTaxRate.rejected, (state, action) => {
               state.fetchTaxRateStatus = 'failed'
+          })
+          .addCase(fetchAllOrders.pending, (state, action) => {
+              state.fetchAllOrdersStatus = 'loading'
+          })
+          .addCase(fetchAllOrders.fulfilled, (state, action) => {
+              state.fetchAllOrdersStatus = 'succeeded'
+              state.allOrders = action.payload.reverse()
+          })
+          .addCase(fetchAllOrders.rejected, (state, action) => {
+              state.fetchAllOrdersStatus = 'failed'
+              // state.orders = []
+          })
+          .addCase(deleteOrder.pending, (state, action) => {
+              state.deleteOrderStatus = 'loading'
+          })
+          .addCase(deleteOrder.fulfilled, (state, action) => {
+              state.deleteOrderStatus = 'succeeded'
+              state.allOrders = state.allOrders.filter(o=>o.id!==action.payload)
+          })
+          .addCase(deleteOrder.rejected, (state, action) => {
+              state.deleteOrderStatus = 'failed'
+              // state.orders = []
           })
     }
 })
@@ -164,3 +229,16 @@ export const calculateTax = (state, subtotal) =>{
     return subtotal * state.taxRate.taxRate / 100;
 }
 
+const selectAllOrders = state => state.order.allOrders;
+const selectText = (state, text) => text
+
+export const searchAllOrders = createSelector(
+    [selectAllOrders, selectText],
+    (allOrders, text) => {
+        // if(text === "")
+            return allOrders
+
+        // const regex = new RegExp(text, "i");
+        // return allOrders.filter(a=>regex.test(regex.test(a.id)))
+    }
+)

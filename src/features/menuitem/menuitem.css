@@ -144,11 +144,18 @@
 
 .yellowbookmark {
     position: absolute;
-    top:-0.55rem;
-    left: 0;
+    top:0.25rem;
+    left: 45%;
     color: #d1c089;
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 3rem;
+    height: 3rem;
+}
+.yellowtext{
+    position: absolute;
+    top:1.1rem;
+    left: 10.85rem;
+    font-weight: bolder;
+
 }
 
 

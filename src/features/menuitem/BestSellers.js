@@ -25,9 +25,9 @@ const BestSellers = () =>{
 
                 <Row className='menuitem_row'>
                     {
-                        array.map((menuitem) => {
+                        array.map((menuitem, idx) => {
                             return (
-                                <SingleBestSeller key={menuitem.menuitemId} menuitemId={menuitem.menuitemId} />
+                                <SingleBestSeller key={menuitem.menuitemId} idx={idx} menuitemId={menuitem.menuitemId} />
                             )
                         })
                     }

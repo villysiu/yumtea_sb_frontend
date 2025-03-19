@@ -42,6 +42,7 @@ import ManageAccount from "./features/admin/account/ManageAccount";
 import ComingSoon from "./features/admin/ComingSoon";
 import ManageImage from "./features/admin/menuitem/ManageImage";
 import ManageCategory from "./features/admin/category/ManageCategory";
+import ManagePurchases from "./features/admin/purchases/ManagePurchases";
 
 const router = createBrowserRouter([
     {
@@ -152,6 +153,10 @@ const router = createBrowserRouter([
                     {
                         path: "/admin/accounts",
                         element: <ManageAccount />
+                    },
+                    {
+                        path: "/admin/purchases",
+                        element: <ManagePurchases />
                     },
                     {
                         path: "/admin/category",

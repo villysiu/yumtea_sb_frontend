@@ -12,20 +12,20 @@ const OrderHistory = () =>{
     const [show, setShow] = useState(null)
     const [days, setDays] =useState(3)
 
-    const ordersStatus = useSelector(state=>state.order.status)
+    const {fetchOrdersStatus} = useSelector(state=>state.order)
     const orders = useSelector(state =>getOrders(state, days))
    
     useEffect(()=>{
-        if(ordersStatus === 'idle')
+        if(fetchOrdersStatus === 'idle')
             dispatch(fetchCurrentUserOrders())
-    }, [ordersStatus, dispatch])
+    }, [fetchOrdersStatus, dispatch])
 
     useEffect(()=>{
         // close order details when filter option changed
         setShow(null)
     }, [days])
    
-    if(ordersStatus === 'loading' || ordersStatus === 'idle')
+    if(fetchOrdersStatus === 'loading' || fetchOrdersStatus === 'idle')
         return <Spinner />
     
 
