@@ -40,7 +40,7 @@ const ManagePurchases = () =>{
 
             {/*<AddMenuitemButton />*/}
 
-            <div key="title" className="manage_list">
+            <div className="manage_list">
                 <Row className="manage_list_title" key="title">
                     <Col xs={1}>Id</Col>
                     <Col xs={3}>Date</Col>

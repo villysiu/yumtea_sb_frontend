@@ -18,8 +18,8 @@ const SearchPurchase = ({setPurchases}) => {
             <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
 
                 <Col sm={6}>
-                    <Form.Control type="text" placeholder="Search by "
-                                  // value={search} onChange={e=>setSearch(e.target.value)}
+                    <Form.Control type="text" placeholder="Search by id, Email, Date or Menuitem"
+                        value={search} onChange={e=>setSearch(e.target.value)}
                     />
                 </Col>
                 <Col sm={2}>

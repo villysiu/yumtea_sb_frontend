@@ -63,7 +63,7 @@ const ManageMenuitem = ({setChoice}) =>{
                             <Col xs={1}>{menuitem.milk.title}</Col>
                             <Col xs={1}>{sugarAbbr.get(menuitem.sugar)}</Col>
                             <Col xs={1}>{menuitem.temperature}</Col>
-                            <Col xs={1} >
+                            <Col xs={1} className={"text-end"}>
                                 <EditMenuitemButton menuitem={menuitem} />
 
                                 {/*<DeleteMenuitemButton menuitem={menuitem}  />*/}

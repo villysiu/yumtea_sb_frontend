@@ -235,10 +235,19 @@ const selectText = (state, text) => text
 export const searchAllOrders = createSelector(
     [selectAllOrders, selectText],
     (allOrders, text) => {
-        // if(text === "")
+        console.log(text)
+        console.log(typeof text)
+        if(text === "")
             return allOrders
 
-        // const regex = new RegExp(text, "i");
-        // return allOrders.filter(a=>regex.test(regex.test(a.id)))
+        const regex = new RegExp(text, "i");
+        return allOrders.filter(o=>
+                regex.test(o.id) //serach by id
+                ||  regex.test(o.account.email)  //search by email
+                || regex.test(o.purchaseDate)
+                || o.purchaseLineitemList.some(pl => regex.test(pl.menuitem.title)) //search by menutitem
+
+
+        )
     }
 )
