@@ -13,6 +13,7 @@ import {triggerCustomizeModal} from '../menuitem/menuitemSlice'
 import CustomizeModal from '../customise/CustomizeModal'
 import Messages from "../message/Messages";
 import {resetOrderStatus} from "../order/orderSlice";
+import Spinner from "react-bootstrap/Spinner";
 
 function Home() {
   console.log("in APP")

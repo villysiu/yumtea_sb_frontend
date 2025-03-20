@@ -10,6 +10,7 @@ import {
     updateMenuitem,
     uploadImage
 } from "../admin/adminSlice";
+import {PlaceOrder} from "../order/orderSlice";
 
 
 const messageSlice = createSlice({
@@ -169,6 +170,12 @@ const messageSlice = createSlice({
                     content: "Deleted image."
 
                 })
+            })
+            .addCase(PlaceOrder.rejected, (state, action) => {
+                    state.messages.push({
+                        type: "danger",
+                        content: action.payload
+                    })
             })
     //
 

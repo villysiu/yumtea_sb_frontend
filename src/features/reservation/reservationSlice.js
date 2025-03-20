@@ -3,7 +3,7 @@ import { apiLink } from "../../app/global";
 
 export const makeReservation=createAsyncThunk(
     'reservation/makeReservation',
-    async (formData) => {
+    async (formData, {rejectWithValue}) => {
         console.log("Make Reservation")
         console.log(formData)
         try {
@@ -18,7 +18,9 @@ export const makeReservation=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             const data=await response.json()
             console.log(data)
@@ -33,13 +35,13 @@ export const makeReservation=createAsyncThunk(
             return data
         } 
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 export const fetchReservations=createAsyncThunk(
     'reservation/fetchReservations',
-    async () => {
+    async (_, {rejectWithValue}) => {
         console.log("fetch Reservation")
         
         try {
@@ -49,22 +51,22 @@ export const fetchReservations=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
-            const data=await response.json()
+            return await response.json()
 
-            
-            return data
         } 
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 
 export const deleteReservation=createAsyncThunk(
     'reservation/deleteReservation',
-    async (pk) => {
+    async (pk, {rejectWithValue}) => {
         console.log("delete Reservation")
 
         try {
@@ -74,19 +76,21 @@ export const deleteReservation=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
 
             return pk
         } 
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 export const updateReservation=createAsyncThunk(
     'reservation/updateReservation',
-    async (formData) => {
+    async (formData, {rejectWithValue}) => {
         console.log("update Reservation")
         console.log(formData)
         try {
@@ -102,16 +106,15 @@ export const updateReservation=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
-            const data=await response.json()
-            
+            return await response.json()
 
-            
-            return data
         } 
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 

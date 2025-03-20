@@ -4,7 +4,7 @@ import {addMenuitem, deleteImage, deleteMenuitem, toggleActive, updateMenuitem, 
 
 export const fetchCategories=createAsyncThunk(
     'menuitem/fetchCategories',
-    async () => {
+    async (_, {rejectWithValue}) => {
         try {
             // const response=await fetch(`${apiLink}/api/categories`, {
             const response=await fetch(`${apiLink}/categories`, {
@@ -16,21 +16,22 @@ export const fetchCategories=createAsyncThunk(
             })
 
             if(!response.ok) {
-                console.log(response)
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
 
             return await response.json()
             
         } 
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 export const fetchMenuitems=createAsyncThunk(
     'menuitem/fetchMenuitems',
-    async () => {
+    async (_, {rejectWithValue}) => {
         try {
             const response=await fetch(`${apiLink}/menuitems`, {
                 method: "GET",
@@ -41,18 +42,20 @@ export const fetchMenuitems=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json()
         } 
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 export const fetchMilks=createAsyncThunk(
     'menuitem/fetchMilks',
-    async () => {
+    async (_, {rejectWithValue}) => {
         try {
             const response=await fetch(`${apiLink}/milks`, {
                 method: "GET",
@@ -62,19 +65,21 @@ export const fetchMilks=createAsyncThunk(
                 }
             })
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
 
             return await response.json();
         } 
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 export const fetchSizes=createAsyncThunk(
     'menuitem/fetchSizes',
-    async () => {
+    async (_, {rejectWithValue}) => {
         try {
             const response=await fetch(`${apiLink}/sizes`, {
                 method: "GET",
@@ -84,18 +89,20 @@ export const fetchSizes=createAsyncThunk(
                 }
             })
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json()
         }
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 export const fetchSugars = createAsyncThunk(
     'menuitem/fetchSugars',
-    async () => {
+    async (_, {rejectWithValue}) => {
         try {
             const response=await fetch(`${apiLink}/sugars`, {
                 method: "GET",
@@ -105,35 +112,39 @@ export const fetchSugars = createAsyncThunk(
                 }
             })
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json()
         }
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 export const fetchTemperatures = createAsyncThunk(
     'menuitem/fetchTemperatures',
-    async () => {
+    async (_, {rejectWithValue}) => {
         try {
             const response=await fetch(`${apiLink}/temperatures`, {
                 method: "GET",
             })
             if(!response.ok) {
-                return response
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json()
         }
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )
 export const fetchBestSellerss=createAsyncThunk(
     'menuitem/fetchBestSellerss',
-    async () => {
+    async (_, {rejectWithValue}) => {
         try {
             const response=await fetch(`${apiLink}/bestsellers`, {
                 method: "GET",
@@ -144,12 +155,14 @@ export const fetchBestSellerss=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json()
         }
         catch(error){
-            return Promise.reject(error);
+            return rejectWithValue(error.message);
         }
     }
 )

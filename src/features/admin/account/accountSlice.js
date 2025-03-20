@@ -13,7 +13,9 @@ export const fetchAccounts=createAsyncThunk(
             })
 
             if(!response.ok) {
-                return response;
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
 
             return await response.json()
@@ -35,8 +37,11 @@ export const deleteAccount=createAsyncThunk(
 
             })
 
-            if(!response.ok)
-                return response
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
 
             return id
 
@@ -54,9 +59,11 @@ export const toggleAdminRole = createAsyncThunk(
                 'method': "PATCH",
                 credentials: 'include'
             })
-            if(!response.ok)
-                return response
-
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
             return id;
 
         } catch(error){

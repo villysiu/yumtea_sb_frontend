@@ -16,8 +16,6 @@ import BackToMenuButton from "./BackToMenuButton";
 const Checkout = () => {
     console.log("in checkout page")
     const location = useLocation()
-    console.log(location)
-    const navigate = useNavigate()
 
     const {carts} = useSelector(state => state.cart)
 
@@ -26,7 +24,6 @@ const Checkout = () => {
     const [tip, setTip] = useState("0");
     const {checkoutStatus} = useSelector(state=>state.order)
 
-console.log(checkoutStatus)
     if(checkoutStatus === 'failed') {
         return <Navigate to="/secure/checkout" />
     }
@@ -63,15 +60,16 @@ console.log(checkoutStatus)
                 <div>Estimated Tax</div>
                 <div>{USDollar.format(tax)}</div>
             </div>
+
             <Tip tip={tip} setTip={setTip} subtotal={subtotal}/>
 
 
             <div className="checkout_summary_line checkout_total">
                 <div>Total</div>
-                <div>{USDollar.format(subtotal  + (tip===""? 0.0 : parseFloat(tip)) + tax)}</div>
+                <div>{USDollar.format(subtotal + tip + tax)}</div>
             </div>
 
-            <PlaceOrderButton tip={parseFloat(tip)}/>
+            <PlaceOrderButton tip={tip} tax={tax} />
 
         </div>
     )

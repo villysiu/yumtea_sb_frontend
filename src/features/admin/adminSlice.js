@@ -18,8 +18,9 @@ export const addMenuitem = createAsyncThunk(
             })
 
             if(!response.ok) {
-                console.log(response)
-                return response
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json();
 
@@ -43,8 +44,9 @@ export const deleteMenuitem = createAsyncThunk(
             })
 
             if(!response.ok) {
-                console.log(response)
-                return response
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return id
 
@@ -73,8 +75,9 @@ export const updateMenuitem = createAsyncThunk(
             })
 
             if(!response.ok) {
-                console.log(response)
-                return response
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json();
 

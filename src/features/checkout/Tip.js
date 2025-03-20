@@ -13,7 +13,7 @@ const Tip = ({tip, setTip, subtotal}) =>{
 
         const regex = /^(\d+(\.\d{0,2})?)?$/;  // Allows numbers with at most 2 decimals
         if (regex.test(val) || val==="")
-            setTip(val === "" ? "" : e.target.value)
+            setTip(val === "" ? "" : parseFloat(e.target.value))
     }
 
      const handleTip = p =>{
@@ -43,7 +43,6 @@ const Tip = ({tip, setTip, subtotal}) =>{
                                         <div key={idx} className="className='tipbox input-dollar">
                                             <input type="text" placeholder="0.00" value={tip}
                                                    onChange={handleChange}
-                                                   // onFocus={()=>setTip("")}
                                             />
                                         </div>
                                         :

@@ -19,8 +19,11 @@ export const fetchCart=createAsyncThunk(
                 credentials: 'include'
             })
 
-            if(!response.ok)
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
 
             return await response.json();
 
@@ -47,10 +50,9 @@ export const addItemToCart = createAsyncThunk(
             })
 
             if(!response.ok) {
-                console.log(response)
-
-                throw new Error(`${response.status}`)
-                // throw new Error
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json();
 
@@ -87,9 +89,11 @@ export const updateItemInCart = createAsyncThunk(
                 credentials: 'include'
             })
 
-            if(!response.ok)
-                throw new Error(`${response.status} ${response.statusText}`)
-
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error uploading image:", errorText);
+                return rejectWithValue(errorText);
+            }
             return await response.json();
 
         } 
@@ -108,8 +112,11 @@ export const removeItemFromCart = createAsyncThunk(
                 method: "DELETE",
                 credentials: 'include'
             })
-            if(!response.ok)
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
 
             return cartitemId;
 

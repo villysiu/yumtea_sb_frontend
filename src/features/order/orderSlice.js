@@ -16,7 +16,9 @@ export const fetchCurrentUserOrders=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json()
         } 
@@ -43,7 +45,11 @@ export const PlaceOrder=createAsyncThunk(
 
 
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                // console.log(response.status)
+
+                return rejectWithValue(errorText);
             }
 
             return await response.json()
@@ -61,9 +67,11 @@ export const fetchTaxRate = createAsyncThunk(
                 method: "GET",
                 // credential: "include"
             })
-            if(!response.ok)
-                throw new Error(`Server error: ${response.status} ${response.statusText}`);
-
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
 
             return await response.json();
         }
@@ -83,7 +91,9 @@ export const fetchAllOrders=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
             return await response.json()
         }
@@ -103,7 +113,10 @@ export const deleteOrder=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+
+                return rejectWithValue(errorText);
             }
             return id
         }
@@ -226,7 +239,7 @@ export const getOrders = createSelector(
     }
 )
 export const calculateTax = (state, subtotal) =>{
-    return subtotal * state.taxRate.taxRate / 100;
+    return subtotal * state.order.taxRate / 100;
 }
 
 const selectAllOrders = state => state.order.allOrders;

@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import {fetchCurrentUserOrders} from "../order/orderSlice";
+import {fetchCurrentUserOrders, PlaceOrder} from "../order/orderSlice";
 import {addItemToCart, fetchCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
@@ -14,9 +14,11 @@ export const fetchCurrentUser=createAsyncThunk(
             })
 
             if(!response.ok) {
-                throw new Error(`${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
             }
-            console.log("user is herer not expored?")
+
             return await response.json()
             
 
@@ -51,9 +53,11 @@ export const loginUser=createAsyncThunk(
 
             })
 
-            if(!response.ok)
-                throw new Error(`${response.status} ${response.statusText}`)
-
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
             return await response.json()
 
         }
@@ -77,9 +81,12 @@ export const logoutUser=createAsyncThunk(
             
    
             })
-            
-            if(!response.ok) 
-                throw new Error(`${response.status} ${response.statusText}`)
+
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
             console.log(response)
 
             return null
@@ -105,8 +112,11 @@ export const registerUser = createAsyncThunk(
                 'body': JSON.stringify(userInfo),
                 credentials: 'include'
             })
-            if(!response.ok)
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
 
             return null;
 
@@ -130,8 +140,11 @@ export const updateUser = createAsyncThunk(
                 'body': JSON.stringify(userInfo),
                 credentials: 'include'
             })
-            if(!response.ok)
-                throw new Error(`${response.status} ${response.statusText}`)
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
 
             return await response.json();
 
@@ -155,10 +168,11 @@ export const updatePassword = createAsyncThunk(
                 'body': JSON.stringify(userPassword),
                 credentials: 'include'
             })
-            if(!response.ok)
-                throw new Error(`${response.status} ${response.statusText}`)
-
-            // return await response.json();
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
 
         } catch(error){
             return rejectWithValue(error.message);
@@ -258,6 +272,7 @@ const userSlice=createSlice({
           })
 
 
+
           .addCase(updateUser.pending, (state, action) => {
               state.updateStatus = 'loading'
           })
@@ -293,6 +308,13 @@ const userSlice=createSlice({
                 state.loginStatus = 'idle';
             }
         })
+          .addCase(PlaceOrder.rejected, (state, action) => {
+              console.log(action.payload)
+                  state.currentUser = null;
+                  state.fetchUserStatus = 'idle';
+                  state.loginStatus = 'idle';
+
+          })
 
 
 
