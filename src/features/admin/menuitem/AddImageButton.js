@@ -3,8 +3,9 @@ import {useState} from "react";
 import {Button, Modal} from "react-bootstrap";
 import MenuitemForm from "./MenuitemForm";
 import ImageForm from "./ImageForm";
-import {uploadImage} from "../adminSlice";
+
 import {useDispatch} from "react-redux";
+import {uploadImage} from "../../menuitem/menuitemSlice";
 
 const AddImageButton = ({menuitem}) =>{
     const dispatch = useDispatch()

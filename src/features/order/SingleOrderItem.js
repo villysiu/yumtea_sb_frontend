@@ -38,8 +38,8 @@ const SingleOrderItem = ({item}) =>{
                 </Link>
                 <div>
                     {item.size.title} | {item.temperature}
-                    {item.milk.id === 1 ? null : ` | ${item.milk.title}`}
-                    {item.sugar === "NA" ? null: ` | ${sugarMap.get(item.sugar)} Sugar`}
+                    {item.milk.title === "NA" ? null : ` | ${item.milk.title}`}
+                    {item.sugar === "NA" ? null: ` | ${sugarMap.get(item.sugar)}`}
 
 
                 </div>

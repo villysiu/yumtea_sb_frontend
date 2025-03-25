@@ -187,13 +187,15 @@ div.slide-left p {
   height: 15rem;
   color: white;
   background-color: var(--dark-brown-color);
+  display: flex;
+  justify-content: center;
 
 }
 .footer {
   width: var(--body-width);
   margin:1rem;
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
   flex-direction: column;
   align-items: center;
 

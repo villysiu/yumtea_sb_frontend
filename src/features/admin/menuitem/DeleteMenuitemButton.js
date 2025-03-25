@@ -1,6 +1,6 @@
 import {Trash3Fill} from "react-bootstrap-icons";
 import {useDispatch} from "react-redux";
-import {deleteMenuitem} from "../adminSlice";
+import {deleteMenuitem} from "../../menuitem/menuitemSlice";
 import {useEffect, useRef, useState} from "react";
 import {Button} from "react-bootstrap";
 

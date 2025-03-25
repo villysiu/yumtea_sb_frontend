@@ -8,7 +8,7 @@ import MilkDropdown from "../milk/MilkDropdown";
 import SugarDropdown from "../sugar/SugarDropdown";
 import TempDropdown from "../temperature/TempDropdown";
 import {useDispatch} from "react-redux";
-import {addMenuitem} from "../adminSlice";
+import {addMenuitem} from "../../menuitem/menuitemSlice";
 import MenuitemForm from "./MenuitemForm";
 import menuitemForm from "./MenuitemForm";
 import {useLocation, useNavigate} from "react-router-dom";

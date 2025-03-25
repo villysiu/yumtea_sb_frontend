@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {toggleAdminRole} from "../account/accountSlice";
 import Form from "react-bootstrap/Form";
-import {toggleActive} from "../adminSlice";
+import {toggleActive} from "../../menuitem/menuitemSlice";
 
 const ActiveCheckbox = ({menuitem}) =>{
         const dispatch = useDispatch();

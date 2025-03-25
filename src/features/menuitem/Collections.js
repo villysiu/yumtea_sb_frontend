@@ -5,8 +5,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import BestSellers from './BestSellers'
-import {homeLink} from "../../app/global";
-
 
 const Collections = () =>{
 

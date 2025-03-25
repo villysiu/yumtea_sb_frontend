@@ -4,12 +4,10 @@ import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartS
 import {
     addMenuitem,
     deleteImage,
-    deleteMenuitem,
-    loginAdmin,
-    logoutAdmin,
+    deleteMenuitem, fetchMenuitems,
     updateMenuitem,
     uploadImage
-} from "../admin/adminSlice";
+} from "../menuitem/menuitemSlice";
 import {PlaceOrder} from "../order/orderSlice";
 
 
@@ -86,6 +84,7 @@ const messageSlice = createSlice({
                 )
 
             })
+
 
             .addCase(addItemToCart.fulfilled, (state, action) => {
                 state.cartMessage = "Item added."
@@ -177,7 +176,16 @@ const messageSlice = createSlice({
                         content: action.payload
                     })
             })
-    //
+
+
+    // API issuq
+            .addCase(fetchMenuitems.rejected, (state, action) => {
+
+                state.messages.push({
+                    type: "danger",
+                    content: action.payload
+                })
+            })
 
     }
 })

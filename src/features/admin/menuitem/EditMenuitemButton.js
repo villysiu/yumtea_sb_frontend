@@ -1,14 +1,9 @@
 import {PencilSquare, Plus} from "react-bootstrap-icons";
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import {useState} from "react";
-import Form from "react-bootstrap/Form";
-import InputGroup from 'react-bootstrap/InputGroup';
-import CategoryDropdown from "../category/CategoryDropdown";
-import MilkDropdown from "../milk/MilkDropdown";
-import SugarDropdown from "../sugar/SugarDropdown";
-import TempDropdown from "../temperature/TempDropdown";
+
 import {useDispatch} from "react-redux";
-import {addMenuitem, updateMenuitem} from "../adminSlice";
+import {updateMenuitem} from "../../menuitem/menuitemSlice";
 import MenuitemForm from "./MenuitemForm";
 
 const EditMenuitemButton = ({menuitem}) =>{

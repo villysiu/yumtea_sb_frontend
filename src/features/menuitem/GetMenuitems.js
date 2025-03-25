@@ -58,7 +58,6 @@ const GetMenuitems = ({setGetMenuitem}) =>{
         }
         if(bestsellers_status === 'idle'){
             dispatch(fetchBestSellerss());
-            // setSpinner(true);
         }
 
 
@@ -68,7 +67,8 @@ const GetMenuitems = ({setGetMenuitem}) =>{
             && size_status === 'succeeded'
             && sugar_status === 'succeeded'
             && temperature_status === 'succeeded'
-            && bestsellers_status === 'succeeded'){
+            && bestsellers_status === 'succeeded'
+        ){
             console.log("all succeded")
             setGetMenuitem(true)
         }

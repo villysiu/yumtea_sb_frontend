@@ -126,6 +126,7 @@ export const deleteOrder=createAsyncThunk(
     }
 )
 
+
 const orderSlice=createSlice({
     name: 'order',
     initialState: {
@@ -135,8 +136,6 @@ const orderSlice=createSlice({
         fetchAllOrdersStatus: 'idle',
         checkoutStatus: 'idle',
         deleteOrderStatus: 'idle',
-
-
         taxRate: 0.0,
         fetchTaxRateStatus: 'idle'
     },
@@ -216,6 +215,7 @@ const orderSlice=createSlice({
               state.deleteOrderStatus = 'failed'
               // state.orders = []
           })
+
     }
 })
 export const { resetOrderStatus } = orderSlice.actions

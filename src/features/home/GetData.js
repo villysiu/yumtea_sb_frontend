@@ -25,10 +25,12 @@ const GetData = () =>{
             <GetTaxRate />
 
 
-            {!getUser || !getMenuitem ?
-                <LoadingPage />
-                :
-                <Outlet/>
+
+            {
+                ["/", "/visit-taste", "/support"].includes(location.pathname) ?
+                    <Outlet/> :
+
+                    (!getUser || !getMenuitem) ? <LoadingPage />:<Outlet/>
             }
 
 

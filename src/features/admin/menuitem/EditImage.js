@@ -2,7 +2,7 @@ import {apiLink} from "../../../app/global";
 import {PencilSquare} from "react-bootstrap-icons";
 import {useDispatch} from "react-redux";
 import {useState} from "react";
-import {deleteImage, uploadImage} from "../adminSlice";
+import {deleteImage, uploadImage} from "../../menuitem/menuitemSlice";
 import {Button, Modal} from "react-bootstrap";
 import ImageForm from "./ImageForm";
 

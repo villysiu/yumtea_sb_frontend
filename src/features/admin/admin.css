@@ -45,6 +45,17 @@
     background-color: #f9f9f9;
 
 }
+.sidebar_box.clicked {
+    font-weight: bolder;
+    background-color: #f9f9f9;
+}
+
+.sidebar_box_sub {
+    padding: 0 1.5rem;
+    align-items: center;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
 .manage_title {
     background-color: #918c85;
     color: white;

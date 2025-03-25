@@ -7,6 +7,7 @@ const OrderFilter = ({filter, setFilter}) =>{
         ["Past 3 days", 3],
         ["Past 7 days", 7],
         ["Past 30 day", 30],
+        ["Past 12 months", 365]
 
     ]
     const handleChange = e =>{
