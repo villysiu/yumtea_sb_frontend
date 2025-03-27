@@ -47,9 +47,9 @@ The React development server should open the application in your default web bro
 ## About the project ##
 
 The ecommerce application has 3 access level:  
-- [public resources](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#publicy)
-- [private resources for **_ROLE_USER_**](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#user-only)
-- [private resources for **_ROLE_ADMIN_** ](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#admin-only)
+- [public resources](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#public-resources)
+- [private resources for **_ROLE_USER_**](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#private-resources-for-role_user)
+- [private resources for **_ROLE_ADMIN_** ](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#private-resources-for-role_admin)
 
 
 
