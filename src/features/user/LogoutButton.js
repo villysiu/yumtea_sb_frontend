@@ -10,7 +10,7 @@ const LogoutButton = () => {
     const handleClick = () =>{
         dispatch(logoutUser());
         if(!currentUser)
-            navigate("http://127.0.0.1:8001/");
+            navigate("/");
 
     }
     return (

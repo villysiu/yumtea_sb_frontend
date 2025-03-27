@@ -152,3 +152,14 @@ a {
     height: 100%;
     position: relative;
 }
+.fixed-msgbox {
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+.app_message {
+    opacity: 1;
+    /*z-index: 1055;*/
+}
+}

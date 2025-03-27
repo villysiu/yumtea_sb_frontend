@@ -15,7 +15,7 @@ const Message =({message}) =>{
             dispatch(removeMessage())
             setShow(false)
 
-        }, 8000 )
+        }, 5000 )
         return function cleanup() {
             clearInterval(timer)
         }

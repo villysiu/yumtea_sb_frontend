@@ -8,7 +8,7 @@
 
   position: relative;
   font-family: fangsong;
-  background: url("http://127.0.0.1:8001/homepage/contentBg.jpg") center no-repeat;
+  background: url("http://localhost:3000/homepage/contentBg.jpg") center no-repeat;
   background-size: cover;
 }
 
@@ -26,7 +26,7 @@
   --cart_summary_right: calc((100vw - 1536px) / 2); */
   /* --cart_summary_top: 6rem/ */
 
-  --hLink: 'http://127.0.0.1:8001';
+
   /* --gold-text-color: rgb(194, 159, 106); */
   --gold-text-color: rgb(209 202 192);
   --gold-text-color-hover: rgb(138, 114, 77);

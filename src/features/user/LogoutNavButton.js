@@ -13,7 +13,7 @@ const LogoutNavButton = ({setShow}) =>{
         dispatch(logoutUser())
         setShow(false);
         if(!currentUser)
-            navigate("http://127.0.0.1:8001/");
+            navigate("/");
     }
     return(
 

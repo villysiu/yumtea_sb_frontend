@@ -10,8 +10,10 @@ const SingleBestSeller = ({idx, menuitemId}) =>{
         <Col xs={12} md={4} className="mb-3" key={menuitem.id} style={{"position": "relative"}}>
 
             <Menuitem menuitem={menuitem}/>
-            <StarFill className="yellowbookmark" />
-            <div className="yellowtext">{idx+1}</div>
+            <div className="yellow_container">
+                <StarFill className="yellowbookmark" />
+                <div className="yellowtext">{idx+1}</div>
+            </div>
         </Col>
 
     )

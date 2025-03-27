@@ -1,5 +1,5 @@
-import {PencilSquare, Plus} from "react-bootstrap-icons";
-import {Button, Col, Modal, Row} from "react-bootstrap";
+import {PencilSquare} from "react-bootstrap-icons";
+import {Button, Modal} from "react-bootstrap";
 import {useState} from "react";
 
 import {useDispatch} from "react-redux";

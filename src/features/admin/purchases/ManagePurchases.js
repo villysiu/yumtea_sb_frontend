@@ -12,6 +12,7 @@ import EditPurchaseButton from "./EditPurchaseButton";
 import DeletePurchaseButton from "./DeletePurchaseButton";
 import ManagePurchaseLineitems from "./ManagePurchaseLineitems";
 import {USDollar} from "../../../app/global";
+import AddMenuitemButton from "../menuitem/AddMenuitemButton";
 
 const ManagePurchases = () =>{
     const dispatch = useDispatch()
@@ -38,7 +39,7 @@ const ManagePurchases = () =>{
 
             <SearchPurchase setPurchases={setPurchases}/>
 
-            {/*<AddMenuitemButton />*/}
+            <AddMenuitemButton />
 
             <div className="manage_list">
                 <Row className="manage_list_title" key="title">

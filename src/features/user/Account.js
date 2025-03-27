@@ -29,7 +29,7 @@ const Account = () => {
 
             }
 
-            <div className='mb-2' ><h3>Youy Account</h3></div>
+            <div className='mb-2' ><h3>Your Account</h3></div>
             <div className="account_wrapper">
                 <div className="account_line ">
                     <div><b>Email: </b>{currentUser.email}</div>

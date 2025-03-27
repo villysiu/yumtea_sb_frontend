@@ -68,8 +68,8 @@
 
 
 .mask {
-  -webkit-mask-image: url("http://127.0.0.1:8001/logo/yumtea_logo.png");
-  mask-image: url("http://127.0.0.1:8001/logo/yumtea_logo.png");
+  /*-webkit-mask-image: url("http://localhost:3000/logo/yumtea_logo.png");*/
+  mask-image: url("http://localhost:3000/logo/yumtea_logo.png");
   mask-repeat: no-repeat;
   mask-size: calc(var(--yumtea_logo_width) - 1rem) 5rem;
   width: 100%;
@@ -89,8 +89,8 @@
   @media all and (max-width: 991.98px) {
 
     .mask {
-      -webkit-mask-image: url("http://127.0.0.1:8001/logo/yumtea_logo_char.png");
-      mask-image: url("http://127.0.0.1:8001/logo/yumtea_logo_char.png");
+      -webkit-mask-image: url("http://localhost:3000/logo/yumtea_logo_char.png");
+      mask-image: url("http://localhost:3000/logo/yumtea_logo_char.png");
       mask-repeat: no-repeat;
       mask-size: calc(var(--yumtea_logo_width) - 1rem) 5rem;
       width: 100%;
@@ -110,10 +110,8 @@
       height: 45px;
       /*display:inline-block;*/
       background-color: black;
-      -webkit-mask:url("http://127.0.0.1:8001/logo/yumtea_logo_Char.png");
+      -webkit-mask:url("http://localhost:3000/logo/yumtea_logo_Char.png");
       mask-size: contain;
-      /*mask-repeat: no-repeat;*/
-      /*mask-position: center;*/
       margin-left: 0;
       margin-right: 0;
     }

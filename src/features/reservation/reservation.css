@@ -4,10 +4,10 @@
     background-color:#f6f3c8
   }
   .reserve_bg_wrapper{
-    background-image: url('http://127.0.0.1:8001/IMG_2488 (1).jpg');
+    background-image: url('http://localhost:3000/IMG_2488 (1).jpg');
   }
   .reservations_bg_wrapper {
-    background-image: url('http://127.0.0.1:8001/teasets.jpg');
+    background-image: url('http://localhost:3000/teasets.jpg');
     height: calc(100vh * 0.3);
   }
   .reservation_buttons_container{

@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap"
 const EmptyCart = () =>{
     return (
         <div className='empty_cart'>
-            <img className='empty_cart_img' src="http://127.0.0.1:8001/homepage/empty_cart.webp" />
+            <img className='empty_cart_img' src={`${homeLink}/homepage/empty_cart.webp}`} alt="empty cart" />
             <div>Your Cart is Empty</div> 
             
          </div>

@@ -258,7 +258,7 @@ export const uploadImage = createAsyncThunk(
             console.log(pair[0], pair[1]);
         }
         try {
-            const response=await fetch(`${apiLink}/menuitem/img/${formData.get('id')}`, {
+            const response=await fetch(`${apiLink}/menuitem/${formData.get('id')}/img`, {
                 method: "POST",
 
                 body: formData,
@@ -287,7 +287,7 @@ export const deleteImage = createAsyncThunk(
     async (id,{rejectWithValue}) => {
 
         try {
-            const response=await fetch(`${apiLink}/menuitem/img/${id}`, {
+            const response=await fetch(`${apiLink}/menuitem/${id}/img`, {
                 method: "DELETE",
                 credentials: 'include'
             })
@@ -313,7 +313,7 @@ export const toggleActive = createAsyncThunk(
     async (id,{rejectWithValue}) => {
 
         try {
-            const response=await fetch(`${apiLink}/menuitem/toggleActive/${id}`, {
+            const response=await fetch(`${apiLink}/menuitem/${id}/toggleActive`, {
                 method: "PATCH",
                 credentials: 'include'
             })

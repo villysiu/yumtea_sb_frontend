@@ -1,3 +1,4 @@
+import {homeLink} from "../../app/global";
 
 const AboutUs = () => {
 
@@ -6,7 +7,7 @@ const AboutUs = () => {
         <>
             <div className='homepage_section'>
                 <div className='homepage_subtitle'>About Us</div>
-                <img src="http://127.0.0.1:8001/homepage/TeaPicking.jpg" alt="tea_picking" className="teapicking_img"/>
+                <img src={`${homeLink}/homepage/TeaPicking.jpg`} alt="tea_picking" className="teapicking_img"/>
                 <div className='homepage_content'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et
@@ -22,7 +23,7 @@ const AboutUs = () => {
             <div className='homepage_section'>
                 <div className='home_row' >
                     <div className='home_col'>
-                        <img src={`http://127.0.0.1:8001/homepage/teacup_color.png`} alt='' className='square_icon'/>
+                        <img src={`${homeLink}/homepage/teacup_color.png`} alt='' className='square_icon'/>
                         <h3>Our Tea</h3>
                         Lorem ipsum odor amet, consectetuer adipiscing elit. Purus dui feugiat interdum bibendum tellus,
                         fermentum
@@ -31,7 +32,7 @@ const AboutUs = () => {
                     </div>
 
                     <div className='home_col'>
-                        <img src={`http://127.0.0.1:8001/homepage/no-pesticides.png`} alt='' className='square_icon'/>
+                        <img src={`${homeLink}/homepage/no-pesticides.png`} alt='' className='square_icon'/>
 
                         <h3>Ethically Sourced </h3>
                         Lorem ipsum odor amet, consectetuer adipiscing elit. Purus dui feugiat interdum bibendum tellus,
@@ -41,7 +42,7 @@ const AboutUs = () => {
 
                     </div>
                     <div className="home_col">
-                        <img src={`http://127.0.0.1:8001/homepage/leaf.png`} alt='' className='square_icon'/>
+                        <img src={`${homeLink}/homepage/leaf.png`} alt='' className='square_icon'/>
 
                         <h3>Genuine Origin</h3>
                         Lorem ipsum odor amet, consectetuer adipiscing elit. Purus dui feugiat interdum bibendum tellus,

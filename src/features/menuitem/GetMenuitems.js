@@ -24,12 +24,12 @@ const GetMenuitems = ({setGetMenuitem}) =>{
     let temperature_status = useSelector(state => state.menuitem.temperature.status)
     let bestsellers_status = useSelector(state=>state.menuitem.bestSellers.status)
     
-    console.log("menuitem: " + menuitems_status);
-    console.log("milk: " + milk_status);
-    console.log("category: " + category_status);
-    console.log("size_status: " + size_status);
-    console.log("sugar_status: " + sugar_status);
-    console.log("bestsellers_status: " + bestsellers_status);
+    // console.log("menuitem: " + menuitems_status);
+    // console.log("milk: " + milk_status);
+    // console.log("category: " + category_status);
+    // console.log("size_status: " + size_status);
+    // console.log("sugar_status: " + sugar_status);
+    // console.log("bestsellers_status: " + bestsellers_status);
 
     useEffect(()=>{
         if(menuitems_status==='idle'){

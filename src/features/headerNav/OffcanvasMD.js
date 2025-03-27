@@ -10,7 +10,7 @@ const OffcanvasMD = ({show, setShow}) =>{
         <Offcanvas show={show} onHide={()=>setShow(false)}>
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>
-                    <img src="http://127.0.0.1:8001/logo/yumtea_logo.png" alt="" className="offcanvas_logo" />
+                    <img src={`${homeLink}/logo/yumtea_logo.png`} alt="" className="offcanvas_logo" />
                 </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
