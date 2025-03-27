@@ -12,11 +12,10 @@ This is the frontend for a tea e-commerce website developed with React.js, backe
 
 
 ## Before You start
-Setup the backend API 
-### Running BackendAPI ###
+Setup the backend API
 The Backend Api is created in **Springboot**.
-Visit [here](https://github.com/villysiu/yum_tea_sb?tab=readme-ov-file#running-the-project)
-and follow the instruction to start up the backend server in http://localhost:8080/.
+Visit [https://github.com/villysiu/yum_tea_sb](https://github.com/villysiu/yum_tea_sb?tab=readme-ov-file#running-the-project)
+and follow the instruction to start up the backend server at http://localhost:8080/.
 
 ## Youtube:  ##
 
@@ -47,58 +46,72 @@ The React development server should open the application in your default web bro
 
 ## About the project ##
 
-`/`
+The ecommerce application has 3 access level:  
+- [public resources](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#publicy)
+- [private resources for **_ROLE_USER_**](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#user-only)
+- [private resources for **_ROLE_ADMIN_** ](https://github.com/villysiu/yumtea_sb_frontend/tree/master?tab=readme-ov-file#admin-only)
 
-`/visit-taste `
 
-`/support `
-  - has a form to submit
 
-`/collection`
-  - Displays all tea `Menuitem` by `Category` 
-  - The `Menuitem` and `Category` are fetched from backendAPI
+## Endpoints ##
+### public resources ###
+- `/`
+- `/visit-taste` 
+- `/support`
 
+- `/collection`
+  - Displays all tea `Menuitem` by `Category`
+  - The `Menuitem` and `Category` are fetched from backendAPI with react-redux
 
  `/user/signin` 
   - User signs in with valid credentials, `email` and `password`
-  - Validations applied
-  - Upon successful sign in, a JWT token is assigned and is being sent in every request in header.
+  - User inputs validated by **regex** 
+  - Authenticated by Spring Security in backend api
+  - Upon successful sign in, a **JWT token** is assigned and is being sent in every request in header.
 
 `/user/signup `
   - User signs up with `nickname`, `email` and `password`
+  - User inputs validated by **regex**
   - User has `ROLE_USER` authority
   - After successful signup, user signs in in `/signin`
 
+### private resources for **_ROLE_USER_** ###
+When a user with `ROLE_USER` signs in,
+the user can visit the following private resources,
+
 `/logout`
-  - User signs out
+  - Authenticated user signs out
+  - handled by Spring Security in backend API
 
 `/secure/account `
-- Only authenticated user has access
 - Authenticated user can change his `nickname`
 - Authenticated user can change his `pasoword`
 
 ` /secure/orders`
-- Only authenticated user has access
-- Authenticated user can view all his `Purchase` in the last 3, 7, 30 or 365  days
+- Authenticated user can view all his own `Purchase` in the last 3, 7, 30 or 365  days
 
 `/secure/checkout `
-- Only authenticated user has access
-- Authenticated user can see all his `Cart` items in shopping cart
+- Authenticated user can see all his own `Cart` items in shopping cart
 - Adds gratuity
-- Shows total including gratuity and tax
+- Tax calculated by state(ie. WA 10%) 
 - Upon successful checkout, shopping cart is emptied
 
-## Admin Only ##
-Only Authenticated Admin with `ROLE_ADMIN` can access 
+### private resources for **_ROLE_ADMIN_** ###
+When an admin with `ROLE_ADMIN` signs in, he can access 
+the following private and `ROLE_ADMIN` only resources.
+
 `/admin/accounts`
+ - can see all user accounts
  - can delete user account
  - can toggle authority between  `ROLE_ADMIN` and `ROLE_USER`
  - can search for accounts by name or email, or id
 
 `/admin/menuitems`
+- can see all menuitems
  - can add new menuitem
  - can edit menuitem
- - can delete menuitem
+
+[//]: # ( - can delete menuitem)
  - can toggle menuitem visibility
  - can search for menuitem by name or category,
 
@@ -113,7 +126,7 @@ Only Authenticated Admin with `ROLE_ADMIN` can access
 - can search purchases by Menuitem, date or email
 
 `/admin/hub`
-- can see bar chart of sales from best selling to least popular
+- can see bar chart of sales from best-selling menuitems
 ![](https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/homepage/barchart.png?raw=true)
-- can see a pie chart of popular milk 
+- can see a pie chart of milk popularity 
 ![](https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/homepage/piechart.png?raw=true)
