@@ -98,11 +98,15 @@ the user can visit the following private resources,
 
 
 #### Other features for **_ROLE_USER_**
-![](https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/readme/cart.png?raw=true)
+<img src="https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/readme/cart.png?raw=true" width="50%"  alt=""/>
+
 - `add item to cart`
 - `remove item from cart`
 - `customize item in cart`
-- ![](https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/readme/customize.png?raw=true)
+
+[//]: # (![]&#40;https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/readme/customize.png?raw=true&#41;)
+<img src="https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/readme/customize.png?raw=true" width="50%"  alt=""/>
+
   - update temperature
   - update size
   - update milk
@@ -141,6 +145,9 @@ the following private and `ROLE_ADMIN` only resources.
 
 `/admin/hub`
 - can see bar chart of sales from best-selling menuitems
-![](https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/homepage/barchart.png?raw=true)
+
+<img src="https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/homepage/barchart.png?raw=true" width="75%"  alt=""/>
+
 - can see a pie chart of milk popularity 
-![](https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/homepage/piechart.png?raw=true)
+
+<img src="https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/homepage/piechart.png?raw=true" width="50%"  alt=""/>
