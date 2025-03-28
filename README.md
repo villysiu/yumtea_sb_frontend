@@ -55,9 +55,9 @@ The ecommerce application has 3 access level:
 
 ## Endpoints ##
 ### public resources ###
-- `/`
-- `/visit-taste` 
-- `/support`
+`/`
+`/visit-taste` 
+`/support`
 
 - `/collection`
   - Displays all tea `Menuitem` by `Category`
@@ -95,6 +95,20 @@ the user can visit the following private resources,
 - Adds gratuity
 - Tax calculated by state(ie. WA 10%) 
 - Upon successful checkout, shopping cart is emptied
+
+
+#### Other features for **_ROLE_USER_**
+![](https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/readme/cart.png?raw=true)
+- `add item to cart`
+- `remove item from cart`
+- `customize item in cart`
+- ![](https://github.com/villysiu/yumtea_sb_frontend/blob/master/public/readme/customize.png?raw=true)
+  - update temperature
+  - update size
+  - update milk
+  - update sweetness
+  - update quantity
+
 
 ### private resources for **_ROLE_ADMIN_** ###
 When an admin with `ROLE_ADMIN` signs in, he can access 
