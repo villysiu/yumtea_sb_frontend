@@ -1,7 +1,9 @@
 import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 import { format } from 'date-fns';
-import {logoutUser} from "../user/userSlice";
+import {loginUser, logout, logoutUser} from "../user/userSlice";
+import {addItemToCart, clearCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
+import {clearAccount} from "../admin/account/accountSlice";
 
 
 
@@ -29,7 +31,7 @@ export const fetchCurrentUserOrders=createAsyncThunk(
 )
 export const PlaceOrder=createAsyncThunk(
     'order/PlaceOrder',
-    async (order, {rejectWithValue}) => {
+    async (order, {rejectWithValue, dispatch}) => {
         console.log("CheckoutCart orders")
         try {
             const response=await fetch(`${apiLink}/purchase`, {
@@ -40,22 +42,27 @@ export const PlaceOrder=createAsyncThunk(
                 },
                 body: JSON.stringify(order),
                 credentials: "include"
-                
             })
 
 
-            if(!response.ok) {
-                const errorText = await response.text();
-                console.log("Error :", errorText);
-                // console.log(response.status)
-
-                return rejectWithValue(errorText);
+            if(!response.ok) { // 400 - 499
+                if(response.status === 401){
+                    dispatch(logout())
+                    dispatch(clearCart())
+                    dispatch(clearOrder())
+                    dispatch(clearAccount())
+                }
+                const errorMessage = await response.text(); // errorText:"Please log in to access this resource."
+                return rejectWithValue(errorMessage)
             }
-
-            return await response.json()
-        } 
+            return null;
+        }
         catch(error){
-            return rejectWithValue(error.message);
+            //network error, server down etc 500-599
+            console.error("Request failed:", error.message);
+            return rejectWithValue(
+                "Network or unexpected error"
+            );
         }
     }
 )
@@ -125,29 +132,87 @@ export const deleteOrder=createAsyncThunk(
         }
     }
 )
+export const fetchSalesByMenuitem=createAsyncThunk(
+    'admin/fetchSalesByMenuitem',
+    async (count, {rejectWithValue}) => {
+        try {
+            const response=await fetch(`${apiLink}/query/allSales`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'accept': 'application/json'
+                },
+                credentials: "include"
+            })
 
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
+            return await response.json()
+        }
+        catch(error){
+            return rejectWithValue(error.message);
+        }
+    }
+)
+export const fetchMilkBySales=createAsyncThunk(
+    'admin/fetchMilkBySales',
+    async (_, {rejectWithValue}) => {
+        try {
+            const response=await fetch(`${apiLink}/query/milk`, {
+                method: "GET",
+                credentials: "include"
+            })
+
+            if(!response.ok) {
+                const errorText = await response.text();
+                console.log("Error :", errorText);
+                return rejectWithValue(errorText);
+            }
+            return await response.json()
+        }
+        catch(error){
+            return rejectWithValue(error.message);
+        }
+    }
+)
 
 const orderSlice=createSlice({
     name: 'order',
     initialState: {
         orders: [],
         fetchOrdersStatus: 'idle',
+        checkoutStatus: 'idle',
+        taxRate: 0.0,
+        fetchTaxRateStatus: 'idle',
+
+        // ROLE_ADMIN only
         allOrders: [],
         fetchAllOrdersStatus: 'idle',
-        checkoutStatus: 'idle',
+
+        salesByMenuitem: [],
+        fetchSalesByMenuitemStatus: 'idle',
+        milkBySales: [],
+        fetchMilkBySalesStatus: 'idle',
+
         deleteOrderStatus: 'idle',
-        taxRate: 0.0,
-        fetchTaxRateStatus: 'idle'
+
     },
     reducers: {
-        // clearorder(state, action){
-        //     state.checkoutStatus="idle"
-        // }
-        //
-        // clearNewestOrder(state){
-        //     state.newestOrder = null;
-        //     state.checkoutStatus = 'idle';
-        // }
+        clearOrder(state){
+            state.orders = []
+            state.fetchOrdersStatus = 'idle'
+            state.allOrders = []
+            state.fetchAllOrdersStatus = 'idle'
+
+            state.checkoutStatus = 'idle'
+            state.salesByMenuitem = []
+            state.fetchSalesByMenuitemStatus = 'idle'
+            state.milkBySales = []
+            state.fetchMilkBySalesStatus ='idle'
+        },
         resetOrderStatus(state){
             state.checkoutStatus = 'idle'
         }
@@ -177,11 +242,7 @@ const orderSlice=createSlice({
         .addCase(PlaceOrder.rejected, (state, action) => {
             state.checkoutStatus = 'failed'
         })
-          .addCase(logoutUser.fulfilled, (state, action) => {
-              state.orders = []
-              state.fetchOrdersStatus ='idle'
-              state.checkoutStatus = 'idle'
-          })
+
 
           .addCase(fetchTaxRate.pending, (state, action) => {
               state.fetchTaxRateStatus = 'loading'
@@ -216,9 +277,51 @@ const orderSlice=createSlice({
               // state.orders = []
           })
 
+          .addCase(fetchSalesByMenuitem.pending, (state, action) => {
+              state.fetchSalesByMenuitemStatus = 'loading'
+          })
+          .addCase(fetchSalesByMenuitem.fulfilled, (state, action) => {
+              state.fetchSalesByMenuitemStatus = 'succeeded'
+              state.salesByMenuitem = action.payload
+          })
+          .addCase(fetchSalesByMenuitem.rejected, (state, action) => {
+              state.fetchSalesByMenuitemStatus = 'failed'
+              // state.orders = []
+          })
+          .addCase(fetchMilkBySales.pending, (state, action) => {
+              state.fetchMilkBySalesStatus = 'loading'
+          })
+          .addCase(fetchMilkBySales.fulfilled, (state, action) => {
+              state.fetchMilkBySalesStatus = 'succeeded'
+              state.milkBySales = action.payload
+          })
+          .addCase(fetchMilkBySales.rejected, (state, action) => {
+              state.fetchMilkBySalesStatus = 'failed'
+              // state.orders = []
+          })
+
+          .addCase(logoutUser.fulfilled, (state, action) => {
+              state.orders = []
+              state.fetchOrdersStatus ='idle'
+              state.fetchAllOrdersStatus = 'idle'
+              state.allOrders = []
+              state.checkoutStatus = 'idle'
+              state.salesByMenuitem = []
+              state.fetchSalesByMenuitemStatus ='idle'
+              state.milkBySales = []
+              state.fetchMilkBySalesStatus = 'idle'
+          })
+
+          .addCase(loginUser.fulfilled, (state, action) => {
+              state.checkoutStatus = 'idle'
+
+
+          })
+
+
     }
 })
-export const { resetOrderStatus } = orderSlice.actions
+export const { resetOrderStatus, clearOrder } = orderSlice.actions
 export default orderSlice.reducer
 
 const selectOrders = (state) => state.order.orders;

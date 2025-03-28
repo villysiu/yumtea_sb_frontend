@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink} from "../../../app/global";
+import {logoutUser} from "../../user/userSlice";
 
 export const fetchAccounts=createAsyncThunk(
     'account/fetchAccounts',
@@ -82,7 +83,12 @@ const accountSlice=createSlice({
         deleteStatus: 'idle',
     },
     reducers: {
-
+        clearAccount(state){
+            state.accounts = []
+            state.fetchAccountsStatus = 'idle'
+            state.updateStatus = 'idle'
+            state.deleteStatus = 'idle'
+        }
 
     },
     extraReducers(builder) {
@@ -135,12 +141,18 @@ const accountSlice=createSlice({
 
             })
 
+            .addCase(logoutUser.fulfilled, (state, action) => {
+                state.accounts = []
+                state.fetchAccountsStatus = 'idle'
+                state.updateStatus = 'idle'
+                state.deleteStatus = 'idle'
+            })
 
 
 
     }
 })
-export const {  } = accountSlice.actions
+export const { clearAccount } = accountSlice.actions
 export default accountSlice.reducer
 
 const selectAccounts = state => state.account.accounts;

@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {addItemToTempCart, addItemToCart} from '../cart/cartSlice'
 import {useLocation, useNavigate} from "react-router-dom";
  import {useEffect} from "react";
+ import {unwrapResult} from "@reduxjs/toolkit";
 
 const AddCartButton = ({customizedItem, handleHide}) => {
     console.log(customizedItem)
@@ -19,12 +20,10 @@ const AddCartButton = ({customizedItem, handleHide}) => {
     const {currentUser} = useSelector(state=>state.user)
     const location = useLocation();
     const navigate = useNavigate();
-    const {tempCart} = useSelector(state=>state.cart)
+    // const {tempCart, addToCartStatus} = useSelector(state=>state.cart)
 
-    useEffect(()=>{
-        if(currentUser === null && tempCart !== null)
-            console.log("fail adding item because user is timed out")
-    },[tempCart,currentUser])
+
+
     // to dispatch
     // {
     // 	"menuitemId": 2,
@@ -37,36 +36,21 @@ const AddCartButton = ({customizedItem, handleHide}) => {
 
     const handleClick = (e) =>{
 
-        if(currentUser === null){
-            console.log(location.pathname)
-            dispatch(addItemToTempCart(
-                {
-                    "menuitemId": customizedItem.menuitem.id,
-                    "milkId": customizedItem.milk.id,
-                    "sizeId": customizedItem.size.id,
-                    "quantity": customizedItem.quantity,
-                    "sugar": customizedItem.sugar,
-                    "temperature": customizedItem.temperature
-                }
-            ));
-            navigate('/user/signin', { state: location.pathname });
-        }
-        else {
-            console.log("add to API cart  ")
-            dispatch(addItemToCart(
-                {
-                    "menuitemId": customizedItem.menuitem.id,
-                    "milkId": customizedItem.milk.id,
-                    "sizeId": customizedItem.size.id,
-                    "quantity": customizedItem.quantity,
-                    "sugar": customizedItem.sugar,
-                    "temperature": customizedItem.temperature
-                }
-            ))
+        console.log("add to API cart  ")
+        dispatch(addItemToCart(
+            {
+                "menuitemId": customizedItem.menuitem.id,
+                "milkId": customizedItem.milk.id,
+                "sizeId": customizedItem.size.id,
+                "quantity": customizedItem.quantity,
+                "sugar": customizedItem.sugar,
+                "temperature": customizedItem.temperature
+            }
+        ))
 
-        }
         handleHide();
     }
+
 
     if(!customizedItem.size || customizedItem.temperature === "FREE"){
         return (

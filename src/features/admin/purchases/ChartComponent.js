@@ -10,11 +10,11 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchSalesByMenuitem} from "../adminSlice"
+import {fetchSalesByMenuitem} from "../../order/orderSlice";
 
 const ChartComponent = ()=> {
     const dispatch = useDispatch()
-    const {salesByMenuitem, fetchSalesByMenuitemStatus} = useSelector(state=>state.admin)
+    const {salesByMenuitem, fetchSalesByMenuitemStatus} = useSelector(state=>state.order)
     useEffect(() => {
         if(fetchSalesByMenuitemStatus === 'idle')
             dispatch(fetchSalesByMenuitem(0))

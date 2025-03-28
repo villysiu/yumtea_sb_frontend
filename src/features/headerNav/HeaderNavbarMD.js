@@ -17,7 +17,7 @@ const HeaderNavbarMD = () =>{
 
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
-    const {currentAdmin} = useSelector(state=>state.admin)
+    // const {currentUser} = useSelector(state=>state.user)
     return(
         <>
             <Navbar collapseOnSelect expand={false} sticky="top" className="bg-body-tertiary header_wrapper">
@@ -31,12 +31,12 @@ const HeaderNavbarMD = () =>{
 
 
                 {/*<Title />*/}
-                { !currentAdmin  &&
+                {/*{ !currentUser  &&*/}
                 <Nav className="header_right_wrapper">
                     <HeaderUserButton />
                     <CartIcon />
                 </Nav>
-                }
+                {/*}*/}
          
           
         </Navbar>

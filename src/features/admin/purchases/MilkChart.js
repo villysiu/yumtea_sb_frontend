@@ -2,14 +2,14 @@ import React, {useEffect} from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMilkBySales} from "../adminSlice";
+import {fetchMilkBySales} from "../../order/orderSlice";
 
 
 
 
 const MilkChart = () => {
     const dispatch = useDispatch()
-    const {milkBySales, fetchMilkBySalesStatus} = useSelector(state=>state.admin)
+    const {milkBySales, fetchMilkBySalesStatus} = useSelector(state=>state.order)
     useEffect(() => {
         if(fetchMilkBySalesStatus === 'idle')
             dispatch(fetchMilkBySales())

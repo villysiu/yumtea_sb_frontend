@@ -82,10 +82,11 @@ export const logoutUser=createAsyncThunk(
    
             })
 
-            if(!response.ok) {
+            if(!response.ok && response.status!==401) {
                 const errorText = await response.text();
                 console.log("Error :", errorText);
-                return rejectWithValue(errorText);
+                console.log(response.status)
+                return rejectWithValue(response.status);
             }
             console.log(response)
 
@@ -129,7 +130,7 @@ export const updateUser = createAsyncThunk(
     'user/update',
     async(userInfo, {rejectWithValue}) =>{
         try{
-            console.log("ipfate?")
+
             const response = await fetch(`${apiLink}/resource/user`, {
                 'method': "PATCH",
                 'headers': {
@@ -190,13 +191,20 @@ const userSlice=createSlice({
         logoutStatus: 'idle',
         registerStatus:'idle',
         updateStatus: 'idle'
+        // user: {
+        //     status: 'idle',
+        //     action: null
+        // }
     },
     reducers: {
-        // logout: (state) => {
-        //     state.current_user = null
-        //     state.logout_status = 'succeeded'
-        //     state.currUser.error = null
-        //   },
+        logout: (state) => {
+            state.currentUser = null;
+            state.fetchUserStatus = 'idle';
+            state.loginStatus = 'idle';
+            state.logoutStatus = 'succeeded';
+            state.registerStatus = 'idle';
+            state.updateStatus = 'idle';
+          },
         removeUser: (state) => {
              console.log('removing??')
             state.currentUser = null
@@ -250,6 +258,7 @@ const userSlice=createSlice({
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.currentUser = null;
+
             state.fetchUserStatus = 'idle';
             state.loginStatus = 'idle';
             state.logoutStatus = 'succeeded';
@@ -301,13 +310,13 @@ const userSlice=createSlice({
           })
         .addCase(addItemToCart.rejected, (state, action) => {
             console.log(action.payload)
-            if(action.payload.msg === "401"){
+// 401 unauthorized
+            state.currentUser = null;
+            state.fetchUserStatus = 'idle';
+            state.loginStatus = 'idle';
 
-                state.currentUser = null;
-                state.fetchUserStatus = 'idle';
-                state.loginStatus = 'idle';
-            }
         })
+
           .addCase(PlaceOrder.rejected, (state, action) => {
               console.log(action.payload)
                   state.currentUser = null;
@@ -320,7 +329,7 @@ const userSlice=createSlice({
 
     }
 })
-export const { removeUser } = userSlice.actions
+export const { logout, removeUser } = userSlice.actions
 export default userSlice.reducer
 
 

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {loginUser, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
+import {loginUser, logout, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 import {
     addMenuitem,
@@ -66,6 +66,7 @@ const messageSlice = createSlice({
                     }
                 )
             })
+
             .addCase(registerUser.fulfilled, (state, action) => {
                 state.messages.push(
                     {
@@ -93,10 +94,28 @@ const messageSlice = createSlice({
             .addCase(removeItemFromCart.fulfilled, (state, action) => {
                 state.cartMessage = "Item removed."
             })
+            // .addCase(removeItemFromCart.rejected, (state, action) => {
+            //     state.messages.push(
+            //         {
+            //             type: "danger",
+            //             content: action.payload.error
+            //         }
+            //     )
+            // })
 
             .addCase(updateItemInCart.fulfilled, (state, action) => {
                 state.cartMessage = 'Item updated.'
             })
+
+            // .addCase(updateItemInCart.rejected, (state, action) => {
+            //     console.log(action.payload)
+            //     state.messages.push(
+            //         {
+            //             type: "danger",
+            //             content: action.payload.errorTe
+            //         }
+            //     )
+            // })
 
             .addCase(updateUser.fulfilled, (state, action) => {
                 state.messages.push(

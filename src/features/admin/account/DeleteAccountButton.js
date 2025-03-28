@@ -1,7 +1,6 @@
 
 import {Trash3Fill} from "react-bootstrap-icons";
 import {useDispatch} from "react-redux";
-import {deleteMenuitem} from "../adminSlice";
 import {useEffect, useRef, useState} from "react";
 import {Button} from "react-bootstrap";
 import {deleteAccount} from "./accountSlice";
