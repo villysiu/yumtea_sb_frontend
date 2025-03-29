@@ -9,17 +9,31 @@ const Tip = ({tip, setTip, subtotal}) =>{
     
 
     const handleChange = (e) =>{
-        const val = e.target.value;
+        const valStr = e.target.value;
+        console.log(valStr)
 
+        // setTip(valStr === "" ? 0.0 : parseFloat(valStr))
         const regex = /^(\d+(\.\d{0,2})?)?$/;  // Allows numbers with at most 2 decimals
-        if (regex.test(val) || val==="")
-            setTip(val === "" ? "" : parseFloat(e.target.value))
+        console.log(regex.test(valStr))
+
+
+        if (regex.test(valStr) || valStr==="") {
+            console.log(valStr)
+            console.log(typeof valStr)
+            // setTip(valStr === "" ? 0.0 : parseFloat(valStr))
+            if(valStr === "")
+                setTip("0.00")
+             else {
+
+                setTip(valStr)
+            }
+        }
     }
 
      const handleTip = p =>{
         console.log(p)
 
-            setTip(subtotal * p / 100)
+            setTip((Math.round(subtotal * p )/100).toString())
             showTipbox(false)
 
     }
@@ -41,8 +55,11 @@ const Tip = ({tip, setTip, subtotal}) =>{
                                 return (
                                     tipbox ?
                                         <div key={idx} className="className='tipbox input-dollar">
-                                            <input type="text" placeholder="0.00" value={tip}
+                                            <input type="text" placeholder="0.00"
+                                                   value={tip}
                                                    onChange={handleChange}
+                                                   onFocus={e=>e.target.select()}
+
                                             />
                                         </div>
                                         :

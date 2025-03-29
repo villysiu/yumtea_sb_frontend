@@ -149,7 +149,7 @@ export const removeItemFromCart = createAsyncThunk(
                     "message": errorMessage // message sent from backend
                 })
             }
-            return null;
+            return cartitemId;
         }
         catch(error){
             //network error, server down etc 500-599

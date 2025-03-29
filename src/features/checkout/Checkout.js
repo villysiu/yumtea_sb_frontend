@@ -21,7 +21,7 @@ const Checkout = () => {
 
     const {subtotal, count} = useSelector(state => getSubtotal(state))
     const tax = useSelector(state => calculateTax(state, subtotal))
-    const [tip, setTip] = useState("0");
+    const [tip, setTip] = useState("0.00");
     const {checkoutStatus} = useSelector(state=>state.order)
 
     if(checkoutStatus === 'failed') {
@@ -66,7 +66,7 @@ const Checkout = () => {
 
             <div className="checkout_summary_line checkout_total">
                 <div>Total</div>
-                <div>{USDollar.format(subtotal + tip + tax)}</div>
+                <div>{USDollar.format(subtotal + parseFloat(tip) + tax)}</div>
             </div>
 
             <PlaceOrderButton tip={tip} tax={tax} />

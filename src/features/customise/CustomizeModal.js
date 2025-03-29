@@ -18,7 +18,8 @@ const CustomizeModal = ({handleHide}) =>{
     // const task = useSelector(state=>state.menuitem.customize.task)
     const {itemToCustomize} = useSelector(state=>state.menuitem)
     console.log(itemToCustomize)
-
+    console.log(itemToCustomize.id)
+console.log(itemToCustomize.id === null)
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
     const [size, setSize] =useState(itemToCustomize.size)
     const [milk, setMilk] = useState(itemToCustomize.milk)
@@ -41,12 +42,12 @@ const CustomizeModal = ({handleHide}) =>{
                 <Modal.Title>Customize {itemToCustomize.menuitem.title} </Modal.Title>
             </Modal.Header>
             <Modal.Body className='customize_list'>
-            {
-                itemToCustomize.menuitem.image_path &&
-                <div className='customize_img_wrapper'>
-                    <img src={`${homeLink}/menuitem/${itemToCustomize.menuitem.image_path}`} className="customize_img" alt={itemToCustomize.menuitem.title}></img>
-                </div>
-            }
+            {/*{*/}
+            {/*    itemToCustomize.menuitem.image_path &&*/}
+            {/*    <div className='customize_img_wrapper'>*/}
+            {/*        <img src={`${homeLink}/menuitem/${itemToCustomize.menuitem.image_path}`} className="customize_img" alt={itemToCustomize.menuitem.title}></img>*/}
+            {/*    </div>*/}
+            {/*}*/}
                 
                 <CustomizeTemp defaultTemperature={itemToCustomize.menuitem.temperature} temperature={temperature} setTemperature={setTemperature} />
                 <CustomizeSize size={size} setSize={setSize} />

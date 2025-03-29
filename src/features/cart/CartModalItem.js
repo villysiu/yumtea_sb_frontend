@@ -82,7 +82,7 @@ const CartModalItem = ({cartitem, setCartShow, remove, setRemove}) =>{
             <div className='cart_modal_item_details'>
                 {cartitem.size.title}
                 , {cartitem.temperature}
-                , {cartitem.milk.id === 1 ? null : `${cartitem.milk.title}`}
+                 {cartitem.milk.id === 1 ? null : `, ${cartitem.milk.title}`}
                 {cartitem.sugar === "NA" ? null: `, ${sugarMap.get(cartitem.sugar)} Sugar`}
             </div>
 

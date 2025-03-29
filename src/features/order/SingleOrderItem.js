@@ -9,33 +9,37 @@ const SingleOrderItem = ({item}) =>{
     const dispatch = useDispatch();
     console.log(item)
     const menuitem = useSelector(state=>getMenuitemById(state, item.menuitem.id))
+
     const handleClick =() =>{
-        // dispatch(triggerMenuItem({cartitem: item} ))
-        // dispatch(triggerCustomizeModal(
-        //     {
-        //         menuitem_pk: item.menuitem_id,
-        //         milk_pk: item.milk_id,
-        //         temperature: item.temperature,
-        //         sweetness: item.sweetness,
-        //         size: item.size,
-        //         price: item.price,
-        //         quantity: 1
-        //     }
-        // ))
+        console.log("repeat order item")
+
+        dispatch(triggerCustomizeModal(
+            {
+                'id': null,
+                'menuitem': menuitem,
+                'milk': item.milk,
+                'temperature': item.temperature,
+                'sugar': item.sugar,
+                'size': item.size,
+                'quantity': 1
+            }
+        ))
+            // setCartShow(false);
+
     }
     return(
         <div className='singleorder_item'>
 
              {/*<Link to={`${homeLink}/menuitems/${item.menuitem_id}`} className='orderhistory_order_img_container'> */}
-            <div className='orderhistory_order_img_container' onClick={handleClick}>
+            <div className='orderhistory_order_img_container' style={{"cursor": "pointer"}} onClick={handleClick}>
                 <img src={`${apiLink}/images/${menuitem.imageUrl}`} className="orderhistory_order_img" alt="{item.title}"></img>
                 <div className="qty_circle">{item.quantity}</div>
             </div>
             {/*/!* </Link> *!/*/}
             <div style={{width: '100%'}}>
-                <Link to={`${homeLink}/menuitems/${item.menuitem.id}`} className="solid_link">
-                    <b>{item.menuitem.title}</b>
-                </Link>
+
+                <div onClick={handleClick} style={{"cursor": "pointer"}}><b>{item.menuitem.title}</b></div>
+
                 <div>
                     {item.size.title} | {item.temperature}
                     {item.milk.title === "NA" ? null : ` | ${item.milk.title}`}
