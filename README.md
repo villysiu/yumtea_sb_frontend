@@ -18,8 +18,7 @@ Visit [https://github.com/villysiu/yum_tea_sb](https://github.com/villysiu/yum_t
 and follow the instruction to start up the backend server at http://localhost:8080/.
 
 ## Youtube:  ##
-
-Coming soon
+[![YumTea frontend](https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fyoutu.be%2FWc-5hyKkA9M)](https://youtu.be/Wc-5hyKkA9M)
 
 
 ## Running the project ##

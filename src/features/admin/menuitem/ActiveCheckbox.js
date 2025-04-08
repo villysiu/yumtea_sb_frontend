@@ -6,6 +6,7 @@ import {toggleActive} from "../../menuitem/menuitemSlice";
 const ActiveCheckbox = ({menuitem}) =>{
         const dispatch = useDispatch();
         const handleChange = () =>{
+            console.log("jjj")
             dispatch(toggleActive(menuitem.id))
         }
         return (
