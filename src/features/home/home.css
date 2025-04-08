@@ -44,49 +44,40 @@
     
   }
 
+.teapouring_wrapper{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 .teapouring_img {
   width: 100%;
-  /* height: 100vh; */
-  height: calc(100vh - var(--header_height));
-  background: url("http://localhost:3000/homepage/pouring_tea.jpg") no-repeat left;
-  background-size: cover;
 
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-right: 2rem;
-  align-items: flex-end;
-  text-align: right;
 }
-.teapicking_content{
+#teapouring_animated{
+  position: absolute;
+  /*top: 50%;*/
   color: #7c610f;
   font-size: 2rem;
   font-weight: bold;
-  /* text-shadow: 0 0 14px #7c610f; */
-  text-align: right;
-  
+
+
+  animation: mymove 3s linear forwards;
+
 }
 
-div.slide-left {
-  width:100%;
-  overflow:hidden;
+@keyframes mymove {
+  from {transform: translateX(200%);}
+  to {transform: translateX(80%);}
 }
-div.slide-left p {
-  animation: 10s slide-left;
-}
-
-@keyframes slide-left {
-  from {
-    margin-right: -100%;
-    width: 300%; 
-  }
-
-  to {
-    margin-right: 0%;
-    width: 100%;
+@media all and  (max-width: 1399.98px) {
+  #teapouring_animated {
+    animation: unset;
+    left: 35%;
   }
 }
+
+
 .home_row {
   width: var(--body-width);
   display: flex;

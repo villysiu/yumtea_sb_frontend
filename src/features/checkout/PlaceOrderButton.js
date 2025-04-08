@@ -7,9 +7,6 @@ import {useEffect } from 'react'
 const PlaceOrderButton = ({tip, tax}) =>{
     const dispatch = useDispatch()
 
-
-    
-    // const cart_status = useSelector(state=>state.cart.cart.status)
     const {checkoutStatus} = useSelector(state=>state.order)
 
     

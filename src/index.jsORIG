@@ -22,7 +22,7 @@ import User from './features/user/User';
 import OrderHistory from './features/order/OrderHistory';
 
 import Checkout from './features/checkout/Checkout'
-import OrderSuccess from './features/order/OrderSuccess';
+import OrderSuccessModal from './features/order/OrderSuccessModal';
 import VisitTaste from './features/home/VisitTaste';
 import Reserve from './features/reservation/Reserve';
 import ReservationSuccess from './features/reservation/ReservationSuccess';
@@ -101,7 +101,7 @@ const router = createBrowserRouter([
                   },
                   {
                     path: "/secure/ordersuccess",
-                    element: <OrderSuccess />
+                    element: <OrderSuccessModal />
                   },        
                   {
                     path: "/secure/reservations/",

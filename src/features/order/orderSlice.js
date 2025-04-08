@@ -55,7 +55,7 @@ export const PlaceOrder=createAsyncThunk(
                 const errorMessage = await response.text(); // errorText:"Please log in to access this resource."
                 return rejectWithValue(errorMessage)
             }
-            return null;
+            return await response.json();
         }
         catch(error){
             //network error, server down etc 500-599
@@ -184,7 +184,10 @@ const orderSlice=createSlice({
     initialState: {
         orders: [],
         fetchOrdersStatus: 'idle',
+
         checkoutStatus: 'idle',
+        newOrder: null,
+
         taxRate: 0.0,
         fetchTaxRateStatus: 'idle',
 
@@ -238,6 +241,7 @@ const orderSlice=createSlice({
         .addCase(PlaceOrder.fulfilled, (state, action) => {
             state.checkoutStatus = 'succeeded'
             state.orders = [action.payload, ...state.orders]
+
         })
         .addCase(PlaceOrder.rejected, (state, action) => {
             state.checkoutStatus = 'failed'

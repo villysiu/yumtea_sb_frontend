@@ -38,7 +38,7 @@ const SingleOrderItem = ({item}) =>{
             {/*/!* </Link> *!/*/}
             <div style={{width: '100%'}}>
 
-                <div onClick={handleClick} style={{"cursor": "pointer"}}><b>{item.menuitem.title}</b></div>
+                <b onClick={handleClick} style={{"cursor": "pointer"}}>{item.menuitem.title}</b>
 
                 <div>
                     {item.size.title} | {item.temperature}

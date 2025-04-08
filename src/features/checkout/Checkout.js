@@ -27,9 +27,10 @@ const Checkout = () => {
     if(checkoutStatus === 'failed') {
         return <Navigate to="/secure/checkout" />
     }
-    if(checkoutStatus === "succeeded")
-        return <Navigate to="/secure/ordersuccess" />
+    if(checkoutStatus === "succeeded") {
 
+        return <Navigate to="/collection"/>
+    }
     if(carts.length === 0)
         return(
             <div className='checkout'>
