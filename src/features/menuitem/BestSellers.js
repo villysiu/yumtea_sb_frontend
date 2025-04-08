@@ -12,16 +12,16 @@ const BestSellers = () =>{
 
     return (
         <div className='category'>
-            <div className='category_wrapper'>
-                <img src={`${homeLink}/category/12typestea.jpg`}
-                     className="category_img" alt="Best Sellers"
-                />
-                <div className='category_label'>
+            {/*<div className='category_wrapper'>*/}
+                {/*<img src={`${homeLink}/category/12typestea.jpg`}*/}
+                {/*     className="category_img" alt="Best Sellers"*/}
+                {/*/>*/}
+                <div className='bestSeller_label'>
                     Best Sellers
                 </div>
 
-            </div>
-            <div className='menuitems_wrapper'>
+            {/*</div>*/}
+            {/*<div className='menuitems_wrapper'>*/}
 
                 <Row className='menuitem_row'>
                     {
@@ -33,7 +33,7 @@ const BestSellers = () =>{
                     }
 
                 </Row>
-            </div>
+            {/*</div>*/}
         </div>
     )
 }
