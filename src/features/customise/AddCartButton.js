@@ -1,10 +1,10 @@
  import {Button} from 'react-bootstrap'
 import {USDollar} from '../../app/global'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItemToTempCart, addItemToCart} from '../cart/cartSlice'
+import { addItemToCart} from '../cart/cartSlice'
 import {useLocation, useNavigate} from "react-router-dom";
- import {useEffect} from "react";
- import {unwrapResult} from "@reduxjs/toolkit";
+
+
 
 const AddCartButton = ({customizedItem, handleHide}) => {
     console.log(customizedItem)
@@ -17,9 +17,7 @@ const AddCartButton = ({customizedItem, handleHide}) => {
     //         'milk': milk
     //     }
     const dispatch = useDispatch()
-    const {currentUser} = useSelector(state=>state.user)
-    const location = useLocation();
-    const navigate = useNavigate();
+
     // const {tempCart, addToCartStatus} = useSelector(state=>state.cart)
 
 

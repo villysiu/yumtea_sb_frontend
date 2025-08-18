@@ -1,17 +1,9 @@
 import {Plus} from "react-bootstrap-icons";
-import {Button, Col, Modal, Row} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import {useState} from "react";
-import Form from "react-bootstrap/Form";
-import InputGroup from 'react-bootstrap/InputGroup';
-import CategoryDropdown from "../category/CategoryDropdown";
-import MilkDropdown from "../milk/MilkDropdown";
-import SugarDropdown from "../sugar/SugarDropdown";
-import TempDropdown from "../temperature/TempDropdown";
 import {useDispatch} from "react-redux";
 import {addMenuitem} from "../../menuitem/menuitemSlice";
 import MenuitemForm from "./MenuitemForm";
-import menuitemForm from "./MenuitemForm";
-import {useLocation, useNavigate} from "react-router-dom";
 
 const AddMenuitemButton = () =>{
     const dispatch = useDispatch();
@@ -43,12 +35,12 @@ const AddMenuitemButton = () =>{
         showCreate(false)
 
     }
-    const handleChange = e => {
-        setNewMenuitem(prev => ({
-            ...prev,
-            [e.target.id]: e.target.value
-        }))
-    }
+    // const handleChange = e => {
+    //     setNewMenuitem(prev => ({
+    //         ...prev,
+    //         [e.target.id]: e.target.value
+    //     }))
+    // }
 
     return (
         <>

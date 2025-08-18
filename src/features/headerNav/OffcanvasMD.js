@@ -1,6 +1,6 @@
 import {Col, Offcanvas, Row} from "react-bootstrap";
 import {useSelector} from "react-redux";
-import {homeLink} from "../../app/global";
+import {homeLink, imgLink} from "../../app/global";
 import {Link} from "react-router-dom";
 
 const OffcanvasMD = ({show, setShow}) =>{
@@ -10,7 +10,7 @@ const OffcanvasMD = ({show, setShow}) =>{
         <Offcanvas show={show} onHide={()=>setShow(false)}>
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>
-                    <img src={`${homeLink}/logo/yumtea_logo.png`} alt="" className="offcanvas_logo" />
+                    <img src={`${imgLink}/logo/yumtea_logo.png`} alt="" className="offcanvas_logo" />
                 </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
@@ -21,7 +21,7 @@ const OffcanvasMD = ({show, setShow}) =>{
 
                             <Col key={category.id} xs={6} className="offcanvas_category_img_wrapper">
                                 <Link to={`${homeLink}/collection`} className="offcanvas_category_link" onClick={()=>setShow(false)}>
-                                <img src={`${homeLink}/category/${category.imageUrl}`} className="offcanvas_category_img"/>
+                                <img src={`${imgLink}/menuitems/${category.imageUrl}`} className="offcanvas_category_img"/>
                                 <div className="offcanvas_category_img_overlay">{category.title} </div>
                                 </Link>
                             </Col>
@@ -40,12 +40,12 @@ const OffcanvasMD = ({show, setShow}) =>{
                             Support
                         </Link>
                     </Col>
-                    {currentUser && currentUser.isAdmin &&
+                    {/* {currentUser && currentUser.isAdmin &&
                     <Col xs={12}>
                         <Link to={`${homeLink}/admin/signin`} className="offcanvas_category_link text" onClick={()=>setShow(false)}>
                             Admin Panel
                         </Link>
-                    </Col>}
+                    </Col>} */}
                 </Row>
             </Offcanvas.Body>
         </Offcanvas>

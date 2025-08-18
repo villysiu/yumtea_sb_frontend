@@ -1,9 +1,9 @@
 import {Trash} from 'react-bootstrap-icons'
-import { useDispatch, useSelector} from 'react-redux'
-import {forwardRef, useState, useEffect} from 'react'
+import { useDispatch} from 'react-redux'
+import {forwardRef} from 'react'
 
 import {Button} from 'react-bootstrap'
-import {removeItem, removeItemFromCart} from './cartSlice'
+import {removeItemFromCart} from './cartSlice'
 const CartModalRemove = forwardRef(
 //     function CartModalRemove({menuitem_title, pk, removeRef}){
     function CartModalItemRemove({cartitem, remove, setRemove}){

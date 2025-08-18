@@ -1,5 +1,4 @@
 import './customize.css'
-import {getMenuitemById} from '../menuitem/menuitemSlice'
 import {useSelector} from 'react-redux'
 import CustomizeTemp from "./CustomizeTemp"
 import CustomizeSize from "./CustomizeSize"
@@ -10,13 +9,12 @@ import UpdateQuantity from "./UpdateQuantity"
 import AddCartButton from './AddCartButton'
 import { useState } from "react"
 import { Modal } from 'react-bootstrap'
-import  {homeLink} from '../../app/global'
-import menuitem from "../menuitem/Menuitem";
+
 
 const CustomizeDetails = ({handleHide}) =>{
 
     const {itemToCustomize} = useSelector(state=>state.menuitem)
-
+    console.log("customize details item to customize", itemToCustomize)
     const [temperature, setTemperature] = useState(itemToCustomize.temperature)
     const [size, setSize] =useState(itemToCustomize.size)
     const [milk, setMilk] = useState(itemToCustomize.milk)

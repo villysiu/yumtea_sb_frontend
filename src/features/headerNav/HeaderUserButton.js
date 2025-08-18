@@ -53,13 +53,13 @@ const HeaderUserButton =() =>{
                             Order History
                         </div>
                     </Link>
-                    {currentUser && currentUser.isAdmin &&
+                    {/* {currentUser && currentUser.isAdmin &&
                         <Link to="/admin/menuitems" state={location.pathname} className='user_modal_link' onClick={handleToggle} >
                             <div className='user_modal_item'>
                                 Admin Panel
                             </div>
                         </Link>
-                    }
+                    } */}
                     <LogoutNavButton setShow={setShow}/>
 
                 </Modal>

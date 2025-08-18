@@ -1,4 +1,3 @@
-import {Offcanvas} from "react-bootstrap";
 import {useState} from "react";
 import {Link} from "react-router-dom";
 

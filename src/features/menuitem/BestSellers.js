@@ -12,28 +12,24 @@ const BestSellers = () =>{
 
     return (
         <div className='category'>
-            {/*<div className='category_wrapper'>*/}
-                {/*<img src={`${homeLink}/category/12typestea.jpg`}*/}
-                {/*     className="category_img" alt="Best Sellers"*/}
-                {/*/>*/}
-                <div className='bestSeller_label'>
-                    Best Sellers
-                </div>
 
-            {/*</div>*/}
-            {/*<div className='menuitems_wrapper'>*/}
+            <div className='bestSeller_label'>
+                Best Sellers
+            </div>
 
-                <Row className='menuitem_row'>
-                    {
-                        array.map((menuitem, idx) => {
-                            return (
-                                <SingleBestSeller key={menuitem.menuitemId} idx={idx} menuitemId={menuitem.menuitemId} />
-                            )
-                        })
-                    }
 
-                </Row>
-            {/*</div>*/}
+
+            <Row className='menuitem_row'>
+                {
+                    array.map((menuitem, idx) => {
+                        return (
+                            <SingleBestSeller key={menuitem.menuitemId} idx={idx} menuitemId={menuitem.menuitemId} />
+                        )
+                    })
+                }
+
+            </Row>
+           
         </div>
     )
 }

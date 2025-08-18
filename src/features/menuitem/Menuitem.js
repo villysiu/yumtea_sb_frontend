@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import {apiLink, homeLink} from "../../app/global"
+import {imgLink} from "../../app/global"
 import { USDollar } from "../../app/global"
 import {Modal} from "react-bootstrap"
 import {useSelector, useDispatch} from 'react-redux'
@@ -38,7 +38,7 @@ const Menuitem = ({menuitem}) =>{
                 menuitem.imageUrl !== null &&
           
                 <div className="menuitem_img_wrapper">
-                    <img src={`${apiLink}/images/${menuitem.imageUrl}`} className="menuitem_img" alt={menuitem.title}></img>
+                    <img src={`${imgLink}/menuitems/${menuitem.imageUrl}`} className="menuitem_img" alt={menuitem.title}></img>
                 </div> 
             }
             <div className='menuitem_plus_circle'>

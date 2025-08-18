@@ -1,6 +1,6 @@
 import SingleCategory from './SingleCategory'
 import {useSelector} from 'react-redux'
-import { useLayoutEffect } from 'react';
+
 import { useLocation } from 'react-router-dom';
 const Categories = () =>{
     const location = useLocation();

@@ -1,16 +1,12 @@
-import {useEffect, useState} from "react";
-import { useSelector} from "react-redux";
-import Form from 'react-bootstrap/Form';
-import {Button, Col, Modal, Row} from "react-bootstrap";
+import {useState} from "react";
+import {Col, Row} from "react-bootstrap";
 import AddMenuitemButton from "./AddMenuitemButton";
-
 import EditMenuitemButton from "./EditMenuitemButton";
-import DeleteMenuitemButton from "./DeleteMenuitemButton";
 import SearchMenuitem from "./SearchMenuitem";
 import ActiveCheckbox from "./ActiveCheckbox";
 
 const ManageMenuitem = ({setChoice}) =>{
-    // const {array, status} = useSelector(state=>state.menuitem.menuitems)
+
     const [menuitems, setMenuitems] = useState([])
     const sugarAbbr = new Map([
         ["NA", "NA"],
@@ -21,9 +17,6 @@ const ManageMenuitem = ({setChoice}) =>{
         ["HUNDRED", "100%"]
     ]);
 
-    // useEffect(() => {
-    //     setMenuitems(array)
-    // }, [array]);
 
     return(
         <>

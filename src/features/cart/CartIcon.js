@@ -9,9 +9,9 @@ import {useLocation} from 'react-router-dom'
 const CartIcon =() =>{
 
     const location = useLocation();
-    const {count} = useSelector(state => getSubtotal(state))
-    const {cartMessage} = useSelector(state => state.message)
-
+    const {count} = useSelector(state => getSubtotal(state));
+    const {cartMessage} = useSelector(state => state.message);
+    const {fetchCartStatus} = useSelector(state=>state.cart);
     const [cartShow, setCartShow] = useState(false);
 
     const handleClick = () => {
@@ -19,10 +19,14 @@ const CartIcon =() =>{
     }
     
     useEffect(()=>{
-      if(cartMessage !== null){
+        console.log("cartMessage changed: ", cartMessage)
+        console.log("fetchCartStatus: ", fetchCartStatus)
+        console.log("cartMessage: ", cartMessage)
+      if(cartMessage !== null && fetchCartStatus === 'succeeded'){
+        console.log("show cart modal")
             setCartShow(true)
         }
-    }, [cartMessage])
+    }, [cartMessage, fetchCartStatus])
 
     // Do not show cart icon in header navbar whrn in the following pages
     if(location.pathname === '/secure/checkout')

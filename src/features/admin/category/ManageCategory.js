@@ -1,5 +1,3 @@
-import SearchMenuitem from "../menuitem/SearchMenuitem";
-import AddMenuitemButton from "../menuitem/AddMenuitemButton";
 import {Col, Row} from "react-bootstrap";
 
 const ManageCategory = () =>{

@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {useState, useRef} from 'react';
-import {Modal} from 'react-bootstrap'
+import {useRef} from 'react';
+
 import {
     triggerCustomizeModal,
     getMilkById,

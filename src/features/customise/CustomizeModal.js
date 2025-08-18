@@ -14,8 +14,7 @@ const CustomizeModal = () =>{
 
 
     useEffect(()=>{
-        // if()
-            setShow(itemToCustomize !== null)
+        setShow(itemToCustomize !== null)
 
     }, [itemToCustomize])
 

@@ -1,5 +1,5 @@
 import MakeReservationButton from "../reservation/MakeReservationButton"
-import {homeLink} from "../../app/global";
+import {imgLink} from "../../app/global";
 import ContactUs from "../support/ContactUs";
 import Reservations from "../reservation/Reservations";
 import {useLocation} from "react-router-dom";
@@ -9,7 +9,7 @@ const VisitTaste = () =>{
     return(
         <div>
             <div className="location_bg_wrapper">
-                <img src={`${homeLink}/homepage/chinese-gongfucha-teakan01.webp`} alt="" className="loaction_bg" />
+                <img src={`${imgLink}/homepage/chinese-gongfucha-teakan01.webp`} alt="" className="loaction_bg" />
                 <div className='location_title'><b>Yum Tea Tasting Room </b></div>
                 {/* <MakeReservationButton /> */}
               

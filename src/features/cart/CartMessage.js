@@ -13,7 +13,7 @@ const CartMessage = () => {
                 dispatch(clearCartMessage());
             }, 3000);
         }
-    }, [cartMessage]);
+    }, [cartMessage, dispatch]);
 
     if(cartMessage === null)
         return null

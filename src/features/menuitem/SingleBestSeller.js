@@ -3,7 +3,7 @@ import {getMenuitemById, triggerCustomizeModal} from "./menuitemSlice";
 import Menuitem from "./Menuitem";
 import {Col} from "react-bootstrap";
 import {StarFill, BookmarkFill} from "react-bootstrap-icons";
-import {apiLink, USDollar} from "../../app/global";
+import {apiLink, imgLink, USDollar} from "../../app/global";
 
 const SingleBestSeller = ({idx, menuitemId}) =>{
     const menuitem = useSelector(state=>getMenuitemById(state, menuitemId))
@@ -27,7 +27,7 @@ const SingleBestSeller = ({idx, menuitemId}) =>{
         <Col xs={12} md={4} className="mb-3" key={menuitem.id}>
 
             <div className="single_bestSeller_img_wrapper" onClick={handleClick}>
-                <img src={`${apiLink}/images/${menuitem.imageUrl}`} className="single_bestSeller_img" alt={menuitem.title}></img>
+                <img src={`${imgLink}/menuitems/${menuitem.imageUrl}`} className="single_bestSeller_img" alt={menuitem.title}></img>
 
                 <div className="single_bestSeller_whitebox">
                     <div className="single_bestSeller_text"><b>{menuitem.title} </b></div>

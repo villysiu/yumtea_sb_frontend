@@ -5,7 +5,6 @@ export const fetchCategories=createAsyncThunk(
     'menuitem/fetchCategories',
     async (_, {rejectWithValue}) => {
         try {
-            // const response=await fetch(`${apiLink}/api/categories`, {
             const response=await fetch(`${apiLink}/categories`, {
                 method: "GET",
                 headers: {

@@ -1,5 +1,4 @@
-import { Modal, Button } from "react-bootstrap"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './cart.css'
 import EmptyCart from './EmptyCart'
 import CartModalItem from './CartModalItem'
@@ -10,7 +9,7 @@ import {useSelector} from 'react-redux'
 
 const CartModal = ({setCartShow}) =>{
     console.log("in cart modal")
-    const {carts} = useSelector(state=>state.cart)
+    const {carts, cart, fetchCartStatus} = useSelector(state=>state.cart)
     const [remove, setRemove] = useState(null)
 
     if(carts.length === 0){
@@ -37,6 +36,16 @@ const CartModal = ({setCartShow}) =>{
                 
                 <CheckoutButton setCartShow={setCartShow}/>
             </div>
+
+
+            {((cart.status === 'loading' && cart.action === 'remove') || fetchCartStatus=== 'loading') 
+            && (
+                <div className="cart-loading-overlay">
+                    <div className="spinner-border text-light" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+        )}
       </>
     )
 }

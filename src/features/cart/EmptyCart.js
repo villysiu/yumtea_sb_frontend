@@ -1,4 +1,4 @@
-import { homeLink } from "../../app/global"
+
 import {Cart4} from "react-bootstrap-icons";
 const EmptyCart = () =>{
     return (

@@ -1,9 +1,5 @@
-import {Button, Col, Modal, Row} from "react-bootstrap";
-import MenuitemForm from "./MenuitemForm";
-import Form from "react-bootstrap/Form";
-
 const ImageForm = ({image, setImage, file, setFile}) => {
-    // const [image, setImage] = useState(null);
+    
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]); // Get the selected file

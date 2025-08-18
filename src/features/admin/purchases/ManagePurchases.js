@@ -1,14 +1,11 @@
-import SearchAccount from "../account/SearchAccount";
 import {Col, Row} from "react-bootstrap";
-import UpdateAccountCheckbox from "../account/UpdateAccountCheckbox";
-import DeleteAccountButton from "../account/DeleteAccountButton";
+
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {fetchAccounts} from "../account/accountSlice";
+
 import Spinner from "react-bootstrap/Spinner";
 import {fetchAllOrders} from "../../order/orderSlice";
 import SearchPurchase from "./SearchPurchase";
-import EditPurchaseButton from "./EditPurchaseButton";
 import DeletePurchaseButton from "./DeletePurchaseButton";
 import ManagePurchaseLineitems from "./ManagePurchaseLineitems";
 import {USDollar} from "../../../app/global";
@@ -29,7 +26,7 @@ const ManagePurchases = () =>{
     useEffect(() => {
         if(fetchAllOrdersStatus === "idle")
             dispatch(fetchAllOrders())
-    }, [fetchAllOrdersStatus]);
+    }, [fetchAllOrdersStatus, dispatch]);
 
     if(fetchAllOrdersStatus === "loading")
         return <Spinner />

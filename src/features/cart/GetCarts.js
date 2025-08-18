@@ -24,7 +24,7 @@ const GetCarts = () => {
             else if (cart.action === "remove")
                 dispatch(removeItemFromCart(tempCart))
         }
-    }, [currentUser, dispatch, tempCart])
+    }, [currentUser, dispatch, tempCart, cart.action, cart.status])
 
 
 
@@ -41,7 +41,7 @@ const GetCarts = () => {
         // console.log(addToCartStatus)
         if(cart.status === "failed")
             navigate('/user/signin', { state: location.pathname });
-    }, [cart]);
+    }, [cart, location.pathname, navigate]);
 
     return null
 }

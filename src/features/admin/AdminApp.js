@@ -22,7 +22,7 @@ const AdminApp = () =>{
         if(fetchUserStatus === 'idle'){
             dispatch(fetchCurrentUser())
         }
-    }, [fetchUserStatus])
+    }, [fetchUserStatus, dispatch])
 
     if(fetchUserStatus === "loading")
         return <Spinner />

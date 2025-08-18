@@ -1,4 +1,4 @@
-import {homeLink} from "../../app/global";
+import {imgLink} from "../../app/global";
 
 const Ingredients = () =>{
     const dataArr = [
@@ -13,14 +13,14 @@ const Ingredients = () =>{
             <div className='homepage_row'>
                 
             {
-                dataArr.map(([imgLink, imgText])=>{
+                dataArr.map(([imgName, imgAlt])=>{
                     return (
-                        <div key={imgLink} className="ingredients_col">
+                        <div key={imgName} className="ingredients_col">
                             {/*<img className="ingredients_img" src={`${homeLink}/homepage/${imgLink}.jpg`} />*/}
                             <img className="ingredients_img"
-                                 src={`${homeLink}/homepage/${imgLink}.jpg`}
-                                 alt={imgText} />
-                            <div className="ingredients_text">{imgText}</div>
+                                 src={`${imgLink}/homepage/${imgName}.jpg`}
+                                 alt={imgAlt} />
+                            <div className="ingredients_text">{imgAlt}</div>
 
                         </div>
                     )

@@ -211,9 +211,7 @@ const cartSlice=createSlice({
         })
 
         .addCase(addItemToCart.pending, (state, action) => {
-            // state.addToCartStatus = 'loading'
-            // state.removeStatus = 'idle'
-            // state.updateStatus = 'idle'
+            
             state.cart={
                 status: 'loading',
                 action: 'add'
@@ -279,7 +277,6 @@ const cartSlice=createSlice({
 
         })
         .addCase(updateItemInCart.fulfilled, (state, action) => {
-            // state.updateStatus = 'succeeded'
             state.fetchCartStatus = "idle"
             state.cart={
                 status: 'succeeded',

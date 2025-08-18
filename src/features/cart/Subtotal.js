@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux'
-import { getSubtotal, getItemsCountInCart } from './cartSlice'
+import { getSubtotal } from './cartSlice'
 import {USDollar} from '../../app/global'
 
 const Subtotal = () =>{

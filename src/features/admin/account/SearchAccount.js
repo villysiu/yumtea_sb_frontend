@@ -10,7 +10,7 @@ const SearchAccount = ({setAccounts}) =>{
 
     useEffect(() => {
         setAccounts(res)
-    }, [res]);
+    }, [res, setAccounts]);
 
     return(
         <Form className="my-4">

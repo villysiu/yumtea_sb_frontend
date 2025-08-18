@@ -1,22 +1,13 @@
 import SearchMenuitem from "./SearchMenuitem";
-import AddMenuitemButton from "./AddMenuitemButton";
-import {Col, Modal, Row} from "react-bootstrap";
-import EditMenuitemButton from "./EditMenuitemButton";
-import DeleteMenuitemButton from "./DeleteMenuitemButton";
-import {useSelector} from "react-redux";
+import {Col, Row} from "react-bootstrap";
 import {useState} from "react";
-import {apiLink, homeLink} from "../../../app/global";
-import {Image, PencilSquare, PlusCircle, PlusCircleFill} from "react-bootstrap-icons";
 import AddImageButton from "./AddImageButton";
-import ImageForm from "./ImageForm";
+
 import EditImage from "./EditImage";
 
 const ManageImage = () => {
     const [menuitems, setMenuitems] = useState([])
-    const [show, setShow] = useState(false)
-    const handleClose = () => {
-        setShow(false)
-    }
+
     return(
       <>
 

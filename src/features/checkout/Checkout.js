@@ -1,12 +1,12 @@
 import './checkout.css'
 
-import {Navigate, useLocation, useNavigate} from "react-router-dom"
+import {Navigate } from "react-router-dom"
 import { USDollar } from "../../app/global"
 import { useSelector } from "react-redux"
 import { getSubtotal } from "../cart/cartSlice"
 
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Tip from "./Tip"
 import PlaceOrderButton from './PlaceOrderButton'
 import CartSummaryLineItem from "./CartSummaryLineItem";
@@ -15,7 +15,7 @@ import BackToMenuButton from "./BackToMenuButton";
 
 const Checkout = () => {
     console.log("in checkout page")
-    const location = useLocation()
+    
 
     const {carts} = useSelector(state => state.cart)
 

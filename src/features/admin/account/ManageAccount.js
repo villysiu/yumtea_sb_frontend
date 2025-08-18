@@ -1,16 +1,12 @@
-import SearchMenuitem from "../menuitem/SearchMenuitem";
-import AddMenuitemButton from "../menuitem/AddMenuitemButton";
 import {Col, Row} from "react-bootstrap";
-import EditMenuitemButton from "../menuitem/EditMenuitemButton";
-import DeleteMenuitemButton from "../menuitem/DeleteMenuitemButton";
 import {useEffect, useState} from "react";
 import SearchAccount from "./SearchAccount";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAccounts} from "./accountSlice";
 import Spinner from "react-bootstrap/Spinner";
-import Form from 'react-bootstrap/Form';
 import UpdateAccountCheckbox from "./UpdateAccountCheckbox";
 import DeleteAccountButton from "./DeleteAccountButton";
+
 const ManageAccount = () =>{
     const dispatch = useDispatch()
     const [accounts, setAccounts] = useState([])
@@ -19,7 +15,7 @@ const ManageAccount = () =>{
     useEffect(() => {
         if(fetchAccountsStatus === "idle")
             dispatch(fetchAccounts())
-    }, [fetchAccountsStatus]);
+    }, [fetchAccountsStatus, dispatch]);
 
     if(fetchAccountsStatus === "loading")
         return <Spinner />
@@ -43,7 +39,7 @@ const ManageAccount = () =>{
 
                 {
                     accounts.map(account => {
-                        {console.log(account.id , currentUser.id )}
+      
                         return (
                             account.id === currentUser.id ?
 
