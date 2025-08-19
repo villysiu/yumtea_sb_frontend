@@ -23,19 +23,30 @@ const Signup = () =>{
 
 
     const dispatch=useDispatch();
-    const {registerStatus} = useSelector(state=>state.user)
+    const {userStatus, 
+        // registerStatus
+    } = useSelector(state=>state.user)
     const navigate = useNavigate();
 
+    // useEffect(()=>{
+    //     if(registerStatus === 'succeeded')
+    //         navigate('/user/signin' )
+    //     else if(registerStatus === "failed"){
+    //         setNickname("")
+    //         setEmail("");
+    //         setPassword("");
+    //     }
+    // }, [registerStatus])
+
     useEffect(()=>{
-        if(registerStatus === 'succeeded')
+        if(userStatus === 'succeeded')
             navigate('/user/signin' )
-        else if(registerStatus === "failed"){
+        else if(userStatus === "failed"){
             setNickname("")
             setEmail("");
             setPassword("");
         }
-    }, [registerStatus])
-
+    }, [userStatus])
     const handleSubmit=e=>{
         e.preventDefault()
         dispatch(registerUser({'nickname': nickname, 'email': email, 'password': password}))

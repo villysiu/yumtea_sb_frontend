@@ -5,7 +5,7 @@ import {logoutUser} from "../../user/userSlice";
 export const fetchAccounts=createAsyncThunk(
     'account/fetchAccounts',
     async (_, {rejectWithValue}) => {
-        console.log("fetching accounts")
+        console.log("fetching all accounts")
 
         try {
             const response=await fetch(`${apiLink}/resource/accounts`, {

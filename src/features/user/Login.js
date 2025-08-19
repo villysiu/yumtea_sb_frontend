@@ -18,18 +18,18 @@ console.log("LOGIN PAGE")
     const [passwordError, setPasswordError] = useState("")
     const dispatch=useDispatch();
 
-    const {loginStatus} = useSelector(state=>state.user)
+    // const {loginStatus} = useSelector(state=>state.user)
+    const {userStatus} = useSelector(state=>state.user)
 
     useEffect(()=>{
-       if(loginStatus === "failed"){
+       if(userStatus === "failed"){
             setEmail("");
             setPassword("");
         }
-        // if(loginStatus === 'succeeded'){
-        //     dispatch(fetchCurrentUser());
-        // }
-    }, [loginStatus])
-
+    
+    // }, [loginStatus])
+    
+    }, [userStatus])
 
     const handleSubmit=e=>{
         e.preventDefault()

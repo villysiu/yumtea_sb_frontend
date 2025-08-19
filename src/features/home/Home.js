@@ -22,6 +22,8 @@ function Home() {
   console.log("in APP")
   const cartStatus = useSelector((state) => state.cart.cart.status);
   const cartAction = useSelector((state) => state.cart.cart.action);
+  // const {fetchUserStatus, loginStatus, logoutStatus, registerStatus, updateStatus} = useSelector(state=>state.user);
+const {fetchUserStatus, userStatus} = useSelector((state) => state.user);
 
   return (
       <>
@@ -39,7 +41,20 @@ function Home() {
                <Footer />
           </div>
       </div>
-      {cartStatus === 'loading' && cartAction !== 'remove' && <LoadingOverlay />}
+      {
+        // Show loading overlay if any of the following conditions are met:
+       (
+        (cartStatus === 'loading' && cartAction !== 'remove') || 
+        (fetchUserStatus === 'loading' || userStatus === 'loading')
+        ) && <LoadingOverlay />
+       }
+              {/* // || loginStatus=== 'loading' ||
+              // logoutStatus === 'loading' ||registerStatus === 'loading' ||
+              // updateStatus=== 'loading'
+        // ) 
+      
+      // && <LoadingOverlay /> */}
+     
       </>
      
   );
