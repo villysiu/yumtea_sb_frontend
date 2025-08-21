@@ -187,10 +187,6 @@ const userSlice=createSlice({
 
         currentUser: null,
         fetchUserStatus: 'idle',
-        // loginStatus: 'idle',
-        // logoutStatus: 'idle',
-        // registerStatus:'idle',
-        // updateStatus: 'idle'
         userStatus: 'idle'
    
     },
@@ -198,17 +194,13 @@ const userSlice=createSlice({
         logout: (state) => {
             state.currentUser = null;
             state.fetchUserStatus = 'idle';
-            // state.loginStatus = 'idle';
-            // state.logoutStatus = 'succeeded';
-            // state.registerStatus = 'idle';
-            // state.updateStatus = 'idle';
+           
             state.userStatus = 'idle';
           },
         removeUser: (state) => {
              console.log('removing??')
             state.currentUser = null
             state.fetchUserStatus = 'idle'
-            // state.loginStatus = 'idle'
             state.userStatus = 'idle';
         }
     },
@@ -222,69 +214,49 @@ const userSlice=createSlice({
 
             state.currentUser= action.payload
             state.fetchUserStatus = 'succeeded'
-            // state.loginStatus = 'succeeded'
-            // state.logoutStatus = 'idle'
             state.userStatus = 'succeeded';
         })
         .addCase(fetchCurrentUser.rejected, (state, action) => {
             // DO NOTHING WHEN NO CURRENT USER
             state.currentUser = null;
             state.fetchUserStatus = 'failed';
-            // state.loginStatus = 'idle';
-            // state.logoutStatus = 'idle';
-            // state.registerStatus = 'idle';
-            // state.updateStatus = 'idle';
             state.userStatus = 'idle';
         })
 
         .addCase(loginUser.pending, (state, action) => {
-            // state.loginStatus = 'loading'
-            // state.registerStatus = 'idle'
-            // state.logoutStatus = 'idle'
             state.userStatus = 'loading';
         })
         .addCase(loginUser.fulfilled, (state, action) => {
             console.log(action.payload)
             state.currentUser = action.payload
             state.fetchUserStatus = 'succeeded'
-            // state.loginStatus = 'succeeded'
             state.userStatus = 'succeeded';
 
         })
         .addCase(loginUser.rejected, (state, action) => {
-            // state.loginStatus = 'failed'
             state.userStatus = 'failed';
         })
 
         .addCase(logoutUser.pending, (state, action) => {
-            // state.logoutStatus = 'loading'
             state.userStatus = 'loading';
         })
         .addCase(logoutUser.fulfilled, (state, action) => {
             state.currentUser = null;
 
             state.fetchUserStatus = 'idle';
-            // state.loginStatus = 'idle';
-            // state.logoutStatus = 'succeeded';
-            // state.registerStatus = 'idle';
-            // state.updateStatus = 'idle';
             state.userStatus = 'succeeded';
         })
         .addCase(logoutUser.rejected, (state, action) => {
-            // state.logoutStatus = 'failed'
             state.userStatus = 'failed';
             
         })
           .addCase(registerUser.pending, (state, action) => {
-            //   state.registerStatus = 'loading'
               state.userStatus = 'loading';
           })
           .addCase(registerUser.fulfilled, (state, action) => {
-            //   state.registerStatus = 'succeeded';
               state.userStatus = 'succeeded';
           })
           .addCase(registerUser.rejected, (state, action) => {
-            //   state.registerStatus = 'failed'
               state.userStatus = 'failed';
 
           })

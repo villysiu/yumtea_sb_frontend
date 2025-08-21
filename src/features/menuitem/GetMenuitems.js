@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import {
@@ -10,74 +9,70 @@ import {
     fetchBestSellerss,
     fetchTemperatures
 } from "./menuitemSlice"
-// import FullSpinner from "../headerNav/FullSpinner"
 
 
-const GetMenuitems = ({setGetMenuitem}) =>{
-    console.log("Getting ManageMenuitem")
+
+const GetMenuitems = ({getMenuitem, setGetMenuitem}) =>{
+    console.log("Getting Menuitem")
     const dispatch = useDispatch()
-    let menuitems_status = useSelector(state => state.menuitem.menuitems.status)
-    let milk_status = useSelector(state => state.menuitem.milk.status)
-    let category_status = useSelector(state => state.menuitem.category.status)
-    let size_status = useSelector(state => state.menuitem.size.status)
-    let sugar_status = useSelector(state => state.menuitem.sugar.status)
-    let temperature_status = useSelector(state => state.menuitem.temperature.status)
-    let bestsellers_status = useSelector(state=>state.menuitem.bestSellers.status)
+    let menuitemsStatus = useSelector(state => state.menuitem.menuitems.status)
+    let milkStatus = useSelector(state => state.menuitem.milk.status)
+    let categoryStatus = useSelector(state => state.menuitem.category.status)
+    let sizeStatus = useSelector(state => state.menuitem.size.status)
+    let sugarStatus = useSelector(state => state.menuitem.sugar.status)
+    let temperatureStatus = useSelector(state => state.menuitem.temperature.status)
+    let bestsellersStatus = useSelector(state=>state.menuitem.bestSellers.status)
     
-    // console.log("menuitem: " + menuitems_status);
-    // console.log("milk: " + milk_status);
-    // console.log("category: " + category_status);
-    // console.log("size_status: " + size_status);
-    // console.log("sugar_status: " + sugar_status);
-    // console.log("bestsellers_status: " + bestsellers_status);
+    // console.log("menuitem: " + menuitemsStatus);
+    // console.log("milk: " + milkStatus);
+    // console.log("category: " + categoryStatus);
+    // console.log("sizeStatus: " + sizeStatus);
+    // console.log("sugarStatus: " + sugarStatus);
+    // console.log("bestsellersStatus: " + bestsellersStatus);
 
     useEffect(()=>{
-        if(menuitems_status==='idle'){
+        if(getMenuitem) return;
+
+        if(menuitemsStatus==='idle'){
             dispatch(fetchMenuitems())
-            // setSpinner(true)
         }
-        if(milk_status === 'idle'){
+        if(milkStatus === 'idle'){
             dispatch(fetchMilks())
-            // setSpinner(true)
         }
-        if(category_status==='idle'){
+        if(categoryStatus==='idle'){
             dispatch(fetchCategories())
-            // setSpinner(true)
         }
-        if(size_status === 'idle'){
+        if(sizeStatus === 'idle'){
             dispatch(fetchSizes());
-            // setSpinner(true);
         }
-        if(sugar_status === 'idle'){
+        if(sugarStatus === 'idle'){
             dispatch(fetchSugars());
-            // setSpinner(true);
         }
-        if(temperature_status === 'idle'){
+        if(temperatureStatus === 'idle'){
             dispatch(fetchTemperatures());
-            // setSpinner(true);
         }
-        if(bestsellers_status === 'idle'){
+        if(bestsellersStatus === 'idle'){
             dispatch(fetchBestSellerss());
         }
 
 
-        if(menuitems_status === 'succeeded'
-            && milk_status === 'succeeded'
-            && category_status === 'succeeded'
-            && size_status === 'succeeded'
-            && sugar_status === 'succeeded'
-            && temperature_status === 'succeeded'
-            && bestsellers_status === 'succeeded'
-        ){
-            console.log("all succeded")
-            setGetMenuitem(true)
-        }
-        else
-            setGetMenuitem(false)
+        const allSucceeded = 
+            menuitemsStatus === 'succeeded' &&
+            milkStatus === 'succeeded' &&
+            categoryStatus === 'succeeded' &&
+            sizeStatus === 'succeeded' &&
+            sugarStatus === 'succeeded' &&
+            temperatureStatus === 'succeeded' &&
+            bestsellersStatus === 'succeeded';
+
+            
+        setGetMenuitem(allSucceeded);
         
 
         
-    }, [dispatch, menuitems_status, milk_status, category_status, size_status, sugar_status,temperature_status, bestsellers_status, setGetMenuitem])
+    }, [dispatch, menuitemsStatus, milkStatus, categoryStatus, sizeStatus, sugarStatus, temperatureStatus, bestsellersStatus, setGetMenuitem])
 
+    // if(getMenuitem === false)
+        return null;
 }
 export default GetMenuitems

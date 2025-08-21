@@ -1,63 +1,74 @@
-import '../../App.css';
-import React, {useEffect} from 'react';
+import Ingredients from './Ingredients';
+import {imgLink} from '../../app/global';
+import React from 'react';
+const Home = () =>{
 
-import {Outlet, useLocation} from 'react-router-dom';
-// import Messages from './features/message/Messages';
-
-import Header from '../headerNav/Header';
-import Footer from './Footer'
-import { useState } from 'react';
-import { useDispatch, useSelector} from 'react-redux'
-import {Modal} from 'react-bootstrap'
-
-import Messages from "../message/Messages";
-import {resetOrderStatus} from "../order/orderSlice";
-import Spinner from "react-bootstrap/Spinner";
-import OrderSuccessDetails from "../order/OrderSuccessDetails";
-import OrderSuccessModal from "../order/OrderSuccessModal";
-import CustomizeModal from "../customise/CustomizeModal";
-import LoadingOverlay from "./LoadingOverlay";
-
-function Home() {
-  console.log("in APP")
-  const cartStatus = useSelector((state) => state.cart.cart.status);
-  const cartAction = useSelector((state) => state.cart.cart.action);
-  // const {fetchUserStatus, loginStatus, logoutStatus, registerStatus, updateStatus} = useSelector(state=>state.user);
-const {fetchUserStatus, userStatus} = useSelector((state) => state.user);
-
-  return (
-      <>
-       <CustomizeModal />
-        <OrderSuccessModal />
-
-
-      <div id="App">
-          <div className='appbody border border-danger'>
-              <Header />
-              <Messages />
-              <div className="content" >
-                    <Outlet />
-              </div>
-               <Footer />
-          </div>
-      </div>
-      {
-        // Show loading overlay if any of the following conditions are met:
-       (
-        (cartStatus === 'loading' && cartAction !== 'remove') || 
-        (fetchUserStatus === 'loading' || userStatus === 'loading')
-        ) && <LoadingOverlay />
-       }
-              {/* // || loginStatus=== 'loading' ||
-              // logoutStatus === 'loading' ||registerStatus === 'loading' ||
-              // updateStatus=== 'loading'
-        // ) 
       
-      // && <LoadingOverlay /> */}
-     
-      </>
-     
-  );
-}
+    return(
+        
+        <div className="home">
+            <div className='teapouring_wrapper'>
+                <img src={`${imgLink}/homepage/pouring_tea.jpg`} alt="tea pouring" className='teapouring_img'/>
+                <div id='teapouring_animated'>
+                    <p>
+                        More than just a cup of tea;
+                        <br/>
+                        it’s a journey of taste, artistry, and purpose.
+                    </p>
+                </div>
 
-export default Home;
+            </div>
+             <div className='homepage_section'>
+                <div className='homepage_subtitle'>About Us</div>
+                <img src={`${imgLink}/homepage/TeaPicking.jpg`} alt="tea_picking" className="teapicking_img"/>
+                <div className='homepage_content'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex
+                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                    eu fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit
+                    anim id est laborum.
+                </div>
+            </div>
+            <div className='homepage_section'>
+                <div className='home_row' >
+                    <div className='home_col'>
+                        <img src={`${imgLink}/homepage/teacup_color.png`} alt='' className='square_icon'/>
+                        <h3>Our Tea</h3>
+                        Lorem ipsum odor amet, consectetuer adipiscing elit. Purus dui feugiat interdum bibendum tellus,
+                        fermentum
+                        gravida nisi.
+
+                    </div>
+
+                    <div className='home_col'>
+                        <img src={`${imgLink}/homepage/no-pesticides.png`} alt='' className='square_icon'/>
+
+                        <h3>Ethically Sourced </h3>
+                        Lorem ipsum odor amet, consectetuer adipiscing elit. Purus dui feugiat interdum bibendum tellus,
+                        fermentum
+                        gravida nisi.
+
+
+                    </div>
+                    <div className="home_col">
+                        <img src={`${imgLink}/homepage/leaf.png`} alt='' className='square_icon'/>
+
+                        <h3>Genuine Origin</h3>
+                        Lorem ipsum odor amet, consectetuer adipiscing elit. Purus dui feugiat interdum bibendum tellus,
+                        fermentum
+                        gravida nisi.
+
+                    </div>
+
+                </div>
+            </div>
+            <Ingredients />
+
+        </div>
+    )
+}
+export default Home

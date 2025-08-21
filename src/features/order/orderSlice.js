@@ -3,7 +3,7 @@ import { apiLink } from "../../app/global";
 import { format } from 'date-fns';
 import {loginUser, logout, logoutUser} from "../user/userSlice";
 import {addItemToCart, clearCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
-import {clearAccount} from "../admin/account/accountSlice";
+
 
 
 
@@ -50,7 +50,7 @@ export const PlaceOrder=createAsyncThunk(
                     dispatch(logout())
                     dispatch(clearCart())
                     dispatch(clearOrder())
-                    dispatch(clearAccount())
+     
                 }
                 const errorMessage = await response.text(); // errorText:"Please log in to access this resource."
                 return rejectWithValue(errorMessage)
@@ -87,28 +87,7 @@ export const fetchTaxRate = createAsyncThunk(
         }
     }
 )
-export const fetchAllOrders=createAsyncThunk(
-    'order/fetchAllOrders',
-    async (_, {rejectWithValue}) => {
-        console.log("fetching orders")
-        try {
-            const response=await fetch(`${apiLink}/purchases/all`, {
-                method: "GET",
-                credentials: "include"
-            })
 
-            if(!response.ok) {
-                const errorText = await response.text();
-                console.log("Error :", errorText);
-                return rejectWithValue(errorText);
-            }
-            return await response.json()
-        }
-        catch(error){
-            return rejectWithValue(error.message);
-        }
-    }
-)
 export const deleteOrder=createAsyncThunk(
     'order/deleteOrder',
     async (id, {rejectWithValue}) => {
@@ -132,52 +111,8 @@ export const deleteOrder=createAsyncThunk(
         }
     }
 )
-export const fetchSalesByMenuitem=createAsyncThunk(
-    'admin/fetchSalesByMenuitem',
-    async (count, {rejectWithValue}) => {
-        try {
-            const response=await fetch(`${apiLink}/query/allSales`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    'accept': 'application/json'
-                },
-                credentials: "include"
-            })
 
-            if(!response.ok) {
-                const errorText = await response.text();
-                console.log("Error :", errorText);
-                return rejectWithValue(errorText);
-            }
-            return await response.json()
-        }
-        catch(error){
-            return rejectWithValue(error.message);
-        }
-    }
-)
-export const fetchMilkBySales=createAsyncThunk(
-    'admin/fetchMilkBySales',
-    async (_, {rejectWithValue}) => {
-        try {
-            const response=await fetch(`${apiLink}/query/milk`, {
-                method: "GET",
-                credentials: "include"
-            })
 
-            if(!response.ok) {
-                const errorText = await response.text();
-                console.log("Error :", errorText);
-                return rejectWithValue(errorText);
-            }
-            return await response.json()
-        }
-        catch(error){
-            return rejectWithValue(error.message);
-        }
-    }
-)
 
 const orderSlice=createSlice({
     name: 'order',
@@ -191,15 +126,6 @@ const orderSlice=createSlice({
         taxRate: 0.0,
         fetchTaxRateStatus: 'idle',
 
-        // ROLE_ADMIN only
-        allOrders: [],
-        fetchAllOrdersStatus: 'idle',
-
-        salesByMenuitem: [],
-        fetchSalesByMenuitemStatus: 'idle',
-        milkBySales: [],
-        fetchMilkBySalesStatus: 'idle',
-
         deleteOrderStatus: 'idle',
 
     },
@@ -207,14 +133,11 @@ const orderSlice=createSlice({
         clearOrder(state){
             state.orders = []
             state.fetchOrdersStatus = 'idle'
-            state.allOrders = []
-            state.fetchAllOrdersStatus = 'idle'
-
+          
             state.checkoutStatus = 'idle'
-            state.salesByMenuitem = []
-            state.fetchSalesByMenuitemStatus = 'idle'
-            state.milkBySales = []
-            state.fetchMilkBySalesStatus ='idle'
+            state.newOrder = null;
+           
+
         },
         resetOrderStatus(state){
             state.checkoutStatus = 'idle'
@@ -235,6 +158,7 @@ const orderSlice=createSlice({
             state.fetchOrdersStatus = 'failed'
             // state.orders = []
         })
+
         .addCase(PlaceOrder.pending, (state, action) => {
             state.checkoutStatus = 'loading'
         })
@@ -258,62 +182,14 @@ const orderSlice=createSlice({
           .addCase(fetchTaxRate.rejected, (state, action) => {
               state.fetchTaxRateStatus = 'failed'
           })
-          .addCase(fetchAllOrders.pending, (state, action) => {
-              state.fetchAllOrdersStatus = 'loading'
-          })
-          .addCase(fetchAllOrders.fulfilled, (state, action) => {
-              state.fetchAllOrdersStatus = 'succeeded'
-              state.allOrders = action.payload.reverse()
-          })
-          .addCase(fetchAllOrders.rejected, (state, action) => {
-              state.fetchAllOrdersStatus = 'failed'
-              // state.orders = []
-          })
-          .addCase(deleteOrder.pending, (state, action) => {
-              state.deleteOrderStatus = 'loading'
-          })
-          .addCase(deleteOrder.fulfilled, (state, action) => {
-              state.deleteOrderStatus = 'succeeded'
-              state.allOrders = state.allOrders.filter(o=>o.id!==action.payload)
-          })
-          .addCase(deleteOrder.rejected, (state, action) => {
-              state.deleteOrderStatus = 'failed'
-              // state.orders = []
-          })
-
-          .addCase(fetchSalesByMenuitem.pending, (state, action) => {
-              state.fetchSalesByMenuitemStatus = 'loading'
-          })
-          .addCase(fetchSalesByMenuitem.fulfilled, (state, action) => {
-              state.fetchSalesByMenuitemStatus = 'succeeded'
-              state.salesByMenuitem = action.payload
-          })
-          .addCase(fetchSalesByMenuitem.rejected, (state, action) => {
-              state.fetchSalesByMenuitemStatus = 'failed'
-              // state.orders = []
-          })
-          .addCase(fetchMilkBySales.pending, (state, action) => {
-              state.fetchMilkBySalesStatus = 'loading'
-          })
-          .addCase(fetchMilkBySales.fulfilled, (state, action) => {
-              state.fetchMilkBySalesStatus = 'succeeded'
-              state.milkBySales = action.payload
-          })
-          .addCase(fetchMilkBySales.rejected, (state, action) => {
-              state.fetchMilkBySalesStatus = 'failed'
-              // state.orders = []
-          })
-
+         
+      
+        
           .addCase(logoutUser.fulfilled, (state, action) => {
-              state.orders = []
-              state.fetchOrdersStatus ='idle'
-              state.fetchAllOrdersStatus = 'idle'
-              state.allOrders = []
-              state.checkoutStatus = 'idle'
-              state.salesByMenuitem = []
-              state.fetchSalesByMenuitemStatus ='idle'
-              state.milkBySales = []
-              state.fetchMilkBySalesStatus = 'idle'
+                state.orders = []
+                state.fetchOrdersStatus ='idle'
+                state.checkoutStatus = 'idle'
+                state.newOrder = null;
           })
 
           .addCase(loginUser.fulfilled, (state, action) => {
@@ -349,25 +225,3 @@ export const calculateTax = (state, subtotal) =>{
     return subtotal * state.order.taxRate / 100;
 }
 
-const selectAllOrders = state => state.order.allOrders;
-const selectText = (state, text) => text
-
-export const searchAllOrders = createSelector(
-    [selectAllOrders, selectText],
-    (allOrders, text) => {
-        console.log(text)
-        console.log(typeof text)
-        if(text === "")
-            return allOrders
-
-        const regex = new RegExp(text, "i");
-        return allOrders.filter(o=>
-                regex.test(o.id) //serach by id
-                ||  regex.test(o.account.email)  //search by email
-                || regex.test(o.purchaseDate)
-                || o.purchaseLineitemList.some(pl => regex.test(pl.menuitem.title)) //search by menutitem
-
-
-        )
-    }
-)

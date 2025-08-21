@@ -8,10 +8,7 @@ import Spinner from "react-bootstrap/Spinner";
 import LogoutNavButton from "../user/LogoutNavButton";
 const HeaderUserButton =() =>{
 
-    const {currentUser
-        // , fetchUserStatus
-        // , loginStatus, logoutStatus
-    } = useSelector(state => state.user)
+    const {currentUser, fetchUserStatus} = useSelector(state => state.user)
     const [show, setShow] = useState(false)
     const location = useLocation()
     console.log(currentUser)
@@ -21,13 +18,19 @@ const HeaderUserButton =() =>{
         setShow(!show);
     };
 
+    if(["/user/signin", "/user/signup"].includes(location.pathname)) 
+        return null;
 
-    // if(fetchUserStatus==="loading" ||  loginStatus==="loading" || logoutStatus === "loading")
-    //     return (
-    //         <div>
-    //             <Spinner animation="border" className="spinner"/>
-    //         </div>
-    //     )
+    if(fetchUserStatus==="loading")
+        return (
+            // <div>
+            //     <Spinner animation="border" className="spinner"/>
+            // </div>
+            <div className="user_button_wrapper me-3">
+                
+            <div className="spinner-border text-light" role="status"></div>
+            </div>
+        )
 
 
     if(currentUser === null)

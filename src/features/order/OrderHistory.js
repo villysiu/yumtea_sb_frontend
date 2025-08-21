@@ -24,8 +24,8 @@ const OrderHistory = () =>{
         setShow(null)
     }, [days])
    
-    if(fetchOrdersStatus === 'loading' || fetchOrdersStatus === 'idle')
-        return <Spinner />
+    // if(fetchOrdersStatus === 'loading' || fetchOrdersStatus === 'idle')
+    //     return <Spinner />
     
 
 

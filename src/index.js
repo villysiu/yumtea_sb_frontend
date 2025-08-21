@@ -6,8 +6,8 @@ import { Provider } from 'react-redux'
 import store from './app/store'
 
 
+import LandingPage from './features/home/LandingPage';
 import Home from './features/home/Home';
-import Intro from './features/home/Intro'
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import About from './features/headerNav/About'
 import Collections from './features/menuitem/Collections'
@@ -24,25 +24,8 @@ import OrderHistory from './features/order/OrderHistory';
 import Checkout from './features/checkout/Checkout'
 import OrderSuccessModal from './features/order/OrderSuccessModal';
 import VisitTaste from './features/home/VisitTaste';
-import Reserve from './features/reservation/Reserve';
-import ReservationSuccess from './features/reservation/ReservationSuccess';
-import Reservations from './features/reservation/Reservations';
-import UpdateReservation from './features/reservation/UpdateReservation';
-// import UpdateReservationFrom from './features/reservation/ReservationsApp';
-
-// import MenuitemsList from './features/menuitem/MenuItemsList';
 import GetData from './features/home/GetData';
-// import ResetApp from './features/home/ResetApp';
-import ReservationsApp from './features/reservation/ReservationsApp';
 import Support from "./features/support/Support";
-import AdminApp from "./features/admin/AdminApp";
-import Hub from "./features/admin/Hub";
-import ManageMenuitem from "./features/admin/menuitem/ManageMenuitem";
-import ManageAccount from "./features/admin/account/ManageAccount";
-import ComingSoon from "./features/admin/ComingSoon";
-import ManageImage from "./features/admin/menuitem/ManageImage";
-import ManageCategory from "./features/admin/category/ManageCategory";
-import ManagePurchases from "./features/admin/purchases/ManagePurchases";
 
 const router = createBrowserRouter([
     {
@@ -52,11 +35,11 @@ const router = createBrowserRouter([
 
             {
                 path: "/",
-                element: <Home />,
+                element: <LandingPage />,
                 children: [
                     {
-                        path: "/",
-                        element: <Intro />,
+                        path: '/',
+                        element: <Home />
                     },
                     {
                         path: "/visit-taste",
@@ -69,11 +52,6 @@ const router = createBrowserRouter([
                         path: "/collection",
                         element: <Collections />,
                     },
-                    // {
-                    //   path: "collection/:itemId",
-                    //   element: <SingleMenuitem />,
-                    // },
-
                     {
                         path: "/user",
                         element: <User />,
@@ -108,67 +86,12 @@ const router = createBrowserRouter([
                                 path: "/secure/ordersuccess",
                                 element: <OrderSuccessModal />
                             },
-                            // {
-                            //     path: "/secure/reservations/",
-                            //     element: <ReservationsApp />,
-                            //     children: [
-                            //         {
-                            //             path: "/secure/reservations/",
-                            //             element: <Reservations />,
-                            //         },
-                            //         {
-                            //             path: "/secure/reservations/reserve",
-                            //             element: <Reserve />
-                            //         },
-                            //         {
-                            //             path: "/secure/reservations/:resId/update",
-                            //             element: <UpdateReservation />,
-                            //         },
-                            //         {
-                            //             path: "/secure/reservations/success",
-                            //             element: <ReservationSuccess />
-                            //         },
-                            //     ]
-                            // },
+                    
                         ]
                     },
                 ]
             },
-            {
-                path: "/admin",
-                element: <AdminApp />,
-                children: [
-                    {
-                        path: "/admin/hub",
-                        element: <Hub />
-                    },
-                    {
-                        path: "/admin/menuitems",
-                        element: <ManageMenuitem />
-                    },
-                    {
-                        path: "/admin/images",
-                        element: <ManageImage />
-                    },
-                    {
-                        path: "/admin/accounts",
-                        element: <ManageAccount />
-                    },
-                    {
-                        path: "/admin/purchases",
-                        element: <ManagePurchases />
-                    },
-                    {
-                        path: "/admin/category",
-                        element: <ManageCategory />
-                    },
-                    {
-                        path: "/admin/coming_soon",
-                        element: <ComingSoon />
-                    }
-                ]
-
-            }
+        
         ]
 
     },

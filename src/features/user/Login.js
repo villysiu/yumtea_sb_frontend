@@ -1,11 +1,9 @@
-import { Button, Spinner } from 'react-bootstrap';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
+
 import Form from 'react-bootstrap/Form';
 import { homeLink } from '../../app/global';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchCurrentUser, removeUser} from "./userSlice"
 import { loginUser } from './userSlice';
 import LoginButton from './LoginButton'
 import EmailInputBox from "./EmailInputBox";
@@ -26,9 +24,7 @@ console.log("LOGIN PAGE")
             setEmail("");
             setPassword("");
         }
-    
-    // }, [loginStatus])
-    
+
     }, [userStatus])
 
     const handleSubmit=e=>{

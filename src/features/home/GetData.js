@@ -1,36 +1,37 @@
 import './home.css'
 import { useState, useEffect } from 'react'
-
+import {  useSelector, useDispatch } from 'react-redux'
 import GetMenuitems from '../menuitem/GetMenuitems'
 import GetCarts from '../cart/GetCarts'
-import GetUser from '../user/GetUser'
+import GetTaxRate from '../order/GetTaxRate'
 import {Outlet, useLocation} from 'react-router-dom';
-import GetTaxRate from "../order/GetTaxRate";
+import {fetchCurrentUser} from '../user/userSlice'
 import LoadingPage from "./LoadingPage";
 
 const GetData = () =>{
     console.log("ENTER PAGE")
+    const dispatch = useDispatch();
 
-    const [getUser, setGetUser] = useState(false);
     const [getMenuitem, setGetMenuitem] = useState(false);
     const location = useLocation()
-    console.log(location)
-    console.log("getUser " +getUser)
-    console.log("getMenuitem" + getMenuitem)
+    const {fetchTaxRateStatus} = useSelector(state => state.order);
+
+    const {currentUser, fetchUserStatus} = useSelector(state => state.user);
+
+    useEffect(()=>{
+        if(!currentUser && fetchUserStatus==='idle')
+            dispatch(fetchCurrentUser());
+    }, [fetchUserStatus, dispatch, currentUser])
+
     return(
         <>
-            <GetMenuitems setGetMenuitem={setGetMenuitem} />
-            <GetUser setGetUser={setGetUser} />
+            <GetMenuitems getMenuitem={getMenuitem} setGetMenuitem={setGetMenuitem} />
             <GetCarts />
-            <GetTaxRate />
-
-
-
+            {fetchTaxRateStatus !== 'succeeded' && <GetTaxRate /> }
             {
                 ["/", "/visit-taste", "/support"].includes(location.pathname) ?
                     <Outlet/> :
-
-                    (!getUser || !getMenuitem) ? <LoadingPage />:<Outlet/>
+                    (fetchUserStatus === 'loading' || !getMenuitem) ? <LoadingPage />:<Outlet/>
             }
 
 

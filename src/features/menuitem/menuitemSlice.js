@@ -376,11 +376,11 @@ const menuitemSlice=createSlice({
         },
 
         itemToCustomize: null,
-        addMenuitemStatus: 'idle',
-        deleteMenuitemStatus: 'idle',
-        updateMenuitemStatus: 'idle',
-        updateImgStatus: 'idle',
-        toggleVisibilityStatus: 'idle'
+        // addMenuitemStatus: 'idle',
+        // deleteMenuitemStatus: 'idle',
+        // updateMenuitemStatus: 'idle',
+        // updateImgStatus: 'idle',
+        // toggleVisibilityStatus: 'idle'
 
 
 

@@ -4,7 +4,6 @@ import {loginUser, logout, logoutUser} from "../user/userSlice";
 import {clearOrder, PlaceOrder} from "../order/orderSlice";
 import { v4 as uuidv4 } from 'uuid';
 import {clearCartMessage} from "../message/messageSlice";
-import {clearAccount} from "../admin/account/accountSlice";
 
 
 export const fetchCart=createAsyncThunk(
@@ -100,7 +99,7 @@ export const updateItemInCart = createAsyncThunk(
                     dispatch(logout())
                     dispatch(clearCart())
                     dispatch(clearOrder())
-                    dispatch(clearAccount())
+                    // dispatch(clearAccount())
                 }
                 const errorMessage = await response.text(); // errorText:"{\"message\": \"Please log in to access this resource.\"}"
                 return rejectWithValue({
@@ -140,7 +139,7 @@ export const removeItemFromCart = createAsyncThunk(
                     dispatch(logout())
                     dispatch(clearCart())
                     dispatch(clearOrder())
-                    dispatch(clearAccount())
+            
                 }
                 const errorMessage = await response.text(); // errorText:"{\"message\": \"Please log in to access this resource.\"}"
                 return rejectWithValue({
