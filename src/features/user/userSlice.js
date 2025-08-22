@@ -1,7 +1,7 @@
-import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import {fetchCurrentUserOrders, PlaceOrder} from "../order/orderSlice";
-import {addItemToCart, fetchCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
+import { PlaceOrder} from "../order/orderSlice";
+import {addItemToCart} from "../cart/cartSlice";
 export const fetchCurrentUser=createAsyncThunk(
     'user/fetchCurrentUser',
     async (_, {rejectWithValue}) => {
@@ -32,9 +32,9 @@ export const fetchCurrentUser=createAsyncThunk(
 )
 export const loginUser=createAsyncThunk(
     'user/loginUser',
-    async (userInfo, { rejectWithValue} ) =>{
+    async (credentials, { rejectWithValue} ) =>{
         
-        console.log(userInfo)
+        console.log(credentials)
         // {
         // 	"email": "springuser@gg.com",
         // 	"password": "password"
@@ -48,21 +48,31 @@ export const loginUser=createAsyncThunk(
                     'accept': 'application/json',
 
                 },
-                'body': JSON.stringify(userInfo),
-                credentials: 'include'
+                'body': JSON.stringify(credentials),
+
 
             })
 
-            if(!response.ok) {
-                const errorText = await response.text();
-                console.log("Error :", errorText);
-                return rejectWithValue(errorText);
+            if (!response.ok) {
+                // Try to parse error response if possible
+                let errorMessage = 'Login failed';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.message || JSON.stringify(errorData);
+                } catch {
+                    errorMessage = await response.text();
+                }
+                console.error('Login error:', errorMessage);
+                return rejectWithValue(errorMessage);
             }
-            return await response.json()
+            const {token, ...user} = await response.json();
+            localStorage.setItem("token", token);  
+
+            return user;
 
         }
         catch(error){
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.message || 'Something went wrong');
         }
     }
 )
@@ -231,6 +241,7 @@ const userSlice=createSlice({
             state.currentUser = action.payload
             state.fetchUserStatus = 'succeeded'
             state.userStatus = 'succeeded';
+            
 
         })
         .addCase(loginUser.rejected, (state, action) => {

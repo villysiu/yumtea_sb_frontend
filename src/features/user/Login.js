@@ -29,7 +29,12 @@ console.log("LOGIN PAGE")
 
     const handleSubmit=e=>{
         e.preventDefault()
-        dispatch(loginUser({'email': email, 'password': password}))
+        dispatch(loginUser(
+            {
+                'email': email, 
+                'password': password
+            }
+        ));
         
     }
 
