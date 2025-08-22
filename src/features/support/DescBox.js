@@ -1,5 +1,4 @@
 import Form from 'react-bootstrap/Form';
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import {Col, Row} from "react-bootstrap";
 const DescBox = ({desc, setDesc, descError, setDescError}) =>{
     const handleChange = e =>{

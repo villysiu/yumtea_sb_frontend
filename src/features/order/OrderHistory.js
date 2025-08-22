@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import {fetchCurrentUserOrders, getOrders} from "./orderSlice"
 import SingleOrder from "./SingleOrder"
 import OrderFilter from "./OrderFilter"
-import {Spinner} from 'react-bootstrap'
 
 const OrderHistory = () =>{
 

@@ -517,7 +517,7 @@ const menuitemSlice=createSlice({
               state.addMenuitemStatus = 'succeeded'
               state.menuitems.status = "succeeded"
               state.menuitems.array = [
-                  ... state.menuitems.array,
+                  ...state.menuitems.array,
                   action.payload
               ]
 

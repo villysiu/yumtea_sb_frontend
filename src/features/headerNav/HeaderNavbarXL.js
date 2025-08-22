@@ -3,7 +3,6 @@ import {Navbar, Nav} from 'react-bootstrap';
 import Title from './Title';
 import HeaderDrinksButton from './HeaderDrinksButton'
 import HeaderVisitButton from './HeaderVisitButton'
-import HeaderHomeButton from './HeaderHomeButton'
 import HeaderUserButton from './HeaderUserButton'
 import CartIcon from '../cart/CartIcon'
 import HeaderSupportButton from "./HeaderSupportButton";

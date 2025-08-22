@@ -1,8 +1,7 @@
 import { Button } from "react-bootstrap"
 
-import { useDispatch, useSelector } from "react-redux"
-import { updateItem, updateItemInCart } from "../cart/cartSlice"
-import { resetMenuitemClicked } from '../menuitem/menuitemSlice'
+import { useDispatch } from "react-redux"
+import { updateItemInCart } from "../cart/cartSlice"
 import { USDollar } from "../../app/global"
 
 const UpdateCartButton = ({customizedItem, handleHide}) =>{

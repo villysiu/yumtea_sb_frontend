@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import {getMenuitemById, sugarMap} from '../menuitem/menuitemSlice'
-import {apiLink, homeLink, USDollar} from "../../app/global"
+import {apiLink, USDollar} from "../../app/global"
 
 const CartSummaryLineItem = ({cartItem})=>{
 

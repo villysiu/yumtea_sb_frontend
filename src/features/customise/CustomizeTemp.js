@@ -1,4 +1,3 @@
-import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form } from "react-bootstrap"
 import {getTemperatures} from "../menuitem/menuitemSlice";
 import {useSelector} from "react-redux";

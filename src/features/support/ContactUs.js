@@ -1,4 +1,3 @@
-import EmailInputBox from "../user/EmailInputBox";
 import {useState} from "react";
 import Form from "react-bootstrap/Form";
 

@@ -1,6 +1,5 @@
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import {useState} from "react";
 
 const EmailInputBox = ({email, setEmail, emailError, setEmailError}) => {
 

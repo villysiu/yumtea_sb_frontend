@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
+
 import {imgLink} from "../../app/global"
 import { USDollar } from "../../app/global"
-import {Modal} from "react-bootstrap"
-import {useSelector, useDispatch} from 'react-redux'
+
+import { useDispatch} from 'react-redux'
 import {triggerCustomizeModal} from './menuitemSlice'
 
 const Menuitem = ({menuitem}) =>{

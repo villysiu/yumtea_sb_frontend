@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {loginUser, logout, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
+import {loginUser, logoutUser, registerUser, updatePassword, updateUser,} from '../user/userSlice'
 import {addItemToCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
 import {
     addMenuitem,

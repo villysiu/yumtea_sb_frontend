@@ -1,8 +1,6 @@
 import { logoutUser } from "./userSlice"
 import {useDispatch, useSelector} from "react-redux"
-import {Link, useNavigate} from "react-router-dom"
-import { homeLink } from "../../app/global"
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import {useNavigate} from "react-router-dom"
 
 const LogoutNavButton = ({setShow}) =>{
     const dispatch = useDispatch()

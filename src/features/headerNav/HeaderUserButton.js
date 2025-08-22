@@ -4,14 +4,16 @@ import {homeLink} from '../../app/global.js'
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Modal} from 'react-bootstrap'
-import Spinner from "react-bootstrap/Spinner";
 import LogoutNavButton from "../user/LogoutNavButton";
 const HeaderUserButton =() =>{
 
-    const {currentUser, fetchUserStatus} = useSelector(state => state.user)
+    const {currentUser, fetchUserStatus} = useSelector(state => state.user);
+    console.log("HeaderUserButton currentUser", currentUser);
+
     const [show, setShow] = useState(false)
+
     const location = useLocation()
-    console.log(currentUser)
+
 
     // Handle dropdown open
     const handleToggle = () => {

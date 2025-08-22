@@ -1,8 +1,6 @@
-import MakeReservationButton from "../reservation/MakeReservationButton"
+
 import {imgLink} from "../../app/global";
-import ContactUs from "../support/ContactUs";
-import Reservations from "../reservation/Reservations";
-import {useLocation} from "react-router-dom";
+
 
 const VisitTaste = () =>{
 

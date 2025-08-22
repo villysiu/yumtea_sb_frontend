@@ -1,12 +1,11 @@
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginUser, registerUser} from "./userSlice";
+import {registerUser} from "./userSlice";
 import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import LoginButton from "./LoginButton";
+
 import {Link, useNavigate} from "react-router-dom";
 import {homeLink} from "../../app/global";
-import {Button} from "react-bootstrap";
+
 import SignupButton from "./SignupButton";
 import EmailInputBox from "./EmailInputBox";
 import PasswordInputBox from "./PasswordInputBox";
@@ -28,15 +27,6 @@ const Signup = () =>{
     } = useSelector(state=>state.user)
     const navigate = useNavigate();
 
-    // useEffect(()=>{
-    //     if(registerStatus === 'succeeded')
-    //         navigate('/user/signin' )
-    //     else if(registerStatus === "failed"){
-    //         setNickname("")
-    //         setEmail("");
-    //         setPassword("");
-    //     }
-    // }, [registerStatus])
 
     useEffect(()=>{
         if(userStatus === 'succeeded')
@@ -46,7 +36,8 @@ const Signup = () =>{
             setEmail("");
             setPassword("");
         }
-    }, [userStatus])
+    }, [userStatus, navigate])
+
     const handleSubmit=e=>{
         e.preventDefault()
         dispatch(registerUser({'nickname': nickname, 'email': email, 'password': password}))

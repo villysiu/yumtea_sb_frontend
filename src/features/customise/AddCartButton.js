@@ -1,8 +1,8 @@
  import {Button} from 'react-bootstrap'
 import {USDollar} from '../../app/global'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { addItemToCart} from '../cart/cartSlice'
-import {useLocation, useNavigate} from "react-router-dom";
+
 
 
 

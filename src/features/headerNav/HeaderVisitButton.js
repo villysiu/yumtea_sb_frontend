@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import {homeLink} from '../../app/global.js'
 
 const HeaderVisitButton = () =>{
     const location = useLocation()

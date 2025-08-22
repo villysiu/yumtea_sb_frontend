@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import {homeLink} from '../../app/global.js'
+
 const HeaderSupportButton = ({current, setCurrent}) =>{
     const location = useLocation()
     return(

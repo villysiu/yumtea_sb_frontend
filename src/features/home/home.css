@@ -183,7 +183,7 @@
   border: red 1px solid;
   background-color: #cdcdc7;
 
-  background: url(http://localhost:3000/homepage/contentBg.jpg) center no-repeat;
+  background: url("https://raw.githubusercontent.com/villysiu/yumtea_sb_frontend/refs/heads/master/public/homepage/contentBg.jpg") center no-repeat;
   background-size: cover;
   display: flex;
   flex-direction: column;

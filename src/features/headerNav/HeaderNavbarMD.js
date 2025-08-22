@@ -1,16 +1,9 @@
-import {Button, Container, Nav, Navbar, Offcanvas} from 'react-bootstrap';
-
-import Title from './Title';
-import HeaderDrinksButton from './HeaderDrinksButton'
-import HeaderVisitButton from './HeaderVisitButton'
-import HeaderHomeButton from './HeaderHomeButton'
+import {Button, Nav, Navbar} from 'react-bootstrap';
 import HeaderUserButton from './HeaderUserButton'
 import CartIcon from '../cart/CartIcon'
 import {useState} from "react";
-import {List} from "react-bootstrap-icons";
 import OffcanvasMD from "./OffcanvasMD";
 import {homeLink} from "../../app/global";
-import {useSelector} from "react-redux";
 
 const HeaderNavbarMD = () =>{
     const [show, setShow] = useState(false);

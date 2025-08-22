@@ -1,13 +1,11 @@
 import {useSelector} from "react-redux";
-import {getMenuitemsByCategoryId} from "./menuitemSlice";
-import {homeLink} from "../../app/global";
-import Menuitem from "./Menuitem";
-import {Col, Row} from "react-bootstrap";
+
+import { Row} from "react-bootstrap";
 import SingleBestSeller from "./SingleBestSeller";
 
 
 const BestSellers = () =>{
-   const {array, status} = useSelector(state => state.menuitem.bestSellers)
+   const {array} = useSelector(state => state.menuitem.bestSellers)
 
 
     return (

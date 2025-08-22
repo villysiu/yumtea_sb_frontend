@@ -1,7 +1,6 @@
-.collection_wrapper{
+.collection_wrapper {
     display: flex;
     flex-direction: column;
-    /*background: url("./img/contentBg.jpg") center no-repeat;*/
     background-size: cover;
 }
 
@@ -10,23 +9,30 @@
     display: flex;
     flex-direction: column;
 }
-.collection_header_wrapper{
+
+.collection_header_wrapper {
     height: 30rem !important;
 }
-.category_wrapper, .collection_header_wrapper {
+
+.category_wrapper,
+.collection_header_wrapper {
 
     height: 20rem;
     position: relative;
 }
-.category_img, .collection_img {
+
+.category_img,
+.collection_img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 
 }
+
 .collection_img {
     opacity: 60%;
 }
+
 .category_label {
     position: absolute;
     top: 8px;
@@ -36,7 +42,8 @@
     color: white;
     text-shadow: 0 0 4px black;
 }
-.collection_text{
+
+.collection_text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -45,6 +52,7 @@
     color: black;
     text-shadow: 0 0 4px white;
 }
+
 /*@media all and  (max-width: 991.98px) {*/
 /*    .collection_text{*/
 /*        font-size: 2rem;*/
@@ -54,7 +62,7 @@
 .menuitems_wrapper {
     --white-outline: 0.5rem;
     width: var(--body-width);
-   
+
     display: flex;
     padding: var(--white-outline);
 }
@@ -62,11 +70,12 @@
 .menuitem_row {
     width: var(--body-width);
     /*display: flex;*/
-/*    flex-wrap: wrap;*/
+    /*    flex-wrap: wrap;*/
 }
+
 /*.menuitem_col{*/
-    /*width: calc(100% / 3 - 1rem);*/
-    /*margin: 0.5rem;*/
+/*width: calc(100% / 3 - 1rem);*/
+/*margin: 0.5rem;*/
 
 /*}*/
 
@@ -82,32 +91,38 @@
     position: relative;
 
 }
+
 .menuitem_wrapper:hover {
-    --border-color: rgb(90 53 49);;
+    --border-color: rgb(90 53 49);
+    ;
     border: var(--border-color) 1px solid;
     box-shadow: 0 0 5px var(--border-color)
 }
-.menuitem_text{
+
+.menuitem_text {
     width: calc(100% - var(--menuitem_wrapper-height));
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 0.5rem;
-    
+
 
 }
+
 .menuitem_img_wrapper {
 
     width: var(--menuitem_wrapper-height);
     /*height: var(--menuitem_wrapper-height);*/
     height: calc(var(--menuitem_wrapper-height) - 2px);
 }
+
 .menuitem_img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
+
 /* .menuitem_title {
     text-align: center;
 } */
@@ -129,6 +144,7 @@
 
     cursor: pointer;
 }
+
 .menuitem_plus_circle:hover {
     background-color: #f9f9f9;
 }
@@ -136,18 +152,21 @@
 .form-check-input {
     border: 1px solid #766d52;
 }
+
 .form-check-input:checked {
     background-color: #d1c089;
-    border-color: #d1c089;;
+    border-color: #d1c089;
+    ;
 }
 
-.bestSeller_label{
+.bestSeller_label {
     font-size: 3rem;
     text-align: center;
     margin: 1rem 0;
 }
-.bestSeller_label:before, .bestSeller_label:after
-{
+
+.bestSeller_label:before,
+.bestSeller_label:after {
     margin-left: 35px;
     margin-right: 35px;
     content: '';
@@ -157,13 +176,15 @@
     background: #918c85;
     transform: translateY(-1rem);
 }
-.yellow_container{
+
+.yellow_container {
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
     width: 5rem;
     height: 5rem;
 }
+
 .yellowbookmark {
     display: flex;
     align-items: center;
@@ -173,7 +194,8 @@
     color: #ead25e;
 
 }
-.yellowtext{
+
+.yellowtext {
     position: absolute;
     left: 0;
     top: 0;
@@ -186,25 +208,29 @@
     font-size: 2rem;
 
 }
-.single_bestSeller_img{
+
+.single_bestSeller_img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
 }
 
-.single_bestSeller_img_wrapper{
+.single_bestSeller_img_wrapper {
     width: 100%;
     height: calc(var(--body-width)* 0.22);
     position: relative;
     border-radius: 7px;
 }
-.single_bestSeller_img_wrapper:hover{
-    --border-color: rgb(90 53 49);;
+
+.single_bestSeller_img_wrapper:hover {
+    --border-color: rgb(90 53 49);
+    ;
     border: var(--border-color) 2px solid;
     box-shadow: 0 0 1rem var(--border-color)
 }
-.single_bestSeller_whitebox{
+
+.single_bestSeller_whitebox {
     position: absolute;
     left: 1rem;
     bottom: 1rem;
@@ -213,14 +239,17 @@
 
 
 }
+
 .single_bestSeller_text {
     opacity: 1;
     color: black;
     font-size: 1.5rem;
 }
+
 .single_bestSeller_plus_circle {
     width: 3rem;
-    height: 3rem;;
+    height: 3rem;
+    ;
     background-color: white;
     border-radius: 50%;
     margin: 10px;

@@ -3,16 +3,16 @@
   width: 100vw;
   /* height: 10rem; */
   min-width: 390px;
-  display:flex;
+  display: flex;
   justify-content: center;
 
   position: relative;
   font-family: fangsong;
-  background: url("http://localhost:3000/homepage/contentBg.jpg") center no-repeat;
+  background: url("https://raw.githubusercontent.com/villysiu/yumtea_sb_frontend/refs/heads/master/public/homepage/contentBg.jpg") center no-repeat;
   background-size: cover;
 }
 
-:root{
+:root {
   --body-width: 1400px;
   /* --bs-body-bg: white; */
 
@@ -43,12 +43,12 @@
   --header-button-size: 45px;
 
   --yumtea_logo_width: 15rem;
-} 
+}
 
-@media all and  (max-width: 1399.98px) {
-  :root{
+@media all and (max-width: 1399.98px) {
+  :root {
     --body-width: 100vw;
-    
+
   }
 }
 
@@ -61,24 +61,26 @@
 
 
 .appbody {
-  position: relative; 
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-    
-    
+
+
 
 }
-.app_width{
+
+.app_width {
   /* min-width: 390px;
   max-width: 1536px; */
   width: var(--body_width);
 
 }
+
 .spinner {
   font-size: 2rem;
-  
+
   width: 4rem;
   height: 4rem;
 
@@ -86,7 +88,7 @@
 }
 
 
- 
+
 .App-header {
   background-color: #282c34;
   min-height: 20vh;
@@ -97,19 +99,22 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 .app_message {
   width: 100%;
   margin-bottom: 0;
   /* padding-bottom: 0.5rem;
   padding-top: 0.5rem; */
 }
-.message_container{
+
+.message_container {
   position: fixed;
   top: 4rem;
   left: 0;
-  z-index:1000;
+  z-index: 1000;
   width: 100%;
 }
+
 /* .alert-dismissible {
   padding-top: 0.5rem;
   padding-right: 1rem;
@@ -127,11 +132,13 @@
 .user_items {
   display: flex;
   align-items: center;
-  
+
 }
+
 .d_navbar {
   background-color: transparent !important;
 }
+
 .circle_button {
   font-size: 2rem;
   margin-left: 0.75rem;
@@ -139,13 +146,16 @@
   color: black;
 
 }
-.gold_button, .red_button {
+
+.gold_button,
+.red_button {
   background: #d1c089;
-  border: 0px; 
+  border: 0px;
   text-transform: uppercase;
   padding-left: 2rem;
   padding-right: 2rem;
-text-shadow: 0px 0px 4px rgb(216, 215, 175);;
+  text-shadow: 0px 0px 4px rgb(216, 215, 175);
+  ;
   /* width: 100%; */
   /* height: 36px; */
 }
@@ -153,6 +163,7 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
 .gold_button.full {
   width: 100%;
 }
+
 /* .cart_container {
   width: var(--body_width);
   position: relative;
@@ -167,14 +178,16 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   color: white;
   min-width: 8rem !important;
 }
-.oblong_button:hover, .oblong_button:active {
+
+.oblong_button:hover,
+.oblong_button:active {
   border-color: transparent;
   box-shadow: 0 0 5px black !important;
   background-color: transparent;
   color: black;
 }
 
-.loading{    
+.loading {
   background-color: rgba(240, 241, 237, 0.5);
   width: 100%;
   height: 100%;
@@ -183,6 +196,7 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   left: 0;
   z-index: 1032;
 }
+
 .spinner_props {
   opacity: 1 !important;
   z-index: 1033;
@@ -191,12 +205,14 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   top: 45vh;
   left: 50vw;
 }
-.cartitem_container{
+
+.cartitem_container {
   width: 100%;
   display: flex;
   flex-direction: row;
   position: relative;
 }
+
 .white_film {
   position: absolute;
   background-color: rgb(249 249 249);
@@ -205,6 +221,7 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   height: 100%;
 
 }
+
 .smoky_spinner {
   position: absolute;
   width: 100%;
@@ -212,51 +229,60 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
 }
-.cartitem_img_wrapper{
+
+.cartitem_img_wrapper {
   width: var(--cartitem_img_width);
 }
-.cartitem_img{
+
+.cartitem_img {
   width: var(--cartitem_img_width);
 }
-.cartitem_info{
+
+.cartitem_info {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
+
 .cartitem_title {
   width: calc(100% / 2);
 
 }
-.cartitem_title_options{
+
+.cartitem_title_options {
   display: flex;
   flex-direction: column;
   width: 50%;
 }
-.cartitem_qty, .cartitem_price{
+
+.cartitem_qty,
+.cartitem_price {
   width: calc(100% / 4);
 
 }
-.cartitem_price{
+
+.cartitem_price {
   text-align: right;
 
 }
-.gold_button:active, .gold_button:hover
 
-{
+.gold_button:active,
+.gold_button:hover {
   background-color: #a5904b !important;
   color: black;
 }
-.gold_button:disabled
- {
+
+.gold_button:disabled {
   background: #d1c089;
   opacity: 0.5;
   /* color: black; */
 }
-.cartitem_qty_input{
+
+.cartitem_qty_input {
   display: flex;
-    flex-direction: row;
+  flex-direction: row;
 }
 
 /*@media all and (max-width: 991.98px) {*/
@@ -278,38 +304,49 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
     bottom: 1rem;
     top: unset;
     margin-left: 0;
-  margin-right: 0;
+    margin-right: 0;
   }
-  .cart_cartitems{
+
+  .cart_cartitems {
     margin-bottom: 20rem;
     width: 100vw;
   }
+
   .cart_summary_checkout {
-    
+
     margin-top: 1rem;
   }
 }
-.qty_minus, .qty_plus {
+
+.qty_minus,
+.qty_plus {
   width: 40px;
   height: 40px;
   border: #d1c089 1px solid;
   background-color: #d1c089;
   border-radius: 0;
 }
+
 .qty_minus {
-  border-top-left-radius: var(--bs-border-radius)!important;
-    border-bottom-left-radius: var(--bs-border-radius)!important;
+  border-top-left-radius: var(--bs-border-radius) !important;
+  border-bottom-left-radius: var(--bs-border-radius) !important;
 }
+
 .qty_plus {
-  border-top-right-radius: var(--bs-border-radius)!important;
-    border-bottom-right-radius: var(--bs-border-radius)!important;
+  border-top-right-radius: var(--bs-border-radius) !important;
+  border-bottom-right-radius: var(--bs-border-radius) !important;
 }
-.qty_minus:active, .qty_minus:hover,
-.qty_plus:active, .qty_plus:hover {
+
+.qty_minus:active,
+.qty_minus:hover,
+.qty_plus:active,
+.qty_plus:hover {
   background-color: #937d36;
-  color:white;
+  color: white;
 }
-.qty_minus:disabled, .qty_plus:disabled{
+
+.qty_minus:disabled,
+.qty_plus:disabled {
   background-color: #937d36;
   opacity: 0.4;
 
@@ -319,7 +356,8 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   font-size: 11px;
   color: red
 }
-.qty_label{
+
+.qty_label {
   position: absolute;
   left: 14px;
   top: -8px;
@@ -327,15 +365,18 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   font-size: 10px;
   background-color: var(--bs-body-bg);
 }
+
 .low_inventory {
 
   color: red
 }
-.solid_link{
+
+.solid_link {
   text-decoration: unset !important;
-  color:black;
+  color: black;
   /* font-weight: bold; */
 }
+
 .added_message {
   position: absolute;
   left: 20%;
@@ -348,17 +389,22 @@ text-shadow: 0px 0px 4px rgb(216, 215, 175);;
   padding: 1rem;
   filter: drop-shadow(0 0 0.75rem black);
 }
-.singlewine_wrapper, .location_wrapper, .reserve_wrapper{
+
+.singlewine_wrapper,
+.location_wrapper,
+.reserve_wrapper {
   position: absolute;
   top: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-    background-color: white;
-  
+  background-color: white;
+
 }
-reserve_bg_wrapper, .reservations_bg_wrapper {
+
+reserve_bg_wrapper,
+.reservations_bg_wrapper {
   width: var(--body-width);
   height: calc(100vh * 0.5);
   background-repeat: no-repeat;
@@ -370,6 +416,7 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
   align-items: flex-start;
   padding: 2rem;
 }
+
 .singlewine_bg {
   width: 100%;
   height: 50vh;
@@ -379,70 +426,81 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
   z-index: 2;
 }
 
-.singlewine_title_cart_props_wrapper{
+.singlewine_title_cart_props_wrapper {
   display: flex;
   flex-direction: column;
 
 }
-.singlewine_img_pos_wrapper, .singlewine_title_pos_wrapper {
+
+.singlewine_img_pos_wrapper,
+.singlewine_title_pos_wrapper {
   display: flex;
   flex-direction: row;
   position: absolute;
   z-index: 100;
 }
+
 .singlewine_img_pos_wrapper {
 
   bottom: var(--single_wine_img_pos);
 
 }
+
 .singlewine_title_pos_wrapper {
   bottom: 0;
   padding-left: var(--single_wine_img_width);
 }
+
 .reserve_title {
   font-size: var(--singlewine_title_font_size);
-  color:white;
+  color: white;
   text-shadow: 0px 0px 4px black;
 }
 
-.singlewine_img_wrapper{
+.singlewine_img_wrapper {
   display: flex;
   justify-content: center;
   width: var(--single_wine_img_width);
   min-width: 140px !important;
 
 }
-.singlewine_title_img_visibility_wrapper{
+
+.singlewine_title_img_visibility_wrapper {
   z-index: 100;
 }
 
 .singlewine_title_img_sm_wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    bottom: -100px;
-    left: 0;
-   
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+
 }
 
-.winelist_img_wrapper{
+.winelist_img_wrapper {
   display: flex;
   justify-content: center;
 }
-.winelist_img_wrapper{
+
+.winelist_img_wrapper {
   height: var(--single_wine_img_height);
 }
 
-.singlewine_img, .winelist_img {
+.singlewine_img,
+.winelist_img {
   object-fit: contain;
 }
+
 .winelist_img {
   height: 100%;
 }
+
 .singlewine_img {
   width: 100%;
 }
+
 .singlewine_info_wrapper {
   display: flex;
   flex-direction: column;
@@ -457,13 +515,15 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
   padding-left: 0 !important;
   /* margin-bottom: 1rem; */
 }
-.singlewine_prop{
+
+.singlewine_prop {
   display: flex;
   flex-direction: column;
   align-items: center;
   border-right: #937d36 1px solid;
   color: white;
 }
+
 .single_item_customize {
   display: flex;
   flex-direction: column;
@@ -471,10 +531,12 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
   border-right: #937d36 1px solid;
   color: black;
 }
-.customize_milk{
+
+.customize_milk {
   height: 4rem;
   position: relative;
 }
+
 .customize_milk_title {
   position: absolute;
   z-index: 100;
@@ -484,6 +546,7 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
   background-color: white;
   text-align: center;
 }
+
 .singlewine_desc_wrapper {
   padding-left: var(--single_wine_img_width);
   padding-right: 1rem;
@@ -492,67 +555,81 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
 .singlewine_cart {
   display: flex;
   flex-direction: row;
-    align-items: center;
-    color: white;
+  align-items: center;
+  color: white;
 }
-.singlewine_price{
+
+.singlewine_price {
   font-size: 1.5rem;
 }
-@media all and  (max-width: 575.98px) {
 
-  .singlewine_title_pos_wrapper{
+@media all and (max-width: 575.98px) {
+
+  .singlewine_title_pos_wrapper {
     bottom: -300px;
     padding-left: 0;
   }
+
   .singlewine_title_cart_props_wrapper {
     /* display: flex; */
     flex-direction: column;
     align-items: center;
   }
+
   .singlewine_title {
 
     text-align: center;
   }
-  .singlewine_cart, .singlewine_prop {
+
+  .singlewine_cart,
+  .singlewine_prop {
     color: black;
     justify-content: center;
   }
-  .singlewine_desc_wrapper{
+
+  .singlewine_desc_wrapper {
     padding-left: 1rem;
   }
+
   .singlewine_title_img_sm_wrapper {
     width: 100%;
   }
-  .singlewine_props_wrapper{
+
+  .singlewine_props_wrapper {
     padding-left: 1rem !important;
     padding-right: 1rem;
   }
 
 }
-.winelist_wine_wrapper{
+
+.winelist_wine_wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .winelist_wine_title {
   display: flex;
   justify-content: center;
 }
 
 
-.hello_user, .header_category {
+.hello_user,
+.header_category {
   position: relative;
   color: black;
   display: flex;
   align-items: center;
 }
+
 .header_category_dropdown_wrapper {
-  position:absolute;
+  position: absolute;
   width: 150px;
   left: 0;
   z-index: 210;
   top: 1.3rem;
 }
+
 .header_category_dropdown {
   width: 100%;
   padding: 1rem;
@@ -561,11 +638,13 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
   border: black 1px solid;
   border-radius: var(--bs-border-radius);
 }
+
 .category_title {
   font-size: 1.5rem;
 }
+
 .user_dropdown_wrapper {
-  position:absolute;
+  position: absolute;
   width: 150px;
   right: 0;
   z-index: 210;
@@ -581,7 +660,9 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
   background-color: white;
   border-radius: var(--bs-border-radius);
 }
-@media all and  (max-width: 991.98px) {
+
+@media all and (max-width: 991.98px) {
+
   /* .user_dropdown_wrapper {
     position:unset;
   width: 100%;
@@ -595,22 +676,21 @@ reserve_bg_wrapper, .reservations_bg_wrapper {
   } */
   .header_user_dropdown {
     width: 100%;
-    
-  display: flex;
-  flex-direction: column;
+
+    display: flex;
+    flex-direction: column;
     align-items: center;
   }
+
   .header_category_dropdown {
     text-align: center;
     width: 100vw;
     padding: 0;
-    background-color:#d1c089;
+    background-color: #d1c089;
     border: 0;
   }
+
   .collapsable_item_link {
     padding-top: 1rem;
   }
 }
-
-
-

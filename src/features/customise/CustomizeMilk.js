@@ -1,9 +1,7 @@
-import InputGroup from "react-bootstrap/esm/InputGroup"
 import { Form} from "react-bootstrap"
 import { useSelector } from "react-redux"
-import { USDollar } from "../../app/global"
 import { getMilks } from "../menuitem/menuitemSlice"
-import { useState } from 'react'
+
 const CustomizeMilk = ({defaultMilk, milk, setMilk}) =>{
     
     const milkChoices = useSelector(state=>getMilks(state));

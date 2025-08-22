@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
 import { format } from 'date-fns';
 import {loginUser, logout, logoutUser} from "../user/userSlice";
-import {addItemToCart, clearCart, removeItemFromCart, updateItemInCart} from "../cart/cartSlice";
+import {clearCart} from "../cart/cartSlice";
 
 
 

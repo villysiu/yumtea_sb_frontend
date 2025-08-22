@@ -99,7 +99,11 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About />
     },
-])
+],
+ {
+    basename: process.env.PUBLIC_URL || "/",
+  }
+)
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(

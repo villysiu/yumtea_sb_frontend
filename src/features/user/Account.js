@@ -2,7 +2,6 @@ import {useSelector} from "react-redux"
 import "./account.css"
 import LogoutButton from "./LogoutButton";
 import {Modal} from "react-bootstrap";
-import CartModal from "../cart/CartModal";
 import {useState} from "react";
 import EditNicknameModal from "./EditNicknameModal";
 import EditPasswordModal from "./EditPasswordModal";

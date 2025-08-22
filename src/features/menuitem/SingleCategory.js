@@ -12,7 +12,7 @@ const SingleCategory = ({category}) => {
     return (
         <div id={`${category.id}`} className='category'>
             <div className='category_wrapper'>
-                <img src={`${imgLink}/menuitems/${category.imageUrl}`} className="category_img" />
+                <img src={`${imgLink}/menuitems/${category.imageUrl}`} className="category_img" alt="" />
                 <div className='category_label'>
                     {category.title}
                 </div>

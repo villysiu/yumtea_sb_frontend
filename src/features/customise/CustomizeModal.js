@@ -2,7 +2,6 @@ import {Modal} from "react-bootstrap";
 import CustomizeDetails from "./CustomizeDetails";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useLocation} from "react-router-dom";
 import {triggerCustomizeModal} from "../menuitem/menuitemSlice";
 
 const CustomizeModal = () =>{

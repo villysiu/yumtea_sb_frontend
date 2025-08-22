@@ -20,7 +20,7 @@ const User = () => {
         if(currentUser !== null){
             navigate(path, { state: location.pathname })
         }
-    }, [currentUser])
+    }, [currentUser, location.pathname, navigate, path])
 
 
     return(

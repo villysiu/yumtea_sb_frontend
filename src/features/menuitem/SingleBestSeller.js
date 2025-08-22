@@ -1,9 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import {getMenuitemById, triggerCustomizeModal} from "./menuitemSlice";
-import Menuitem from "./Menuitem";
+
 import {Col} from "react-bootstrap";
-import {StarFill, BookmarkFill} from "react-bootstrap-icons";
-import {apiLink, imgLink, USDollar} from "../../app/global";
+import {StarFill} from "react-bootstrap-icons";
+import {imgLink, USDollar} from "../../app/global";
 
 const SingleBestSeller = ({idx, menuitemId}) =>{
     const menuitem = useSelector(state=>getMenuitemById(state, menuitemId))

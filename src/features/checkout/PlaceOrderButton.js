@@ -2,8 +2,7 @@ import '../order/order.css'
 import { Button, Spinner } from "react-bootstrap"
 import {PlaceOrder} from '../order/orderSlice'
 import {useDispatch, useSelector} from 'react-redux'
-import {Navigate, useNavigate} from 'react-router-dom'
-import {useEffect } from 'react'
+
 const PlaceOrderButton = ({tip, tax}) =>{
     const dispatch = useDispatch()
 

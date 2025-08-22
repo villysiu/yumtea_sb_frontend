@@ -1,9 +1,8 @@
-import {imgLink, homeLink} from "../../app/global"
-import { Link } from "react-router-dom"
+import {imgLink} from "../../app/global"
 import { USDollar } from "../../app/global"
 import { useSelector, useDispatch } from "react-redux"
-import {getMenuitemById, getMilkById, sugarMap} from "../menuitem/menuitemSlice"
-import {triggerMenuItem, triggerCustomizeModal} from '../menuitem/menuitemSlice'
+import {getMenuitemById, sugarMap} from "../menuitem/menuitemSlice"
+import {triggerCustomizeModal} from '../menuitem/menuitemSlice'
 
 const SingleOrderItem = ({item}) =>{
     const dispatch = useDispatch();
