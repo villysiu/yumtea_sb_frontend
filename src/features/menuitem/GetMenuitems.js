@@ -70,7 +70,7 @@ const GetMenuitems = ({getMenuitem, setGetMenuitem}) =>{
         
 
         
-    }, [dispatch, menuitemsStatus, milkStatus, categoryStatus, sizeStatus, sugarStatus, temperatureStatus, bestsellersStatus, setGetMenuitem])
+    }, [dispatch, menuitemsStatus, milkStatus, categoryStatus, sizeStatus, sugarStatus, temperatureStatus, bestsellersStatus, setGetMenuitem, getMenuitem])
 
     // if(getMenuitem === false)
         return null;

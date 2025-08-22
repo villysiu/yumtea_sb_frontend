@@ -1,13 +1,11 @@
 import Title from "../headerNav/Title";
 import Footer from "./Footer";
 import Messages from "../message/Messages";
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {setMessage} from "../message/messageSlice";
+import React from "react";
 import {imgLink} from "../../app/global";
 const LoadingPage = () =>{
 
-
+    // used when loading data from the server, Menuitems and user data
     return (
         <div className="loading_page">
             <div className='header_full_wrapper'>

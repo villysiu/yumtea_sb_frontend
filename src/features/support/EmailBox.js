@@ -1,5 +1,4 @@
 import {Col, Row, Form} from "react-bootstrap";
-import {validate} from "uuid";
 
 const EmailBox = ({email, setEmail, emailError, setEmailError}) =>{
     const handleChange =e =>{

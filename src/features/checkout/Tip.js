@@ -1,84 +1,79 @@
-import { Form } from "react-bootstrap"
-import { useState } from "react"
-import {Button} from "react-bootstrap"
-import {USDollar} from "../../app/global";
+import { useState } from "react";
+import { USDollar } from "../../app/global";
 
-const Tip = ({tip, setTip, subtotal}) =>{
-    const tipArray = [10, 15, 20, 'other']
-    const [tipbox, showTipbox] = useState(false)
-    
+const Tip = ({ tip, setTip, subtotal }) => {
+  const tipArray = [10, 15, 20, "other"];
+  const [showCustomInput, setShowCustomInput] = useState(false);
+  const [selectedTip, setSelectedTip] = useState(null); // To track selected tip percentage
 
-    const handleChange = (e) =>{
-        const valStr = e.target.value;
-        console.log(valStr)
+  const handleChange = (e) => {
+    const valStr = e.target.value;
+    const regex = /^(\d+(\.\d{0,2})?)?$/; // Allow max 2 decimal places
 
-        // setTip(valStr === "" ? 0.0 : parseFloat(valStr))
-        const regex = /^(\d+(\.\d{0,2})?)?$/;  // Allows numbers with at most 2 decimals
-        console.log(regex.test(valStr))
-
-
-        if (regex.test(valStr) || valStr==="") {
-            console.log(valStr)
-            console.log(typeof valStr)
-            // setTip(valStr === "" ? 0.0 : parseFloat(valStr))
-            if(valStr === "")
-                setTip("0.00")
-             else {
-
-                setTip(valStr)
-            }
-        }
+    if (regex.test(valStr) || valStr === "") {
+      const parsed = valStr === "" ? 0.0 : parseFloat(valStr);
+      setTip(parsed);
+      setSelectedTip("other"); // Highlight "Other" when custom tip entered
     }
+  };
 
-     const handleTip = p =>{
-        console.log(p)
+  const handleTip = (percentage) => {
+    const calculatedTip = Math.round((subtotal * percentage) / 100 * 100) / 100;
+    setTip(calculatedTip);
+    setShowCustomInput(false);
+    setSelectedTip(percentage);
+  };
 
-            setTip((Math.round(subtotal * p )/100).toString())
-            showTipbox(false)
+  return (
+    <div className="checkout_tip">
+      <div className="checkout_summary_line">
+        <div>Tip</div>
+        <div>{USDollar.format(tip)}</div>
+      </div>
 
-    }
-    //
-
-    return (
-        <div className='checkout_tip'>
-            <div className="checkout_summary_line">
-                <div>Tip</div>
-                <div>{USDollar.format(tip)}</div>
-
-            </div>
-            <div className='tipbox_wrapper'>
-                <div className='tipbox_container'>
-                    {
-                        tipArray.map((percentage, idx) => {
-
-                            if (percentage === 'other') {
-                                return (
-                                    tipbox ?
-                                        <div key={idx} className="className='tipbox input-dollar">
-                                            <input type="text" placeholder="0.00"
-                                                   value={tip}
-                                                   onChange={handleChange}
-                                                   onFocus={e=>e.target.select()}
-
-                                            />
-                                        </div>
-                                        :
-                                        <div key={idx} className='tipbox right'
-                                             onClick={() => showTipbox(true)}>Other</div>
-                                )
-                            }
-                            return (
-
-                                <div key={idx} className={`tipbox ${idx === 0 ? 'left' : ''}`}
-                                     onClick={() => handleTip(percentage)}>{percentage}%</div>
-
-                            )
-                        })
-                    }
+      <div className="tipbox_wrapper">
+        <div className="tipbox_container">
+          {tipArray.map((percentage, idx) => {
+            if (percentage === "other") {
+              return showCustomInput ? (
+                <div key={idx} className="tipbox input-dollar active">
+                  <input
+                    type="text"
+                    placeholder="0.00"
+                    value={tip === 0 ? "" : tip}
+                    onChange={handleChange}
+                    onFocus={(e) => e.target.select()}
+                    
+                  />
                 </div>
-            </div>
-        </div>
-    )
+              ) : (
+                <div
+                  key={idx}
+                  className={`tipbox right ${selectedTip === "other" ? "active" : ""}`}
+                  onClick={() => {
+                    setShowCustomInput(true);
+                    setSelectedTip("other");
+                  }}
+                >
+                  Other
+                </div>
+              );
+            }
 
-}
-export default Tip
+            return (
+              <div
+                key={idx}
+                className={`tipbox ${idx === 0 ? "left" : ""} ${selectedTip === percentage ? "active" : ""}`}
+                onClick={() => handleTip(percentage)}
+              >
+                {percentage}%
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Tip;

@@ -1,10 +1,7 @@
 import {createSlice, createAsyncThunk, createSelector} from "@reduxjs/toolkit";
 import { apiLink } from "../../app/global";
-import {loginUser, logout, logoutUser} from "../user/userSlice";
+import {logout, logoutUser} from "../user/userSlice";
 import {clearOrder, PlaceOrder} from "../order/orderSlice";
-import { v4 as uuidv4 } from 'uuid';
-import {clearCartMessage} from "../message/messageSlice";
-
 
 export const fetchCart=createAsyncThunk(
     'cart/fetchCart',

@@ -2,6 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetOrderStatus } from "./orderSlice";
+import { useCallback } from "react";
 
 const OrderSuccessModal = () => {
     console.log("OrderSuccessModal rendered");
@@ -11,11 +12,13 @@ const OrderSuccessModal = () => {
     const { checkoutStatus, orders } = useSelector(state => state.order);
     const dispatch = useDispatch();
 
-    const closeOrderSuccessModal = () => {
+    const closeOrderSuccessModal = useCallback(() => {
+    setShow(false);
+    setSeconds(10);
+    setTimeout(() => {
         dispatch(resetOrderStatus());
-        setShow(false);
-        setSeconds(10); // Reset for next time
-    };
+    }, 0);
+}, [dispatch]);
 
     // Show modal when checkout succeeded
     useEffect(() => {
@@ -27,21 +30,21 @@ const OrderSuccessModal = () => {
 
     // Countdown logic
     useEffect(() => {
-        if (!show) return;
+    if (!show) return;
 
-        const timer = setInterval(() => {
-            setSeconds(prev => {
-                if (prev <= 1) {
-                    clearInterval(timer);
-                    closeOrderSuccessModal();
-                    return 0;
-                }
-                return prev - 1;
-            });
-        }, 1000);
+    const timer = setInterval(() => {
+        setSeconds(prev => {
+            if (prev <= 1) {
+                clearInterval(timer);
+                closeOrderSuccessModal();
+                return 0;
+            }
+            return prev - 1;
+        });
+    }, 1000);
 
-        return () => clearInterval(timer);
-    }, [show]);
+    return () => clearInterval(timer);
+}, [show, closeOrderSuccessModal]);
 
     return (
         <>
