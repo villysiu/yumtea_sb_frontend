@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/yumtea_sb_frontend/static/css/main.4b073a74.css",
+    "main.js": "/yumtea_sb_frontend/static/js/main.7c43cd4b.js",
+    "index.html": "/yumtea_sb_frontend/index.html",
+    "main.4b073a74.css.map": "/yumtea_sb_frontend/static/css/main.4b073a74.css.map",
+    "main.7c43cd4b.js.map": "/yumtea_sb_frontend/static/js/main.7c43cd4b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4b073a74.css",
+    "static/js/main.7c43cd4b.js"
+  ]
+}
