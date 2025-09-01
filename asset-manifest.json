@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/yumtea_sb_frontend/static/css/main.43f1d9ac.css",
-    "main.js": "/yumtea_sb_frontend/static/js/main.57d120df.js",
+    "main.css": "/yumtea_sb_frontend/static/css/main.a7304989.css",
+    "main.js": "/yumtea_sb_frontend/static/js/main.c34d6cfb.js",
     "index.html": "/yumtea_sb_frontend/index.html",
-    "main.43f1d9ac.css.map": "/yumtea_sb_frontend/static/css/main.43f1d9ac.css.map",
-    "main.57d120df.js.map": "/yumtea_sb_frontend/static/js/main.57d120df.js.map"
+    "main.a7304989.css.map": "/yumtea_sb_frontend/static/css/main.a7304989.css.map",
+    "main.c34d6cfb.js.map": "/yumtea_sb_frontend/static/js/main.c34d6cfb.js.map"
   },
   "entrypoints": [
-    "static/css/main.43f1d9ac.css",
-    "static/js/main.57d120df.js"
+    "static/css/main.a7304989.css",
+    "static/js/main.c34d6cfb.js"
   ]
 }
